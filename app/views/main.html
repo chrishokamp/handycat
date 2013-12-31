@@ -1,0 +1,28 @@
+<div class="header">
+  <ul class="nav nav-pills pull-right">
+    <li class="active"><a ng-href="#">Home</a></li>
+    <li><a ng-href="#">About</a></li>
+    <li><a ng-href="#">Contact</a></li>
+  </ul>
+  <h3 class="text-muted">editor_components</h3>
+</div>
+
+<hr/>
+<h3 class="text-primary">Testing Directives</h3>
+<div token-row ng-controller="RowCtrl">
+    <!-- setup the template here -->
+    <!-- one starting gap -->
+    <div class="start inline">
+        <div gap class='gap'>&nbsp</div>
+    </div>
+    <!-- A token unit has a token, then a gap after -->
+    <div class='inline' draggable ng-repeat='token in tokens'>
+        <div token class="word">{{ token }}</div>
+        <!-- <token></token> -->
+        <!-- TODO: collapse this gap when dragging stops -->
+        <div gap class='gap'>&nbsp</div>
+    </div>
+</div>
+<div class="footer">
+  <p>Make good stuff</p>
+</div>

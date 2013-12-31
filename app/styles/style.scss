@@ -1,0 +1,28 @@
+h1 {
+  color: red;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.word {
+  display: inline-block;
+  text-align: center;
+  min-width: 50px;
+  border: 1px dotted orange;
+}
+
+.word:hover {
+  background-color: pink;
+}
+
+.gap {
+  display: inline-block;
+  width: 20px;
+}
+
+.drop-hover {
+  background-color: orange;
+  width: 20px;
+}
