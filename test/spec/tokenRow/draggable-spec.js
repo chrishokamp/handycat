@@ -32,15 +32,19 @@ define(['angular',
 
       // TODO: change to actual tests
       it('Should contain text', inject(function($compile, $rootScope) {
+          d("inside draggable test");
           var $elem = $(elm);
           var text = $elem.text();
           // how to drag with jquery?
-          expect(text).toBe("Drag Me");
+          //expect(text).toBe("Drag Me");
           //expect(text).toBe("Balls");
+        expect(text).toBe("Drag Me");
+          console.error($elem);
 
           // use jquery simulate to simulate dragging
           $elem.simulate('drag', { dx: 200, dy: 100 });
           expect($elem.hasClass('i-was-dragged')).toBeTruthy();
+          console.error($elem);
 
         })
       );

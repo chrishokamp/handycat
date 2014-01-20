@@ -33,7 +33,7 @@ requirejs.config({
       //domReady: '../bower_components/domready/ready',
       ngCookies: '../bower_components/angular-cookies/angular-cookies',
       ngSanitize: '../bower_components/angular-sanitize/angular-sanitize',
-      //angularMocks: '../bower_components/angular-mocks/angular-mocks'
+      angularMocks: '../bower_components/angular-mocks/angular-mocks'
     },
     shim: {
       angular: {
@@ -64,10 +64,10 @@ requirejs.config({
         deps: ['angular'],
         exports: 'ngSanitize'
       },
-      //angularMocks: {
-      //  deps: ['ngResource'],
-      //  exports: 'angularMocks'
-      //}
+      angularMocks: {
+        deps: ['ngResource'],
+        exports: 'angularMocks'
+      }
     },
 
     // deps: ask Require.js to load these files (all our tests)

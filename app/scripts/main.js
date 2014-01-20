@@ -13,10 +13,15 @@ require.config({
 		ngResource: '../bower_components/angular-resource/angular-resource',
 		jquery: 	'../bower_components/jquery/jquery.min',
     jqueryui: 	'../bower_components/jqueryui/ui/jquery-ui',
-		underscore: '../bower_components/underscore/underscore-min',
+    underscore: '../bower_components/underscore/underscore-min',
     domReady: '../bower_components/domready/ready',
     ngCookies: '../bower_components/angular-cookies/angular-cookies',
-    ngSanitize: '../bower_components/angular-sanitize/angular-sanitize'
+    ngSanitize: '../bower_components/angular-sanitize/angular-sanitize',
+    uiAce: '../bower_components/angular-ui-ace/ui-ace',
+    ace: '../bower_components/ace-builds/src/ace',
+    //uiBootstrap: '../bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.10.0'
+    // TODO: added to get access to the new popover template directive
+    uiBootstrap: 'vendor/ui-bootstrap-tpls-0.10.0'
 	},
 	shim: {
 		angular: {
@@ -26,6 +31,10 @@ require.config({
     jqueryui: {
       deps: ['jquery'],
       exports: 'jqueryui'
+    },
+    uiBootstrap: {
+      deps: ['angular'],
+      exports: 'uiBootstrap'
     },
 		ngRoute: {
 			deps: ['angular'],
@@ -42,6 +51,10 @@ require.config({
     ngSanitize: {
       deps: ['angular'],
       exports: 'ngSanitize'
+    },
+    uiAce: {
+      deps: ['angular', 'ace'],
+      exports: 'uiAce'
     }
 	}
 });
@@ -55,14 +68,20 @@ require(
 		'ngResource',
     'ngCookies',
     'ngSanitize',
-		'underscore',
     'controllers/controllers',
+    'services/services',
+    'directives/directives',
     'tokenRow/tokenRow',
     'tokenRow/draggable',
     'tokenRow/gap',
     'tokenRow/token',
+    'aceEditor/AceCtrl',
+    'glossary/Glossary',
     'controllers/main',
-    'directives/directives'
+    'services/glossary',
+    'services/fileReader',
+    'glossary/glossaryFileUpload',
+    'directives/ngFileSelect'
 	],
 	function(angular, app, domReady){
 		app.config(['$routeProvider',

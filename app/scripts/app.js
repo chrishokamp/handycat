@@ -7,9 +7,11 @@ define(
     'ngSanitize',
     'ngRoute',
     'controllers/controllers',
-    'directives/directives'
-    //'services/services',
+    'directives/directives',
+    'services/services',
     //'filters/filters',
+    'uiAce',
+    'uiBootstrap'
   ],
   function(angular){
     var app = angular.module('editorComponentsApp',
@@ -17,8 +19,11 @@ define(
         'ngRoute',
         'ngResource',
         'controllers',
-        'directives'
-        //'services',
+        'directives',
+        'services',
+        'ui.ace',
+        'ui.bootstrap',
+        'services'
         //'filters',
         //'ui.bootstrap',
         //'ngTouch'

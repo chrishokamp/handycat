@@ -31,6 +31,7 @@ define(['../directives/directives'], function(directives){
             // TODO: tests only!
             //$token.addClass('in-drag');
             $token.addClass('i-was-dragged');
+            //$token.removeClass('i-was-dragged');
 
           },
           stop: function(ev, ui) {

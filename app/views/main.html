@@ -8,7 +8,30 @@
 </div>
 
 <hr/>
-<h3 class="text-primary">Testing Directives</h3>
+<h3 class="text-primary">Testing file upload</h3>
+<div ng-controller="UploadCtrl">
+    <form>
+        <input type="file" ng-file-select="onFileSelect($files)" >
+        <!--  <input type="file" ng-file-select="onFileSelect($files)" multiple> -->
+
+    </form>
+    <b>Preview:</b><br />
+
+    <i ng-hide="imageSrc">No image chosen yet</i>
+    <img ng-src="{{imageSrc}}" /><br/>
+
+    <i ng-hide="textFromFile">No text uploaded yet</i>
+    <p>{{ textFromFile }}</p>
+    <b>Progress:</b>
+    <progress value="{{progress}}"></progress>
+</div>
+
+
+<hr/>
+<h3 class="text-primary">Testing Ace with directives</h3>
+
+
+
 <div token-row ng-controller="RowCtrl">
     <!-- setup the template here -->
     <!-- one starting gap -->
@@ -23,6 +46,42 @@
         <div gap class='gap'>&nbsp</div>
     </div>
 </div>
+
+<!-- WORKING: setup source area and target area -->
+<div class="container">
+    <div class="row">
+
+        <div class="edit-area source-area col-md-6" ng-controller="AceCtrl">
+            <h3>Source Area</h3>
+            <p>TODO: draggables currently cannot revert inside the edit area</p>
+            <div class="ace_editor" ui-ace="{ onLoad : aceLoaded }"></div>
+            <button ng-click="getSelection()">get selection</button>
+        </div>
+
+        <div class="edit-area target-area col-md-6" ng-controller="AceCtrl">
+            <h3>Target Area</h3>
+            <p>TODO: draggables currently cannot revert inside the edit area</p>
+            <div class="ace_editor" ui-ace="{ onLoad : aceLoaded }"></div>
+            <button ng-click="getSelection()">get selection</button>
+        </div>
+    </div>
+</div>
+
+<!-- testing popovers -->
+<!-- TODO: dynamically populate popovers from glossary service -->
+<hr />
+<h4>Testing popovers</h4>
+<div class="test-popover" ng-controller="GlossaryCtrl">
+    <p>
+        <button popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>
+        <!-- Note: this uses the very new popover-template directive see: http://plnkr.co/edit/B2wEisa -->
+        <button popover-template="scripts/glossary/glossary-template.html" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>
+        <p>
+            <span popover="I appeared when the mouse entered a span" popover-trigger="mouseenter">Popover on span element</span>
+        </p>
+    </p>
+</div>
+
 <div class="footer">
   <p>Make good stuff</p>
 </div>

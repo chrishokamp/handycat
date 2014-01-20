@@ -5000,6 +5000,28 @@ td.visible-print {
 h1 {
   color: red; }
 
+/* Ace Editor Styles */
+.ace_editor {
+  height: 200px; }
+
+/* % percent sign prefixes sass pseudo classes */
+.ace_marker-layer .was-selected:hover {
+  cursor: crosshair;
+  background: green; }
+
+/* hack to hide the scrollbars in the ace editor */
+.ace_scrollbar {
+  display: none !important; }
+
+/* TODO: use marker.renderer to find a solution that can handle future edits */
+.ace_marker-layer .was-selected {
+  background-color: red;
+  position: absolute;
+  z-index: 5;
+  pointer-events: auto;
+  cursor: pointer; }
+
+/* End Ace Editor Styles */
 .inline {
   display: inline-block; }
 
