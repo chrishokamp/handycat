@@ -83,9 +83,16 @@ define(['controllers/controllers'], function(controllers) {
 
     // Use this function to configure the ace editor instance
     $scope.aceLoaded = function (_editor) {
-       var editor = _editor;
+
+      var editor = _editor;
+      $scope.editor = editor;
+      var session = editor.getSession();
+
       // TODO: move styling to the view
+      // hide the print margin
       editor.setShowPrintMargin(false);
+      // wrap words
+      session.setUseWrapMode(true);
 
       // TODO: how to limit the Ace editor to a certain number of lines?
       //editor.setOption("maxLines", 1);
@@ -95,16 +102,15 @@ define(['controllers/controllers'], function(controllers) {
 
       $scope.startText = "gloss over source to see the target phrase alignment";
 // TODO: see moses - how to get translation alignment?
-      $scope.editor = editor;
       editor.setFontSize(20);
       editor.setValue($scope.startText);
       //editor.setTheme("ace/theme/twilight");  // Note: the editor themes are called by their string names (these are not paths)
       //console.log("here's the _renderer theme:")
       //console.log(_renderer.getTheme());
       // interact with the ace session using editor, session, etc...
-      var _session = _editor.getSession();
-      var _renderer = _editor.renderer;
-      _session.on("change", function(){
+
+      var renderer = editor.renderer;
+      session.on("change", function(){
       console.log(editor.getValue());
       console.log("the ace session change event fired") });
     }

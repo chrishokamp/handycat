@@ -11,7 +11,8 @@ define(
     'services/services',
     //'filters/filters',
     'uiAce',
-    'uiBootstrap'
+    'uiBootstrap',
+    'ngFileUpload'
   ],
   function(angular){
     var app = angular.module('editorComponentsApp',
@@ -23,7 +24,8 @@ define(
         'services',
         'ui.ace',
         'ui.bootstrap',
-        'services'
+        'services',
+        'angularFileUpload'
         //'filters',
         //'ui.bootstrap',
         //'ngTouch'

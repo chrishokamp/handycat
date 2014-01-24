@@ -8,27 +8,31 @@
 </div>
 
 <hr/>
-<h3 class="text-primary">Testing file upload</h3>
+<h3 class="text-primary" ng-controller="UploadCtrl">Testing ngFileUpload</h3>
+<!-- the upload control should be the same regardless of the UI component -->
 <div ng-controller="UploadCtrl">
-    <form>
-        <input type="file" ng-file-select="onFileSelect($files)" >
-        <!--  <input type="file" ng-file-select="onFileSelect($files)" multiple> -->
+    <!-- TODO: add the ngFileUpload input templates here -->
+    <!-- <input type="text" ng-model="file"> -->
+    <input type="file" ng-file-select="onFileSelect($files)" >
+    <!-- <input type="file" ng-file-select="onFileSelect($files)" multiple> -->
 
-    </form>
-    <b>Preview:</b><br />
+    <!-- TODO: For some reason drag-and-drop doesn't work yet -->
+    <!--
+    <div class="drop-zone" ng-file-select="onFileSelect($files)" ng-file-drag-over-class="dragover"
+         ng-show="dropSupported">drop files here</div>
+    <div ng-file-drop-available="dropSupported=true"
+         ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
+    -->
+    <!-- <button ng-click="upload.abort()">Cancel Upload</button> -->
+    <ul>
+        <li ng-repeat="segment in parsed">{{segment}}</li>
+    </ul>
 
-    <i ng-hide="imageSrc">No image chosen yet</i>
-    <img ng-src="{{imageSrc}}" /><br/>
-
-    <i ng-hide="textFromFile">No text uploaded yet</i>
-    <p>{{ textFromFile }}</p>
-    <b>Progress:</b>
-    <progress value="{{progress}}"></progress>
 </div>
 
-
 <hr/>
-<h3 class="text-primary">Testing Ace with directives</h3>
+
+<h3 class="text-primary">Testing Ace with directives - TODO: add Document service to a bunch of ace instances?</h3>
 
 
 
@@ -47,7 +51,6 @@
     </div>
 </div>
 
-<!-- WORKING: setup source area and target area -->
 <div class="container">
     <div class="row">
 

@@ -7,7 +7,11 @@
 
 define(['services/services'], function(services) {
 
-  services.factory('Document', ['', function( ) {
-
-  }]);
+  services.factory('Document', function( ) {
+    // TODO: how to get a "loaded" flag on this object? - emit an event?
+    return {
+      segments: [],
+      translatableNodes: []
+    }
+  });
 });

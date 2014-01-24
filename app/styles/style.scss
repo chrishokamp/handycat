@@ -2,6 +2,23 @@ h1 {
   color: red;
 }
 
+/* Drop zone pseudo class */
+%drop {
+  height: 50px;
+  width: 100px;
+  &:hover {
+    /*background-color: yellow; */
+  }
+}
+
+.drop-zone {
+  @extend %drop;
+  background-color: lightskyblue;
+  .dragover {
+    background-color: #ffff00;
+  }
+}
+
 /* Ace Editor Styles */
 .ace_editor { height: 200px; }
 

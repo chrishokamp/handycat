@@ -20,8 +20,11 @@ require.config({
     uiAce: '../bower_components/angular-ui-ace/ui-ace',
     ace: '../bower_components/ace-builds/src/ace',
     //uiBootstrap: '../bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.10.0'
-    // TODO: added to get access to the new popover template directive
-    uiBootstrap: 'vendor/ui-bootstrap-tpls-0.10.0'
+    // TODO: added to get access to the new popover template directive - found on github (somebody's modified uiBootstrap)
+    uiBootstrap: 'vendor/ui-bootstrap-tpls-0.10.0',
+    ngFileUpload: '../bower_components/ng-file-upload/angular-file-upload',
+    // TODO: create a proper xliff parsing component
+    xliffParser: 'lib/xliff_data_selector'
 	},
 	shim: {
 		angular: {
@@ -55,6 +58,10 @@ require.config({
     uiAce: {
       deps: ['angular', 'ace'],
       exports: 'uiAce'
+    },
+    ngFileUpload: {
+      deps: ['angular'],
+      exports: 'ngFileUpload'
     }
 	}
 });
@@ -68,6 +75,8 @@ require(
 		'ngResource',
     'ngCookies',
     'ngSanitize',
+    'underscore',
+    'xliffParser',
     'controllers/controllers',
     'services/services',
     'directives/directives',
@@ -77,11 +86,13 @@ require(
     'tokenRow/token',
     'aceEditor/AceCtrl',
     'glossary/Glossary',
-    'controllers/main',
     'services/glossary',
     'services/fileReader',
+    'services/xliffParser',
+    'services/document',
     'glossary/glossaryFileUpload',
-    'directives/ngFileSelect'
+    // TODO: ngFileSelect (local directive) has the same name as the library ngFileSelect
+    //'directives/ngFileSelect',
 	],
 	function(angular, app, domReady){
 		app.config(['$routeProvider',

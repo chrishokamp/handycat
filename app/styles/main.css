@@ -5000,6 +5000,18 @@ td.visible-print {
 h1 {
   color: red; }
 
+/* Drop zone pseudo class */
+.drop-zone {
+  height: 50px;
+  width: 100px; }
+  .drop-zone:hover {
+    /*background-color: yellow; */ }
+
+.drop-zone {
+  background-color: lightskyblue; }
+  .drop-zone .dragover {
+    background-color: #ffff00; }
+
 /* Ace Editor Styles */
 .ace_editor {
   height: 200px; }
