@@ -91,6 +91,7 @@ require(
     'services/xliffParser',
     'services/document',
     'glossary/glossaryFileUpload',
+    'contentArea/contentArea'
     // TODO: ngFileSelect (local directive) has the same name as the library ngFileSelect
     //'directives/ngFileSelect',
 	],

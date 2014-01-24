@@ -2,7 +2,22 @@
 
 define(['controllers/controllers'], function(controllers) {
 
-  controllers.controller('AceCtrl', ['$scope', function($scope) {
+  controllers.controller('AceCtrl', ['$scope', 'Document', function($scope, Document) {
+
+    $scope.fullDoc = Document;
+
+    $scope.setText = function(text) {
+      var editor = $scope.editor;
+      if (editor) {
+       editor.setValue(text);
+      }
+    };
+
+    $scope.setModel = function(index) {
+      var segName = seg + index;
+      $scope.segName = $scope.segments[index];
+      return segName;
+    }
 
     $scope.getSelection = function() {
       var editor = $scope.editor;
