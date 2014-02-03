@@ -3,8 +3,25 @@ define(['controllers/controllers'], function(controllers) {
 
 // TODO: remove or rename fileReader?
 // TODO: remove document service -- this controller should change route once the document has loaded
-  controllers.controller('UploadCtrl', ['$scope', 'fileReader', '$timeout', 'XliffParser', 'Document', function($scope, fileReader, $timeout, XliffParser, Document) {
+  controllers.controller('UploadCtrl', ['$scope', 'fileReader', '$timeout', 'XliffParser', 'Document', '$log', function($scope, fileReader, $timeout, XliffParser, Document, $log) {
 // TODO: remember that different file types will require different parsers
+
+    var development = true;
+  // Dev flag - load file by default
+    if (development) {
+      var fileUrl = 'data/enEs.xlf';
+      $log.log("IN DEVELOPMENT MODE - loading local file: " + fileUrl);
+
+      // autoload a file
+      XliffParser.loadLocalFile(fileUrl);
+
+// Example files - TODO: repurpose for testing
+//      var example_path = "examples/";
+//      var task_path = "examples/tasks/";
+//      var lang_path = "es/";
+//      var xliff_file = "";
+
+    }
 
     // does the browser support drag n drop?
     $scope.dropSupported = true;
@@ -14,13 +31,12 @@ define(['controllers/controllers'], function(controllers) {
 // TODO: parse a local xml file - see the escriba project
 // Parsing on the server is also a perfectly valid option
 // server needs to know how to synchronize with the file format at all times
+// TODO: this should actually change the route using ui-router
     $scope.$on('DocumentLoaded', function (event) {
       d("UploadCtrl: DocumentLoaded")
       $scope.parsed = Document.segments;
     });
 
-    console.log(fileReader);
-// TODO: delete the function after this, and merge this one with getFile() above
 // TODO: get file type
     $scope.onFileSelect = function ($files) {
       d("inside file select");
@@ -28,21 +44,19 @@ define(['controllers/controllers'], function(controllers) {
       for (var i = 0; i < $files.length; i++) {
         $scope.progress = 0;
         var file = $files[i];
-
-        XliffParser.parse(file)
+        d("Logging the file:")
+        d(file);
+        // use the fileReader service to read the file (via the HTML5 FileAPI)
+        XliffParser.readFile(file)
       }
     };
 
+// TODO: TESTING ONLY
     $scope.$on("fileProgress", function(e, progress) {
       $scope.progress = progress.loaded / progress.total;
     });
 
     // for angular-file-upload (copied from github https://github.com/danialfarid/angular-file-upload)
-    //$scope.onFileSelect = function($files) {
-    //  //$files: an array of files selected, each file has name, size, and type.
-    //  for (var i = 0; i < $files.length; i++) {
-    //    var file = $files[i];
-
     //    // TODO: repurpose this for local upload
     //    $scope.upload = $upload.upload({
     //      url: 'server/upload/url', //upload.php script, node.js route, or servlet url

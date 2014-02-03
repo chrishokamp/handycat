@@ -6,18 +6,20 @@ define(
     'ngResource',
     'ngSanitize',
     'ngRoute',
+    'uiRouter',
     'controllers/controllers',
     'directives/directives',
     'services/services',
     //'filters/filters',
     'uiAce',
     'uiBootstrap',
-    'ngFileUpload'
+    'ngFileUpload',
   ],
   function(angular){
     var app = angular.module('editorComponentsApp',
       [
         'ngRoute',
+        'ui.router',
         'ngResource',
         'controllers',
         'directives',
@@ -25,7 +27,7 @@ define(
         'ui.ace',
         'ui.bootstrap',
         'services',
-        'angularFileUpload'
+        'angularFileUpload',
         //'filters',
         //'ui.bootstrap',
         //'ngTouch'

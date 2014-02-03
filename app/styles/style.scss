@@ -25,7 +25,11 @@ h1 {
 /* % percent sign prefixes sass pseudo classes */
 %foo {
   cursor: crosshair;
-  background: green;
+  background-color: green;
+}
+
+.source {
+  background-color: green;
 }
 
 /* hack to hide the scrollbars in the ace editor */

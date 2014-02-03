@@ -24,7 +24,8 @@ require.config({
     uiBootstrap: 'vendor/ui-bootstrap-tpls-0.10.0',
     ngFileUpload: '../bower_components/ng-file-upload/angular-file-upload',
     // TODO: create a proper xliff parsing component
-    xliffParser: 'lib/xliff_data_selector'
+    xliffParser: 'lib/xliff_data_selector',
+    uiRouter: 	'../bower_components/angular-ui-router/release/angular-ui-router'
 	},
 	shim: {
 		angular: {
@@ -42,7 +43,11 @@ require.config({
 		ngRoute: {
 			deps: ['angular'],
 			exports: 'ngRoute'
-		},
+    },
+    uiRouter: {
+      deps: ['angular', 'ngResource'],
+      exports: 'uiRouter'
+    },
 		ngResource: {
 			deps: ['angular'],
 			exports: 'ngResource'
@@ -71,7 +76,8 @@ require(
 		'angular',
 		'app',
     'domReady',
-		'ngRoute',
+		//'ngRoute',
+    'uiRouter',
 		'ngResource',
     'ngCookies',
     'ngSanitize',
@@ -91,23 +97,44 @@ require(
     'services/xliffParser',
     'services/document',
     'glossary/glossaryFileUpload',
-    'contentArea/contentArea'
+    'contentArea/contentArea',
+    'services/translationMemory'
     // TODO: ngFileSelect (local directive) has the same name as the library ngFileSelect
     //'directives/ngFileSelect',
 	],
-	function(angular, app, domReady){
-		app.config(['$routeProvider',
-			function($routeProvider){
-				$routeProvider
-          .when('/', {
-            templateUrl: 'views/main.html'
-            //controller: 'MainCtrl'
-           })
-					.otherwise({
-						redirectTo: '/'
-					});
-			}
-		]);
+	function(angular, app, domReady,uiRouter, ngResource){
+    // WORKING: set up ui router
+
+    app.config(['$stateProvider', '$urlRouterProvider',
+      function($stateProvider, $urlRouterProvider){
+
+        $stateProvider
+          .state('home', {
+            url: '/home',
+            templateUrl: 'views/main.html',
+            controller: ''
+          })
+          .state('ace', {
+            url: '/ace',
+            templateUrl: 'scripts/aceEditor/ace-drag-test.html'
+          });
+
+        $urlRouterProvider
+          .otherwise('/home');
+      }
+    ]);
+		//app.config(['$routeProvider',
+		//	function($routeProvider){
+		//		$routeProvider
+    //      .when('/', {
+    //        templateUrl: 'views/main.html'
+    //        //controller: 'MainCtrl'
+    //       })
+		//			.otherwise({
+		//				redirectTo: '/'
+		//			});
+		//	}
+		//]);
 		domReady(function(){
 			angular.bootstrap(document, ['editorComponentsApp']);
 		});

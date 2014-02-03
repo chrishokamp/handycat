@@ -7,10 +7,36 @@
   <h3 class="text-muted">editor_components</h3>
 </div>
 
+
+<!-- testing popovers -->
+<!-- TODO: dynamically populate popovers from glossary service -->
+<hr />
+<h4>Testing popovers</h4>
+<div class="test-popover" ng-controller="GlossaryCtrl">
+    <p>
+        <button popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>
+        <!-- TODO: Note: this uses the very new popover-template directive see: http://plnkr.co/edit/B2wEisa -->
+        <button popover-template="scripts/glossary/glossary-template.html" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>
+        <!-- <span    ui-options="{title:office.location, content:office.people.join(',')} -->
+        <span tooltip-html-unsafe="contentFunc()">Tooltip with html from function</span>
+        <span tooltip-html-unsafe="{{content}}">Tooltip with html from function</span>
+    <div popover="{{content}}" popover-trigger="mouseenter">Testing ui popover</div>
+
+    <p>
+        <span popover="I appeared when the mouse entered a span" popover-trigger="mouseenter">Popover on span element</span>
+        <span popover="makeHTML()" popover-trigger="mouseenter">Popover on span element</span>
+    </p>
+    </p>
+</div>
+
 <hr/>
+
+
+
 <h3 class="text-primary" ng-controller="UploadCtrl">Testing ngFileUpload</h3>
 <!-- the upload control should be the same regardless of the UI component -->
-<div ng-controller="UploadCtrl">
+<!-- <div ng-controller="UploadCtrl"> -->
+<div>
     <!-- <input type="text" ng-model="file"> -->
     <input type="file" ng-file-select="onFileSelect($files)" >
     <!-- <input type="file" ng-file-select="onFileSelect($files)" multiple> -->
@@ -22,18 +48,14 @@
     <div ng-file-drop-available="dropSupported=true"
          ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
     -->
-
     <!-- <button ng-click="upload.abort()">Cancel Upload</button> -->
-    <ul>
-        <li ng-repeat="segment in parsed">{{segment}}</li>
-    </ul>
 
 </div>
 
 <hr/>
 
-<h3 class="text-primary">Testing Ace with directives - TODO: add Document service to a bunch of ace instances?</h3>
-
+<!-- TODO: should we only have one Ace instance, or many?
+<h3 class="text-primary">Testing Ace with directives</h3>
 
 
 <div token-row ng-controller="RowCtrl">
@@ -51,39 +73,32 @@
     </div>
 </div>
 
+<!-- <h2>TODO: DYNAMICALLY SET HIGHLIGHTING RULES?</h2> -->
+<!-- TODO: only use the editor on the target side -->
 <div class="container" ng-controller="ContentAreaCtrl">
     <div ng-repeat="seg in segments" class="row">
-<!-- WORKING: insert text from xliff into editors
+<!-- WORKING: insert text from xliff into editors -->
 <!-- TODO: add feature where dragging a word or phrase to target area translates it automatically -->
+        <p>Segment Index: {{$index}}</p>
         <div class="edit-area source-area col-md-6" ng-controller="AceCtrl">
             <h3>Source Area</h3>
             <p>TODO: draggables currently cannot revert inside the edit area</p>
-            <div class="ace_editor" ui-ace="{ onLoad : aceLoaded }" ng-model="fullDoc.segments[$index]"></div>
-            <button ng-click="getSelection()">get selection</button>
+            <div class="source">{{ fullDoc.segments[$index] }}</div>
         </div>
 
+<!-- TODO: add TM and MT output on the target side -->
+<!-- TODO: markup target content using highlight rules -->
         <div class="edit-area target-area col-md-6" ng-controller="AceCtrl">
             <h3>Target Area</h3>
             <p>TODO: draggables currently cannot revert inside the edit area</p>
+<!-- TODO: get the TM matches for the source segment -->
             <div class="ace_editor" ui-ace="{ onLoad : aceLoaded }"></div>
+            <!-- <div class="ace_editor" ui-ace="{ onLoad : aceLoaded, mode: 'javascript'}" ng-model="fullDoc.segments[$index]"></div> -->
+            <button ng-click="queryTM(testQuery)">query TM</button>
             <button ng-click="getSelection()">get selection</button>
+            <p>Current Selection: {{$scope.currentSelection}}</p>
         </div>
     </div>
-</div>
-
-<!-- testing popovers -->
-<!-- TODO: dynamically populate popovers from glossary service -->
-<hr />
-<h4>Testing popovers</h4>
-<div class="test-popover" ng-controller="GlossaryCtrl">
-    <p>
-        <button popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>
-        <!-- Note: this uses the very new popover-template directive see: http://plnkr.co/edit/B2wEisa -->
-        <button popover-template="scripts/glossary/glossary-template.html" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>
-        <p>
-            <span popover="I appeared when the mouse entered a span" popover-trigger="mouseenter">Popover on span element</span>
-        </p>
-    </p>
 </div>
 
 <div class="footer">

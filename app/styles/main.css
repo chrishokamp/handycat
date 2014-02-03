@@ -5021,6 +5021,9 @@ h1 {
   cursor: crosshair;
   background: green; }
 
+.source {
+  background-color: green; }
+
 /* hack to hide the scrollbars in the ace editor */
 .ace_scrollbar {
   display: none !important; }

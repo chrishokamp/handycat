@@ -28,7 +28,8 @@ module.exports = function (grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
-        files: ['{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js'],
+        //files: ['{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js'],
+        files: ['{.tmp,<%= yeoman.app %>}/scripts/**/*.js'],
         //tasks: ['newer:jshint:all', 'test']
         tasks: ['newer:jshint:all']
       },
