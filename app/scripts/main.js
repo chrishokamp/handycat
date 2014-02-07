@@ -8,6 +8,7 @@ var d = function(){
 
 require.config({
 	paths: {
+    //ace: 'lib'
 		angular: 	'../bower_components/angular/angular',
 		ngRoute: 	'../bower_components/angular-route/angular-route',
 		ngResource: '../bower_components/angular-resource/angular-resource',
@@ -18,7 +19,11 @@ require.config({
     ngCookies: '../bower_components/angular-cookies/angular-cookies',
     ngSanitize: '../bower_components/angular-sanitize/angular-sanitize',
     uiAce: '../bower_components/angular-ui-ace/ui-ace',
-    ace: '../bower_components/ace-builds/src/ace',
+    //'ace': '/scripts/lib/ace/lib/ace/ace',
+    //ace: 'scripts/lib/ace/lib/ace',
+    //ace: '../bower_components/ace/build/src/ace',
+    // added for language_tools
+    //language_tools: 'lib/ace/lib/ace/ext/language_tools',
     //uiBootstrap: '../bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.10.0'
     // TODO: added to get access to the new popover template directive - found on github (somebody's modified uiBootstrap)
     uiBootstrap: 'vendor/ui-bootstrap-tpls-0.10.0',
@@ -61,7 +66,7 @@ require.config({
       exports: 'ngSanitize'
     },
     uiAce: {
-      deps: ['angular', 'ace'],
+      deps: ['angular'],
       exports: 'uiAce'
     },
     ngFileUpload: {
@@ -77,6 +82,7 @@ require(
 		'app',
     'domReady',
 		//'ngRoute',
+    'lib/ace/build/src/ext-language_tools',
     'uiRouter',
 		'ngResource',
     'ngCookies',
@@ -96,9 +102,13 @@ require(
     'services/fileReader',
     'services/xliffParser',
     'services/document',
+    'services/tokenizer',
     'glossary/glossaryFileUpload',
     'contentArea/contentArea',
-    'services/translationMemory'
+    'services/translationMemory',
+    'menu/Menu',
+    'typeahead/typeahead'
+
     // TODO: ngFileSelect (local directive) has the same name as the library ngFileSelect
     //'directives/ngFileSelect',
 	],
@@ -117,6 +127,10 @@ require(
           .state('ace', {
             url: '/ace',
             templateUrl: 'scripts/aceEditor/ace-drag-test.html'
+          })
+          .state('edit', {
+            url: '/edit',
+            templateUrl: 'views/edit.html'
           });
 
         $urlRouterProvider

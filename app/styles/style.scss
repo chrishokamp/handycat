@@ -1,5 +1,23 @@
-h1 {
-  color: red;
+h3 {
+  padding: 4px 0 4px 0;
+}
+
+%ace-editor-height {
+  height: 300px;
+}
+
+.edit-area {
+  @extend %ace-editor-height;
+}
+
+.translation-unit {
+  background-color: whitesmoke;
+  box-shadow: 0 0 10px black;
+  padding:0 10px 0 10px;
+}
+
+.edit-area-wrapper {
+  border: 1px dotted #808080;
 }
 
 /* Drop zone pseudo class */
@@ -28,8 +46,16 @@ h1 {
   background-color: green;
 }
 
+/* markup for the source area */
+.source-area {
+
+}
+
+/* the div which actually contains the source - what is overriding height? */
 .source {
-  background-color: green;
+  background-color: #f8f8ff;
+  font-size: 20px;
+  /* height: 200px !important; */
 }
 
 /* hack to hide the scrollbars in the ace editor */

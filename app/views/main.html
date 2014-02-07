@@ -54,7 +54,7 @@
 
 <hr/>
 
-<!-- TODO: should we only have one Ace instance, or many?
+<!-- TODO: should we only have one Ace instance, or many? -->
 <h3 class="text-primary">Testing Ace with directives</h3>
 
 
@@ -77,28 +77,35 @@
 <!-- TODO: only use the editor on the target side -->
 <div class="container" ng-controller="ContentAreaCtrl">
     <div ng-repeat="seg in segments" class="row">
-<!-- WORKING: insert text from xliff into editors -->
 <!-- TODO: add feature where dragging a word or phrase to target area translates it automatically -->
         <p>Segment Index: {{$index}}</p>
         <div class="edit-area source-area col-md-6" ng-controller="AceCtrl">
-            <h3>Source Area</h3>
-            <p>TODO: draggables currently cannot revert inside the edit area</p>
             <div class="source">{{ fullDoc.segments[$index] }}</div>
         </div>
 
 <!-- TODO: add TM and MT output on the target side -->
 <!-- TODO: markup target content using highlight rules -->
         <div class="edit-area target-area col-md-6" ng-controller="AceCtrl">
-            <h3>Target Area</h3>
-            <p>TODO: draggables currently cannot revert inside the edit area</p>
 <!-- TODO: get the TM matches for the source segment -->
             <div class="ace_editor" ui-ace="{ onLoad : aceLoaded }"></div>
             <!-- <div class="ace_editor" ui-ace="{ onLoad : aceLoaded, mode: 'javascript'}" ng-model="fullDoc.segments[$index]"></div> -->
-            <button ng-click="queryTM(testQuery)">query TM</button>
-            <button ng-click="getSelection()">get selection</button>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <input type="text" ng-model="sampleSen" placeholder="Type a sentence to tokenize"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="col-xs-2" ng-click="queryTM(testQuery)">query TM</button>
+                    <button class="col-xs-2" ng-click="getSelection()">get selection</button>
+                    <button class="col-xs-2" ng-click="tokenize(sampleSen)">Tokenize</button>
+                    <button class="col-xs-2" ng-click="createTM(sampleSen,minPhraseLen)">Create TM</button>
+                    <button class="col-xs-2" ng-click="logTM()">Log TM</button>
+                </div>
             <p>Current Selection: {{$scope.currentSelection}}</p>
+            </div>
         </div>
     </div>
+    <hr/>
 </div>
 
 <div class="footer">

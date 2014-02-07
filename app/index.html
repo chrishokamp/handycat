@@ -26,8 +26,10 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
+    <!-- Chris: this is the main application view -->
 
-    <div class="container" ng-view=""></div>
+    <div class="container" ui-view></div>
+
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -38,6 +40,24 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
+
+    <!-- require ace separately -->
+    <!-- <script src="/scripts/lib/ace/lib/ace/ace.js"></script> -->
+    <!-- load ace language tools -->
+
+    <!-- <script data-main="scripts/lib/ace/lib/ace/ace" src="bower_components/requirejs/require.js"></script> -->
+
+    <!-- <script src="scripts/lib/ace/build/src/ace.js"></script> -->
+    <!-- <script src="scripts/lib/ace/build/src/ext-language_tools.js"></script> -->
+
+    <!--
+    <script src="https://raw.github.com/ajaxorg/ace-builds/master/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://raw.github.com/ajaxorg/ace-builds/master/src/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+    -->
+
+    <!-- This works only with the newest ace build: git clone https://github.com/ajaxorg/ace-builds.git -->
+    <script src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+    <script src="bower_components/ace-builds/src-min-noconflict/ext-language_tools.js"></script>
 
     <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
     <!-- <script src="bower_components/ng-file-upload/angular-file-upload.js"></script> -->
