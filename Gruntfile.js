@@ -352,7 +352,7 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js',
         // TODO: karma autowatch is currently broken
-        autoWatch: true,
+        autoWatch: true
         //singleRun: true
       }
       //backgroundUnit: {
