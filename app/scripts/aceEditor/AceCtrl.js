@@ -2,7 +2,7 @@
 
 define(['controllers/controllers'], function(controllers) {
 
-  controllers.controller('AceCtrl', ['$scope', 'Document', 'TranslationMemory', 'tokenizer', '$log', function($scope, Document, TranslationMemory, tokenizer, $log) {
+  controllers.controller('AceCtrl', ['$scope', 'Document', 'TranslationMemory', 'tokenizer', '$http','$log', function($scope, Document, TranslationMemory, tokenizer, $http, $log) {
 
     $scope.fullDoc = Document;
 
@@ -12,12 +12,6 @@ define(['controllers/controllers'], function(controllers) {
       return segName;
     }
 
-
-    // TM returns a list of objects like this:
-//      quality: 100
-//      rank: 100
-//      source: "apple"
-//      target: "Apfel"
 
     // TODO: source controller and directive to let us flip through source tokens
     // maintain the current TM matches based on the selected token in the source side
@@ -98,46 +92,56 @@ define(['controllers/controllers'], function(controllers) {
     }
 
     // TESTING TYPEAHEAD
-    $scope.selected = undefined;
-    $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+    // $scope.selected = undefined;
+    // $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
     // END TYPEAHEAD
 
     // Use this function to configure the ace editor instance
     $scope.aceLoaded = function (_editor) {
       d("inside ace loaded");
 
-      // Setup autocompletion - TODO: in progress
       // Note: this is the path for the ace require modules
       var langTools = ace.require("ace/ext/language_tools");
-      //$log.log(langTools);
-
-      var editor = ace.edit("editor");
-      editor.setOptions({enableBasicAutocompletion: true});
-      // uses http://rhymebrain.com/api.html
-      var rhymeCompleter = {
-          getCompletions: function(editor, session, pos, prefix, callback) {
-              if (prefix.length === 0) { callback(null, []); return }
-              $.getJSON(
-                  "http://rhymebrain.com/talk?function=getRhymes&word=" + prefix,
-                  function(wordList) {
-                      // wordList like [{"word":"flow","freq":24,"score":300,"flags":"bc","syllables":"1"}]
-                      callback(null, wordList.map(function(ea) {
-                          return {name: ea.word, value: ea.word, score: ea.score, meta: "rhyme"}
-                      }));
-                  })
-          }
-      }
-
-      langTools.addCompleter(rhymeCompleter);      // TODO: add the typeahead controller code
-      // end autocompletion tests
-
-      var editor = ace.edit("editor");
-
       var editor = _editor;
-      // Testing ace autocompletion
-
       $scope.editor = editor;
       var session = editor.getSession();
+
+      editor.setOptions({enableBasicAutocompletion: true});
+      var tmCompleter = {
+        getCompletions: function(editor, session, pos, prefix, callback) {
+          if (prefix.length === 0) { callback(null, []); return }
+          var tmMatches = TranslationMemory.allMatches;
+          callback(null, tmMatches.map(function(ea) {
+            $log.log("inside autocomplete callback, item from TM is: ");
+            $log.log(ea);
+            //return {name: ea.source, value: ea.source, score: ea.quality, meta: "translation_memory"}
+            return {name: ea.source, value: ea.target, score: 1, meta: "translation_memory"}
+
+          }));
+        }
+      }
+// TODO: this is a general-purpose utility that can be used to add autocomplete for any web service
+//          getCompletions: function(editor, session, pos, prefix, callback) {
+//            if (prefix.length === 0) { callback(null, []); return }
+// WORKING: query the local tm, let this code interact with a dictionary api or concordancer?
+//            $http.get('http://localhost:8999/tmserver/en/de/unit/' + prefix)
+//              .success(
+//                function(tmMatches) {
+                  // TM returns a list of objects like this: { quality: 100, rank: 100, source: "apple", target: "Apfel" }
+// TODO: check how the ace's language_tools actually uses the word objects
+// TODO: user will be typing in target language, so the autocomplete should have keys in the target language
+//                  callback(null, tmMatches.map(function(ea) {
+//                    $log.log("inside autocomplete callback, item from TM is: ");
+//                    $log.log(ea);
+//                    //return {name: ea.source, value: ea.source, score: ea.quality, meta: "translation_memory"}
+//                    return {name: ea.source, value: ea.target, score: 1, meta: "translation_memory"}
+//                  }));
+//              })
+//          }
+//      }
+// This creates a custom autocomplete function for Ace! - fuckin cool
+      langTools.addCompleter(tmCompleter);      // TODO: add the typeahead controller code
+      // end autocompletion tests
 
       // TESTING TO FIND HOW ACE USES ITS CONTAINER ELEMENT
       d("Logging the renderer");
@@ -157,22 +161,14 @@ define(['controllers/controllers'], function(controllers) {
         session.setMode('ace/mode/' + modeName);
       }
 
-      // TODO: how to limit the Ace editor to a certain number of lines?
-      // TODO: Override pressing Enter when inside an edit area? - i.e. don't let Ace see it
-      //editor.setOption("maxLines", 1);
-      //editor.setOptions({
-      //  maxLines: 1
-      //});
-
-      $scope.startText = "gloss over source to see the target phrase alignment";
-// TODO: see moses - how to get translation alignment?
+// TODO: see moses - how to get translation alignments?
       editor.setFontSize(20);
       editor.setFontSize(20);
-      //editor.setValue($scope.startText);
+      // sampleSen is initialized earlier in the controller
+      editor.setValue($scope.sampleSen);
       //editor.setTheme("ace/theme/twilight");  // Note: the editor themes are called by their string names (these are not paths)
       //console.log(_renderer.getTheme());
 
-      var renderer = editor.renderer;
       //session.on("change", function(){
         //console.log(editor.getValue());
        //console.log("the ace session change event fired") });

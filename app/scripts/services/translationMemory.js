@@ -2,6 +2,7 @@
 
 // TODO: the TM should point in both directions, right now it only goes e-->f
 // TODO- align subsegments to their source token ids - this requires tokenization!
+// TODO: formalize the TM item data model
 define(['services/services'], function(services) {
 
   services.factory('TranslationMemory', ['$http', '$log', function( $http, $log ) {
@@ -12,14 +13,52 @@ define(['services/services'], function(services) {
     var min_sim = '30';
 
     var getUrl = 'http://localhost:8999/tmserver/en/de/unit/';
+    var mymemoryUrl = 'http://api.mymemory.translated.net/get?q=';
+    var langPairStr = '&langpair=en|de';
+    var urlParams = {};
+    // my memory objects look like this:
+    //matches: Array[3]
+    //  0: Object
+    //  create-date: "2014-02-09"
+    //  created-by: "MT!"
+    //  id: "0"
+    //  last-update-date: "2014-02-09"
+    //  last-updated-by: "MT!"
+    //  match: 0.85
+    //  quality: "70"
+    //  reference: "Machine Translation provided by Google, Microsoft, Worldlingo or MyMemory customized engine."
+    //  segment: "the file for"
+    //  subject: "All"
+    //  translation: "Die Datei für"
+    //  usage-count: 1
+
+
+    //$http({
+    //  url: mymemoryUrl,
+    //  method: "GET",
+    //  params: urlParams
+    //});
+
+
     return {
       TM: {}, // holds all of the TM matches for every segment queried so far (lists of TM objects)
+      allMatches: [], // holds a list of all segments that we know about
       similarityThreshold: 60, // 70 is default
+      searchTM: function(query) {
+        // for this to be useful, we need to provide fuzzy matching logic
+        // the ace editor autocomplete already provides some of that functionality
+        // for now, make a custom autocomplete function which returns and filters EVERYTHING in the TM (i.e. all matches for all segments in this document)
+
+      },
       getMatches: function(query, callback, self) {
         if (!self)
           var self = this;
-        // TODO: url encode the queryString!
-        var queryUrl = getUrl + encodeURIComponent(query) + '?min_similarity=' + this.similarityThreshold;
+
+        // for amagama
+        // var queryUrl = getUrl + encodeURIComponent(query) + '?min_similarity=' + this.similarityThreshold;
+
+        // working - for myMemory
+        var queryUrl = mymemoryUrl + encodeURIComponent(query) + langPairStr;
         $http.get(queryUrl)
           .success(function(data) {
             $log.info("query was: " + query)
@@ -42,11 +81,23 @@ define(['services/services'], function(services) {
       addItems: function(queryString,tmMatches, self) {
         if (!self)
           var self = this;
-        if (self.TM[queryString]) {
-          self.TM[queryString].push(tmMatches);
-        } else {
-          self.TM[queryString] = tmMatches;
+        if (tmMatches.length > 0) {
+          if (self.TM[queryString]) {
+            self.TM[queryString].push(tmMatches);
+          } else {
+            self.TM[queryString] = tmMatches;
+          }
+          // flatten and add each match to the list of all matches (<array>, shallow) - shallow flattens to one level
+          //self.allMatches.push(_.flatten(tmMatches, true));
+          _.each(tmMatches, function(match) {
+            $log.log("logging tmMatch")
+            $log.log(match);
+            self.allMatches.push(match);
+          })
+//          $log.log("logging allMatches")
+//          $log.log(self.allMatches);
         }
+        // return im case someone wants to use the matches immediately
         return self.TM[queryString];
       },
       populateTM: function(subphrases) {

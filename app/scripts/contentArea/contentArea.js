@@ -16,6 +16,5 @@ define(['controllers/controllers'], function(controllers) {
     );
 
 
-
   }]);
 });

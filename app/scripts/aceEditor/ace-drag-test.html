@@ -2,7 +2,8 @@
 <!-- TODO: ace uses dragEnabled to allow user to drag selected text? -->
 <div id="test-editor" ng-controller="AceCtrl">
      <div id="editor" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" ui-ace="{ onLoad : aceLoaded, mode: 'translation'}"></div>
-    <button ng-click="queryTM(testQuery)"></button>
+    <button ng-click="queryTM(testQuery)">Query TM</button>
+    <button ng-click="createTM(sampleSen, minPhraseLen)">Populate TM</button>
 </div>
 
 <hr/>
