@@ -82,7 +82,7 @@ require(
 		'app',
     'domReady',
 		//'ngRoute',
-    'lib/ace/build/src/ext-language_tools',
+    //'lib/ace/build/src/ext-language_tools',
     'uiRouter',
 		'ngResource',
     'ngCookies',
@@ -92,6 +92,8 @@ require(
     'controllers/controllers',
     'services/services',
     'directives/directives',
+    'directives/index',
+
     'tokenRow/tokenRow',
     'tokenRow/draggable',
     'tokenRow/gap',
@@ -103,11 +105,12 @@ require(
     'services/xliffParser',
     'services/document',
     'services/tokenizer',
-    'glossary/glossaryFileUpload',
+    'glossary/xliffFileUpload',
     'contentArea/contentArea',
     'services/translationMemory',
     'menu/Menu',
-    'typeahead/typeahead'
+    'typeahead/typeahead',
+    'services/project'
 
     // TODO: ngFileSelect (local directive) has the same name as the library ngFileSelect
     //'directives/ngFileSelect',

@@ -26,32 +26,69 @@ define(['services/services'], function(services) {
         });
       },
       parseXML: function(rawText) {
-          var xml = parser.parseFromString(rawText, "text/xml");
-          // Set Document DOM to the parsed result
-          Document.DOM = xml;
+        var self = this;
+        var xml = parser.parseFromString(rawText, "text/xml");
+        // Set Document DOM to the parsed result
+        Document.DOM = xml;
 
-          var file = xml.querySelector("file");
+        var file = xml.querySelector("file");
 
-          // get all <trans-unit> nodes
-          var transUnits = xml.querySelectorAll('trans-unit');
+        // get all <trans-unit> nodes
+        var transUnits = xml.querySelectorAll('trans-unit');
 
-          var segments = get_translatable_segments(xml);
-          $log.log("The number of segments is: " + segments.length);
+        // Note: the Escriba sample xliffs have MT output inside them, ready for post-editing
+        var sourceSegments = this.getTranslatableSegments(xml);
 
-          _.each(segments,
-            function(seg) {
-              var s = seg.textContent;
-              // TODO how to replace and add nodes to the document as the translator works?
-              Document.segments.push(seg.textContent);
-              Document.translatableNodes.push(seg);
-            });
-          // tell the world that the document loaded
-          $log.log("firing DocumentLoaded");
-          $rootScope.$broadcast('DocumentLoaded');
-          // flip the flag on the Document object
-          Document.loaded = true;
+        // for every segment, get its matching target mrk, if it exists - note: it may not exist
+        var targetSegments = _.map(sourceSegments,
+          function(seg) {
+            return self.getMrkTarget(xml, seg);
+          }
+        );
+
+        $log.log("the number of source segments is: " + sourceSegments.length);
+        $log.log("The number of target segments is: " + targetSegments.length);
+
+        var sourceWithTarget = _.zip(sourceSegments, targetSegments);
+        _.each(sourceWithTarget,
+          function(seg) {
+            var sourceText = seg[0].textContent;
+            var targetText = seg[1] ? seg[1].textContent : '';
+            $log.log("sourceText: " + sourceText)
+            $log.log("targetText: " + targetText)
+            var segPair = [sourceText, targetText];
+
+            // TODO how to replace and add nodes to the document as the translator works?
+            Document.sourceSegments.push(sourceText);
+            Document.targetSegments.push(targetText);
+            // Add the pairs so we can access both sides from a single ngRepeat
+            Document.segments.push(segPair);
+
+            // TODO: make this useful
+            Document.translatableNodes.push(seg);
+          });
+        // tell the world that the document loaded
+        $log.log("firing DocumentLoaded");
+        $rootScope.$broadcast('DocumentLoaded');
+        // flip the flag on the Document object
+        Document.loaded = true;
       },
-      // Copied from Escriba - utility method to grab a local file from a string url
+      getTranslatableSegments: function(xmlDoc) {
+        return xmlDoc.querySelectorAll('seg-source > mrk[mtype="seg"]');
+      },
+      getMrkTarget: function(xmlDoc, seg) {
+        var segid = this.getSegId(seg);
+        var tuid = this.getTransUnitId(seg);
+        return xmlDoc.querySelector('trans-unit[id="'+tuid+'"] > target > mrk[mtype="seg"][mid="'+segid+'"]');
+      },
+      getSegId: function(seg) {
+        return seg.getAttribute("mid");
+      },
+      getTransUnitId: function(seg) {
+        var transunitNode = seg.parentNode.parentNode;
+        return transunitNode.getAttribute("id");
+      },
+      // utility function to grab a local file from a string url
       loadLocalFile: function(filepath) {
         // if filepath exists
         var xliffFile = '';

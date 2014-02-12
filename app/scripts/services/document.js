@@ -12,12 +12,12 @@ define(['services/services'], function(services) {
     // TODO: how to get a "loaded" flag on this object? - emit an event?
     return {
       ready: false,
+      sourceSegments: [],
+      targetSegments: [],
+      // testing: these are pairs of source + target
       segments: [],
       translatableNodes: [],
-      DOM: {},
-      getTargetSegments: function(node) {
-        return node.querySelector('target > mrk[mtype="seg"]');
-      }
+      DOM: {}
     }
   });
 });

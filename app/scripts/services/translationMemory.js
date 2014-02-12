@@ -5,17 +5,19 @@
 // TODO: formalize the TM item data model
 define(['services/services'], function(services) {
 
-  services.factory('TranslationMemory', ['$http', '$log', function( $http, $log ) {
+  services.factory('TranslationMemory', ['$http', '$timeout', '$log', function( $http, $timeout, $log ) {
     // An interface to a translation memory on the backend (currently uses the Amagama TM server)
     // Each segment has its own controller, so we don't need to call the callback with an index
 
     // There are several parameters which can be passed in the URL
     var min_sim = '30';
 
+    // url to amagama tm server
     var getUrl = 'http://localhost:8999/tmserver/en/de/unit/';
+
     var mymemoryUrl = 'http://api.mymemory.translated.net/get?q=';
     var langPairStr = '&langpair=en|de';
-    var urlParams = {};
+
     // my memory objects look like this:
     //matches: Array[3]
     //  0: Object
@@ -31,7 +33,6 @@ define(['services/services'], function(services) {
     //  subject: "All"
     //  translation: "Die Datei für"
     //  usage-count: 1
-
 
     //$http({
     //  url: mymemoryUrl,
@@ -55,10 +56,11 @@ define(['services/services'], function(services) {
           var self = this;
 
         // for amagama
-        // var queryUrl = getUrl + encodeURIComponent(query) + '?min_similarity=' + this.similarityThreshold;
+        var queryUrl = getUrl + encodeURIComponent(query) + '?min_similarity=' + this.similarityThreshold;
 
-        // working - for myMemory
-        var queryUrl = mymemoryUrl + encodeURIComponent(query) + langPairStr;
+        // for myMemory
+        // var queryUrl = mymemoryUrl + encodeURIComponent(query) + langPairStr;
+
         $http.get(queryUrl)
           .success(function(data) {
             $log.info("query was: " + query)
@@ -78,6 +80,7 @@ define(['services/services'], function(services) {
         );
       },
       // we need to pass in 'self' because this function may be used in callbacks
+// TODO: add a proper check to see if this item is already in the TM
       addItems: function(queryString,tmMatches, self) {
         if (!self)
           var self = this;
@@ -87,15 +90,15 @@ define(['services/services'], function(services) {
           } else {
             self.TM[queryString] = tmMatches;
           }
-          // flatten and add each match to the list of all matches (<array>, shallow) - shallow flattens to one level
-          //self.allMatches.push(_.flatten(tmMatches, true));
+
           _.each(tmMatches, function(match) {
             $log.log("logging tmMatch")
             $log.log(match);
             self.allMatches.push(match);
+
           })
-//          $log.log("logging allMatches")
-//          $log.log(self.allMatches);
+          $log.log("logging allMatches")
+          $log.log(self.allMatches);
         }
         // return im case someone wants to use the matches immediately
         return self.TM[queryString];
@@ -106,9 +109,12 @@ define(['services/services'], function(services) {
         if (typeof subphrases === 'string') {
           self.getMatches(subphrases, self.addItems, self);
         } else if (subphrases instanceof Array) {
+          var startTimeout = 0;
           _.each(subphrases, function(tokenList){
+            startTimeout = startTimeout + 10;
             var qString = tokenList.join(' ');
-            self.getMatches(qString, self.addItems, self);
+            // set a litte timeout on these so the TM doesn't get slammed
+            $timeout(function(){self.getMatches(qString, self.addItems, self)}, startTimeout);
           });
         }
       }

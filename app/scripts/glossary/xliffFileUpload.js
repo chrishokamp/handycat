@@ -1,19 +1,23 @@
 'use strict';
 define(['controllers/controllers'], function(controllers) {
 
-// TODO: remove or rename fileReader?
 // TODO: remove document service -- this controller should change route once the document has loaded
-  controllers.controller('UploadCtrl', ['$scope', 'fileReader', '$timeout', 'XliffParser', 'Document', '$log', function($scope, fileReader, $timeout, XliffParser, Document, $log) {
+  controllers.controller('UploadCtrl', ['$scope', 'fileReader', '$timeout', 'XliffParser', 'Document', '$state', '$log', function($scope, fileReader, $timeout, XliffParser, Document, $state, $log) {
 // TODO: remember that different file types will require different parsers
 
     var development = true;
   // Dev flag - load file by default
     if (development) {
-      var fileUrl = 'data/enEs.xlf';
+      //var fileUrl = 'data/enEs.xlf';
+      // var fileUrl = 'data/enDe.xlf';
+      var fileUrl = 'data/enDeSmall.xlf';
       $log.log("IN DEVELOPMENT MODE - loading local file: " + fileUrl);
 
       // autoload a file
       XliffParser.loadLocalFile(fileUrl);
+
+      // WORKING - go to the edit state
+      $state.go('edit')
 
 // Example files - TODO: repurpose for testing
 //      var example_path = "examples/";
@@ -28,16 +32,13 @@ define(['controllers/controllers'], function(controllers) {
 
 // get the file name, and let the parsing service handle the rest (service should have a function for each file type
 // Once the file is parsed, the parsed data should be set on the Document service
-// TODO: parse a local xml file - see the escriba project
-// Parsing on the server is also a perfectly valid option
-// server needs to know how to synchronize with the file format at all times
 // TODO: this should actually change the route using ui-router
     $scope.$on('DocumentLoaded', function (event) {
       d("UploadCtrl: DocumentLoaded")
       $scope.parsed = Document.segments;
     });
 
-// TODO: get file type
+// TODO: get file type (assume xlf for now)
     $scope.onFileSelect = function ($files) {
       d("inside file select");
       //$files: an array of files selected, each file has name, size, and type.

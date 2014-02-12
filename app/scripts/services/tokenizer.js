@@ -10,7 +10,7 @@
 
 define(['services/services'], function(services) {
 
-  services.factory('tokenizer', function( ) {
+  services.factory('tokenizer',['$log', function( $log ) {
 
     // Naive tokenization for a line of text -- note: for TMs, leaving punctuation is actually ok
     var tokenize = function(str) {
@@ -49,5 +49,5 @@ define(['services/services'], function(services) {
         return phrases;
       }
     }
-  });
+  }]);
 });

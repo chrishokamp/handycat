@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:okp="okapi-framework:xliff-extensions" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" its:version="2.0">
+<file original="http://en.wikipedia.org/wiki/Santiago_de_Compostela#The city" source-language="en-us" target-language="de" datatype="html">
+<body>
+<trans-unit id="1">
+<source xml:lang="en-us">Santiago de Compostela</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">The cathedral borders the main plaza of the old and well-preserved city.</mrk> 
+	<mrk mid="1" mtype="seg" its:translate="no">Santiago de Compostela</mrk>
+</seg-source>
+<target xml:lang="de">
+	<mrk mid="1" mtype="seg">Santiago de Compostela</mrk>
+</target>
+<alt-trans mid="0" origin="google-translate" its:mtConfidence="0.6982">
+	<source xml:lang="en-us">The cathedral borders the main plaza of the old and well-preserved city.</source>
+	<target xml:lang="de">Die Kathedrale grenzt an den Hauptplatz des alten und gut erhaltenen Stadt.</target>
+</alt-trans>
+</trans-unit>
+
+<trans-unit id="2">
+<source>The cathedral borders the main plaza of the old and well-preserved city. Legend has it that the remains of the apostle James were brought to Galicia for burial. In 813, according to medieval legend, the light of a bright star guided a shepherd who was watching his flock at night to the burial site in Santiago de Compostela. The shepherd quickly reported his discovery to the bishop of Iria, Bishop Teodomiro.The bishop declared that the remains were those of the apostle James and immediately notified King Alfonso II in Oviedo. To honour St. James, the cathedral was built on the spot where his remains were said to have been found. The legend, which included numerous miraculous events, enabled the Catholic faithful to not only maintain their stronghold in northern Spain during the Christian crusades against the Moors, but also led to the growth and development of the city.</source>
+<seg-source>
+	<mrk mid="1" mtype="seg">Legend has it that the remains of the apostle James were brought to Galicia for burial.</mrk>
+	<mrk mid="2" mtype="seg">In 813, according to medieval legend, the light of a bright star guided a shepherd who was watching his flock at night to the burial site in Santiago de Compostela.</mrk>
+	<mrk mid="3" mtype="seg">The shepherd quickly reported his discovery to the bishop of Iria, <mrk mtype="term" its:term="yes" its:termConfidence="0.3">Bishop</mrk> Teodomiro.The bishop declared that the remains were those of the apostle James and immediately notified King Alfonso II in Oviedo.</mrk>
+	<mrk mid="4" mtype="seg">To honour <mrk mtype="term" its:term="yes" its:termConfidence="0.9">St. James</mrk>, the cathedral was built on the spot where his remains were said to have been found.</mrk>	
+	<mrk mid="5" mtype="seg">The legend, which included numerous miraculous events, enabled the Catholic faithful to not only maintain their stronghold in northern Spain during the <mrk mtype="term" its:term="yes" its:termConfidence="0.5">Christian crusades</mrk> against the Moors, but also led to the growth and development of the city.</mrk>			
+</seg-source>
+<target xml:lang="de">
+	<mrk mid="2" mtype="seg">In 813, nach mittelalterlichen Legende, das Licht von einem hellen Stern ein Hirte, der seine Herde beobachtete in der Nacht wurde der Grabstätte in Santiago de Compostela geführt.</mrk>
+	<mrk mid="3" mtype="seg">Der Schäfer schnell berichtet seine Entdeckung an den Bischof von Iria, Bischof Teodomiro. Der Bischof erklärte, dass diejenigen, die Überreste des Apostels Jakobus waren und sofort benachrichtigt König Alfonso II in Oviedo .</mrk>
+	<mrk mid="4" mtype="seg">Zu Ehren St. James wurde die Kathedrale auf der Stelle, wo seine sterblichen Überreste gefunden worden waren gebaut .</mrk>	
+	<mrk mid="5" mtype="seg">Die Legende , die zahlreiche wunderbare Ereignisse enthalten, aktiviert die katholischen Gläubigen nicht nur halten, ihre Hochburg im Norden von Spanien während der christlichen Kreuzzüge gegen die Mauren, sondern auch auf das Wachstum und die Entwicklung der Stadt führte.</mrk>	
+</target>
+<alt-trans mid="4" origin="google-translate" its:mtConfidence="0.781">
+	<source xml:lang="en-us">To honour St. James, the cathedral was built on the spot where his remains were said to have been found.</source>
+	<target xml:lang="de">Zu Ehren St. James wurde die Kathedrale auf der Stelle, wo seine sterblichen Überreste gefunden worden waren gebaut .</target>
+</alt-trans>
+<alt-trans mid="5" origin="google-translate" its:mtConfidence="0.8982">
+	<source xml:lang="en-us">The legend, which included numerous miraculous events, enabled the Catholic faithful to not only maintain their stronghold in northern Spain during the Christian crusades against the Moors, but also led to the growth and development of the city.</source>
+	<target xml:lang="de">Die Legende , die zahlreiche wunderbare Ereignisse enthalten, aktiviert die katholischen Gläubigen nicht nur halten, ihre Hochburg im Norden von Spanien während der christlichen Kreuzzüge gegen die Mauren, sondern auch auf das Wachstum und die Entwicklung der Stadt führte.</target>
+</alt-trans>
+<alt-trans mid="5" origin="bing-translate" its:mtConfidence="0.5234">
+	<source xml:lang="en-us">The legend, which included numerous miraculous events, enabled the Catholic faithful to not only maintain their stronghold in northern Spain during the Christian crusades against the Moors, but also led to the growth and development of the city.</source>
+	<target xml:lang="de">Die Legende , die zahlreiche wunderbare Ereignisse enthalten, aktiviert die katholischen Gläubigen nicht halten, ihre Hochburg im Norden von Spanien während der christlichen Kreuzzüge gegen die Mauren, sondern auch auf das Wachstum und die Entwicklung der Stadt führte.</target>
+</alt-trans>
+</trans-unit>
+
+<trans-unit id="3">
+<source xml:lang="en-us">Santiago is the site of the University of Santiago de Compostela, established in the early 16th century. The main campus can be seen best from an alcove in the large municipal park in the centre of the city.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">Santiago is the site of <mrk mtype="term" its:term="yes" its:termConfidence="0.2">the University of Santiago de Compostela</mrk>, established in the early 16th century.</mrk>
+	<mrk mid="1" mtype="seg">The main campus can be seen best from an alcove in the large municipal park in the centre of the city.</mrk>	
+</seg-source>
+<target xml:lang="de">
+	<mrk mid="0" mtype="seg">Santiago ist die Website der Universität von Santiago de Compostela , in der Anfang des 16.</mrk>
+</target>
+<alt-trans mid="1" origin="bing-translate" its:mtConfidence="0.4112">
+	<source xml:lang="en-us">The main campus can be seen best from an alcove in the large municipal park in the centre of the city.</source>
+	<target xml:lang="de">Der Hauptcampus kann man am besten aus einer Nische im großen Stadtpark im Zentrum der Stadt werden.</target>
+</alt-trans>
+</trans-unit>
+
+<trans-unit id="4">
+<source xml:lang="en-us">Within the old town there are many narrow winding streets full of historic buildings. The new town all around it has less character though some of the older parts of the new town have some big flats in them.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">Within the old town there are many narrow winding streets full of historic buildings.</mrk>
+	<mrk mid="1" mtype="seg">The new town all around it has less character though some of the older parts of the new town have some big flats in them.</mrk>	
+</seg-source>
+<target xml:lang="de">
+	<mrk mid="0" mtype="seg">Innerhalb der Altstadt gibt es viele schmale Gassen voll von historischen Gebäuden.</mrk>	
+</target>
+<alt-trans mid="1" origin="google-translate" its:mtConfidence="0.7122">
+	<source xml:lang="en-us">The new town all around it has less character though some of the older parts of the new town have some big flats in them</source>
+	<target xml:lang="de">Die neue Stadt rundherum hat weniger Charakter obwohl einige von den älteren Teilen der neuen Stadt einige große Wohnungen in ihnen haben.</target>
+</alt-trans>
+<alt-trans mid="1" origin="bing-translate" its:mtConfidence="0.4552">
+	<source xml:lang="en-us">The new town all around it has less character though some of the older parts of the new town have some big flats in them</source>
+	<target xml:lang="de">Die neue Stadt rundherum hat weniger Charakter obwohl einige von älteren Teilen neuen Stadt einige große Wohnungen in ihnen haben.</target>
+</alt-trans>
+</trans-unit>
+
+<trans-unit id="5">
+<source xml:lang="en-us">Santiago de Compostela has a substantial nightlife. Divided between the new town (a zona nova in Galician, la zona nueva in Spanish or ensanche) and the old town (a zona vella in Galician or la zona vieja in Spanish, trade-branded as zona monumental), a mix of middle-aged residents and younger students running throughout the city until the early hours of the morning can often be found. Radiating from the centre of the city, the historic cathedral is surrounded by paved granite streets, tucked away in the old town, and separated from the newer part of the city by the largest of many parks throughout the city, Parque da Alameda. Whether in the old town or the new town, party-goers will often find themselves following their tapas by dancing the night away.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">Santiago de Compostela has a substantial nightlife.</mrk>
+	<mrk mid="1" mtype="seg">Divided between the new town (a zona nova in Galician, la zona nueva in Spanish or ensanche) and the old town (<mrk mtype="term" its:term="yes" its:termConfidence="0.99">a zona vella</mrk> in Galician or la zona vieja in Spanish, trade-branded as zona monumental), a mix of middle-aged residents and younger students running throughout the city until the early hours of the morning can often be found.</mrk>
+	<mrk mid="2" mtype="seg">Radiating from the centre of the city, the historic cathedral is surrounded by paved granite streets, tucked away in the old town, and separated from the newer part of the city by the largest of many parks throughout the city, <mrk mtype="term" its:term="yes" its:termConfidence="0.8">Parque da Alameda</mrk>.</mrk>
+	<mrk mid="3" mtype="seg">Whether in the old town or the new town, party-goers will often find themselves following their <mrk mtype="term" its:term="yes" its:termConfidence="0.85">tapas</mrk> by dancing the night away.</mrk>
+</seg-source>
+<target xml:lang="de">
+	<mrk mid="0" mtype="seg">Santiago de Compostela hat eine erhebliche Nachtleben.</mrk>
+	<mrk mid="1" mtype="seg">Aufgeteilt zwischen der neuen Stadt (a zona nova in Galizien , la zona nueva in Spanisch oder ensanche) und der Altstadt (zona Vella in Galizien oder la zona Vieja in Spanisch , als zona monumentale Handels-Marke), eine Mischung aus mittleren Alters Bewohner und jüngere Schüler laufen in der ganzen Stadt bis in die frühen Morgenstunden kann oft gefunden werden.</mrk>
+	<mrk mid="2" mtype="seg">Strahlenförmig von der Mitte der Stadt, wird die historische Kathedrale durch gepflasterte Straßen Granit umgeben, versteckt in der Altstadt versteckt, und getrennt von dem neueren Teil der Stadt durch die größte von vielen Parks in der ganzen Stadt, Parque da Alameda.</mrk>
+</target>
+</trans-unit>
+
+<trans-unit id="6">
+<source xml:lang="en-us">The population of the city in 2012 was 95,671 inhabitants, while the metropolitan area reaches 178,695. In 2010 there were 4,111 foreigners living in the city, representing a 4,3% of the total population. The main nationalities are Brazilians (11%), Portuguese (8%) and Colombians (7%). By language, according to 2008 data, 21% of the population always speak in Galician, 15% always speak in Spanish and the rest use both interchangeably.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg" its:translate="no">The population of the city in 2012 was 95,671 inhabitants, while the metropolitan area reaches 178,695.</mrk>
+	<mrk mid="1" mtype="seg">In 2010 there were 4,111 foreigners living in the city, representing a 4,3% of the total population.</mrk>
+	<mrk mid="2" mtype="seg">The main nationalities are Brazilians (11%), Portuguese (8%) and Colombians (7%).</mrk>	
+	<mrk mid="3" mtype="seg">By language, according to 2008 data, 21% of the population always speak in Galician, 15% always speak in Spanish and the rest use both interchangeably.</mrk>
+</seg-source>
+<target xml:lang="de">
+	<mrk mid="0" mtype="seg">Die Bevölkerung der Stadt im Jahr 2012 war 95.671 Einwohner, während der Großraum erreicht 178.695.</mrk>
+	<mrk mid="1" mtype="seg">Im Jahr 2010 gab es 4.111 Ausländer leben in der Stadt, was einem 4,3% der Gesamtbevölkerung.</mrk>
+	<mrk mid="2" mtype="seg">Die wichtigsten Nationalitäten sind Brasilianer (11%), Portugiesen (8%) und Kolumbianer (7%).</mrk>	
+	<mrk mid="3" mtype="seg">Durch Sprache, nach Daten von 2008, 21% der Bevölkerung immer in galizischen sprechen, 15% immer in Spanisch sprechen und den Rest verwenden sowohl austauschbar.</mrk>
+</target>
+</trans-unit>
+
+</body>
+</file>
+</xliff>

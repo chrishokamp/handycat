@@ -1,3 +1,7 @@
+body {
+  background-color: light-grey;
+}
+
 h3 {
   padding: 4px 0 4px 0;
 }
@@ -8,6 +12,8 @@ h3 {
 
 .edit-area {
   @extend %ace-editor-height;
+  background-color: white;
+  border: 1px solid black;
 }
 
 .translation-unit {
@@ -53,9 +59,13 @@ h3 {
 
 /* the div which actually contains the source - what is overriding height? */
 .source {
-  background-color: #f8f8ff;
+  background-color: white;
   font-size: 20px;
-  /* height: 200px !important; */
+  margin-top: 10px;
+}
+
+.target {
+  margin-top: 10px;
 }
 
 /* hack to hide the scrollbars in the ace editor */

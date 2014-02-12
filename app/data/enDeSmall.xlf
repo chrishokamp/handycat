@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:okp="okapi-framework:xliff-extensions" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" its:version="2.0">
+<file original="http://en.wikipedia.org/wiki/Santiago_de_Compostela#The city" source-language="en-us" target-language="de" datatype="html">
+<body>
+
+<trans-unit id="0">
+<source xml:lang="en-us">Santiago de Compostela has a substantial nightlife. Divided between the new town (a zona nova in Galician, la zona nueva in Spanish or ensanche) and the old town (a zona vella in Galician or la zona vieja in Spanish, trade-branded as zona monumental), a mix of middle-aged residents and younger students running throughout the city until the early hours of the morning can often be found. Radiating from the centre of the city, the historic cathedral is surrounded by paved granite streets, tucked away in the old town, and separated from the newer part of the city by the largest of many parks throughout the city, Parque da Alameda. Whether in the old town or the new town, party-goers will often find themselves following their tapas by dancing the night away.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">Santiago de Compostela has a substantial nightlife.</mrk>
+	<mrk mid="1" mtype="seg">Divided between the new town (a zona nova in Galician, la zona nueva in Spanish or ensanche) and the old town (<mrk mtype="term" its:term="yes" its:termConfidence="0.99">a zona vella</mrk> in Galician or la zona vieja in Spanish, trade-branded as zona monumental), a mix of middle-aged residents and younger students running throughout the city until the early hours of the morning can often be found.</mrk>
+	<mrk mid="2" mtype="seg">Radiating from the centre of the city, the historic cathedral is surrounded by paved granite streets, tucked away in the old town, and separated from the newer part of the city by the largest of many parks throughout the city, <mrk mtype="term" its:term="yes" its:termConfidence="0.8">Parque da Alameda</mrk>.</mrk>
+	<mrk mid="3" mtype="seg">Whether in the old town or the new town, party-goers will often find themselves following their <mrk mtype="term" its:term="yes" its:termConfidence="0.85">tapas</mrk> by dancing the night away.</mrk>
+</seg-source>
+<target xml:lang="de">
+	<mrk mid="0" mtype="seg">Santiago de Compostela hat eine erhebliche Nachtleben.</mrk>
+	<mrk mid="1" mtype="seg">Aufgeteilt zwischen der neuen Stadt (a zona nova in Galizien , la zona nueva in Spanisch oder ensanche) und der Altstadt (zona Vella in Galizien oder la zona Vieja in Spanisch , als zona monumentale Handels-Marke), eine Mischung aus mittleren Alters Bewohner und jüngere Schüler laufen in der ganzen Stadt bis in die frühen Morgenstunden kann oft gefunden werden.</mrk>
+	<mrk mid="2" mtype="seg">Strahlenförmig von der Mitte der Stadt, wird die historische Kathedrale durch gepflasterte Straßen Granit umgeben, versteckt in der Altstadt versteckt, und getrennt von dem neueren Teil der Stadt durch die größte von vielen Parks in der ganzen Stadt, Parque da Alameda.</mrk>
+</target>
+</trans-unit>
+</body>
+</file>
+</xliff>
