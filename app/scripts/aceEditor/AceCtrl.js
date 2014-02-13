@@ -5,9 +5,17 @@
 
 define(['controllers/controllers'], function(controllers) {
 
-  controllers.controller('AceCtrl', ['$scope', 'Document', 'TranslationMemory', 'tokenizer', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, $http, $timeout, $log) {
+  controllers.controller('AceCtrl', ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, Glossary, $http, $timeout, $log) {
+
+    // testing the special chars directive
+    $scope.germanChars = ['a','b','c','d'];
+    $scope.insertChar = function(char) {
+      $log.log("char to insert: " + char);
+      $scope.insertText(char);
+    }
 
     // we don't know ths segment's value until it's initialized from the ng-repeat index
+    // TODO: use ngInit to set the source and target segs from the view?
     $scope.allSegments = Document.segments;
     // TODO: this is super hackish
     $scope.$watch(
@@ -132,8 +140,6 @@ define(['controllers/controllers'], function(controllers) {
       //$log.log("setting the value of the ace editor to: " + $scope.targetSegment);
       //editor.setValue($scope.targetSegment);
 
-      var session = editor.getSession();
-
       editor.setOptions({enableBasicAutocompletion: true});
       var tmCompleter = {
         getCompletions: function(editor, session, pos, prefix, callback) {
@@ -145,6 +151,15 @@ define(['controllers/controllers'], function(controllers) {
             //return {name: ea.source, value: ea.source, score: ea.quality, meta: "translation_memory"}
             return {name: ea.source, value: ea.target, score: 1, meta: "translation_memory"}
 
+          }));
+        }
+      }
+      var glossaryCompleter = {
+        getCompletions: function(editor, session, pos, prefix, callback) {
+          if (prefix.length === 0) { callback(null, []); return }
+          var glossaryMatches = Glossary.allWords;
+          callback(null, glossaryMatches.map(function(item) {
+            return {name: item, value: item, score: 1, meta: "Glossary"}
           }));
         }
       }
@@ -168,15 +183,15 @@ define(['controllers/controllers'], function(controllers) {
 //          }
 //      }
 // This creates a custom autocomplete function for Ace! - fuckin cool
-      langTools.addCompleter(tmCompleter);      // TODO: add the typeahead controller code
+      langTools.addCompleter(tmCompleter);   // TODO: add the typeahead controller code
+      langTools.addCompleter(glossaryCompleter);
       // end autocompletion tests
 
-      // TESTING TO FIND HOW ACE USES ITS CONTAINER ELEMENT
-      // d("Logging the renderer");
+      var session = editor.getSession();
+      // modify some of the display params for the Ace Editor
       var renderer = editor.renderer;
-      var container = renderer.getContainerElement();
-      // d(container);
-      // END TESTING
+      //var container = renderer.getContainerElement();
+      renderer.setShowGutter(false);
 
       // hide the print margin
       editor.setShowPrintMargin(false);

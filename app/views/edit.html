@@ -28,6 +28,7 @@
 
                 <div class="ace_editor target" id="ace_editor-{{$index}}"  ng-model="allSegments[$index][1]" ui-ace="{ onLoad : aceLoaded }"></div>
                 <div class="row"><button ng-click="segmentFinished()">Segment Finished</button></div>
+                <div chars special="germanChars" selected="insertChar(char)" ></div>
             </div>
         </div>
     </div>
