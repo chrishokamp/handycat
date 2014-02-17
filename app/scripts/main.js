@@ -18,6 +18,7 @@ require.config({
     domReady: '../bower_components/domready/ready',
     ngCookies: '../bower_components/angular-cookies/angular-cookies',
     ngSanitize: '../bower_components/angular-sanitize/angular-sanitize',
+    ngAnimate: 	'../bower_components/angular-animate/angular-animate',
     uiAce: '../bower_components/angular-ui-ace/ui-ace',
     //'ace': '/scripts/lib/ace/lib/ace/ace',
     //ace: 'scripts/lib/ace/lib/ace',
@@ -57,6 +58,10 @@ require.config({
 			deps: ['angular'],
 			exports: 'ngResource'
 		},
+    ngAnimate: {
+      deps: ['angular'],
+      exports: 'ngAnimate'
+    },
     ngCookies: {
       deps: ['angular'],
       exports: 'ngCookies'
@@ -85,6 +90,7 @@ require(
     //'lib/ace/build/src/ext-language_tools',
     'uiRouter',
 		'ngResource',
+    'ngAnimate',
     'ngCookies',
     'ngSanitize',
     'underscore',
@@ -108,6 +114,9 @@ require(
     'tokenRow/token',
     'aceEditor/AceCtrl',
     'ace_utils/wordHighlighter',
+
+    'tabs/tabs',
+
     'glossary/Glossary',
     'glossary/xliffFileUpload',
     'contentArea/contentArea',

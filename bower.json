@@ -21,10 +21,14 @@
     "ng-file-upload": "~1.2.4",
     "angular-ui-router": "0.2.7",
     "ace": "~1.1.1",
-    "ace-builds": "~1.1.1"
+    "ace-builds": "~1.1.1",
+    "angular-animate": "~1.2.13"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
     "angular-scenario": "~1.2.0"
+  },
+  "resolutions": {
+    "angular": ">= 1.1.5"
   }
 }

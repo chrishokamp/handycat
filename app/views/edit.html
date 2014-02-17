@@ -1,40 +1,40 @@
-  <!-- TODO: put the page content inside the tabs -->
+  <!-- TODO: show the relevant content when the tab is active - put inside tab.content? -->
+<div class="container" ng-controller="TabsCtrl">
+    <div>
+      <tabset justified="true">
+        <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled"></tab>
+      </tabset>
+    </div>
 
-  <tabset justified="true">
-    <tab heading="Translate"></tab>
-    <tab heading="Statistics"></tab>
-    <tab heading="Project"></tab>
-  </tabset>
-</div>
+    <!-- TODO: add feature where dragging a word or phrase to target area translates it automatically -->
+    <!-- TODO: markup target content using highlight rules -->
+    <!-- TODO: get the TM matches for the source segment -->
 
-
-<!-- TODO: add feature where dragging a word or phrase to target area translates it automatically -->
-<!-- TODO: add TM and MT output on the target side -->
-<!-- TODO: markup target content using highlight rules -->
-<!-- TODO: get the TM matches for the source segment -->
-<div class="containeri clearfix" ng-controller="ContentAreaCtrl">
-    <div class="segment"  ng-repeat="seg in segments">
-        <div class="row" ng-controller="AceCtrl">
-            <!-- used with $anchorScroll from ContentAreaCtrl -->
-            <!-- TODO: prevent $anchorScroll from reloading the ng-repeat -->
+    <!-- translation area -->
+    <div>hi</div>
+    <div class="container" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
+        <div class="segment"  ng-repeat="seg in segments" >
             <a id="segment-{{$index}}"></a>
             <p>Segment Index: {{$index}}</p>
+            <div class="row" ng-controller="AceCtrl">
+                <!-- used with $anchorScroll from ContentAreaCtrl -->
+                <!-- TODO: prevent $anchorScroll from reloading the ng-repeat -->
 
-            <div class="source-area col-sm-6">
-                <div class="source">{{ allSegments[$index][0] }}</div>
-            </div>
-
-            <div index="{{$index}}" class="edit-area target-area col-sm-6">
-
-                <div class="ace_editor target" id="ace_editor-{{$index}}"  ng-model="allSegments[$index][1]" ui-ace="{ onLoad : aceLoaded }"></div>
-                <div class="row">
-                    <button ng-click="segmentFinished()" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-right cat-glyph"></span></button>
-                    <button ng-click="setMode()" class="btn btn-primary pull-right"><span>Set Mode</span></button>
+                <div class="content-card source-area col-sm-6">
+                    <div class="source">{{ allSegments[$index][0] }}</div>
                 </div>
-                <div chars special="germanChars" selected="insertChar(char)" ></div>
+                <div index="{{$index}}" class="content-card target-area col-sm-6">
+                    <div class="edit-area">
+                        <div class="ace_editor target" id="ace_editor-{{$index}}"  ng-model="allSegments[$index][1]" ui-ace="{ onLoad : aceLoaded }"></div>
+                        <div class="row">
+                            <button ng-click="segmentFinished()" class="seg-finished btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-right cat-glyph"></span></button>
+                            <button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>
+                        </div>
+                        <div chars class="sample-show-hide" show="{{showSpecialChars}}" special="germanChars" selected="insertChar(char)" ></div>
+                    </div>
+                </div>
             </div>
         </div>
+        <hr/>
     </div>
-    <hr/>
 </div>
-

@@ -8664,7 +8664,7 @@ var TextHighlightRules = function() {
         },
         {
           //defaultToken : "text"
-          defaultToken : "apple"
+          defaultToken : "non-word"
         }]
     };
 };

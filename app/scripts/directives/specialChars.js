@@ -10,7 +10,8 @@ define(['../directives/directives'], function(directives){
       scope: {
         special: '=',
         // pass the function used by the controller in the view
-        selected: '&'
+        selected: '&',
+        show: '@'
       },
       templateUrl: 'scripts/directives/special-chars.html',
 
