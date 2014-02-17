@@ -68,11 +68,6 @@ span.cat-glyph {
   background-color: green;
 }
 
-/* markup for the source area */
-.source-area {
-
-}
-
 /* the div which actually contains the source - what is overriding height? */
 .source {
   background-color: white;
@@ -85,8 +80,11 @@ span.cat-glyph {
   overflow: hidden;
 }
 
-.edit-area {
+.target {
   background-color: white;
+}
+
+.edit-area {
   margin-top: 10px;
   padding-left: 4px;
 }

@@ -5,7 +5,7 @@
 
 define(['controllers/controllers'], function(controllers) {
 
-  controllers.controller('AceCtrl', ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, Glossary, $http, $timeout, $log) {
+  controllers.controller('AceCtrl', ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, $http, $timeout, $log) {
 
     // testing the special chars directive
     $scope.germanChars = ['ä','ö','ü','Ä','Ö','Ü','ß'];
@@ -136,13 +136,27 @@ define(['controllers/controllers'], function(controllers) {
       $scope.editor.session.setMode('ace/mode/text');
 
       // Testing token mouseover
-      editor.on('mousemove', function(e) {
+      // TODO: the hover/click logic here is tricky!
+      // editor.on('mousemove', function(e) {
+      editor.on('click', function(e) {
         var position = e.getDocumentPosition();
         var token = editor.session.getTokenAt(position.row, position.column);
-        $log.log("LOG: token is: ");
+        $log.log("LOG: token object is: ");
         $log.log(token);
-      });
+        $log.log("LOG: Stemmed token is: ");
+        var stemmedToken = GermanStemmer.stem(token.value)
+        $log.log(stemmedToken);
+        $log.log("map output is: ");
+        var otherForms = GermanStemmer.getOtherForms(stemmedToken)
+        $log.log(otherForms);
 
+        // TESTING - set the possible forms on the scope
+        if (otherForms) {
+          $log.log("setting otherWordForms");
+          $scope.otherWordForms = otherForms;
+          $scope.$apply();
+        }
+      });
 
       // a way of getting the current token on click
 //      var Range = ace.require("ace/range").Range, markerId

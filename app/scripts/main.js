@@ -31,6 +31,7 @@ require.config({
     ngFileUpload: '../bower_components/ng-file-upload/angular-file-upload',
     // TODO: create a proper xliff parsing component
     xliffParser: 'lib/xliff_data_selector',
+    germanSnowball: 'lib/german_snowball_stemmer',
     uiRouter: 	'../bower_components/angular-ui-router/release/angular-ui-router'
 	},
 	shim: {
@@ -94,7 +95,10 @@ require(
     'ngCookies',
     'ngSanitize',
     'underscore',
+
     'xliffParser',
+    'germanSnowball',
+
     'controllers/controllers',
 
     'services/services',
@@ -103,6 +107,7 @@ require(
     'services/xliffParser',
     'services/document',
     'services/tokenizer',
+    'services/germanStemmer',
 
     'directives/directives',
     'directives/index',
