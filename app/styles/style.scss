@@ -1,6 +1,12 @@
 /* make widescreen */
 
 
+/* no rounded corners allowed */
+* {
+  -webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
+}
 
 body {
   background-color: light-grey;
@@ -14,10 +20,17 @@ h3 {
   height: 300px;
 }
 
+
 .edit-area {
   @extend %ace-editor-height;
   background-color: white;
   border: 1px solid black;
+}
+
+span.cat-glyph {
+  font-size: 30px;
+  vertical-align: middle;
+  // TODO: get it perfect
 }
 
 .translation-unit {

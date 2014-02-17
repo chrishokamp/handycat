@@ -8655,8 +8655,16 @@ var TextHighlightRules = function() {
         "start" : [{
             token : "empty_line",
             regex : '^$'
-        }, {
-            defaultToken : "text"
+        },
+        {
+          token : "word",
+          // regex : '\w+'
+          // regex : 'text'
+          regex : '[a-zA-Z]+'
+        },
+        {
+          //defaultToken : "text"
+          defaultToken : "apple"
         }]
     };
 };

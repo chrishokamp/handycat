@@ -107,6 +107,7 @@ require(
     'tokenRow/gap',
     'tokenRow/token',
     'aceEditor/AceCtrl',
+    'ace_utils/wordHighlighter',
     'glossary/Glossary',
     'glossary/xliffFileUpload',
     'contentArea/contentArea',

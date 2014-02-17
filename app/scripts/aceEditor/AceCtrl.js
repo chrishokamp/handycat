@@ -131,6 +131,38 @@ define(['controllers/controllers'], function(controllers) {
       var langTools = ace.require("ace/ext/language_tools");
       var editor = _editor;
       $scope.editor = editor;
+      $log.log("logging editor");
+      $log.log(editor);
+      // WORKING - use ace.require to create an edit mode - in lib/
+
+      $scope.editor.session.setMode('ace/mode/text');
+
+      // Testing token mouseover
+      editor.on('mousemove', function(e) {
+        var position = e.getDocumentPosition();
+        var token = editor.session.getTokenAt(position.row, position.column);
+        $log.log("LOG: token is: ");
+        $log.log(token);
+      });
+
+
+      var Range = ace.require("ace/range").Range, markerId
+      var handler = function(e){
+          var editor = e.editor
+          console.log(e)
+          var pos = editor.getCursorPosition()
+          var token = editor.session.getTokenAt(pos.row, pos.column)
+          if (/\bkeyword\b/.test(token.type))
+              console.log(token.value, 'is a keyword')
+
+          // add highlight for the clicked token
+          var range = new Range(pos.row, token.start,
+              pos.row, token.start + token.value.length)
+          console.log(range)
+          editor.session.removeMarker(markerId)
+          markerId = editor.session.addMarker(range, 'ace_bracket red')
+      }
+      editor.on("click", handler)
 
       // TESTING - focus the editor
       // what is the editor object?
@@ -199,9 +231,11 @@ define(['controllers/controllers'], function(controllers) {
       session.setUseWrapMode(true);
 
       // TESTING: dynamically set the mode
+      // WORKING: add a text tokenization (word recognition) mode to ace
       $scope.setMode = function() {
         var modeName = "text";
-        session.setMode('ace/mode/' + modeName);
+        $scope.editor.session.setMode('ace/mode/' + modeName);
+        $log.log("Set mode to: " + modeName);
       }
 
 // TODO: see moses - how to get translation alignments?

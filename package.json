@@ -1,7 +1,12 @@
 {
   "name": "editorcomponents",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "bower": "1.2.x",
+    "express": "3.4.x",
+    "gzippo": "0.2.x"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
@@ -45,6 +50,7 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "postinstall": "./node_modules/bower/bin/bower install"
   }
 }

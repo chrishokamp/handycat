@@ -56,7 +56,11 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+          //'{.tmp,<%= yeoman.app %>}/angular/**/*.js',
+          //'{.tmp,<%= yeoman.app %>}/angular/**/*.html',
         ]
       }
     },
@@ -66,7 +70,8 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        //hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
@@ -176,18 +181,19 @@ module.exports = function (grunt) {
     },
 
     // Renames files for browser caching purposes
-    rev: {
-      dist: {
-        files: {
-          src: [
-            '<%= yeoman.dist %>/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
-          ]
-        }
-      }
-    },
+    // Chris - commented because files can't be found in dist/
+    //rev: {
+    //  dist: {
+    //    files: {
+    //      src: [
+    //        '<%= yeoman.dist %>/scripts/{,*/}*.js',
+    //        '<%= yeoman.dist %>/styles/{,*/}*.css',
+    //        '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+    //        '<%= yeoman.dist %>/styles/fonts/*'
+    //      ]
+    //    }
+    //  }
+    //},
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
@@ -282,8 +288,12 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'bower_components/**/*',
-            'images/{,*/}*.{webp}',
-            'fonts/*'
+            'scripts/**/*',
+            'data/**/*',
+            'styles/**/*',
+            'images/{,*/}*.{gif,webp}',
+            'fonts/{,*/}*'
+            //'fonts/*'
           ]
         }, {
           expand: true,
@@ -324,16 +334,17 @@ module.exports = function (grunt) {
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
     // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= yeoman.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
+    // chris - minify and concat everything onto main.css
+    cssmin: {
+      dist: {
+        files: {
+          '<%= yeoman.dist %>/styles/main.css': [
+            '.tmp/styles/{,*/}*.css',
+            '<%= yeoman.app %>/styles/{,*/}*.css'
+          ]
+        }
+      }
+    },
     // uglify: {
     //   dist: {
     //     files: {
@@ -402,9 +413,10 @@ module.exports = function (grunt) {
     'copy:dist',
     'cdnify',
     'cssmin',
-    'uglify',
-    'rev',
-    'usemin'
+    // chris - commented for testing
+    //'uglify',
+    //'rev',
+    //'usemin'
   ]);
 
   grunt.registerTask('default', [
