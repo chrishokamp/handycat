@@ -1,25 +1,6 @@
 'use strict';
-define(
-  [
-    'angular',
-    'ngCookies',
-    'ngResource',
-    'ngAnimate',
-    'ngSanitize',
-    'ngRoute',
-    'uiRouter',
-    'controllers/controllers',
-    'directives/directives',
-    'services/services',
-    //'filters/filters',
-    'uiAce',
-    'uiBootstrap',
-    'ngFileUpload',
-  ],
-  function(angular){
-    var app = angular.module('editorComponentsApp',
+angular.module('editorComponentsApp',
       [
-        'ngRoute',
         'ui.router',
         'ngResource',
         'ngAnimate',
@@ -34,13 +15,31 @@ define(
         //'ui.bootstrap',
         //'ngTouch'
       ]
-    );
+)
+.config(function ($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('home', {
+      url: '/home',
+      templateUrl: 'views/main.html',
+      controller: ''
+    })
+    .state('ace', {
+      url: '/ace',
+      templateUrl: 'scripts/aceEditor/ace-drag-test.html'
+    })
+    .state('edit', {
+      url: '/edit',
+      templateUrl: 'views/edit.html'
+    });
 
-    app.config(['$httpProvider', function($httpProvider) {
-      $httpProvider.defaults.useXDomain = true;
-      delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    }]);
+  $urlRouterProvider
+    .otherwise('/home');
 
-    return app;
-  }
-);
+});
+//domReady(function() {angular.bootstrap(document, ['editorComponentsApp']);})
+
+//    app.config(['$httpProvider', function($httpProvider) {
+//      $httpProvider.defaults.useXDomain = true;
+//      delete $httpProvider.defaults.headers.common['X-Requested-With'];
+//    }]);
+

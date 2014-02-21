@@ -1,6 +1,4 @@
-define(['services/services'], function(services) {
-  'use strict';
-  services.factory('GermanStemmer', ['$http', '$log', function($http, $log) {
+angular.module('services').factory('GermanStemmer', ['$http', '$log', function($http, $log) {
     // we have the stemmer code in lib/
     var deStemmer = new Stemmer();
     // load the stem map
@@ -24,5 +22,4 @@ define(['services/services'], function(services) {
         return stemMap[stem];
       }
     }
-  }]);
-});
+}]);

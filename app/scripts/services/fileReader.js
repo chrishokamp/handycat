@@ -1,6 +1,4 @@
-'use strict';
-
-define(['services/services'], function(services) {
+angular.module('services').factory('fileReader', ['$q', '$log', function($q, $log) {
 
   // begin fileReader with promises - three methods: onLoad, onError, and onProgress
   var fileReader = function ($q, $log) {
@@ -105,8 +103,6 @@ define(['services/services'], function(services) {
     };
   };
 
-  services.factory('fileReader',
-    ['$q', '$log', fileReader]);
+  return fileReader($q, $log);
 
-
-});
+}]);

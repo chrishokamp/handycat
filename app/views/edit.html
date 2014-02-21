@@ -32,9 +32,12 @@
                             <button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>
                         </div>
                         <div chars class="sample-show-hide" show="{{showSpecialChars}}" special="germanChars" selected="insertChar(char)" ></div>
-                        <!-- TESTING: show possible word forms for this one -->
-                        <h3>Testing word forms</h3>
-                        <div class="row"><span class="col-xs-1" ng-repeat="word in otherWordForms">{{word}}</span></div>
+                        <h3>Word forms of the clicked token</h3>
+                        <div class="row">
+                            <span class="col-xs-1" ng-repeat="word in otherWordForms">
+                                <a ng-click="replaceSelection(word)">{{word}}</a>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

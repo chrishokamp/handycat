@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
 </head>
-  <body>
+  <body ng-app="editorComponentsApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -55,12 +55,90 @@
     <script src="https://raw.github.com/ajaxorg/ace-builds/master/src/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
     -->
 
+    <!-- Chris: working - move to the actual ace source, not the no conflict version -->
     <!-- This works only with the newest ace build: git clone https://github.com/ajaxorg/ace-builds.git -->
     <script src="scripts/lib/ace-builds-master/src-noconflict/ace.js"></script>
     <!-- <script src="bower_components/ace-builds/src-min-noconflict/ext-language_tools.js"></script> -->
     <script src="scripts/lib/ace-builds-master/src-noconflict/ext-language_tools.js"></script>
 
-    <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
+    <!-- Chris: working - remove requirejs completely -->
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <!-- TODO: remove jquery-ui -->
+    <script src="bower_components/jqueryui/ui/jquery-ui.js"></script>
+
+    <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
+
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+
+    <script src="bower_components/underscore/underscore.js"></script>
+
+    <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+
+    <!-- endbower -->
+
+    <!-- Chris: custom local versions of some dependencies -->
+    <script src="scripts/vendor/ui-bootstrap-tpls-0.10.0.js"></script>
+    <script src="scripts/lib/xliff_data_selector.js"></script>
+    <script src="scripts/lib/german_snowball_stemmer.js"></script>
+
+    <!-- endbuild -->
+
+    <!-- CAT editor scripts -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- the top-level modules, followed by the scripts that use them -->
+    <script src="scripts/services.js"></script>
+    <script src="scripts/services/glossary.js"></script>
+    <script src="scripts/services/fileReader.js"></script>
+    <script src="scripts/services/xliffParser.js"></script>
+    <script src="scripts/services/document.js"></script>
+    <script src="scripts/services/tokenizer.js"></script>
+    <script src="scripts/services/germanStemmer.js"></script>
+    <script src="scripts/services/translationMemory.js"></script>
+    <script src="scripts/services/project.js"></script>
+
+    <script src="scripts/directives.js"></script>
+    <script src="scripts/directives/index.js"></script>
+    <script src="scripts/directives/specialChars.js"></script>
+
+
+    <script src="scripts/controllers.js"></script>
+    <!-- TODO: refactor all of the token row scripts -->
+    <script src="scripts/tokenRow/tokenRow.js"></script>
+    <script src="scripts/tokenRow/draggable.js"></script>
+    <script src="scripts/tokenRow/gap.js"></script>
+    <script src="scripts/tokenRow/token.js"></script>
+
+    <script src="scripts/aceEditor/AceCtrl.js"></script>
+
+    <script src="scripts/tabs/tabs.js"></script>
+
+    <script src="scripts/glossary/Glossary.js"></script>
+    <script src="scripts/glossary/xliffFileUpload.js"></script>
+    <script src="scripts/contentArea/contentArea.js"></script>
+
+    <script src="scripts/typeahead/typeahead.js"></script>
+
+    <script src="scripts/app.js"></script>
+    <!-- working - use angular module syntax -->
+
+    <!-- endbuild -->
+
+    <!--<script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>-->
     <!-- <script src="bower_components/ng-file-upload/angular-file-upload.js"></script> -->
     <!--
     <script src="bower_components/jquery/jquery.js"></script>

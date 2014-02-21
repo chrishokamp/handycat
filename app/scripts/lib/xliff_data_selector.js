@@ -29,6 +29,7 @@ function get_mrk_target(doc, segment) {
 
 function get_target(doc, segment) {
   var segid = _get_segid(segment);
+  // Chris: tuid is the transunit id
   var tuid = _get_tuid(segment);
   return doc.querySelector('trans-unit[id="'+tuid+'"] > target');
 }

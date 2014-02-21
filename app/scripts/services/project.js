@@ -1,12 +1,8 @@
-'use strict';
-
 // Holds the project-wide settings, like source and target languages,  and editing stats
 // TODO: add editing stats
 // TODO: throw errors when we ask for segments that don't exist
 
-define(['services/services'], function(services) {
-
-  services.factory('project', ['$rootScope', function($rootScope) {
+angular.module('services').factory('project', ['$rootScope', function($rootScope) {
 
     return {
       activeSegment: 0,
@@ -20,5 +16,4 @@ define(['services/services'], function(services) {
         return this.activeSegment;
       }
     }
-  }]);
-});
+}]);

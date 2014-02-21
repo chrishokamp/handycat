@@ -59,9 +59,6 @@ span.cat-glyph {
   }
 }
 
-/* Ace Editor Styles */
-.ace_editor { height: 200px; }
-
 /* % percent sign prefixes sass pseudo classes */
 %foo {
   cursor: crosshair;
@@ -87,6 +84,13 @@ span.cat-glyph {
 .edit-area {
   margin-top: 10px;
   padding-left: 4px;
+}
+
+/* Ace Editor Styles */
+.ace_editor { height: 200px; }
+
+.ace_selected_token {
+  background-color: LightGreen;
 }
 
 /* hack to hide the scrollbars in the ace editor */
