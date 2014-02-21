@@ -2,6 +2,7 @@
 // maintain the current TM matches based on the selected token in the source side
 
 angular.module('controllers').controller('AceCtrl',
+//  angular.module('editorComponentsApp.controllers').controller('AceCtrl',
   ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, $http, $timeout, $log) {
 
   // require some stuff from the ace object

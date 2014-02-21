@@ -360,12 +360,18 @@ module.exports = function (grunt) {
     // },
 
     // Test settings
+    // see: https://github.com/yearofmoo-articles/AngularJS-Testing-Article/blob/master/Gruntfile.js
     karma: {
       unit: {
-        configFile: 'karma.conf.js',
+        configFile: './test/karma-unit.conf.js',
         // TODO: karma autowatch is currently broken
-        autoWatch: true
-        //singleRun: true
+        autoWatch: false,
+        singleRun: true
+      },
+      unit_auto: {
+        configFile: './test/karma-unit.conf.js',
+        autoWatch: true,
+        singleRun: false
       }
       //backgroundUnit: {
       //    configFile: 'karma.conf.js',
@@ -425,4 +431,21 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  // some testing tasks -- taken from: https://github.com/yearofmoo/angularjs-seed-repo/blob/master/Gruntfile.js
+  grunt.registerTask('test', ['connect:testserver','karma:unit','karma:midway', 'karma:e2e']);
+  grunt.registerTask('test:unit', ['karma:unit']);
+  grunt.registerTask('test:midway', ['connect:testserver','karma:midway']);
+  grunt.registerTask('test:e2e', ['connect:testserver', 'karma:e2e']);
+
+   //autotest and watch tests
+  grunt.registerTask('autotest', ['karma:unit_auto']);
+  grunt.registerTask('autotest:unit', ['karma:unit_auto']);
+  grunt.registerTask('autotest:e2e', ['connect:testserver','shell:selenium','watch:protractor']);
+
+
+
+
+
+
 };

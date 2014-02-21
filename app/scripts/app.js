@@ -1,5 +1,5 @@
 'use strict';
-angular.module('editorComponentsApp',
+var App = window.App = angular.module('editorComponentsApp',
       [
         'ui.router',
         'ngResource',
@@ -9,7 +9,6 @@ angular.module('editorComponentsApp',
         'services',
         'ui.ace',
         'ui.bootstrap',
-        'services',
         'angularFileUpload',
         //'filters',
         //'ui.bootstrap',

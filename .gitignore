@@ -2,4 +2,6 @@ node_modules
 dist
 .tmp
 .sass-cache
+.css
 app/bower_components
+heroku_app
