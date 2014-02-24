@@ -364,7 +364,6 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: './test/karma-unit.conf.js',
-        // TODO: karma autowatch is currently broken
         autoWatch: false,
         singleRun: true
       },

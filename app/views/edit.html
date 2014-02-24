@@ -22,7 +22,7 @@
                 <div class="content-card source-area col-sm-6">
                     <div class="source">{{ allSegments[$index][0] }}</div>
                 </div>
-                <div index="{{$index}}" class="content-card target-area col-sm-6">
+                <div ng-init="setSegments(index)" index="{{$index}}" class="content-card target-area col-sm-6">
                     <div class="edit-area">
                         <!-- the ace editor -->
                         <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="allSegments[$index][1]" ui-ace="{ onLoad : aceLoaded }"></div>

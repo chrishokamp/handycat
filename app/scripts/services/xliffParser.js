@@ -15,10 +15,11 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
 // Only allow non-Upload controllers to touch this object once the file has loaded and parsed
 // Broadcast the "file loaded" event? -- that's probably the best way
     readFile: function(file) {
+      var self = this;
       $log.log("inside parse");
       var promise = fileReader.readAsText(file);
       promise.then(function(result) {
-        this.parseXML(result);
+        self.parseXML(result);
       });
     },
     parseXML: function(rawText) {

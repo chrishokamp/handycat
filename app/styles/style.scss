@@ -46,17 +46,17 @@ span.cat-glyph {
 %drop {
   height: 50px;
   width: 100px;
-  &:hover {
-    /*background-color: yellow; */
-  }
 }
 
-.drop-zone {
+.drop-box {
   @extend %drop;
-  background-color: lightskyblue;
-  .dragover {
-    background-color: #ffff00;
-  }
+  border: 5px dashed #DDD;
+  height: 200px;
+  width: 200px;
+}
+.drop-box.dragover {
+  border: 5px dashed yellow;
+  background-color: #ffff00;
 }
 
 /* % percent sign prefixes sass pseudo classes */

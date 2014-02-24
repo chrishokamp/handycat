@@ -2,7 +2,7 @@
 angular.module('controllers').controller('UploadCtrl', ['$scope', 'fileReader', '$timeout', 'XliffParser', 'Document', '$state', '$log', function($scope, fileReader, $timeout, XliffParser, Document, $state, $log) {
 // TODO: remember that different file types will require different parsers
 
-  var development = true;
+  var development = false;
 // Dev flag - load file by default
   if (development) {
     //var fileUrl = 'data/enEs.xlf';
@@ -31,19 +31,23 @@ angular.module('controllers').controller('UploadCtrl', ['$scope', 'fileReader', 
 // Once the file is parsed, the parsed data should be set on the Document service
 // TODO: this should actually change the route using ui-router
   $scope.$on('DocumentLoaded', function (event) {
-    d("UploadCtrl: DocumentLoaded")
+    $log.log("UploadCtrl: DocumentLoaded");
     $scope.parsed = Document.segments;
   });
 
 // TODO: get file type (assume xlf for now)
   $scope.onFileSelect = function ($files) {
-    d("inside file select");
+    $log.log("inside file select");
+
+    // show the user what the selected files are
+    $scope.selectedFiles = $files;
+
     //$files: an array of files selected, each file has name, size, and type.
     for (var i = 0; i < $files.length; i++) {
       $scope.progress = 0;
       var file = $files[i];
-      d("Logging the file:")
-      d(file);
+      $log.log("Logging the file:")
+      $log.log(file);
       // use the fileReader service to read the file (via the HTML5 FileAPI)
       XliffParser.readFile(file)
     }
@@ -78,4 +82,3 @@ angular.module('controllers').controller('UploadCtrl', ['$scope', 'fileReader', 
   //  }
   //};
 }]);
-
