@@ -2,8 +2,11 @@
 // maintain the current TM matches based on the selected token in the source side
 
 angular.module('controllers').controller('AceCtrl',
-//  angular.module('editorComponentsApp.controllers').controller('AceCtrl',
   ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, $http, $timeout, $log) {
+
+  // Toolbar open
+  $scope.toolbarOpen = false;
+
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
@@ -131,6 +134,8 @@ angular.module('controllers').controller('AceCtrl',
     var langTools = ace.require("ace/ext/language_tools");
     var editor = _editor;
     $scope.editor = editor;
+    $log.log('logging ace editor');
+    $log.log(editor);
     // WORKING - use ace.require to create an edit mode - in lib/
 
     $scope.editor.session.setMode('ace/mode/text');
@@ -139,6 +144,9 @@ angular.module('controllers').controller('AceCtrl',
     editor.on('click', function(e) {
       // testing only
       getCurrentTokenRange();
+
+      // open the toolbar to show word forms, etc...
+      $scope.toolbarOpen = true;
 
       var position = e.getDocumentPosition();
       var token = editor.session.getTokenAt(position.row, position.column);
@@ -288,10 +296,15 @@ angular.module('controllers').controller('AceCtrl',
     $log.log('Data.currentSegment is: ' + data.currentSegment);
     if (data.currentSegment === $scope.index) {
       // ask the TM
-      $log.log('augmenting the TM for seg index: ' + $scope.index);
-      $scope.augmentTM($scope.minPhraseLen);
-      // $scope.editor.focus();
-
+//      $log.log('augmenting the TM for seg index: ' + $scope.index);
+//      $scope.augmentTM($scope.minPhraseLen);
+      $log.log("focusing the editor for segment: " + data.currentSegment);
+      $scope.editor.focus();
+      var containerEditArea = $($scope.editor.container).parents('.segment');
+      $log.log('parent segment element: ');
+      $log.log(containerEditArea);
+// TODO: this only works for large displays, otherwise the offset is wrong
+      $(window).scrollTop($(containerEditArea).offset().top);
     }
   });
 

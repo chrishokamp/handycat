@@ -17,10 +17,9 @@ var App = window.App = angular.module('editorComponentsApp',
 )
 .config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('home', {
-      url: '/home',
-      templateUrl: 'views/project.html',
-      controller: ''
+    .state('project', {
+      url: '/project',
+      templateUrl: 'views/project.html'
     })
     .state('ace', {
       url: '/ace',

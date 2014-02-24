@@ -17,6 +17,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
     readFile: function(file) {
       var self = this;
       $log.log("inside parse");
+
+      // working - try chaining these promises
       var promise = fileReader.readAsText(file);
       promise.then(function(result) {
         self.parseXML(result);
