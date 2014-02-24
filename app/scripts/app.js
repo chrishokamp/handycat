@@ -19,7 +19,7 @@ var App = window.App = angular.module('editorComponentsApp',
   $stateProvider
     .state('home', {
       url: '/home',
-      templateUrl: 'views/main.html',
+      templateUrl: 'views/project.html',
       controller: ''
     })
     .state('ace', {
@@ -32,7 +32,7 @@ var App = window.App = angular.module('editorComponentsApp',
     });
 
   $urlRouterProvider
-    .otherwise('/home');
+    .otherwise('/project');
 
 });
 //domReady(function() {angular.bootstrap(document, ['editorComponentsApp']);})

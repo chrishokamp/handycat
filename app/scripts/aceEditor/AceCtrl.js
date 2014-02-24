@@ -15,21 +15,16 @@ angular.module('controllers').controller('AceCtrl',
     $scope.insertText(char);
   }
 
-  // we don't know ths segment's value until it's initialized from the ng-repeat index
-  // TODO: use ngInit to set the source and target segs from the view?
   $scope.allSegments = Document.segments;
-  // TODO: this is super hackish
-  $scope.$watch(
-    function() {
-      return $scope.index;
-    },
-    function() {
-        $scope.sourceSegment = Document.sourceSegments[$scope.index];
-        $scope.targetSegment = Document.targetSegments[$scope.index];
-    }
-  );
+
+  // the values for this instance set from the view with ng-init and the ng-repeat index
+  $scope.setSegments = function(index) {
+    $scope.sourceSegment = Document.sourceSegments[index];
+    $scope.targetSegment = Document.targetSegments[index];
+  }
 
   // TODO: the logic here is wrong -- the tokenizer produces WAY too many queries!
+  // TODO: move this logic to the tokenizer
   $scope.minPhraseLen = 15;
   var tmQueried = false;
   $scope.augmentTM = function(minPhraseLen) {

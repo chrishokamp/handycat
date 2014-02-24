@@ -9,32 +9,25 @@
 
 
 <!-- TODO: add ui-view here, and switch out from project, edit and stats views -->
+<!--<h4>Testing popovers</h4>-->
+<!--<div class="test-popover" ng-controller="GlossaryCtrl">-->
+    <!--<p>-->
+        <!--<button popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>-->
+        <!--&lt;!&ndash; TODO: Note: this uses the very new popover-template directive see: http://plnkr.co/edit/B2wEisa &ndash;&gt;-->
+        <!--<button popover-template="scripts/glossary/glossary-template.html" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>-->
+        <!--&lt;!&ndash; <span    ui-options="{title:office.location, content:office.people.join(',')} &ndash;&gt;-->
+        <!--<span tooltip-html-unsafe="contentFunc()">Tooltip with html from function</span>-->
+        <!--<span tooltip-html-unsafe="{{content}}">Tooltip with html from function</span>-->
+    <!--<div popover="{{content}}" popover-trigger="mouseenter">Testing ui popover</div>-->
 
-<!-- testing popovers -->
-<!-- TODO: dynamically populate popovers from glossary service -->
-<hr />
-<h4>Testing popovers</h4>
-<div class="test-popover" ng-controller="GlossaryCtrl">
-    <p>
-        <button popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>
-        <!-- TODO: Note: this uses the very new popover-template directive see: http://plnkr.co/edit/B2wEisa -->
-        <button popover-template="scripts/glossary/glossary-template.html" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>
-        <!-- <span    ui-options="{title:office.location, content:office.people.join(',')} -->
-        <span tooltip-html-unsafe="contentFunc()">Tooltip with html from function</span>
-        <span tooltip-html-unsafe="{{content}}">Tooltip with html from function</span>
-    <div popover="{{content}}" popover-trigger="mouseenter">Testing ui popover</div>
-
-    <p>
-        <span popover="I appeared when the mouse entered a span" popover-trigger="mouseenter">Popover on span element</span>
-        <span popover="makeHTML()" popover-trigger="mouseenter">Popover on span element</span>
-    </p>
-    </p>
-</div>
+    <!--<p>-->
+        <!--<span popover="I appeared when the mouse entered a span" popover-trigger="mouseenter">Popover on span element</span>-->
+        <!--<span popover="makeHTML()" popover-trigger="mouseenter">Popover on span element</span>-->
+    <!--</p>-->
+    <!--</p>-->
+<!--</div>-->
 
 <hr/>
-
-<!-- working: add the upload directive -->
-<xliff-upload></xliff-upload>
 
 <!--<h3 class="text-primary" ng-controller="UploadCtrl">Testing ngFileUpload</h3>-->
 <!-- the upload control should be the same regardless of the UI component -->
@@ -42,24 +35,41 @@
 
 <!-- working: move this into the upload ctrl directive -->
 <div ng-controller="UploadCtrl">
-    <!-- <input type="text" ng-model="file"> -->
-    <input type="file" ng-file-select="onFileSelect($files)" >
-     <!--<input type="file" ng-file-select="onFileSelect($files)" multiple> -->
 
 <!--working - the dragover class is added by default -->
 <!--ng-file-drag-over-class="dragover"-->
-    <div class="drop-box" ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true" ng-show="dropSupported">drop files here</div>
-    <div ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
-    <div ng-show="selectedFiles != null">
-        <h3>Selected Files:</h3>
-        <div class="sel-file" ng-repeat="f in selectedFiles">
-            <img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}">
-            <button class="button" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>
-            <span class="progress" ng-show="progress[$index] >= 0">
-                <div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
-            </span>
-            <button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>
-            {{f.name}} - size: {{f.size}}B - type: {{f.type}}
+    <div class="row">
+        <div
+            ng-show="dropSupported"
+            class="drop-box col-xs-6 col-centered text-center"
+            ng-file-drop="onFileSelect($files);"
+            ng-file-drop-available="dropSupported=true"
+        >
+            <div class="row"><span class="drop-message drop-text">drop files here</span></div>
+            <div class="row"><span class="glyphicon glyphicon-plus drop-text"></span></div>
+        </div>
+        <div ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-centered text-center">
+            <span class="btn btn-default btn-file">Choose a File<input class="file-input" type="file" ng-file-select="onFileSelect($files)" /></span>
+        </div>
+        <!--<input type="file" ng-file-select="onFileSelect($files)" multiple> -->
+    </div>
+    <div class="row">
+        <div class="col-xs-12" ng-show="selectedFiles.length > 0">
+            <h3>Selected Files:</h3>
+            <div class="sel-file" ng-repeat="f in selectedFiles">
+                {{f.name}} - size: {{f.size}}B - type: {{f.type}}
+                <!--this is for multiple files with user-directed upload-->
+                <!--<img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}">-->
+
+                <!--<button class="button" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>-->
+                <!--<span class="progress" ng-show="progress[$index] >= 0">-->
+                    <!--<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>-->
+                <!--</span>-->
+                <!--<button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>-->
+            </div>
         </div>
     </div>
 
