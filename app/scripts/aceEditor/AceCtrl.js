@@ -7,6 +7,8 @@ angular.module('controllers').controller('AceCtrl',
   // Toolbar open
   $scope.toolbarOpen = false;
 
+  // special chars toolbar showing
+  $scope.showSpecialChars = true;
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;

@@ -11,7 +11,7 @@
     <!-- TODO: get the TM matches for the source segment -->
 
     <!-- translation area -->
-    <div class="container" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
+    <div class="container edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
         <div class="segment row" ng-repeat="seg in segments">
             <a id="segment-{{$index}}"></a>
             <p>Segment Index: {{$index}}</p>
@@ -27,10 +27,7 @@
                         <!-- the ace editor -->
                         <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="allSegments[$index][1]" ui-ace="{ onLoad : aceLoaded }"></div>
                         <!-- The tools for editing -->
-                        <div class="row">
-                            <button ng-click="segmentFinished()" class="seg-finished btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-right cat-glyph"></span></button>
-                            <button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>
-                        </div>
+                        <!--<div chars class="sample-show-hide" show="{{showSpecialChars}}" special="germanChars" selected="insertChar(char)" ></div>-->
                         <div chars class="sample-show-hide" show="{{showSpecialChars}}" special="germanChars" selected="insertChar(char)" ></div>
 
                         <!-- the toolbar of utilities -->
@@ -44,6 +41,10 @@
                                     <button class="btn btn-default" ng-click="replaceSelection(word)">{{word}}</button>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <button ng-click="segmentFinished()" class="seg-finished btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-right cat-glyph"></span></button>
+                            <!--<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>-->
                         </div>
                     </div>
                 </div>

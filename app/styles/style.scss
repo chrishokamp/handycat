@@ -1,5 +1,5 @@
-
-/* no rounded corners allowed */
+//@import url(http://fonts.googleapis.com/css?family=Gilda+Display&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Cardo&subset=latin,latin-ext);
 * {
   -webkit-border-radius: 0 !important;
      -moz-border-radius: 0 !important;
@@ -7,17 +7,23 @@
 }
 
 body {
-  //background: LightGrey;
   background-image:url('img/squared_metal.png');
+  font-family: 'Cardo', serif;
+  //font-family: 'Gilda Display', serif;/* no rounded corners allowed */
 }
 
 h3 {
   padding: 4px 0 4px 0;
 }
 
+.edit-area-wrapper {
+  margin-top: 16px;
+  //border: 1px dotted #808080;
+}
+
 /* style file input as a button (with bootstrap 3) */
 .btn-file {
-    margin-top: 10px;
+    margin-top: 12px;
     position: relative;
     overflow: hidden;
     background-color: LightBlue;
@@ -45,8 +51,6 @@ h3 {
 /* end: style file input as button */
 
 /* styles for the project page */
-/* working - collapse the upload div to a row with an arrow when a file has been uploaded */
-
 
 .col-centered{
     float: none;
@@ -57,9 +61,20 @@ h3 {
   margin-top: 20px;
 }
 
+%bottom-margin {
+  margin-bottom: 10px;
+}
+
+.start-translation {
+  @extend %bottom-margin;
+}
+
+.user-info {
+  margin-top: 10px;
+}
 
 %ace-editor-height {
-  height: 300px;
+  min-height: 300px;
 }
 
 .content-card {
@@ -80,13 +95,9 @@ span.cat-glyph {
   padding:0 10px 0 10px;
 }
 
-.edit-area-wrapper {
-  border: 1px dotted #808080;
-}
-
 .drop-box {
   margin-top: 20px;
-  border: 5px dashed red;
+  border: 5px dashed blue;
   height: 200px;
   &:hover {
     border: 5px dashed yellow;
