@@ -12,9 +12,10 @@
 
     <!-- translation area -->
     <div class="container edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
-        <div class="segment row" ng-repeat="seg in segments">
+        <div class="segment row" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments">
             <a id="segment-{{$index}}"></a>
             <p>Segment Index: {{$index}}</p>
+            <!-- TODO - WORKING: move the AceCtrl only to the Ace edit area, and nest controllers within the translation unit -->
             <div class="row" ng-controller="AceCtrl">
                 <!-- used with $anchorScroll from ContentAreaCtrl -->
                 <!-- TODO: prevent $anchorScroll from reloading the ng-repeat -->
@@ -35,7 +36,7 @@
                                 class="translation-toolbar"
                             >
                                 <div class="row">
-                                    <span class="col-xs-3 btn btn-default glyphicon glyphicon-search" ng-click="queryConcordancer('San Francisco')"></span>
+                                    <span class="col-xs-3 btn btn-default glyphicon glyphicon-search" ng-click="queryConcordancer(concordanceQuery)"></span>
                                     <span class="col-xs-3"></span>
                                     <span class="col-xs-3"></span>
                                     <span class="col-xs-3"></span>
@@ -43,6 +44,8 @@
 
                                 </div>
                                 <h3>concordance matches</h3>
+                                <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." />
+
                                 <div ng-repeat="concordanceMatch in concordanceMatches" ng-bind-html="getSnippet({{concordanceMatch}})"></div>
 
                             </div>

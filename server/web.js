@@ -15,11 +15,9 @@ app.use(gzippo.staticGzip("" + __dirname + "/dist"));
 // Working - add a route to query media wiki
 app.get('/wikipedia', function(req, res){
 	console.log('i just got a POST request to /wikipedia');
-//	res.render('wiki/edit', {
-//      title: 'Editing Wiki',
-//      wiki: wiki_entry
-//    })
-	var query = '&srsearch="query"';
+	// the search parameter name is 'srsearch'
+	var query = '&srsearch=' + req.query.srsearch;
+	console.log('the req query param is: ' + req.query.srsearch);
 	var options = {
 	  host: 'en.wikipedia.org',
 	  path: '/w/api.php?action=query&format=json&list=search&srprop=snippet' + query,

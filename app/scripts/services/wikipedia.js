@@ -4,38 +4,55 @@
 
 angular.module('services').factory('Wikipedia', ['$http', '$rootScope', '$log', function($http, $rootScope, $log) {
 
-  // working - markup the <span class='searchmatch'> tags in the ui
-  //var baseUrl = 'http://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=snippet';
+  // the query url: 'http://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=snippet';
 
 // TODO: set this url dynamically, because we dont know where we're getting deployed from
   var baseUrl = 'http://localhost:5000/wikipedia';
-  return {
+  var Wikipedia = {
     concordances: {},
     // TODO: reset currentQuery when user moves to a new segment?
+    // yes - listen for segment change
     currentQuery: [],
     getConcordances: function(query) {
       var self = this;
-      $http.get(baseUrl, {
-        params: {
-          srsearch: query,
-          origin: 'http://0.0.0.0:9000'
-        }
-      })
-      .success(function(res) {
-        $log.log('results for: ' + query);
-        $log.log(res);
+      if (self.concordances[query]) {
+        currentQuery = self.concordances[query];
+      } else {
 
-        var snippets = res;
-        self.concordances['query'] = snippets;
-        self.currentQuery = self.concordances['query'];
-        $rootScope.$broadcast('concordancer-updated');
+        // TODO: make sure the backend actually returns responses to this query
+        $http.get(baseUrl, {
+          params: {
+            srsearch: query,
+            origin: 'http://0.0.0.0:9000'
+          }
+        })
+        .success(function(res) {
+          $log.log('results for: ' + query);
+          $log.log(res);
 
-      })
-      .error(function(err) {
+          var snippets = res;
+          self.concordances[query] = snippets;
+          self.currentQuery = self.concordances[query];
+          $rootScope.$broadcast('concordancer-updated');
+
+        })
+        .error(function(err) {
           $log.log('Error in concordancer: ' + err.message);
-      })
+        })
+
+      }
     }
   }
+
+  // listen for 'segmentFinished' from all of the AceCtrl
+  $rootScope.$on('segmentComplete', function(evt) {
+    // reset current query
+    Wikipedia.currentQuery = [];
+    // let the edit areas know
+    $rootScope.$broadcast('concordancer-updated');
+  });
+
+  return Wikipedia;
 
 }]);
 
