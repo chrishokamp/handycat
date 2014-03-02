@@ -1,5 +1,6 @@
 //@import url(http://fonts.googleapis.com/css?family=Gilda+Display&subset=latin,latin-ext);
 @import url(http://fonts.googleapis.com/css?family=Cardo&subset=latin,latin-ext);
+
 * {
   -webkit-border-radius: 0 !important;
      -moz-border-radius: 0 !important;
@@ -7,7 +8,10 @@
 }
 
 body {
-  background-image:url('img/squared_metal.png');
+//  background-image:url('img/squared_metal.png');
+//  background: #FCF0C7;
+  background: rgb(236, 236, 236);
+  background-image:url('img/patterns/transparent_bgs/ricepaper.png');
   font-family: 'Cardo', serif;
   //font-family: 'Gilda Display', serif;/* no rounded corners allowed */
 }
@@ -23,7 +27,7 @@ h3 {
 
 /* style file input as a button (with bootstrap 3) */
 .btn-file {
-    margin-top: 12px;
+    margin-top: 10px;
     position: relative;
     overflow: hidden;
     background-color: LightBlue;
@@ -50,7 +54,7 @@ h3 {
 
 /* end: style file input as button */
 
-/* styles for the project page */
+/* styles for the project view */
 
 .col-centered{
     float: none;
@@ -71,6 +75,13 @@ h3 {
 
 .user-info {
   margin-top: 10px;
+}
+
+/* styles for the editing view */
+
+/* to highlight matches from the concordancer */
+.searchmatch {
+  font-weight: bold;
 }
 
 %ace-editor-height {

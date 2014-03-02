@@ -3,6 +3,7 @@ var App = window.App = angular.module('editorComponentsApp',
       [
         'ui.router',
         'ngResource',
+        'ngSanitize',
         'controllers',
         'directives',
         'services',

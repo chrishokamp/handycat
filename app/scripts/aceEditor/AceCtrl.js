@@ -2,16 +2,38 @@
 // maintain the current TM matches based on the selected token in the source side
 
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, $http, $timeout, $log) {
+  ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', 'Wikipedia', '$sce', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, Wikipedia, $sce, $http, $timeout, $log) {
+
+  // Note: don't do $scope.$watch, because we reuse this controller many times!
+
+  // TODO: set this only when this is the active scope
+  $scope.active = true;
+  $scope.model = {};
 
   // Toolbar open
   $scope.toolbarOpen = false;
+  $scope.queryConcordancer = function(query) {
+    Wikipedia.getConcordances(query);
+  };
+  $scope.$on('concordancer-updated', function(e) {
+// does $scope.$apply happen automagically? - answer: no, so we have to listen for the event
+    $scope.concordanceMatches = Wikipedia.currentQuery;
+  })
 
-  // special chars toolbar showing
-  $scope.showSpecialChars = true;
+  // convert a snippet to trusted html
+  $scope.getSnippet = function(concordanceMatch) {
+    $log.log('getSnippet called with: ' );
+    $log.log(concordanceMatch);
+    return $sce.trustAsHtml(concordanceMatch.snippet);
+  }
+
+
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
+
+  // special chars toolbar showing
+  $scope.showSpecialChars = true;
 
   // testing the special chars directive
   $scope.germanChars = ['ä','ö','ü','Ä','Ö','Ü','ß'];

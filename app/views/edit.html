@@ -26,22 +26,39 @@
                     <div class="edit-area">
                         <!-- the ace editor -->
                         <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="allSegments[$index][1]" ui-ace="{ onLoad : aceLoaded }"></div>
-                        <!-- The tools for editing -->
-                        <!--<div chars class="sample-show-hide" show="{{showSpecialChars}}" special="germanChars" selected="insertChar(char)" ></div>-->
-                        <div chars class="sample-show-hide" show="{{showSpecialChars}}" special="germanChars" selected="insertChar(char)" ></div>
 
-                        <!-- the toolbar of utilities -->
+                        <!-- The tools for editing -->
+
+                        <!-- the other possible wordforms for the selected word -->
                         <div class="ace-toolbar" ng-show="toolbarOpen">
-                            <p>Word forms of the clicked token</p>
-                            <div class="row">
-                                <div
-                                    class="pull-left"
-                                    ng-repeat="word in otherWordForms"
-                                >
-                                    <button class="btn btn-default" ng-click="replaceSelection(word)">{{word}}</button>
+                            <div
+                                class="translation-toolbar"
+                            >
+                                <div class="row">
+                                    <span class="col-xs-3 btn btn-default glyphicon glyphicon-search" ng-click="queryConcordancer('San Francisco')"></span>
+                                    <span class="col-xs-3"></span>
+                                    <span class="col-xs-3"></span>
+                                    <span class="col-xs-3"></span>
+
+
+                                </div>
+                                <h3>concordance matches</h3>
+                                <div ng-repeat="concordanceMatch in concordanceMatches" ng-bind-html="getSnippet({{concordanceMatch}})"></div>
+
+                            </div>
+                            <div class="word-forms">
+                                <p>Word forms of the clicked token</p>
+                                <div class="row">
+                                    <div
+                                        class="pull-left"
+                                        ng-repeat="word in otherWordForms"
+                                    >
+                                        <button class="btn btn-default" ng-click="replaceSelection(word)">{{word}}</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div chars class="sample-show-hide" show="{{showSpecialChars}}" special="germanChars" selected="insertChar(char)" ></div>
                         <div class="row">
                             <button ng-click="segmentFinished()" class="seg-finished btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-right cat-glyph"></span></button>
                             <!--<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>-->
