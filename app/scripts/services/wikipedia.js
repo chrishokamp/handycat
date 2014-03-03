@@ -14,6 +14,7 @@ angular.module('services').factory('Wikipedia', ['$http', '$rootScope', '$log', 
     // yes - listen for segment change
     currentQuery: [],
     getConcordances: function(query) {
+      $log.log('inside Wikipedia service, query is: ' + query);
       var self = this;
       if (self.concordances[query]) {
         currentQuery = self.concordances[query];

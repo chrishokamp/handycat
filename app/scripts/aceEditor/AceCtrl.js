@@ -209,6 +209,8 @@ angular.module('controllers').controller('AceCtrl',
     var tmCompleter = {
       getCompletions: function(editor, session, pos, prefix, callback) {
         if (prefix.length === 0) { callback(null, []); return }
+
+        // TODO: the TM needs to search for matches, not just return everything!
         var tmMatches = TranslationMemory.allMatches;
         callback(null, tmMatches.map(function(ea) {
           $log.log("inside autocomplete callback, item from TM is: ");
@@ -222,7 +224,8 @@ angular.module('controllers').controller('AceCtrl',
     var glossaryCompleter = {
       getCompletions: function(editor, session, pos, prefix, callback) {
         if (prefix.length === 0) { callback(null, []); return }
-        var glossaryMatches = Glossary.allWords;
+// TODO: the Glossary needs to search for matches, not just return everything!
+        var glossaryMatches = Glossary.getMaa;
         callback(null, glossaryMatches.map(function(item) {
           return {name: item, value: item, score: 1, meta: "Glossary"}
         }));

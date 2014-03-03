@@ -7,6 +7,7 @@
     </div>
 
     <!-- TODO: add feature where dragging a word or phrase to target area translates it automatically -->
+    <!-- UPDATE: use glossary for the 'add word' feature -->
     <!-- TODO: markup target content using highlight rules -->
     <!-- TODO: get the TM matches for the source segment -->
 
@@ -37,15 +38,16 @@
                             >
                                 <div class="row">
                                     <span class="col-xs-3 btn btn-default glyphicon glyphicon-search" ng-click="queryConcordancer(concordanceQuery)"></span>
+                                    <span class="col-xs-3 btn btn-default glyphicon glyphicon-book" ng-click="queryGlossary(glossaryQuery)"></span>
+                                    <span class="col-xs-3 btn btn-default glyphicon glyphicon-list-alt"></span>
                                     <span class="col-xs-3"></span>
-                                    <span class="col-xs-3"></span>
-                                    <span class="col-xs-3"></span>
-
-
                                 </div>
+                                <h3>glossary matches</h3>
+                                <input type="text" ng-model="glossaryQuery" placeholder="Enter a search query..." />
+                                <div ng-repeat="glossaryMatch in glossaryMatches">{{glossaryMatch}}</div>
+
                                 <h3>concordance matches</h3>
                                 <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." />
-
                                 <div ng-repeat="concordanceMatch in concordanceMatches" ng-bind-html="getSnippet({{concordanceMatch}})"></div>
 
                             </div>
@@ -63,7 +65,7 @@
                         </div>
                         <div chars class="sample-show-hide" show="{{showSpecialChars}}" special="germanChars" selected="insertChar(char)" ></div>
                         <div class="row">
-                            <button ng-click="segmentFinished()" class="seg-finished btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-right cat-glyph"></span></button>
+                            <button ng-click="segmentFinished()" class="seg-finished btn btn-primary pull-right"><span class="glyphicon glyphicon-ok-sign cat-glyph"></span></button>
                             <!--<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>-->
                         </div>
                     </div>
