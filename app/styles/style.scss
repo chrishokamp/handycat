@@ -27,7 +27,7 @@ h3 {
 
 /* style file input as a button (with bootstrap 3) */
 .btn-file {
-    margin-top: 12px;
+    margin-top: 10px;
     position: relative;
     overflow: hidden;
     background-color: LightBlue;
@@ -85,7 +85,7 @@ h3 {
 }
 
 %ace-editor-height {
-  min-height: 300px;
+  min-height: 100px;
 }
 
 .content-card {
@@ -120,10 +120,6 @@ span.cat-glyph {
   background-color: LightBlue;
 }
 
-// working - add the bootstrap plus glyph
-span.drop-glyph {
-
-}
 span.drop-message {
   display: inline-block;
   margin-top: 40px;
@@ -131,7 +127,6 @@ span.drop-message {
 span.drop-text {
   font-size: 30px;
 }
-
 
 
 %foo {
@@ -143,7 +138,7 @@ span.drop-text {
 .source {
   background-color: white;
   font-size: 20px;
-  height: 200px;
+  min-height: 100px;
   margin-top: 10px;
   padding-top: 10px;
   padding-left: 4px;
@@ -161,7 +156,7 @@ span.drop-text {
 }
 
 /* Ace Editor Styles */
-.ace_editor { height: 200px; }
+.ace_editor { min-height: 100px; }
 
 .ace_selected_token {
   background-color: LightGreen;
@@ -210,6 +205,22 @@ span.drop-text {
 .drop-hover {
   background-color: orange;
   width: 20px;
+}
+
+/* styles for the toolbar */
+.tabset {
+}
+.tab-pane {
+  background-color: white;
+  min-height: 100px;
+  input {
+    width: 60%;
+  }
+  button {
+    margin-left: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
 
 

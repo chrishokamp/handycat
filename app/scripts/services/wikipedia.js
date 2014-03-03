@@ -18,6 +18,7 @@ angular.module('services').factory('Wikipedia', ['$http', '$rootScope', '$log', 
       var self = this;
       if (self.concordances[query]) {
         currentQuery = self.concordances[query];
+        $log.log('I already have results for query: ' + query);
       } else {
 
         // TODO: make sure the backend actually returns responses to this query

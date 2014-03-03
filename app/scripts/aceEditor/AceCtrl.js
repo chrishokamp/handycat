@@ -125,13 +125,29 @@ angular.module('controllers').controller('AceCtrl',
 
   // Use this function to configure the ace editor instance
   $scope.aceLoaded = function (_editor) {
-    // d("inside ace loaded");
+
+   var editor = _editor;
+   var heightUpdateFunction = function() {
+
+     // http://stackoverflow.com/questions/11584061/
+     var newHeight =
+               editor.getSession().getScreenLength()
+               * editor.renderer.lineHeight
+               + editor.renderer.scrollBar.getWidth();
+
+     $('#editor').height(newHeight.toString() + "px");
+     $('#editor-section').height(newHeight.toString() + "px");
+
+     // This call is required for the editor to fix all of
+     // its inner structure for adapting to a change in size
+     editor.resize();
+   };
+
     // TESTING the index directive
-    $timeout(function() { $log.log("the index property on this AceEditor ctrl is: " + $scope.index)},1500);
+//    $timeout(function() { $log.log("the index property on this AceEditor ctrl is: " + $scope.index)},1500);
 
     // Note: this is the path for the ace require modules
     var langTools = ace.require("ace/ext/language_tools");
-    var editor = _editor;
     $scope.editor = editor;
     $log.log('logging ace editor');
     $log.log(editor);
@@ -275,6 +291,14 @@ angular.module('controllers').controller('AceCtrl',
       $scope.editor.session.setMode('ace/mode/' + modeName);
       $log.log("Set mode to: " + modeName);
     }
+
+    // Set initial size to match initial content
+    heightUpdateFunction();
+
+    // Whenever a change happens inside the ACE editor, update
+    // the size again
+    editor.getSession().on('change', heightUpdateFunction);
+
 
 // TODO: see moses - how to get translation alignments?
     editor.setFontSize(20);

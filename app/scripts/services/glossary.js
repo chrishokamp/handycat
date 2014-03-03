@@ -53,7 +53,9 @@ angular.module('services').factory('Glossary', [ '$http', '$log', function($http
       }
     }
   }
-  // en --> de index for queries
+
+// TODO: move this to a separate autocomplete service
+  // en --> de index for Autocomplete
   $http.get(glossaryFile)
     .success(function(data) {
       var lines = data.match(/[^\r\n]+/g);

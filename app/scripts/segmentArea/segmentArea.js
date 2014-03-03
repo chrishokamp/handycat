@@ -5,6 +5,8 @@ angular.module('controllers')
 // TODO: display the results of the concordancer here, not from the AceCtrl
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
+  // Toggle opening / collapsing the toolbar
+  $scope.isCollapsed = true;
 
   // TODO: set this only when this is the active scope
   $scope.active = true;
@@ -29,7 +31,11 @@ angular.module('controllers')
 
   // used as a callback for the glossary
   var updateGlossaryArea = function(glossaryMatches) {
-    $scope.glossaryMatches = glossaryMatches;
+    $log.log('Inside callback, the glossary matches: ')
+    $log.log(glossaryMatches);
+    $scope.glossaryMatches = glossaryMatches.map(function(item) {
+      return item.text;
+    });
   }
 // TODO: use a callback
   $scope.queryGlossary = function(query) {

@@ -1,9 +1,11 @@
   <!-- TODO: show the relevant content when the tab is active - put inside tab.content? -->
 <div class="container" ng-controller="TabsCtrl">
     <div>
-      <tabset justified="true">
-        <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled"></tab>
-      </tabset>
+      <!--<tabset justified="true">-->
+        <!--<tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled"></tab>-->
+      <!--</tabset>-->
+        <!-- TODO: use nav here, not tabs -->
+      <div>Translate</div>
     </div>
 
     <!-- TODO: add feature where dragging a word or phrase to target area translates it automatically -->
@@ -29,44 +31,48 @@
                         <!-- the ace editor -->
                         <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="allSegments[$index][1]" ui-ace="{ onLoad : aceLoaded }"></div>
 
-                        <!-- The tools for editing -->
-
-                        <!-- the other possible wordforms for the selected word -->
-                        <div class="ace-toolbar" ng-show="toolbarOpen">
-                            <div
-                                class="translation-toolbar"
-                            >
-                                <div class="row">
-                                    <span class="col-xs-3 btn btn-default glyphicon glyphicon-search" ng-click="queryConcordancer(concordanceQuery)"></span>
-                                    <span class="col-xs-3 btn btn-default glyphicon glyphicon-book" ng-click="queryGlossary(glossaryQuery)"></span>
-                                    <span class="col-xs-3 btn btn-default glyphicon glyphicon-list-alt"></span>
-                                    <span class="col-xs-3"></span>
-                                </div>
-                                <h3>glossary matches</h3>
-                                <input type="text" ng-model="glossaryQuery" placeholder="Enter a search query..." />
-                                <div ng-repeat="glossaryMatch in glossaryMatches">{{glossaryMatch}}</div>
-
-                                <h3>concordance matches</h3>
-                                <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." />
-                                <div ng-repeat="concordanceMatch in concordanceMatches" ng-bind-html="getSnippet({{concordanceMatch}})"></div>
-
-                            </div>
-                            <div class="word-forms">
-                                <p>Word forms of the clicked token</p>
-                                <div class="row">
-                                    <div
-                                        class="pull-left"
-                                        ng-repeat="word in otherWordForms"
-                                    >
-                                        <button class="btn btn-default" ng-click="replaceSelection(word)">{{word}}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div chars class="sample-show-hide" show="{{showSpecialChars}}" special="germanChars" selected="insertChar(char)" ></div>
-                        <div class="row">
-                            <button ng-click="segmentFinished()" class="seg-finished btn btn-primary pull-right"><span class="glyphicon glyphicon-ok-sign cat-glyph"></span></button>
-                            <!--<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button ng-click="isCollapsed = !isCollapsed" class="btn btn-primary cat-glyph pull-left"><span class="glyphicon glyphicon-wrench"></span></button>
+
+                <button ng-click="segmentFinished()" class="seg-finished btn btn-primary cat-glyph pull-right"><span class="glyphicon glyphicon-ok-sign"></span></button>
+                <!--<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>-->
+            </div>
+
+            <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Toggle collapse</button>
+            <!-- The tools for editing -->
+            <!-- TODO: should these tools really be repeated, or should there be a single instance for the whole document? -->
+            <!--<div class="ace-toolbar container" ng-show="toolbarOpen" collapse="toolbarOpen">-->
+            <div class="ace-toolbar container" collapse="isCollapsed">
+                <div
+                    class="translation-toolbar"
+                >
+                <!-- Working - move to tabset -->
+                <!-- TODO - make tabs active based on edit-area interactions -->
+                    <tabset>
+                        <tab heading="Glossary" ng-click="">
+                            <div class="container">
+                                <input type="text" ng-model="glossaryQuery" placeholder="Enter a search query..." /><button ng-click="queryGlossary(glossaryQuery)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                                <div ng-repeat="glossaryMatch in glossaryMatches">{{glossaryMatch}}</div>
+                            </div>
+                        </tab>
+                        <tab heading="Concordance" ng-click="">
+                            <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." /><button ng-click="queryConcordancer(concordanceQuery)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                            <div ng-repeat="concordanceMatch in concordanceMatches" ng-bind-html="getSnippet({{concordanceMatch}})"></div>
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="word-forms">
+                    <p>Word forms of the clicked token</p>
+                    <div class="row">
+                        <div
+                                class="pull-left"
+                                ng-repeat="word in otherWordForms"
+                                >
+                            <button class="btn btn-default" ng-click="replaceSelection(word)">{{word}}</button>
                         </div>
                     </div>
                 </div>

@@ -16,8 +16,12 @@ app.use(gzippo.staticGzip("" + __dirname + "/dist"));
 app.get('/wikipedia', function(req, res){
 	console.log('i just got a GET request to /wikipedia');
 	// the search parameter name is 'srsearch'
-	var query = '&srsearch=' + req.query.srsearch;
-	console.log('the req query param is: ' + req.query.srsearch);
+  console.log('the req query param is: ' + req.query.srsearch);
+  // Question: put in quotes to search literally
+  var searchQuery = encodeURIComponent(req.query.srsearch);
+	var query = '&srsearch=' + searchQuery;
+
+
 	var options = {
 	  host: 'en.wikipedia.org',
 	  path: '/w/api.php?action=query&format=json&list=search&srprop=snippet' + query,
@@ -45,7 +49,7 @@ app.get('/glossary', function(req, res){
   // note the & is missing from the first param
   var from = 'from=' + req.query.from;
   var to = '&dest=' + req.query.dest;
-  var phrase = '&phrase=' + req.query.phrase;
+  var phrase = '&phrase=' + encodeURIComponent(req.query.phrase);
   var format = '&format=json'
   console.log('the req phrase param is: ' + req.query.phrase);
   var options = {
@@ -59,9 +63,24 @@ app.get('/glossary', function(req, res){
   getJSON.getJSON(options,
     function(result) {
       //var searchResults = result.query.search;
-      var searchResults = result;
+      // TODO: make sure every item is unique (this might be done on their side)
+      var matches = result.tuc.map(function (glossaryObj) {
+        // parse the results here
+        var p = glossaryObj.phrase;
+        return p;
+      })
+        .filter(function(match) {
+          if (match !== undefined) {
+            return true;
+          }
+        });
+
+      var searchResults = matches;
       console.log('the result from the glosbe API: ');
-      console.log(result);
+      console.log(matches);
+
+
+
       //console.log(JSON.stringify(searchResults, null, 3));
       res.setHeader('Content-Type', 'application/json');
       res.send(searchResults);
