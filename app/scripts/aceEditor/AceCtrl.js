@@ -107,10 +107,14 @@ angular.module('controllers').controller('AceCtrl',
     $scope.editor.focus();
   }
 
-
   $scope.insertText = function(text) {
     var editor = $scope.editor;
     editor.insert(text);
+  }
+
+  $scope.clearEditor = function() {
+    $log.log('clearEditor fired...');
+    $scope.editor.setValue(' ', -1);
   }
 
   $scope.currentPrefix = function() {

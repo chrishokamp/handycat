@@ -79,8 +79,6 @@ app.get('/glossary', function(req, res){
       console.log('the result from the glosbe API: ');
       console.log(matches);
 
-
-
       //console.log(JSON.stringify(searchResults, null, 3));
       res.setHeader('Content-Type', 'application/json');
       res.send(searchResults);

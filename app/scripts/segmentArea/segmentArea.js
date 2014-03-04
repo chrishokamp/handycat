@@ -37,6 +37,14 @@ angular.module('controllers')
       return item.text;
     });
   }
+
+// TODO: testing
+  $scope.isCollapsed = true;
+  $scope.toggleToolbar = function() {
+    $scope.isCollapsed = !$scope.isCollapsed;
+    $log.log("isCollapsed: the value of isCollapsed is: " + $scope.isCollapsed);
+  }
+
 // TODO: use a callback
   $scope.queryGlossary = function(query) {
     Glossary.getMatches(query, updateGlossaryArea);

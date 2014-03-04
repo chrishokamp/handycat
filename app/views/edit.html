@@ -19,30 +19,30 @@
             <a id="segment-{{$index}}"></a>
             <p>Segment Index: {{$index}}</p>
             <!-- TODO - WORKING: move the AceCtrl only to the Ace edit area, and nest controllers within the translation unit -->
-            <div class="row" ng-controller="AceCtrl">
-                <!-- used with $anchorScroll from ContentAreaCtrl -->
-                <!-- TODO: prevent $anchorScroll from reloading the ng-repeat -->
+            <div class="container" ng-controller="AceCtrl">
+                <div class="row">
+                    <!-- used with $anchorScroll from ContentAreaCtrl -->
+                    <!-- TODO: prevent $anchorScroll from reloading the ng-repeat -->
 
-                <div class="content-card source-area col-sm-6">
-                    <div class="source">{{ allSegments[$index][0] }}</div>
-                </div>
-                <div ng-init="setSegments(index)" index="{{$index}}" class="content-card target-area col-sm-6">
-                    <div class="edit-area">
-                        <!-- the ace editor -->
-                        <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="allSegments[$index][1]" ui-ace="{ onLoad : aceLoaded }"></div>
-
-                        <div chars class="sample-show-hide" show="{{showSpecialChars}}" special="germanChars" selected="insertChar(char)" ></div>
+                    <div class="content-card col-sm-6">
+                        <div class="source">{{ allSegments[$index][0] }}</div>
+                    </div>
+                    <div ng-init="setSegments(index)" index="{{$index}}" class="content-card target-area col-sm-6">
+                        <div class="edit-area">
+                            <!-- the ace editor -->
+                            <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="allSegments[$index][1]" ui-ace="{ onLoad : aceLoaded }"></div>
+                        </div>
+                        <div chars class="sample-show-hide" collapsed="showSpecialChars" special="germanChars" selected="insertChar(char)" ></div>
                     </div>
                 </div>
+                <div class="row">
+                    <!-- TODO: refactor the css classes here -->
+                    <button ng-click="segmentFinished()" tooltip="segment complete" class="seg-finished btn btn-primary cat-glyph pull-right"><span class="glyphicon glyphicon-ok-sign"></span></button>
+                    <button ng-click="clearEditor()" tooltip="reject MT output" class="seg-finished btn btn-primary cat-glyph pull-right"><span class="glyphicon glyphicon-remove"></span></button>
+                    <button ng-click="toggleToolbar()" tooltip="toggle toolbar" class="seg-finished btn btn-primary cat-glyph pull-right"><span class="glyphicon glyphicon-wrench"></span></button>
+                    <!--<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>-->
+                </div>
             </div>
-            <div class="row">
-                <button ng-click="isCollapsed = !isCollapsed" class="btn btn-primary cat-glyph pull-left"><span class="glyphicon glyphicon-wrench"></span></button>
-
-                <button ng-click="segmentFinished()" class="seg-finished btn btn-primary cat-glyph pull-right"><span class="glyphicon glyphicon-ok-sign"></span></button>
-                <!--<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>-->
-            </div>
-
-            <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Toggle collapse</button>
             <!-- The tools for editing -->
             <!-- TODO: should these tools really be repeated, or should there be a single instance for the whole document? -->
             <!--<div class="ace-toolbar container" ng-show="toolbarOpen" collapse="toolbarOpen">-->
@@ -51,6 +51,7 @@
                     class="translation-toolbar"
                 >
                 <!-- Working - move to tabset -->
+                <!-- Working - Add smart pluralize here first, then move to the edit area -->
                 <!-- TODO - make tabs active based on edit-area interactions -->
                     <tabset>
                         <tab heading="Glossary" ng-click="">

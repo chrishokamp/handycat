@@ -27,7 +27,7 @@ h3 {
 
 /* style file input as a button (with bootstrap 3) */
 .btn-file {
-    margin-top: 10px;
+    margin-top: 12px;
     position: relative;
     overflow: hidden;
     background-color: LightBlue;
@@ -90,6 +90,7 @@ h3 {
 
 .content-card {
   @extend %ace-editor-height;
+
   //background-color: white;
 }
 span.cat-glyph {
@@ -138,6 +139,7 @@ span.drop-text {
 .source {
   background-color: white;
   font-size: 20px;
+  width:100%;
   min-height: 100px;
   margin-top: 10px;
   padding-top: 10px;
@@ -152,11 +154,11 @@ span.drop-text {
 
 .edit-area {
   margin-top: 10px;
-  padding-left: 4px;
+
 }
 
 /* Ace Editor Styles */
-.ace_editor { min-height: 100px; }
+.ace_editor { min-height: 300px; }
 
 .ace_selected_token {
   background-color: LightGreen;
