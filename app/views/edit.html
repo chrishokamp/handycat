@@ -55,10 +55,8 @@
                 <!-- TODO - make tabs active based on edit-area interactions -->
                     <tabset>
                         <tab heading="Glossary" ng-click="">
-                            <div class="container">
-                                <input type="text" ng-model="glossaryQuery" placeholder="Enter a search query..." /><button ng-click="queryGlossary(glossaryQuery)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-                                <div ng-repeat="glossaryMatch in glossaryMatches">{{glossaryMatch}}</div>
-                            </div>
+                            <input type="text" ng-model="glossaryQuery" placeholder="Enter a search query..." /><button ng-click="queryGlossary(glossaryQuery)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                            <div ng-repeat="glossaryMatch in glossaryMatches">{{glossaryMatch}}</div>
                         </tab>
                         <tab heading="Concordance" ng-click="">
                             <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." /><button ng-click="queryConcordancer(concordanceQuery)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>

@@ -11,7 +11,8 @@ angular.module('services').factory('Glossary', [ '$http', '$log', function($http
   // working -- interface with the glosbe translate API
   // check whether CORS is ok
 //   http://glosbe.com/gapi/tm?from=eng&dest=deuk&format=json&phrase="the company grew"&pretty=true
-  var baseUrl = 'http://localhost:5000/glossary';
+//  var baseUrl = 'http://localhost:5000/glossary';
+  var baseUrl = 'http://protected-crag-2517.herokuapp.com/glossary';
 
   // Note: a glossary is for LOOKUP, not autocomplete
   var Glossary = {
