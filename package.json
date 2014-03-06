@@ -1,15 +1,11 @@
 {
-  "name": "editorcomponents",
+  "name": "yoangular",
   "version": "0.0.0",
-  "dependencies": {
-    "grunt": "~0.4.1",
-    "bower": "1.2.x",
-    "express": "3.4.x",
-    "gzippo": "0.2.x"
-  },
+  "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
+    "grunt-bower-install": "~0.7.0",
     "grunt-concurrent": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-coffee": "~0.7.0",
@@ -32,25 +28,24 @@
     "jshint-stylish": "~0.1.3",
     "load-grunt-tasks": "~0.2.0",
     "time-grunt": "~0.2.1",
-    "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-ng-scenario": "~0.1.0",
+    "grunt-karma": "~0.6.2",
     "karma-script-launcher": "~0.1.0",
     "karma-chrome-launcher": "~0.1.2",
     "karma-firefox-launcher": "~0.1.3",
     "karma-html2js-preprocessor": "~0.1.0",
     "karma-jasmine": "~0.1.5",
-    "requirejs": "~2.1.9",
+    "requirejs": "~2.1.11",
     "karma-requirejs": "~0.2.1",
-    "karma-coffee-preprocessor": "~0.1.2",
-    "karma-phantomjs-launcher": "~0.1.1",
-    "karma": "~0.10.8",
-    "grunt-karma": "~0.6.2"
+    "karma-coffee-preprocessor": "~0.1.3",
+    "karma-phantomjs-launcher": "~0.1.2",
+    "karma": "~0.10.9",
+    "karma-ng-html2js-preprocessor": "~0.1.0"
   },
   "engines": {
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "grunt test",
-    "postinstall": "./node_modules/bower/bin/bower install; ./node_modules/grunt/bin/grunt build --force"
+    "test": "grunt test"
   }
 }

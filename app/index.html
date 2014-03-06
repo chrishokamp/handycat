@@ -11,34 +11,55 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <!-- build:css({.tmp,app}) styles/main.css -->
-        <link rel="stylesheet" href="styles/bootstrap.min.css">
+      <!-- TODO: sass-bootstrap is included from the main.scss sass file -->
+      <!-- build:css styles/vendor.css -->
+      <!-- bower:css -->
+      <!--<link rel="stylesheet" href="styles/bootstrap.min.css" />-->
+      <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
+      <!--<link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />-->
+      <!-- endbower -->
+      <!-- endbuild -->
+
+      <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/test.css">
+      <!-- endbuild -->
 </head>
   <body ng-app="editorComponentsApp">
 
     <div class="container" ui-view></div>
 
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
     <!-- build:js({.tmp,app}) scripts/vendor.js -->
+
     <!-- bower:js -->
-    <script src="scripts/lib/ace-builds-master/src-noconflict/ace.js"></script>
-    <script src="scripts/lib/ace-builds-master/src-noconflict/ext-language_tools.js"></script>
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/jqueryui/ui/jquery-ui.js"></script>
-    <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
+    <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/jqueryui/ui/jquery-ui.js"></script>
+    <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
+    <script src="bower_components/ng-file-upload/angular-file-upload-shim.js"></script>
     <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
-    <script src="scripts/vendor/ui-bootstrap-tpls-0.10.0.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+
+    <!-- endbower -->
+
+    <script src="bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.10.0.js"></script>
     <script src="scripts/lib/xliff_data_selector.js"></script>
     <script src="scripts/lib/german_snowball_stemmer.js"></script>
-    <!-- endbower -->
+    <script src="scripts/lib/ace-builds-master/src-noconflict/ace.js"></script>
+    <script src="scripts/lib/ace-builds-master/src-noconflict/ext-language_tools.js"></script>
     <!-- endbuild -->
 
     <!-- CAT editor scripts -->

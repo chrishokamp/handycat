@@ -8,12 +8,9 @@
 }
 
 body {
-//  background-image:url('img/squared_metal.png');
-//  background: #FCF0C7;
   background: rgb(236, 236, 236);
-  background-image:url('img/ricepaper.png');
+  background-image:url('../images/ricepaper.png');
   font-family: 'Cardo', serif;
-  //font-family: 'Gilda Display', serif;/* no rounded corners allowed */
 }
 
 h3 {
@@ -22,12 +19,11 @@ h3 {
 
 .edit-area-wrapper {
   margin-top: 16px;
-  //border: 1px dotted #808080;
 }
 
 /* style file input as a button (with bootstrap 3) */
 .btn-file {
-    margin-top: 10px;
+    margin-top: 12px;
     position: relative;
     overflow: hidden;
     background-color: LightBlue;
@@ -222,6 +218,11 @@ span.drop-text {
     margin-left: 6px;
     padding-left: 8px;
     padding-right: 8px;
+  }
+  .search-result {
+    &:hover {
+      background-color: coral;
+    }
   }
 }
 
