@@ -1,18 +1,13 @@
 // the segment area is the area of the UI representing a single translation unit
 // this is a source + target pair
 angular.module('controllers')
-.controller('SegmentAreaCtrl', ['$scope', 'Wikipedia', 'Glossary', '$sce', '$log', function($scope, Wikipedia, Glossary, $sce, $log) {
+.controller('SegmentAreaCtrl', ['$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', function($scope, Wikipedia, Glossary, GermanStemmer, $sce, $log) {
 // TODO: display the results of the concordancer here, not from the AceCtrl
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
-  // Toggle opening / collapsing the toolbar
-  $scope.isCollapsed = true;
-
   // TODO: set this only when this is the active scope
   $scope.active = true;
 
-  // Toolbar open
-  $scope.toolbarOpen = false;
   $scope.queryConcordancer = function(query) {
     $log.log('query is: ' + query);
     Wikipedia.getConcordances(query);
@@ -22,7 +17,16 @@ angular.module('controllers')
     $scope.concordanceMatches = Wikipedia.currentQuery;
   })
 
-//   http://glosbe.com/gapi/tm?from=eng&dest=deu&format=json&phrase="the company grew"&pretty=true
+  // special chars toolbar showing
+  $scope.showSpecialChars = true;
+
+  // testing the special chars directive
+  $scope.germanChars = ['ä','ö','ü','Ä','Ö','Ü','ß'];
+  $scope.insertChar = function(char) {
+    $log.log("char to insert: " + char);
+    $scope.insertText(char);
+  }
+
 
   // convert a snippet to trusted html - TODO: this isn't reusable becuase we send back x.snippet
   $scope.getSnippet = function(concordanceMatch) {
@@ -39,13 +43,23 @@ angular.module('controllers')
   }
 
 // TODO: testing
-  $scope.isCollapsed = true;
-  $scope.toggleToolbar = function() {
-    $scope.isCollapsed = !$scope.isCollapsed;
-    $log.log("isCollapsed: the value of isCollapsed is: " + $scope.isCollapsed);
+  $scope.isCollapsed = {collapsed: true};
+  $scope.toggleToolbar = function(bool) {
+    if (arguments.length > 0) {
+      $scope.isCollapsed = { collapsed: bool };
+// TODO: there is a broken corner-case here
+    } else {
+      $scope.isCollapsed = { collapsed: !$scope.isCollapsed.collapsed };
+    }
+    $log.log("isCollapsed: the value of isCollapsed is: " + $scope.isCollapsed.collapsed);
   }
 
-// TODO: use a callback
+  $scope.getOtherWordForms = function(stemmedToken) {
+    $log.log('other word forms called with: ' + stemmedToken);
+    $scope.otherWordForms = GermanStemmer.getOtherForms(stemmedToken);
+  };
+
+// TODO: use a promise
   $scope.queryGlossary = function(query) {
     Glossary.getMatches(query, updateGlossaryArea);
 

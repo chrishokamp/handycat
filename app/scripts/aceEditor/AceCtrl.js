@@ -7,17 +7,7 @@ angular.module('controllers').controller('AceCtrl',
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
 
-  // special chars toolbar showing
-  $scope.showSpecialChars = true;
-
-  // testing the special chars directive
-  $scope.germanChars = ['ä','ö','ü','Ä','Ö','Ü','ß'];
-  $scope.insertChar = function(char) {
-    $log.log("char to insert: " + char);
-    $scope.insertText(char);
-  }
-
-  $scope.allSegments = Document.segments;
+  // $scope.allSegments = Document.segments;
 
   // the values for this instance set from the view with ng-init and the ng-repeat index
   $scope.setSegments = function(index) {
@@ -76,21 +66,13 @@ angular.module('controllers').controller('AceCtrl',
 
   // get the range of the current token under the cursor
   // Chris: working here - call this as part of the selection workflow, when tokens need to be selected or reselected
-  var getCurrentTokenRange = function() {
+  var getCurrentTokenAndRange = function() {
     var editor = $scope.editor;
     // get cursor position, then token
     var pos = editor.getCursorPosition();
-    $log.log('current cursor position: ');
-    $log.log(pos);
     var token = editor.session.getTokenAt(pos.row, pos.column);
-    $log.log("LOG: token object is: ");
-    $log.log(token);
-
     var tokenRange = new aceRange(pos.row, token.start, pos.row, token.start + token.value.length);
-    $log.log("logging the tokens range");
-    $log.log(tokenRange)
-
-    // editor.session.selection.setRange(tokenRange);
+    return {token: token, range: tokenRange};
   }
 
   // replace the current selection in the editor with this text
@@ -103,14 +85,22 @@ angular.module('controllers').controller('AceCtrl',
     editor.session.getDocument().replace(currentSelection, text);
     $log.log("replaced current selection with: " + text);
 
+
     // refocus the AceEditor
     $scope.editor.focus();
   }
+  // let the parent see replaceSelection too
+  $scope.$parent.replaceSelection = $scope.replaceSelection;
 
   $scope.insertText = function(text) {
+    $log.log('insertText called with value: ' + text);
     var editor = $scope.editor;
-    editor.insert(text);
+
+    // insert the text with a space before and after
+    editor.insert(' ' + text + ' ');
   }
+  // let the $parent controller see insertText, so that we can hit it from sibling controllers
+  $scope.$parent.insertText = $scope.insertText;
 
   $scope.clearEditor = function() {
     $log.log('clearEditor fired...');
@@ -147,57 +137,40 @@ angular.module('controllers').controller('AceCtrl',
      editor.resize();
    };
 
-    // TESTING the index directive
-//    $timeout(function() { $log.log("the index property on this AceEditor ctrl is: " + $scope.index)},1500);
-
     // Note: this is the path for the ace require modules
     var langTools = ace.require("ace/ext/language_tools");
     $scope.editor = editor;
-    $log.log('logging ace editor');
-    $log.log(editor);
-    // WORKING - use ace.require to create an edit mode - in lib/
 
     $scope.editor.session.setMode('ace/mode/text');
 
     // Testing token mouseover
     editor.on('click', function(e) {
-      // testing only
-      getCurrentTokenRange();
 
-      // open the toolbar to show word forms, etc...
-      $scope.toolbarOpen = true;
-
-      var position = e.getDocumentPosition();
-      var token = editor.session.getTokenAt(position.row, position.column);
-      $log.log("LOG: token object is: ");
-      $log.log(token);
-
-      $log.log("LOG: Stemmed token is: ");
-      var stemmedToken = GermanStemmer.stem(token.value)
-      $log.log(stemmedToken);
-
-      $log.log("map output is: ");
-      var otherForms = GermanStemmer.getOtherForms(stemmedToken)
-      $log.log(otherForms);
-
-      // now select token (first clear any existing selection)
-       // editor.session.removeMarker(markerId)
-      var tokenRange = new aceRange(position.row, token.start, position.row, token.start + token.value.length);
-      $log.log("logging the tokens range");
-      $log.log(tokenRange)
-
-      // we currently don't need to use clearSelection(), but switching to multi-select may require that
-
-      editor.session.selection.setRange(tokenRange);
-
-      //TODO - move to a directive for wordForms?
-      if (otherForms) {
-        $log.log("setting otherWordForms");
-        $scope.otherWordForms = otherForms;
-        $scope.$apply();
+// TODO: move this side-effect elsewhere
+    $scope.$parent.$apply(
+      function() {
+        $scope.$parent.toggleToolbar(false);
       }
-    });
+    );
 
+    var tokenAndRange = getCurrentTokenAndRange();
+    var token = tokenAndRange.token;
+    var stemmedToken = GermanStemmer.stem(token.value);
+    $log.log('token: '+ token, 'stemmed: ' + stemmedToken);
+
+    // TODO: move this out of AceCtrl - function is on segmentCtrl
+    $scope.$parent.$apply(
+      function() {
+        $scope.getOtherWordForms(stemmedToken);
+      }
+    );
+
+    // now select token (first clear any existing selection)
+    editor.session.selection.setRange(tokenAndRange.range);
+    // we currently don't need to use clearSelection(), but switching to multi-select may require that
+   });
+
+// Chris: use the function below to highlight the search term in the text
     // a way of getting the current token on click
 //      var Range = ace.require("ace/range").Range, markerId
 //      var handler = function(e){
@@ -213,17 +186,11 @@ angular.module('controllers').controller('AceCtrl',
 //              pos.row, token.start + token.value.length)
 //          console.log(range)
 //          editor.session.removeMarker(markerId)
+//
+//          // Chris - ace_bracket would be the css class
 //          markerId = editor.session.addMarker(range, 'ace_bracket red')
 //      }
 //      editor.on("click", handler)
-
-    // TESTING - focus the editor
-    // what is the editor object?
-    //$log.log(editor);
-
-    // TESTING: set the content of the editor as the target segment
-    //$log.log("setting the value of the ace editor to: " + $scope.targetSegment);
-    //editor.setValue($scope.targetSegment);
 
     editor.setOptions({enableBasicAutocompletion: true});
     var tmCompleter = {
@@ -303,18 +270,10 @@ angular.module('controllers').controller('AceCtrl',
     // the size again
     editor.getSession().on('change', heightUpdateFunction);
 
-
+// Move styling into the Ace Editor directive
 // TODO: see moses - how to get translation alignments?
     editor.setFontSize(20);
     editor.setFontSize(20);
-    // sampleSen is initialized earlier in the controller
-    // editor.setValue($scope.sampleSen);
-    //editor.setTheme("ace/theme/twilight");  // Note: the editor themes are called by their string names (these are not paths)
-    //console.log(_renderer.getTheme());
-
-    //session.on("change", function(){
-      //console.log(editor.getValue());
-     //console.log("the ace session change event fired") });
   }
 
   // BEGIN - managing the active segment

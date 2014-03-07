@@ -1,18 +1,17 @@
 // Working - provide the ectaco dictionary from this service
-angular.module('services').factory('Glossary', [ '$http', '$log', function($http,$log) {
-  // load the file from data/
-  // TODO: move this glossary to a backend service
-//  var glossaryFile = 'data/ectaco-en-pos-de.tsv';
+angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', function($http,baseUrl,$log) {
 
   //development
   // the ectaco german dictionary
   var glossaryFile = 'data/glossary.small.tsv';
+//  var glossaryFile = 'data/ectaco-en-pos-de.tsv';
 
+  // the glossary server
+  var urlPrefix = '/glossary';
+  var glossaryUrl = baseUrl + urlPrefix;
   // working -- interface with the glosbe translate API
   // check whether CORS is ok
 //   http://glosbe.com/gapi/tm?from=eng&dest=deuk&format=json&phrase="the company grew"&pretty=true
-//  var baseUrl = 'http://localhost:5000/glossary';
-  var baseUrl = 'http://protected-crag-2517.herokuapp.com/glossary';
 
   // Note: a glossary is for LOOKUP, not autocomplete
   var Glossary = {
@@ -28,7 +27,7 @@ angular.module('services').factory('Glossary', [ '$http', '$log', function($http
         callback(self.glossary[phrase]);
       } else {
 
-        $http.get(baseUrl, {
+        $http.get(glossaryUrl, {
           params: {
             phrase: phrase,
             from: 'eng',

@@ -5,7 +5,6 @@
         <!--<tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled"></tab>-->
       <!--</tabset>-->
         <!-- TODO: use nav here, not tabs -->
-      <div>Translate</div>
     </div>
 
     <!-- TODO: add feature where dragging a word or phrase to target area translates it automatically -->
@@ -15,22 +14,22 @@
 
     <!-- translation area -->
     <div class="container edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
-        <div class="segment row" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments">
+        <div class="segment row" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments" ng-init="segment = seg">
             <a id="segment-{{$index}}"></a>
             <p>Segment Index: {{$index}}</p>
             <!-- TODO - WORKING: move the AceCtrl only to the Ace edit area, and nest controllers within the translation unit -->
-            <div class="container" ng-controller="AceCtrl">
+            <div class="container" >
                 <div class="row">
                     <!-- used with $anchorScroll from ContentAreaCtrl -->
                     <!-- TODO: prevent $anchorScroll from reloading the ng-repeat -->
 
                     <div class="content-card col-sm-6">
-                        <div class="source">{{ allSegments[$index][0] }}</div>
+                        <div class="source">{{ segment.source }}</div>
                     </div>
-                    <div ng-init="setSegments(index)" index="{{$index}}" class="content-card target-area col-sm-6">
+                    <div ng-controller="AceCtrl" index="{{$index}}" class="content-card target-area col-sm-6">
                         <div class="edit-area">
                             <!-- the ace editor -->
-                            <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="allSegments[$index][1]" ui-ace="{ onLoad : aceLoaded }"></div>
+                            <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="segment.target" ui-ace="{ onLoad : aceLoaded }"></div>
                         </div>
                         <div chars class="sample-show-hide" collapsed="showSpecialChars" special="germanChars" selected="insertChar(char)" ></div>
                     </div>
@@ -46,7 +45,7 @@
             <!-- The tools for editing -->
             <!-- TODO: should these tools really be repeated, or should there be a single instance for the whole document? -->
             <!--<div class="ace-toolbar container" ng-show="toolbarOpen" collapse="toolbarOpen">-->
-            <div class="ace-toolbar container" collapse="isCollapsed">
+            <div class="ace-toolbar container" collapse="isCollapsed['collapsed']">
                 <div
                     class="translation-toolbar"
                 >
@@ -56,24 +55,29 @@
                     <tabset>
                         <tab heading="Glossary" ng-click="">
                             <input type="text" ng-model="glossaryQuery" placeholder="Enter a search query..." /><button ng-click="queryGlossary(glossaryQuery)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-                            <div ng-repeat="glossaryMatch in glossaryMatches">{{glossaryMatch}}</div>
+                            <div class="search-result"
+                                 ng-repeat="glossaryMatch in glossaryMatches"
+                                 ng-click="insertText(glossaryMatch)"
+                            >{{glossaryMatch}}</div>
                         </tab>
                         <tab heading="Concordance" ng-click="">
                             <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." /><button ng-click="queryConcordancer(concordanceQuery)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-                            <div ng-repeat="concordanceMatch in concordanceMatches" ng-bind-html="getSnippet({{concordanceMatch}})"></div>
+                            <div class="search-result"
+                                 ng-repeat="concordanceMatch in concordanceMatches"
+                                 ng-bind-html="getSnippet({{concordanceMatch}})"
+                            ></div>
+                        </tab>
+                        <tab heading="WordForms">
+                            <div class="word-forms">
+                                <div
+                                        ng-repeat="word in otherWordForms"
+                                >
+                                    <button class="btn btn-default" ng-click="replaceSelection(word)">{{word}}</button>
+                                </div>
+                            </div>
                         </tab>
                     </tabset>
-                </div>
-                <div class="word-forms">
-                    <p>Word forms of the clicked token</p>
-                    <div class="row">
-                        <div
-                                class="pull-left"
-                                ng-repeat="word in otherWordForms"
-                                >
-                            <button class="btn btn-default" ng-click="replaceSelection(word)">{{word}}</button>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         <hr/>

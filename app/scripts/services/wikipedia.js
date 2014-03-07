@@ -2,13 +2,14 @@
 // a sample query
 // http://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch="indubitably"&srprop=snippet
 
-angular.module('services').factory('Wikipedia', ['$http', '$rootScope', '$log', function($http, $rootScope, $log) {
+angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl', '$log', function($http, $rootScope, baseUrl, $log) {
 
   // the query url: 'http://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=snippet';
+  var urlPrefix = '/wikipedia';
+  var concordanceUrl = baseUrl + urlPrefix;
 
 // TODO: set this url dynamically, because we dont know where we're getting deployed from
 //  var baseUrl = 'http://localhost:5000/wikipedia';
-  var baseUrl = 'http://protected-crag-2517.herokuapp.com/wikipedia';
   var Wikipedia = {
     concordances: {},
     // TODO: reset currentQuery when user moves to a new segment?
@@ -23,7 +24,7 @@ angular.module('services').factory('Wikipedia', ['$http', '$rootScope', '$log', 
       } else {
 
         // TODO: make sure the backend actually returns responses to this query
-        $http.get(baseUrl, {
+        $http.get(concordanceUrl, {
           params: {
             srsearch: query,
             origin: 'http://0.0.0.0:9000'

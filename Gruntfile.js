@@ -372,9 +372,21 @@ module.exports = function (grunt) {
     // Test settings
     karma: {
       unit: {
-        configFile: 'config/karma.conf.js',
+        configFile: './test/karma-unit.conf.js',
+        autoWatch: false,
         singleRun: true
-      }
+      },
+      unit_auto: {
+        configFile: './test/karma-unit.conf.js',
+        autoWatch: true,
+        singleRun: false
+      },
+      //backgroundUnit: {
+      //    configFile: 'karma.conf.js',
+      //    runnerPort: 9999,
+      //    browsers: ['Chrome'],
+      //    background: true,
+      //},
     }
   });
 
