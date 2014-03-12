@@ -1,5 +1,5 @@
 //@import url(http://fonts.googleapis.com/css?family=Gilda+Display&subset=latin,latin-ext);
-@import url(http://fonts.googleapis.com/css?family=Cardo&subset=latin,latin-ext);
+//@import url(http://fonts.googleapis.com/css?family=Cardo&subset=latin,latin-ext);
 
 * {
   -webkit-border-radius: 0 !important;
@@ -8,9 +8,13 @@
 }
 
 body {
-  background: rgb(236, 236, 236);
-  background-image:url('../images/ricepaper.png');
-  font-family: 'Cardo', serif;
+  // background: rgb(236, 236, 236);
+  background: slategray;
+  // background-image:url('../images/ricepaper.png');
+  background-image:url('../images/broken_noise.png');
+//  font-family: 'Cardo', serif;
+  font-family: 'Monaco', monospace;
+  font-size: 12px;
 }
 
 h3 {
@@ -144,6 +148,8 @@ span.drop-text {
   overflow: hidden;
 }
 
+/* Ace Editor Styles */
+
 .target {
   background-color: white;
 }
@@ -153,8 +159,17 @@ span.drop-text {
 
 }
 
-/* Ace Editor Styles */
-.ace_editor { min-height: 300px; }
+.ace_editor {
+  min-height: 300px;
+  font-family: 'Cardo', serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+// don't highlight the active line
+.ace_active-line {
+ background-color: transparent !important;
+}
 
 .ace_selected_token {
   background-color: LightGreen;

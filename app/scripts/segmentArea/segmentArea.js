@@ -54,6 +54,11 @@ angular.module('controllers')
     $log.log("isCollapsed: the value of isCollapsed is: " + $scope.isCollapsed.collapsed);
   }
 
+  $scope.clearEditor = function() {
+   $log.log('clear editor fired on the segment control');
+   $scope.$broadcast('clear-editor');
+  }
+
   $scope.getOtherWordForms = function(stemmedToken) {
     $log.log('other word forms called with: ' + stemmedToken);
     $scope.otherWordForms = GermanStemmer.getOtherForms(stemmedToken);

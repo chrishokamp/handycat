@@ -77,14 +77,13 @@ angular.module('controllers').controller('AceCtrl',
 
   // replace the current selection in the editor with this text
   $scope.replaceSelection = function(text) {
+
     var editor = $scope.editor;
     var currentSelection = getSelection();
-    $log.log(currentSelection);
 
     // use the replace method on the ace Document object
     editor.session.getDocument().replace(currentSelection, text);
     $log.log("replaced current selection with: " + text);
-
 
     // refocus the AceEditor
     $scope.editor.focus();
@@ -102,9 +101,16 @@ angular.module('controllers').controller('AceCtrl',
   // let the $parent controller see insertText, so that we can hit it from sibling controllers
   $scope.$parent.insertText = $scope.insertText;
 
-  $scope.clearEditor = function() {
+  // The Segment area is the parent of the AceCtrl
+  $scope.$on('clear-editor', function(e) {
+    e.preventDefault();
+    clearEditor();
+  });
+
+  function clearEditor() {
     $log.log('clearEditor fired...');
     $scope.editor.setValue(' ', -1);
+    $scope.editor.focus();
   }
 
   $scope.currentPrefix = function() {
@@ -118,24 +124,10 @@ angular.module('controllers').controller('AceCtrl',
   // END TYPEAHEAD
 
   // Use this function to configure the ace editor instance
-  $scope.aceLoaded = function (_editor) {
+  $scope.aceLoaded = function (editor) {
+   var editor = editor;
+   $scope.editor = editor;
 
-   var editor = _editor;
-   var heightUpdateFunction = function() {
-
-     // http://stackoverflow.com/questions/11584061/
-     var newHeight =
-               editor.getSession().getScreenLength()
-               * editor.renderer.lineHeight
-               + editor.renderer.scrollBar.getWidth();
-
-     $('#editor').height(newHeight.toString() + "px");
-     $('#editor-section').height(newHeight.toString() + "px");
-
-     // This call is required for the editor to fix all of
-     // its inner structure for adapting to a change in size
-     editor.resize();
-   };
 
     // Note: this is the path for the ace require modules
     var langTools = ace.require("ace/ext/language_tools");
@@ -263,18 +255,36 @@ angular.module('controllers').controller('AceCtrl',
       $log.log("Set mode to: " + modeName);
     }
 
-    // Set initial size to match initial content
-    heightUpdateFunction();
-
-    // Whenever a change happens inside the ACE editor, update
-    // the size again
-    editor.getSession().on('change', heightUpdateFunction);
 
 // Move styling into the Ace Editor directive
 // TODO: see moses - how to get translation alignments?
+
+    // this doesn't work from CSS for some reason
     editor.setFontSize(20);
-    editor.setFontSize(20);
-  }
+
+    var heightUpdateFunction = function() {
+
+      // http://stackoverflow.com/questions/11584061/
+      var newHeight =
+                editor.getSession().getScreenLength()
+                * editor.renderer.lineHeight
+                + editor.renderer.scrollBar.getWidth();
+
+      $('#editor').height(newHeight.toString() + "px");
+      $('#editor-section').height(newHeight.toString() + "px");
+
+      // This call is required for the editor to fix all of
+      // its inner structure for adapting to a change in size
+      editor.resize();
+    };
+
+    heightUpdateFunction();
+
+    // Whenever a change happens inside the ACE editor, update
+    // the height again
+    editor.getSession().on('change', heightUpdateFunction);
+    // Set initial size to match initial content
+  }  // end AceLoaded
 
   // BEGIN - managing the active segment
   // listen for the new segment event, if it's this segment, ask the TM for matches
