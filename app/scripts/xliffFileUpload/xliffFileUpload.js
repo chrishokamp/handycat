@@ -6,6 +6,15 @@ angular.module('controllers').controller('UploadCtrl', ['$scope', 'fileReader', 
   $scope.fileAdded = false;
   $scope.dropSupported = false;
 
+  $scope.$watch(
+    function() {
+      return $scope.dropSupported;
+    },
+    function() {
+      $log.log('UploadCtrl: dropSupported changed to: ' + $scope.dropSupported);
+    }
+  )
+
   // make sure that a file has been uploaded, parse it, and transition to translation
   $scope.startTranslation = function() {
     $log.log('starting translation...');
@@ -18,7 +27,7 @@ angular.module('controllers').controller('UploadCtrl', ['$scope', 'fileReader', 
   }
 
   // DEVELOPMENT UTILITY
-  var development = true;
+  var development = false;
 // Dev flag - load file by default
   if (development) {
     //var fileUrl = 'data/enEs.xlf';

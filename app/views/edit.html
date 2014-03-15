@@ -16,15 +16,14 @@
     <div class="container edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
         <div class="segment row" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments" ng-init="segment = seg">
             <a id="segment-{{$index}}"></a>
-            <p>Segment Index: {{$index}}</p>
+            <p class="segment-index-label">Segment Index: {{$index}}</p>
             <!-- TODO - WORKING: move the AceCtrl only to the Ace edit area, and nest controllers within the translation unit -->
             <div class="container" >
                 <div class="row">
                     <!-- used with $anchorScroll from ContentAreaCtrl -->
                     <!-- TODO: prevent $anchorScroll from reloading the ng-repeat -->
-
                     <div class="content-card col-sm-6">
-                        <div class="source">{{ segment.source }}</div>
+                        <source-area sentence="segment.source" class="source"></source-area>
                     </div>
                     <div ng-controller="AceCtrl" index="{{$index}}" class="content-card target-area col-sm-6">
                         <div class="edit-area">
