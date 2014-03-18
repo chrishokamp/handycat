@@ -30,10 +30,10 @@ h3 {
     margin-top: 12px;
     position: relative;
     overflow: hidden;
-    background-color: LightBlue;
+    background-color: #f5f5f5;
     border: 1px solid #696969;
     &:hover {
-      background-color: darken(LightBlue, 20%);
+      background-color: darken(#f5f5f5, 20%);
     }
 }
 .btn-file input[type=file] {
@@ -55,7 +55,12 @@ h3 {
 /* end: style file input as button */
 
 /* styles for the project view */
+.inline-header {
+   display: inline-block;
+  vertical-align: baseline;
+}
 
+// TODO: this is problematic with bootstrap's grid system
 .col-centered{
     float: none;
     margin: 0 auto;
@@ -77,6 +82,12 @@ h3 {
   margin-top: 10px;
 }
 
+.selected-files {
+  color: #f5f5f5;
+}
+
+/* End project view styles */
+
 /* styles for the editing view */
 
 /* to highlight matches from the concordancer */
@@ -85,30 +96,27 @@ h3 {
 }
 
 %ace-editor-height {
-  min-height: 100px;
+  min-height: 200px;
 }
 
 .content-card {
   @extend %ace-editor-height;
-
+  background-color: white;
+  // leave a little space between the two
+//  overflow-y: hidden;
   //background-color: white;
 }
+
 span.cat-glyph {
   font-size: 30px;
   vertical-align: middle;
 }
 .seg-finished {
-  margin-right: 20px;
-}
-
-.translation-unit {
-  background-color: whitesmoke;
-  box-shadow: 0 0 10px black;
-  padding:0 10px 0 10px;
+//  margin-right: 20px;
 }
 
 .drop-box {
-  margin-top: 20px;
+  margin-top: 80px;
   border: 5px dashed blue;
   height: 200px;
   &:hover {
@@ -118,7 +126,7 @@ span.cat-glyph {
 }
 .drop-box.dragover {
   border: 5px dashed yellow;
-  background-color: LightBlue;
+  background-color: blue;
 }
 
 span.drop-message {
@@ -130,37 +138,44 @@ span.drop-text {
 }
 
 
-%foo {
+%crosshair {
   cursor: crosshair;
   background-color: green;
 }
 
-/* the div which actually contains the source - what is overriding height? */
+/* the div which actually contains the source */
 .source {
-  background-color: white;
   font-size: 20px;
   width:100%;
-  min-height: 100px;
+  height: 200px;
   margin-top: 10px;
-  padding-top: 10px;
-  padding-left: 4px;
-  padding-right: 4px;
-  overflow: hidden;
+  overflow-y: auto;
+}
+
+.source-token {
+  &:hover {
+    background-color: darken(#f5f5f5, 20%);
+  }
+}
+
+/* Segment Area Styles */
+.segment-index-label {
+  color: white;
 }
 
 /* Ace Editor Styles */
 
 .target {
   background-color: white;
+
 }
 
 .edit-area {
-  margin-top: 10px;
 
 }
 
 .ace_editor {
-  min-height: 300px;
+  min-height: 200px;
   font-family: 'Cardo', serif;
   font-weight: normal;
   font-style: normal;
@@ -177,7 +192,7 @@ span.drop-text {
 
 /* hack to hide the scrollbars in the ace editor */
 .ace_scrollbar {
-    display: none !important;
+//    display: none !important;
 }
 
 /* TODO: use marker.renderer to find a solution that can handle future edits */
@@ -190,7 +205,7 @@ span.drop-text {
 }
 
 .ace_marker-layer .was-selected:hover {
-  @extend %foo;
+  @extend %crosshair;
 }
 
 /* End Ace Editor Styles */

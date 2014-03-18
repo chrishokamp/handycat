@@ -22,24 +22,44 @@
                 <div class="row">
                     <!-- used with $anchorScroll from ContentAreaCtrl -->
                     <!-- TODO: prevent $anchorScroll from reloading the ng-repeat -->
-                    <div class="content-card col-sm-6">
-                        <source-area sentence="segment.source" class="source"></source-area>
-                    </div>
-                    <div ng-controller="AceCtrl" index="{{$index}}" class="content-card target-area col-sm-6">
-                        <div class="edit-area">
-                            <!-- the ace editor -->
-                            <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="segment.target" ui-ace="{ onLoad : aceLoaded }"></div>
+
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="content-card">
+                                    <source-area sentence="segment.source" class="source"></source-area>
+                                </div>
+                            </div>
                         </div>
-                        <div chars class="sample-show-hide" collapsed="showSpecialChars" special="germanChars" selected="insertChar(char)" ></div>
                     </div>
-                </div>
-                <div class="row">
-                    <!-- TODO: refactor the css classes here -->
-                    <button ng-click="segmentFinished()" tooltip="segment complete" class="seg-finished btn btn-primary cat-glyph pull-right"><span class="glyphicon glyphicon-ok-sign"></span></button>
-                    <button ng-click="clearEditor()" tooltip="reject MT output" class="seg-finished btn btn-primary cat-glyph pull-right"><span class="glyphicon glyphicon-remove"></span></button>
-                    <button ng-click="toggleToolbar()" tooltip="toggle toolbar" class="seg-finished btn btn-primary cat-glyph pull-right"><span class="glyphicon glyphicon-wrench"></span></button>
-                    <button ng-click="nextMTSuggestion()" tooltip="next MT suggestion" class="seg-finished btn btn-primary cat-glyph pull-right"><span class="glyphicon glyphicon-flash"></span></button>
-                    <!--<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>-->
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div ng-controller="AceCtrl" index="{{$index}}" class="content-card target-area">
+                                    <div class="edit-area">
+                                        <!-- the ace editor -->
+                                        <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="segment.target" ui-ace="{ onLoad : aceLoaded }"></div>
+                                    </div>
+                                    <div chars class="sample-show-hide" collapsed="showSpecialChars" special="germanChars" selected="insertChar(char)" ></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-offset-4 col-xs-2 text-right">
+                                <button ng-click="segmentFinished()" tooltip="segment complete" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
+                            </div>
+                            <div class="col-xs-2 text-right">
+                                <button ng-click="clearEditor()" tooltip="reject MT output" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-remove"></span></button>
+                            </div>
+                            <div class="col-xs-2 text-right">
+                                <button ng-click="toggleToolbar()" tooltip="toggle toolbar" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-wrench"></span></button>
+                            </div>
+                            <div class="col-xs-2 text-right">
+                                <button ng-click="nextMTSuggestion()" tooltip="next MT suggestion" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>
+                            </div>
+                            <!--<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>-->
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- The tools for editing -->
