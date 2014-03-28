@@ -97,6 +97,7 @@ angular.module('controllers').controller('AceCtrl',
 
     // insert the text with a space before and after
     editor.insert(' ' + text + ' ');
+    editor.focus();
   }
   // let the $parent controller see insertText, so that we can hit it from sibling controllers
   $scope.$parent.insertText = $scope.insertText;
@@ -138,17 +139,20 @@ angular.module('controllers').controller('AceCtrl',
     // Testing token mouseover
     editor.on('click', function(e) {
 
-// TODO: move this side-effect elsewhere
-    $scope.$parent.$apply(
-      function() {
-        $scope.$parent.toggleToolbar(false);
-      }
-    );
 
     var tokenAndRange = getCurrentTokenAndRange();
     var token = tokenAndRange.token;
     var stemmedToken = GermanStemmer.stem(token.value);
     $log.log('token: '+ token, 'stemmed: ' + stemmedToken);
+// TODO: move this side-effect elsewhere
+    $scope.$parent.$apply(
+      function() {
+        $scope.$parent.toggleToolbar(false);
+        $scope.$parent.queryGlossary(token.value);
+        $scope.$parent.glossaryQuery = token.value;
+
+      }
+    );
 
     // TODO: move this out of AceCtrl - function is on segmentCtrl
     $scope.$parent.$apply(
