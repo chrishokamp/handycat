@@ -15,8 +15,17 @@ To set up your development environment, it's strongly recommended that you use t
 ## Installation    
 
 1. Install node and npm if you don't already have them.  
-  * you *shouldn't* need to use sudo, [here](https://gist.github.com/isaacs/579814) are good installation options.  
+  * you *shouldn't* need to use sudo, [the scripts here](https://gist.github.com/isaacs/579814) are good installation options.  
+  * if you already have node and npm, don't try to install again without *completely* getting rid of your previous installation.
 2. clone the repo `git clone git@github.com:CNGL-repo/editor_components.git`  
+3. install grunt `
+4. build bootstrap ui -
+  ```
+  $ cd app/bower_components/angular-ui-bootstrap
+  $ npm install
+  $ grunt
+  ```
+4. note ui-router isn't in bower.json - add it
 3. run `$ npm install`
 4. run `$ bower install`
 
@@ -24,15 +33,13 @@ To set up your development environment, it's strongly recommended that you use t
   * [install Ruby](https://www.ruby-lang.org/en/installation/), then do `gem install compass`  
   * make sure that your ruby installation's bin/ folder is on your `$PATH`
 
-
 ## Development
 
-
-## Code Style
+### Code Style
+* use *two spaces* to indent javascript
 
 
 ## Testing
 
 
 ## TODOs and Notes
-currently the Ace editor needs to be installed directly from the ace-builds repo on github
