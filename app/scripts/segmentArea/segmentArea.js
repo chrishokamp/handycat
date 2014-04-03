@@ -8,6 +8,24 @@ angular.module('controllers')
   // TODO: set this only when this is the active scope
   $scope.active = true;
 
+  $scope.setTarget = function(targetSentence) {
+     $scope.target = targetSentence;
+  };
+
+  $scope.setSource = function(sourceSentence) {
+     $scope.source = sourceSentence;
+  };
+
+  $scope.copySourcePunctuation = function() {
+     $log.log('copy source called');
+     if ($scope.source && $scope.target) {
+        // TODO: Create server for this feature
+        $scope.target += '.';
+        $scope.$broadcast('target-updated');
+        $log.log('target updated');
+     }
+  };
+
   $scope.queryConcordancer = function(query) {
     $log.log('query is: ' + query);
     Wikipedia.getConcordances(query);

@@ -15,6 +15,11 @@ angular.module('controllers').controller('AceCtrl',
     $scope.targetSegment = Document.targetSegments[index];
   }
 
+  // Update parent's model when the segments change.
+  $scope.$watch('segment.target', function() { $scope.setTarget($scope.segment.target); }, true);
+  $scope.$watch('segment.source', function() { $scope.setSource($scope.segment.source); }, true);
+
+
   // TODO: the logic here is wrong -- the tokenizer produces WAY too many queries!
   // TODO: move this logic to the tokenizer
   $scope.minPhraseLen = 15;
@@ -45,13 +50,19 @@ angular.module('controllers').controller('AceCtrl',
     $log.log("the TM: " + JSON.stringify(TranslationMemory.TM));
   }
 
+  
   // set the text for this editor instance
   $scope.setText = function(text) {
     var editor = $scope.editor;
     if (editor) {
       editor.setValue(text);
     }
+    $log.log('target updated setText');
   };
+
+  // Target text updated at the parent controller
+  $scope.$on('target-updated', function() { $scope.setText($scope.target); } );
+
 
   // get the current selection from the editor
   var getSelection = function() {
