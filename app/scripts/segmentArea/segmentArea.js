@@ -26,6 +26,16 @@ angular.module('controllers')
      }
   };
 
+  $scope.setCurrentToken = function(token) {
+     $scope.currentToken = token;
+  };
+
+  $scope.changeTokenNumber = function() {
+    $log.log('change token number');
+    $scope.$broadcast('change-token-number');
+    
+  }
+
   $scope.queryConcordancer = function(query) {
     $log.log('query is: ' + query);
     Wikipedia.getConcordances(query);

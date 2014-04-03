@@ -86,6 +86,16 @@ angular.module('controllers').controller('AceCtrl',
     return {token: token, range: tokenRange};
   }
 
+  $scope.$on('change-token-number', function() {
+    var token = getCurrentTokenAndRange();
+    var text = token.token.value + 's'; // TODO(ximop) implement as webservice
+    var currentSelection = getSelection();
+
+    $scope.editor.session.getDocument().replace(currentSelection, text);
+    $scope.editor.focus();
+
+  });
+
   // replace the current selection in the editor with this text
   $scope.replaceSelection = function(text) {
 
