@@ -7,18 +7,17 @@ angular.module('controllers').controller('AceCtrl',
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
 
-  // $scope.allSegments = Document.segments;
-
-  // the values for this instance set from the view with ng-init and the ng-repeat index
-  $scope.setSegments = function(index) {
-    $scope.sourceSegment = Document.sourceSegments[index];
-    $scope.targetSegment = Document.targetSegments[index];
-  }
-
-  // Update parent's model when the segments change.
-  $scope.$watch('segment.target', function() { $scope.setTarget($scope.segment.target); }, true);
+// Update parent's model when the segments change.
+// TODO: the model names are not shared in the child controllers
+  // watch segment.source from the parent controller
   $scope.$watch('segment.source', function() { $scope.setSource($scope.segment.source); }, true);
 
+// the values for this instance set from the view with ng-init and the ng-repeat index
+// TODO: these properties are only used by the Translation memory (see below) - make a single, consistent datamodel
+//  $scope.setSegments = function(index) {
+//    $scope.sourceSegment = Document.sourceSegments[index];
+//    $scope.targetSegment = Document.targetSegments[index];
+//  }
 
   // TODO: the logic here is wrong -- the tokenizer produces WAY too many queries!
   // TODO: move this logic to the tokenizer
@@ -61,7 +60,7 @@ angular.module('controllers').controller('AceCtrl',
   };
 
   // Target text updated at the parent controller
-  $scope.$on('target-updated', function() { $scope.setText($scope.target); } );
+  $scope.$on('target-updated', function() { $scope.setText($scope.segment.target); } );
 
 
   // get the current selection from the editor

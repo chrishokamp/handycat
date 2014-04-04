@@ -8,22 +8,34 @@ angular.module('controllers')
   // TODO: set this only when this is the active scope
   $scope.active = true;
 
-  $scope.setTarget = function(targetSentence) {
-     $scope.target = targetSentence;
-  };
-
+// TODO - Working - make sure that the child controllers all share the state for source/target
+// currently the model names on the child controllers are different
   $scope.setSource = function(sourceSentence) {
-     $scope.source = sourceSentence;
+     $scope.segment.source = sourceSentence;
+  };
+  $scope.setTarget = function(targetSentence) {
+     $scope.segment.target = targetSentence;
   };
 
+// TODO: Create server for this feature
   $scope.copySourcePunctuation = function() {
-     $log.log('copy source called');
-     if ($scope.source && $scope.target) {
-        // TODO: Create server for this feature
-        $scope.target += '.';
-        $scope.$broadcast('target-updated');
-        $log.log('target updated');
-     }
+    $log.log('copy source called');
+    if ($scope.segment.source && $scope.segment.target) {
+      // get source punctuation
+      var sourcePunct = $scope.segment.source.trim().slice(-1);
+      $log.log('sourcePunct: ' + sourcePunct);
+      // if it's punctuation
+      var currentTargetPunct = $scope.segment.target.trim().slice(-1);
+      $log.log('currentTargetPunct: ' + currentTargetPunct);
+      if (sourcePunct !== currentTargetPunct) {
+        if (sourcePunct.match(/[\.!;\?]/)) {
+          $scope.segment.target = $scope.segment.target + sourcePunct;
+          $scope.$broadcast('target-updated');
+          $log.log('target updated');
+        }
+      }
+
+    }
   };
 
   $scope.setCurrentToken = function(token) {

@@ -3,15 +3,15 @@ angular.module('directives')
     // take the text inside the element, tokenize it, and wrap in spans that we can interact with
     return {
       scope: {
-        sentence: '=',
+        sourceSentence: '=',
         annotatedSentence: '='
       },
       restrict: 'E',
       //templateUrl: 'scripts/sourceArea/sourceArea.html',
       link: function(scope,el,attrs){
-        $log.log('sourceArea directive - tokens: ' + scope.tokens);
-        //
-        var tokenStrings = tokenizer.tokenize(scope.sentence);
+        // tokens should be undefined here
+//        $log.log('sourceArea directive - tokens: ' + scope.tokens);
+        var tokenStrings = tokenizer.tokenize(scope.sourceSentence);
         $log.log('tokenized sentence: ' + tokenStrings);
         // give each token an id, and also move to dot notation
         // var tokens =  _.map(tokenStrings, function(tok, index) { return { index: index, token: tok} });
@@ -24,8 +24,8 @@ angular.module('directives')
 //        scope.annotatedSentence = annotatedSentence;
         $log.log('compiledHTML is:' + compiledHTML);
         el.append(compiledHTML);
-//        scope.$apply();
-//        el.html(annotatedSentence);
+
+
       }
     };
 }]);
