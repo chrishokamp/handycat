@@ -34,7 +34,6 @@ angular.module('controllers')
           $log.log('target updated');
         }
       }
-
     }
   };
 

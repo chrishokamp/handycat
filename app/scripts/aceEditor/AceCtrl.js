@@ -2,7 +2,7 @@
 // maintain the current TM matches based on the selected token in the source side
 
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, $http, $timeout, $log) {
+  ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', 'WordNumber', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, WordNumber, $http, $timeout, $log) {
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
@@ -87,12 +87,11 @@ angular.module('controllers').controller('AceCtrl',
 
   $scope.$on('change-token-number', function() {
     var token = getCurrentTokenAndRange();
-    var text = token.token.value + 's'; // TODO(ximop) implement as webservice
+    var text = WordNumber.changeNumber(token.token.value);
     var currentSelection = getSelection();
 
     $scope.editor.session.getDocument().replace(currentSelection, text);
     $scope.editor.focus();
-
   });
 
   // replace the current selection in the editor with this text
