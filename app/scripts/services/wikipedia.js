@@ -42,6 +42,7 @@ angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl
         })
         .error(function(err) {
           $log.log('Error in concordancer: ' + err.message);
+          $rootScope.$broadcast('concordancer-error');
         })
 
       }

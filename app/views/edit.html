@@ -85,14 +85,20 @@
                             <div class="search-result"
                                  ng-repeat="glossaryMatch in glossaryMatches"
                                  ng-click="insertText(glossaryMatch)"
+                                 ng-show="glossaryMatches"
                             >{{glossaryMatch}}</div>
+
+                            <div ng-hide="glossaryMatches"><p>Error: Unable to access the glossary service.</p></div>
                         </tab>
                         <tab heading="Concordance" ng-click="">
                             <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." /><button ng-click="queryConcordancer(concordanceQuery)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
                             <div class="search-result"
                                  ng-repeat="concordanceMatch in concordanceMatches"
                                  ng-bind-html="getSnippet({{concordanceMatch}})"
+                                 ng-hi="concordancerError"
                             ></div>
+
+                            <div ng-show="concordancerError"><p>Error: Unable to access the concordance service.</p></div>
                         </tab>
                         <tab heading="WordForms">
                             <div class="word-forms">

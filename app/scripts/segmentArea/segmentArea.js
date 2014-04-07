@@ -49,12 +49,18 @@ angular.module('controllers')
 
   $scope.queryConcordancer = function(query) {
     $log.log('query is: ' + query);
+    $scope.concordancerError = false;
     Wikipedia.getConcordances(query);
   };
+
   $scope.$on('concordancer-updated', function(e) {
 // does $scope.$apply happen automagically? - answer: no, so we have to listen for the event
     $scope.concordanceMatches = Wikipedia.currentQuery;
-  })
+  });
+
+  $scope.$on('concordancer-error', function() {
+    $scope.concordancerError = true;
+  });
 
   // special chars toolbar showing
   $scope.showSpecialChars = true;
@@ -74,12 +80,13 @@ angular.module('controllers')
 
   // used as a callback for the glossary
   var updateGlossaryArea = function(glossaryMatches) {
-    $log.log('Inside callback, the glossary matches: ')
+    $log.log('Inside callback, the glossary matches: ');
     $log.log(glossaryMatches);
-    $scope.glossaryMatches = glossaryMatches.map(function(item) {
-      return item.text;
-    });
-  }
+    if (glossaryMatches)
+      $scope.glossaryMatches = glossaryMatches.map(function(item) {
+        return item.text;
+      });
+  };
 
 // TODO: testing
   $scope.isCollapsed = {collapsed: true};
