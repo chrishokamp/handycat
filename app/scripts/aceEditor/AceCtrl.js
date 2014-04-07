@@ -67,12 +67,13 @@ angular.module('controllers').controller('AceCtrl',
   var getSelection = function() {
     var editor = $scope.editor;
     //get selection range
-    return editor.getSelectionRange();;
-  }
+    return editor.getSelectionRange();
+  };
 
+  // select a range of text in the editor
   var selectRange = function(aceRange) {
     $scope.editor.session.selection.setRange(aceRange);
-  }
+  };
 
   // get the range of the current token under the cursor
   // Chris: working here - call this as part of the selection workflow, when tokens need to be selected or reselected
@@ -83,7 +84,34 @@ angular.module('controllers').controller('AceCtrl',
     var token = editor.session.getTokenAt(pos.row, pos.column);
     var tokenRange = new aceRange(pos.row, token.start, pos.row, token.start + token.value.length);
     return {token: token, range: tokenRange};
-  }
+  };
+
+  // replace the current selection in the editor with this text
+  $scope.replaceSelection = function(text) {
+
+    var editor = $scope.editor;
+    var currentSelection = getSelection();
+
+    // use the replace method on the ace Document object
+    editor.session.getDocument().replace(currentSelection, text);
+    $log.log("replaced current selection with: " + text);
+
+    // refocus the AceEditor
+    $scope.editor.focus();
+  };
+  // let the parent see replaceSelection too
+  $scope.$parent.replaceSelection = $scope.replaceSelection;
+
+  $scope.insertText = function(text) {
+    $log.log('insertText called with value: ' + text);
+    var editor = $scope.editor;
+
+    // insert the text with a space before and after
+    editor.insert(' ' + text + ' ');
+    editor.focus();
+  };
+  // let the $parent controller see insertText, so that we can hit it from sibling controllers
+  $scope.$parent.insertText = $scope.insertText;
 
   $scope.$on('change-token-number', function() {
     // Text to modify
@@ -102,34 +130,7 @@ angular.module('controllers').controller('AceCtrl',
     range.end.column += modified_text.length - original_text.length;
     selectRange(range);
   });
-
-  // replace the current selection in the editor with this text
-  $scope.replaceSelection = function(text) {
-
-    var editor = $scope.editor;
-    var currentSelection = getSelection();
-
-    // use the replace method on the ace Document object
-    editor.session.getDocument().replace(currentSelection, text);
-    $log.log("replaced current selection with: " + text);
-
-    // refocus the AceEditor
-    $scope.editor.focus();
-  }
-  // let the parent see replaceSelection too
-  $scope.$parent.replaceSelection = $scope.replaceSelection;
-
-  $scope.insertText = function(text) {
-    $log.log('insertText called with value: ' + text);
-    var editor = $scope.editor;
-
-    // insert the text with a space before and after
-    editor.insert(' ' + text + ' ');
-    editor.focus();
-  }
-  // let the $parent controller see insertText, so that we can hit it from sibling controllers
-  $scope.$parent.insertText = $scope.insertText;
-
+    
   // The Segment area is the parent of the AceCtrl
   $scope.$on('clear-editor', function(e) {
     e.preventDefault();
