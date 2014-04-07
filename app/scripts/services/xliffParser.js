@@ -6,9 +6,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
   // Persistent DOMParser
   var parser = new DOMParser();
 
-  // Working - we want to be able to load a file automatically (for development and testing
-
-
   return {
     // call file reader, then parse the result as XML
 
@@ -17,8 +14,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
     readFile: function(file) {
       var self = this;
       $log.log("inside parse");
+      $log.log("inside parse");
 
-      // working - try chaining these promises
       var promise = fileReader.readAsText(file);
       promise.then(function(result) {
         self.parseXML(result);
@@ -35,7 +32,9 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       // get all <trans-unit> nodes
       var transUnits = xml.querySelectorAll('trans-unit');
 
-      // Note: the Escriba sample xliffs have MT output inside them, ready for post-editing
+      // WORKING - support other tags which may contain translatable units
+      // this requires adhering to the XLIFF spec
+
       var sourceSegments = this.getTranslatableSegments(xml);
 
       // for every segment, get its matching target mrk, if it exists - note: it may not exist
@@ -70,8 +69,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
           Document.translatableNodes.push(seg);
         });
       // tell the world that the document loaded
-      $log.log("firing DocumentLoaded");
-      $rootScope.$broadcast('DocumentLoaded');
+      $log.log("firing document-loaded");
+      $rootScope.$broadcast('document-loaded');
       // flip the flag on the Document object
       Document.loaded = true;
     },

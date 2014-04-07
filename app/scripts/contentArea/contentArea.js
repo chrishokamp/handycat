@@ -1,5 +1,8 @@
 // Holds all of the translation pairs and handles the interface with the Document service
-angular.module('controllers').controller('ContentAreaCtrl', ['$scope', 'Document', 'project', '$location', '$anchorScroll', '$log', function($scope, Document, project, $location, $anchorScroll, $log) {
+angular.module('controllers').controller('ContentAreaCtrl', ['$scope', 'Document', 'project', '$location', '$anchorScroll', '$state', '$log', function($scope, Document, project, $location, $anchorScroll, $state, $log) {
+  if (Document.segments.length === 0) {
+    $state.go('project');
+  }
   $scope.numSegments = Document.segments.length;
   $scope.segments = Document.segments;
 
