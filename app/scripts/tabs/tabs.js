@@ -14,6 +14,10 @@ angular.module('controllers').controller('TabsCtrl', ['$scope', function($scope)
     active: false,
     disabled: false
 
-  }]
+  }];
+
+  $scope.$on('perform-propagation', function(event, action) {
+    $scope.$broadcast('propagate-action', action);
+  });
 
 }]);

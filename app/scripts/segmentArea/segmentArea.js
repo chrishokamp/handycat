@@ -106,8 +106,19 @@ angular.module('controllers')
 // TODO: use a promise
   $scope.queryGlossary = function(query) {
     Glossary.getMatches(query, updateGlossaryArea);
+  };
 
-  }
+  // The last action performed by the user
+  $scope.lastAction = null;
+  $scope.setLastAction = function(value) {
+    $log.log('lastAction: ' + JSON.stringify(value));
+    $scope.lastAction = value;
+  };
+
+  $scope.propagateLastAction = function() {
+    if ($scope.lastAction != null)
+      $scope.$emit('perform-propagation', $scope.lastAction);
+  };
 
 }]);
 

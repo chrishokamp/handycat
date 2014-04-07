@@ -129,8 +129,26 @@ angular.module('controllers').controller('AceCtrl',
     // Updates the selection to match the size of the modified text
     range.end.column += modified_text.length - original_text.length;
     selectRange(range);
+
+    // save this action
+    var action = {
+      type:'change-token-number',
+      original: '\\b' + original_text + '\\b',
+      modified: modified_text
+    };
+    $log.log("------->" + action.type);
+    $scope.setLastAction(action);
   });
-    
+
+  $scope.$on('propagate-action', function(event, action) {
+    if (action['type'] == 'change-token-number') {
+      var content = $scope.editor.getValue().replace(new RegExp(action['original']), action['modified']);
+      $scope.editor.setValue(content);
+    } else {
+        $log.log('Unknown action: ' + action['type']);
+    }
+  });
+
   // The Segment area is the parent of the AceCtrl
   $scope.$on('clear-editor', function(e) {
     e.preventDefault();
