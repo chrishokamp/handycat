@@ -44,7 +44,7 @@ module.exports = function(config) {
       'app/scripts/tokenRow/draggable.js',
       'app/scripts/tokenRow/gap.js',
       'app/scripts/tokenRow/token.js',
-      'app/scripts/aceEditor/AceCtrl.js',
+      'app/scripts/targetArea/AceCtrl.js',
       'app/scripts/tabs/tabs.js',
       'app/scripts/glossary/Glossary.js',
       'app/scripts/glossary/xliffFileUpload.js',
