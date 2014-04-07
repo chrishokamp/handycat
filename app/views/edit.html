@@ -95,7 +95,7 @@
                             <div class="search-result"
                                  ng-repeat="concordanceMatch in concordanceMatches"
                                  ng-bind-html="getSnippet({{concordanceMatch}})"
-                                 ng-hi="concordancerError"
+                                 ng-hide="concordancerError"
                             ></div>
 
                             <div ng-show="concordancerError"><p>Error: Unable to access the concordance service.</p></div>
