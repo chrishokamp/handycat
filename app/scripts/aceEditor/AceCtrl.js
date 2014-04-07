@@ -86,12 +86,21 @@ angular.module('controllers').controller('AceCtrl',
   }
 
   $scope.$on('change-token-number', function() {
+    // Text to modify
     var token = getCurrentTokenAndRange();
-    var text = WordNumber.changeNumber(token.token.value);
-    var currentSelection = getSelection();
+    var original_text = token.token.value;
+    var modified_text = WordNumber.changeNumber(original_text);
 
-    $scope.editor.session.getDocument().replace(currentSelection, text);
-    $scope.editor.focus();
+    // Original selection range
+    var range = getSelection();
+    var row = range.start.row;
+    var col = range.start.column;
+
+    $scope.replaceSelection(modified_text);
+
+    // Updates the selection to match the size of the modified text
+    range.end.column += modified_text.length - original_text.length;
+    selectRange(range);
   });
 
   // replace the current selection in the editor with this text
