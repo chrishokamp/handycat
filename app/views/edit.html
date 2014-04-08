@@ -42,12 +42,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-offset-2 col-xs-2 text-right">
-                                <button ng-click="segmentFinished()" tooltip="segment complete" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
+
+                        <div class="row" ng-show="selectedToken">
+                            <div class="col-xs-offset-1 col-xs-3 text-right">
+                                <button ng-click="changeTokenNumber()" tooltip="change the number of the current token" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-plus"></span> number</button>
                             </div>
                             <div class="col-xs-2 text-right">
-                                <button ng-click="changeTokenNumber()" tooltip="change the number of the current token" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon glyphicon-plus"></span></button> 
+                                <button ng-click="changeTokenGender()" tooltip="change the gender of the current token" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-repeat"></span> gender </button>
+                            </div>
+                            <div></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-offset-1 col-xs-2 text-right">
+                                <button ng-click="segmentFinished()" tooltip="segment complete" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
                             </div>
                             <div class="col-xs-2 text-right">
                                 <button ng-click="copySourcePunctuation()" tooltip="copy punctuation from source" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-share-alt"></span></button> 

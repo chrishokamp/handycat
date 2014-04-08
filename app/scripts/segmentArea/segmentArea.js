@@ -16,6 +16,12 @@ angular.module('controllers')
      $scope.segment.target = targetSentence;
   };
 
+  // Text currently selected in the child editor
+  $scope.setTextSelection = function(text, range) {
+    $scope.selectedToken = text;
+    $scope.selectedRange = range;
+  };
+
 // TODO: Create server for this feature
   $scope.copySourcePunctuation = function() {
     $log.log('copy source called');
