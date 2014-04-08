@@ -1,5 +1,5 @@
 angular.module('services')
-.factory('ruleMap', ['$log', function($log) {
+.factory('ruleMap', ['$rootScope','$log', function($rootScope, $log) {
 
 // rules are objects with the form:
 //    { 'operationName': 'opName', 'context': '<context>, 'change': <change> }
@@ -10,6 +10,7 @@ angular.module('services')
       if (!this.contains(newRuleObj)) {
         rules.push(newRuleObj);
       }
+// TODO: fire a 'new rule' event
     },
     contains: function(newRuleObj) {
       return (_.find(this.rules, function(ruleObj) {
