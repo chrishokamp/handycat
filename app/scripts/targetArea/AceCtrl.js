@@ -1,16 +1,9 @@
-// TODO: source controller and directive to let us flip through source tokens
-// maintain the current TM matches based on the selected token in the source side
 
 angular.module('controllers').controller('AceCtrl',
   ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', 'WordNumber', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, WordNumber, $http, $timeout, $log) {
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
-
-// Update parent's model when the segments change.
-// TODO: the model names are not shared in the child controllers
-  // watch segment.source from the parent controller
-  $scope.$watch('segment.source', function() { $scope.setSource($scope.segment.source); }, true);
 
 // the values for this instance set from the view with ng-init and the ng-repeat index
 // TODO: these properties are only used by the Translation memory (see below) - make a single, consistent datamodel
@@ -19,8 +12,9 @@ angular.module('controllers').controller('AceCtrl',
 //    $scope.targetSegment = Document.targetSegments[index];
 //  }
 
-  // TODO: the logic here is wrong -- the tokenizer produces WAY too many queries!
-  // TODO: move this logic to the tokenizer
+// TODO: the logic here is wrong -- the tokenizer produces WAY too many queries!
+// TODO: move this logic to the tokenizer
+// TODO: maintain the current TM matches based on the selected token in the source side
   $scope.minPhraseLen = 15;
   var tmQueried = false;
   $scope.augmentTM = function(minPhraseLen) {
@@ -49,19 +43,17 @@ angular.module('controllers').controller('AceCtrl',
     $log.log("the TM: " + JSON.stringify(TranslationMemory.TM));
   }
 
-  
   // set the text for this editor instance
   $scope.setText = function(text) {
     var editor = $scope.editor;
     if (editor) {
       editor.setValue(text);
+    } else {
+      throw new Error('AceCtrl: $scope.setText() was called, but there is no editor on the $scope');
     }
-    $log.log('target updated setText');
   };
 
-  // Target text updated at the parent controller
-  $scope.$on('target-updated', function() { $scope.setText($scope.segment.target); } );
-
+  // Begin event listeners
 
   // get the current selection from the editor
   var getSelection = function() {
@@ -76,7 +68,6 @@ angular.module('controllers').controller('AceCtrl',
   };
 
   // get the range of the current token under the cursor
-  // Chris: working here - call this as part of the selection workflow, when tokens need to be selected or reselected
   var getCurrentTokenAndRange = function() {
     var editor = $scope.editor;
     // get cursor position, then token
@@ -99,7 +90,7 @@ angular.module('controllers').controller('AceCtrl',
     // refocus the AceEditor
     $scope.editor.focus();
   };
-  // let the parent see replaceSelection too
+  // let the parent see replaceSelection
   $scope.$parent.replaceSelection = $scope.replaceSelection;
 
   $scope.insertText = function(text) {
@@ -166,16 +157,10 @@ angular.module('controllers').controller('AceCtrl',
     console.log(editor.getValue());
   }
 
-  // TESTING TYPEAHEAD
-  // $scope.selected = undefined;
-  // $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-  // END TYPEAHEAD
-
   // Use this function to configure the ace editor instance
   $scope.aceLoaded = function (editor) {
    var editor = editor;
    $scope.editor = editor;
-
 
     // Note: this is the path for the ace require modules
     var langTools = ace.require("ace/ext/language_tools");
@@ -183,34 +168,32 @@ angular.module('controllers').controller('AceCtrl',
 
     $scope.editor.session.setMode('ace/mode/text');
 
-    // Testing token mouseover
     editor.on('click', function(e) {
 
+      var tokenAndRange = getCurrentTokenAndRange();
+      var token = tokenAndRange.token;
+      var stemmedToken = GermanStemmer.stem(token.value);
+      $log.log('token: '+ token, 'stemmed: ' + stemmedToken);
 
-    var tokenAndRange = getCurrentTokenAndRange();
-    var token = tokenAndRange.token;
-    var stemmedToken = GermanStemmer.stem(token.value);
-    $log.log('token: '+ token, 'stemmed: ' + stemmedToken);
-// TODO: move this side-effect elsewhere
-    $scope.$parent.$apply(
-      function() {
-        $scope.$parent.toggleToolbar(false);
-        $scope.$parent.queryGlossary(token.value);
-        $scope.$parent.glossaryQuery = token.value;
+      // note - these properties are on the parent (segmentCtrl)
+      $scope.$apply(
+        function() {
+          $scope.toggleToolbar(false);
+          $scope.queryGlossary(token.value);
+          $scope.glossary.glossaryQuery = token.value;
 
-      }
-    );
+        }
+      );
 
-    // TODO: move this out of AceCtrl - function is on segmentCtrl
-    $scope.$parent.$apply(
-      function() {
-        $scope.getOtherWordForms(stemmedToken);
-      }
-    );
+      $scope.$apply(
+        function() {
+          $scope.getOtherWordForms(stemmedToken);
+        }
+      );
 
-    // now select token (first clear any existing selection)
-    editor.session.selection.setRange(tokenAndRange.range);
-    // we currently don't need to use clearSelection(), but switching to multi-select may require that
+      // now select token (first clear any existing selection)
+      editor.session.selection.setRange(tokenAndRange.range);
+      // we currently don't need to use clearSelection(), but switching to multi-select may require that
    });
 
 // Chris: use the function below to highlight the search term in the text
@@ -337,7 +320,7 @@ angular.module('controllers').controller('AceCtrl',
     // Set initial size to match initial content
   }  // end AceLoaded
 
-  // BEGIN - managing the active segment
+  // BEGIN - managing the active segment - TODO: move this to segmentAreaCtrl
   // listen for the new segment event, if it's this segment, ask the TM for matches
   // TODO: the query logic for the tokenizer is currently flawed -- way too many queries get produced (see augmentTM)
   // also, focus the editor

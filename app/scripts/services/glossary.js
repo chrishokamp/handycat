@@ -30,8 +30,8 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
         $http.get(glossaryUrl, {
           params: {
             phrase: phrase,
-            from: 'eng',
-            dest: 'deu',
+            from: 'deu',
+            dest: 'eng',
             origin: 'http://0.0.0.0:9000'
           }
         })

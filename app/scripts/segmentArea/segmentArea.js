@@ -2,7 +2,6 @@
 // this is a source + target pair
 angular.module('controllers')
 .controller('SegmentAreaCtrl', ['$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', function($scope, Wikipedia, Glossary, GermanStemmer, $sce, $log) {
-// TODO: display the results of the concordancer here, not from the AceCtrl
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
@@ -29,9 +28,8 @@ angular.module('controllers')
       $log.log('currentTargetPunct: ' + currentTargetPunct);
       if (sourcePunct !== currentTargetPunct) {
         if (sourcePunct.match(/[\.!;\?]/)) {
+          // the ng-model on the AceCtrl scope is data-bound to $scope.segment.target, so it will update automatically
           $scope.segment.target = $scope.segment.target + sourcePunct;
-          $scope.$broadcast('target-updated');
-          $log.log('target updated');
         }
       }
     }
@@ -111,6 +109,10 @@ angular.module('controllers')
   };
 
 // TODO: use a promise
+  // prep the model
+  var glossary = {};
+  glossary.glossaryQuery = undefined;
+  $scope.glossary = glossary;
   $scope.queryGlossary = function(query) {
     Glossary.getMatches(query, updateGlossaryArea);
   };
