@@ -50,7 +50,7 @@ angular.module('services').factory('fileReader', ['$q', '$log', function($q, $lo
       return deferred.promise;
     };
 
-// Why are we passing in scope here? - Answer: becuase the resolution of the promise is called with scope.$apply
+// Why are we passing in scope here? - Answer: because the resolution of the promise is called with scope.$apply
     var readAsText = function (file) {
       var deferred = $q.defer();
 
@@ -68,33 +68,8 @@ angular.module('services').factory('fileReader', ['$q', '$log', function($q, $lo
       var reader = getReader(deferred, scope);
       reader.readAsText(file);
 
-      // now parse the result as XML
-// TODO: understand this stuff with promises
-// TODO: all of this is specific to xliff, not arbitrary xml
-// Moving to controller because i don't understand the promise API
       return deferred.promise;
     }
-
-
-
-    // Chris: this code is from the escriba XLIFF parser
-    // Chris: this assumes that the translation units are in <mrk></mrk> tags - what if they aren't?
-    //function get_mrk_target(doc, segment) {
-    //  var segid = _get_segid(segment);
-    //  var tuid = _get_tuid(segment);
-    //  return doc.querySelector('trans-unit[id="'+tuid+'"] > target > mrk[mtype="seg"][mid="'+segid+'"]');
-    //}
-
-    //function get_target(doc, segment) {
-    //  var segid = _get_segid(segment);
-    //  var tuid = _get_tuid(segment);
-    //  return doc.querySelector('trans-unit[id="'+tuid+'"] > target');
-    //}
-
-    //function get_transunit(doc, tuid) {
-    //  return doc.querySelector('trans-unit[id="'+tuid+'"]');
-    //}
-
 
     return {
       readAsDataUrl: readAsDataURL,

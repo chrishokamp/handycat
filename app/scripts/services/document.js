@@ -5,7 +5,11 @@
 // properties = { segments: <numSegments>, docTree: { <documentObject> } }
 
 angular.module('services').factory('Document', function( ) {
-  // TODO: how to get a "loaded" flag on this object? - emit an event?
+
+  // Working - functions to update, delete, and modify nodes in the XLIFF
+
+
+
   return {
     ready: false,
     sourceSegments: [],
