@@ -12277,6 +12277,8 @@ var UndoManager = function() {
 (function() {
     this.execute = function(options) {
         var deltas = options.args[0];
+        console.log('inside ace editor execute - printing deltas:');
+        console.log(deltas);
         this.$doc  = options.args[1];
         if (options.merge && this.hasUndo()){
             deltas = this.$undoStack.pop().concat(deltas);
@@ -12291,6 +12293,8 @@ var UndoManager = function() {
     };
     this.undo = function(dontSelect) {
         var deltas = this.$undoStack.pop();
+        console.log('inside ace editor undo - printing deltas:');
+        console.log(deltas);
         var undoSelectionRange = null;
         if (deltas) {
             undoSelectionRange =
