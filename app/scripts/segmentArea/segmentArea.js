@@ -1,7 +1,9 @@
 // the segment area is the area of the UI representing a single translation unit
 // this is a source + target pair
 angular.module('controllers')
-.controller('SegmentAreaCtrl', ['$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap) {
+.controller('SegmentAreaCtrl', [
+    '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation',
+    function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation) {
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
@@ -22,26 +24,28 @@ angular.module('controllers')
     $scope.selectedRange = range;
   };
 
-// TODO: Create server for this feature
+
   $scope.copySourcePunctuation = function() {
     $log.log('copy source called');
-    if ($scope.segment.source && $scope.segment.target) {
-      // get source punctuation
-      var sourcePunct = $scope.segment.source.trim().slice(-1);
-      $log.log('sourcePunct: ' + sourcePunct);
-      // if it's punctuation
-      var currentTargetPunct = $scope.segment.target.trim().slice(-1);
-      $log.log('currentTargetPunct: ' + currentTargetPunct);
-      if (sourcePunct !== currentTargetPunct) {
-        if (sourcePunct.match(/[\.!;\?]/)) {
-          // the ng-model on the AceCtrl scope is data-bound to $scope.segment.target, so it will update automatically
-          $scope.segment.target = $scope.segment.target + sourcePunct;
-          $scope.editHistory.push(
-            ruleMap.newRule('copy-source-punctuation', '', '', 'Copy punctuation from source segment'));
-        }
-      }
+    var source = $scope.segment.source;
+    var target = $scope.segment.target;
+    $scope.segment.target = copyPunctuation.copySourcePunctuation(source, target);
+
+    // Only adds the action to the edit history if it actually did something.
+    if ($scope.segment.target !== target) {
+      $scope.editHistory.push(
+        ruleMap.newRule('copy-source-punctuation', '', '', 'Copy punctuation from source segment'));
     }
   };
+
+  // Trigger propagated edits
+  $scope.$on('propagate-action', function(event, edit) {
+    $log.log(edit);
+    if (edit.operation === 'copy-source-punctuation') {
+      $scope.copySourcePunctuation();
+    }
+
+  });
 
   $scope.setCurrentToken = function(token) {
      $scope.currentToken = token;
