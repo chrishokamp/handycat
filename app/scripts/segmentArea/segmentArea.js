@@ -12,6 +12,7 @@ angular.module('controllers')
 
   $scope.language = Document.targetLang;
 
+
 // TODO - Working - make sure that the child controllers all share the state for source/target
 // currently the model names on the child controllers are different
   $scope.setSource = function(sourceSentence) {
