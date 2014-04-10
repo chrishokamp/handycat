@@ -1,6 +1,6 @@
 
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', 'WordNumber', '$http','$timeout', '$log', function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, WordNumber, $http, $timeout, $log) {
+  ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', 'WordNumber', '$http','$timeout', '$log', 'ruleMap', function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, WordNumber, $http, $timeout, $log, ruleMap) {
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
@@ -122,18 +122,14 @@ angular.module('controllers').controller('AceCtrl',
     selectRange(range);
 
     // save this action
-    var action = {
-      type:'change-token-number',
-      original: '\\b' + original_text + '\\b',
-      modified: modified_text
-    };
-    $log.log("------->" + action.type);
-    $scope.setLastAction(action);
+    $scope.editHistory.push(
+      ruleMap.newRule('change-token-number', '', [original_text, modified_text],
+          'Change number "'+ original_text + '" -> "'+ modified_text +'"'));
   });
 
   $scope.$on('propagate-action', function(event, action) {
-    if (action['type'] == 'change-token-number') {
-      var content = $scope.editor.getValue().replace(new RegExp(action['original']), action['modified']);
+    if (action['operation'] == 'change-token-number') {
+      var content = $scope.editor.getValue().replace(new RegExp(action['change'][0]), action['change'][1]);
       $scope.editor.setValue(content);
     } else {
         $log.log('Unknown action: ' + action['type']);
