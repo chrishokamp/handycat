@@ -17,6 +17,8 @@ angular.module('services').factory('Document', function( ) {
     // testing: these are pairs of source + target
     segments: [],
     translatableNodes: [],
+    sourceLang: '',
+    targetLang: '',
     DOM: {}
   }
 });

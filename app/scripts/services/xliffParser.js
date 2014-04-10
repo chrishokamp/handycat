@@ -29,6 +29,9 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
 
       var file = xml.querySelector("file");
 
+      var sourceLang = file.getAttribute('source-language');
+      var targetLang = file.getAttribute('target-language');
+
       // get all <trans-unit> nodes
       var transUnits = xml.querySelectorAll('trans-unit');
 
@@ -45,15 +48,17 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       );
 
       $log.log("the number of source segments is: " + sourceSegments.length);
+      $log.log('source lang: ' + sourceLang);
       $log.log("The number of target segments is: " + targetSegments.length);
+      $log.log('target lang: ' + targetLang);
 
       var sourceWithTarget = _.zip(sourceSegments, targetSegments);
       _.each(sourceWithTarget,
         function(seg) {
           var sourceText = seg[0].textContent;
           var targetText = seg[1] ? seg[1].textContent : '';
-          $log.log("sourceText: " + sourceText)
-          $log.log("targetText: " + targetText)
+          $log.log("sourceText: " + sourceText);
+          $log.log("targetText: " + targetText);
           var segPair = {
             source: sourceText,
             target: targetText
@@ -67,6 +72,9 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
 
           // TODO: make this useful
           Document.translatableNodes.push(seg);
+
+          Document.sourceLang = sourceLang;
+          Document.targetLang = targetLang;
         });
       // tell the world that the document loaded
       $log.log("firing document-loaded");
