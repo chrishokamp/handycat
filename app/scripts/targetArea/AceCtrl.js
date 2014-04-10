@@ -1,6 +1,9 @@
 
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', 'WordNumber', '$http','$timeout', '$log', 'ruleMap', function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, WordNumber, $http, $timeout, $log, ruleMap) {
+  ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', 'Morphology', '$http',
+   '$timeout', '$log', 'ruleMap',
+   function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, Morphology, $http, $timeout, $log,
+            ruleMap) {
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
@@ -108,7 +111,7 @@ angular.module('controllers').controller('AceCtrl',
     // Text to modify
     var token = getCurrentTokenAndRange();
     var original_text = token.token.value;
-    var modified_text = WordNumber.changeNumber(original_text);
+    var modified_text = Morphology.changeNumber(original_text);
 
     // Original selection range
     var range = getSelection();
