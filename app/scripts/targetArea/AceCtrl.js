@@ -8,6 +8,8 @@ angular.module('controllers').controller('AceCtrl',
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
 
+  $scope.language = Document.targetLang;
+
 // the values for this instance set from the view with ng-init and the ng-repeat index
 // TODO: these properties are only used by the Translation memory (see below) - make a single, consistent datamodel
 //  $scope.setSegments = function(index) {
@@ -111,7 +113,7 @@ angular.module('controllers').controller('AceCtrl',
     // Text to modify
     var token = getCurrentTokenAndRange();
     var original_text = token.token.value;
-    var modified_text = Morphology.changeNumber(original_text);
+    var modified_text = Morphology.changeNumber(original_text, $scope.language);
 
     // Original selection range
     var range = getSelection();

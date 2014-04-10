@@ -11,8 +11,6 @@ angular.module('services').factory('Morphology', [ '$log', function($log) {
     // changeNumber('dogs', 'en', 'I have one dogs') -> 'dog'
     changeNumber: function (word, lang, context) {
       $log.log('changeNumber call: ' + word + ' ' + lang);
-      if (!lang)
-        lang = 'en';
       if (!context)
         context = '';
 

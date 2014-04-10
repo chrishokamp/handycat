@@ -3,11 +3,14 @@
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-  function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation) {
+  'Document',
+  function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation, Document) {
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
   $scope.active = true;
+
+  $scope.language = Document.targetLang;
 
 // TODO - Working - make sure that the child controllers all share the state for source/target
 // currently the model names on the child controllers are different
