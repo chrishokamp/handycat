@@ -14,7 +14,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
     readFile: function(file) {
       var self = this;
       $log.log("inside parse");
-      $log.log("inside parse");
 
       var promise = fileReader.readAsText(file);
       promise.then(function(result) {
@@ -32,10 +31,9 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       var sourceLang = file.getAttribute('source-language');
       var targetLang = file.getAttribute('target-language');
 
-      // get all <trans-unit> nodes
-      var transUnits = xml.querySelectorAll('trans-unit');
-
       // WORKING - support other tags which may contain translatable units
+      // Working - get all <trans-unit> nodes
+      var transUnits = xml.querySelectorAll('trans-unit');
       // this requires adhering to the XLIFF spec
 
       var sourceSegments = this.getTranslatableSegments(xml);

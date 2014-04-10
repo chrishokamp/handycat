@@ -1,4 +1,4 @@
 sudo /etc/init.d/postgresql start
 # run amagama
-./${HOME}/programs/amagama-tm-server/bin/amagama
+python ${HOME}/programs/amagama-tm-server/bin/amagama -p 8999
 

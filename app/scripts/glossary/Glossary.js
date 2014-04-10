@@ -17,14 +17,5 @@ angular.module('controllers').controller('GlossaryCtrl', ['$scope', 'Glossary', 
     });
     return out;
   }
-// TODO: we need the popover to listen for clicks on its elements
-// TODO: the ui-tooltip component supports html content via tooltip-html-unsafe
-
-  $scope.content = '<ul><li>TEST HTML</li><li>TEST HTML</li><li>TEST HTML</li></ul>';
-  $scope.contentFunc = function(){
-    '<ul><li>TEST HTML</li><li>TEST HTML</li><li>TEST HTML</li></ul>';
-  }
-
-
 
 }]);
