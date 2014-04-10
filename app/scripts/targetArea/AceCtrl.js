@@ -37,11 +37,11 @@ angular.module('controllers').controller('AceCtrl',
     } else {
       $log.log("TM already loaded for seg: " + $scope.sourceSegment);
     }
-  }
+  };
 
   $scope.logTM = function() {
     $log.log("the TM: " + JSON.stringify(TranslationMemory.TM));
-  }
+  };
 
   // set the text for this editor instance
   $scope.setText = function(text) {
@@ -113,7 +113,6 @@ angular.module('controllers').controller('AceCtrl',
     // Original selection range
     var range = getSelection();
     var row = range.start.row;
-    var col = range.start.column;
 
     $scope.replaceSelection(modified_text);
 
@@ -151,11 +150,11 @@ angular.module('controllers').controller('AceCtrl',
   $scope.currentPrefix = function() {
     var editor = $scope.editor;
     console.log(editor.getValue());
-  }
+  };
 
   // Use this function to configure the ace editor instance
-  $scope.aceLoaded = function (editor) {
-   var editor = editor;
+  $scope.aceLoaded = function (ed) {
+   var editor = ed;
    $scope.editor = editor;
 
     // Note: this is the path for the ace require modules
@@ -229,7 +228,7 @@ angular.module('controllers').controller('AceCtrl',
 
         }));
       }
-    }
+    };
     var glossaryCompleter = {
       getCompletions: function(editor, session, pos, prefix, callback) {
         if (prefix.length === 0) { callback(null, []); return }
@@ -239,7 +238,7 @@ angular.module('controllers').controller('AceCtrl',
           return {name: item, value: item, score: 1, meta: "Glossary"}
         }));
       }
-    }
+    };
 // TODO: this is a general-purpose utility that can be used to add autocomplete for any web service
 //          getCompletions: function(editor, session, pos, prefix, callback) {
 //            if (prefix.length === 0) { callback(null, []); return }
@@ -314,7 +313,7 @@ angular.module('controllers').controller('AceCtrl',
     // the height again
     editor.getSession().on('change', heightUpdateFunction);
     // Set initial size to match initial content
-  }  // end AceLoaded
+  };  // end AceLoaded
 
   // BEGIN - managing the active segment - TODO: move this to segmentAreaCtrl
   // listen for the new segment event, if it's this segment, ask the TM for matches

@@ -2,8 +2,8 @@
 // this is a source + target pair
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
-    '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-    function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation) {
+  '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation',
+  function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation) {
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
@@ -38,15 +38,6 @@ angular.module('controllers')
     }
   };
 
-  // Trigger propagated edits
-  $scope.$on('propagate-action', function(event, edit) {
-    $log.log(edit);
-    if (edit.operation === 'copy-source-punctuation') {
-      $scope.copySourcePunctuation();
-    }
-
-  });
-
   $scope.setCurrentToken = function(token) {
      $scope.currentToken = token;
   };
@@ -62,7 +53,7 @@ angular.module('controllers')
     Wikipedia.getConcordances(query);
   };
 
-  $scope.$on('concordancer-updated', function(e) {
+  $scope.$on('concordancer-updated', function() {
 // does $scope.$apply happen automagically? - answer: no, so we have to listen for the event
     $scope.concordanceMatches = Wikipedia.currentQuery;
   });
@@ -79,13 +70,13 @@ angular.module('controllers')
   $scope.insertChar = function(char) {
     $log.log("char to insert: " + char);
     $scope.insertText(char);
-  }
+  };
 
 
   // convert a snippet to trusted html - TODO: this isn't reusable becuase we send back x.snippet
   $scope.getSnippet = function(concordanceMatch) {
     return $sce.trustAsHtml(concordanceMatch.snippet);
-  }
+  };
 
   // used as a callback for the glossary
   var updateGlossaryArea = function(glossaryMatches) {
@@ -107,12 +98,12 @@ angular.module('controllers')
       $scope.isCollapsed = { collapsed: !$scope.isCollapsed.collapsed };
     }
     $log.log("isCollapsed: the value of isCollapsed is: " + $scope.isCollapsed.collapsed);
-  }
+  };
 
   $scope.clearEditor = function() {
    $log.log('clear editor fired on the segment control');
    $scope.$broadcast('clear-editor');
-  }
+  };
 
   $scope.getOtherWordForms = function(stemmedToken) {
     $log.log('other word forms called with: ' + stemmedToken);
@@ -128,9 +119,22 @@ angular.module('controllers')
     Glossary.getMatches(query, updateGlossaryArea);
   };
 
+  // Informs other segments that they should make a change.
+  // The event argument is a unique object created by the ruleMap service.
+  // The event will probably be received by the broadcaster as well so the action handlers
+  // should check first if the edit should be applied or not.
   $scope.propagateEdit = function(index) {
       $rootScope.$broadcast('propagate-action', $scope.editHistory[index]);
   };
+
+  // Trigger propagated edits
+  $scope.$on('propagate-action', function(event, edit) {
+    $log.log(edit);
+    if (edit.operation == 'copy-source-punctuation') {
+      $scope.copySourcePunctuation();
+    }
+    // Add more action handlers here if needed.
+  });
 
   $scope.addToEditHistory = function(edit) {
     $scope.editHistory.push(edit);
