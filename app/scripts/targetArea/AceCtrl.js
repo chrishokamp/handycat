@@ -175,25 +175,30 @@ angular.module('controllers').controller('AceCtrl',
       var stemmedToken = GermanStemmer.stem(token.value);
       $log.log('token: '+ token, 'stemmed: ' + stemmedToken);
 
-      // note - these properties are on the parent (segmentCtrl)
-      $scope.$apply(
-        function() {
-          $scope.toggleToolbar(false);
-          $scope.queryGlossary(token.value);
-          $scope.glossary.glossaryQuery = token.value;
-          $scope.setTextSelection(tokenAndRange.token.value, tokenAndRange.range);
-        }
-      );
+      // make sure the user isn't trying to click into the same token to edit it
+      if ($scope.lastToken !== token) {
+        $scope.lastToken = token;
 
-      $scope.$apply(
-        function() {
-          $scope.getOtherWordForms(stemmedToken);
-        }
-      );
+        // note - these properties are on the parent (segmentCtrl)
+        $scope.$apply(
+          function() {
+            $scope.toggleToolbar(false);
+            $scope.queryGlossary(token.value);
+            $scope.glossary.glossaryQuery = token.value;
+            $scope.setTextSelection(tokenAndRange.token.value, tokenAndRange.range);
+          }
+        );
 
-      // now select token (first clear any existing selection)
-      editor.session.selection.setRange(tokenAndRange.range);
-      // we currently don't need to use clearSelection(), but switching to multi-select may require that
+        $scope.$apply(
+          function() {
+            $scope.getOtherWordForms(stemmedToken);
+          }
+        );
+
+        // now select token (first clear any existing selection)
+        editor.session.selection.setRange(tokenAndRange.range);
+        // we currently don't need to use clearSelection(), but switching to multi-select may require that
+      }
    });
 
 // Chris: use the function below to highlight the search term in the text
