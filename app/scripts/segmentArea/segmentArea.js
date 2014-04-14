@@ -12,10 +12,6 @@ angular.module('controllers')
 
   $scope.language = Document.targetLang;
 
-
-  // ui controls
-  $scope.changeGenderClicked = false;
-
 // TODO - Working - make sure that the child controllers all share the state for source/target
 // currently the model names on the child controllers are different
   $scope.setSource = function(sourceSentence) {
@@ -84,7 +80,6 @@ angular.module('controllers')
     $scope.insertText(char);
   };
 
-
   // convert a snippet to trusted html - TODO: this isn't reusable becuase we send back x.snippet
   $scope.getSnippet = function(concordanceMatch) {
     return $sce.trustAsHtml(concordanceMatch.snippet);
@@ -100,7 +95,7 @@ angular.module('controllers')
       });
   };
 
-// TODO: testing
+// TODO: collapse (remove from DOM) when this segment goes out of focus
   $scope.isCollapsed = {collapsed: true};
   $scope.toggleToolbar = function(bool) {
     if (arguments.length > 0) {

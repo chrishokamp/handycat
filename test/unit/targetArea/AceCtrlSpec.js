@@ -12,7 +12,7 @@ describe("Unit: Testing the AceCtrl", function() {
       scope.setSource = function(test) {};
 
       // now create the controller with mocks for the services
-      ctrl = $controller('AceCtrl', {$scope: scope, Document:{}, TranslationMemory:{}, tokenizer:{}, Glossary:{}, GermanStemmer:{} });
+      ctrl = $controller('AceCtrl', {$scope: scope, Document:{}, TranslationMemory:{}, tokenizer:{}, Glossary:{}, GermanStemmer:{}, Morphology: {}, ruleMap: {} });
   //    dump(scope);
       element = angular.element('<div ui-ace="{ onLoad : aceLoaded }"></div>');
       // compile the element on this scope
