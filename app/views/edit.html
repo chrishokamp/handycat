@@ -126,7 +126,12 @@
                             <div ng-show="glossaryMatches.length === 0"><p>No matches found for term: <b>{{ glossary.glossaryQuery }}</b></p></div>
                         </tab>
                         <tab heading="Concordance" ng-click="">
-                            <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." /><button ng-click="queryConcordancer(concordanceQuery)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                            <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." />
+                            <button ng-click="queryConcordancer(concordanceQuery, queryLang)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary lang-select" btn-radio="'en'" ng-model="queryLang">EN</button>
+                                <button type="button" class="btn btn-primary lang-select" btn-radio="'de'" ng-model="queryLang">DE</button>
+                            </div>
                             <div class="search-result"
                                  ng-repeat="concordanceMatch in concordanceMatches"
                                  ng-bind-html="getSnippet({{concordanceMatch}})"

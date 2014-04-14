@@ -12,6 +12,9 @@ angular.module('controllers')
 
   $scope.language = Document.targetLang;
 
+  // for the concordancer - default to English
+  $scope.queryLang = 'en';
+
 // TODO - Working - make sure that the child controllers all share the state for source/target
 // currently the model names on the child controllers are different
   $scope.setSource = function(sourceSentence) {
@@ -55,10 +58,10 @@ angular.module('controllers')
     $log.log('change gender');
   }
 
-  $scope.queryConcordancer = function(query) {
-    $log.log('query is: ' + query);
+  $scope.queryConcordancer = function(query, lang) {
+    $log.log('query is: ' + query + ', lang is: ' + lang);
     $scope.concordancerError = false;
-    Wikipedia.getConcordances(query);
+    Wikipedia.getConcordances(query, lang);
   };
 
   $scope.$on('concordancer-updated', function() {

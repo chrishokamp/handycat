@@ -269,6 +269,13 @@ span.drop-text {
   }
 }
 
+.lang-select {
+  background-color: grey;
+  &:active {
+    background-color: blue;
+  }
+}
+
 
 /* animations */
 /* as the element is hidden */

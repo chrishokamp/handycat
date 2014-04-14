@@ -15,16 +15,17 @@ angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl
     // TODO: reset currentQuery when user moves to a new segment?
     // yes - listen for segment change
     currentQuery: [],
-    getConcordances: function(query) {
-      $log.log('inside Wikipedia service, query is: ' + query);
+    getConcordances: function(query, lang) {
+      $log.log('inside Wikipedia service, query is: ' + query + ', lang is: ' + lang);
       var self = this;
-      if (self.concordances[query]) {
-        currentQuery = self.concordances[query];
+      if (self.concordances[lang] && self.concordances[lang][query]) {
+        currentQuery = self.concordances[lang][query];
         $log.log('I already have results for query: ' + query);
       } else {
 
         // TODO: make sure the backend actually returns responses to this query
-        $http.get(concordanceUrl, {
+        var queryUrl = concordanceUrl + '/' + lang.trim();
+        $http.get(queryUrl, {
           params: {
             srsearch: query,
             origin: 'http://0.0.0.0:9000'
@@ -35,8 +36,13 @@ angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl
           $log.log(res);
 
           var snippets = res;
-          self.concordances[query] = snippets;
-          self.currentQuery = self.concordances[query];
+          if(self.concordances[lang]) {
+            self.concordances[lang][query] = snippets;
+          } else {
+            self.concordances[lang] = {};
+            self.concordances[lang][query] = snippets;
+          }
+          self.currentQuery = self.concordances[lang][query];
           $rootScope.$broadcast('concordancer-updated');
 
         })
