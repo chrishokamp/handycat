@@ -17,7 +17,6 @@ angular.module('controllers').controller('AceCtrl',
 //    $scope.targetSegment = Document.targetSegments[index];
 //  }
 
-// TODO: the logic here is wrong -- the tokenizer produces WAY too many queries!
 // TODO: move this logic to the tokenizer
 // TODO: maintain the current TM matches based on the selected token in the source side
   $scope.minPhraseLen = 15;

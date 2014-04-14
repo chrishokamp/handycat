@@ -8,8 +8,6 @@ angular.module('services').factory('Document', function( ) {
 
   // Working - functions to update, delete, and modify nodes in the XLIFF
 
-
-
   return {
     ready: false,
     sourceSegments: [],

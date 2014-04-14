@@ -34,6 +34,8 @@ module.exports = function(config) {
       'app/scripts/services/germanStemmer.js',
       'app/scripts/services/translationMemory.js',
       'app/scripts/services/project.js',
+      'app/scripts/services/wikipedia.js',
+      'scripts/services/morphology.js',
 
       'app/scripts/directives.js',
       'app/scripts/directives/index.js',
@@ -49,6 +51,7 @@ module.exports = function(config) {
       'app/scripts/glossary/Glossary.js',
       'app/scripts/glossary/xliffFileUpload.js',
       'app/scripts/contentArea/contentArea.js',
+      'app/scripts/segmentArea/segmentArea.js',
       'app/scripts/typeahead/typeahead.js',
       'app/scripts/app.js',
 

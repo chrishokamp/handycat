@@ -16,7 +16,7 @@ describe("Unit: Testing the SegmentAreaCtrl", function() {
   }));
 
   // the segment should not be on the scope yet
-  it('should not have a segment on the scope', function() {
+  it('should not have a segment on the scope yet', function() {
     expect(scope.segement).toBe(undefined);
   });
 });
