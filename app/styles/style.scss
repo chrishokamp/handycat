@@ -15,6 +15,12 @@ body {
 //  font-family: 'Cardo', serif;
   font-family: 'Monaco', monospace;
   font-size: 12px;
+
+// minimum supported widths
+   min-width: 480px; /* suppose you want minimun width of 1000px */
+   width: auto !important;  /* Firefox will set width as auto */
+   width:480px;             /* As IE ignores !important it will set width as 1000px; */
+
 }
 
 h3 {
