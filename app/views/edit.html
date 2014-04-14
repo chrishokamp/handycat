@@ -44,13 +44,19 @@
                         </div>
 
                         <div ng-show="selectedToken">
-                            <div class="row">
-                                <div class="col-xs-offset-1 col-xs-3 text-right">
-                                    <button ng-click="changeTokenNumber()" tooltip="change the number of the current token" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-plus"></span> number</button>
+                            <div class="row row-padded">
+                                <div class="col-xs-1">
+                                    <button ng-click="changeTokenNumber()" tooltip="change the number of the selected phrase" class="btn btn-primary morph-glyph"><span>#</span></button>
                                 </div>
-                                <div class="col-xs-2 text-right">
-                                    <button type="button" class="btn btn-primary" ng-model="changeGenderClicked" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
-                                        <span class="glyphicon glyphicon-repeat"></span> gender
+                                <div class="col-xs-1">
+                                    <button type="button" class="btn btn-primary morph-glyph" tooltip="change gender of the selected phrase" ng-click="toggleMorphologyMenu()">
+                                        <!--<span class="icon ion-male"></span>-->
+                                        <span>G</span>
+                                    </button>
+                                </div>
+                                <div class="col-xs-1">
+                                    <button type="button" ng-click="toggleMorphologyMenu()" class="btn btn-primary morph-glyph" tooltip="change case of the selected phrase">
+                                        <span>C</span>
                                     </button>
                                 </div>
                             </div>

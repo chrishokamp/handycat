@@ -110,8 +110,13 @@ h3 {
 }
 
 span.cat-glyph {
+  width: 50px;
   font-size: 30px;
   vertical-align: middle;
+}
+
+.morph-glyph {
+  background-color: orange;
 }
 .seg-finished {
 //  margin-right: 20px;
@@ -225,9 +230,14 @@ span.drop-text {
   width: 20px;
 }
 
-/* styles for the toolbar */
+/* styles for the toolbars */
 .tabset {
 }
+
+.row-padded {
+  margin-bottom: 6px;
+}
+
 .tab-pane {
   background-color: white;
   min-height: 100px;

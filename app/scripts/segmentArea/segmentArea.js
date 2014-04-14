@@ -13,6 +13,9 @@ angular.module('controllers')
   $scope.language = Document.targetLang;
 
 
+  // ui controls
+  $scope.changeGenderClicked = false;
+
 // TODO - Working - make sure that the child controllers all share the state for source/target
 // currently the model names on the child controllers are different
   $scope.setSource = function(sourceSentence) {
@@ -50,6 +53,11 @@ angular.module('controllers')
     $log.log('change token number');
     $scope.$broadcast('change-token-number');
   };
+
+  $scope.toggleMorphologyMenu = function() {
+    $scope.changeGenderClicked = !$scope.changeGenderClicked;
+    $log.log('change gender');
+  }
 
   $scope.queryConcordancer = function(query) {
     $log.log('query is: ' + query);
