@@ -43,7 +43,7 @@ Finally, once you've done all that, you should be able to run `grunt serve`, and
 ## Running the Servers
 * to start the server to the glossary and concordancer endpoints, do:     
     ```
-    cd server/
+    cd server/     
     node web.js
     ```
 
