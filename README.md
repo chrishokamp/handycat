@@ -40,6 +40,12 @@ Finally, once you've done all that, you should be able to run `grunt serve`, and
 ### Code Style
 * use *two spaces* to indent javascript
 
+## Running the Servers
+* to start the server to the glossary and concordancer endpoints, do:     
+    ```
+    cd server/
+    node web.js
+    ```
 
 ## Testing
 
