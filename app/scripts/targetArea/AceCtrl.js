@@ -57,8 +57,6 @@ angular.module('controllers').controller('AceCtrl',
     }
   };
 
-  // Begin event listeners
-
   // get the current selection from the editor
   var getSelection = function() {
     var editor = $scope.editor;
@@ -83,7 +81,6 @@ angular.module('controllers').controller('AceCtrl',
 
   // replace the current selection in the editor with this text
   $scope.replaceSelection = function(text) {
-
     var editor = $scope.editor;
     var currentSelection = getSelection();
 
@@ -101,13 +98,13 @@ angular.module('controllers').controller('AceCtrl',
     $log.log('insertText called with value: ' + text);
     var editor = $scope.editor;
 
-    // insert the text with a space before and after
-    editor.insert(' ' + text + ' ');
+    editor.insert(text);
     editor.focus();
   };
   // let the $parent controller see insertText, so that we can hit it from sibling controllers
   $scope.$parent.insertText = $scope.insertText;
 
+  // TODO: remove these events
   $scope.$on('change-token-number', function() {
     // Text to modify
     var token = getCurrentTokenAndRange();
@@ -167,6 +164,20 @@ angular.module('controllers').controller('AceCtrl',
 
     $scope.editor.session.setMode('ace/mode/text');
 
+    // we want to always know what text the user currently has selected
+    // TODO: change this to listen for a selection change
+    editor.on('mouseup',
+      function(e) {
+        $timeout(function() {
+          $log.log('MOUSE UP event');
+          var currentSelection = getSelection();
+          var text = editor.session.getTextRange(currentSelection);
+          $log.log("currentSelection: " + currentSelection + ", text: " + text);
+          $scope.setTextSelection(text, currentSelection);
+        }, 500);
+      }
+    );
+
     editor.on('click', function(e) {
 
       var tokenAndRange = getCurrentTokenAndRange();
@@ -195,7 +206,7 @@ angular.module('controllers').controller('AceCtrl',
         );
 
         // now select token (first clear any existing selection)
-        editor.session.selection.setRange(tokenAndRange.range);
+        //editor.session.selection.setRange(tokenAndRange.range);
         // we currently don't need to use clearSelection(), but switching to multi-select may require that
       }
    });

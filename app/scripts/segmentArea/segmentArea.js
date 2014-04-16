@@ -47,16 +47,26 @@ angular.module('controllers')
      $scope.currentToken = token;
   };
 
-  $scope.changeTokenNumber = function(phrase) {
-    $log.log('change token number');
-    var phrase = "ein Apfel";
-    phrase = "eine Mischung";
-    var res = Morphology.changeNumber(phrase, 'de')
-    res.then(function(result) {
-      $log.log('the result from the morphology server: ')
-      $log.log(result)
-    })
-    // $scope.$broadcast('change-token-number');
+  $scope.changeTokenNumber = function() {
+    // toggle the working state of the button
+    $scope.changeNumberWorking = true;
+
+    // the current selection is a range object from the Ace Editor
+    if ($scope.selectedToken && $scope.selectedRange) {
+      $log.log('change token number');
+      var phrase = $scope.selectedToken;
+      $log.log('the phrase to change is: ' + phrase);
+
+      var res = Morphology.changeNumber(phrase, 'de')
+      res.then(function(result) {
+        $log.log('the result from the morphology server: ')
+        $log.log(result)
+
+        // this function is on the AceCtrl
+        $scope.insertText(result.data['converted_phrase']);
+        $scope.changeNumberWorking = false;
+      });
+    }
   };
 
   $scope.toggleMorphologyMenu = function() {
