@@ -43,7 +43,7 @@
                             </div>
                         </div>
 
-                        <div ng-show="selectedToken">
+                        <div collapse="!selectedToken">
                             <div class="row row-padded">
                                 <div class="col-xs-1">
                                     <button ng-click="changeTokenNumber()" tooltip="change the number of the selected phrase" class="btn btn-primary morph-glyph">
@@ -66,26 +66,6 @@
                                 </div>
                             </div>
 
-                            <!--<div ng-show="changeGenderClicked">-->
-                                <!--<div class="row btn-group" style="width:100%">-->
-                                    <!--<button type="button" class="btn btn-primary" ng-model="selGender" btn-radio="'masculine'">Masculine</button>-->
-                                    <!--<button type="button" class="btn btn-primary" ng-model="selGender" btn-radio="'femenine'">Femenine</button>-->
-                                    <!--<button type="button" class="btn btn-primary" ng-model="selGender" btn-radio="'neuter'">Neuter</button>-->
-                                <!--</div>-->
-
-                                <!--<div class="row btn-group" style="width:100%">-->
-                                    <!--<button type="button" class="btn btn-primary" ng-model="selNumber" btn-radio="'Masc'">Singlar</button>-->
-                                    <!--<button type="button" class="btn btn-primary" ng-model="selNumber" btn-radio="'Fem'">Plural</button>-->
-                                <!--</div>-->
-
-                                <!--<div class="row btn-group" style="width:100%">-->
-                                    <!--<button type="button" class="btn btn-primary" ng-model="selCase" btn-radio="'nominative'">Nominative</button>-->
-                                    <!--<button type="button" class="btn btn-primary" ng-model="selCase" btn-radio="'accusative'">Accusative</button>-->
-                                    <!--<button type="button" class="btn btn-primary" ng-model="selCase" btn-radio="'dative'">Dative</button>-->
-                                    <!--<button type="button" class="btn btn-primary" ng-model="selCase" btn-radio="'genitive'">Genitive</button>-->
-                                <!--</div>-->
-
-                            <!--</div>-->
                         </div>
                         <div class="row">
                             <div class="col-xs-offset-1 col-xs-2 text-right">

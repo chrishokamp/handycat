@@ -195,7 +195,7 @@ angular.module('controllers').controller('AceCtrl',
             $scope.toggleToolbar(false);
             $scope.queryGlossary(token.value);
             $scope.glossary.glossaryQuery = token.value;
-            $scope.setTextSelection(tokenAndRange.token.value, tokenAndRange.range);
+//            $scope.setTextSelection(tokenAndRange.token.value, tokenAndRange.range);
           }
         );
 
