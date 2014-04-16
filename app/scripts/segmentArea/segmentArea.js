@@ -2,9 +2,9 @@
 // this is a source + target pair
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
-  '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation',
+  '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation', 'Morphology',
   'Document',
-  function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation, Document) {
+  function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation, Morphology, Document) {
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
@@ -30,7 +30,6 @@ angular.module('controllers')
     $scope.selectedRange = range;
   };
 
-
   $scope.copySourcePunctuation = function() {
     $log.log('copy source called');
     var source = $scope.segment.source;
@@ -48,9 +47,16 @@ angular.module('controllers')
      $scope.currentToken = token;
   };
 
-  $scope.changeTokenNumber = function() {
+  $scope.changeTokenNumber = function(phrase) {
     $log.log('change token number');
-    $scope.$broadcast('change-token-number');
+    var phrase = "ein Apfel";
+    phrase = "eine Mischung";
+    var res = Morphology.changeNumber(phrase, 'de')
+    res.then(function(result) {
+      $log.log('the result from the morphology server: ')
+      $log.log(result)
+    })
+    // $scope.$broadcast('change-token-number');
   };
 
   $scope.toggleMorphologyMenu = function() {

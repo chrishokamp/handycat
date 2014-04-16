@@ -36,7 +36,13 @@ var App = window.App = angular.module('editorComponentsApp',
 
 })
 //.constant('baseUrl', 'http://protected-crag-2517.herokuapp.com/glossary');
-.constant('baseUrl', 'http://localhost:5000');
+.constant('baseUrl', 'http://localhost:5000')
+
+// Allow CORS
+.config(['$httpProvider', function($httpProvider) {
+	$httpProvider.defaults.useXDomain = true;
+	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}])
 // TODO
 // check window.location to see where we are, and set the baseUrl accordingly
 //.run(['$location', '$log', function($location, $log) {
