@@ -6,7 +6,7 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
   var glossaryFile = 'data/glossary.small.tsv';
 //  var glossaryFile = 'data/ectaco-en-pos-de.tsv';
 
-  // the glossary server
+  // the glossary server - make sure the node server is running from server/
   var urlPrefix = '/glossary';
   var glossaryUrl = baseUrl + urlPrefix;
   // working -- interface with the glosbe translate API
