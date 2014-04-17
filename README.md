@@ -17,8 +17,12 @@ To set up your development environment, it's strongly recommended that you use t
 1. Install node and npm if you don't already have them.  
   * you *shouldn't* need to use sudo, [the scripts here](https://gist.github.com/isaacs/579814) are good installation options.  
   * if you already have node and npm, don't try to install again without *completely* getting rid of your previous installation.
-2. clone the repo `git clone git@github.com:CNGL-repo/editor_components.git`  
+  * in order to compile node in a fresh Ubuntu instalation you'll need to install the C/C++ compilation tools first. `sudo apt-get install build-essential` will install them.
+  * the scripts also require curl: `sudo apt-get install curl`
+2. clone the repo `git clone USERNAME@github.com:CNGL-repo/editor_components.git`  
 3. install grunt `npm install -g grunt`
+3. install grun-cli `npm install -g grunt-cli`
+3. install boew `npm install -g bower`
 3. run `$ npm install` from the top directiory(`editor_components/`)
 4. run `$ bower install` from the top directory(`editor_components/`)
 4. build bootstrap ui -
