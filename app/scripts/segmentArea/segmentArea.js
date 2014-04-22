@@ -169,5 +169,11 @@ angular.module('controllers')
   // List of edit actions performed on this segment
   $scope.editHistory = [];
 
+  $scope.segmentFinished = function(segId) {
+      $log.log("segId is: " + segId);
+      $log.log("emitting segmentComplete");
+      $scope.$emit('segmentComplete', {segmentId: segId});
+  };
+
 }]);
 

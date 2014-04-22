@@ -5,6 +5,7 @@
         <!--<tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled"></tab>-->
       <!--</tabset>-->
         <!-- TODO: use nav here, not tabs -->
+
     </div>
 
     <!-- TODO: add feature where dragging a word or phrase to target area translates it automatically -->
@@ -14,6 +15,9 @@
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
+
+        <textarea>{{ xliff_content }}</textarea>
+
         <div class="segment row" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments" index="$index" ng-init="segment = seg;">
             <a id="segment-{{$index}}"></a>
             <p class="segment-index-label">Segment Index: {{$index}}</p>
@@ -69,7 +73,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-offset-1 col-xs-2 text-right">
-                                <button ng-click="segmentFinished()" tooltip="segment complete" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
+                                <button ng-click="segmentFinished($index)" tooltip="segment complete" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
                             </div>
                             <div class="col-xs-2 text-right">
                                 <button ng-click="copySourcePunctuation()" tooltip="copy punctuation from source" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-share-alt"></span></button> 

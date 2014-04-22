@@ -16,6 +16,8 @@ angular.module('controllers').controller('ContentAreaCtrl', ['$scope', 'Document
       // segments is a list of [source, target] pairs
       //$scope.segments = Document.segments;
       $scope.segments = Document.segments;
+
+      $scope.xliff_content = new XMLSerializer().serializeToString( Document.DOM );
     }
   );
 

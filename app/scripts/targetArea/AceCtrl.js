@@ -356,14 +356,5 @@ angular.module('controllers').controller('AceCtrl',
       $(window).scrollTop($(containerEditArea).offset().top);
     }
   });
-
-  $scope.segmentFinished = function() {
-    var segId = $scope.index;
-
-    $log.log("segId is: " + segId);
-    $log.log("emitting segmentComplete");
-    $scope.$emit('segmentComplete', {segmentId: segId});
-  }
-
 }]);
 
