@@ -68,11 +68,48 @@ angular.module('controllers')
       });
     }
   };
+  $scope.changeTokenGender = function() {
+    // toggle the working state of the button
+    $scope.changeGenderWorking = true;
 
-  $scope.toggleMorphologyMenu = function() {
-    $scope.changeGenderClicked = !$scope.changeGenderClicked;
-    $log.log('change gender');
-  }
+    // the current selection is a range object from the Ace Editor
+    if ($scope.selectedToken && $scope.selectedRange) {
+      $log.log('change token gender');
+      var phrase = $scope.selectedToken;
+      $log.log('the phrase to change is: ' + phrase);
+
+      var res = Morphology.changeGender(phrase, 'de')
+      res.then(function(result) {
+        $log.log('the result from the morphology server: ')
+        $log.log(result)
+
+        // this function is on the AceCtrl
+        $scope.insertText(result.data['converted_phrase']);
+        $scope.changeGenderWorking = false;
+      });
+    }
+  };
+  $scope.changeTokenCase = function() {
+    // toggle the working state of the button
+    $scope.changeCaseWorking = true;
+
+    // the current selection is a range object from the Ace Editor
+    if ($scope.selectedToken && $scope.selectedRange) {
+      $log.log('change token case');
+      var phrase = $scope.selectedToken;
+      $log.log('the phrase to change is: ' + phrase);
+
+      var res = Morphology.changeCase(phrase, 'de')
+      res.then(function(result) {
+        $log.log('the result from the morphology server: ')
+        $log.log(result)
+
+        // this function is on the AceCtrl
+        $scope.insertText(result.data['converted_phrase']);
+        $scope.changeCaseWorking = false;
+      });
+    }
+  };
 
   $scope.queryConcordancer = function(query, lang) {
     $log.log('query is: ' + query + ', lang is: ' + lang);

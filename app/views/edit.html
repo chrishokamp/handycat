@@ -43,7 +43,8 @@
                             </div>
                         </div>
 
-                        <div collapse="!selectedToken">
+                        <!--<div collapse="!selectedToken">-->
+                            <div collapse="false">
                             <div class="row row-padded">
                                 <div class="col-xs-1">
                                     <button ng-click="changeTokenNumber()" tooltip="change the number of the selected phrase" class="btn btn-primary morph-glyph">
@@ -52,14 +53,14 @@
                                     </button>
                                 </div>
                                 <div class="col-xs-1">
-                                    <button type="button" class="btn btn-primary morph-glyph" tooltip="change gender of the selected phrase" ng-click="toggleMorphologyMenu()">
+                                    <button ng-click="changeTokenGender()" type="button" class="btn btn-primary morph-glyph" tooltip="change gender of the selected phrase" >
                                         <span>G</span>
                                         <i ng-show="changeGenderWorking" class="ion-loading-b"></i>
 
                                     </button>
                                 </div>
                                 <div class="col-xs-1">
-                                    <button type="button" ng-click="toggleMorphologyMenu()" class="btn btn-primary morph-glyph" tooltip="change case of the selected phrase">
+                                    <button ng-click="changeTokenCase()" type="button" class="btn btn-primary morph-glyph" tooltip="change case of the selected phrase">
                                         <span>C</span>
                                         <i ng-show="changeCaseWorking" class="ion-loading-b"></i>
                                     </button>
@@ -68,11 +69,8 @@
 
                         </div>
                         <div class="row">
-                            <div class="col-xs-offset-1 col-xs-2 text-right">
-                                <button ng-click="segmentFinished()" tooltip="segment complete" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
-                            </div>
                             <div class="col-xs-2 text-right">
-                                <button ng-click="copySourcePunctuation()" tooltip="copy punctuation from source" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-share-alt"></span></button> 
+                                <button ng-click="copySourcePunctuation()" tooltip="copy punctuation from source" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-share-alt"></span></button>
                             </div>
                             <div class="col-xs-2 text-right">
                                 <button ng-click="clearEditor()" tooltip="reject MT output" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-remove"></span></button>
@@ -82,6 +80,9 @@
                             </div>
                             <div class="col-xs-2 text-right">
                                 <button ng-click="nextMTSuggestion()" tooltip="next MT suggestion" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>
+                            </div>
+                            <div class="col-xs-offset-1 col-xs-2 text-right">
+                                <button ng-click="segmentFinished()" tooltip="segment complete" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
                             </div>
                             <!--<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>-->
                         </div>

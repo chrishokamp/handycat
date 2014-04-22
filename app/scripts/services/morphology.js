@@ -14,32 +14,31 @@ angular.module('services').factory('Morphology', [ '$http','$log', function($htt
     // changeNumber('dogs', 'en', 'I have one dogs') -> 'dog'
 
     // returns a promise
-    changeNumber: function (phrase, lang, context) {
-      $log.log('changeNumber call: ' + phrase + ' ' + lang);
-      if (!context)
-        context = '';
-
+    changeNumber: function (phrase, lang) {
+      $log.log('changeNumber call: ' + phrase);
       var morphologyRoute = '';
       lang ? morphologyRoute = routePrefix + lang : morphologyRoute = routePrefix + default_lang;
 
-      var data = { "phrase": phrase, "to_number": 'Pl' };
+      var data = { "phrase": phrase, "change_type": 'rfNumber' };
       return $http.post(morphologyRoute, data);
-//      return $http({
-//        url: morphologyRoute,
-//        method: "POST",
-//        data: {
-//          "phrase": phrase,
-//          "to_number": 'Pl'
-//        },
-//        headers: {'Content-Type': 'application/json'}
-//      });
     },
-    // Change the gender of a word - in general, we can only change the number of adjectives, articles, and pronouns
-    changeGender: function(word, lang, context) {
-      $log.log('changeGender call: ' + word + ' ' + lang);
-      // TODO(ximop) call the webservice
-      return word;
-    }
+    // Change the gender of a word or phrase - in general, we can only change the number of adjectives, articles, and pronouns
+    changeGender: function(phrase, lang) {
+      $log.log('changeGender call: ' + phrase);
+      var morphologyRoute = '';
+      lang ? morphologyRoute = routePrefix + lang : morphologyRoute = routePrefix + default_lang;
+
+      var data = { "phrase": phrase, "change_type": 'rfGender' };
+      return $http.post(morphologyRoute, data);
+    },
+    changeCase: function(phrase, lang) {
+      $log.log('changeCase call: ' + phrase);
+      var morphologyRoute = '';
+      lang ? morphologyRoute = routePrefix + lang : morphologyRoute = routePrefix + default_lang;
+
+      var data = { "phrase": phrase, "change_type": 'rfCase' };
+      return $http.post(morphologyRoute, data);
+    },
   };
 
 }]);
