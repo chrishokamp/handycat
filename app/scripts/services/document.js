@@ -7,9 +7,10 @@
 angular.module('services').factory('Document', function( ) {
 
   // Working - functions to update, delete, and modify nodes in the XLIFF
-
   return {
     ready: false,
+    loaded: false,
+    revision: 0,
     sourceSegments: [],
     targetSegments: [],
     // testing: these are pairs of source + target

@@ -57,9 +57,14 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
           var targetText = seg[1] ? seg[1].textContent : '';
           $log.log("sourceText: " + sourceText);
           $log.log("targetText: " + targetText);
+          $log.log("sourceDOM: " + seg[0]);
+          $log.log("targetDOM: " + seg[1]? seg[1] : '');
+          // TODO(ximo) if seg[1] does not exist, create and add to DOM
           var segPair = {
             source: sourceText,
-            target: targetText
+            target: targetText,
+            sourceDOM: seg[0],
+            targetDOM: seg[1]
           };
 
           // TODO how to replace and add nodes to the document as the translator works?

@@ -356,5 +356,6 @@ angular.module('controllers').controller('AceCtrl',
       $(window).scrollTop($(containerEditArea).offset().top);
     }
   });
+
 }]);
 

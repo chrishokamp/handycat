@@ -7,7 +7,7 @@ angular.module('services').factory('fileReader', ['$q', '$log', function($q, $lo
     var onLoad = function(reader, deferred, scope) {
       return function () {
         deferred.resolve(reader.result);
-      }
+      };
       //return function () {
       //  scope.$apply(function () {
       //    deferred.resolve(reader.result);
@@ -59,7 +59,7 @@ angular.module('services').factory('fileReader', ['$q', '$log', function($q, $lo
       reader.readAsText(file);
 
       return deferred.promise;
-    }
+    };
 
 // TODO: how to maintain document state as the user changes stuff?
     var readAsXML = function (file, scope) {
@@ -69,7 +69,7 @@ angular.module('services').factory('fileReader', ['$q', '$log', function($q, $lo
       reader.readAsText(file);
 
       return deferred.promise;
-    }
+    };
 
     return {
       readAsDataUrl: readAsDataURL,

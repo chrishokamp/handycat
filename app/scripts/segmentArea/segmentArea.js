@@ -173,6 +173,10 @@ angular.module('controllers')
       $log.log("segId is: " + segId);
       $log.log("emitting segmentComplete");
       $scope.$emit('segmentComplete', {segmentId: segId});
+
+      // Update the current segment
+      $scope.segment.targetDOM.textContent = $scope.segment.target;
+      Document.revision++;
   };
 
 }]);

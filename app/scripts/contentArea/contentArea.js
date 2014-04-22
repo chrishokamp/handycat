@@ -8,7 +8,10 @@ angular.module('controllers').controller('ContentAreaCtrl', ['$scope', 'Document
 
   // watch the flag on the Documents service
   $scope.$watch(function() {
-      return Document.loaded;
+      if (!Document.loaded)
+        return false;
+      else
+        return Document.revision;
     },
     function() {
       $log.log("ContentAreaCtrl: Number of segments in document: " + Document.segments.length);
