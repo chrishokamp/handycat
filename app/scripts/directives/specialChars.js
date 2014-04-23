@@ -1,7 +1,7 @@
 // a directive adding a special chars component
 // use & to call a function with the special chars
 // require ngModel, and use it to init the special chars for the component
-angular.module('directives').directive('chars', function($log) {
+angular.module('directives').directive('chars', ['$log', function($log) {
   return {
     restrict: 'A',
     replace: 'true',
@@ -18,4 +18,4 @@ angular.module('directives').directive('chars', function($log) {
       $log.log("scope.special is: " + scope.special);
     }
   };
-});
+}]);

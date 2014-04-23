@@ -1,4 +1,4 @@
-angular.module('directives').directive('index', function($log) {
+angular.module('directives').directive('index', ['$log', function($log) {
   return {
     // use the index attr
     //scope: {
@@ -13,4 +13,4 @@ angular.module('directives').directive('index', function($log) {
       })
     }
   };
-});
+}]);
