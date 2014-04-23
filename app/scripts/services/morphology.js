@@ -5,15 +5,14 @@ angular.module('services').factory('Morphology', [ '$http','$log', function($htt
   // TODO(xpl) cache
   // var wordCache = {};
 
-  var routePrefix = 'http://0.0.0.0:5001/morphology/';
+  // local prefix
+  // var routePrefix = 'http://0.0.0.0:5001/morphology/';
+  // current AWS
+  var routePrefix = 'http://ec2-54-186-18-81.us-west-2.compute.amazonaws.com:5001/morphology/';
   var default_lang = 'de';
 
   return {
-    // Given a word, returns the word with the number changes if possible.
-    // changeNumber('dog', 'en', 'I have two dog') -> 'dogs'
-    // changeNumber('dogs', 'en', 'I have one dogs') -> 'dog'
-
-    // returns a promise
+    // these functions return promises
     changeNumber: function (phrase, lang) {
       $log.log('changeNumber call: ' + phrase);
       var morphologyRoute = '';
