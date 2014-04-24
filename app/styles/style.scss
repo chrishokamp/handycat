@@ -105,6 +105,13 @@ h3 {
   min-height: 200px;
 }
 
+// highlight recent changes in the marker layer
+.changed_range {
+  background-color: pink;
+  position: absolute;
+  z-index: 5;
+}
+
 .content-card {
   @extend %ace-editor-height;
   background-color: white;
@@ -315,4 +322,8 @@ span.drop-text {
   opacity:1;
 }
 
+@-webkit-keyframes fade-out {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
 
