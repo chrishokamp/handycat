@@ -29,7 +29,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 
-define('kitchen-sink/demo', ['require', 'exports', 'module' , 'ace/lib/fixoldbrowsers', 'ace/multi_select', 'ace/ext/spellcheck', 'kitchen-sink/inline_editor', 'kitchen-sink/dev_util', 'kitchen-sink/file_drop', 'ace/config', 'ace/lib/dom', 'ace/lib/net', 'ace/lib/lang', 'ace/lib/useragent', 'ace/lib/event', 'ace/theme/textmate', 'ace/edit_session', 'ace/undomanager', 'ace/keyboard/hash_handler', 'ace/virtual_renderer', 'ace/editor', 'ace/ext/whitespace', 'kitchen-sink/doclist', 'ace/ext/modelist', 'ace/ext/themelist', 'kitchen-sink/layout', 'kitchen-sink/token_tooltip', 'kitchen-sink/util', 'ace/ext/elastic_tabstops_lite', 'ace/incremental_search', 'ace/worker/worker_client', 'ace/split', 'ace/keyboard/vim', 'ace/ext/statusbar', 'ace/ext/emmet', 'ace/snippets', 'ace/ext/language_tools'], function(require, exports, module) {
+define('kitchen-sink/demo', ['require', 'exports', 'module' , 'ace/lib/fixoldbrowsers', 'ace/multi_select', 'ace/ext/spellcheck', 'kitchen-sink/inline_editor', 'kitchen-sink/dev_util', 'kitchen-sink/file_drop', 'ace/config', 'ace/lib/dom', 'ace/lib/net', 'ace/lib/lang', 'ace/lib/useragent', 'ace/lib/event', 'ace/theme/textmate', 'ace/edit_session', 'ace/undomanager', 'ace/keyboard/hash_handler', 'ace/virtual_renderer', 'ace/editor', 'ace/ext/whitespace', 'kitchen-sink/doclist', 'ace/ext/modelist', 'ace/ext/themelist', 'kitchen-sink/layout', 'kitchen-sink/token_tooltip', 'kitchen-sink/util', 'ace/ext/elastic_tabstops_lite', 'ace/incremental_search', 'ace/worker/worker_client', 'ace/split', 'ace/keyboard/vim', 'ace/ext/statusbar', 'ace/ext/emmet', 'ace/snippets', 'ace/ext/language_tools', 'ace/ext/beautify'], function(require, exports, module) {
 
 
 require("ace/lib/fixoldbrowsers");
@@ -243,7 +243,7 @@ commands.addCommand({
     }
 });
 
-var keybindings = {    
+var keybindings = {
     ace: null, // Null = use "default" keymapping
     vim: require("ace/keyboard/vim").handler,
     emacs: "ace/keyboard/emacs",
@@ -302,7 +302,7 @@ doclist.history.index = 0;
 doclist.cycleOpen = function(editor, dir) {
     var h = this.history;
     h.index += dir;
-    if (h.index >= h.length) 
+    if (h.index >= h.length)
         h.index = 0;
     else if (h.index <= 0)
         h.index = h.length - 1;
@@ -484,7 +484,7 @@ bindDropdown("split", function(value) {
         sp.setSplits(1);
     } else {
         var newEditor = (sp.getSplits() == 1);
-        sp.setOrientation(value == "below" ? sp.BELOW : sp.BESIDE);        
+        sp.setOrientation(value == "below" ? sp.BELOW : sp.BESIDE);
         sp.setSplits(2);
 
         if (newEditor) {
@@ -574,8 +574,12 @@ env.editSnippets = function() {
 require("ace/ext/language_tools");
 env.editor.setOptions({
     enableBasicAutocompletion: true,
+    enableLiveAutocomplete: true,
     enableSnippets: true
 });
+
+var beautify = require("ace/ext/beautify");
+env.editor.commands.addCommands(beautify.commands);
 
 });
 define('ace/ext/spellcheck', ['require', 'exports', 'module' , 'ace/lib/event', 'ace/editor', 'ace/config'], function(require, exports, module) {
@@ -840,6 +844,7 @@ var supportedModes = {
     BatchFile:   ["bat|cmd"],
     C9Search:    ["c9search_results"],
     C_Cpp:       ["cpp|c|cc|cxx|h|hh|hpp"],
+    Cirru:       ["cirru|cr"],
     Clojure:     ["clj"],
     Cobol:       ["CBL|COB"],
     coffee:      ["coffee|cf|cson|^Cakefile"],
@@ -855,6 +860,7 @@ var supportedModes = {
     EJS:         ["ejs"],
     Forth:       ["frt|fs|ldr"],
     FTL:         ["ftl"],
+    Gherkin:     ["feature"],
     Glsl:        ["glsl|frag|vert"],
     golang:      ["go"],
     Groovy:      ["groovy"],
@@ -910,6 +916,7 @@ var supportedModes = {
     SASS:        ["sass"],
     SCAD:        ["scad"],
     Scala:       ["scala"],
+    Smarty:      ["smarty|tpl"],
     Scheme:      ["scm|rkt"],
     SCSS:        ["scss"],
     SH:          ["sh|bash|^.bashrc"],
@@ -980,6 +987,7 @@ background-color: #6B72E6;\
 }\
 .ace-tm {\
 background-color: #FFFFFF;\
+color: black;\
 }\
 .ace-tm .ace_cursor {\
 color: black;\
@@ -1120,9 +1128,12 @@ exports.$detectIndentation = function(lines, fallback) {
             stats[spaces] = (stats[spaces] || 0) + 1;
         }
         prevSpaces = spaces;
-        while (line[line.length - 1] == "\\")
+        while (i < max && line[line.length - 1] == "\\")
             line = lines[i++];
     }
+    
+    if (!stats.length)
+        return;
 
     function getScore(indent) {
         var score = 0;
@@ -1419,8 +1430,9 @@ module.exports.all = {
 
 });
 
-define('ace/ext/themelist', ['require', 'exports', 'module' ], function(require, exports, module) {
+define('ace/ext/themelist', ['require', 'exports', 'module' , 'ace/lib/fixoldbrowsers'], function(require, exports, module) {
 
+require("ace/lib/fixoldbrowsers");
 
 var themeData = [
     ["Chrome"         ],
@@ -1455,17 +1467,17 @@ var themeData = [
     ["Tomorrow Night 80s"   ,"tomorrow_night_eighties" ,  "dark"],
     ["Twilight"             ,"twilight"                ,  "dark"],
     ["Vibrant Ink"          ,"vibrant_ink"             ,  "dark"]
-]
+];
 
 
 exports.themesByName = {};
 exports.themes = themeData.map(function(data) {
     var name = data[1] || data[0].replace(/ /g, "_").toLowerCase();
     var theme = {
-         caption: data[0],
-         theme: "ace/theme/" + name,
-         isDark: data[2] == "dark",
-         name: name
+        caption: data[0],
+        theme: "ace/theme/" + name,
+        isDark: data[2] == "dark",
+        name: name
     };
     exports.themesByName[name] = theme;
     return theme;
@@ -1602,29 +1614,30 @@ exports.singleLineEditor = function(el) {
 
 });
 
-define('kitchen-sink/token_tooltip', ['require', 'exports', 'module' , 'ace/lib/dom', 'ace/lib/event', 'ace/range'], function(require, exports, module) {
+define('kitchen-sink/token_tooltip', ['require', 'exports', 'module' , 'ace/lib/dom', 'ace/lib/oop', 'ace/lib/event', 'ace/range', 'ace/tooltip'], function(require, exports, module) {
 
 
 var dom = require("ace/lib/dom");
+var oop = require("ace/lib/oop");
 var event = require("ace/lib/event");
 var Range = require("ace/range").Range;
+var Tooltip = require("ace/tooltip").Tooltip;
 
-var tooltipNode;
-
-var TokenTooltip = function(editor) {
+function TokenTooltip (editor) {
     if (editor.tokenTooltip)
         return;
-    editor.tokenTooltip = this;    
+    Tooltip.call(this, editor.container);
+    editor.tokenTooltip = this;
     this.editor = editor;
-    
-    editor.tooltip = tooltipNode || this.$init();
 
     this.update = this.update.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseOut = this.onMouseOut.bind(this);
     event.addListener(editor.renderer.scroller, "mousemove", this.onMouseMove);
     event.addListener(editor.renderer.content, "mouseout", this.onMouseOut);
-};
+}
+
+oop.inherits(TokenTooltip, Tooltip);
 
 (function(){
     this.token = {};
@@ -1660,15 +1673,10 @@ var TokenTooltip = function(editor) {
         }
         if (!token) {
             session.removeMarker(this.marker);
-            tooltipNode.style.display = "none";
-            this.isOpen = false;
+            this.hide();
             return;
         }
-        if (!this.isOpen) {
-            tooltipNode.style.display = "";
-            this.isOpen = true;
-        }
-        
+
         var tokenText = token.type;
         if (token.state)
             tokenText += "|" + token.state;
@@ -1676,15 +1684,15 @@ var TokenTooltip = function(editor) {
             tokenText += "\n  merge";
         if (token.stateTransitions)
             tokenText += "\n  " + token.stateTransitions.join("\n  ");
-        
+
         if (this.tokenText != tokenText) {
-            tooltipNode.textContent = tokenText;
-            this.tooltipWidth = tooltipNode.offsetWidth;
-            this.tooltipHeight = tooltipNode.offsetHeight;
+            this.setText(tokenText);
+            this.width = this.getWidth();
+            this.height = this.getHeight();
             this.tokenText = tokenText;
         }
-        
-        this.updateTooltipPosition(this.x, this.y);
+
+        this.show(null, this.x, this.y);
 
         this.token = token;
         session.removeMarker(this.marker);
@@ -1697,56 +1705,34 @@ var TokenTooltip = function(editor) {
         this.y = e.clientY;
         if (this.isOpen) {
             this.lastT = e.timeStamp;
-            this.updateTooltipPosition(this.x, this.y);
+            this.setPosition(this.x, this.y);
         }
         if (!this.$timer)
             this.$timer = setTimeout(this.update, 100);
     };
-    
+
     this.onMouseOut = function(e) {
-        var t = e && e.relatedTarget;
-        var ct = e &&  e.currentTarget;
-        while(t && (t = t.parentNode)) {
-            if (t == ct)
-                return;
-        }
-        tooltipNode.style.display = "none";
+        if (e && e.currentTarget.contains(e.relatedTarget))
+            return;
+        this.hide();
         this.editor.session.removeMarker(this.marker);
         this.$timer = clearTimeout(this.$timer);
-        this.isOpen = false;
-    };
-    
-    this.updateTooltipPosition = function(x, y) {
-        var st = tooltipNode.style;
-        if (x + 10 + this.tooltipWidth > this.maxWidth)
-            x = window.innerWidth - this.tooltipWidth - 10;
-        if (y > window.innerHeight * 0.75 || y + 20 + this.tooltipHeight > this.maxHeight)
-            y = y - this.tooltipHeight - 30;
-        
-        st.left = x + 10 + "px";
-        st.top = y + 20 + "px";
     };
 
-    this.$init = function() {
-        tooltipNode = document.documentElement.appendChild(dom.createElement("div"));
-        var st = tooltipNode.style;
-        st.position = "fixed";
-        st.display = "none";
-        st.background = "lightyellow";
-        st.borderRadius = "";
-        st.border = "1px solid gray";
-        st.padding = "1px";
-        st.zIndex = 1000;
-        st.fontFamily = "monospace";
-        st.whiteSpace = "pre-line";
-        return tooltipNode;
+    this.setPosition = function(x, y) {
+        if (x + 10 + this.width > this.maxWidth)
+            x = window.innerWidth - this.width - 10;
+        if (y > window.innerHeight * 0.75 || y + 20 + this.height > this.maxHeight)
+            y = y - this.height - 30;
+
+        Tooltip.prototype.setPosition.call(this, x + 10, y + 20);
     };
 
     this.destroy = function() {
         this.onMouseOut();
         event.removeListener(this.editor.renderer.scroller, "mousemove", this.onMouseMove);
         event.removeListener(this.editor.renderer.content, "mouseout", this.onMouseOut);
-        delete this.editor.tokenTooltip;    
+        delete this.editor.tokenTooltip;
     };
 
 }).call(TokenTooltip.prototype);
@@ -2253,6 +2239,7 @@ oop.inherits(IncrementalSearch, Search);
         this.$options.needle = '';
         this.$options.backwards = backwards;
         ed.keyBinding.addKeyboardHandler(this.$keyboardHandler);
+        this.$originalEditorOnPaste = ed.onPaste; ed.onPaste = this.onPaste.bind(this);
         this.$mousedownHandler = ed.addEventListener('mousedown', this.onMouseDown.bind(this));
         this.selectionFix(ed);
         this.statusMessage(true);
@@ -2260,11 +2247,13 @@ oop.inherits(IncrementalSearch, Search);
 
     this.deactivate = function(reset) {
         this.cancelSearch(reset);
-        this.$editor.keyBinding.removeKeyboardHandler(this.$keyboardHandler);
+        var ed = this.$editor;
+        ed.keyBinding.removeKeyboardHandler(this.$keyboardHandler);
         if (this.$mousedownHandler) {
-            this.$editor.removeEventListener('mousedown', this.$mousedownHandler);
+            ed.removeEventListener('mousedown', this.$mousedownHandler);
             delete this.$mousedownHandler;
         }
+        ed.onPaste = this.$originalEditorOnPaste;
         this.message('');
     }
 
@@ -2321,9 +2310,9 @@ oop.inherits(IncrementalSearch, Search);
         return found;
     }
 
-    this.addChar = function(c) {
+    this.addString = function(s) {
         return this.highlightAndFindWithNeedle(false, function(needle) {
-            return needle + c;
+            return needle + s;
         });
     }
 
@@ -2346,6 +2335,10 @@ oop.inherits(IncrementalSearch, Search);
     this.onMouseDown = function(evt) {
         this.deactivate();
         return true;
+    }
+
+    this.onPaste = function(text) {
+        this.addString(text);
     }
 
     this.statusMessage = function(found) {
@@ -2476,14 +2469,14 @@ exports.iSearchCommands = [{
 }, {
     name: "extendSearchTerm",
     exec: function(iSearch, string) {
-        iSearch.addChar(string);
+        iSearch.addString(string);
     },
     readOnly: true,
     isIncrementalSearchCommand: true
 }, {
     name: "extendSearchTermSpace",
     bindKey: "space",
-    exec: function(iSearch) { iSearch.addChar(' '); },
+    exec: function(iSearch) { iSearch.addString(' '); },
     readOnly: true,
     isIncrementalSearchCommand: true
 }, {
@@ -2516,6 +2509,34 @@ exports.iSearchCommands = [{
     },
     readOnly: true,
     isIncrementalSearchCommand: true
+}, {
+    name: "yankNextWord",
+    bindKey: "Ctrl-w",
+    exec: function(iSearch) {
+        var ed = iSearch.$editor,
+            range = ed.selection.getRangeOfMovements(function(sel) { sel.moveCursorWordRight(); }),
+            string = ed.session.getTextRange(range);
+        iSearch.addString(string);
+    },
+    readOnly: true,
+    isIncrementalSearchCommand: true
+}, {
+    name: "yankNextChar",
+    bindKey: "Ctrl-Alt-y",
+    exec: function(iSearch) {
+        var ed = iSearch.$editor,
+            range = ed.selection.getRangeOfMovements(function(sel) { sel.moveCursorRight(); }),
+            string = ed.session.getTextRange(range);
+        iSearch.addString(string);
+    },
+    readOnly: true,
+    isIncrementalSearchCommand: true
+}, {
+    name: 'recenterTopBottom',
+    bindKey: 'Ctrl-l',
+    exec: function(iSearch) { iSearch.$editor.execCommand('recenterTopBottom'); },
+    readOnly: true,
+    isIncrementalSearchCommand: true
 }];
 
 function IncrementalSearchKeyboardHandler(iSearch) {
@@ -2545,6 +2566,8 @@ oop.inherits(IncrementalSearchKeyboardHandler, HashHandler);
 
     var handleKeyboard$super = this.handleKeyboard;
     this.handleKeyboard = function(data, hashId, key, keyCode) {
+        if (((hashId === 1/*ctrl*/ || hashId === 8/*command*/) && key === 'v')
+         || (hashId === 1/*ctrl*/ && key === 'y')) return null;
         var cmd = handleKeyboard$super.call(this, data, hashId, key, keyCode);
         if (cmd.command) { return cmd; }
         if (hashId == -1) {
@@ -2685,12 +2708,15 @@ oop.inherits(Occur, Search);
         occurSession.$occur = this;
         occurSession.$occurMatchingLines = found;
         editor.setSession(occurSession);
+        this.$useEmacsStyleLineStart = this.$originalSession.$useEmacsStyleLineStart;
+        occurSession.$useEmacsStyleLineStart = this.$useEmacsStyleLineStart;
         this.highlight(occurSession, options.re);
         occurSession._emit('changeBackMarker');
     }
 
     this.displayOriginalContent = function(editor) {
         editor.setSession(this.$originalSession);
+        this.$originalSession.$useEmacsStyleLineStart = this.$useEmacsStyleLineStart;
     }
     this.originalToOccurPosition = function(session, pos) {
         var lines = session.$occurMatchingLines;
@@ -3044,7 +3070,7 @@ exports.handler = {
             if (util.currentMode === "insert") {            
                 this.onCompositionStartOrig(text);
             }
-        }
+        };
         if (enable) {
             if (!editor.onCompositionUpdateOrig) {
                 editor.onCompositionUpdateOrig = editor.onCompositionUpdate;
@@ -3063,7 +3089,7 @@ exports.handler = {
     },
 
     handleKeyboard: function(data, hashId, key, keyCode, e) {
-        if (hashId != 0 && (key == "" || key == "\x00"))
+        if (hashId !== 0 && (!key || keyCode == -1))
             return null;
         
         var editor = data.editor;
@@ -3081,7 +3107,7 @@ exports.handler = {
                 return {command: "null", passEvent: true};
             }
             return {command: coreCommands.stop};            
-        } else if ((key == "esc" && hashId == 0) || key == "ctrl-[") {
+        } else if ((key == "esc" && hashId === 0) || key == "ctrl-[") {
             return {command: coreCommands.stop};
         } else if (data.state == "start") {
             if (useragent.isMac && this.handleMacRepeat(data, hashId, key)) {
@@ -3089,15 +3115,17 @@ exports.handler = {
                 key = data.inputChar;
             }
             
-            if (hashId == -1 || hashId == 1 || hashId == 0 && key.length > 1) {
+            if (hashId == -1 || hashId == 1 || hashId === 0 && key.length > 1) {
                 if (cmds.inputBuffer.idle && startCommands[key])
                     return startCommands[key];
-                cmds.inputBuffer.push(editor, key);
-                return {command: "null", passEvent: false}; 
+                var isHandled = cmds.inputBuffer.push(editor, key);
+                if (!isHandled && hashId !== -1)
+                    return;
+                return {command: "null", passEvent: !isHandled}; 
             } // if no modifier || shift: wait for input.
-            else if (key.length == 1 && (hashId == 0 || hashId == 4)) {
+            else if (key.length == 1 && (hashId === 0 || hashId == 4)) {
                 return {command: "null", passEvent: true};
-            } else if (key == "esc" && hashId == 0) {
+            } else if (key == "esc" && hashId === 0) {
                 return {command: coreCommands.stop};
             }
         } else {
@@ -3312,8 +3340,7 @@ var actions = exports.actions = {
     "V": {
         fn: function(editor, range, count, param) {
             var row = editor.getCursorPosition().row;
-            editor.selection.clearSelection();
-            editor.selection.moveCursorTo(row, 0);
+            editor.selection.moveTo(row, 0);
             editor.selection.selectLineEnd();
             editor.selection.visualLineStart = row;
 
@@ -3682,13 +3709,11 @@ var handleCursorMove = exports.onCursorMove = function(editor, e) {
             var cursorRow = editor.getCursorPosition().row;
             if(originRow <= cursorRow) {
                 var endLine = editor.session.getLine(cursorRow);
-                editor.selection.clearSelection();
-                editor.selection.moveCursorTo(originRow, 0);
+                editor.selection.moveTo(originRow, 0);
                 editor.selection.selectTo(cursorRow, endLine.length);
             } else {
                 var endLine = editor.session.getLine(originRow);
-                editor.selection.clearSelection();
-                editor.selection.moveCursorTo(originRow, endLine.length);
+                editor.selection.moveTo(originRow, endLine.length);
                 editor.selection.selectTo(cursorRow, 0);
             }
         }
@@ -3830,13 +3855,11 @@ module.exports = {
     },
     copyLine: function(editor) {
         var pos = editor.getCursorPosition();
-        editor.selection.clearSelection();
-        editor.moveCursorTo(pos.row, pos.column);
+        editor.selection.moveTo(pos.row, pos.column);
         editor.selection.selectLine();
         registers._default.isLine = true;
         registers._default.text = editor.getCopyText().replace(/\n$/, "");
-        editor.selection.clearSelection();
-        editor.moveCursorTo(pos.row, pos.column);
+        editor.selection.moveTo(pos.row, pos.column);
     }
 };
 });
@@ -3879,8 +3902,7 @@ function Motion(m) {
         var a = getPos(editor, range, count, param, false);
         if (!a)
             return;
-        editor.clearSelection();
-        editor.moveCursorTo(a.row, a.column);
+        editor.selection.moveTo(a.row, a.column);
     };
     m.sel = function(editor, range, count, param) {
         var a = getPos(editor, range, count, param, true);
@@ -4302,10 +4324,17 @@ module.exports = {
         }
     },
     "$": {
-        nav: function(editor) {
+        handlesCount: true,
+        nav: function(editor, range, count, param) {
+            if (count > 1) {
+                editor.navigateDown(count-1);
+            }
             editor.navigateLineEnd();
         },
-        sel: function(editor) {
+        sel: function(editor, range, count, param) {
+            if (count > 1) {
+                editor.selection.moveCursorBy(count-1, 0);
+            }
             editor.selection.selectLineEnd();
         }
     },
@@ -4481,6 +4510,8 @@ module.exports.up = module.exports.k;
 module.exports.down = module.exports.j;
 module.exports.pagedown = module.exports["ctrl-d"];
 module.exports.pageup = module.exports["ctrl-u"];
+module.exports.home = module.exports["0"];
+module.exports.end = module.exports["$"];
 
 });
  
@@ -4814,8 +4845,7 @@ AceEmmetEditor.prototype = {
     },
     setCaretPos: function(index){
         var pos = this.ace.indexToPosition(index);
-        this.ace.clearSelection();
-        this.ace.selection.moveCursorToPosition(pos);
+        this.ace.selection.moveToPosition(pos);
     },
     getCurrentLine: function() {
         var row = this.ace.getCursorPosition().row;
@@ -4980,6 +5010,7 @@ exports.runEmmetCommand = function(editor) {
     } catch(e) {
         editor._signal("changeStatus", typeof e == "string" ? e : e.message);
         console.log(e);
+        result = false
     }
     return result;
 };
@@ -5164,7 +5195,7 @@ var SnippetManager = function() {
                 return s.getTabSize();
             case "FILENAME":
             case "FILEPATH":
-                return "ace.ajax.org";
+                return "";
             case "FULLNAME":
                 return "Ace";
         }
@@ -5258,8 +5289,11 @@ var SnippetManager = function() {
     this.insertSnippet = function(editor, snippetText) {
         var cursor = editor.getCursorPosition();
         var line = editor.session.getLine(cursor.row);
-        var indentString = line.match(/^\s*/)[0];
         var tabString = editor.session.getTabString();
+        var indentString = line.match(/^\s*/)[0];
+        
+        if (cursor.column < indentString.length)
+            indentString = indentString.slice(0, cursor.column);
 
         var tokens = this.tokenizeTmSnippet(snippetText);
         tokens = this.resolveVariables(tokens, editor);
@@ -5318,8 +5352,9 @@ var SnippetManager = function() {
                 continue;
             var id = p.tabstopId;
             var i1 = tokens.indexOf(p, i + 1);
-            if (expanding[id] == p) { 
-                expanding[id] = null;
+            if (expanding[id]) {
+                if (expanding[id] === p)
+                    expanding[id] = null;
                 continue;
             }
             
@@ -5362,7 +5397,7 @@ var SnippetManager = function() {
         var scope = editor.session.$mode.$id || "";
         scope = scope.split("/").pop();
         if (scope === "html" || scope === "php") {
-            if (scope === "php") 
+            if (scope === "php" && !editor.session.$mode.inlinePhp) 
                 scope = "html";
             var c = editor.getCursorPosition()
             var state = editor.session.getState(c.row);
@@ -5839,12 +5874,13 @@ exports.snippetManager = new SnippetManager();
 
 });
 
-define('ace/ext/language_tools', ['require', 'exports', 'module' , 'ace/snippets', 'ace/autocomplete', 'ace/config', 'ace/autocomplete/text_completer', 'ace/editor'], function(require, exports, module) {
+define('ace/ext/language_tools', ['require', 'exports', 'module' , 'ace/snippets', 'ace/autocomplete', 'ace/config', 'ace/autocomplete/util', 'ace/autocomplete/text_completer', 'ace/editor'], function(require, exports, module) {
 
 
 var snippetManager = require("../snippets").snippetManager;
 var Autocomplete = require("../autocomplete").Autocomplete;
 var config = require("../config");
+var util = require("../autocomplete/util");
 
 var textCompleter = require("../autocomplete/text_completer");
 var keyWordCompleter = {
@@ -5889,7 +5925,7 @@ var expandSnippet = {
         if (!success)
             editor.execCommand("indent");
     },
-    bindKey: "tab"
+    bindKey: "Tab"
 };
 
 var onChangeMode = function(e, editor) {
@@ -5925,6 +5961,40 @@ var loadSnippetFile = function(id) {
     });
 };
 
+var doLiveAutocomplete = function(e) {
+    var editor = e.editor;
+    var text = e.args || "";
+    var pos = editor.getCursorPosition();
+    var line = editor.session.getLine(pos.row);
+    var hasCompleter = editor.completer && editor.completer.activated;
+    var prefix = util.retrievePrecedingIdentifier(line, pos.column);
+    completers.forEach(function(completer) {
+        if (completer.identifierRegexps) {
+            completer.identifierRegexps.forEach(function(identifierRegex){
+                if (!prefix) {
+                    prefix = util.retrievePrecedingIdentifier(line, pos.column, identifierRegex);
+                }
+            });
+        }
+    });
+    if (e.command.name === "backspace" && !prefix) {
+        if (hasCompleter) 
+            editor.completer.detach();
+    }
+    else if (e.command.name === "insertstring") {
+        if (prefix && !hasCompleter) {
+            if (!editor.completer) {
+                editor.completer = new Autocomplete();
+                editor.completer.autoSelect = false;
+                editor.completer.autoInsert = false;
+            }
+            editor.completer.showPopup(editor);
+        } else if (!prefix && hasCompleter) {
+            editor.completer.detach();
+        }
+    }
+};
+
 var Editor = require("../editor").Editor;
 require("../config").defineOptions(Editor.prototype, "editor", {
     enableBasicAutocompletion: {
@@ -5934,6 +6004,16 @@ require("../config").defineOptions(Editor.prototype, "editor", {
                 this.commands.addCommand(Autocomplete.startCommand);
             } else {
                 this.commands.removeCommand(Autocomplete.startCommand);
+            }
+        },
+        value: false
+    },
+    enableLiveAutocomplete: {
+        set: function(val) {
+            if (val) {
+                this.commands.on('afterExec', doLiveAutocomplete);
+            } else {
+                this.commands.removeListener('afterExec', doLiveAutocomplete);
             }
         },
         value: false
@@ -5967,6 +6047,7 @@ var snippetManager = require("./snippets").snippetManager;
 
 var Autocomplete = function() {
     this.autoInsert = true;
+    this.autoSelect = true;
     this.keyboardHandler = new HashHandler();
     this.keyboardHandler.bindKeys(this.commands);
 
@@ -5974,19 +6055,22 @@ var Autocomplete = function() {
     this.changeListener = this.changeListener.bind(this);
     this.mousedownListener = this.mousedownListener.bind(this);
     this.mousewheelListener = this.mousewheelListener.bind(this);
-    
+
     this.changeTimer = lang.delayedCall(function() {
         this.updateCompletions(true);
     }.bind(this))
 };
 
 (function() {
+    this.gatherCompletionsId = 0;
+
     this.$init = function() {
         this.popup = new AcePopup(document.body || document.documentElement);
         this.popup.on("click", function(e) {
             this.insertMatch();
             e.stop();
         }.bind(this));
+        this.popup.focus = this.editor.focus.bind(this.editor);
     };
 
     this.openPopup = function(editor, prefix, keepPopupPosition) {
@@ -5996,15 +6080,16 @@ var Autocomplete = function() {
         this.popup.setData(this.completions.filtered);
 
         var renderer = editor.renderer;
+        this.popup.setRow(this.autoSelect ? 0 : -1);
         if (!keepPopupPosition) {
-            this.popup.setRow(0);
+            this.popup.setTheme(editor.getTheme());
             this.popup.setFontSize(editor.getFontSize());
 
             var lineHeight = renderer.layerConfig.lineHeight;
-            
-            var pos = renderer.$cursorLayer.getPixelPosition(this.base, true);            
+
+            var pos = renderer.$cursorLayer.getPixelPosition(this.base, true);
             pos.left -= this.popup.getTextLeftOffset();
-            
+
             var rect = editor.container.getBoundingClientRect();
             pos.top += rect.top - renderer.layerConfig.offset;
             pos.left += rect.left - editor.renderer.scrollLeft;
@@ -6017,11 +6102,15 @@ var Autocomplete = function() {
     this.detach = function() {
         this.editor.keyBinding.removeKeyboardHandler(this.keyboardHandler);
         this.editor.off("changeSelection", this.changeListener);
-        this.editor.off("blur", this.changeListener);
+        this.editor.off("blur", this.blurListener);
         this.editor.off("mousedown", this.mousedownListener);
         this.editor.off("mousewheel", this.mousewheelListener);
         this.changeTimer.cancel();
-        
+
+        if (this.popup && this.popup.isOpen) {
+            this.gatherCompletionsId = this.gatherCompletionsId + 1;
+        }
+
         if (this.popup)
             this.popup.hide();
 
@@ -6041,7 +6130,8 @@ var Autocomplete = function() {
     };
 
     this.blurListener = function() {
-        if (document.activeElement != this.editor.textInput.getElement())
+        var el = document.activeElement;
+        if (el != this.editor.textInput.getElement() && el.parentNode != this.popup.container)
             this.detach();
     };
 
@@ -6058,7 +6148,7 @@ var Autocomplete = function() {
         var max = this.popup.session.getLength() - 1;
 
         switch(where) {
-            case "up": row = row < 0 ? max : row - 1; break;
+            case "up": row = row <= 0 ? max : row - 1; break;
             case "down": row = row >= max ? -1 : row + 1; break;
             case "start": row = 0; break;
             case "end": row = max; break;
@@ -6072,6 +6162,7 @@ var Autocomplete = function() {
             data = this.popup.getData(this.popup.getRow());
         if (!data)
             return false;
+
         if (data.completer && data.completer.insertMatch) {
             data.completer.insertMatch(this.editor);
         } else {
@@ -6098,9 +6189,15 @@ var Autocomplete = function() {
 
         "Esc": function(editor) { editor.completer.detach(); },
         "Space": function(editor) { editor.completer.detach(); editor.insert(" ");},
-        "Return": function(editor) { editor.completer.insertMatch(); },
+        "Return": function(editor) { return editor.completer.insertMatch(); },
         "Shift-Return": function(editor) { editor.completer.insertMatch(true); },
-        "Tab": function(editor) { editor.completer.insertMatch(); },
+        "Tab": function(editor) {
+            var result = editor.completer.insertMatch();
+            if (!result && !editor.tabstopManager)
+                editor.completer.goTo("down");
+            else
+                return result;
+        },
 
         "PageUp": function(editor) { editor.completer.popup.gotoPageUp(); },
         "PageDown": function(editor) { editor.completer.popup.gotoPageDown(); }
@@ -6109,24 +6206,26 @@ var Autocomplete = function() {
     this.gatherCompletions = function(editor, callback) {
         var session = editor.getSession();
         var pos = editor.getCursorPosition();
-        
+
         var line = session.getLine(pos.row);
         var prefix = util.retrievePrecedingIdentifier(line, pos.column);
-        
+
         this.base = editor.getCursorPosition();
         this.base.column -= prefix.length;
 
         var matches = [];
-        util.parForEach(editor.completers, function(completer, next) {
+        var total = editor.completers.length;
+        editor.completers.forEach(function(completer, i) {
             completer.getCompletions(editor, session, pos, prefix, function(err, results) {
                 if (!err)
                     matches = matches.concat(results);
-                next();
-            });
-        }, function() {
-            callback(null, {
-                prefix: prefix,
-                matches: matches
+                var pos = editor.getCursorPosition();
+                var line = session.getLine(pos.row);
+                callback(null, {
+                    prefix: util.retrievePrecedingIdentifier(line, pos.column, results[0] && results[0].identifierRegex),
+                    matches: matches,
+                    finished: (--total === 0)
+                });
             });
         });
         return true;
@@ -6135,7 +6234,7 @@ var Autocomplete = function() {
     this.showPopup = function(editor) {
         if (this.editor)
             this.detach();
-        
+
         this.activated = true;
 
         this.editor = editor;
@@ -6150,10 +6249,10 @@ var Autocomplete = function() {
         editor.on("blur", this.blurListener);
         editor.on("mousedown", this.mousedownListener);
         editor.on("mousewheel", this.mousewheelListener);
-        
+
         this.updateCompletions();
     };
-    
+
     this.updateCompletions = function(keepPopupPosition) {
         if (keepPopupPosition && this.base && this.completions) {
             var pos = this.editor.getCursorPosition();
@@ -6163,22 +6262,39 @@ var Autocomplete = function() {
             this.completions.setFilter(prefix);
             if (!this.completions.filtered.length)
                 return this.detach();
+            if (this.completions.filtered.length == 1
+            && this.completions.filtered[0].value == prefix
+            && !this.completions.filtered[0].snippet)
+                return this.detach();
             this.openPopup(this.editor, prefix, keepPopupPosition);
             return;
         }
+        var _id = this.gatherCompletionsId;
         this.gatherCompletions(this.editor, function(err, results) {
-            var matches = results && results.matches;
-            if (!matches || !matches.length)
+            var doDetach = function() {
+                if (!results.finished) return;
                 return this.detach();
+            }.bind(this);
+
+            var prefix = results.prefix;
+            var matches = results && results.matches;
+            
+            if (!matches || !matches.length)
+                return doDetach();
+            if (prefix.indexOf(results.prefix) != 0 || _id != this.gatherCompletionsId)
+                return;
 
             this.completions = new FilteredList(matches);
-            this.completions.setFilter(results.prefix);
+            this.completions.setFilter(prefix);
             var filtered = this.completions.filtered;
             if (!filtered.length)
-                return this.detach();
+                return doDetach();
+            if (filtered.length == 1 && filtered[0].value == prefix && !filtered[0].snippet)
+                return doDetach();
             if (this.autoInsert && filtered.length == 1)
                 return this.insertMatch(filtered[0]);
-            this.openPopup(this.editor, results.prefix, keepPopupPosition);
+
+            this.openPopup(this.editor, prefix, keepPopupPosition);
         }.bind(this));
     };
 
@@ -6199,6 +6315,8 @@ Autocomplete.startCommand = {
     exec: function(editor) {
         if (!editor.completer)
             editor.completer = new Autocomplete();
+        editor.completer.autoInsert = 
+        editor.completer.autoSelect = true;
         editor.completer.showPopup(editor);
         editor.completer.cancelContextMenu();
     },
@@ -6224,12 +6342,12 @@ var FilteredList = function(array, filterText, mutateData) {
         });
         var prev = null;
         matches = matches.filter(function(item){
-            var caption = item.value || item.caption || item.snippet; 
+            var caption = item.value || item.caption || item.snippet;
             if (caption === prev) return false;
             prev = caption;
             return true;
         });
-        
+
         this.filtered = matches;
     };
     this.filterCompletions = function(items, needle) {
@@ -6287,7 +6405,7 @@ var $singleLineEditor = function(el) {
     var renderer = new Renderer(el);
 
     renderer.$maxLines = 4;
-    
+
     var editor = new Editor(renderer);
 
     editor.setHighlightActiveLine(false);
@@ -6303,13 +6421,13 @@ var $singleLineEditor = function(el) {
 var AcePopup = function(parentNode) {
     var el = dom.createElement("div");
     var popup = new $singleLineEditor(el);
-    
+
     if (parentNode)
         parentNode.appendChild(el);
     el.style.display = "none";
     popup.renderer.content.style.cursor = "default";
     popup.renderer.setStyle("ace_autocomplete");
-    
+
     popup.setOption("displayIndentGuides", false);
 
     var noop = function(){};
@@ -6329,8 +6447,7 @@ var AcePopup = function(parentNode) {
 
     popup.on("mousedown", function(e) {
         var pos = e.getDocumentPosition();
-        popup.moveCursorToPosition(pos);
-        popup.selection.clearSelection();
+        popup.selection.moveToPosition(pos);
         selectionMarker.start.row = selectionMarker.end.row = pos.row;
         e.stop();
     });
@@ -6398,11 +6515,11 @@ var AcePopup = function(parentNode) {
     popup.getHoveredRow = function() {
         return hoverMarker.start.row;
     };
-    
+
     event.addListener(popup.container, "mouseout", hideHoverMarker);
     popup.on("hide", hideHoverMarker);
     popup.on("changeSelection", hideHoverMarker);
-    
+
     popup.session.doc.getLength = function() {
         return popup.data.length;
     };
@@ -6446,13 +6563,13 @@ var AcePopup = function(parentNode) {
     };
     bgTokenizer.$updateOnChange = noop;
     bgTokenizer.start = noop;
-    
+
     popup.session.$computeWidth = function() {
         return this.screenWidth = 0;
     }
     popup.isOpen = false;
     popup.isTopdown = false;
-    
+
     popup.data = [];
     popup.setData = function(list) {
         popup.data = list || [];
@@ -6477,7 +6594,7 @@ var AcePopup = function(parentNode) {
                 popup._signal("select");
         }
     };
-    
+
     popup.on("changeSelection", function() {
         if (popup.isOpen)
             popup.setRow(popup.selection.lead.row);
@@ -6508,22 +6625,22 @@ var AcePopup = function(parentNode) {
 
         el.style.display = "";
         this.renderer.$textLayer.checkForSizeChanges();
-        
+
         var left = pos.left;
         if (left + el.offsetWidth > screenWidth)
             left = screenWidth - el.offsetWidth;
-            
+
         el.style.left = left + "px";
-        
+
         this._signal("show");
         lastMouseEvent = null;
         popup.isOpen = true;
     };
-    
+
     popup.getTextLeftOffset = function() {
         return this.$borderSize + this.renderer.$padding + this.$imageSize;
     };
-    
+
     popup.$imageSize = 0;
     popup.$borderSize = 1;
 
@@ -6531,18 +6648,23 @@ var AcePopup = function(parentNode) {
 };
 
 dom.importCssString("\
-.ace_autocomplete.ace-tm .ace_marker-layer .ace_active-line {\
+.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {\
     background-color: #CAD6FA;\
     z-index: 1;\
 }\
-.ace_autocomplete.ace-tm .ace_line-hover {\
+.ace_editor.ace_autocomplete .ace_line-hover {\
     border: 1px solid #abbffe;\
     margin-top: -1px;\
     background: rgba(233,233,253,0.4);\
 }\
-.ace_autocomplete .ace_line-hover {\
+.ace_editor.ace_autocomplete .ace_line-hover {\
     position: absolute;\
     z-index: 2;\
+}\
+.ace_editor.ace_autocomplete .ace_scroller {\
+   background: none;\
+   border: none;\
+   box-shadow: none;\
 }\
 .ace_rightAlignedText {\
     color: gray;\
@@ -6552,11 +6674,11 @@ dom.importCssString("\
     text-align: right;\
     z-index: -1;\
 }\
-.ace_autocomplete .ace_completion-highlight{\
+.ace_editor.ace_autocomplete .ace_completion-highlight{\
     color: #000;\
     text-shadow: 0 0 0.01em;\
 }\
-.ace_autocomplete {\
+.ace_editor.ace_autocomplete {\
     width: 280px;\
     z-index: 200000;\
     background: #fbfbfb;\
@@ -6617,7 +6739,7 @@ exports.retrieveFollowingIdentifier = function(text, pos, regex) {
 });
 
 define('ace/autocomplete/text_completer', ['require', 'exports', 'module' , 'ace/range'], function(require, exports, module) {
-    var Range = require("ace/range").Range;
+    var Range = require("../range").Range;
     
     var splitRegex = /[^a-zA-Z_0-9\$\-]+/;
 
@@ -6658,4 +6780,335 @@ define('ace/autocomplete/text_completer', ['require', 'exports', 'module' , 'ace
             };
         }));
     };
+});
+
+define('ace/ext/beautify', ['require', 'exports', 'module' , 'ace/token_iterator', 'ace/ext/beautify/php_rules'], function(require, exports, module) {
+
+var TokenIterator = require("ace/token_iterator").TokenIterator;
+
+var phpTransform = require("./beautify/php_rules").transform;
+
+exports.beautify = function(session) {
+    var iterator = new TokenIterator(session, 0, 0);
+    var token = iterator.getCurrentToken();
+
+    var context = session.$modeId.split("/").pop();
+
+    var code = phpTransform(iterator, context);
+    session.doc.setValue(code);
+};
+
+exports.commands = [{
+    name: "beautify",
+    exec: function(editor) {
+        exports.beautify(editor.session);
+    },
+    bindKey: "Ctrl-Shift-B"
+}]
+
+});
+
+define('ace/ext/beautify/php_rules', ['require', 'exports', 'module' , 'ace/token_iterator'], function(require, exports, module) {
+
+var TokenIterator = require("ace/token_iterator").TokenIterator;
+exports.newLines = [{
+    type: 'support.php_tag',
+    value: '<?php'
+}, {
+    type: 'support.php_tag',
+    value: '<?'
+}, {
+    type: 'support.php_tag',
+    value: '?>'
+}, {
+    type: 'paren.lparen',
+    value: '{',
+    indent: true
+}, {
+    type: 'paren.rparen',
+    breakBefore: true,
+    value: '}',
+    indent: false
+}, {
+    type: 'paren.rparen',
+    breakBefore: true,
+    value: '})',
+    indent: false,
+    dontBreak: true
+}, {
+    type: 'comment'
+}, {
+    type: 'text',
+    value: ';'
+}, {
+    type: 'text',
+    value: ':',
+    context: 'php'
+}, {
+    type: 'keyword',
+    value: 'case',
+    indent: true,
+    dontBreak: true
+}, {
+    type: 'keyword',
+    value: 'default',
+    indent: true,
+    dontBreak: true
+}, {
+    type: 'keyword',
+    value: 'break',
+    indent: false,
+    dontBreak: true
+}, {
+    type: 'punctuation.doctype.end',
+    value: '>'
+}, {
+    type: 'meta.tag.punctuation.end',
+    value: '>'
+}, {
+    type: 'meta.tag.punctuation.begin',
+    value: '<',
+    blockTag: true,
+    indent: true,
+    dontBreak: true
+}, {
+    type: 'meta.tag.punctuation.begin',
+    value: '</',
+    indent: false,
+    breakBefore: true,
+    dontBreak: true
+}, {
+    type: 'punctuation.operator',
+    value: ';'
+}];
+
+exports.spaces = [{
+    type: 'xml-pe',
+    prepend: true
+},{
+    type: 'entity.other.attribute-name',
+    prepend: true
+}, {
+    type: 'storage.type',
+    value: 'var',
+    append: true
+}, {
+    type: 'storage.type',
+    value: 'function',
+    append: true
+}, {
+    type: 'keyword.operator',
+    value: '='
+}, {
+    type: 'keyword',
+    value: 'as',
+    prepend: true,
+    append: true
+}, {
+    type: 'keyword',
+    value: 'function',
+    append: true
+}, {
+    type: 'support.function',
+    next: /[^\(]/,
+    append: true
+}, {
+    type: 'keyword',
+    value: 'or',
+    append: true,
+    prepend: true
+}, {
+    type: 'keyword',
+    value: 'and',
+    append: true,
+    prepend: true
+}, {
+    type: 'keyword',
+    value: 'case',
+    append: true
+}, {
+    type: 'keyword.operator',
+    value: '||',
+    append: true,
+    prepend: true
+}, {
+    type: 'keyword.operator',
+    value: '&&',
+    append: true,
+    prepend: true
+}];
+exports.singleTags = ['!doctype','area','base','br','hr','input','img','link','meta'];
+
+exports.transform = function(iterator, maxPos, context) {
+    var token = iterator.getCurrentToken();
+    
+    var newLines = exports.newLines;
+    var spaces = exports.spaces;
+    var singleTags = exports.singleTags;
+
+    var code = '';
+    
+    var indentation = 0;
+    var dontBreak = false;
+    var tag;
+    var lastTag;
+    var lastToken = {};
+    var nextTag;
+    var nextToken = {};
+    var breakAdded = false;
+    var value = '';
+
+    while (token!==null) {
+        console.log(token);
+
+        if( !token ){
+            token = iterator.stepForward();
+            continue;
+        }
+        if( token.type == 'support.php_tag' && token.value != '?>' ){
+            context = 'php';
+        }
+        else if( token.type == 'support.php_tag' && token.value == '?>' ){
+            context = 'html';
+        }
+        else if( token.type == 'meta.tag.name.style' && context != 'css' ){
+            context = 'css';
+        }
+        else if( token.type == 'meta.tag.name.style' && context == 'css' ){
+            context = 'html';
+        }
+        else if( token.type == 'meta.tag.name.script' && context != 'js' ){
+            context = 'js';
+        }
+        else if( token.type == 'meta.tag.name.script' && context == 'js' ){
+            context = 'html';
+        }
+
+        nextToken = iterator.stepForward();
+        if (nextToken && nextToken.type.indexOf('meta.tag.name') == 0) {
+            nextTag = nextToken.value;
+        }
+        if ( lastToken.type == 'support.php_tag' && lastToken.value == '<?=') {
+            dontBreak = true;
+        }
+        if (token.type == 'meta.tag.name') {
+            token.value = token.value.toLowerCase();
+        }
+        if (token.type == 'text') {
+            token.value = token.value.trim();
+        }
+        if (!token.value) {
+            token = nextToken;
+            continue;
+        }
+        value = token.value;
+        for (var i in spaces) {
+            if (
+                token.type == spaces[i].type &&
+                (!spaces[i].value || token.value == spaces[i].value) &&
+                (
+                    nextToken &&
+                    (!spaces[i].next || spaces[i].next.test(nextToken.value))
+                )
+            ) {
+                if (spaces[i].prepend) {
+                    value = ' ' + token.value;
+                }
+
+                if (spaces[i].append) {
+                    value += ' ';
+                }
+            }
+        }
+        if (token.type.indexOf('meta.tag.name') == 0) {
+            tag = token.value;
+        }
+        breakAdded = false;
+        for (i in newLines) {
+            if (
+                token.type == newLines[i].type &&
+                (
+                    !newLines[i].value ||
+                    token.value == newLines[i].value
+                ) &&
+                (
+                    !newLines[i].blockTag ||
+                    singleTags.indexOf(nextTag) === -1
+                ) &&
+                (
+                    !newLines[i].context ||
+                    newLines[i].context === context
+                )
+            ) {
+                if (newLines[i].indent === false) {
+                    indentation--;
+                }
+
+                if (
+                    newLines[i].breakBefore &&
+                    ( !newLines[i].prev || newLines[i].prev.test(lastToken.value) )
+                ) {
+                    code += "\n";
+                    breakAdded = true;
+                    for (i = 0; i < indentation; i++) {
+                        code += "\t";
+                    }
+                }
+
+                break;
+            }
+        }
+
+        if (dontBreak===false) {
+            for (i in newLines) {
+                if (
+                    lastToken.type == newLines[i].type &&
+                    (
+                        !newLines[i].value || lastToken.value == newLines[i].value
+                    ) &&
+                    (
+                        !newLines[i].blockTag ||
+                        singleTags.indexOf(tag) === -1
+                    ) &&
+                    (
+                        !newLines[i].context ||
+                        newLines[i].context === context
+                    )
+                ) {
+                    if (newLines[i].indent === true) {
+                        indentation++;
+                    }
+
+                    if (!newLines[i].dontBreak  && !breakAdded) {
+                        code += "\n";
+                        for (i = 0; i < indentation; i++) {
+                            code += "\t";
+                        }
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        code += value;
+        if ( lastToken.type == 'support.php_tag' && lastToken.value == '?>' ) {
+            dontBreak = false;
+        }
+        lastTag = tag;
+
+        lastToken = token;
+
+        token = nextToken;
+
+        if (token===null) {
+            break;
+        }
+    }
+    
+    return code;
+};
+
+
+
 });
