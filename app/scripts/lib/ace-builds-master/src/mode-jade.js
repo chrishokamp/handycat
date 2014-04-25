@@ -33,12 +33,11 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
-define('ace/mode/jade', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text', 'ace/tokenizer', 'ace/mode/jade_highlight_rules', 'ace/mode/folding/coffee'], function(require, exports, module) {
+define('ace/mode/jade', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text', 'ace/mode/jade_highlight_rules', 'ace/mode/folding/coffee'], function(require, exports, module) {
 
 
 var oop = require("../lib/oop");
 var TextMode = require("./text").Mode;
-var Tokenizer = require("../tokenizer").Tokenizer;
 var JadeHighlightRules = require("./jade_highlight_rules").JadeHighlightRules;
 var FoldMode = require("./folding/coffee").FoldMode;
 
@@ -287,7 +286,7 @@ var escaped = function(ch) {
 function github_embed(tag, prefix) {
     return { // Github style block
         token : "support.function",
-        regex : "^```" + tag + "\\s*$",
+        regex : "^\\s*```" + tag + "\\s*$",
         push  : prefix + "start"
     };
 }
@@ -318,7 +317,7 @@ var MarkdownHighlightRules = function() {
        github_embed("css", "csscode-"),
     { // Github style block
         token : "support.function",
-        regex : "^```\\s*[a-zA-Z]*(?:{.*?\\})?\\s*$",
+        regex : "^\\s*```\\s*\\S*(?:{.*?\\})?\\s*$",
         next  : "githubblock"
     }, { // block quote
         token : "string.blockquote",
@@ -401,11 +400,15 @@ var MarkdownHighlightRules = function() {
             next  : "listblock-start"
         }, {
             include : "basic", noEscape: true
+        }, { // Github style block
+            token : "support.function",
+            regex : "^\\s*```\\s*[a-zA-Z]*(?:{.*?\\})?\\s*$",
+            next  : "githubblock"
         }, {
             defaultToken : "list" //do not use markup.list to allow stling leading `*` differntly
         } ],
 
-        "blockquote" : [ { // BLockquotes only escape on blank lines.
+        "blockquote" : [ { // Blockquotes only escape on blank lines.
             token : "empty_line",
             regex : "^\\s*$",
             next  : "start"
@@ -421,7 +424,7 @@ var MarkdownHighlightRules = function() {
 
         "githubblock" : [ {
             token : "support.function",
-            regex : "^```",
+            regex : "^\\s*```",
             next  : "start"
         }, {
             token : "support.function",
@@ -431,25 +434,25 @@ var MarkdownHighlightRules = function() {
 
     this.embedRules(JavaScriptHighlightRules, "jscode-", [{
        token : "support.function",
-       regex : "^```",
+       regex : "^\\s*```",
        next  : "pop"
     }]);
 
     this.embedRules(HtmlHighlightRules, "htmlcode-", [{
        token : "support.function",
-       regex : "^```",
+       regex : "^\\s*```",
        next  : "pop"
     }]);
 
     this.embedRules(CssHighlightRules, "csscode-", [{
        token : "support.function",
-       regex : "^```",
+       regex : "^\\s*```",
        next  : "pop"
     }]);
 
     this.embedRules(XmlHighlightRules, "xmlcode-", [{
        token : "support.function",
-       regex : "^```",
+       regex : "^\\s*```",
        next  : "pop"
     }]);
 
@@ -813,67 +816,81 @@ exports.DocCommentHighlightRules = DocCommentHighlightRules;
 
 });
 
-define('ace/mode/xml_highlight_rules', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/xml_util', 'ace/mode/text_highlight_rules'], function(require, exports, module) {
+define('ace/mode/xml_highlight_rules', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text_highlight_rules'], function(require, exports, module) {
 
 
 var oop = require("../lib/oop");
-var xmlUtil = require("./xml_util");
 var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
 
 var XmlHighlightRules = function(normalize) {
     this.$rules = {
         start : [
-            {token : "punctuation.string.begin", regex : "<\\!\\[CDATA\\[", next : "cdata"},
+            {token : "string.cdata.xml", regex : "<\\!\\[CDATA\\[", next : "cdata"},
             {
-                token : ["punctuation.instruction.begin", "keyword.instruction"],
-                regex : "(<\\?)(xml)(?=[\\s])", next : "xml_declaration"
+                token : ["punctuation.xml-decl.xml", "keyword.xml-decl.xml"],
+                regex : "(<\\?)(xml)(?=[\\s])", next : "xml_decl", caseInsensitive: true
             },
             {
-                token : ["punctuation.instruction.begin", "keyword.instruction"],
-                regex : "(<\\?)([-_a-zA-Z0-9]+)", next : "instruction"
+                token : ["punctuation.instruction.xml", "keyword.instruction.xml"],
+                regex : "(<\\?)([-_a-zA-Z0-9]+)", next : "processing_instruction",
             },
-            {token : "comment", regex : "<\\!--", next : "comment"},
+            {token : "comment.xml", regex : "<\\!--", next : "comment"},
             {
-                token : ["punctuation.doctype.begin", "meta.tag.doctype"],
-                regex : "(<\\!)(DOCTYPE)(?=[\\s])", next : "doctype"
+                token : ["xml-pe.doctype.xml", "xml-pe.doctype.xml"],
+                regex : "(<\\!)(DOCTYPE)(?=[\\s])", next : "doctype", caseInsensitive: true
             },
             {include : "tag"},
-            {include : "reference"}
+            {token : "text.end-tag-open.xml", regex: "</"},
+            {token : "text.tag-open.xml", regex: "<"},
+            {include : "reference"},
+            {defaultToken : "text.xml"}
         ],
 
-        xml_declaration : [
-            {include : "attributes"},
-            {include : "instruction"}
-        ],
+        xml_decl : [{
+            token : "entity.other.attribute-name.decl-attribute-name.xml",
+            regex : "(?:[-_a-zA-Z0-9]+:)?[-_a-zA-Z0-9]+"
+        }, {
+            token : "keyword.operator.decl-attribute-equals.xml",
+            regex : "="
+        }, {
+            include: "whitespace"
+        }, {
+            include: "string"
+        }, {
+            token : "punctuation.xml-decl.xml",
+            regex : "\\?>",
+            next : "start"
+        }],
 
-        instruction : [
-            {token : "punctuation.instruction.end", regex : "\\?>", next : "start"}
+        processing_instruction : [
+            {token : "punctuation.instruction.xml", regex : "\\?>", next : "start"},
+            {defaultToken : "instruction.xml"}
         ],
 
         doctype : [
-            {include : "space"},
+            {include : "whitespace"},
             {include : "string"},
-            {token : "punctuation.doctype.end", regex : ">", next : "start"},
-            {token : "xml-pe", regex : "[-_a-zA-Z0-9:]+"},
-            {token : "punctuation.begin", regex : "\\[", push : "declarations"}
+            {token : "xml-pe.doctype.xml", regex : ">", next : "start"},
+            {token : "xml-pe.xml", regex : "[-_a-zA-Z0-9:]+"},
+            {token : "punctuation.int-subset", regex : "\\[", push : "int_subset"}
         ],
 
-        declarations : [{
-            token : "text",
+        int_subset : [{
+            token : "text.xml",
             regex : "\\s+"
         }, {
-            token: "punctuation.end",
+            token: "punctuation.int-subset.xml",
             regex: "]",
             next: "pop"
         }, {
-            token : ["punctuation.begin", "keyword"],
+            token : ["punctuation.markup-decl.xml", "keyword.markup-decl.xml"],
             regex : "(<\\!)([-_a-zA-Z0-9]+)",
             push : [{
                 token : "text",
                 regex : "\\s+"
             },
             {
-                token : "punctuation.end",
+                token : "punctuation.markup-decl.xml",
                 regex : ">",
                 next : "pop"
             },
@@ -881,75 +898,85 @@ var XmlHighlightRules = function(normalize) {
         }],
 
         cdata : [
-            {token : "string.end", regex : "\\]\\]>", next : "start"},
-            {token : "text", regex : "\\s+"},
-            {token : "text", regex : "(?:[^\\]]|\\](?!\\]>))+"}
+            {token : "string.cdata.xml", regex : "\\]\\]>", next : "start"},
+            {token : "text.xml", regex : "\\s+"},
+            {token : "text.xml", regex : "(?:[^\\]]|\\](?!\\]>))+"}
         ],
 
         comment : [
-            {token : "comment", regex : "-->", next : "start"},
-            {defaultToken : "comment"}
-        ],
-
-        tag : [{
-            token : ["meta.tag.punctuation.begin", "meta.tag.name"],
-            regex : "(<)((?:[-_a-zA-Z0-9]+:)?[-_a-zA-Z0-9]+)",
-            next: [
-                {include : "attributes"},
-                {token : "meta.tag.punctuation.end", regex : "/?>", next : "start"}
-            ]
-        }, {
-            token : ["meta.tag.punctuation.begin", "meta.tag.name"],
-            regex : "(</)((?:[-_a-zA-Z0-9]+:)?[-_a-zA-Z0-9]+)",
-            next: [
-                {include : "space"},
-                {token : "meta.tag.punctuation.end", regex : ">", next : "start"}
-            ]
-        }],
-
-        space : [
-            {token : "text", regex : "\\s+"}
+            {token : "comment.xml", regex : "-->", next : "start"},
+            {defaultToken : "comment.xml"}
         ],
 
         reference : [{
-            token : "constant.language.escape",
+            token : "constant.language.escape.reference.xml",
             regex : "(?:&#[0-9]+;)|(?:&#x[0-9a-fA-F]+;)|(?:&[a-zA-Z0-9_:\\.-]+;)"
-        }, {
-            token : "text", regex : "&"
         }],
 
+        attr_reference : [{
+            token : "constant.language.escape.reference.attribute-value.xml",
+            regex : "(?:&#[0-9]+;)|(?:&#x[0-9a-fA-F]+;)|(?:&[a-zA-Z0-9_:\\.-]+;)"
+        }],
+
+        tag : [{
+            token : ["meta.tag.punctuation.tag-open.xml", "meta.tag.punctuation.end-tag-open.xml", "meta.tag.tag-name.xml"],
+            regex : "(?:(<)|(</))((?:[-_a-zA-Z0-9]+:)?[-_a-zA-Z0-9]+)",
+            next: [
+                {include : "attributes"},
+                {token : "meta.tag.punctuation.tag-close.xml", regex : "/?>", next : "start"}
+            ]
+        }],
+
+        tag_whitespace : [
+            {token : "text.tag-whitespace.xml", regex : "\\s+"}
+        ],
+        whitespace : [
+            {token : "text.whitespace.xml", regex : "\\s+"}
+        ],
         string: [{
-            token : "string",
+            token : "string.xml",
             regex : "'",
-            push : "qstring_inner"
+            push : [
+                {token : "string.xml", regex: "'", next: "pop"},
+                {defaultToken : "string.xml"}
+            ]
         }, {
-            token : "string",
+            token : "string.xml",
             regex : '"',
-            push : "qqstring_inner"
+            push : [
+                {token : "string.xml", regex: '"', next: "pop"},
+                {defaultToken : "string.xml"}
+            ]
         }],
-
-        qstring_inner: [
-            {token : "string", regex: "'", next: "pop"},
-            {include : "reference"},
-            {defaultToken : "string"}
-        ],
-
-        qqstring_inner: [
-            {token : "string", regex: '"', next: "pop"},
-            {include : "reference"},
-            {defaultToken : "string"}
-        ],
 
         attributes: [{
-            token : "entity.other.attribute-name",
+            token : "entity.other.attribute-name.xml",
             regex : "(?:[-_a-zA-Z0-9]+:)?[-_a-zA-Z0-9]+"
         }, {
-            token : "keyword.operator.separator",
+            token : "keyword.operator.attribute-equals.xml",
             regex : "="
         }, {
-            include : "space"
+            include: "tag_whitespace"
         }, {
-            include : "string"
+            include: "attribute_value"
+        }],
+
+        attribute_value: [{
+            token : "string.attribute-value.xml",
+            regex : "'",
+            push : [
+                {token : "string.attribute-value.xml", regex: "'", next: "pop"},
+                {include : "attr_reference"},
+                {defaultToken : "string.attribute-value.xml"}
+            ]
+        }, {
+            token : "string.attribute-value.xml",
+            regex : '"',
+            push : [
+                {token : "string.attribute-value.xml", regex: '"', next: "pop"},
+                {include : "attr_reference"},
+                {defaultToken : "string.attribute-value.xml"}
+            ]
         }]
     };
 
@@ -962,18 +989,17 @@ var XmlHighlightRules = function(normalize) {
 
     this.embedTagRules = function(HighlightRules, prefix, tag){
         this.$rules.tag.unshift({
-            token : ["meta.tag.punctuation.begin", "meta.tag.name." + tag],
-            regex : "(<)(" + tag + ")",
+            token : ["meta.tag.punctuation.tag-open.xml", "meta.tag." + tag + ".tag-name.xml"],
+            regex : "(<)(" + tag + "(?=\\s|>|$))",
             next: [
-                {include : "space"},
                 {include : "attributes"},
-                {token : "meta.tag.punctuation.end", regex : "/?>", next : prefix + "start"}
+                {token : "meta.tag.punctuation.tag-close.xml", regex : "/?>", next : prefix + "start"}
             ]
         });
 
         this.$rules[tag + "-end"] = [
-            {include : "space"},
-            {token : "meta.tag.punctuation.end", regex : ">",  next: "start",
+            {include : "attributes"},
+            {token : "meta.tag.punctuation.tag-close.xml", regex : "/?>",  next: "start",
                 onMatch : function(value, currentState, stack) {
                     stack.splice(0);
                     return this.token;
@@ -981,14 +1007,14 @@ var XmlHighlightRules = function(normalize) {
         ]
 
         this.embedRules(HighlightRules, prefix, [{
-            token: ["meta.tag.punctuation.begin", "meta.tag.name." + tag],
-            regex : "(</)(" + tag + ")",
+            token: ["meta.tag.punctuation.end-tag-open.xml", "meta.tag." + tag + ".tag-name.xml"],
+            regex : "(</)(" + tag + "(?=\\s|>|$))",
             next: tag + "-end"
         }, {
-            token: "string.begin",
+            token: "string.cdata.xml",
             regex : "<\\!\\[CDATA\\["
         }, {
-            token: "string.end",
+            token: "string.cdata.xml",
             regex : "\\]\\]>"
         }]);
     };
@@ -998,76 +1024,6 @@ var XmlHighlightRules = function(normalize) {
 oop.inherits(XmlHighlightRules, TextHighlightRules);
 
 exports.XmlHighlightRules = XmlHighlightRules;
-});
-
-define('ace/mode/xml_util', ['require', 'exports', 'module' ], function(require, exports, module) {
-
-
-function string(state) {
-    return [{
-        token : "string",
-        regex : '"',
-        next : state + "_qqstring"
-    }, {
-        token : "string",
-        regex : "'",
-        next : state + "_qstring"
-    }];
-}
-
-function multiLineString(quote, state) {
-    return [
-        {token : "string", regex : quote, next : state},
-        {
-            token : "constant.language.escape",
-            regex : "(?:&#[0-9]+;)|(?:&#x[0-9a-fA-F]+;)|(?:&[a-zA-Z0-9_:\\.-]+;)" 
-        },
-        {defaultToken : "string"}
-    ];
-}
-
-exports.tag = function(states, name, nextState, tagMap) {
-    states[name] = [{
-        token : "text",
-        regex : "\\s+"
-    }, {
-        
-    token : !tagMap ? "meta.tag.tag-name" : function(value) {
-            if (tagMap[value])
-                return "meta.tag.tag-name." + tagMap[value];
-            else
-                return "meta.tag.tag-name";
-        },
-        regex : "[-_a-zA-Z0-9:]+",
-        next : name + "_embed_attribute_list" 
-    }, {
-        token: "empty",
-        regex: "",
-        next : name + "_embed_attribute_list"
-    }];
-
-    states[name + "_qstring"] = multiLineString("'", name + "_embed_attribute_list");
-    states[name + "_qqstring"] = multiLineString("\"", name + "_embed_attribute_list");
-    
-    states[name + "_embed_attribute_list"] = [{
-        token : "meta.tag.r",
-        regex : "/?>",
-        next : nextState
-    }, {
-        token : "keyword.operator",
-        regex : "="
-    }, {
-        token : "entity.other.attribute-name",
-        regex : "[-_a-zA-Z0-9:]+"
-    }, {
-        token : "constant.numeric", // float
-        regex : "[+-]?\\d+(?:(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)?\\b"
-    }, {
-        token : "text",
-        regex : "\\s+"
-    }].concat(string(name));
-};
-
 });
 
 define('ace/mode/html_highlight_rules', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/lib/lang', 'ace/mode/css_highlight_rules', 'ace/mode/javascript_highlight_rules', 'ace/mode/xml_highlight_rules'], function(require, exports, module) {
@@ -1104,17 +1060,17 @@ var HtmlHighlightRules = function() {
 
     this.addRules({
         attributes: [{
-            include : "space"
+            include : "tag_whitespace"
         }, {
-            token : "entity.other.attribute-name",
+            token : "entity.other.attribute-name.xml",
             regex : "[-_a-zA-Z0-9:]+"
         }, {
-            token : "keyword.operator.separator",
+            token : "keyword.operator.attribute-equals.xml",
             regex : "=",
             push : [{
-                include: "space"
+                include: "tag_whitespace"
             }, {
-                token : "string",
+                token : "string.unquoted.attribute-value.html",
                 regex : "[^<>='\"`\\s]+",
                 next : "pop"
             }, {
@@ -1123,33 +1079,21 @@ var HtmlHighlightRules = function() {
                 next : "pop"
             }]
         }, {
-            include : "string"
+            include : "attribute_value"
         }],
         tag: [{
             token : function(start, tag) {
                 var group = tagMap[tag];
-                return ["meta.tag.punctuation.begin",
-                    "meta.tag.name" + (group ? "." + group : "")];
+                return ["meta.tag.punctuation." + (start == "<" ? "" : "end-") + "tag-open.xml",
+                    "meta.tag" + (group ? "." + group : "") + ".tag-name.xml"];
             },
-            regex : "(<)([-_a-zA-Z0-9:]+)",
-            next: "start_tag_stuff"
-        }, {
-            token : function(start, tag) {
-                var group = tagMap[tag];
-                return ["meta.tag.punctuation.begin",
-                    "meta.tag.name" + (group ? "." + group : "")];
-            },
-            regex : "(</)([-_a-zA-Z0-9:]+)",
-            next: "end_tag_stuff"
+            regex : "(</?)([-_a-zA-Z0-9:]+)",
+            next: "tag_stuff"
         }],
-        start_tag_stuff: [
+        tag_stuff: [
             {include : "attributes"},
-            {token : "meta.tag.punctuation.end", regex : "/?>", next : "start"}
+            {token : "meta.tag.punctuation.tag-close.xml", regex : "/?>", next : "start"}
         ],
-        end_tag_stuff: [
-            {include : "space"},
-            {token : "meta.tag.punctuation.end", regex : ">", next : "start"}
-        ]
     });
 
     this.embedTagRules(CssHighlightRules, "css-", "style");

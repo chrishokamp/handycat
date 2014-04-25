@@ -6,9 +6,9 @@ angular.module('services').factory('Morphology', [ '$http','$log', function($htt
   // var wordCache = {};
 
   // local prefix
-  // var routePrefix = 'http://0.0.0.0:5001/morphology/';
+  var routePrefix = 'http://0.0.0.0:5001/morphology/';
   // current AWS
-  var routePrefix = 'http://ec2-54-186-18-81.us-west-2.compute.amazonaws.com:5001/morphology/';
+//  var routePrefix = 'http://ec2-54-186-18-81.us-west-2.compute.amazonaws.com:5001/morphology/';
   var default_lang = 'de';
 
   return {
@@ -19,7 +19,7 @@ angular.module('services').factory('Morphology', [ '$http','$log', function($htt
       lang ? morphologyRoute = routePrefix + lang : morphologyRoute = routePrefix + default_lang;
 
       var data = { "phrase": phrase, "change_type": 'rfNumber' };
-      return $http.post(morphologyRoute, data);
+      return $http.post(morphologyRoute, data, { timeout: 5000 });
     },
     // Change the gender of a word or phrase - in general, we can only change the number of adjectives, articles, and pronouns
     changeGender: function(phrase, lang) {
@@ -28,7 +28,7 @@ angular.module('services').factory('Morphology', [ '$http','$log', function($htt
       lang ? morphologyRoute = routePrefix + lang : morphologyRoute = routePrefix + default_lang;
 
       var data = { "phrase": phrase, "change_type": 'rfGender' };
-      return $http.post(morphologyRoute, data);
+      return $http.post(morphologyRoute, data, { timeout: 5000 });
     },
     changeCase: function(phrase, lang) {
       $log.log('changeCase call: ' + phrase);
@@ -36,7 +36,7 @@ angular.module('services').factory('Morphology', [ '$http','$log', function($htt
       lang ? morphologyRoute = routePrefix + lang : morphologyRoute = routePrefix + default_lang;
 
       var data = { "phrase": phrase, "change_type": 'rfCase' };
-      return $http.post(morphologyRoute, data);
+      return $http.post(morphologyRoute, data, { timeout: 5000 });
     },
   };
 

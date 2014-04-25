@@ -30,8 +30,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-define('ace/ext/themelist', ['require', 'exports', 'module' ], function(require, exports, module) {
+define('ace/ext/themelist', ['require', 'exports', 'module' , 'ace/lib/fixoldbrowsers'], function(require, exports, module) {
 
+require("ace/lib/fixoldbrowsers");
 
 var themeData = [
     ["Chrome"         ],
@@ -66,17 +67,17 @@ var themeData = [
     ["Tomorrow Night 80s"   ,"tomorrow_night_eighties" ,  "dark"],
     ["Twilight"             ,"twilight"                ,  "dark"],
     ["Vibrant Ink"          ,"vibrant_ink"             ,  "dark"]
-]
+];
 
 
 exports.themesByName = {};
 exports.themes = themeData.map(function(data) {
     var name = data[1] || data[0].replace(/ /g, "_").toLowerCase();
     var theme = {
-         caption: data[0],
-         theme: "ace/theme/" + name,
-         isDark: data[2] == "dark",
-         name: name
+        caption: data[0],
+        theme: "ace/theme/" + name,
+        isDark: data[2] == "dark",
+        name: name
     };
     exports.themesByName[name] = theme;
     return theme;

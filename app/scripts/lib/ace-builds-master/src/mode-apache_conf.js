@@ -33,12 +33,11 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-define('ace/mode/apache_conf', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text', 'ace/tokenizer', 'ace/mode/apache_conf_highlight_rules', 'ace/mode/folding/cstyle'], function(require, exports, module) {
+define('ace/mode/apache_conf', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text', 'ace/mode/apache_conf_highlight_rules', 'ace/mode/folding/cstyle'], function(require, exports, module) {
 
 
 var oop = require("../lib/oop");
 var TextMode = require("./text").Mode;
-var Tokenizer = require("../tokenizer").Tokenizer;
 var ApacheConfHighlightRules = require("./apache_conf_highlight_rules").ApacheConfHighlightRules;
 var FoldMode = require("./folding/cstyle").FoldMode;
 
@@ -50,6 +49,7 @@ oop.inherits(Mode, TextMode);
 
 (function() {
     this.lineCommentStart = "#";
+    this.$id = "ace/mode/apache_conf";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;

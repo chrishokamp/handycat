@@ -85,8 +85,14 @@ angular.module('controllers').controller('AceCtrl',
     var currentSelection = getSelection();
 
     // use the replace method on the ace Document object
-    editor.session.getDocument().replace(currentSelection, text);
+    // cursor location is in an object like: { column: 37, row: 0 }
+    var newCursorLocation = editor.session.getDocument().replace(currentSelection, text);
+    var newRange = new aceRange(newCursorLocation.row, newCursorLocation.column - text.length, newCursorLocation.row, newCursorLocation.column);
     $log.log("replaced current selection with: " + text);
+    // TODO: select the new replacement, or create the range that it 'will be' so that we can add classes to the newly inserted text
+    // add, then remove a class from the selection range
+    $scope.highlightRange(newRange);
+    $scope.editor.session.selection.clearSelection();
 
     // refocus the AceEditor
     $scope.editor.focus();
@@ -94,11 +100,14 @@ angular.module('controllers').controller('AceCtrl',
   // let the parent see replaceSelection
   $scope.$parent.replaceSelection = $scope.replaceSelection;
 
+  // TODO: make sure that insertText and replaceText are called in the right places -- right now they are intermixed
   $scope.insertText = function(text) {
     $log.log('insertText called with value: ' + text);
     var editor = $scope.editor;
+    var currentSelection = getSelection();
 
-    editor.insert(text);
+    // TODO: separate this from insertText
+    $scope.replaceSelection(text);
     editor.focus();
   };
   // let the $parent controller see insertText, so that we can hit it from sibling controllers
@@ -118,8 +127,8 @@ angular.module('controllers').controller('AceCtrl',
     $scope.replaceSelection(modified_text);
 
     // Updates the selection to match the size of the modified text
-    range.end.column += modified_text.length - original_text.length;
-    selectRange(range);
+    //range.end.column += modified_text.length - original_text.length;
+    //selectRange(range);
 
     // save this action
     $scope.editHistory.push(
@@ -211,27 +220,19 @@ angular.module('controllers').controller('AceCtrl',
       }
    });
 
-// Chris: use the function below to highlight the search term in the text
-    // a way of getting the current token on click
-//      var Range = ace.require("ace/range").Range, markerId
-//      var handler = function(e){
-//          var editor = e.editor
-//          console.log(e)
-//          var pos = editor.getCursorPosition()
-//          var token = editor.session.getTokenAt(pos.row, pos.column)
-//          if (/\bkeyword\b/.test(token.type))
-//              console.log(token.value, 'is a keyword')
-//
-//          // add highlight for the clicked token
-//          var range = new Range(pos.row, token.start,
-//              pos.row, token.start + token.value.length)
-//          console.log(range)
-//          editor.session.removeMarker(markerId)
-//
-//          // Chris - ace_bracket would be the css class
-//          markerId = editor.session.addMarker(range, 'ace_bracket red')
-//      }
-//      editor.on("click", handler)
+    // pulse the color on change, so that it's clear where the change happened
+    $scope.highlightRange = function(phraseRange) {
+        $log.log('Highlighting the range: ')
+        $log.log(phraseRange)
+//        editor.session.removeMarker(markerId)
+        var marker = $scope.editor.session.addMarker(phraseRange, 'changed_range');
+        // remove the marker after a bit
+        $timeout(
+          function() {
+            $scope.editor.getSession().removeMarker(marker);
+          }, 2000);
+
+    }
 
     editor.setOptions({enableBasicAutocompletion: true});
     var tmCompleter = {
@@ -250,6 +251,7 @@ angular.module('controllers').controller('AceCtrl',
         }));
       }
     };
+
     var glossaryCompleter = {
       getCompletions: function(editor, session, pos, prefix, callback) {
         if (prefix.length === 0) { callback(null, []); return }

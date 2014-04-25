@@ -1,5 +1,5 @@
 // attribute-only directive which makes the element draggable
-angular.module('directives').directive('draggable', function($log) {
+angular.module('directives').directive('draggable' ['$log', function($log) {
   return {
     restrict: 'A',
     scope: {},
@@ -42,4 +42,4 @@ angular.module('directives').directive('draggable', function($log) {
       });
     }
   };
-});
+}]);

@@ -15,17 +15,14 @@
 
       <!-- TODO: sass-bootstrap is included from the main.scss sass file -->
       <!-- build:css styles/vendor.css -->
-      <!-- bower:css -->
       <!--<link rel="stylesheet" href="styles/bootstrap.min.css" />-->
       <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
       <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />
-      <!-- endbower -->
       <!-- endbuild -->
 
       <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/style.css">
-        <!--<link rel="stylesheet" href="styles/test.css">-->
       <!-- endbuild -->
 </head>
   <body ng-app="editorComponentsApp">
@@ -38,8 +35,7 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!-- build:js({.tmp,app}) scripts/vendor.js -->
-
+    <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -55,13 +51,12 @@
     <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
 
-    <!-- endbower -->
-
     <script src="bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.10.0.js"></script>
     <script src="scripts/lib/xliff_data_selector.js"></script>
     <script src="scripts/lib/german_snowball_stemmer.js"></script>
     <script src="scripts/lib/ace-builds-master/src-noconflict/ace.js"></script>
     <script src="scripts/lib/ace-builds-master/src-noconflict/ext-language_tools.js"></script>
+    <!-- endbower -->
     <!-- endbuild -->
 
     <!-- CAT editor scripts -->
@@ -108,6 +103,9 @@
     <script src="scripts/app.js"></script>
 
     <!-- endbuild -->
+
+    <!-- CAT Tool Templates -->
+    <script src="scripts/cat.templates.js"></script>
 
 </body>
 </html>
