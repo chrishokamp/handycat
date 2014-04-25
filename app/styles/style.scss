@@ -112,6 +112,10 @@ h3 {
   z-index: 5;
 }
 
+.move-left {
+  left: -30px;
+}
+
 .content-card {
   @extend %ace-editor-height;
   background-color: white;
@@ -130,6 +134,9 @@ span.cat-glyph {
 
 .morph-glyph {
   background-color: orange;
+}
+.mode-glyph {
+  background-color: grey;
 }
 .seg-finished {
 //  margin-right: 20px;
