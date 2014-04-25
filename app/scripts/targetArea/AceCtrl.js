@@ -17,6 +17,52 @@ angular.module('controllers').controller('AceCtrl',
 //    $scope.targetSegment = Document.targetSegments[index];
 //  }
 
+    // an object representing the current edit mode
+    // params:
+    // spanTokenizer - a function which returns a promise,
+    // selectRange - a function which takes a range as its argument
+    // resolving to a list of tokens in the format - { 'token': <token>, 'start': <start_index>, 'end': <end_index> }
+
+    // swaps the edit mode - should be a function on the editor
+    var changeEditMode = function() {
+      // clear existing selections
+      // highlight the first token of this view
+      // set state on the EditMode
+      // make sure that the edit mode updates when there are changes in the UI
+      // we need functions like 'put after' / 'put before'
+
+    };
+
+    var EditMode = function(spanTokenizer, selectRange) {
+      return {
+        // remember that tokenRanges can and will be updated asynchronously
+        tokenRanges: [],
+        modeName: '',
+        currentToken: null,
+        // TODO: implement hasRange -- see ace editor source
+        // if we have a token at { column, row }, return that range, else return null
+        setSpans: function(text) {
+          var self = this;
+          self.tokenRanges = [];
+          var tokenPromise = spanTokenizer(text);
+          tokenPromise.then(
+            function(tokenList) {
+              self.tokenRanges = _.map(tokenList, function(obj) {
+                // currently we don't allow multiple rows, and we wrap the text, so the row is always = 0
+                return new aceRange(0, obj.start, 0, obj.end);
+              });
+              $log.log('testing EditMode');
+              $log.log("new value of token ranges: ");
+              $log.log(self.tokenRanges);
+            }
+          );
+        }
+      }
+    };
+
+    var testMode = EditMode(tokenizer.getTokenRanges);
+    testMode.setSpans('this is a test sentence.');
+
 // TODO: move this logic to the tokenizer
 // TODO: maintain the current TM matches based on the selected token in the source side
   $scope.minPhraseLen = 15;
@@ -188,7 +234,6 @@ angular.module('controllers').controller('AceCtrl',
     );
 
     editor.on('click', function(e) {
-
       var tokenAndRange = getCurrentTokenAndRange();
       var token = tokenAndRange.token;
       var stemmedToken = GermanStemmer.stem(token.value);

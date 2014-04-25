@@ -6,10 +6,11 @@
 // We want to be able to highlight ranges of tokens
 // On the source side, we're totally flexible in terms of representation
 
-angular.module('services').factory('tokenizer',['$log', function( $log ) {
+angular.module('services').factory('tokenizer',['$q', '$log', function( $q, $log ) {
 
   // Naive tokenization for a line of text -- note: for TMs, leaving punctuation is actually ok
   var tokenize = function(str) {
+
     // Note: this regex replaces, it doesn't just split
 //      var words = str.replace(/[^a-zA-Z0-9\u00C0-\u00FF]+/g, ' ').split(' '),
 //	     lang = lang || 'en';
@@ -18,6 +19,16 @@ angular.module('services').factory('tokenizer',['$log', function( $log ) {
     var words = str.replace(/\s+/g, ' ').split(' '),
       lang = lang || 'en';
     return words;
+  }
+
+  // returns a promise
+  var wordTokenize = function(str) {
+    var deferred = $q.defer();
+    // this one just splits on whitespace
+    var words = str.replace(/\s+/g, ' ').split(' '),
+      lang = lang || 'en';
+    deferred.resolve(words);
+    return deferred.promise;
   }
 
   // WORKING - add server-backed tokenization for the various edit modes
@@ -29,11 +40,11 @@ angular.module('services').factory('tokenizer',['$log', function( $log ) {
 
   // map tokens (strings) to (start, end) pairs
   function tokensToSpans(tokenList, completeString) {
+    var deferred = $q.defer();
     var startPos = 0,
-      currentString = completeString,
-      tokenSpans = [];
+      currentString = completeString;
 
-    tokenSpans = _.map(tokenList, function(token) {
+    var tokenSpans = _.map(tokenList, function(token) {
       var match = currentString.match(token);
       if (match) {
         var startIndex = match.index + startPos;
@@ -45,8 +56,12 @@ angular.module('services').factory('tokenizer',['$log', function( $log ) {
       }
     })
     var filtered = _.filter(tokenSpans, function(s) { return (s !== undefined); });
-    return filtered;
+    // TODO: placeholder - resolve the promise inside the callback from the tokenization server
+    deferred.resolve(filtered);
+
+    return deferred.promise;
   }
+// TODO: move to test
 //  var testRes = tokensToSpans(['this', 'is', 'a', 'test'], "This is a test.");
 //  $log.log('tokensToSpans results: ');
 //  $log.log(testRes);
@@ -54,6 +69,18 @@ angular.module('services').factory('tokenizer',['$log', function( $log ) {
   return {
     tokenize: function(str) {
       return tokenize(str);
+    },
+    // tokenize according to the mode, and return a list of token objects
+    getTokenRanges: function(text, mode) {
+      var deferred = $q.defer();
+      // the AceEditor should take care of mapping the token objects into range objects
+      // TODO: change the tokenization function depending upon the mode parameter (may involve calling a server)
+      var spanPromise = wordTokenize(text).then(
+        function(tokens) {
+          return tokensToSpans(tokens, text);
+        }
+      );
+      return spanPromise;
     },
     subphrases: function(tokens,minLen) {
       // phrases: [[]], toks: []
