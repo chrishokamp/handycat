@@ -20,6 +20,37 @@ angular.module('services').factory('tokenizer',['$log', function( $log ) {
     return words;
   }
 
+  // WORKING - add server-backed tokenization for the various edit modes
+  // - one route for each language and tokenization type (token, phrase, etc...)
+  // - function convertIndexToRange()
+  // - don't allow multiple lines in the editor (override the function of 'Return')
+  // - servers return a list of pairs (start, end), for the token type
+  // - tokens cannot overlap
+
+  // map tokens (strings) to (start, end) pairs
+  function tokensToSpans(tokenList, completeString) {
+    var startPos = 0,
+      currentString = completeString,
+      tokenSpans = [];
+
+    tokenSpans = _.map(tokenList, function(token) {
+      var match = currentString.match(token);
+      if (match) {
+        var startIndex = match.index + startPos;
+        var endIndex = startIndex + token.length;
+        currentString = completeString.slice(endIndex);
+        startPos = endIndex;
+
+        return { "token": token, "start": startIndex, "end": endIndex };
+      }
+    })
+    var filtered = _.filter(tokenSpans, function(s) { return (s !== undefined); });
+    return filtered;
+  }
+//  var testRes = tokensToSpans(['this', 'is', 'a', 'test'], "This is a test.");
+//  $log.log('tokensToSpans results: ');
+//  $log.log(testRes);
+
   return {
     tokenize: function(str) {
       return tokenize(str);
