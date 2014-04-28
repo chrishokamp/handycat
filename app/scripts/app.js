@@ -10,7 +10,7 @@ var App = window.App = angular.module('editorComponentsApp',
         'ui.ace',
         'ui.bootstrap',
         'angularFileUpload',
-        'ngAnimate',
+        'ngAnimate'
         //'filters',
         //'ui.bootstrap',
         //'ngTouch'
@@ -42,7 +42,7 @@ var App = window.App = angular.module('editorComponentsApp',
 .config(['$httpProvider', function($httpProvider) {
 	$httpProvider.defaults.useXDomain = true;
 	delete $httpProvider.defaults.headers.common['X-Requested-With'];
-}])
+}]);
 // TODO
 // check window.location to see where we are, and set the baseUrl accordingly
 //.run(['$location', '$log', function($location, $log) {

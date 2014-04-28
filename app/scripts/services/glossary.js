@@ -52,7 +52,7 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
           })
       }
     }
-  }
+  };
 
 // TODO: move this to a separate autocomplete service
   // en --> de index for Autocomplete
@@ -76,7 +76,7 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
       $log.log("allWords");
       $log.log(Glossary.allWords);
 
-    })
+    });
   return Glossary;
 
 }]);

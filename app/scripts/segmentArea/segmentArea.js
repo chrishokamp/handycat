@@ -57,10 +57,10 @@ angular.module('controllers')
       var phrase = $scope.selectedToken;
       $log.log('the phrase to change is: ' + phrase);
 
-      var res = Morphology.changeNumber(phrase, 'de')
+      var res = Morphology.changeNumber(phrase, 'de');
       res.then(function(result) {
-        $log.log('the result from the morphology server: ')
-        $log.log(result)
+        $log.log('the result from the morphology server: ');
+        $log.log(result);
 
         // this function is on the AceCtrl
         $scope.insertText(result.data['converted_phrase']);
@@ -78,10 +78,10 @@ angular.module('controllers')
       var phrase = $scope.selectedToken;
       $log.log('the phrase to change is: ' + phrase);
 
-      var res = Morphology.changeGender(phrase, 'de')
+      var res = Morphology.changeGender(phrase, 'de');
       res.then(function(result) {
-        $log.log('the result from the morphology server: ')
-        $log.log(result)
+        $log.log('the result from the morphology server: ');
+        $log.log(result);
 
         // this function is on the AceCtrl
         $scope.insertText(result.data['converted_phrase']);
@@ -99,10 +99,10 @@ angular.module('controllers')
       var phrase = $scope.selectedToken;
       $log.log('the phrase to change is: ' + phrase);
 
-      var res = Morphology.changeCase(phrase, 'de')
+      var res = Morphology.changeCase(phrase, 'de');
       res.then(function(result) {
-        $log.log('the result from the morphology server: ')
-        $log.log(result)
+        $log.log('the result from the morphology server: ');
+        $log.log(result);
 
         // this function is on the AceCtrl
         $scope.insertText(result.data['converted_phrase']);

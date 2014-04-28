@@ -19,7 +19,7 @@ angular.module('services').factory('tokenizer',['$q', '$log', function( $q, $log
     var words = str.replace(/\s+/g, ' ').split(' '),
       lang = lang || 'en';
     return words;
-  }
+  };
 
   // returns a promise
   var wordTokenize = function(str) {
@@ -29,7 +29,7 @@ angular.module('services').factory('tokenizer',['$q', '$log', function( $q, $log
       lang = lang || 'en';
     deferred.resolve(words);
     return deferred.promise;
-  }
+  };
 
   // WORKING - add server-backed tokenization for the various edit modes
   // - one route for each language and tokenization type (token, phrase, etc...)
@@ -54,7 +54,7 @@ angular.module('services').factory('tokenizer',['$q', '$log', function( $q, $log
 
         return { "token": token, "start": startIndex, "end": endIndex };
       }
-    })
+    });
     var filtered = _.filter(tokenSpans, function(s) { return (s !== undefined); });
     // TODO: placeholder - resolve the promise inside the callback from the tokenization server
     deferred.resolve(filtered);
