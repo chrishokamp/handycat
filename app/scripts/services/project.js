@@ -2,12 +2,17 @@
 // TODO: add editing stats
 // TODO: throw errors when we ask for segments that don't exist
 
-angular.module('services').factory('project', ['$rootScope', function($rootScope) {
+angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Document',
+    function($rootScope, SegmentOrder, Document) {
 
     return {
       activeSegment: 0,
-      nextSegment: function() {
-        return this.activeSegment + 1;
+      getNextSegment: function() {
+        if (SegmentOrder.order.length == 0)
+            SegmentOrder.getOrder(Document.segments);
+
+        var next = SegmentOrder.nextSegment(this.activeSegment);
+        return next;
       },
       setSegment: function(segIndex) {
         var self = this;

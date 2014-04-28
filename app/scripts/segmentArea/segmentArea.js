@@ -208,7 +208,6 @@ angular.module('controllers')
 
   $scope.segmentFinished = function(segId) {
       $log.log("segId is: " + segId);
-      $log.log("emitting segmentComplete");
       $scope.$emit('segmentComplete', {segmentId: segId});
 
       // Update the current segment

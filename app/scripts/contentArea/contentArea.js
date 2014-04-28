@@ -32,13 +32,13 @@ angular.module('controllers').controller('ContentAreaCtrl', ['$scope', 'Document
     $log.log("segmentComplete data: ");
     $log.log(data);
     $log.log("contentArea heard segmentComplete for seg: " + data.segmentId);
-    var nextSegment = Number(data.segmentId) + 1;
+    var nextSegment = project.getNextSegment(data.segmentId);
     // set the next segment on the project service
     var newSegment = 'segment-' + project.setSegment(nextSegment);
 
     // TODO: this causes a reload of the ng-repeat
-    // $location.hash(newSegment);
-    // $anchorScroll();
+    $location.hash(newSegment);
+    $anchorScroll();
 
     //setFocus($("#ace_editor-" + nextSegment));
   });
