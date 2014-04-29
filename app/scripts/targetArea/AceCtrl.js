@@ -10,89 +10,78 @@ angular.module('controllers').controller('AceCtrl',
 
   $scope.language = Document.targetLang;
 
-// the values for this instance set from the view with ng-init and the ng-repeat index
-// TODO: these properties are only used by the Translation memory (see below) - make a single, consistent datamodel
-//  $scope.setSegments = function(index) {
-//    $scope.sourceSegment = Document.sourceSegments[index];
-//    $scope.targetSegment = Document.targetSegments[index];
-//  }
-
-    // an object representing the current edit mode
-    // params:
-    // spanTokenizer - a function which returns a promise,
-    // selectRange - a function which takes a range as its argument
-    // resolving to a list of tokens in the format - { 'token': <token>, 'start': <start_index>, 'end': <end_index> }
-
-    // swaps the edit mode - should be a function on the editor
-    var changeEditMode = function() {
-      // clear existing selections
-      // highlight the first token of this view
-      // set state on the EditMode
-      // make sure that the edit mode updates when there are changes in the UI
-      // we need functions like 'put after' / 'put before'
 
 
-    };
-
-    var EditMode = function(spanTokenizer, selectRange) {
-      return {
-        // remember that tokenRanges can and will be updated asynchronously
-        tokenRanges: [],
-        modeName: '',
-        currentTokenRange: null,
-        // TODO: implement hasRange -- see ace editor source
-        // if we have a token at { column, row }, return that range, else return null
-        setSpans: function(text) {
-          var self = this;
-          self.tokenRanges = [];
-          var tokenPromise = spanTokenizer(text);
-          tokenPromise.then(
-            function(tokenList) {
-              self.tokenRanges = _.map(tokenList, function(obj) {
-                // currently we don't allow multiple rows, and we wrap the text, so the row is always = 0
-                return new aceRange(0, obj.start, 0, obj.end);
-              });
-              $log.log('testing EditMode');
-              $log.log("new value of token ranges: ");
-              $log.log(self.tokenRanges);
-            }
-          );
+  // an object representing the current edit mode
+  // params:
+  // spanTokenizer - a function which returns a promise containing token ranges to select
+  // selectRange - a function which takes a range as its argument - will be called by this object with a range to select
+  // resolving to a list of tokens in the format - { 'token': <token>, 'start': <start_index>, 'end': <end_index> }
+  var EditMode = function(spanTokenizer, selectRange) {
+    return {
+      // remember that tokenRanges can and will be updated asynchronously
+      tokenRanges: [],
+      modeName: '',
+      // holds the index of the current token range
+      currentTokenRange: null,
+      // TODO: implement hasRange -- see ace editor source
+      // if we have a token at { column, row }, return that range, else return null
+      setSpans: function(text) {
+        var self = this;
+        self.tokenRanges = [];
+        var tokenPromise = spanTokenizer(text);
+        tokenPromise.then(
+          function(tokenList) {
+            self.tokenRanges = _.map(tokenList, function(obj) {
+              // currently we don't allow multiple rows, and we wrap the text, so the row is always = 0
+              return new aceRange(0, obj.start, 0, obj.end);
+            });
+            // select the first of the tokenRanges - be careful - this is a side-effect
+            selectRange(self.tokenRanges[0]);
+            self.currentTokenRange = 0;
+          },
+          function(err) {
+            $log.log("AceCtrl: there was an error getting the token ranges");
+          }
+        );
+      },
+      selectNextTokenRange: function() {
+        if (this.tokenRanges[this.currentTokenRange+1]) {
+           // select the first of the tokenRanges
+           this.currentTokenRange += 1;
+           selectRange(this.tokenRanges[this.currentTokenRange]);
+        } else {
+          this.currentTokenRange = 0;
+          selectRange(this.tokenRanges[this.currentTokenRange]);
         }
       }
-    };
-
-    var testMode = EditMode(tokenizer.getTokenRanges);
-    testMode.setSpans('this is a test sentence.');
-
-// TODO: move this logic to the tokenizer
-// TODO: maintain the current TM matches based on the selected token in the source side
-  $scope.minPhraseLen = 15;
-  var tmQueried = false;
-  $scope.augmentTM = function(minPhraseLen) {
-    //$log.log("minPhraseLen: " + $scope.minPhraseLen);
-//      $log.log("source segment: " + $scope.sourceSegment)
-//      $log.log("Augmenting the TM");
-    if (!tmQueried) {
-      $log.log("Getting TM matches for seg: " + $scope.sourceSegment);
-
-      // Working - take every other item
-      var toks = tokenizer.tokenize($scope.sourceSegment);
-
-      $log.log("from AceCtrl, logging toks: ");
-      $log.log(toks);
-      var subphrases = tokenizer.subphrases(toks,minPhraseLen);
-      //$log.log("the subphrases: " + JSON.stringify(subphrases));
-      // populate the TM with the segments from this AceCtrl instance
-      TranslationMemory.populateTM(subphrases);
-      tmQueried = true;
-    } else {
-      $log.log("TM already loaded for seg: " + $scope.sourceSegment);
     }
   };
 
-  $scope.logTM = function() {
-    $log.log("the TM: " + JSON.stringify(TranslationMemory.TM));
+  // select a range of text in the editor
+  var selectRange = function(aceRange) {
+    $scope.editor.session.selection.setRange(aceRange);
+    $scope.editor.focus();
   };
+   // TODO: on change of content in editor, the currentMode needs to update its ranges immediately
+  var currentMode = EditMode(tokenizer.getTokenRanges, selectRange);
+
+  // swaps the edit mode - should be a function on the editor
+  $scope.changeEditMode = function() {
+    // clear existing selections
+    // highlight the first token of this view
+    // set state on the EditMode
+    // make sure that the edit mode updates when there are changes in the UI
+    // we need functions like 'put after' / 'put before'
+
+    // initialize spans on the current editing mode
+    currentMode.setSpans($scope.editor.getSession().getValue());
+  };
+
+  // expose control of the current mode on the $scope
+  $scope.selectNextRange = function() {
+    currentMode.selectNextTokenRange();
+  }
 
   // set the text for this editor instance
   $scope.setText = function(text) {
@@ -111,10 +100,6 @@ angular.module('controllers').controller('AceCtrl',
     return editor.getSelectionRange();
   };
 
-  // select a range of text in the editor
-  var selectRange = function(aceRange) {
-    $scope.editor.session.selection.setRange(aceRange);
-  };
 
   // get the range of the current token under the cursor
   var getCurrentTokenAndRange = function() {
@@ -204,21 +189,17 @@ angular.module('controllers').controller('AceCtrl',
     $scope.editor.focus();
   }
 
-  $scope.currentPrefix = function() {
-    var editor = $scope.editor;
-    console.log(editor.getValue());
-  };
 
   // Use this function to configure the ace editor instance
   $scope.aceLoaded = function (ed) {
-   var editor = ed;
-   $scope.editor = editor;
+    var editor = ed;
+    $scope.editor = editor;
 
     // Note: this is the path for the ace require modules
     var langTools = ace.require("ace/ext/language_tools");
-    $scope.editor = editor;
 
     $scope.editor.session.setMode('ace/mode/text');
+
 
     // we want to always know what text the user currently has selected
     // TODO: change this to listen for a selection change
@@ -226,6 +207,7 @@ angular.module('controllers').controller('AceCtrl',
       function(e) {
         $timeout(function() {
           $log.log('MOUSE UP event');
+          // this would only exist when the user has just selected something
           var currentSelection = getSelection();
           var text = editor.session.getTextRange(currentSelection);
           $log.log("currentSelection: " + currentSelection + ", text: " + text);
@@ -298,6 +280,11 @@ angular.module('controllers').controller('AceCtrl',
       }
     };
 
+    $scope.currentPrefix = function() {
+      var editor = $scope.editor;
+      console.log(editor.getValue());
+    };
+
     var glossaryCompleter = {
       getCompletions: function(editor, session, pos, prefix, callback) {
         if (prefix.length === 0) { callback(null, []); return }
@@ -353,10 +340,6 @@ angular.module('controllers').controller('AceCtrl',
       $log.log("Set mode to: " + modeName);
     }
 
-
-// Move styling into the Ace Editor directive
-// TODO: see moses - how to get translation alignments?
-
     // this doesn't work from CSS for some reason
     editor.setFontSize(18);
 
@@ -404,6 +387,42 @@ angular.module('controllers').controller('AceCtrl',
       $(window).scrollTop($(containerEditArea).offset().top);
     }
   });
+
+// the values for this instance set from the view with ng-init and the ng-repeat index
+// TODO: these properties are only used by the Translation memory (see below) - make a single, consistent datamodel
+//  $scope.setSegments = function(index) {
+//    $scope.sourceSegment = Document.sourceSegments[index];
+//    $scope.targetSegment = Document.targetSegments[index];
+//  }
+// TODO: move this logic to the tokenizer
+// TODO: maintain the current TM matches based on the selected token in the source side
+  $scope.minPhraseLen = 15;
+  var tmQueried = false;
+  $scope.augmentTM = function(minPhraseLen) {
+    //$log.log("minPhraseLen: " + $scope.minPhraseLen);
+//      $log.log("source segment: " + $scope.sourceSegment)
+//      $log.log("Augmenting the TM");
+    if (!tmQueried) {
+      $log.log("Getting TM matches for seg: " + $scope.sourceSegment);
+
+      // Working - take every other item
+      var toks = tokenizer.tokenize($scope.sourceSegment);
+
+      $log.log("from AceCtrl, logging toks: ");
+      $log.log(toks);
+      var subphrases = tokenizer.subphrases(toks,minPhraseLen);
+      //$log.log("the subphrases: " + JSON.stringify(subphrases));
+      // populate the TM with the segments from this AceCtrl instance
+      TranslationMemory.populateTM(subphrases);
+      tmQueried = true;
+    } else {
+      $log.log("TM already loaded for seg: " + $scope.sourceSegment);
+    }
+  };
+
+  $scope.logTM = function() {
+    $log.log("the TM: " + JSON.stringify(TranslationMemory.TM));
+  };
 
 }]);
 
