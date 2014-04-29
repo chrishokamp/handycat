@@ -31,6 +31,7 @@ angular.module('controllers').controller('AceCtrl',
       // make sure that the edit mode updates when there are changes in the UI
       // we need functions like 'put after' / 'put before'
 
+
     };
 
     var EditMode = function(spanTokenizer, selectRange) {
@@ -38,7 +39,7 @@ angular.module('controllers').controller('AceCtrl',
         // remember that tokenRanges can and will be updated asynchronously
         tokenRanges: [],
         modeName: '',
-        currentToken: null,
+        currentTokenRange: null,
         // TODO: implement hasRange -- see ace editor source
         // if we have a token at { column, row }, return that range, else return null
         setSpans: function(text) {
@@ -357,7 +358,7 @@ angular.module('controllers').controller('AceCtrl',
 // TODO: see moses - how to get translation alignments?
 
     // this doesn't work from CSS for some reason
-    editor.setFontSize(20);
+    editor.setFontSize(18);
 
     var heightUpdateFunction = function() {
 
