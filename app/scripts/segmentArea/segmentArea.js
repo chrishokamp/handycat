@@ -58,14 +58,20 @@ angular.module('controllers')
       $log.log('the phrase to change is: ' + phrase);
 
       var res = Morphology.changeNumber(phrase, 'de');
-      res.then(function(result) {
-        $log.log('the result from the morphology server: ');
-        $log.log(result);
+      res.then(
+        function(result) {
+          $log.log('the result from the morphology server: ');
+          $log.log(result);
 
-        // this function is on the AceCtrl
-        $scope.insertText(result.data['converted_phrase']);
-        $scope.changeNumberWorking = false;
-      });
+          // this function is on the AceCtrl
+          $scope.insertText(result.data['converted_phrase']);
+          $scope.changeNumberWorking = false;
+        },
+        function(err) {
+          $log.log('changeNumber failed');
+          $scope.changeNumberWorking = false;
+        }
+      );
     }
   };
   $scope.changeTokenGender = function() {
@@ -79,14 +85,20 @@ angular.module('controllers')
       $log.log('the phrase to change is: ' + phrase);
 
       var res = Morphology.changeGender(phrase, 'de');
-      res.then(function(result) {
-        $log.log('the result from the morphology server: ');
-        $log.log(result);
+      res.then(
+        function(result) {
+          $log.log('the result from the morphology server: ');
+          $log.log(result);
 
-        // this function is on the AceCtrl
-        $scope.insertText(result.data['converted_phrase']);
-        $scope.changeGenderWorking = false;
-      });
+          // this function is on the AceCtrl
+          $scope.insertText(result.data['converted_phrase']);
+          $scope.changeGenderWorking = false;
+        },
+        function(err) {
+          $log.log('changeGender failed');
+          $scope.changeGenderWorking = false;
+        }
+      );
     }
   };
   $scope.changeTokenCase = function() {
@@ -100,14 +112,20 @@ angular.module('controllers')
       $log.log('the phrase to change is: ' + phrase);
 
       var res = Morphology.changeCase(phrase, 'de');
-      res.then(function(result) {
-        $log.log('the result from the morphology server: ');
-        $log.log(result);
+      res.then(
+        function(result) {
+          $log.log('the result from the morphology server: ');
+          $log.log(result);
 
-        // this function is on the AceCtrl
-        $scope.insertText(result.data['converted_phrase']);
-        $scope.changeCaseWorking = false;
-      });
+          // this function is on the AceCtrl
+          $scope.insertText(result.data['converted_phrase']);
+          $scope.changeCaseWorking = false;
+        },
+        function(err) {
+          $log.log('changeCase failed: ' + err);
+          $scope.changeCaseWorking = false;
+        }
+      );
     }
   };
 
