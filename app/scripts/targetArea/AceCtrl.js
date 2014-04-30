@@ -10,8 +10,6 @@ angular.module('controllers').controller('AceCtrl',
 
   $scope.language = Document.targetLang;
 
-
-
   // an object representing the current edit mode
   // params:
   // spanTokenizer - a function which returns a promise containing token ranges to select
@@ -39,6 +37,8 @@ angular.module('controllers').controller('AceCtrl',
             // select the first of the tokenRanges - be careful - this is a side-effect
             selectRange(self.tokenRanges[0]);
             self.currentRangeIndex = 0;
+              $log.log("all ranges");
+        $log.log(self.tokenRanges);
           },
           function(err) {
             $log.log("AceCtrl: there was an error getting the token ranges");
@@ -51,6 +51,8 @@ angular.module('controllers').controller('AceCtrl',
         } else {
           this.currentRangeIndex = 0;
         }
+        $log.log('current range to be selected:');
+        $log.log(this.tokenRanges[this.currentRangeIndex]);
         selectRange(this.tokenRanges[this.currentRangeIndex]);
       },
 
@@ -64,29 +66,52 @@ angular.module('controllers').controller('AceCtrl',
     // note: inserting generally involves removing one space after, then inserting one space after at the new location
       // working - what is the type of the location argument?
       // working - currently this function is "moveRight"
+      // TODO: add a 'following whitespace' function
       moveCurrentRange: function(location) {
-        // get the text at the current range (don't remove it yet)
+        var tokenText = $scope.editor.getSession().getDocument().getTextRange(this.tokenRanges[this.currentRangeIndex]);
+        var startingIndex = this.currentRangeIndex;
+        var nextIndex = 0;
 
-        // avoid retokenization at this point
-        // move the cursor before or after another range, and insert the text there
-        $log.log('current token range:');
-        $log.log(this.currentTokenRange);
+        // working - now we increment by 1, but this should be an arbitrary index - i.e. a 'swap' instead of a 'move'
+        if (this.tokenRanges[startingIndex + 1]) {
+          nextIndex = startingIndex + 1;
+        }
 
-        // removing the range will change all future ranges
-//        var cursorPosition = $scope.editor.getSession().getDocument().remove(this.tokenRanges[this.currentRangeIndex]);
-//        $log.log("the cursor position:");
-//        $log.log(cursorPosition);
+        var originalRange = this.tokenRanges[startingIndex];
+        //remove the original text
+        $scope.editor.getSession().getDocument().remove(originalRange);
 
-        // TODO: error check for the end of segment
-        var nextIndex = this.currentRangeIndex + 1;
-        var insertPosition = {"row": 0, "column":this.tokenRanges[nextIndex]['end']['column'] + 1 }; // add one for the whitespace
+        // update all of the ranges from currentIndex-nextIndex-1 - (remember the extra whitespace)
+        for (var i=startingIndex; i<nextIndex; i++) {
+          // move the ranges in between one slot back
+          var offset = tokenText.length;
+          var oldRange = this.tokenRanges[i+1];
+          var updatedRange = new aceRange(0, oldRange['start']['column']-offset, 0, oldRange['end']['column']-offset);
+          this.tokenRanges[i] = updatedRange;
+        }
+        // now the slot at this.tokenRanges[nextIndex] is 'open'
 
-        // TODO: set the second argument to the range's text
-        $scope.editor.getSession().getDocument().insert(insertPosition, 'test');
+        // note that this block depends upon the updated ranges above
+        var insertPosition = { "row": 0, "column":this.tokenRanges[startingIndex]['end']['column'] };
+        $log.log("insert position is: ");
+        $log.log(insertPosition);
+        var newRange = new aceRange(0, insertPosition['column'], 0, insertPosition['column']+tokenText.length);
+
+        // place the range in its new slot
+        this.tokenRanges[nextIndex] = newRange;
+
+        // update the edit mode state
+        this.currentRangeIndex = nextIndex;
+
+        // do the actual insertion into the editor
+        $scope.editor.getSession().getDocument().insert(insertPosition, tokenText);
+        selectRange(newRange);
 
         // how to maintain the current range as its indices change?
+        $scope.editor.focus();
       }
     }
+
     // TODO: add logic to handle preceding and trailing whitespaces correctly
     // if there's a whitespace before, leave it
     // if there's a whitespace after, delete it with the range.
@@ -95,12 +120,15 @@ angular.module('controllers').controller('AceCtrl',
   };
 
   // select a range of text in the editor
-  var selectRange = function(aceRange) {
-    $scope.editor.session.selection.setRange(aceRange);
+  var selectRange = function(aRange) {
+    $log.log('selecting range: ');
+    $log.log(aRange);
+    $scope.editor.session.selection.setRange(aRange);
     $scope.editor.focus();
   };
    // TODO: on change of content in editor, the currentMode needs to update its ranges immediately
   var currentMode = EditMode(tokenizer.getTokenRanges, selectRange);
+
 
   // swaps the edit mode - should be a function on the editor
   $scope.changeEditMode = function() {
