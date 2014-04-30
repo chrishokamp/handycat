@@ -23,7 +23,7 @@ angular.module('controllers').controller('AceCtrl',
       tokenRanges: [],
       modeName: '',
       // holds the index of the current token range
-      currentTokenRange: null,
+      currentRangeIndex: null,
       // TODO: implement hasRange -- see ace editor source
       // if we have a token at { column, row }, return that range, else return null
       setSpans: function(text) {
@@ -38,7 +38,7 @@ angular.module('controllers').controller('AceCtrl',
             });
             // select the first of the tokenRanges - be careful - this is a side-effect
             selectRange(self.tokenRanges[0]);
-            self.currentTokenRange = 0;
+            self.currentRangeIndex = 0;
           },
           function(err) {
             $log.log("AceCtrl: there was an error getting the token ranges");
@@ -46,16 +46,52 @@ angular.module('controllers').controller('AceCtrl',
         );
       },
       selectNextTokenRange: function() {
-        if (this.tokenRanges[this.currentTokenRange+1]) {
-           // select the first of the tokenRanges
-           this.currentTokenRange += 1;
-           selectRange(this.tokenRanges[this.currentTokenRange]);
+        if (this.tokenRanges[this.currentRangeIndex+1]) {
+          this.currentRangeIndex += 1;
         } else {
-          this.currentTokenRange = 0;
-          selectRange(this.tokenRanges[this.currentTokenRange]);
+          this.currentRangeIndex = 0;
         }
+        selectRange(this.tokenRanges[this.currentRangeIndex]);
+      },
+
+// Ace document object (editor.getSession().getDocument()) API:
+// insert(position, text)
+// remove(range)
+// replace(range, text)
+
+    // move the current range to the specified location
+    // just insert it, then retokenize - don't adjust the ranges after this one
+    // note: inserting generally involves removing one space after, then inserting one space after at the new location
+      // working - what is the type of the location argument?
+      // working - currently this function is "moveRight"
+      moveCurrentRange: function(location) {
+        // get the text at the current range (don't remove it yet)
+
+        // avoid retokenization at this point
+        // move the cursor before or after another range, and insert the text there
+        $log.log('current token range:');
+        $log.log(this.currentTokenRange);
+
+        // removing the range will change all future ranges
+//        var cursorPosition = $scope.editor.getSession().getDocument().remove(this.tokenRanges[this.currentRangeIndex]);
+//        $log.log("the cursor position:");
+//        $log.log(cursorPosition);
+
+        // TODO: error check for the end of segment
+        var nextIndex = this.currentRangeIndex + 1;
+        var insertPosition = {"row": 0, "column":this.tokenRanges[nextIndex]['end']['column'] + 1 }; // add one for the whitespace
+
+        // TODO: set the second argument to the range's text
+        $scope.editor.getSession().getDocument().insert(insertPosition, 'test');
+
+        // how to maintain the current range as its indices change?
       }
     }
+    // TODO: add logic to handle preceding and trailing whitespaces correctly
+    // if there's a whitespace before, leave it
+    // if there's a whitespace after, delete it with the range.
+    // handle insertion whitespace logic SEPARATELY
+
   };
 
   // select a range of text in the editor
@@ -76,12 +112,20 @@ angular.module('controllers').controller('AceCtrl',
 
     // initialize spans on the current editing mode
     currentMode.setSpans($scope.editor.getSession().getValue());
+
   };
 
-  // expose control of the current mode on the $scope
+  // the following functions expose control of the current mode on the $scope
   $scope.selectNextRange = function() {
     currentMode.selectNextTokenRange();
   }
+
+  // the following functions expose control of the current mode on the $scope
+  $scope.moveCurrentEditRange = function() {
+    currentMode.moveCurrentRange(1);
+  }
+
+// end edit mode API
 
   // set the text for this editor instance
   $scope.setText = function(text) {
