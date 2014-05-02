@@ -101,7 +101,7 @@ h3 {
 }
 
 %ace-editor-height {
-  min-height: 200px;
+  min-height: 100px;
 }
 
 // highlight recent changes in the marker layer
@@ -118,7 +118,7 @@ h3 {
 .content-card {
   @extend %ace-editor-height;
   background-color: white;
-  height: 200px;
+  height: 100px;
   overflow-y: auto;
   // leave a little space between the two
 //  overflow-y: hidden;
@@ -191,7 +191,7 @@ span.drop-text {
 /* Ace Editor Styles */
 .ace_editor {
   line-height: normal;
-  min-height: 200px;
+  min-height: 100px;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
   font-weight: normal;
   font-style: normal;

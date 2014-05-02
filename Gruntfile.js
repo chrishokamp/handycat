@@ -16,6 +16,7 @@ module.exports = function (grunt) {
 
     // to automatically add templates to the $templateCache
     grunt.loadNpmTasks('grunt-angular-templates');
+    grunt.loadNpmTasks('grunt-autoprefixer');
 
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
