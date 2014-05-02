@@ -172,7 +172,6 @@ angular.module('controllers').controller('AceCtrl',
     return editor.getSelectionRange();
   };
 
-
   // get the range of the current token under the cursor
   var getCurrentTokenAndRange = function() {
     var editor = $scope.editor;

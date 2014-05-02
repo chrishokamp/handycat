@@ -9,7 +9,18 @@ angular.module('controllers')
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
-  $scope.active = true;
+  $scope.isActive = { active:true };
+
+  /*
+  $scope.activate = function(index) {
+  $log.log("Index: " + $scope.index);
+    $rootScope.$broadcast('activate-segment', index);
+  };
+
+  $scope.$on('activate-segment', function(event, index) {
+      $log.log("Index: " + $scope.index + " " + "index: " + index);
+    $scope.isActive.active = $scope.index == index;
+  });*/
 
   $scope.language = Document.targetLang;
 
@@ -228,8 +239,7 @@ angular.module('controllers')
   $scope.segmentFinished = function(segId) {
       $log.log("segId is: " + segId);
       Project.setActiveSegment(segId);
-      Project.focusNextSegment();
-      $scope.$emit('segmentComplete', {segmentId: segId});
+      $rootScope.$emit('segmentComplete', {segmentId: segId});
 
       // Update the current segment
       $scope.segment.targetDOM.textContent = $scope.segment.target;

@@ -18,11 +18,12 @@
 
         <textarea rows="20" cols="120">{{ xliff_content }}</textarea>
 
-        <div class="segment row" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments" index="$index" ng-init="segment = seg;">
+        <div class="segment row" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments" index="$index"
+             ng-init="segment = seg; init($index)">
             <a id="segment-{{$index}}"></a>
             <p class="segment-index-label">Segment Index: {{$index}}</p>
             <!-- TODO - WORKING: move the AceCtrl only to the Ace edit area, and nest controllers within the translation unit -->
-            <div class="container bottom-margin" >
+            <div class="container bottom-margin" ng-click="activate($index)">
                 <div class="row">
                     <!-- used with $anchorScroll from ContentAreaCtrl -->
                     <!-- TODO: prevent $anchorScroll from reloading the ng-repeat -->
@@ -47,7 +48,7 @@
                                     <!--<div chars class="sample-show-hide" collapsed="showSpecialChars" special="germanChars" selected="insertChar(char)" ></div>-->
                                 </div>
                             </div>
-                            <div class="col-xs-1 move-left">
+                            <div class="col-xs-1 move-left" ng-show="isActive.active">
                               <button tooltip="switch edit mode" ng-click="changeEditMode()"  class="btn btn-primary mode-glyph">
                                     <span>E</span>
                               </button>
@@ -62,7 +63,7 @@
 
                         <!-- TODO: use the 'currentToken' property on the AceCtrl instead of 'selectedToken' -->
                         <!--<div collapse="!selectedToken">-->
-                            <div collapse="false">
+                            <div collapse="false" ng-show="isActive.active">
                             <div class="row">
                                 <div class="col-xs-1">
                                     <button ng-click="changeTokenNumber()" tooltip="change the number of the selected phrase" class="btn btn-primary morph-glyph">
@@ -86,7 +87,7 @@
                             </div>
 
                         </div>
-                        <div class="row">
+                        <div class="row" ng-show="isActive.active">
                             <div class="col-xs-offset-1 col-xs-2 text-right">
                                 <button ng-click="copySourcePunctuation()" tooltip="copy punctuation from source" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-share-alt"></span></button>
                             </div>
@@ -110,7 +111,7 @@
             <!-- The tools for editing -->
             <!-- TODO: should these tools really be repeated, or should there be a single instance for the whole document? -->
             <!--<div class="ace-toolbar container" ng-show="toolbarOpen" collapse="toolbarOpen">-->
-            <div class="ace-toolbar container" collapse="isCollapsed['collapsed']">
+            <div class="ace-toolbar container" collapse="isCollapsed['collapsed']" ng-show="isActive.active">
                 <div
                     class="translation-toolbar"
                 >
@@ -161,7 +162,6 @@
                                     {{edit.description}} <button ng-click="propagateEdit($index)">Propagate</button>
                                 </div>
                             </div>
-
                         </tab>
                     </tabset>
 
