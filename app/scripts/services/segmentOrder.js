@@ -11,11 +11,22 @@ angular.module('services').factory('SegmentOrder', ['$http', '$rootScope', 'base
     var SegmentOrder = {
         order: [],
         getOrder: function (segments) {
-            // if we don't have the segment order service, the order is 0, 1, 2, ...
+
             // TODO(ximop) develop webservice
+            // parameters for the webservice
+            // source of the translation job
+            // source of the mt training data
+            // criteria (4 values)
+                // random
+                // ngram
+                // ced
+                // cedn
+
+            // if we don't have the segment order service, the order is 0, 1, 2, ...
             for (var i = 0; i < segments.length; ++i)
                 this.order.push(i);
         },
+
         nextSegment: function(current) {
             var index = this.order.indexOf(current);
             if (index != -1)

@@ -7,10 +7,18 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
 
     return {
       activeSegment: 0,
+      setActiveSegment: function(segId) {
+          this.activeSegment = segId;
+      },
       getNextSegment: function() {
         if (SegmentOrder.order.length == 0)
             SegmentOrder.getOrder(Document.segments);
         return SegmentOrder.nextSegment(this.activeSegment);
+      },
+      focusNextSegment: function() {
+        var self = this;
+        var next = self.getNextSegment();
+        self.setSegment(next);
       },
       setSegment: function(segIndex) {
         var self = this;

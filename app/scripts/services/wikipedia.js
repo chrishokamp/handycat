@@ -53,7 +53,7 @@ angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl
 
       }
     }
-  }
+  };
 
   // listen for 'segmentFinished' from all of the AceCtrl
   $rootScope.$on('segmentComplete', function(evt) {

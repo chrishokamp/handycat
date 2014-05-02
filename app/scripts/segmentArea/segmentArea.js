@@ -2,9 +2,10 @@
 // this is a source + target pair
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
-  '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation', 'Morphology',
-  'Document',
-  function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation, Morphology, Document) {
+  '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation',
+  'Morphology', 'Document', 'project',
+  function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation, Morphology,
+           Document, Project) {
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
@@ -226,6 +227,8 @@ angular.module('controllers')
 
   $scope.segmentFinished = function(segId) {
       $log.log("segId is: " + segId);
+      Project.setActiveSegment(segId);
+      Project.focusNextSegment();
       $scope.$emit('segmentComplete', {segmentId: segId});
 
       // Update the current segment
