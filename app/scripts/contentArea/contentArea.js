@@ -6,6 +6,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
     $state.go('project');
   }
   $scope.numSegments = Document.segments.length;
+  // each segment is a reference to the segment in the Document service
   $scope.segments = Document.segments;
 
   // watch the flag on the Documents service

@@ -100,6 +100,53 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       var transunitNode = seg.parentNode.parentNode;
       return transunitNode.getAttribute("id");
     },
+    getTransunit: function (xmlDoc, tuid) {
+      return xmlDoc.querySelector('trans-unit[id="'+tuid+'"]');
+    },
+    getTarget: function (doc, seg) {
+      var segid = this.getSegid(seg);
+      var tuid = this.getTransUnitId(seg);
+      return doc.querySelector('trans-unit[id="'+tuid+'"] > target');
+    },
+    // TODO: test these functions
+    createNewMrkTarget: function (xmlDoc, seg, newValue, targetLang) {
+      var segid = this.getSegId(seg);
+      var tuid = this.getTransUnitId(seg);
+
+      // create new mrk/target node
+      var mrkTarget = xmlDoc.createElement('mrk');
+      mrkTarget.setAttribute('mid', segid);
+      mrkTarget.setAttribute('mtype', 'seg');
+      mrkTarget.textContent = newValue;
+
+      var targetNode = this.getTarget(doc, seg);
+      if (!targetNode) {
+        // There is no previous translation for this transunit
+        // create new target node
+        targetNode = doc.createElement('target');
+        targetNode.setAttribute('xml:lang', targetLang);
+
+        // append to specific transunit node
+        var transUnit = this.getTransunit(doc, tuid);
+        transUnit.appendChild(target_node);
+      }
+
+      // append  mrk_target to target node
+      targetNode.appendChild(mrkTarget);
+
+      return mrkTarget;
+    },
+    removeMrkTarget: function (doc, segment)  {
+      var target_node = get_target(doc, segment);
+      var mrk_target_to_be_removed = get_mrk_target(doc, segment);
+
+      if (target_node && mrk_target_to_be_removed) {
+        target_node.removeChild(mrk_target_to_be_removed);
+        // remove target if empty
+        if (target_node.childElementCount == 0)
+          target_node.parentNode.removeChild(target_node);
+      }
+    },
     // utility function to grab a local file from a string url
     loadLocalFile: function(filepath) {
       // if filepath exists
