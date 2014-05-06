@@ -69,11 +69,11 @@ module.exports = function (grunt) {
             //hostname: 'localhost'
             hostname: '0.0.0.0'
           },
-//          testserver: {
-//            options: {
-//              port: 9999
-//            }
-//          },
+          testserver: {
+            options: {
+              port: 9999
+            }
+          },
           livereload: {
                 options: {
                     middleware: function (connect) {
@@ -306,7 +306,7 @@ module.exports = function (grunt) {
                         'data/**/*',
                         'bower_components/sass-bootstrap/fonts/**/*',
                         'fonts/**/*',
-                        'images/{,*/}*.{gif,web,png}',
+                        'images/{,*/}*.{gif,web,png}'
                     ]
                 }, {
                     expand: true,

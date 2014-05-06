@@ -49,7 +49,7 @@ module.exports = function(config) {
       'app/scripts/targetArea/AceCtrl.js',
       'app/scripts/tabs/tabs.js',
       'app/scripts/glossary/Glossary.js',
-      'app/scripts/glossary/xliffFileUpload.js',
+      'app/scripts/xliffFileUpload/xliffFileUpload.js',
       'app/scripts/contentArea/contentArea.js',
       'app/scripts/segmentArea/segmentArea.js',
       'app/scripts/typeahead/typeahead.js',

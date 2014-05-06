@@ -7,7 +7,7 @@ describe("Unit: Testing the SegmentAreaCtrl", function() {
       scope = $rootScope.$new();
 
       // create the controller with mocks for the services
-      ctrl = $controller('SegmentAreaCtrl', {$scope: scope, Wikipedia:{}, Glossary:{}, GermanStemmer:{}, ruleMap:{}, copyPunctuation:{}, Document:{} });
+      ctrl = $controller('SegmentAreaCtrl', {$scope: scope, Wikipedia:{}, Glossary:{}, GermanStemmer:{}, ruleMap:{}, copyPunctuation:{}, Morphology: {}, Document:{}, project:{} });
     });
   });
 

@@ -1,6 +1,9 @@
 describe("Unit: Testing the AceCtrl", function() {
   var ctrl, scope, element;
 
+  // remember: describe() creates a suite, it() creates a spec
+  // disable with xdescribe() and xit()
+
   beforeEach(function() {
     module('editorComponentsApp');
     inject(function($controller, $rootScope, $compile) {
@@ -20,12 +23,14 @@ describe("Unit: Testing the AceCtrl", function() {
   });
   });
 
-  it('should exist', inject(function($controller, $rootScope) {
-    expect(ctrl).toBeDefined();
-  }));
+  it('should have an instance of the Ace editor', function() {
+    scope.$digest();
+    expect(scope.editor).toBeDefined();
+  });
 
   it('should have an instance of the Ace editor', function() {
     scope.$digest();
     expect(scope.editor).toBeDefined();
   });
+
 });
