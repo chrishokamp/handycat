@@ -177,6 +177,7 @@ angular.module('controllers').controller('AceCtrl',
     var editor = $scope.editor;
     // get cursor position, then token
     var pos = editor.getCursorPosition();
+    //
     var token = editor.session.getTokenAt(pos.row, pos.column);
     var tokenRange = new aceRange(pos.row, token.start, pos.row, token.start + token.value.length);
     return {token: token, range: tokenRange};
@@ -216,7 +217,6 @@ angular.module('controllers').controller('AceCtrl',
   // let the $parent controller see insertText, so that we can hit it from sibling controllers
   $scope.$parent.insertText = $scope.insertText;
 
-  // TODO: remove these events
   $scope.$on('change-token-number', function() {
     // Text to modify
     var token = getCurrentTokenAndRange();
@@ -270,6 +270,8 @@ angular.module('controllers').controller('AceCtrl',
     var langTools = ace.require("ace/ext/language_tools");
 
     $scope.editor.session.setMode('ace/mode/text');
+    $log.log("aceLoaded, logging the current mode:");
+    $log.log($scope.editor.session);
 
 
     // we want to always know what text the user currently has selected
@@ -287,8 +289,12 @@ angular.module('controllers').controller('AceCtrl',
       }
     );
 
+    // working - select the current token based on the edit mode
+    // the logic here is complex -- add unit tests
     editor.on('click', function(e) {
       var tokenAndRange = getCurrentTokenAndRange();
+      $log.log("click event: currentTokenAndRange: ");
+      $log.log(tokenAndRange);
       var token = tokenAndRange.token;
       var stemmedToken = GermanStemmer.stem(token.value);
       $log.log('token: '+ token, 'stemmed: ' + stemmedToken);
@@ -430,7 +436,7 @@ angular.module('controllers').controller('AceCtrl',
       editor.resize();
     };
 
-    heightUpdateFunction();
+//    heightUpdateFunction();
 
     // Whenever a change happens inside the ACE editor, update
     // the height again

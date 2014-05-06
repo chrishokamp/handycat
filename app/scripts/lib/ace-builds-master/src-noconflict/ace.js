@@ -6064,7 +6064,9 @@ var EditSession = function(text, mode) {
             path = mode || "ace/mode/text";
         }
         if (!this.$modes["ace/mode/text"])
+            console.log('NO TEXT MODE');
             this.$modes["ace/mode/text"] = new TextMode();
+            console.log(this.$modes["ace/mode/text"]);
 
         if (this.$modes[path] && !options) {
             this.$onChangeMode(this.$modes[path]);
@@ -8787,7 +8789,12 @@ var TextHighlightRules = function() {
         "start" : [{
             token : "empty_line",
             regex : '^$'
-        }, {
+        },
+        {
+          token: "word",
+          regex : '[äöüÄÖÜßA-Za-z]+'
+        },
+        {
             defaultToken : "text"
         }]
     };
@@ -9781,6 +9788,8 @@ var BackgroundTokenizer = function(tokenizer, editor) {
         this.running = false;
     };
     this.getTokens = function(row) {
+        console.log("getTokens: the current lines in the AceEditor");
+        console.log(this.lines)
         return this.lines[row] || this.$tokenizeRow(row);
     };
     this.getState = function(row) {
