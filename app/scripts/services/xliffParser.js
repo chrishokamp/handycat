@@ -9,8 +9,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
   return {
     // call file reader, then parse the result as XML
 
-// Only allow non-Upload controllers to touch this object once the file has loaded and parsed
-// Broadcast the "file loaded" event? -- that's probably the best way
+// Only allow non-Upload controllers to touch this object once the file has been loaded and parsed
     readFile: function(file) {
       var self = this;
       $log.log("inside parse");
@@ -50,6 +49,10 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       $log.log("The number of target segments is: " + targetSegments.length);
       $log.log('target lang: ' + targetLang);
 
+      // TODO: a zip won't work here, since there may be segments missing in the middle
+      // we need to iterate through the source segments and add target nodes where they don't already exist
+      // we can assume that translators will want to translate every segment, so there should be at least an
+      // empty target node corresponding to each source node
       var sourceWithTarget = _.zip(sourceSegments, targetSegments);
       _.each(sourceWithTarget,
         function(seg) {
