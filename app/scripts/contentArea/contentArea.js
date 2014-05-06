@@ -11,10 +11,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
 
   // watch the flag on the Documents service
   $scope.$watch(function() {
-      if (!Document.loaded)
-        return false;
-      else
-        return Document.revision;
+      return Document.revision;
     },
     function() {
       $log.log("ContentAreaCtrl: Number of segments in document: " + Document.segments.length);
@@ -22,8 +19,9 @@ angular.module('controllers').controller('ContentAreaCtrl',
       // segments is a list of [source, target] pairs
       //$scope.segments = Document.segments;
       $scope.segments = Document.segments;
-
-      $scope.xliff_content = new XMLSerializer().serializeToString( Document.DOM );
+      if (Document.loaded) {
+        $scope.xliff_content = new XMLSerializer().serializeToString( Document.DOM );
+      }
     }
   );
 

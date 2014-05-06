@@ -58,8 +58,9 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
           $log.log("sourceText: " + sourceText);
           $log.log("targetText: " + targetText);
           $log.log("sourceDOM: " + seg[0]);
+          // in the case that there is no target node, the test should fail
           $log.log("targetDOM: " + seg[1]? seg[1] : '');
-          // TODO(ximo) if seg[1] does not exist, create and add to DOM
+
           var segPair = {
             source: sourceText,
             target: targetText,
@@ -79,11 +80,13 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
           Document.sourceLang = sourceLang;
           Document.targetLang = targetLang;
         });
+      // initialize the revision property on the document object
+      Document.revision = 0;
+      // flip the flag on the Document object
+      Document.loaded = true;
       // tell the world that the document loaded
       $log.log("firing document-loaded");
       $rootScope.$broadcast('document-loaded');
-      // flip the flag on the Document object
-      Document.loaded = true;
     },
     getTranslatableSegments: function(xmlDoc) {
       return xmlDoc.querySelectorAll('seg-source > mrk[mtype="seg"]');

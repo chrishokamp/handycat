@@ -10,7 +10,7 @@ angular.module('services').factory('Document', function( ) {
   return {
     ready: false,
     loaded: false,
-    revision: 0,
+    revision: undefined,
     sourceSegments: [],
     targetSegments: [],
     // testing: these are pairs of source + target
