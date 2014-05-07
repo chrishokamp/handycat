@@ -55,8 +55,8 @@ angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl
     }
   };
 
-  // listen for 'segmentFinished' from all of the AceCtrl
-  $rootScope.$on('segmentComplete', function(evt) {
+  // listen for 'changeSegment' from all of the AceCtrl
+  $rootScope.$on('changeSegment', function(evt) {
     // reset current query
     Wikipedia.currentQuery = [];
     // let the edit areas know

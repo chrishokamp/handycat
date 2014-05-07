@@ -239,7 +239,7 @@ angular.module('controllers')
   $scope.segmentFinished = function(segId) {
       $log.log("segId is: " + segId);
       Project.setActiveSegment(segId);
-      $rootScope.$emit('segmentComplete', {segmentId: segId});
+      Project.focusNextSegment();
 
       // Update the current segment
       $scope.segment.targetDOM.textContent = $scope.segment.target;
