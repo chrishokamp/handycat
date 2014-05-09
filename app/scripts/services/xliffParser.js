@@ -64,6 +64,16 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
           // in the case that there is no target node, the test should fail
           $log.log("targetDOM: " + seg[1]? seg[1] : '');
 
+          if (!seg[1]) {
+            //$log.log(' ' + seg[0]);
+            $log.log(seg[0]);
+            var mid = seg[0].getAttribute('mid');
+            $log.log("target segment missing: " + mid);
+            seg[1] = self.createNewMrkTarget(Document.DOM, seg[0], '', targetLang);
+            //(xmlDoc, seg, newValue, targetLang)
+            $log.log(seg[1]);
+          }
+
           var segPair = {
             source: sourceText,
             target: targetText,
@@ -110,7 +120,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       return xmlDoc.querySelector('trans-unit[id="'+tuid+'"]');
     },
     getTarget: function (doc, seg) {
-      var segid = this.getSegid(seg);
+      var segid = this.getSegId(seg);
       var tuid = this.getTransUnitId(seg);
       return doc.querySelector('trans-unit[id="'+tuid+'"] > target');
     },
@@ -125,15 +135,15 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       mrkTarget.setAttribute('mtype', 'seg');
       mrkTarget.textContent = newValue;
 
-      var targetNode = this.getTarget(doc, seg);
+      var targetNode = this.getTarget(xmlDoc, seg);
       if (!targetNode) {
         // There is no previous translation for this transunit
         // create new target node
-        targetNode = doc.createElement('target');
+        targetNode = xmlDoc.createElement('target');
         targetNode.setAttribute('xml:lang', targetLang);
 
         // append to specific transunit node
-        var transUnit = this.getTransunit(doc, tuid);
+        var transUnit = this.getTransunit(xmlDoc, tuid);
         transUnit.appendChild(target_node);
       }
 
