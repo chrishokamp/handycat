@@ -26,7 +26,8 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
       setSegment: function(segIndex) {
         var self = this;
         self.activeSegment = segIndex;
-        $rootScope.$broadcast('changeSegment', {currentSegment: self.activeSegment});
+        if (segIndex != -1)
+          $rootScope.$broadcast('changeSegment', {currentSegment: self.activeSegment});
         return this.activeSegment;
       }
     }

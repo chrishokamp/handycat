@@ -18,6 +18,7 @@ angular.module('services').factory('Document', function( ) {
     translatableNodes: [],
     sourceLang: '',
     targetLang: '',
-    DOM: {}
+    DOM: {},
+    completedSegments:[]
   }
 });

@@ -90,9 +90,10 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
           // TODO: make this useful
           Document.translatableNodes.push(seg);
 
-          Document.sourceLang = sourceLang;
-          Document.targetLang = targetLang;
+          Document.completedSegments.push(false);
         });
+      Document.sourceLang = sourceLang;
+      Document.targetLang = targetLang;
       // initialize the revision property on the document object
       Document.revision = 0;
       // flip the flag on the Document object

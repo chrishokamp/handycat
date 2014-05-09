@@ -237,13 +237,14 @@ angular.module('controllers')
   $scope.editHistory = [];
 
   $scope.segmentFinished = function(segId) {
-      $log.log("segId is: " + segId);
-      Project.setActiveSegment(segId);
-      Project.focusNextSegment();
+    $log.log("segId is: " + segId);
+    Document.completedSegments[segId] = true;
+    Project.setActiveSegment(segId);
+    Project.focusNextSegment();
 
-      // Update the current segment in the DOM
-      $scope.segment.targetDOM.textContent = $scope.segment.target;
-      Document.revision++;
+    // Update the current segment
+    $scope.segment.targetDOM.textContent = $scope.segment.target;
+    Document.revision++;
   };
 
 }]);
