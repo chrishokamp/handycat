@@ -9,6 +9,8 @@ angular.module('controllers').controller('ContentAreaCtrl',
   // each segment is a reference to the segment in the Document service
   $scope.segments = Document.segments;
 
+  $scope.showXLIFF = project.debugXLIFF;
+
   // watch the flag on the Documents service
   $scope.$watch(function() {
       return Document.revision;

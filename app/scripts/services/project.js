@@ -6,6 +6,9 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
     function($rootScope, SegmentOrder, Document) {
 
     return {
+      // set to true to show a textarea with the modifications of the XLIFF in real time.
+      debugXLIFF: false,
+
       activeSegment: 0,
       setActiveSegment: function(segId) {
           this.activeSegment = segId;
