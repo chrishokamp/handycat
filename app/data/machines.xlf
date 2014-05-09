@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:okp="okapi-framework:xliff-extensions" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" version="1.2" its:version="2.0">
+<file original="http://en.wikipedia.org/wiki/Computer_science#History" source-language="en-us" target-language="de" datatype="html">
+
+<header><its:provenanceRecords xml:id="defaultprov" xmlns:xml="http://www.w3.org/XML/1998/namespace"><its:provenanceRecord revTool="escriba-MOBILE-WEB-CAT" revOrgRef="http://mobile-webcat.appspot.com" revPerson="Default-user" provRef="Default-ref"/></its:provenanceRecords> 
+<its:provenanceRecords xml:id="pr1" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="acme" orgRef="http://www.acme.com" tool="AcmeTranslator" provRef="http://www.acme.com/#23131223"/>
+</its:provenanceRecords>
+<its:provenanceRecords xml:id="pr2" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="Microsoft" orgRef="http://www.microsoft.com" tool="Bing Translator" provRef="http://www.prov.com/#23131223"/>
+</its:provenanceRecords>
+<its:provenanceRecords xml:id="pr3" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="reference.com" orgRef="http://translate.reference.com/" tool="Reference Translator" provRef="http://www.prov.com/#23131223"/>
+</its:provenanceRecords>
+<its:provenanceRecords xml:id="pr4" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="imtranslator" orgRef="http://imtranslator.net/" tool="imTranslator" provRef="http://www.prov.com/#23131223"/>
+</its:provenanceRecords>
+<its:provenanceRecords xml:id="pr5" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="babylon" orgRef="http://translation.babylon.com/" tool="babylonTranslator" provRef="http://www.prov.com/#23131223"/>
+</its:provenanceRecords>
+<its:provenanceRecords xml:id="pr6" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="Google" orgRef="http://google.com/" tool="GoogleTranslator" provRef="http://www.prov.com/#23131223"/>
+</its:provenanceRecords>
+</header> 
+
+<body>
+<trans-unit id="1">
+<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">History</source>
+<seg-source>
+	<mrk mid="0" mtype="seg" its:translate="yes">Machines for calculating fixed numerical tasks such as the abacus have existed since antiquity but they only supported the human mind, aiding in computations as complex as multiplication and division.</mrk>		
+	<mrk mid="1" mtype="seg">History</mrk>
+</seg-source>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<mrk mid="1" mtype="seg">Geschichte</mrk>
+<mrk mid="0" mtype="seg" its:provenanceRecordsRef="#defaultprov">apple swim</mrk></target>
+<alt-trans mid="0" its:mtConfidence="0.4112">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">Machines for calculating fixed numerical tasks such as the abacus have existed since antiquity but they only supported the human mind, aiding in computations as complex as multiplication and division.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr1">Maschinen für die Berechnung der Zahlenwerte Aufgaben wie die abacus haben seit der Antike existierte aber nur unterstützt den Geist menschlichen, Beihilfe in Berechnungen so komplex wie Multiplikation und Division.</target>
+</alt-trans>
+<alt-trans mid="0" its:mtConfidence="0.5482">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">Machines for calculating fixed numerical tasks such as the abacus have existed since antiquity but they only supported the human mind, aiding in computations as complex as multiplication and division.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr6">Maschinen für die Berechnung der Zahlenwerte Aufgaben wie die abacus haben seit der Antike existierte aber nur unterstützt den menschlichen Geist, Beihilfe in Berechnungen komplex Multiplikation und Division.</target>
+</alt-trans>
+<alt-trans mid="0">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">Machines for calculating fixed numerical tasks such as the abacus have existed since antiquity but they only supported the human mind, aiding in computations as complex as multiplication and division.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr3" its:mtConfidence="0.8982">Maschinen für die Berechnung der Zahlenwerte Aufgaben wie die abacus haben seit der Antike existierte aber nur unterstützt den menschlichen Geist, Beihilfe in Berechnungen so komplex wie Multiplikation und Division.</target>
+</alt-trans>
+</trans-unit>
+
+<trans-unit id="2">
+<source>The earliest foundations of what would become computer science predate the invention of the modern digital computer. Machines for calculating fixed numerical tasks such as the abacus have existed since antiquity but they only supported the human mind, aiding in computations as complex as multiplication and division.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">The earliest foundations of what would become computer science predate the invention of the modern digital computer.</mrk> 
+</seg-source>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<mrk mid="0" mtype="seg">Die frühesten Grundlagen der Informatik, was sich älter als die Erfindung des modernen digitalen Computers .</mrk>
+</target>
+</trans-unit>
+
+<trans-unit id="3">
+<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">Blaise Pascal designed and constructed the first working mechanical calculator, Pascal's calculator, in 1642. Two hundred years later, Thomas de Colmar launched the mechanical calculator industry[2] when he released his simplified arithmometer, which was the first calculating machine strong enough and reliable enough to be used daily in an office environment. Charles Babbage started the design of the first automatic mechanical calculator, his difference engine, in 1822, which eventually gave him the idea of the first programmable mechanical calculator, his Analytical Engine.[3] He started developing this machine in 1834 and "in less than two years he had sketched out many of the salient features of the modern computer. A crucial step was the adoption of a punched card system derived from the Jacquard loom"[4] making it infinitely programmable.[5] In 1843, during the translation of a French article on the analytical engine, Ada Lovelace wrote, in one of the many notes she included, an algorithm to compute the Bernoulli numbers, which is considered to be the first computer program.[6] Around 1885, Herman Hollerith invented the tabulator which used punched cards to process statistical information; eventually his company became part of IBM. In 1937, one hundred years after Babbage's impossible dream, Howard Aiken convinced IBM, which was making all kinds of punched card equipment and was also in the calculator business[7] to develop his giant programmable calculator, the ASCC/Harvard Mark I, based on Babbage's analytical engine, which itself used cards and a central computing unit. When the machine was finished, some hailed it as "Babbage's dream come true".[8]</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">Blaise Pascal designed and constructed the first working mechanical calculator, Pascal's calculator, in 1642.</mrk>
+	<mrk mid="1" mtype="seg">Two hundred years later, Thomas de Colmar launched the mechanical calculator industry when he released his simplified arithmometer, which was the first calculating machine strong enough and reliable enough to be used daily in an office environment.</mrk>
+	<mrk mid="2" mtype="seg">Charles Babbage started the design of the first automatic mechanical calculator, his difference engine, in 1822, which eventually gave him the idea of the first programmable mechanical calculator, his Analytical Engine.</mrk>
+	<mrk mid="3" mtype="seg">He started developing this machine in 1834 and in less than two years he had sketched out many of the salient features of the modern computer.</mrk>
+	<mrk mid="4" mtype="seg">A crucial step was the adoption of a punched card system derived from the Jacquard loom making it infinitely programmable.</mrk>	
+	<mrk mid="5" mtype="seg">In 1843, during the translation of a French article on the analytical engine, Ada Lovelace wrote, in one of the many notes she included, an algorithm to compute the Bernoulli numbers, which is considered to be the first computer program.</mrk>
+	<mrk mid="6" mtype="seg">Around 1885, Herman Hollerith invented the tabulator which used punched cards to process statistical information; eventually his company became part of IBM.</mrk>	
+	<mrk mid="7" mtype="seg">In 1937, one hundred years after Babbage's impossible dream, Howard Aiken convinced IBM, which was making all kinds of punched card equipment and was also in the calculator business[7] to develop his giant programmable calculator, the ASCC/Harvard Mark I, based on Babbage's analytical engine, which itself used cards and a central computing unit. When the machine was finished, some hailed it as "Babbage's dream come true".</mrk>
+</seg-source>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<mrk mid="0" mtype="seg">Blaise Pascal entwickelt und der erste funktionierende mechanische Rechenmaschine, gebaut Pascals Rechner , im Jahre 1642.</mrk>
+	<mrk mid="1" mtype="seg"> Zweihundert Jahre später, Thomas de Colmar startete die mechanische Rechenmaschine Industrie, wenn er seine vereinfachte Freigabe arithmometer , die die erste Rechenmaschine stark genug und zuverlässig genug, um täglich in einer Büroumgebung verwendet werden sollte.</mrk>
+	<mrk mid="2" mtype="seg">  Charles Babbage begann die Gestaltung der erste automatische mechanische Rechenmaschine, seiner Difference Engine , im Jahre 1822, die schließlich gab ihm die Idee des ersten programmierbaren mechanischen Rechner, seine Analytical Engine.</mrk>
+	<mrk mid="4" mtype="seg">Ein entscheidender Schritt war die Verabschiedung einer Lochkarte System von der Jacquard-Webstuhl abgeleitet macht es unendlich programmierbar..</mrk>	
+	<mrk mid="5" mtype="seg">Im Jahr 1843, während der Übersetzung eines Artikels auf der Französisch Analyse-Engine, Ada Lovelace schrieb, in einem der vielen Notizen, die sie enthalten, einen Algorithmus zu berechnen, um die Bernoulli-Zahlen , die als der erste Computer-Programm sein wird</mrk>
+	<mrk mid="6" mtype="seg">Um 1885, Herman Hollerith das erfunden Tabulator , die verwendet Lochkarten zu verarbeiten statistischen Informationen; schließlich seine Firma wurde Teil der IBM .</mrk>	
+	<mrk mid="7" mtype="seg">Im Jahr 1937, hundert Jahre nach unmöglichen Traum Babbage, Howard Aiken überzeugt IBM, die Herstellung aller Arten von Lochkarten Ausrüstung wurde und war auch in den Rechner Unternehmen, um seine riesigen programmierbaren Taschenrechner, die Entwicklung ASCC / Harvard Mark I , bezogen on Analytical Engine Babbage, verwendet, die sich Karten und eine zentrale Recheneinheit. Wenn die Maschine fertig war, hagelte es einige als "Babbage wahr gewordener Traum".</mrk>	
+</target>
+<alt-trans mid="3" its:mtConfidence="0.5482">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">He started developing this machine in 1834 and in less than two years he had sketched out many of the salient features of the modern computer.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr5">Er begann mit der Entwicklung dieser Maschine im Jahr 1834 und "in weniger als zwei Jahren hatte skizziert viele der wichtigsten Merkmale modernen Computer .</target>
+</alt-trans>
+<alt-trans mid="3">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">He started developing this machine in 1834 and in less than two years he had sketched out many of the salient features of the modern computer.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr6" its:mtConfidence="0.7932">Er begann mit der Entwicklung dieser Maschine im Jahr 1834 und "in weniger als zwei Jahren hatte er skizziert viele der wichtigsten Merkmale der modernen Computer .</target>
+</alt-trans>
+</trans-unit>
+
+<trans-unit id="4">
+<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">During the 1940s, as new and more powerful computing machines were developed, the term computer came to refer to the machines rather than their human predecessors.[9] As it became clear that computers could be used for more than just mathematical calculations, the field of computer science broadened to study computation in general. Computer science began to be established as a distinct academic discipline in the 1950s and early 1960s.[10][11] The world's first computer science degree program, the Cambridge Diploma in Computer Science, began at the University of Cambridge Computer Laboratory in 1953. The first computer science degree program in the United States was formed at Purdue University in 1962.[12] Since practical computers became available, many applications of computing have become distinct areas of study in their own right.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">During the 1940s, as new and more powerful computing machines were developed, the term computer came to refer to the machines rather than their human predecessors.</mrk>
+	<mrk mid="1" mtype="seg">As it became clear that computers could be used for more than just mathematical calculations, the field of computer science broadened to study computation in general.</mrk>
+	<mrk mid="2" mtype="seg">Computer science began to be established as a distinct academic discipline in the 1950s and early 1960s.</mrk>
+	<mrk mid="3" mtype="seg">The world's first computer science degree program, the Cambridge Diploma in Computer Science, began at the University of Cambridge Computer Laboratory in 1953.</mrk>
+	<mrk mid="4" mtype="seg">The first computer science degree program in the United States was formed at Purdue University in 1962.</mrk>
+	<mrk mid="5" mtype="seg">Since practical computers became available, many applications of computing have become distinct areas of study in their own right.</mrk>		
+</seg-source>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<mrk mid="1" mtype="seg">Als klar wurde, dass Computer für mehr als nur mathematische Berechnungen verwendet werden könnte, das Feld der Informatik zu studieren erweitert Berechnung im Allgemeinen.</mrk>
+	<mrk mid="2" mtype="seg">Informatik begann als eigenständige wissenschaftliche Disziplin in den 1950er und frühen 1960er Jahren gegründet werden.</mrk>
+	<mrk mid="3" mtype="seg">Das weltweit erste Informatik-Studium, das Cambridge Diplom in Informatik begann, an der University of Cambridge Computer Laboratory im Jahr 1953.</mrk>
+	<mrk mid="4" mtype="seg">Der erste Informatik-Studium in den Vereinigten Staaten gebildet wurde bei Purdue University im Jahr 1962.</mrk>
+	<mrk mid="5" mtype="seg">Da die praktische Computer zur Verfügung stand, haben viele Anwendungen der Informatik werden verschiedene Bereiche der Studie in ihrem eigenen Recht.</mrk>
+</target>
+<alt-trans mid="0" its:mtConfidence="0.3423">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">During the 1940s, as new and more powerful computing machines were developed, the term computer came to refer to the machines rather than their human predecessors.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr6">In 1940er Jahren, als neue und leistungsfähigere Computing Maschinen entwickelt wurden, kam der Begriff Computer Maschinen eher als ihre menschlichen Vorgänger verweisen.</target>
+</alt-trans>
+<alt-trans mid="0">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">During the 1940s, as new and more powerful computing machines were developed, the term computer came to refer to the machines rather than their human predecessors.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr1" its:mtConfidence="0.4982">In den 1940er Jahren, als neue und leistungsfähigere Computing Maschinen entwickelt wurden, kam der Begriff Computer Maschinen eher als ihre menschlichen Vorgänger verweisen.</target>
+</alt-trans>
+<alt-trans mid="0">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">During the 1940s, as new and more powerful computing machines were developed, the term computer came to refer to the machines rather than their human predecessors.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr3" its:mtConfidence="0.8982">In den 1940er Jahren, als neue und leistungsfähigere Computing Maschinen entwickelt wurden, kam der Begriff Computer an die Maschinen eher als ihre menschlichen Vorgänger verweisen.</target>
+</alt-trans>
+</trans-unit>
+
+<trans-unit id="5">
+<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">Although many initially believed it was impossible that computers themselves could actually be a scientific field of study, in the late fifties it gradually became accepted among the greater academic population.[13] It is the now well-known IBM brand that formed part of the computer science revolution during this time. IBM (short for International Business Machines) released the IBM 704[14] and later the IBM 709[15] computers, which were widely used during the exploration period of such devices. "Still, working with the IBM [computer] was frustrating...if you had misplaced as much as one letter in one instruction, the program would crash, and you would have to start the whole process over again".[13] During the late 1950s, the computer science discipline was very much in its developmental stages, and such issues were commonplace.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">Although many initially believed it was impossible that computers themselves could actually be a scientific field of study, in the late fifties it gradually became accepted among the greater academic population.</mrk>
+	<mrk mid="1" mtype="seg">It is the now well-known IBM brand that formed part of the computer science revolution during this time.</mrk>
+	<mrk mid="2" mtype="seg">IBM (short for International Business Machines) released the IBM 704 and later the IBM 709 computers, which were widely used during the exploration period of such devices.</mrk>	
+	<mrk mid="3" mtype="seg">"Still, working with the IBM [computer] was frustrating...if you had misplaced as much as one letter in one instruction, the program would crash, and you would have to start the whole process over again".</mrk>
+	<mrk mid="4" mtype="seg">During the late 1950s, the computer science discipline was very much in its developmental stages, and such issues were commonplace.</mrk>
+</seg-source>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<mrk mid="0" mtype="seg">Obwohl viele zunächst glaubten, es sei unmöglich, dass Computer selbst könnte tatsächlich eine wissenschaftliche Fachrichtung sein, in den späten fünfziger Jahren wurde es allmählich akzeptiert unter den größeren akademischen Bevölkerung.</mrk>
+	<mrk mid="1" mtype="seg">Es ist die jetzt bekannten IBM Marke, die Teil der gebildeten Informatik Revolution während dieser Zeit.</mrk>
+	<mrk mid="3" mtype="seg">"Still, die Zusammenarbeit mit der IBM [Computer] war frustrierend ... wenn du so viel wie ein Brief in einem Befehl verlegt hatte, das Programm würde abstürzen, und Sie müssten den ganzen Prozess wieder von vorn anfangen".</mrk>
+	<mrk mid="4" mtype="seg">Während Ende der 1950er Jahre war die Informatik Disziplin sehr viel in seinen Entwicklungsstadien, und solche Fragen waren an der Tagesordnung.</mrk>
+</target>
+<alt-trans mid="2" its:mtConfidence="0.9423">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">IBM (short for International Business Machines) released the IBM 704 and later the IBM 709 computers, which were widely used during the exploration period of such devices.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr6">IBM (kurz für International Business Machines) veröffentlicht die IBM 704 und später die IBM 709 Computern, die weit in der Exploration Zeitraum von solchen Geräten verwendet wurden.</target>
+</alt-trans>
+<alt-trans mid="2">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">IBM (short for International Business Machines) released the IBM 704 and later the IBM 709 computers, which were widely used during the exploration period of such devices.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr1" its:mtConfidence="0.2999">IBM (kurz für International Business Machines) veröffentlicht die IBM 704 und später IBM 709 Computern, die weit in der Exploration Zeitraum von solchen Geräten verwendet wurden.</target>
+</alt-trans>
+<alt-trans mid="2">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">IBM (short for International Business Machines) released the IBM 704 and later the IBM 709 computers, which were widely used during the exploration period of such devices.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr3" its:mtConfidence="0.3002">IBM (kurz für International Business Machines) veröffentlicht die IBM 704 und später die IBM 709 Computern, die weit Exploration Zeitraum solchen Geräten verwendet wurden.</target>
+</alt-trans>
+<alt-trans mid="2">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">IBM (short for International Business Machines) released the IBM 704 and later the IBM 709 computers, which were widely used during the exploration period of such devices.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr2" its:mtConfidence="0.4122">IBM (kurz für International Business Machines) veröffentlicht die IBM 704 und später die IBM 709 Computern, die weit in der Exploration Zeitraum von solchen Geräten verwendet wurden.</target>
+</alt-trans>
+</trans-unit>
+
+<trans-unit id="6">
+<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">Time has seen significant improvements in the usability and effectiveness of computing technology. Modern society has seen a significant shift in the users of computer technology, from usage only by experts and professionals, to a near-ubiquitous user base. Initially, computers were quite costly, and some degree of human aid was needed for efficient use - in part from professional computer operators. As computer adoption became more widespread and affordable, less human assistance was needed for common usage.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">Time has seen significant improvements in the usability and effectiveness of computing technology.</mrk>
+	<mrk mid="1" mtype="seg">Modern society has seen a significant shift in the users of computer technology, from usage only by experts and professionals, to a near-ubiquitous user base.</mrk>
+	<mrk mid="2" mtype="seg">Initially, computers were quite costly, and some degree of human aid was needed for efficient use - in part from professional computer operators.</mrk>	
+	<mrk mid="3" mtype="seg">As computer adoption became more widespread and affordable, less human assistance was needed for common usage.</mrk>
+</seg-source>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<mrk mid="0" mtype="seg">Die Zeit hat deutliche Verbesserungen in der Benutzerfreundlichkeit und Effektivität der Computing-Technologie gesehen.</mrk>
+	<mrk mid="1" mtype="seg">Die moderne Gesellschaft hat eine deutliche Verschiebung in der Nutzer von Computer-Technologie, aus der Nutzung nur von Experten und Profis, zu einem nahezu allgegenwärtig Nutzerbasis gesehen</mrk>
+	<mrk mid="3" mtype="seg">Als Computer-Annahme immer mehr verbreitet und erschwinglich, wurde weniger menschliche Hilfe für die gemeinsame Nutzung benötigt.</mrk>
+</target>
+<alt-trans mid="2">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">Initially, computers were quite costly, and some degree of human aid was needed for efficient use - in part from professional computer operators.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr5" its:mtConfidence="0.6002">Zunächst waren Computer sehr teuer, und ein gewisses Maß menschliche Hilfe wurde für die effiziente Nutzung benötigt - teilweise professionellen Computer-Betreiber</target>
+</alt-trans>
+<alt-trans mid="2">
+	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">Initially, computers were quite costly, and some degree of human aid was needed for efficient use - in part from professional computer operators.</source>
+	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr4" its:mtConfidence="0.7122">Zunächst waren Computer sehr teuer, und ein gewisses Maß an menschliche Hilfe wurde für die effiziente Nutzung benötigt - teilweise von professionellen Computer-Betreiber</target>
+</alt-trans>
+</trans-unit>
+
+</body>
+</file>
+</xliff>
