@@ -420,6 +420,7 @@ angular.module('controllers').controller('AceCtrl',
     // this doesn't work from CSS for some reason
     editor.setFontSize(18);
 
+    // working - don't scroll - height should match the text
     var heightUpdateFunction = function() {
 
       // http://stackoverflow.com/questions/11584061/
@@ -427,6 +428,10 @@ angular.module('controllers').controller('AceCtrl',
                 editor.getSession().getScreenLength()
                 * editor.renderer.lineHeight
                 + editor.renderer.scrollBar.getWidth();
+
+
+      $log.log("Editor height: ");
+      $log.log(newHeight);
 
       $('#editor').height(newHeight.toString() + "px");
       $('#editor-section').height(newHeight.toString() + "px");
