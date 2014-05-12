@@ -433,15 +433,14 @@ angular.module('controllers').controller('AceCtrl',
       $log.log("Editor height: ");
       $log.log(newHeight);
 
-      $('#editor').height(newHeight.toString() + "px");
-      $('#editor-section').height(newHeight.toString() + "px");
+      // emit ace editor height up the scope hierarchy - height change directives listen for current-height event
+      $scope.$emit('change-height', { "height": newHeight });
 
       // This call is required for the editor to fix all of
       // its inner structure for adapting to a change in size
       editor.resize();
     };
-
-//    heightUpdateFunction();
+    heightUpdateFunction();
 
     // Whenever a change happens inside the ACE editor, update
     // the height again

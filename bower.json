@@ -12,7 +12,7 @@
     "angular-sanitize": "~1.2.0",
     "underscore": "~1.5.2",
     "jqueryui": "~1.10.3",
-    "angular-ui-ace": "~0.1.0",
+    "angular-ui-ace": "bower",
     "angular-ui-bootstrap": "~0.10.0",
     "ng-file-upload": "~1.2.4",
     "ace-builds": "~1.1.1",
