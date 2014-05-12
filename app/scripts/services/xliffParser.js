@@ -30,27 +30,23 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       var sourceLang = file.getAttribute('source-language');
       var targetLang = file.getAttribute('target-language');
 
-      // WORKING - support other tags which may contain translatable units
-      // Working - get all <trans-unit> nodes
-      var transUnits = xml.querySelectorAll('trans-unit');
-      // this requires adhering to the XLIFF spec
-
+      // Working -- segmentation with <seg-source> and <mrk> tags is Optional -- add support for pure <source> and <target>
       var sourceSegments = this.getTranslatableSegments(xml);
 
       // for every segment, get its matching target mrk, if it exists - note: it may not exist
       var targetSegments = _.map(sourceSegments,
         function(seg) {
-          return self.getMrkTarget(xml, seg);
+          $log.log("logging the source segment node:");
+          $log.log(seg);
+          if (seg.nodeName === 'mrk') {
+            $log.log("nodeName is mrk");
+            return self.getMrkTarget(xml, seg);
+          }
+          // there's no mrks inside <target>, just a <target> -- TODO: do we require target nodes to exist?
+          return seg.parentNode.querySelector('target');
         }
       );
 
-      $log.log("the number of source segments is: " + sourceSegments.length);
-      $log.log('source lang: ' + sourceLang);
-      $log.log("The number of target segments is: " + targetSegments.length);
-      $log.log('target lang: ' + targetLang);
-
-      // TODO: a zip won't work here, since there may be segments missing in the middle
-      // we need to iterate through the source segments and add target nodes where they don't already exist
       // we can assume that translators will want to translate every segment, so there should be at least an
       // empty target node corresponding to each source node
       var sourceWithTarget = _.zip(sourceSegments, targetSegments);
@@ -58,19 +54,12 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
         function(seg) {
           var sourceText = seg[0].textContent;
           var targetText = seg[1] ? seg[1].textContent : '';
-          $log.log("sourceText: " + sourceText);
-          $log.log("targetText: " + targetText);
-          $log.log("sourceDOM: " + seg[0]);
-          // in the case that there is no target node, the test should fail
-          $log.log("targetDOM: " + seg[1]? seg[1] : '');
-
           if (!seg[1]) {
             //$log.log(' ' + seg[0]);
             $log.log(seg[0]);
             var mid = seg[0].getAttribute('mid');
             $log.log("target segment missing: " + mid);
             seg[1] = self.createNewMrkTarget(Document.DOM, seg[0], '', targetLang);
-            //(xmlDoc, seg, newValue, targetLang)
             $log.log(seg[1]);
           }
 
@@ -81,7 +70,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
             targetDOM: seg[1]
           };
 
-          // TODO how to replace and add nodes to the document as the translator works?
           Document.sourceSegments.push(sourceText);
           Document.targetSegments.push(targetText);
           // Add the pairs so we can access both sides from a single ngRepeat
@@ -102,9 +90,25 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       $log.log("firing document-loaded");
       $rootScope.$broadcast('document-loaded');
     },
+    // working - the source may not be segmented with <seg-source> tags -- there may only be a single <source> tag
     getTranslatableSegments: function(xmlDoc) {
-      return xmlDoc.querySelectorAll('seg-source > mrk[mtype="seg"]');
+      var transUnits = xmlDoc.querySelectorAll('trans-unit');
+      var translatableSegments = [];
+      angular.forEach(transUnits, function(transUnit) {
+        // if seg-source, get <mrk> targets, else, get <target>
+        if (transUnit.querySelector('seg-source')) {
+          // querySelectorAll returns a node list, so we use Array.prototype.slice.call to make it a normal array
+          translatableSegments = translatableSegments.concat(Array.prototype.slice.call((transUnit.querySelectorAll('seg-source > mrk[mtype="seg"]'))));
+        } else {
+          translatableSegments = translatableSegments.concat((transUnit.querySelector('source')));
+        }
+      });
+
+//      return xmlDoc.querySelectorAll('seg-source > mrk[mtype="seg"]');
+      return translatableSegments;
     },
+
+    // note: <trans-units> are required to have the 'id' attribute
     getMrkTarget: function(xmlDoc, seg) {
       var segid = this.getSegId(seg);
       var tuid = this.getTransUnitId(seg);
@@ -152,17 +156,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       targetNode.appendChild(mrkTarget);
 
       return mrkTarget;
-    },
-    removeMrkTarget: function (doc, segment)  {
-      var target_node = get_target(doc, segment);
-      var mrk_target_to_be_removed = get_mrk_target(doc, segment);
-
-      if (target_node && mrk_target_to_be_removed) {
-        target_node.removeChild(mrk_target_to_be_removed);
-        // remove target if empty
-        if (target_node.childElementCount == 0)
-          target_node.parentNode.removeChild(target_node);
-      }
     },
     // utility function to grab a local file from a string url
     loadLocalFile: function(filepath) {

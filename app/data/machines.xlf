@@ -25,13 +25,7 @@
 <body>
 <trans-unit id="1">
 <source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">History</source>
-<seg-source>
-	<mrk mid="0" mtype="seg" its:translate="yes">Machines for calculating fixed numerical tasks such as the abacus have existed since antiquity but they only supported the human mind, aiding in computations as complex as multiplication and division.</mrk>		
-	<mrk mid="1" mtype="seg">History</mrk>
-</seg-source>
-<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="1" mtype="seg">Geschichte</mrk>
-<mrk mid="0" mtype="seg" its:provenanceRecordsRef="#defaultprov">apple swim</mrk></target>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">Geschichte</target>
 <alt-trans mid="0" its:mtConfidence="0.4112">
 	<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">Machines for calculating fixed numerical tasks such as the abacus have existed since antiquity but they only supported the human mind, aiding in computations as complex as multiplication and division.</source>
 	<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace" its:provenanceRecordsRef="#pr1">Maschinen für die Berechnung der Zahlenwerte Aufgaben wie die abacus haben seit der Antike existierte aber nur unterstützt den Geist menschlichen, Beihilfe in Berechnungen so komplex wie Multiplikation und Division.</target>
