@@ -1,28 +1,19 @@
   <!-- TODO: show the relevant content when the tab is active - put inside tab.content? -->
-<div class="container" ng-controller="TabsCtrl">
-    <div>
-      <!--<tabset justified="true">-->
-        <!--<tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled"></tab>-->
-      <!--</tabset>-->
-        <!-- TODO: use nav here, not tabs -->
-
-    </div>
+<div class="container" ng-controller="TabsCtrl">-->
 
     <!-- TODO: add feature where dragging a word or phrase to target area translates it automatically -->
     <!-- UPDATE: use glossary for the 'add word' feature -->
-    <!-- TODO: markup target content using highlight rules -->
     <!-- TODO: get the TM matches for the source segment -->
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
-
         <textarea ng-show="showXLIFF" rows="20" cols="120">{{ xliff_content }}</textarea>
 
         <div class="segment row" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments" index="$index"
              ng-init="segment = seg; init($index)">
             <a id="segment-{{$index}}"></a>
             <p class="segment-index-label">Segment Index: {{$index}}</p>
-            <div class="container bottom-margin" ng-click="activate($index)">
+            <div class="bottom-margin" ng-click="activate($index)">
                 <div class="row">
                     <!-- used with $anchorScroll from ContentAreaCtrl -->
                     <!-- TODO: prevent $anchorScroll from reloading the ng-repeat -->
@@ -108,7 +99,7 @@
                 </div>
                 <!-- The tools for editing -->
                 <!--<div class="ace-toolbar container" ng-show="toolbarOpen" collapse="toolbarOpen">-->
-                <div class="ace-toolbar container" collapse="isCollapsed['collapsed']" ng-show="isActive.active">
+                <div class="ace-toolbar" collapse="isCollapsed['collapsed']" ng-show="isActive.active">
                     <div
                         class="translation-toolbar"
                     >
