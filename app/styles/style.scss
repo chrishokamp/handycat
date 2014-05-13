@@ -9,8 +9,9 @@
 
 body {
   // background: rgb(236, 236, 236);
-  background: slategray;
-  // background-image:url('../images/ricepaper.png');
+//  background: slategray;
+  background: #ffffff;
+//  background-image:url('../images/ricepaper.png');
   background-image:url('../images/broken_noise.png');
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
   font-size: 18px;
@@ -19,9 +20,6 @@ body {
    min-width: 480px; /* suppose you want minimun width of 1000px */
    width: auto !important;  /* Firefox will set width as auto */
    width:480px;             /* As IE ignores !important it will set width as 1000px; */
-}
-
-button {
 }
 
 h3 {
@@ -219,7 +217,8 @@ span.drop-text {
   color: red;
 }
 .segment-index-label {
-  color: white;
+//  color: white;
+  color: #708090;
   font-size: small;
 }
 

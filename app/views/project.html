@@ -1,102 +1,104 @@
-<div class="header">
-  <!--<ul class="nav nav-pills pull-right">-->
-    <!--<li class="active"><a ng-href="#">Home</a></li>-->
-  <!--</ul>-->
-  <image src="images/cat_logo.png"></image>
-  <h3 class="inline-header text-muted">CNGL CAT</h3>
-</div>
-<div class="row user-info">
-    <div class="col-xs-3 col-xs-offset-9">
-        <span class="text-muted">Current User: Chris Hokamp</span>
+<div class="project-wrapper">
+    <div class="header">
+      <!--<ul class="nav nav-pills pull-right">-->
+        <!--<li class="active"><a ng-href="#">Home</a></li>-->
+      <!--</ul>-->
+      <image src="images/cat_logo.png"></image>
+      <h3 class="inline-header text-muted">CNGL CAT</h3>
     </div>
-</div>
-
-<!-- TODO: add ui-view here, and switch out from project, edit and stats views -->
-<!--<h4>Testing popovers</h4>-->
-<!--<div class="test-popover" ng-controller="GlossaryCtrl">-->
-    <!--<p>-->
-        <!--<button popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>-->
-        <!--&lt;!&ndash; TODO: Note: this uses the very new popover-template directive see: http://plnkr.co/edit/B2wEisa &ndash;&gt;-->
-        <!--<button popover-template="scripts/glossary/glossary-template.html" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>-->
-        <!--&lt;!&ndash; <span    ui-options="{title:office.location, content:office.people.join(',')} &ndash;&gt;-->
-        <!--<span tooltip-html-unsafe="contentFunc()">Tooltip with html from function</span>-->
-        <!--<span tooltip-html-unsafe="{{content}}">Tooltip with html from function</span>-->
-    <!--<div popover="{{content}}" popover-trigger="mouseenter">Testing ui popover</div>-->
-
-    <!--<p>-->
-        <!--<span popover="I appeared when the mouse entered a span" popover-trigger="mouseenter">Popover on span element</span>-->
-        <!--<span popover="makeHTML()" popover-trigger="mouseenter">Popover on span element</span>-->
-    <!--</p>-->
-    <!--</p>-->
-<!--</div>-->
-
-
-<!--<h3 class="text-primary" ng-controller="UploadCtrl">Testing ngFileUpload</h3>-->
-<!-- the upload control should be the same regardless of the UI component -->
-<!-- <div ng-controller="UploadCtrl"> -->
-
-<div ng-controller="LangPairCtrl">
-    <p>Please select a language pair</p>
-</div>
-
-<div ng-controller="UploadCtrl" class="container">
-
-<!--working - collapse the drag area when a file is uploaded-->
-    <div class="alert alert-success slide-in" ng-click="fileAdded=!fileAdded" ng-hide="!fileAdded">
-        Click to change your file...
+    <div class="row user-info">
+        <div class="col-xs-3 col-xs-offset-9">
+            <span class="text-muted">Current User: Chris Hokamp</span>
+        </div>
     </div>
-    <div class="upload-area slide-in" ng-hide="fileAdded">
-        <div class="row" >
-            <div
-                class="drop-box col-xs-6 col-centered text-center"
-                ng-file-drop="onFileSelect($files);"
-                ng-file-drop-available="dropSupported=true"
-            >
-                <div class="row"><span class="drop-message drop-text">Drag in an XLIFF file to get started</span></div>
-                <div class="row"><span class="glyphicon glyphicon-plus drop-text"></span></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-centered text-center">
-                <span class="btn btn-default btn-file">Choose a File<input class="file-input" type="file" ng-file-select="onFileSelect($files)" /></span>
-            </div>
-            <!--<input type="file" ng-file-select="onFileSelect($files)" multiple> -->
-        </div>
-    </div> <!-- end upload area -->
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 selected-files" ng-show="selectedFiles.length > 0">
-                <h3>Selected File:</h3>
-                <div class="sel-file row" ng-repeat="f in selectedFiles">
-                    <div class="col-xs-7">{{f.name}} - size: {{f.size}}B - type: {{f.type}}</div>
-                    <div class="col-xs-1 col-xs-offset-1 start-translation"><button  ng-click="startTranslation()" class="btn btn-info">Translate</button></div>
 
-                    <!--<button class="button" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>-->
-                    <!--<span class="progress" ng-show="progress[$index] >= 0">-->
-                        <!--<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>-->
-                    <!--</span>-->
-                    <!--<button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>-->
+    <!-- TODO: add ui-view here, and switch out from project, edit and stats views -->
+    <!--<h4>Testing popovers</h4>-->
+    <!--<div class="test-popover" ng-controller="GlossaryCtrl">-->
+        <!--<p>-->
+            <!--<button popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>-->
+            <!--&lt;!&ndash; TODO: Note: this uses the very new popover-template directive see: http://plnkr.co/edit/B2wEisa &ndash;&gt;-->
+            <!--<button popover-template="scripts/glossary/glossary-template.html" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button>-->
+            <!--&lt;!&ndash; <span    ui-options="{title:office.location, content:office.people.join(',')} &ndash;&gt;-->
+            <!--<span tooltip-html-unsafe="contentFunc()">Tooltip with html from function</span>-->
+            <!--<span tooltip-html-unsafe="{{content}}">Tooltip with html from function</span>-->
+        <!--<div popover="{{content}}" popover-trigger="mouseenter">Testing ui popover</div>-->
+
+        <!--<p>-->
+            <!--<span popover="I appeared when the mouse entered a span" popover-trigger="mouseenter">Popover on span element</span>-->
+            <!--<span popover="makeHTML()" popover-trigger="mouseenter">Popover on span element</span>-->
+        <!--</p>-->
+        <!--</p>-->
+    <!--</div>-->
+
+
+    <!--<h3 class="text-primary" ng-controller="UploadCtrl">Testing ngFileUpload</h3>-->
+    <!-- the upload control should be the same regardless of the UI component -->
+    <!-- <div ng-controller="UploadCtrl"> -->
+
+    <div ng-controller="LangPairCtrl">
+        <p>Please select a language pair</p>
+    </div>
+
+    <div ng-controller="UploadCtrl" class="container">
+
+    <!--working - collapse the drag area when a file is uploaded-->
+        <div class="alert alert-success slide-in" ng-click="fileAdded=!fileAdded" ng-hide="!fileAdded">
+            Click to change your file...
+        </div>
+        <div class="upload-area slide-in" ng-hide="fileAdded">
+            <div class="row" >
+                <div
+                    class="drop-box col-xs-6 col-centered text-center"
+                    ng-file-drop="onFileSelect($files);"
+                    ng-file-drop-available="dropSupported=true"
+                >
+                    <div class="row"><span class="drop-message drop-text">Drag in an XLIFF file to get started</span></div>
+                    <div class="row"><span class="glyphicon glyphicon-plus drop-text"></span></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-centered text-center">
+                    <span class="btn btn-default btn-file">Choose a File<input class="file-input" type="file" ng-file-select="onFileSelect($files)" /></span>
+                </div>
+                <!--<input type="file" ng-file-select="onFileSelect($files)" multiple> -->
+            </div>
+        </div> <!-- end upload area -->
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 selected-files" ng-show="selectedFiles.length > 0">
+                    <h3>Selected File:</h3>
+                    <div class="sel-file row" ng-repeat="f in selectedFiles">
+                        <div class="col-xs-7">{{f.name}} - size: {{f.size}}B - type: {{f.type}}</div>
+                        <div class="col-xs-1 col-xs-offset-1 start-translation"><button  ng-click="startTranslation()" class="btn btn-info">Translate</button></div>
+
+                        <!--<button class="button" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>-->
+                        <!--<span class="progress" ng-show="progress[$index] >= 0">-->
+                            <!--<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>-->
+                        <!--</span>-->
+                        <!--<button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>-->
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
+
+    <!--<div token-row ng-controller="RowCtrl">-->
+        <!--&lt;!&ndash; setup the template here &ndash;&gt;-->
+        <!--&lt;!&ndash; one starting gap &ndash;&gt;-->
+        <!--<div class="start inline">-->
+            <!--<div gap class='gap'>&nbsp</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; A token unit has a token, then a gap after &ndash;&gt;-->
+        <!--<div class='inline' draggable ng-repeat='token in tokens'>-->
+            <!--<div token class="word">{{ token }}</div>-->
+            <!--&lt;!&ndash; <token></token> &ndash;&gt;-->
+            <!--&lt;!&ndash; TODO: collapse this gap when dragging stops &ndash;&gt;-->
+            <!--<div gap class='gap'>&nbsp</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="footer"></div>
 </div>
-
-
-<!--<div token-row ng-controller="RowCtrl">-->
-    <!--&lt;!&ndash; setup the template here &ndash;&gt;-->
-    <!--&lt;!&ndash; one starting gap &ndash;&gt;-->
-    <!--<div class="start inline">-->
-        <!--<div gap class='gap'>&nbsp</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash; A token unit has a token, then a gap after &ndash;&gt;-->
-    <!--<div class='inline' draggable ng-repeat='token in tokens'>-->
-        <!--<div token class="word">{{ token }}</div>-->
-        <!--&lt;!&ndash; <token></token> &ndash;&gt;-->
-        <!--&lt;!&ndash; TODO: collapse this gap when dragging stops &ndash;&gt;-->
-        <!--<div gap class='gap'>&nbsp</div>-->
-    <!--</div>-->
-<!--</div>-->
-
-<div class="footer"></div>
