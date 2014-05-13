@@ -279,8 +279,8 @@ angular.module('controllers').controller('AceCtrl',
     // space at the end
     whitespaceRemoved = whitespaceRemoved.replace(/\s+$/, '');
     $scope.editor.getSession().setValue(whitespaceRemoved);
+    $scope.editor.focus();
   }
-
 
   // Use this function to configure the ace editor instance
   $scope.aceLoaded = function (ed) {
