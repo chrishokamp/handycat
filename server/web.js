@@ -12,8 +12,9 @@ app.use(cors());
 app.use(app.router);
 params.extend(app);
 app.use(express.logger('dev'));
+
 // for hosting the app using express
-app.use(gzippo.staticGzip("" + __dirname + "/dist"));
+// app.use(gzippo.staticGzip("" + __dirname + "/dist"));
 
 // add a route to query media wiki
 app.param('lang', /^\w{2}$/);
