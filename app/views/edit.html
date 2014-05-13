@@ -39,7 +39,7 @@
                                         <!--<div chars class="sample-show-hide" collapsed="showSpecialChars" special="germanChars" selected="insertChar(char)" ></div>-->
                                     </div>
                                 </div>
-                                <div class="col-xs-1 move-left" ng-show="isActive.active">
+                                <div class="reorder-toolbar col-xs-1 move-left" ng-show="isActive.active">
                                   <button tooltip="switch edit mode" ng-click="changeEditMode()"  class="btn btn-primary mode-glyph">
                                         <span>E</span>
                                   </button>
@@ -81,13 +81,13 @@
                                     <button ng-click="copySourcePunctuation()" tooltip="copy punctuation from source" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-share-alt"></span></button>
                                 </div>
                                 <div class="col-xs-1 text-right">
-                                    <button ng-click="clearEditor()" tooltip="reject MT output" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-remove"></span></button>
-                                </div>
-                                <div class="col-xs-1 text-right">
                                     <button ng-click="toggleToolbar()" tooltip="toggle toolbar" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-wrench"></span></button>
                                 </div>
                                 <div class="col-xs-1 text-right">
                                     <button ng-click="nextMTSuggestion()" tooltip="next MT suggestion" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>
+                                </div>
+                                <div class="col-xs-1 text-right">
+                                    <button ng-click="clearEditor()" tooltip="reject MT output" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-remove"></span></button>
                                 </div>
                                 <div class="col-xs-1 text-right">
                                     <button ng-click="segmentFinished($index)" tooltip="segment complete" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
