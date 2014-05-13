@@ -78,7 +78,12 @@ angular.module('controllers').controller('AceCtrl',
         }
 
         var originalRange = this.tokenRanges[startingIndex];
-        //remove the original text
+        $log.log("originalRange");
+        $log.log(originalRange);
+        //remove the original text + 1 space
+        var extendedRange = angular.extend(originalRange, extendedRange);
+        extendedRange.end.column += 1;
+
         $scope.editor.getSession().getDocument().remove(originalRange);
 
         // update all of the ranges from currentIndex-nextIndex-1 - (remember the extra whitespace)
@@ -95,6 +100,7 @@ angular.module('controllers').controller('AceCtrl',
         var insertPosition = { "row": 0, "column":this.tokenRanges[startingIndex]['end']['column'] };
         $log.log("insert position is: ");
         $log.log(insertPosition);
+
         var newRange = new aceRange(0, insertPosition['column'], 0, insertPosition['column']+tokenText.length);
 
         // place the range in its new slot
@@ -104,6 +110,8 @@ angular.module('controllers').controller('AceCtrl',
         this.currentRangeIndex = nextIndex;
 
         // do the actual insertion into the editor
+        // add a space after tokenText
+        tokenText = tokenText + ' ';
         $scope.editor.getSession().getDocument().insert(insertPosition, tokenText);
         selectRange(newRange);
 
@@ -431,7 +439,6 @@ angular.module('controllers').controller('AceCtrl',
                 screenLength
                 * editor.renderer.lineHeight
                 + editor.renderer.scrollBar.getWidth();
-
 
       $log.log("Editor height: ");
       $log.log(newHeight);
