@@ -149,9 +149,6 @@ ul.nav-tabs > li {
 .mode-glyph {
   background-color: grey;
 }
-.seg-finished {
-//  margin-right: 20px;
-}
 
 .reorder-toolbar {
   button {
@@ -213,6 +210,11 @@ span.drop-text {
 }
 
 /* Segment Area Styles */
+.segment-finished {
+  background-color: #87cefa;
+  font-size: medium;
+  color: red;
+}
 .segment-index-label {
   color: white;
   font-size: small;

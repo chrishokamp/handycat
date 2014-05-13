@@ -10,6 +10,7 @@ angular.module('controllers')
   // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
   $scope.isActive = { active:true };
+  $scope.segmentState = { currentState: 'untranslated', complete: false };
 
   /*
   $scope.activate = function(index) {
@@ -238,6 +239,9 @@ angular.module('controllers')
 
   $scope.segmentFinished = function(segId) {
     $log.log("segId is: " + segId);
+
+    $scope.segmentState.completed = true;
+
     Document.completedSegments[segId] = true;
     Project.setActiveSegment(segId);
     Project.focusNextSegment();
