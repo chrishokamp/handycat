@@ -133,6 +133,8 @@ ul.nav-tabs > li {
   background-color: white;
 //  height: 100px;
   overflow-y: auto;
+  overflow-x: hidden;
+  padding-left: 3px;
   // leave a little space between the two
 //  overflow-y: hidden;
   //background-color: white;
@@ -201,6 +203,7 @@ span.drop-text {
   font-size: 18px;
   width:100%;
   margin-top: 10px;
+//  overflow-x: hidden;
 }
 
 .source-token {
