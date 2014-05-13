@@ -424,8 +424,11 @@ angular.module('controllers').controller('AceCtrl',
     var heightUpdateFunction = function() {
 
       // http://stackoverflow.com/questions/11584061/
+      // add 1 to screen length to get some extra space
+      var screenLength = editor.getSession().getScreenLength();
+      screenLength += 1;
       var newHeight =
-                editor.getSession().getScreenLength()
+                screenLength
                 * editor.renderer.lineHeight
                 + editor.renderer.scrollBar.getWidth();
 

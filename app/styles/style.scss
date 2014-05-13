@@ -95,6 +95,11 @@ h3 {
 
 /* styles for the editing view */
 
+/* toolbar tabs */
+ul.nav-tabs > li {
+  font-size: small;
+}
+
 /* to highlight matches from the concordancer */
 .searchmatch {
   font-weight: bold;
