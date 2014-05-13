@@ -17,7 +17,9 @@ angular.module('services').factory('tokenizer',['$q', '$log', function( $q, $log
 
     // this one just splits on whitespace
     var words = str.replace(/\s+/g, ' ').split(' '),
-      lang = lang || 'en';
+        lang = lang || 'en';
+    // split on words - note: the following removes punctuation
+//    var words = str.replace(/\s+/g, ' ').split(/[\s\.,?]/),
     return words;
   };
 

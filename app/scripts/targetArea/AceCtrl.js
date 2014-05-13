@@ -268,6 +268,19 @@ angular.module('controllers').controller('AceCtrl',
     $scope.editor.focus();
   }
 
+  $scope.removeExtraWhitespace = function() {
+    var currentText = $scope.editor.getSession().getValue();
+    //punctuation
+    var whitespaceRemoved = currentText.replace(/\s+([\.,])/, '$1');
+    // multiple spaces
+    whitespaceRemoved = whitespaceRemoved.replace(/\s+/, ' ');
+    // space at the beginning
+    whitespaceRemoved = whitespaceRemoved.replace(/^\s+/, '');
+    // space at the end
+    whitespaceRemoved = whitespaceRemoved.replace(/\s+$/, '');
+    $scope.editor.getSession().setValue(whitespaceRemoved);
+  }
+
 
   // Use this function to configure the ace editor instance
   $scope.aceLoaded = function (ed) {
