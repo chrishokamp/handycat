@@ -13,8 +13,14 @@ angular.module('services').factory('SegmentOrder', ['$http', '$rootScope', 'base
       // if we don't have the segment order service, the order is 0, 1, 2, ...
       for (var i = 0; i < segments.length; ++i)
         this.order.push(i);
-    },
 
+      // testing only
+      this.order = this.shuffle(this.order);
+    },
+    shuffle: function(o){
+     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+      return o;
+    },
     nextSegment: function(current) {
       var index = this.order.indexOf(current);
       if (index != -1) {

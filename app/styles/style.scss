@@ -10,7 +10,8 @@
 body {
   // background: rgb(236, 236, 236);
 //  background: slategray;
-  background: #ffffff;
+//  background: #ffffff;
+  background: lightgrey;
 //  background-image:url('../images/ricepaper.png');
   background-image:url('../images/broken_noise.png');
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
@@ -116,9 +117,6 @@ ul.nav-tabs > li {
   font-size: 10px;
 }
 
-%ace-editor-height {
-  min-height: 100px;
-}
 
 // highlight recent changes in the marker layer
 .changed_range {
@@ -131,11 +129,15 @@ ul.nav-tabs > li {
   left: -30px;
 }
 
+%ace-editor-height {
+  min-height: 100px;
+}
+
 .content-card {
   @extend %ace-editor-height;
   background-color: white;
 //  height: 100px;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
   padding-left: 3px;
   // leave a little space between the two
