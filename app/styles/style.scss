@@ -96,7 +96,12 @@ h3 {
 
 /* styles for the editing view */
 
-/* toolbar tabs */
+/* info toolbar */
+.info-toolbar {
+
+}
+
+/* tabs */
 ul.nav-tabs > li {
   font-size: small;
 }
@@ -200,7 +205,8 @@ span.drop-text {
   line-height: normal;
   font-size: 18px;
   width:100%;
-  margin-top: 10px;
+  margin-top: 12px;
+  margin-bottom: 6px;
 //  overflow-x: hidden;
 }
 
