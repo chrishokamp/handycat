@@ -3,9 +3,13 @@
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-  'Morphology', 'Document', 'project',
+  'Morphology', 'Document', 'project', 'entityLinker',
   function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation, Morphology,
-           Document, Project) {
+           Document, Project, entityLinker) {
+
+  $scope.linkEntities = function() {
+    entityLinker.annotate();
+  }
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
