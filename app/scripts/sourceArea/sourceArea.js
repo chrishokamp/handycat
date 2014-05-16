@@ -16,7 +16,7 @@ angular.module('directives')
         // give each token an id, and also move to dot notation
         // var tokens =  _.map(tokenStrings, function(tok, index) { return { index: index, token: tok} });
         // wrap tokens in spans
-        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span class="source-token">' + tok + '</span>'});
+        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span popover class="source-token">' + tok + '</span>'});
         var annotatedSentence = tokenSpans.join(' ');
 //        $log.log('annotatedSentence is: ' + annotatedSentence);
 
