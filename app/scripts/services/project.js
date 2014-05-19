@@ -5,10 +5,13 @@
 angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Document',
     function($rootScope, SegmentOrder, Document) {
 
+
+
     return {
       // set to true to show a textarea with the modifications of the XLIFF in real time.
       debugXLIFF: false,
 
+      // order of segments
       activeSegment: 0,
       setActiveSegment: function(segId) {
           this.activeSegment = segId;
@@ -29,6 +32,33 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
         if (segIndex != -1)
           $rootScope.$broadcast('changeSegment', {currentSegment: self.activeSegment});
         return this.activeSegment;
+      },
+
+      // stats
+      // stores all the actions performed by the user in order
+      log:[],
+
+      // aggregated usage of each operation. this object could be reconstructed from this.log
+      stats: {},
+
+      updateStat: function(stat, segment, data) {
+        var currentdate = new Date();
+        var date = currentdate.getDate() + "/"
+          + (currentdate.getMonth()+1)  + "/"
+          + currentdate.getFullYear() + " @ "
+          + currentdate.getHours() + ":"
+          + currentdate.getMinutes() + ":"
+          + currentdate.getSeconds();
+        var self = this;
+        self.log.push([stat, segment, data, date]);
+        if (!(stat in self.stats)) {
+          self.stats[stat] = [];
+          var nSegments = Document.segments.length;
+          for (var i = 0; i < nSegments; ++i)
+            self.stats[stat].push([]);
+        }
+        self.stats[stat][segment].push(date);
+        console.log(self.log);
       }
     }
 }]);

@@ -166,4 +166,11 @@
     <div ng-show="checkTranslationCompleted()" id="footmsg">
         <h2>Translation completed!</h2>
     </div>
+
+    <div ng-controller="StatsController">
+        <p>Stats</p>
+        <div ng-repeat="s in log">
+            <p>{{s[3]}}: {{s[0]}} {{s[1]}} {{s[2]}}</p>
+        </div>
+    </div>
 </div>

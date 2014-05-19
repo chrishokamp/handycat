@@ -9,7 +9,7 @@ angular.module('controllers')
 
   $scope.linkEntities = function() {
     entityLinker.annotate();
-  }
+  };
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
@@ -53,6 +53,7 @@ angular.module('controllers')
     var target = $scope.segment.target;
     $scope.segment.target = copyPunctuation.copySourcePunctuation(source, target);
 
+    Project.updateStat('copyPunctuation', $scope.$index);
     // Only adds the action to the edit history if it actually did something.
     if ($scope.segment.target !== target) {
       $scope.editHistory.push(
@@ -74,6 +75,7 @@ angular.module('controllers')
       var phrase = $scope.selectedToken;
       $log.log('the phrase to change is: ' + phrase);
 
+      Project.updateStat('changeNumber', $scope.$index, phrase);
       var res = Morphology.changeNumber(phrase, 'de');
       res.then(
         function(result) {
@@ -101,6 +103,7 @@ angular.module('controllers')
       var phrase = $scope.selectedToken;
       $log.log('the phrase to change is: ' + phrase);
 
+      Project.updateStat('changeGender', $scope.$index, phrase);
       var res = Morphology.changeGender(phrase, 'de');
       res.then(
         function(result) {
@@ -128,6 +131,7 @@ angular.module('controllers')
       var phrase = $scope.selectedToken;
       $log.log('the phrase to change is: ' + phrase);
 
+      Project.updateStat('changeCase', $scope.$index, phrase);
       var res = Morphology.changeCase(phrase, 'de');
       res.then(
         function(result) {
@@ -149,6 +153,7 @@ angular.module('controllers')
   $scope.queryConcordancer = function(query, lang) {
     $log.log('query is: ' + query + ', lang is: ' + lang);
     $scope.concordancerError = false;
+    Project.updateStat('queryConcordancer', $scope.$index, query);
     Wikipedia.getConcordances(query, lang);
   };
 
@@ -214,6 +219,7 @@ angular.module('controllers')
   glossary.glossaryQuery = undefined;
   $scope.glossary = glossary;
   $scope.queryGlossary = function(query) {
+    Project.updateStat('queryGlossary', $scope.$index, query);
     Glossary.getMatches(query, updateGlossaryArea);
   };
 
@@ -223,6 +229,7 @@ angular.module('controllers')
   // should check first if the edit should be applied or not.
   $scope.propagateEdit = function(index) {
       $rootScope.$broadcast('propagate-action', $scope.editHistory[index]);
+      Project.updateStat('propagateAction', $scope.$index, $scope.editHistory[index].operation);
   };
 
   // Trigger propagated edits
@@ -245,6 +252,7 @@ angular.module('controllers')
     $log.log("segId is: " + segId);
 
     $scope.segmentState.completed = true;
+    Project.updateStat('segmentFinished', segId);
 
     Document.completedSegments[segId] = true;
     Project.setActiveSegment(segId);
