@@ -1,9 +1,9 @@
 
 angular.module('controllers').controller('AceCtrl',
   ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', 'Morphology', '$http',
-   '$timeout', '$log', 'ruleMap',
+   '$timeout', '$log', 'ruleMap', 'project',
    function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, Morphology, $http, $timeout, $log,
-            ruleMap) {
+            ruleMap, Project) {
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
@@ -37,8 +37,8 @@ angular.module('controllers').controller('AceCtrl',
             // select the first of the tokenRanges - be careful - this is a side-effect
             selectRange(self.tokenRanges[0]);
             self.currentRangeIndex = 0;
-              $log.log("all ranges");
-        $log.log(self.tokenRanges);
+            $log.log("all ranges");
+            $log.log(self.tokenRanges);
           },
           function(err) {
             $log.log("AceCtrl: there was an error getting the token ranges");
@@ -54,6 +54,9 @@ angular.module('controllers').controller('AceCtrl',
         $log.log('current range to be selected:');
         $log.log(this.tokenRanges[this.currentRangeIndex]);
         selectRange(this.tokenRanges[this.currentRangeIndex]);
+      },
+      getTokenText: function() {
+        return $scope.editor.getSession().getDocument().getTextRange(this.tokenRanges[this.currentRangeIndex]);
       },
 
 // Ace document object (editor.getSession().getDocument()) API:
@@ -146,20 +149,23 @@ angular.module('controllers').controller('AceCtrl',
     // make sure that the edit mode updates when there are changes in the UI
     // we need functions like 'put after' / 'put before'
 
+    Project.updateStat('changeEditMode', $scope.$index, '');
+
     // initialize spans on the current editing mode
     currentMode.setSpans($scope.editor.getSession().getValue());
-
   };
 
   // the following functions expose control of the current mode on the $scope
   $scope.selectNextRange = function() {
     currentMode.selectNextTokenRange();
-  }
+    Project.updateStat('selectNextRange', $scope.$index, currentMode.getTokenText());
+  };
 
   // the following functions expose control of the current mode on the $scope
   $scope.moveCurrentEditRange = function() {
+    Project.updateStat('modeCurrentEditRange', $scope.$index, currentMode.getTokenText());
     currentMode.moveCurrentRange(1);
-  }
+  };
 
 // end edit mode API
 
