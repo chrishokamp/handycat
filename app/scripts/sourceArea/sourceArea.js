@@ -16,8 +16,9 @@ angular.module('directives')
         // give each token an id, and also move to dot notation
         // var tokens =  _.map(tokenStrings, function(tok, index) { return { index: index, token: tok} });
         // wrap tokens in spans
-        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span popover class="source-token">' + tok + '</span>'});
-        var annotatedSentence = tokenSpans.join(' ');
+//        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span popover tooltip="fun fun" class="source-token">' + tok + '</span>'});
+        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span tooltip-html-unsafe="{{getLinkedData()}}" class="source-token">' + tok + '</span>'});
+        var annotatedSentence = '<div>' + tokenSpans.join(' ') + '</div>';
 //        $log.log('annotatedSentence is: ' + annotatedSentence);
 
         var compiledHTML = $compile(annotatedSentence)(scope);
@@ -25,6 +26,12 @@ angular.module('directives')
 //        $log.log('compiledHTML is:' + compiledHTML);
         el.append(compiledHTML);
 
+
+      },
+      controller: function($scope) {
+        $scope.getLinkedData = function() {
+          return '<ul><li>test</li><li>test</li><li>test</li></ul>';
+        }
 
       }
     };

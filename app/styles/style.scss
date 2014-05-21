@@ -221,6 +221,12 @@ span.drop-text {
   &:hover {
     background-color: darken(#f5f5f5, 20%);
   }
+  // styling tooltips: http://stackoverflow.com/questions/15383440/css-styling-bootstrap-tooltips-arrow
+  // http://www.jeffmould.com/2013/10/30/style-bootstrap-3-0-tooltips/
+  .tooltip-inner {
+    background: #f00;
+    color: #f00;
+  }
 }
 
 /* Segment Area Styles */
