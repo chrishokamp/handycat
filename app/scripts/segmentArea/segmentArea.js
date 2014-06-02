@@ -8,8 +8,8 @@ angular.module('controllers')
            Document, Project, entityLinker) {
 
   // call this with the text in the source area
-  $scope.linkEntities = function() {
-    entityLinker.annotate();
+  $scope.linkSourceEntities = function() {
+    entityLinker.annotate($scope.segment.source);
   };
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
@@ -35,7 +35,9 @@ angular.module('controllers')
 
 // currently the model names on the child controllers are different
   $scope.setSource = function(sourceSentence) {
-     $scope.segment.source = sourceSentence;
+    $log.log("setSource");
+    $log.log("source is: " + sourceSentence);
+    $scope.segment.source = sourceSentence;
   };
   $scope.setTarget = function(targetSentence) {
      $scope.segment.target = targetSentence;

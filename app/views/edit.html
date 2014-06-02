@@ -25,7 +25,9 @@
                             <div class="col-xs-11">
                                 <div class="content-card">
                                     <div class="source">
-                                        <source-area source-sentence="segment.source"></source-area>
+                                        <button ng-click="linkSourceEntities()">Tag NEs</button>
+                                        // TODO: refactor so that the source sentence only comes from one place
+                                        <source-area ng-init="setSource(segment.source)" source-sentence="segment.source"></source-area>
                                     </div>
                                 </div>
                             </div>
