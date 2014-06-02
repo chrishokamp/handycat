@@ -21,12 +21,8 @@ angular.module('services')
         "types" : "",
         "sparql" : ""
       }
-      $log.log("annotating entities");
-      $log.log(spotlightEndpoint);
-      params["text"] = text;
-      $log.log(params);
 
-      // working - return a promise to the controller
+      params["text"] = text;
       var linkPromise = $http({
         url: spotlightEndpoint,
         method: 'GET',
@@ -34,19 +30,7 @@ angular.module('services')
         //cache: false
       });
 
-      linkPromise.then(
-        function (res) {
-          $log.log('entity linking res: ');
-          $log.log(res);
-
-        },
-        function(e) {
-          $log.log('Error in entity linking request');
-        }
-      )
+      return linkPromise;
     }
   }
-
-
-
 }]);

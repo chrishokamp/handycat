@@ -15,7 +15,6 @@
             <p class="segment-index-label">Segment Index: {{$index}} <span class="segment-finished" ng-show="segmentState.completed">Complete</span></p>
 
             <div class="bottom-margin" ng-click="activate($index)">
-                <!--<button class="btn btn-primary" ng-click="linkEntities()">Link</button>-->
                 <div class="row">
                     <!-- used with $anchorScroll from ContentAreaCtrl -->
                     <!-- TODO: prevent $anchorScroll from reloading the ng-repeat -->
@@ -25,9 +24,10 @@
                             <div class="col-xs-11">
                                 <div class="content-card">
                                     <div class="source">
-                                        <button ng-click="linkSourceEntities()">Tag NEs</button>
-                                        // TODO: refactor so that the source sentence only comes from one place
                                         <source-area ng-init="setSource(segment.source)" source-sentence="segment.source"></source-area>
+                                        <div class="row">
+                                            <button class="btn btn-primary btn-sm col-xs-2" ng-click="linkSourceEntities()">Tag NEs</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
