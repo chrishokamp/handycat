@@ -46,7 +46,7 @@ var App = window.App = angular.module('editorComponentsApp',
   // see: https://github.com/angular-ui/bootstrap/blob/master/src/tooltip/tooltip.js
 .config(['$tooltipProvider', function( $tooltipProvider ) {
    // place tooltips left instead of top by default
-   $tooltipProvider.options( { placement: 'left' } );
+//   $tooltipProvider.options( { placement: 'left' } );
    // $tooltipProvider.options( { trigger: 'click' } );
 //    $tooltipProvider.setTriggers( 'openTrigger': 'closeTrigger' );
 //    $tooltipProvider.setTriggers( {'mouseenter': 'click'} );

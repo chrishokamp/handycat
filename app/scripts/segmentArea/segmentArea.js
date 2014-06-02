@@ -7,6 +7,7 @@ angular.module('controllers')
   function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation, Morphology,
            Document, Project, entityLinker) {
 
+  // call this with the text in the source area
   $scope.linkEntities = function() {
     entityLinker.annotate();
   };
@@ -32,7 +33,6 @@ angular.module('controllers')
   // for the concordancer - default to English
   $scope.queryLang = 'en';
 
-// TODO - Working - make sure that the child controllers all share the state for source/target
 // currently the model names on the child controllers are different
   $scope.setSource = function(sourceSentence) {
      $scope.segment.source = sourceSentence;
@@ -61,6 +61,7 @@ angular.module('controllers')
     }
   };
 
+  // sets the current target token
   $scope.setCurrentToken = function(token) {
      $scope.currentToken = token;
   };

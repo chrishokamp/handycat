@@ -5,8 +5,6 @@
 angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Document',
     function($rootScope, SegmentOrder, Document) {
 
-
-
     return {
       // set to true to show a textarea with the modifications of the XLIFF in real time.
       debugXLIFF: false,
