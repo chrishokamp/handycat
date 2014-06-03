@@ -6,7 +6,6 @@ angular.module('directives')
         // this comes from the Document service via segment via contentArea
         sourceSentence: '=',
         annotatedSentence: '=',
-        findSurfaceForms: '&'
       },
       restrict: 'E',
       //templateUrl: 'scripts/sourceArea/sourceArea.html',
@@ -39,9 +38,8 @@ angular.module('directives')
           angular.forEach(data.entityData, function(resObj) {
             var surfaceForm = resObj['@surfaceForm'];
             // test
-            scope.$emit('find-surface-forms', { 'sf': surfaceForm });
             var re = new RegExp('(' + surfaceForm + ')', "g");
-            text = text.replace(re, '<span style="background-color: blue" ng-click="">$1</span>');
+            text = text.replace(re, '<span style="text-decoration: underline" ng-click="setSurfaceForms($event)">$1</span>');
           });
           $log.log('replaced text: ' + text);
           var compiledHTML = $compile(text)(scope);
@@ -55,6 +53,11 @@ angular.module('directives')
       controller: function($scope) {
         $scope.getLinkedData = function() {
           return '<ul><li>test</li><li>test</li><li>test</li></ul>';
+        }
+        $scope.setSurfaceForms = function(e) {
+          var surfaceForm = $(e.target).text();
+          $log.log('target text is: ' + surfaceForm);
+          $scope.$emit('find-surface-forms', { 'sf': surfaceForm });
         }
 
       }
