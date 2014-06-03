@@ -35,13 +35,18 @@ angular.module('directives')
 
           // iterate over text and add markup to entity ranges, then $compile
           var text = scope.sourceSentence;
+          var alreadyMarked = [];
           angular.forEach(data.entityData, function(resObj) {
             var surfaceForm = resObj['@surfaceForm'];
             // test
-            var re = new RegExp('(' + surfaceForm + ')', "g");
-            text = text.replace(re, '<span style="text-decoration: underline" ng-click="setSurfaceForms($event)">$1</span>');
+            if (!(_.contains(alreadyMarked, surfaceForm))) {
+              var re = new RegExp('(' + surfaceForm + ')', "g");
+              text = text.replace(re, '<span style="text-decoration: underline;" ng-click="setSurfaceForms($event)">$1</span>');
+            }
+            alreadyMarked.push(surfaceForm);
           });
           $log.log('replaced text: ' + text);
+          text = '<div>' + text + '</div>';
           var compiledHTML = $compile(text)(scope);
           $log.log('compiledHTML is:' + compiledHTML);
           el.html(compiledHTML);

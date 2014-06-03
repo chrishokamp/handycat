@@ -8,12 +8,23 @@ angular.module('controllers')
            Document, Project, entityLinker, entityDB) {
 
   $scope.entities = {};
+  $scope.entities.entityMap = {};
   $scope.entities.currentEntity = {};
   $scope.entities.entityData = {};
 
   $scope.insertSurfaceForm = function(sf) {
     $log.log('INSERT SURFACE FORM: ' + sf);
-    $scope.insertText(sf + ' ');
+    $scope.insertText(' ' + sf + ' ');
+  }
+
+  $scope.getLink = function() {
+    $log.log($scope.entities.entityMap);
+    return 'http://dbpedia.org/resource/' + $scope.entities.currentEntity.name;
+//    if ($scope.entities.entityMap[surfaceForm]) {
+//      return $scope.entities.entityMap[surfaceForm];
+//    }
+//    return '';
+
   }
 
   // (1) - surface forms
@@ -36,6 +47,7 @@ angular.module('controllers')
         var surfaceForms = res.data;
 
         $scope.entities.currentEntity.surfaceForms = [];
+        $scope.entities.currentEntity.name = entityName;
         angular.forEach(surfaceForms, function(sf) {
           var sfObj = { 'name': sf[0], 'count': parseFloat(sf[1]) };
           $log.log(sfObj);
@@ -60,6 +72,8 @@ angular.module('controllers')
         var result = res.data;
         if (result.Resources) {
           $scope.entities.entityData = result.Resources;
+          $scope.entities.entityMap[result['@surfaceForm']] = result['@URI'];
+
           // tell the source area that we've got entities
           // source area should tag, compile, and replace
           $scope.$broadcast('update-source', { 'entityData': result.Resources });

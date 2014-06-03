@@ -26,10 +26,10 @@
                                     <div class="source">
                                         <source-area ng-init="setSource(segment.source)" source-sentence="segment.source"></source-area>
                                         <div class="row">
-                                            <button class="btn btn-primary btn-sm col-xs-2" ng-click="linkSourceEntities()">Tag NEs</button>
                                         </div>
                                     </div>
                                 </div>
+                                <button class="btn btn-primary" ng-click="linkSourceEntities(); toggleToolbar();">Tag Entities</button>
                             </div>
                         </div>
                     </div>
@@ -60,25 +60,25 @@
                         <!-- TODO: use the 'currentToken' property on the AceCtrl instead of 'selectedToken' -->
                         <div collapse="false" ng-show="isActive.active">
                             <div class="row">
-                                <div class="col-xs-1">
-                                    <button ng-click="changeTokenNumber()" tooltip="change the number of the selected phrase" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom">
-                                        <span class="ion-pound" ng-show="!changeNumberWorking"></span>
-                                        <i ng-show="changeNumberWorking" class="ion-loading-b"></i>
-                                    </button>
-                                </div>
-                                <div class="col-xs-1">
-                                    <button ng-click="changeTokenGender()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change gender of the selected phrase" tooltip-placement="bottom">
-                                        <span class="ion-male"></span>
-                                        <i ng-show="changeGenderWorking" class="ion-loading-b"></i>
-                                    </button>
-                                </div>
-                                <div class="col-xs-1">
-                                    <button ng-click="changeTokenCase()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change case of the selected phrase" tooltip-placement="bottom">
-                                        <span class="ion-ios7-briefcase"></span>
-                                        <i ng-show="changeCaseWorking" class="ion-loading-b"></i>
-                                    </button>
-                                </div>
-                                <div class="col-xs-offset-1 col-xs-1 text-right">
+                                <!--<div class="col-xs-1">-->
+                                    <!--<button ng-click="changeTokenNumber()" tooltip="change the number of the selected phrase" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom">-->
+                                        <!--<span class="ion-pound" ng-show="!changeNumberWorking"></span>-->
+                                        <!--<i ng-show="changeNumberWorking" class="ion-loading-b"></i>-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-1">-->
+                                    <!--<button ng-click="changeTokenGender()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change gender of the selected phrase" tooltip-placement="bottom">-->
+                                        <!--<span class="ion-male"></span>-->
+                                        <!--<i ng-show="changeGenderWorking" class="ion-loading-b"></i>-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-1">-->
+                                    <!--<button ng-click="changeTokenCase()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change case of the selected phrase" tooltip-placement="bottom">-->
+                                        <!--<span class="ion-ios7-briefcase"></span>-->
+                                        <!--<i ng-show="changeCaseWorking" class="ion-loading-b"></i>-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                                <div class="col-xs-offset-4 col-xs-1 text-right">
                                     <button ng-click="openHelp()" tooltip="show help" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-question-sign"></span></button>
                                 </div>
                                 <div class="col-xs-1 text-right">
@@ -112,6 +112,17 @@
                     <!-- Working - Add smart pluralize here first, then move to the edit area -->
                     <!-- TODO - make tabs active based on edit-area interactions -->
                         <tabset>
+                            <tab heading="Entities">
+                                <div class="named-entities">
+                                    <div>
+                                        <div>Entity: <a ng-href="http://dbpedia.org/resource/{{entities.currentEntity.name}}">{{entities.currentEntity.name}}</a></div>
+                                        <div class="surface-form" ng-repeat="sf in entities.currentEntity.surfaceForms | orderBy:'-count'">
+                                            <!-- on click, insert entity -->
+                                            <div ng-click="insertSurfaceForm(sf.name)">{{sf.name}}: {{sf.count}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tab>
                             <tab heading="Glossary" ng-click="">
                                 <input type="text" ng-model="glossary.glossaryQuery" placeholder="Enter a search query..." /><button ng-click="queryGlossary(glossary.glossaryQuery)" class="glossary-search btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
                                 <div class="search-result"
@@ -144,16 +155,6 @@
                                             ng-repeat="word in otherWordForms"
                                     >
                                         <button class="btn btn-default" ng-click="replaceSelection(word)">{{word}}</button>
-                                    </div>
-                                </div>
-                            </tab>
-                            <tab heading="Entities">
-                                <div class="named-entities">
-                                    <button ng-click="findSurfaceForms()">Test</button>
-                                    <div class="row">Current Entity: {{entities.currentEntity.name}}</div>
-                                    <div class="row" ng-repeat="sf in entities.currentEntity.surfaceForms | orderBy:'-count'">
-                                        <!-- on click, insert entity -->
-                                        <div ng-click="insertSurfaceForm(sf.name)">{{sf.name}}: {{sf.count}}</div>
                                     </div>
                                 </div>
                             </tab>

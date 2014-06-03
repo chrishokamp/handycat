@@ -212,6 +212,10 @@ span.drop-text {
 //  overflow-x: hidden;
 }
 
+.surface-form {
+  padding-left: 10px !important;
+}
+
 .info-popover {
   position: absolute;
   background-color: pink;
@@ -348,7 +352,6 @@ span.drop-text {
     background-color: blue;
   }
 }
-
 
 /* animations */
 /* as the element is hidden */
