@@ -7,7 +7,35 @@ angular.module('controllers')
   function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation, Morphology,
            Document, Project, entityLinker, entityDB) {
 
-  // call this with the text in the source area
+  $scope.entities = {};
+  $scope.entities.currentEntity = {};
+  // (1) - surface forms
+  // (2) - entity name (in German)
+  // (1) - return entity name
+
+  $scope.findSurfaceForms = function(entityName) {
+
+    var entityName = 'Berlin';
+    $log.log('entityName: ' + entityName);
+    var sfPromise = entityDB.queryEntities(entityName);
+    sfPromise.then(
+      function(res) {
+        $log.log('queried entities for surface form of: ' + entityName);
+        $log.log(res.data);
+        var surfaceForms = res.data;
+
+        $scope.entities.currentEntity.surfaceForms = [];
+        angular.forEach(surfaceForms, function(sf) {
+          var sfObj = { 'name': sf[0], 'count': parseFloat(sf[1]) };
+          $log.log(sfObj);
+          $scope.entities.currentEntity.surfaceForms.push(sfObj);
+        });
+        $log.log("surfaceForms:");
+        $log.log($scope.entities.currentEntity.surfaceForms);
+      }
+    );
+  }
+
   $scope.linkSourceEntities = function() {
 
 //    var annotationPromise = entityLinker.annotate($scope.segment.source);
@@ -34,16 +62,6 @@ angular.module('controllers')
 //        $log.log('Error in entity linking request');
 //      }
 //    );
-
-    // TODO: move to separate function, and use the surface forms in the UI
-    var entityName = 'Berlin';
-    var sfPromise = entityDB.queryEntities(entityName);
-    sfPromise.then(
-      function(res) {
-        $log.log('queried entities for surface form of: ' + entityName);
-        $log.log(res.data);
-      }
-    )
 
 
     // result looks like this:

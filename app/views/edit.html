@@ -149,7 +149,14 @@
                             </tab>
                             <tab heading="Entities">
                                 <div class="named-entities">
-                                    <div>Current Entity: {{source.currentEntity}}</div>
+                                    <button ng-click="findSurfaceForms()">Test</button>
+                                    <div>Current Entity: {{entities.currentEntity.name}}</div>
+                                    <div ng-repeat="sf in entities.currentEntity.surfaceForms | orderBy:'-count'">
+                                        <!--{{sf}}-->
+                                        <!-- on click, insert entity -->
+                                        <!--<div ng-click="insertSurfaceForm()">{{sf.name}}: {{sf.count}}</div>-->
+                                        {{sf.name}}: {{sf.count}}
+                                    </div>
                                 </div>
                             </tab>
                             <tab heading="Edit history">
