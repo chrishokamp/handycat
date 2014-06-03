@@ -9,13 +9,24 @@ angular.module('controllers')
 
   $scope.entities = {};
   $scope.entities.currentEntity = {};
+  $scope.entities.entityData = {};
+
+  $scope.insertSurfaceForm = function(sf) {
+    $log.log('INSERT SURFACE FORM: ' + sf);
+    $scope.insertText(sf + ' ');
+  }
+
   // (1) - surface forms
   // (2) - entity name (in German)
   // (1) - return entity name
+  $scope.$on('find-surface-forms', function(e, data) {
+    $log.log('find-surface-forms heard in segmentArea');
+    $scope.findSurfaceForms(data.sf);
+  });
 
   $scope.findSurfaceForms = function(entityName) {
 
-    var entityName = 'Berlin';
+//    var entityName = 'Berlin';
     $log.log('entityName: ' + entityName);
     var sfPromise = entityDB.queryEntities(entityName);
     sfPromise.then(
@@ -38,30 +49,26 @@ angular.module('controllers')
 
   $scope.linkSourceEntities = function() {
 
-//    var annotationPromise = entityLinker.annotate($scope.segment.source);
+    $log.log('linkSourceEntities');
+    var annotationPromise = entityLinker.annotate($scope.segment.source);
 
     // see http://stackoverflow.com/questions/18690804/insert-and-parse-html-into-view-using-angularjs
-//    annotationPromise.then(
-//      function (res) {
-//        $log.log('entity linking res: ');
-//        $log.log(res.data);
-//        var result = res.data;
-//        if (result.Resources) {
-//          // iterate over text and add markup to entity ranges, then $compile
-//          var text = result['@text'];
-//          // TODO: move to directive that recompiles when it changes
-//          angular.forEach(result.Resources, function(resObj) {
-//            var surfaceForm = resObj['@surfaceForm'];
-//            var re = new RegExp('(' + surfaceForm + ')', "g");
-//            text = text.replace(re, "<span>$1</span>");
-//          });
-//          $log.log('replaced text: ' + text);
-//        }
-//      },
-//      function(e) {
-//        $log.log('Error in entity linking request');
-//      }
-//    );
+    annotationPromise.then(
+      function (res) {
+        $log.log('entity linking res: ');
+        $log.log(res.data);
+        var result = res.data;
+        if (result.Resources) {
+          $scope.entities.entityData = result.Resources;
+          // tell the source area that we've got entities
+          // source area should tag, compile, and replace
+          $scope.$broadcast('update-source', { 'entityData': result.Resources });
+        }
+      },
+      function(e) {
+        $log.log('Error in entity linking request');
+      }
+    );
 
 
     // result looks like this:

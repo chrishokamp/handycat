@@ -150,12 +150,10 @@
                             <tab heading="Entities">
                                 <div class="named-entities">
                                     <button ng-click="findSurfaceForms()">Test</button>
-                                    <div>Current Entity: {{entities.currentEntity.name}}</div>
-                                    <div ng-repeat="sf in entities.currentEntity.surfaceForms | orderBy:'-count'">
-                                        <!--{{sf}}-->
+                                    <div class="row">Current Entity: {{entities.currentEntity.name}}</div>
+                                    <div class="row" ng-repeat="sf in entities.currentEntity.surfaceForms | orderBy:'-count'">
                                         <!-- on click, insert entity -->
-                                        <!--<div ng-click="insertSurfaceForm()">{{sf.name}}: {{sf.count}}</div>-->
-                                        {{sf.name}}: {{sf.count}}
+                                        <div ng-click="insertSurfaceForm(sf.name)">{{sf.name}}: {{sf.count}}</div>
                                     </div>
                                 </div>
                             </tab>

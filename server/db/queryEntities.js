@@ -46,7 +46,12 @@ exports.findSurfaceFormByEntityName = function(req, res) {
         console.log('found item:');
         console.log(item);
         // TODO: the datastructure should be ['de']['surface_forms'] in mongo
-        res.send(item['surface_forms']);
+        if(item) {
+          res.send(item['surface_forms']);
+        } else {
+          res.send([[entityName, 1]]);
+
+        }
       });
   });
 };
