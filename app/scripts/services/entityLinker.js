@@ -3,7 +3,7 @@
 //  - make a directive that can find and wrap text from a callback
 
 angular.module('services')
-.factory('entityLinker', ['$log', '$http', function($log, $http) {
+.factory('entityLinker', ['entityDB', '$log', '$http', function(entityDB, $log, $http) {
 
   var spotlightEndpoint = 'http://spotlight.sztaki.hu:2222/rest/annotate';
   // sample call
@@ -21,6 +21,8 @@ angular.module('services')
         "types" : "",
         "sparql" : ""
       }
+
+//      entityDB.queryEntities('test');
 
       params["text"] = text;
       var linkPromise = $http({

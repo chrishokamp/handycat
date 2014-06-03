@@ -3,37 +3,48 @@
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-  'Morphology', 'Document', 'project', 'entityLinker',
+  'Morphology', 'Document', 'project', 'entityLinker', 'entityDB',
   function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation, Morphology,
-           Document, Project, entityLinker) {
+           Document, Project, entityLinker, entityDB) {
 
   // call this with the text in the source area
   $scope.linkSourceEntities = function() {
-    var annotationPromise = entityLinker.annotate($scope.segment.source);
+
+//    var annotationPromise = entityLinker.annotate($scope.segment.source);
 
     // see http://stackoverflow.com/questions/18690804/insert-and-parse-html-into-view-using-angularjs
-    annotationPromise.then(
-      function (res) {
-        $log.log('entity linking res: ');
-        $log.log(res.data);
-        var result = res.data;
-        if (result.Resources) {
-          // iterate over text and add markup to entity ranges, then $compile
-          var text = result['@text'];
-          // TODO: move to directive that recompiles when it changes
-          angular.forEach(result.Resources, function(resObj) {
-            var surfaceForm = resObj['@surfaceForm'];
-            var re = new RegExp('(' + surfaceForm + ')', "g");
-            text = text.replace(re, "<span>$1</span>");
-          });
-          $log.log('replaced text: ' + text);
-        }
+//    annotationPromise.then(
+//      function (res) {
+//        $log.log('entity linking res: ');
+//        $log.log(res.data);
+//        var result = res.data;
+//        if (result.Resources) {
+//          // iterate over text and add markup to entity ranges, then $compile
+//          var text = result['@text'];
+//          // TODO: move to directive that recompiles when it changes
+//          angular.forEach(result.Resources, function(resObj) {
+//            var surfaceForm = resObj['@surfaceForm'];
+//            var re = new RegExp('(' + surfaceForm + ')', "g");
+//            text = text.replace(re, "<span>$1</span>");
+//          });
+//          $log.log('replaced text: ' + text);
+//        }
+//      },
+//      function(e) {
+//        $log.log('Error in entity linking request');
+//      }
+//    );
 
-      },
-      function(e) {
-        $log.log('Error in entity linking request');
+    // TODO: move to separate function, and use the surface forms in the UI
+    var entityName = 'Berlin';
+    var sfPromise = entityDB.queryEntities(entityName);
+    sfPromise.then(
+      function(res) {
+        $log.log('queried entities for surface form of: ' + entityName);
+        $log.log(res.data);
       }
-    );
+    )
+
 
     // result looks like this:
 
