@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:okp="okapi-framework:xliff-extensions" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" version="1.2" its:version="2.0">
 <file original="http://en.wikipedia.org/wiki/Computer_science#History" source-language="en-us" target-language="de" datatype="html">
 
-<header><its:provenanceRecords xml:id="defaultprov" xmlns:xml="http://www.w3.org/XML/1998/namespace"><its:provenanceRecord revTool="escriba-MOBILE-WEB-CAT" revOrgRef="http://mobile-webcat.appspot.com" revPerson="Default-user" provRef="Default-ref"/></its:provenanceRecords> 
+<header><its:provenanceRecords xml:id="defaultprov" xmlns:xml="http://www.w3.org/XML/1998/namespace"><its:provenanceRecord revTool="PEARL - PE tool" revOrgRef="http://mobile-webcat.appspot.com" revPerson="Default-user" provRef="Default-ref"/></its:provenanceRecords> 
 <its:provenanceRecords xml:id="pr1" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<its:provenanceRecord org="acme" orgRef="http://www.acme.com" tool="AcmeTranslator" provRef="http://www.acme.com/#23131223"/>
 </its:provenanceRecords>

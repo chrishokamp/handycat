@@ -7,7 +7,6 @@
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
-        <textarea ng-show="showXLIFF" rows="20" cols="120">{{ xliff_content }}</textarea>
 
         <div class="segment row" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments" index="$index"
              ng-init="segment = seg; init($index)">
@@ -174,6 +173,7 @@
                 <hr/>
             </div>
         </div>
+    <textarea rows="20" cols="120">{{ xliff_content }}</textarea>
     </div>
 
     <div ng-show="checkTranslationCompleted()" id="footmsg">
