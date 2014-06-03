@@ -41,7 +41,7 @@ angular.module('directives')
             // test
             scope.$emit('find-surface-forms', { 'sf': surfaceForm });
             var re = new RegExp('(' + surfaceForm + ')', "g");
-            text = text.replace(re, '<span ng-click="">$1</span>');
+            text = text.replace(re, '<span style="background-color: blue" ng-click="">$1</span>');
           });
           $log.log('replaced text: ' + text);
           var compiledHTML = $compile(text)(scope);
