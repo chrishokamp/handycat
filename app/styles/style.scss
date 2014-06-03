@@ -212,6 +212,10 @@ span.drop-text {
 //  overflow-x: hidden;
 }
 
+.surface-form {
+  padding-left: 10px !important;
+}
+
 .info-popover {
   position: absolute;
   background-color: pink;
@@ -220,6 +224,12 @@ span.drop-text {
 .source-token {
   &:hover {
     background-color: darken(#f5f5f5, 20%);
+  }
+  // styling tooltips: http://stackoverflow.com/questions/15383440/css-styling-bootstrap-tooltips-arrow
+  // http://www.jeffmould.com/2013/10/30/style-bootstrap-3-0-tooltips/
+  .tooltip-inner {
+    background: #f00;
+    color: #f00;
   }
 }
 
@@ -342,7 +352,6 @@ span.drop-text {
     background-color: blue;
   }
 }
-
 
 /* animations */
 /* as the element is hidden */

@@ -3,12 +3,115 @@
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-  'Morphology', 'Document', 'project', 'entityLinker',
+  'Morphology', 'Document', 'project', 'entityLinker', 'entityDB',
   function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation, Morphology,
-           Document, Project, entityLinker) {
+           Document, Project, entityLinker, entityDB) {
 
-  $scope.linkEntities = function() {
-    entityLinker.annotate();
+  $scope.entities = {};
+  $scope.entities.entityMap = {};
+  $scope.entities.currentEntity = {};
+  $scope.entities.entityData = {};
+
+  $scope.insertSurfaceForm = function(sf) {
+    $log.log('INSERT SURFACE FORM: ' + sf);
+    $scope.insertText(' ' + sf + ' ');
+  }
+
+  $scope.getLink = function() {
+    $log.log($scope.entities.entityMap);
+    return 'http://dbpedia.org/resource/' + $scope.entities.currentEntity.name;
+//    if ($scope.entities.entityMap[surfaceForm]) {
+//      return $scope.entities.entityMap[surfaceForm];
+//    }
+//    return '';
+
+  }
+
+  // (1) - surface forms
+  // (2) - entity name (in German)
+  // (1) - return entity name
+  $scope.$on('find-surface-forms', function(e, data) {
+    $log.log('find-surface-forms heard in segmentArea');
+    $scope.findSurfaceForms(data.sf);
+  });
+
+  $scope.findSurfaceForms = function(entityName) {
+
+//    var entityName = 'Berlin';
+    $log.log('entityName: ' + entityName);
+    var sfPromise = entityDB.queryEntities(entityName);
+    sfPromise.then(
+      function(res) {
+        $log.log('queried entities for surface form of: ' + entityName);
+        $log.log(res.data);
+        var surfaceForms = res.data;
+
+        $scope.entities.currentEntity.surfaceForms = [];
+        $scope.entities.currentEntity.name = entityName;
+        angular.forEach(surfaceForms, function(sf) {
+          var sfObj = { 'name': sf[0], 'count': parseFloat(sf[1]) };
+          $log.log(sfObj);
+          $scope.entities.currentEntity.surfaceForms.push(sfObj);
+        });
+        $log.log("surfaceForms:");
+        $log.log($scope.entities.currentEntity.surfaceForms);
+      }
+    );
+  }
+
+  $scope.linkSourceEntities = function() {
+
+    $log.log('linkSourceEntities');
+    var annotationPromise = entityLinker.annotate($scope.segment.source);
+
+    // see http://stackoverflow.com/questions/18690804/insert-and-parse-html-into-view-using-angularjs
+    annotationPromise.then(
+      function (res) {
+        $log.log('entity linking res: ');
+        $log.log(res.data);
+        var result = res.data;
+        if (result.Resources) {
+          $scope.entities.entityData = result.Resources;
+          $scope.entities.entityMap[result['@surfaceForm']] = result['@URI'];
+
+          // tell the source area that we've got entities
+          // source area should tag, compile, and replace
+          $scope.$broadcast('update-source', { 'entityData': result.Resources });
+        }
+      },
+      function(e) {
+        $log.log('Error in entity linking request');
+      }
+    );
+
+
+    // result looks like this:
+
+//Object {@text: "Blaise Pascal designed and constructed the first w…hanical calculator, Pascal's calculator, in 1642.", @confidence: "0.5", @support: "0", @types: "", @sparql: ""…}
+//@confidence: "0.5"
+//@policy: "whitelist"
+//@sparql: ""
+//@support: "0"
+//@text: "Blaise Pascal designed and constructed the first working mechanical calculator, Pascal's calculator, in 1642."
+//@types: ""
+//Resources: Array[2]
+//0: Object
+//@URI: "http://dbpedia.org/resource/Blaise_Pascal"
+//@offset: "0"
+//@percentageOfSecondRank: "4.0041326330454826E-20"
+//@similarityScore: "1.0"
+//@support: "515"
+//@surfaceForm: "Blaise Pascal"
+//@types: "DBpedia:Agent,Schema:Person,Http://xmlns.com/foaf/0.1/Person,DBpedia:Person,DBpedia:Philosopher"
+//__proto__: Object
+//1: Object
+//@URI: "http://dbpedia.org/resource/Mechanical_calculator"
+//@offset: "57"
+//@percentageOfSecondRank: "0.2968657118710354"
+//@similarityScore: "0.7710898598415911"
+//@support: "126"
+//@surfaceForm: "mechanical calculator"
+//@types: "
   };
 
   // Note: don't do $scope.$watches, because we reuse this controller many times!
@@ -32,10 +135,11 @@ angular.module('controllers')
   // for the concordancer - default to English
   $scope.queryLang = 'en';
 
-// TODO - Working - make sure that the child controllers all share the state for source/target
 // currently the model names on the child controllers are different
   $scope.setSource = function(sourceSentence) {
-     $scope.segment.source = sourceSentence;
+    $log.log("setSource");
+    $log.log("source is: " + sourceSentence);
+    $scope.segment.source = sourceSentence;
   };
   $scope.setTarget = function(targetSentence) {
      $scope.segment.target = targetSentence;
@@ -61,6 +165,7 @@ angular.module('controllers')
     }
   };
 
+  // sets the current target token
   $scope.setCurrentToken = function(token) {
      $scope.currentToken = token;
   };

@@ -10,9 +10,9 @@ var App = window.App = angular.module('editorComponentsApp',
         'ui.ace',
         'ui.bootstrap',
         'angularFileUpload',
-        'ngAnimate'
+        'ngAnimate',
+        'ui.bootstrap.tooltip'
         //'filters',
-        //'ui.bootstrap',
         //'ngTouch'
       ]
 )
@@ -42,7 +42,17 @@ var App = window.App = angular.module('editorComponentsApp',
 .config(['$httpProvider', function($httpProvider) {
 	$httpProvider.defaults.useXDomain = true;
 	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}])
+  // see: https://github.com/angular-ui/bootstrap/blob/master/src/tooltip/tooltip.js
+.config(['$tooltipProvider', function( $tooltipProvider ) {
+   // place tooltips left instead of top by default
+//   $tooltipProvider.options( { placement: 'left' } );
+   // $tooltipProvider.options( { trigger: 'click' } );
+//    $tooltipProvider.setTriggers( 'openTrigger': 'closeTrigger' );
+//    $tooltipProvider.setTriggers( {'mouseenter': 'click'} );
 }]);
+
+
 // TODO
 // check window.location to see where we are, and set the baseUrl accordingly
 //.run(['$location', '$log', function($location, $log) {

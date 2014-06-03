@@ -28,13 +28,13 @@ angular.module('controllers').controller('UploadCtrl', ['$scope', 'fileReader', 
   }
 
   // DEVELOPMENT UTILITY
-  var development = true;
+  var development = false;
 // Dev flag - load file by default
   if (development) {
     //var fileUrl = 'data/enEs.xlf';
     // var fileUrl = 'data/enDe.xlf';
 //    var fileUrl = 'data/enDeSmall.xlf';
-    var fileUrl = 'data/machines.xlf';
+    var fileUrl = 'data/dublin.xlf';
     $log.log("IN DEVELOPMENT MODE - loading local file: " + fileUrl);
 
     // autoload a file

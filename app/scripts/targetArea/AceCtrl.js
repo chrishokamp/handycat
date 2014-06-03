@@ -340,11 +340,12 @@ angular.module('controllers').controller('AceCtrl',
           }
         );
 
-        $scope.$apply(
-          function() {
-            $scope.getOtherWordForms(stemmedToken);
-          }
-        );
+        // This is for getting other word forms -- todo: move to segment control
+//        $scope.$apply(
+//          function() {
+//            $scope.getOtherWordForms(stemmedToken);
+//          }
+//        );
 
         // now select token (first clear any existing selection)
         //editor.session.selection.setRange(tokenAndRange.range);
@@ -389,16 +390,17 @@ angular.module('controllers').controller('AceCtrl',
       console.log(editor.getValue());
     };
 
-    var glossaryCompleter = {
-      getCompletions: function(editor, session, pos, prefix, callback) {
-        if (prefix.length === 0) { callback(null, []); return }
-// TODO: the Glossary needs to search for matches, not just return everything!
-        var glossaryMatches = Glossary.getMatches(prefix, callback);
-        callback(null, glossaryMatches.map(function(item) {
-          return {name: item, value: item, score: 1, meta: "Glossary"}
-        }));
-      }
-    };
+//    var glossaryCompleter = {
+//      getCompletions: function(editor, session, pos, prefix, callback) {
+//        if (prefix.length === 0) { callback(null, []); return }
+//// TODO: the Glossary needs to search for matches, not just return everything!
+//        var glossaryMatches = Glossary.getMatches(prefix, callback);
+//        callback(null, glossaryMatches.map(function(item) {
+//          return {name: item, value: item, score: 1, meta: "Glossary"}
+//        }));
+//      }
+//    };
+
 // TODO: this is a general-purpose utility that can be used to add autocomplete for any web service
 //          getCompletions: function(editor, session, pos, prefix, callback) {
 //            if (prefix.length === 0) { callback(null, []); return }
@@ -420,7 +422,7 @@ angular.module('controllers').controller('AceCtrl',
 //      }
 // This creates a custom autocomplete function for Ace! - fuckin cool
     langTools.addCompleter(tmCompleter);   // TODO: add the typeahead controller code
-    langTools.addCompleter(glossaryCompleter);
+//    langTools.addCompleter(glossaryCompleter);
     // end autocompletion tests
 
     var session = editor.session;

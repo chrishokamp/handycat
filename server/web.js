@@ -9,7 +9,7 @@ var gzippo = require('gzippo')
 // use the node superagent module instead?
 
 app.use(cors());
-app.use(app.router);
+// app.use(app.router);
 params.extend(app);
 app.use(express.logger('dev'));
 
@@ -70,7 +70,7 @@ app.get('/glossary', function(req, res){
 //    path: '/gapi/tm?' + from + to + phrase;
     path: '/gapi/translate?' + from + to + phrase + format,
     method: 'GET'
-// EXMAPLE:
+// EXAMPLE:
 // http://glosbe.com/gapi/tm?from=eng&dest=deuk&format=json&phrase="the company grew"&pretty=true
   };
   getJSON.getJSON(options,
@@ -99,6 +99,14 @@ app.get('/glossary', function(req, res){
 
 });
 
+var DbEntities = require('./db/queryEntities');
+// MONGO DB ENTITY STORE ROUTES
+app.get('/surface-forms/:lang/:entity', function(req, res){
+  console.log('i just got a GET request to /surface');
+  DbEntities.findSurfaceFormByEntityName(req, res);
+//  res.setHeader('Content-Type', 'application/json');
+//  res.send(searchResults);
+});
 
 // other datasources to try:
 // wiktionary

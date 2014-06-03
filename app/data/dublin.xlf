@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:okp="okapi-framework:xliff-extensions" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" version="1.2" its:version="2.0">
+<file original="http://en.wikipedia.org/wiki/Computer_science#History" source-language="en-us" target-language="de" datatype="html">
+
+<header><its:provenanceRecords xml:id="defaultprov" xmlns:xml="http://www.w3.org/XML/1998/namespace"><its:provenanceRecord revTool="PEARL - PE tool" revOrgRef="http://mobile-webcat.appspot.com" revPerson="Default-user" provRef="Default-ref"/></its:provenanceRecords> 
+<its:provenanceRecords xml:id="pr1" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="acme" orgRef="http://www.acme.com" tool="AcmeTranslator" provRef="http://www.acme.com/#23131223"/>
+</its:provenanceRecords>
+<its:provenanceRecords xml:id="pr2" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="Microsoft" orgRef="http://www.microsoft.com" tool="Bing Translator" provRef="http://www.prov.com/#23131223"/>
+</its:provenanceRecords>
+<its:provenanceRecords xml:id="pr3" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="reference.com" orgRef="http://translate.reference.com/" tool="Reference Translator" provRef="http://www.prov.com/#23131223"/>
+</its:provenanceRecords>
+<its:provenanceRecords xml:id="pr4" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="imtranslator" orgRef="http://imtranslator.net/" tool="imTranslator" provRef="http://www.prov.com/#23131223"/>
+</its:provenanceRecords>
+<its:provenanceRecords xml:id="pr5" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="babylon" orgRef="http://translation.babylon.com/" tool="babylonTranslator" provRef="http://www.prov.com/#23131223"/>
+</its:provenanceRecords>
+<its:provenanceRecords xml:id="pr6" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<its:provenanceRecord org="Google" orgRef="http://google.com/" tool="GoogleTranslator" provRef="http://www.prov.com/#23131223"/>
+</its:provenanceRecords>
+</header> 
+
+<body>
+<trans-unit id="1">
+<source xml:lang="en-us" xmlns:xml="http://www.w3.org/XML/1998/namespace">Middle Ages</source>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">Mittelalter</target>
+
+</trans-unit>
+
+<trans-unit id="2">
+<source>Dublin was established by the Vikings as a settlement in the 9th century and, despite a number of rebellions by the native Irish, it remained largely under Viking control until the Norman invasion of Ireland was launched from Wales in 1169.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">Dublin was established by the Vikings as a settlement in the 9th century and, despite a number of rebellions by the native Irish people, it remained largely under Viking control until the Norman invasion of Ireland was launched from Wales in 1169.</mrk> 
+</seg-source>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<mrk mid="0" mtype="seg">Dublin wurde als Wikingersiedlung im 9. Jahrhundert gegründet, und trotz einer Reihe von Aufständen der einheimischen irischen, blieb es weitgehend unter Kontrolle, bis die Wikingernormannischen Invasion von Irland wurde von Wales im Jahre 1169 ins Leben gerufen.</mrk>
+</target>
+</trans-unit>
+
+<trans-unit id="3">
+<source>Around this time, the county of the City of Dublin was established along with certain liberties adjacent to the city proper. This continued down to 1840 when the barony of Dublin City was separated from the barony of Dublin. Since 2001, both baronies have been redesignated the City of Dublin.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">Around this time, the county of the City of Dublin was established along with certain liberties adjacent to the city proper. This continued down to 1840 when the barony of Dublin City was separated from the barony of Dublin. Since 2001, both baronies have been redesignated the City of Dublin.</mrk> 
+</seg-source>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<mrk mid="0" mtype="seg">Um diese Zeit wurde der Kreis der Stadt Dublin zusammen mit bestimmten Freiheiten neben der eigentlichen Stadt errichtet. Dies setzte sich bis auf 1840, wenn die Baronie von Dublin City wurde von der Baronie von Dublin getrennt. Seit 2001 haben beide Baronien wurde umbenannt die Stadt Dublin.</mrk>
+</target>
+</trans-unit>
+
+<trans-unit id="4">
+<source>Dublin prospered as a trade centre, despite an attempt by King Robert I of Scotland to capture the city in 1317. It remained a relatively small walled medieval town during the 14th century and was under constant threat from the surrounding native clans. In 1348, the Black Death, a lethal plague which had ravaged Europe, took hold in Dublin and killed thousands over the following decade.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">Dublin prospered as a trade centre, despite an attempt by King Robert I of Scotland to capture the city in 1317. It remained a relatively small walled medieval town during the 14th century and was under constant threat from the surrounding native clans. In 1348, the Black Death, a lethal plague which had ravaged Europe, took hold in Dublin and killed thousands over the following decade.</mrk> 
+</seg-source>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<mrk mid="0" mtype="seg">Dublin blühte als Handelszentrum, trotz einem Versuch von König Robert I. von Schottland, die Stadt im Jahr 1317 zu erfassen. Es blieb eine relativ kleine Mauern der mittelalterlichen Stadt im 14. Jahrhundert und war ständig bedroht von den umliegenden einheimischen Clans. Im Jahre 1348, der Schwarze Tod, eine tödliche Seuche, die Europa heimgesucht hatte, ergriff in Dublin und tötete Tausende über den folgenden zehn Jahren.</mrk>
+</target>
+</trans-unit>
+
+<trans-unit id="4">
+<source>The city had a population of 21,000 in 1640 before a plague in 1649–51 wiped out almost half of the city's inhabitants. However, the city prospered again soon after as a result of the wool and linen trade with England, reaching a population of over 50,000 in 1700.</source>
+<seg-source>
+	<mrk mid="0" mtype="seg">The city had a population of 21,000 in 1640 before a plague in 1649–51 wiped out almost half of the city's inhabitants. However, the city prospered again soon after as a result of the wool and linen trade with England, reaching a population of over 50,000 in 1700.</mrk> 
+</seg-source>
+<target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+	<mrk mid="0" mtype="seg">Die Stadt hatte eine Bevölkerung von 21.000 im Jahre 1640 vor der Pest in 1649-51 ausgelöscht fast die Hälfte der Einwohner der Stadt. Allerdings florierte die Stadt bald wieder, nachdem er als Ergebnis der Wolle und Leinen Handel mit England und erreichte eine Bevölkerung von über 50.000 im Jahr 1700.</mrk>
+</target>
+</trans-unit>
+
+
+
+
+
+</body>
+</file>
+</xliff>
