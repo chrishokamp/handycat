@@ -1,13 +1,12 @@
 
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'Document', 'TranslationMemory', 'tokenizer', 'Glossary', 'GermanStemmer', 'Morphology', '$http',
+  ['$scope', 'Document', 'tokenizer', 'Glossary', 'GermanStemmer', 'Morphology', '$http',
    '$timeout', '$log', 'ruleMap',
-   function($scope, Document, TranslationMemory, tokenizer, Glossary, GermanStemmer, Morphology, $http, $timeout, $log,
+   function($scope, Document, tokenizer, Glossary, GermanStemmer, Morphology, $http, $timeout, $log,
             ruleMap) {
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
-  // Note: this is the path for the ace require modules
   var langTools = ace.require("ace/ext/language_tools");
 
   // an object representing the current edit mode
@@ -41,7 +40,7 @@ angular.module('controllers').controller('AceCtrl',
         $log.log(self.tokenRanges);
           },
           function(err) {
-            $log.log("AceCtrl: there was an error getting the token ranges");
+            $log.log("ERROR: AceCtrl: there was an error getting the token ranges");
           }
         );
       },
@@ -51,8 +50,6 @@ angular.module('controllers').controller('AceCtrl',
         } else {
           this.currentRangeIndex = 0;
         }
-        $log.log('current range to be selected:');
-        $log.log(this.tokenRanges[this.currentRangeIndex]);
         selectRange(this.tokenRanges[this.currentRangeIndex]);
       },
       // note: inserting generally involves removing one space after, then inserting one space after at the new location
@@ -69,8 +66,6 @@ angular.module('controllers').controller('AceCtrl',
         }
 
         var originalRange = this.tokenRanges[startingIndex];
-        $log.log("originalRange");
-        $log.log(originalRange);
         //remove the original text + 1 space
         var extendedRange = angular.extend(originalRange, extendedRange);
         extendedRange.end.column += 1;
@@ -333,6 +328,7 @@ angular.module('controllers').controller('AceCtrl',
 
     // enable autocompletion, and set the autocompleters from the autocompleters service
     editor.setOptions({enableBasicAutocompletion: true});
+// This creates a custom autocomplete function for Ace! - fuckin cool
 //    langTools.addCompleter(glossaryCompleter);
 
     // modify some of the display params for the Ace Editor
@@ -420,10 +416,5 @@ angular.module('controllers').controller('AceCtrl',
     }
   };
 
-  $scope.logTM = function() {
-    $log.log("the TM: " + JSON.stringify(TranslationMemory.TM));
-  };
-
-  // end move to translation memory
 }]);
 

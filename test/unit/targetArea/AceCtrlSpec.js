@@ -15,7 +15,7 @@ describe("Unit: Testing the AceCtrl", function() {
       scope.setSource = function(test) {};
 
       // now create the controller with mocks for the services
-      ctrl = $controller('AceCtrl', {$scope: scope, Document:{}, TranslationMemory:{}, tokenizer:{}, Glossary:{}, GermanStemmer:{}, Morphology: {}, ruleMap: {} });
+      ctrl = $controller('AceCtrl', {$scope: scope, Document:{}, tokenizer:{}, Glossary:{}, GermanStemmer:{}, Morphology: {}, ruleMap: {}, });
   //    dump(scope);
       element = angular.element('<div ui-ace="{ onLoad : aceLoaded }"></div>');
       // compile the element on this scope
@@ -27,9 +27,17 @@ describe("Unit: Testing the AceCtrl", function() {
     scope.$digest();
     expect(scope.editor).toBeDefined();
   });
-  it('should have an instance of the Ace editor', function() {
-    scope.$digest();
-    expect(scope.editor).toBeDefined();
+  it('can set text', function() {
+    var testText = "This is a test sentence";
+    scope.insertText(testText);
+    expect(scope.editor.getValue()).toEqual(testText);
   });
+
+  // test actual logic!
+  // EditMode tests - note that the edit mode depends upon the tokenizer function that you pass in
+  // tokenEdit mode
+//  it('has an edit mode which can rearrange spans', function() {
+// })
+
 
 });

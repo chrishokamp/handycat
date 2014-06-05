@@ -19,16 +19,16 @@ angular.module('services')
     };
 
 
-//    var glossaryCompleter = {
-//      getCompletions: function(editor, session, pos, prefix, callback) {
-//        if (prefix.length === 0) { callback(null, []); return }
-//// TODO: the Glossary needs to search for matches, not just return everything!
-//        var glossaryMatches = Glossary.getMatches(prefix, callback);
-//        callback(null, glossaryMatches.map(function(item) {
-//          return {name: item, value: item, score: 1, meta: "Glossary"}
-//        }));
-//      }
-//    };
+    var glossaryCompleter = {
+      getCompletions: function(editor, session, pos, prefix, callback) {
+        if (prefix.length === 0) { callback(null, []); return }
+// TODO: the Glossary needs to search for matches, not just return everything!
+        var glossaryMatches = Glossary.getMatches(prefix, callback);
+        callback(null, glossaryMatches.map(function(item) {
+          return {name: item, value: item, score: 1, meta: "Glossary"}
+        }));
+      }
+    };
 
 // TODO: this is a general-purpose utility that can be used to add autocomplete for any web service
 //          getCompletions: function(editor, session, pos, prefix, callback) {
@@ -49,6 +49,4 @@ angular.module('services')
 //              })
 //          }
 //      }
-// This creates a custom autocomplete function for Ace! - fuckin cool
-//    langTools.addCompleter(tmCompleter);   // TODO: add the typeahead controller code
 }]);

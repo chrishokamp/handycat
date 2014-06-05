@@ -35,7 +35,8 @@ module.exports = function(config) {
       'app/scripts/services/translationMemory.js',
       'app/scripts/services/project.js',
       'app/scripts/services/wikipedia.js',
-      'scripts/services/morphology.js',
+      'app/scripts/services/morphology.js',
+      'app/scripts/services/entityLinker.js',
 
       'app/scripts/directives.js',
       'app/scripts/directives/index.js',
