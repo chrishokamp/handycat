@@ -448,6 +448,8 @@ angular.module('controllers').controller('AceCtrl',
     }
   });
 
+  // end move to segment area ctrl
+
   // begin move to translation memory
 // the values for this instance set from the view with ng-init and the ng-repeat index
 // TODO: these properties are only used by the Translation memory (see below) - make a single, consistent datamodel
