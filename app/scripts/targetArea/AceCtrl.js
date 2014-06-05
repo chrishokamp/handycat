@@ -248,6 +248,11 @@ angular.module('controllers').controller('AceCtrl',
     $log.log("Set mode to: " + modeName);
   }
 
+  $scope.currentPrefix = function() {
+    var editor = $scope.editor;
+    console.log(editor.getValue());
+  };
+
   // Event listeners that let other parts of the application touch the ace editor
   $scope.$on('change-token-number', function() {
     // Text to modify
@@ -326,66 +331,9 @@ angular.module('controllers').controller('AceCtrl',
       }
     });
 
+    // enable autocompletion, and set the autocompleters from the autocompleters service
     editor.setOptions({enableBasicAutocompletion: true});
-
-    // Working - move to autocomplete service
-    var tmCompleter = {
-      getCompletions: function(editor, session, pos, prefix, callback) {
-        if (prefix.length === 0) { callback(null, []); return }
-
-        // TODO: the TM needs to search for matches, not just return everything!
-        var tmMatches = TranslationMemory.allMatches;
-        // hit api here, and pass this function as the callback to the api
-        callback(null, tmMatches.map(function(ea) {
-          $log.log("inside autocomplete callback, item from TM is: ");
-          $log.log(ea);
-          //return {name: ea.source, value: ea.source, score: ea.quality, meta: "translation_memory"}
-          return {name: ea.source, value: ea.target, score: 1, meta: "translation_memory"}
-
-        }));
-      }
-    };
-
-    $scope.currentPrefix = function() {
-      var editor = $scope.editor;
-      console.log(editor.getValue());
-    };
-
-//    var glossaryCompleter = {
-//      getCompletions: function(editor, session, pos, prefix, callback) {
-//        if (prefix.length === 0) { callback(null, []); return }
-//// TODO: the Glossary needs to search for matches, not just return everything!
-//        var glossaryMatches = Glossary.getMatches(prefix, callback);
-//        callback(null, glossaryMatches.map(function(item) {
-//          return {name: item, value: item, score: 1, meta: "Glossary"}
-//        }));
-//      }
-//    };
-
-// TODO: this is a general-purpose utility that can be used to add autocomplete for any web service
-//          getCompletions: function(editor, session, pos, prefix, callback) {
-//            if (prefix.length === 0) { callback(null, []); return }
-// WORKING: query the local tm, let this code interact with a dictionary api or concordancer?
-//            $http.get('http://localhost:8999/tmserver/en/de/unit/' + prefix)
-//              .success(
-//                function(tmMatches) {
-                // TM returns a list of objects like this: { quality: 100, rank: 100, source: "apple", target: "Apfel" }
-// TODO: check how the ace's language_tools actually uses the word objects
-// TODO: user will be typing in target language, so the autocomplete should have keys in the target language
-//                  callback(null, tmMatches.map(function(ea) {
-//                    $log.log("inside autocomplete callback, item from TM is: ");
-//                    $log.log(ea);
-//                    //return {name: ea.source, value: ea.source, score: ea.quality, meta: "translation_memory"}
-//                    return {name: ea.source, value: ea.target, score: 1, meta: "translation_memory"}
-//                  }));
-//              })
-//          }
-//      }
-// This creates a custom autocomplete function for Ace! - fuckin cool
-    langTools.addCompleter(tmCompleter);   // TODO: add the typeahead controller code
 //    langTools.addCompleter(glossaryCompleter);
-    // end autocompletion tests
-    // end move to autocompletion service
 
     // modify some of the display params for the Ace Editor
     renderer.setShowGutter(false);
@@ -450,21 +398,10 @@ angular.module('controllers').controller('AceCtrl',
 
   // end move to segment area ctrl
 
-  // begin move to translation memory
-// the values for this instance set from the view with ng-init and the ng-repeat index
-// TODO: these properties are only used by the Translation memory (see below) - make a single, consistent datamodel
-//  $scope.setSegments = function(index) {
-//    $scope.sourceSegment = Document.sourceSegments[index];
-//    $scope.targetSegment = Document.targetSegments[index];
-//  }
-// TODO: move this logic to the tokenizer
 // TODO: maintain the current TM matches based on the selected token in the source side
   $scope.minPhraseLen = 15;
   var tmQueried = false;
   $scope.augmentTM = function(minPhraseLen) {
-    //$log.log("minPhraseLen: " + $scope.minPhraseLen);
-//      $log.log("source segment: " + $scope.sourceSegment)
-//      $log.log("Augmenting the TM");
     if (!tmQueried) {
       $log.log("Getting TM matches for seg: " + $scope.sourceSegment);
 
