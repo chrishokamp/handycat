@@ -20,14 +20,13 @@ describe("Unit: Testing the AceCtrl", function() {
       element = angular.element('<div ui-ace="{ onLoad : aceLoaded }"></div>');
       // compile the element on this scope
       $compile(element)(scope);
-  });
+    });
   });
 
   it('should have an instance of the Ace editor', function() {
     scope.$digest();
     expect(scope.editor).toBeDefined();
   });
-
   it('should have an instance of the Ace editor', function() {
     scope.$digest();
     expect(scope.editor).toBeDefined();

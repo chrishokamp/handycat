@@ -13,7 +13,7 @@ angular.module('services')
   return {
     annotate: function(text) {
       var params = {
-        "confidence" : 0.5,
+        "confidence" : 0.2,
         "support" : 0,
         "spotter" : "Default",
         "disambiguator" : "Default",
@@ -23,7 +23,7 @@ angular.module('services')
       }
 
 //      entityDB.queryEntities('test');
-
+l
       params["text"] = text;
       var linkPromise = $http({
         url: spotlightEndpoint,

@@ -7,8 +7,8 @@ angular.module('controllers').controller('AceCtrl',
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
-
-  $scope.language = Document.targetLang;
+  // Note: this is the path for the ace require modules
+  var langTools = ace.require("ace/ext/language_tools");
 
   // an object representing the current edit mode
   // params:
@@ -55,16 +55,7 @@ angular.module('controllers').controller('AceCtrl',
         $log.log(this.tokenRanges[this.currentRangeIndex]);
         selectRange(this.tokenRanges[this.currentRangeIndex]);
       },
-
-// Ace document object (editor.getSession().getDocument()) API:
-// insert(position, text)
-// remove(range)
-// replace(range, text)
-
-    // move the current range to the specified location
-    // just insert it, then retokenize - don't adjust the ranges after this one
-    // note: inserting generally involves removing one space after, then inserting one space after at the new location
-      // working - what is the type of the location argument?
+      // note: inserting generally involves removing one space after, then inserting one space after at the new location
       // working - currently this function is "moveRight"
       // TODO: add a 'following whitespace' function
       moveCurrentRange: function(location) {
@@ -94,7 +85,6 @@ angular.module('controllers').controller('AceCtrl',
           var updatedRange = new aceRange(0, oldRange['start']['column']-offset, 0, oldRange['end']['column']-offset);
           this.tokenRanges[i] = updatedRange;
         }
-        // now the slot at this.tokenRanges[nextIndex] is 'open'
 
         // note that this block depends upon the updated ranges above
         var insertPosition = { "row": 0, "column":this.tokenRanges[startingIndex]['end']['column'] };
@@ -124,19 +114,20 @@ angular.module('controllers').controller('AceCtrl',
     // if there's a whitespace before, leave it
     // if there's a whitespace after, delete it with the range.
     // handle insertion whitespace logic SEPARATELY
-
   };
 
-  // select a range of text in the editor
-  var selectRange = function(aRange) {
-    $log.log('selecting range: ');
-    $log.log(aRange);
-    $scope.editor.session.selection.setRange(aRange);
-    $scope.editor.focus();
-  };
+  // the following functions expose control of the current mode on the $scope
+  $scope.selectNextRange = function() {
+    currentMode.selectNextTokenRange();
+  }
+
+  // the following functions expose control of the current mode on the $scope
+  $scope.moveCurrentEditRange = function() {
+    currentMode.moveCurrentRange(1);
+  }
+
    // TODO: on change of content in editor, the currentMode needs to update its ranges immediately
   var currentMode = EditMode(tokenizer.getTokenRanges, selectRange);
-
 
   // swaps the edit mode - should be a function on the editor
   $scope.changeEditMode = function() {
@@ -150,20 +141,60 @@ angular.module('controllers').controller('AceCtrl',
     currentMode.setSpans($scope.editor.getSession().getValue());
 
   };
+  // end edit mode API
 
-  // the following functions expose control of the current mode on the $scope
-  $scope.selectNextRange = function() {
-    currentMode.selectNextTokenRange();
+  // BEGIN AceEditor API
+
+  // pulse the color on change, so that it's clear where the change happened
+  $scope.highlightRange = function(phraseRange) {
+    $log.log('Highlighting the range: ')
+    $log.log(phraseRange)
+    var marker = $scope.editor.session.addMarker(phraseRange, 'changed_range');
+    // remove the marker after a bit
+    $timeout(
+      function() {
+        $scope.editor.getSession().removeMarker(marker);
+      }, 2000);
   }
 
-  // the following functions expose control of the current mode on the $scope
-  $scope.moveCurrentEditRange = function() {
-    currentMode.moveCurrentRange(1);
-  }
+  // select a range of text in the editor
+  var selectRange = function(aRange) {
+    $scope.editor.session.selection.setRange(aRange);
+    $scope.editor.focus();
+  };
+  // get the current selection from the editor
+  var getSelection = function() {
+    var editor = $scope.editor;
+    //get selection range
+    return editor.getSelectionRange();
+  };
 
-// end edit mode API
+  // replace the current selection in the editor with this text
+  $scope.replaceSelection = function(text) {
+    var editor = $scope.editor;
+    var currentSelection = getSelection();
 
-  // set the text for this editor instance
+    // cursor location is in an object like: { column: 37, row: 0 }
+    var newCursorLocation = editor.session.getDocument().replace(currentSelection, text);
+    var newRange = new aceRange(newCursorLocation.row, newCursorLocation.column - text.length, newCursorLocation.row, newCursorLocation.column);
+    // TODO: select the new replacement, or create the range that it 'will be' so that we can add classes to the newly inserted text
+    // add, then remove a class from the selection range
+    $scope.highlightRange(newRange);
+    $scope.editor.session.selection.clearSelection();
+
+    // refocus the AceEditor
+    $scope.editor.focus();
+  };
+
+  $scope.insertText = function(text) {
+    $log.log('insertText called with value: ' + text);
+    var editor = $scope.editor;
+    // TODO: separate this from insertText
+    $scope.replaceSelection(text);
+    editor.focus();
+  };
+
+  // RESET the text for this editor instance
   $scope.setText = function(text) {
     var editor = $scope.editor;
     if (editor) {
@@ -173,12 +204,10 @@ angular.module('controllers').controller('AceCtrl',
     }
   };
 
-  // get the current selection from the editor
-  var getSelection = function() {
-    var editor = $scope.editor;
-    //get selection range
-    return editor.getSelectionRange();
-  };
+  // let the $parent controller see insertText, so that we can hit it from sibling controllers
+  $scope.$parent.insertText = $scope.insertText;
+  // let the parent see replaceSelection
+  $scope.$parent.replaceSelection = $scope.replaceSelection;
 
   // get the range of the current token under the cursor
   var getCurrentTokenAndRange = function() {
@@ -190,77 +219,6 @@ angular.module('controllers').controller('AceCtrl',
     var tokenRange = new aceRange(pos.row, token.start, pos.row, token.start + token.value.length);
     return {token: token, range: tokenRange};
   };
-
-  // replace the current selection in the editor with this text
-  $scope.replaceSelection = function(text) {
-    var editor = $scope.editor;
-    var currentSelection = getSelection();
-
-    // use the replace method on the ace Document object
-    // cursor location is in an object like: { column: 37, row: 0 }
-    var newCursorLocation = editor.session.getDocument().replace(currentSelection, text);
-    var newRange = new aceRange(newCursorLocation.row, newCursorLocation.column - text.length, newCursorLocation.row, newCursorLocation.column);
-    $log.log("replaced current selection with: " + text);
-    // TODO: select the new replacement, or create the range that it 'will be' so that we can add classes to the newly inserted text
-    // add, then remove a class from the selection range
-    $scope.highlightRange(newRange);
-    $scope.editor.session.selection.clearSelection();
-
-    // refocus the AceEditor
-    $scope.editor.focus();
-  };
-  // let the parent see replaceSelection
-  $scope.$parent.replaceSelection = $scope.replaceSelection;
-
-  // TODO: make sure that insertText and replaceText are called in the right places -- right now they are intermixed
-  $scope.insertText = function(text) {
-    $log.log('insertText called with value: ' + text);
-    var editor = $scope.editor;
-    var currentSelection = getSelection();
-
-    // TODO: separate this from insertText
-    $scope.replaceSelection(text);
-    editor.focus();
-  };
-  // let the $parent controller see insertText, so that we can hit it from sibling controllers
-  $scope.$parent.insertText = $scope.insertText;
-
-  $scope.$on('change-token-number', function() {
-    // Text to modify
-    var token = getCurrentTokenAndRange();
-    var original_text = token.token.value;
-    var modified_text = Morphology.changeNumber(original_text, $scope.language);
-
-    // Original selection range
-    var range = getSelection();
-    var row = range.start.row;
-
-    $scope.replaceSelection(modified_text);
-
-    // Updates the selection to match the size of the modified text
-    //range.end.column += modified_text.length - original_text.length;
-    //selectRange(range);
-
-    // save this action
-    $scope.editHistory.push(
-      ruleMap.newRule('change-token-number', '', [original_text, modified_text],
-          'Change number "'+ original_text + '" -> "'+ modified_text +'"'));
-  });
-
-  $scope.$on('propagate-action', function(event, action) {
-    if (action['operation'] == 'change-token-number') {
-      var content = $scope.editor.getValue().replace(new RegExp(action['change'][0]), action['change'][1]);
-      $scope.editor.setValue(content);
-    } else {
-        $log.log('Unknown action: ' + action['type']);
-    }
-  });
-
-  // The Segment area is the parent of the AceCtrl
-  $scope.$on('clear-editor', function(e) {
-    e.preventDefault();
-    clearEditor();
-  });
 
   function clearEditor() {
     $log.log('clearEditor fired...');
@@ -282,18 +240,54 @@ angular.module('controllers').controller('AceCtrl',
     $scope.editor.focus();
   }
 
+  // TESTING: dynamically set the mode
+  // WORKING: add a text tokenization (word recognition) mode to ace
+  $scope.setMode = function() {
+    var modeName = "text";
+    $scope.editor.session.setMode('ace/mode/' + modeName);
+    $log.log("Set mode to: " + modeName);
+  }
+
+  // Event listeners that let other parts of the application touch the ace editor
+  $scope.$on('change-token-number', function() {
+    // Text to modify
+    var token = getCurrentTokenAndRange();
+    var original_text = token.token.value;
+    var modified_text = Morphology.changeNumber(original_text, $scope.language);
+
+    $scope.replaceSelection(modified_text);
+
+    // save this action
+    $scope.editHistory.push(
+      ruleMap.newRule('change-token-number', '', [original_text, modified_text],
+        'Change number "'+ original_text + '" -> "'+ modified_text +'"'));
+  });
+
+  $scope.$on('propagate-action', function(event, action) {
+    if (action['operation'] == 'change-token-number') {
+      var content = $scope.editor.getValue().replace(new RegExp(action['change'][0]), action['change'][1]);
+      $scope.editor.setValue(content);
+    } else {
+      $log.log('Unknown action: ' + action['type']);
+    }
+  });
+
+  // The Segment area is the parent of the AceCtrl
+  $scope.$on('clear-editor', function(e) {
+    e.preventDefault();
+    clearEditor();
+  });
+
   // Use this function to configure the ace editor instance
   $scope.aceLoaded = function (ed) {
     var editor = ed;
+    var session = editor.session;
+    var renderer = editor.renderer;
+
     $scope.editor = editor;
-
-    // Note: this is the path for the ace require modules
-    var langTools = ace.require("ace/ext/language_tools");
-
     $scope.editor.session.setMode('ace/mode/text');
     $log.log("aceLoaded, logging the current mode:");
     $log.log($scope.editor.session);
-
 
     // we want to always know what text the user currently has selected
     // TODO: change this to listen for a selection change
@@ -314,11 +308,8 @@ angular.module('controllers').controller('AceCtrl',
     // the logic here is complex -- add unit tests
     editor.on('click', function(e) {
       var tokenAndRange = getCurrentTokenAndRange();
-      $log.log("click event: currentTokenAndRange: ");
-      $log.log(tokenAndRange);
       var token = tokenAndRange.token;
       var stemmedToken = GermanStemmer.stem(token.value);
-      $log.log('token: '+ token, 'stemmed: ' + stemmedToken);
 
       // make sure the user isn't trying to click into the same token to edit it
       if ($scope.lastToken !== token) {
@@ -330,38 +321,14 @@ angular.module('controllers').controller('AceCtrl',
             $scope.toggleToolbar(false);
             $scope.queryGlossary(token.value);
             $scope.glossary.glossaryQuery = token.value;
-//            $scope.setTextSelection(tokenAndRange.token.value, tokenAndRange.range);
           }
         );
-
-        // This is for getting other word forms -- todo: move to segment control
-//        $scope.$apply(
-//          function() {
-//            $scope.getOtherWordForms(stemmedToken);
-//          }
-//        );
-
-        // now select token (first clear any existing selection)
-        //editor.session.selection.setRange(tokenAndRange.range);
-        // we currently don't need to use clearSelection(), but switching to multi-select may require that
       }
-   });
-
-    // pulse the color on change, so that it's clear where the change happened
-    $scope.highlightRange = function(phraseRange) {
-        $log.log('Highlighting the range: ')
-        $log.log(phraseRange)
-//        editor.session.removeMarker(markerId)
-        var marker = $scope.editor.session.addMarker(phraseRange, 'changed_range');
-        // remove the marker after a bit
-        $timeout(
-          function() {
-            $scope.editor.getSession().removeMarker(marker);
-          }, 2000);
-
-    }
+    });
 
     editor.setOptions({enableBasicAutocompletion: true});
+
+    // Working - move to autocomplete service
     var tmCompleter = {
       getCompletions: function(editor, session, pos, prefix, callback) {
         if (prefix.length === 0) { callback(null, []); return }
@@ -418,28 +385,15 @@ angular.module('controllers').controller('AceCtrl',
     langTools.addCompleter(tmCompleter);   // TODO: add the typeahead controller code
 //    langTools.addCompleter(glossaryCompleter);
     // end autocompletion tests
+    // end move to autocompletion service
 
-    var session = editor.session;
     // modify some of the display params for the Ace Editor
-    var renderer = editor.renderer;
-    //var container = renderer.getContainerElement();
     renderer.setShowGutter(false);
-    //renderer.setPadding(10)
     // hide the print margin
     editor.setShowPrintMargin(false);
     renderer.setScrollMargin(10,0,0,0);
-
     // wrap words
     session.setUseWrapMode(true);
-
-    // TESTING: dynamically set the mode
-    // WORKING: add a text tokenization (word recognition) mode to ace
-    $scope.setMode = function() {
-      var modeName = "text";
-      $scope.editor.session.setMode('ace/mode/' + modeName);
-      $log.log("Set mode to: " + modeName);
-    }
-
     // this doesn't work from CSS for some reason
     editor.setFontSize(18);
 
@@ -494,6 +448,7 @@ angular.module('controllers').controller('AceCtrl',
     }
   });
 
+  // begin move to translation memory
 // the values for this instance set from the view with ng-init and the ng-repeat index
 // TODO: these properties are only used by the Translation memory (see below) - make a single, consistent datamodel
 //  $scope.setSegments = function(index) {
@@ -530,5 +485,6 @@ angular.module('controllers').controller('AceCtrl',
     $log.log("the TM: " + JSON.stringify(TranslationMemory.TM));
   };
 
+  // end move to translation memory
 }]);
 

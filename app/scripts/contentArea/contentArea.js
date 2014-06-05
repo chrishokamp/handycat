@@ -1,15 +1,19 @@
 // Holds all of the translation pairs and handles the interface with the Document service
+// Content area is the place for global control of the /edit view
 angular.module('controllers').controller('ContentAreaCtrl',
     ['$scope', 'Document', 'project', '$location', '$anchorScroll', '$state', '$modal', '$log',
     function($scope, Document, project, $location, $anchorScroll, $state, $modal, $log) {
   if (Document.segments.length === 0) {
     $state.go('project');
   }
+  // DEV UTILS
+  $scope.showXLIFF = project.debugXLIFF;
+  // END DEV UTILS
+
+  $scope.language = Document.targetLang;
   $scope.numSegments = Document.segments.length;
   // each segment is a reference to the segment in the Document service
   $scope.segments = Document.segments;
-
-  $scope.showXLIFF = project.debugXLIFF;
 
   // watch the flag on the Documents service
   $scope.$watch(function() {
