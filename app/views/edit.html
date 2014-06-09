@@ -59,25 +59,26 @@
                         <!-- TODO: use the 'currentToken' property on the AceCtrl instead of 'selectedToken' -->
                         <div collapse="false" ng-show="isActive.active">
                             <div class="row">
-                                <!--<div class="col-xs-1">-->
+                                <div class="col-xs-1">
                                     <!--<button ng-click="changeTokenNumber()" tooltip="change the number of the selected phrase" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom">-->
-                                        <!--<span class="ion-pound" ng-show="!changeNumberWorking"></span>-->
-                                        <!--<i ng-show="changeNumberWorking" class="ion-loading-b"></i>-->
-                                    <!--</button>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-1">-->
-                                    <!--<button ng-click="changeTokenGender()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change gender of the selected phrase" tooltip-placement="bottom">-->
-                                        <!--<span class="ion-male"></span>-->
-                                        <!--<i ng-show="changeGenderWorking" class="ion-loading-b"></i>-->
-                                    <!--</button>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-1">-->
-                                    <!--<button ng-click="changeTokenCase()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change case of the selected phrase" tooltip-placement="bottom">-->
-                                        <!--<span class="ion-ios7-briefcase"></span>-->
-                                        <!--<i ng-show="changeCaseWorking" class="ion-loading-b"></i>-->
-                                    <!--</button>-->
-                                <!--</div>-->
-                                <div class="col-xs-offset-4 col-xs-1 text-right">
+                                    <button popover ng-click="togglePopover()" tooltip="change the number of the selected phrase" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom">
+                                        <span class="ion-pound" ng-show="!changeNumberWorking"></span>
+                                        <i ng-show="changeNumberWorking" class="ion-loading-b"></i>
+                                    </button>
+                                </div>
+                                <div class="col-xs-1">
+                                    <button ng-click="changeTokenGender()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change gender of the selected phrase" tooltip-placement="bottom">
+                                        <span class="ion-male"></span>
+                                        <i ng-show="changeGenderWorking" class="ion-loading-b"></i>
+                                    </button>
+                                </div>
+                                <div class="col-xs-1">
+                                    <button ng-click="changeTokenCase()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change case of the selected phrase" tooltip-placement="bottom">
+                                        <span class="ion-ios7-briefcase"></span>
+                                        <i ng-show="changeCaseWorking" class="ion-loading-b"></i>
+                                    </button>
+                                </div>
+                                <div class="col-xs-offset-1 col-xs-1 text-right">
                                     <button ng-click="openHelp()" tooltip="show help" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-question-sign"></span></button>
                                 </div>
                                 <div class="col-xs-1 text-right">
