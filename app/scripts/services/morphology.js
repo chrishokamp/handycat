@@ -18,12 +18,12 @@ angular.module('services').factory('Morphology', [ '$http','$log', function($htt
       var morphologyRoute = '';
       lang ? morphologyRoute = routePrefix + lang : morphologyRoute = routePrefix + default_lang;
 
-      if (_.contains(['S', 'P'], param)) {
+      if (_.contains(['Sg', 'Pl'], param)) {
         $log.log('changeNumber call: ' + phrase);
         var paramMap = {
           'to_number': param
         }
-        var data = { "phrase": phrase, "change_type": 'rfNumber', "param_map": param_map };
+        var data = { "phrase": phrase, "change_type": 'rfNumber', "param_map": paramMap };
 
 //        return $http.post(morphologyRoute, data, { timeout: 10000 });
 

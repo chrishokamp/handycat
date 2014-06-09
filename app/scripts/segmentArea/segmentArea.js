@@ -151,6 +151,7 @@ angular.module('controllers')
   $scope.setTextSelection = function(text, range) {
     $scope.selectedToken = text;
     $scope.selectedRange = range;
+    $log.log('setTextSelection fired, selectedToken: '+$scope.selectedToken+' selectedRange: ' + $scope.selectedRange);
   };
 
   $scope.copySourcePunctuation = function() {
@@ -183,7 +184,8 @@ angular.module('controllers')
       var phrase = $scope.selectedToken;
       $log.log('the phrase to change is: ' + phrase);
 
-      var res = Morphology.changeNumber(phrase, 'de');
+//      var res = Morphology.changeNumber(phrase, 'de');
+      var res = Morphology.changeNumber(phrase, 'de', param);
       res.then(
         function(result) {
           $log.log('the result from the morphology server: ');

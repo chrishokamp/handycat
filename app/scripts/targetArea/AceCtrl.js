@@ -299,6 +299,7 @@ angular.module('controllers').controller('AceCtrl',
           var currentSelection = getSelection();
           var text = editor.session.getTextRange(currentSelection);
           $log.log("currentSelection: " + currentSelection + ", text: " + text);
+          // this function is on segmentAreaCtrl
           $scope.setTextSelection(text, currentSelection);
         }, 500);
       }

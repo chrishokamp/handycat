@@ -1,0 +1,39 @@
+angular.module('directives').directive('numberPopover', ['$log', '$timeout', '$compile', function($log, $timeout, $compile) {
+  return {
+    restrict: 'A',
+    scope: true,
+    link: function($scope,el, attrs){
+      var $infoPopover;
+
+      $scope.togglePopover = function(evt) {
+        $log.log('toggle number popover');
+        if ($infoPopover) {
+          $infoPopover.remove();
+          $infoPopover = undefined;
+        } else {
+          var offset = el.offset();
+          // pad the top
+          offset.top += el.height() + 18;
+          var popoverHtml =
+            '<div class="info-popover text-center">' +
+              '<div ng-click="changeTokenNumber(\'Sg\')" class="btn btn-primary">S</div>' +
+              '<div ng-click="changeTokenNumber(\'P\')" class="btn btn-primary">P</div>' +
+            '</div>';
+
+          var compiledHtml = $compile(popoverHtml)($scope);
+          $infoPopover = $(compiledHtml);
+          // give infoPopover some style
+          $infoPopover.css({
+            'height': '100px',
+            'top': offset.top+'px',
+            'max-width': el.outerWidth()+'px',
+            'left': offset.left+'px'
+          });
+          // style="position: absolute; top:'+offset.top +'px; width:'+ el.outerWidth() + 'px !important; left:'+ offset.left +'px;
+          $('body').append($infoPopover);
+        }
+      }
+
+    }
+  }
+}]);
