@@ -61,13 +61,14 @@
                             <div class="row">
                                 <div class="col-xs-1">
                                     <!--<button ng-click="changeTokenNumber()" tooltip="change the number of the selected phrase" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom">-->
-                                    <button popover ng-click="togglePopover()" tooltip="change the number of the selected phrase" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom">
+                                    <button tooltip="change the number of the selected phrase" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom">
                                         <span class="ion-pound" ng-show="!changeNumberWorking"></span>
                                         <i ng-show="changeNumberWorking" class="ion-loading-b"></i>
                                     </button>
                                 </div>
                                 <div class="col-xs-1">
-                                    <button ng-click="changeTokenGender()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change gender of the selected phrase" tooltip-placement="bottom">
+                                    <button gender-popover ng-click="togglePopover()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change gender of the selected phrase" tooltip-placement="bottom">
+                                        <!--<button gender-popover ng-click="togglePopover()" ng-click="changeTokenGender()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change gender of the selected phrase" tooltip-placement="bottom">-->
                                         <span class="ion-male"></span>
                                         <i ng-show="changeGenderWorking" class="ion-loading-b"></i>
                                     </button>

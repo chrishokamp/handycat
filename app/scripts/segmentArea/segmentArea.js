@@ -12,6 +12,8 @@ angular.module('controllers')
   $scope.entities.currentEntity = {};
   $scope.entities.entityData = {};
 
+  $scope.test = { 'test': 'TEST'};
+
   $scope.insertSurfaceForm = function(sf) {
     $log.log('INSERT SURFACE FORM: ' + sf);
     $scope.insertText(' ' + sf + ' ');
@@ -170,7 +172,8 @@ angular.module('controllers')
      $scope.currentToken = token;
   };
 
-  $scope.changeTokenNumber = function() {
+  $scope.changeTokenNumber = function(param) {
+    $log.log('Change token number param: ' + param);
     // toggle the working state of the button
     $scope.changeNumberWorking = true;
 
@@ -180,7 +183,6 @@ angular.module('controllers')
       var phrase = $scope.selectedToken;
       $log.log('the phrase to change is: ' + phrase);
 
-      Project.updateStat('changeNumber', $scope.$index, phrase);
       var res = Morphology.changeNumber(phrase, 'de');
       res.then(
         function(result) {
@@ -196,6 +198,8 @@ angular.module('controllers')
           $scope.changeNumberWorking = false;
         }
       );
+
+      Project.updateStat('changeNumber', $scope.$index, phrase);
     }
   };
   $scope.changeTokenGender = function() {
