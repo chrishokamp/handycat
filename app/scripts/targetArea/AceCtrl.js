@@ -121,7 +121,12 @@ angular.module('controllers').controller('AceCtrl',
     currentMode.moveCurrentRange(1);
   }
 
-   // TODO: on change of content in editor, the currentMode needs to update its ranges immediately
+  // TODO: on change of content in editor, the currentMode needs to update its ranges immediately
+  // select a range of text in the editor - note that this function must be declared before it is used to initialize an EditMode
+  var selectRange = function(aRange) {
+    $scope.editor.session.selection.setRange(aRange);
+    $scope.editor.focus();
+  };
   var currentMode = EditMode(tokenizer.getTokenRanges, selectRange);
 
   // swaps the edit mode - should be a function on the editor
@@ -152,11 +157,6 @@ angular.module('controllers').controller('AceCtrl',
       }, 2000);
   }
 
-  // select a range of text in the editor
-  var selectRange = function(aRange) {
-    $scope.editor.session.selection.setRange(aRange);
-    $scope.editor.focus();
-  };
   // get the current selection from the editor
   var getSelection = function() {
     var editor = $scope.editor;
