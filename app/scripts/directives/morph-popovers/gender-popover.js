@@ -5,14 +5,6 @@ angular.module('directives').directive('genderPopover', ['$log', '$timeout', '$c
     scope: true,
     link: function($scope,el, attrs){
       var $infoPopover;
-
-      // test function
-      $scope.log = function(str) {
-        console.log("LOG GOT: " + str);
-        $log.log($scope.$parent.$parent);
-        $log.log($scope.changeTokenNumber);
-        $scope.changeTokenNumber(str);
-      }
       $scope.togglePopover = function(evt) {
         $log.log('toggle popover');
         if ($infoPopover) {
@@ -24,10 +16,9 @@ angular.module('directives').directive('genderPopover', ['$log', '$timeout', '$c
           offset.top += el.height() + 18;
           var popoverHtml =
             '<div class="info-popover text-center">' +
-              '<div ng-click="changeTokenNumber(\'F\')" class="btn btn-primary">F</div>' +
-              '<div ng-click="log(\'Apple\')" class="btn btn-primary">F</div>' +
-              '<div ng-click="" class="btn btn-primary text-center">M</div>' +
-              '<div ng-click="" class="btn btn-primary text-center">N</div>' +
+              '<div ng-click="changeTokenGender(\'Fem\')" class="btn btn-primary">F</div>' +
+              '<div ng-click="changeTokenGender(\'Masc\')" class="btn btn-primary">M</div>' +
+              '<div ng-click="changeTokenGender(\'Neut\')" class="btn btn-primary">N</div>' +
             '</div>';
           //          var popoverHtml = '<div data-tooltip-html-unsafe="fun fun" tooltip-trigger="tooltipOpen" class="info-popover">TEST</div>';
 

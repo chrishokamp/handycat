@@ -204,7 +204,7 @@ angular.module('controllers')
       Project.updateStat('changeNumber', $scope.$index, phrase);
     }
   };
-  $scope.changeTokenGender = function() {
+  $scope.changeTokenGender = function(param) {
     // toggle the working state of the button
     $scope.changeGenderWorking = true;
 
@@ -214,8 +214,7 @@ angular.module('controllers')
       var phrase = $scope.selectedToken;
       $log.log('the phrase to change is: ' + phrase);
 
-      Project.updateStat('changeGender', $scope.$index, phrase);
-      var res = Morphology.changeGender(phrase, 'de');
+      var res = Morphology.changeGender(phrase, 'de', param);
       res.then(
         function(result) {
           $log.log('the result from the morphology server: ');
@@ -230,9 +229,10 @@ angular.module('controllers')
           $scope.changeGenderWorking = false;
         }
       );
+      Project.updateStat('changeGender', $scope.$index, phrase);
     }
   };
-  $scope.changeTokenCase = function() {
+  $scope.changeTokenCase = function(param) {
     // toggle the working state of the button
     $scope.changeCaseWorking = true;
 
@@ -242,8 +242,7 @@ angular.module('controllers')
       var phrase = $scope.selectedToken;
       $log.log('the phrase to change is: ' + phrase);
 
-      Project.updateStat('changeCase', $scope.$index, phrase);
-      var res = Morphology.changeCase(phrase, 'de');
+      var res = Morphology.changeCase(phrase, 'de', param);
       res.then(
         function(result) {
           $log.log('the result from the morphology server: ');
@@ -258,6 +257,7 @@ angular.module('controllers')
           $scope.changeCaseWorking = false;
         }
       );
+      Project.updateStat('changeCase', $scope.$index, phrase);
     }
   };
 

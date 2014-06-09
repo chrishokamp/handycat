@@ -1,11 +1,13 @@
-angular.module('directives').directive('numberPopover', ['$log', '$timeout', '$compile', function($log, $timeout, $compile) {
+
+// a popover which displays information about a token
+angular.module('directives').directive('casePopover', ['$log', '$timeout', '$compile', function($log, $timeout, $compile) {
   return {
     restrict: 'A',
     scope: true,
     link: function($scope,el, attrs){
       var $infoPopover;
       $scope.togglePopover = function(evt) {
-        $log.log('toggle number popover');
+        $log.log('toggle popover');
         if ($infoPopover) {
           $infoPopover.remove();
           $infoPopover = undefined;
@@ -15,9 +17,12 @@ angular.module('directives').directive('numberPopover', ['$log', '$timeout', '$c
           offset.top += el.height() + 18;
           var popoverHtml =
             '<div class="info-popover text-center">' +
-              '<div ng-click="changeTokenNumber(\'Sg\')" class="btn btn-primary">S</div>' +
-              '<div ng-click="changeTokenNumber(\'Pl\')" class="btn btn-primary">P</div>' +
+              '<div ng-click="changeTokenCase(\'Nom\')" class="btn btn-primary">N</div>' +
+              '<div ng-click="changeTokenCase(\'Acc\')" class="btn btn-primary">A</div>' +
+              '<div ng-click="changeTokenCase(\'Dat\')" class="btn btn-primary">D</div>' +
+              '<div ng-click="changeTokenCase(\'Gen\')" class="btn btn-primary">G</div>' +
             '</div>';
+          //          var popoverHtml = '<div data-tooltip-html-unsafe="fun fun" tooltip-trigger="tooltipOpen" class="info-popover">TEST</div>';
 
           var compiledHtml = $compile(popoverHtml)($scope);
           $infoPopover = $(compiledHtml);
