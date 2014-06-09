@@ -1,4 +1,4 @@
-angular.module('directives').directive('numberPopover', ['$log', '$timeout', '$compile', function($log, $timeout, $compile) {
+angular.module('directives').directive('numberPopover', ['$log', '$timeout', '$compile', '$rootScope', function($log, $timeout, $compile, $rootScope) {
   return {
     restrict: 'A',
     scope: true,
@@ -15,23 +15,53 @@ angular.module('directives').directive('numberPopover', ['$log', '$timeout', '$c
           offset.top += el.height() + 18;
           var popoverHtml =
             '<div class="info-popover text-center">' +
+            '<div class="arrow-up"></div>' +
+            '<div>' +
               '<div ng-click="changeTokenNumber(\'Sg\')" class="btn btn-primary">S</div>' +
               '<div ng-click="changeTokenNumber(\'Pl\')" class="btn btn-primary">P</div>' +
+            '</div>' +
             '</div>';
 
           var compiledHtml = $compile(popoverHtml)($scope);
           $infoPopover = $(compiledHtml);
           // give infoPopover some style
           $infoPopover.css({
-            'height': '100px',
+//            'height': '100px',
             'top': offset.top+'px',
             'max-width': el.outerWidth()+'px',
             'left': offset.left+'px'
           });
           // style="position: absolute; top:'+offset.top +'px; width:'+ el.outerWidth() + 'px !important; left:'+ offset.left +'px;
           $('body').append($infoPopover);
+          $infoPopover.click(function() {
+            $infoPopover.remove();
+          })
+          var oneClick = (function( clickCount ) {
+            var handler = function(event) {
+              clickCount++;
+              if(clickCount >= 2 ) {
+                if ($infoPopover) {
+                  $infoPopover.remove();
+                  $infoPopover = undefined;
+                  // remove listener
+                }
+                document.removeEventListener('click', handler);
+                clickCount = 0;
+              }
+            };
+            return handler;
+          })( 0 );
+          document.addEventListener('click', oneClick);
         }
       }
+
+
+
+      $scope.$on('toggle-popovers', function() {
+        if ($infoPopover) {
+          $infoPopover.remove();
+        }
+      })
 
     }
   }

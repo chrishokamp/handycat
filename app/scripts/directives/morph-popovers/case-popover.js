@@ -1,13 +1,13 @@
 
 // a popover which displays information about a token
-angular.module('directives').directive('casePopover', ['$log', '$timeout', '$compile', function($log, $timeout, $compile) {
+angular.module('directives').directive('casePopover', ['$log', '$timeout', '$compile', '$rootScope', function($log, $timeout, $compile, $rootScope) {
   return {
     restrict: 'A',
     scope: true,
     link: function($scope,el, attrs){
       var $infoPopover;
       $scope.togglePopover = function(evt) {
-        $log.log('toggle popover');
+        $rootScope.$broadcast('toggle-popovers');
         if ($infoPopover) {
           $infoPopover.remove();
           $infoPopover = undefined;
@@ -38,6 +38,12 @@ angular.module('directives').directive('casePopover', ['$log', '$timeout', '$com
         }
       }
 
+      $scope.$on('toggle-popovers', function() {
+        $log.log('heard toggle popover');
+        if ($infoPopover) {
+          $infoPopover.remove();
+        }
+      })
     }
   }
 }]);

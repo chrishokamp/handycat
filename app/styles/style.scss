@@ -27,6 +27,16 @@ h3 {
   padding: 4px 0 4px 0;
 }
 
+// upward pointing triangle
+.arrow-up {
+    margin: auto;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+
+	border-bottom: 5px solid black;
+}
 .edit-area-wrapper {
   margin-top: 16px;
 }
@@ -218,7 +228,7 @@ span.drop-text {
 
 .info-popover {
   position: absolute;
-  background-color: pink;
+//  background-color: pink;
 }
 
 .source-token {
