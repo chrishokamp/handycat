@@ -317,13 +317,13 @@ angular.module('controllers').controller('AceCtrl',
         $scope.lastToken = token;
 
         // note - these properties are on the parent (segmentCtrl)
-        $scope.$apply(
-          function() {
+//        $scope.$apply(
+//          function() {
+//          }
+//        );
             $scope.toggleToolbar(false);
-            $scope.queryGlossary(token.value);
+            $scope.queryGlossary(token.value, 'deu', 'eng');
             $scope.glossary.glossaryQuery = token.value;
-          }
-        );
       }
     });
 

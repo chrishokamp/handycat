@@ -329,9 +329,9 @@ angular.module('controllers')
   var glossary = {};
   glossary.glossaryQuery = undefined;
   $scope.glossary = glossary;
-  $scope.queryGlossary = function(query) {
+  $scope.queryGlossary = function(query, fromLang, toLang) {
+    Glossary.getMatches(query, updateGlossaryArea, fromLang, toLang);
     Project.updateStat('queryGlossary', $scope.$index, query);
-    Glossary.getMatches(query, updateGlossaryArea);
   };
 
   // Informs other segments that they should make a change.

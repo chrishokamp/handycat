@@ -20,7 +20,7 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
     allWords: [],
 // TODO: add top level keys using language codes
     glossary: {},
-    getMatches: function(phrase, callback) {
+    getMatches: function(phrase, callback, fromLang, toLang) {
       $log.log('Inside Glossary service, getting matches for: ' + phrase);
       // ask the node server for matches from the glosbe API
       var self = this;
@@ -31,8 +31,8 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
         $http.get(glossaryUrl, {
           params: {
             phrase: phrase,
-            from: 'deu',
-            dest: 'eng',
+            from: fromLang,
+            dest: toLang,
             origin: 'http://0.0.0.0:9000'
           }
         })
