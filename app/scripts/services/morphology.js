@@ -6,7 +6,8 @@ angular.module('services').factory('Morphology', [ '$http','$log', function($htt
   // var wordCache = {};
 
   // local prefix
-  var routePrefix = 'http://0.0.0.0:5001/morphology/';
+//  var routePrefix = 'http://0.0.0.0:5001/morphology/';
+  var routePrefix = 'http://213.138.115.10:5001/morphology/';
   var convertPrefix = routePrefix + 'convert/';
   // current AWS
 //  var routePrefix = 'http://ec2-54-186-18-81.us-west-2.compute.amazonaws.com:5001/morphology/';

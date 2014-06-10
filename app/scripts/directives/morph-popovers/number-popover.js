@@ -33,9 +33,9 @@ angular.module('directives').directive('numberPopover', ['$log', '$timeout', '$c
           });
           // style="position: absolute; top:'+offset.top +'px; width:'+ el.outerWidth() + 'px !important; left:'+ offset.left +'px;
           $('body').append($infoPopover);
-          $infoPopover.click(function() {
-            $infoPopover.remove();
-          })
+//          $infoPopover.click(function() {
+//            $infoPopover.remove();
+//          })
           var oneClick = (function( clickCount ) {
             var handler = function(event) {
               clickCount++;

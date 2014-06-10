@@ -17,10 +17,13 @@ angular.module('directives').directive('casePopover', ['$log', '$timeout', '$com
           offset.top += el.height() + 18;
           var popoverHtml =
             '<div class="info-popover text-center">' +
-              '<div ng-click="changeTokenCase(\'Nom\')" class="btn btn-primary">N</div>' +
-              '<div ng-click="changeTokenCase(\'Acc\')" class="btn btn-primary">A</div>' +
-              '<div ng-click="changeTokenCase(\'Dat\')" class="btn btn-primary">D</div>' +
-              '<div ng-click="changeTokenCase(\'Gen\')" class="btn btn-primary">G</div>' +
+              '<div class="arrow-up"></div>' +
+              '<div>' +
+                '<div ng-click="changeTokenCase(\'Nom\')" class="btn btn-primary">N</div>' +
+                '<div ng-click="changeTokenCase(\'Acc\')" class="btn btn-primary">A</div>' +
+                '<div ng-click="changeTokenCase(\'Dat\')" class="btn btn-primary">D</div>' +
+                '<div ng-click="changeTokenCase(\'Gen\')" class="btn btn-primary">G</div>' +
+              '</div>' +
             '</div>';
           //          var popoverHtml = '<div data-tooltip-html-unsafe="fun fun" tooltip-trigger="tooltipOpen" class="info-popover">TEST</div>';
 
@@ -35,6 +38,22 @@ angular.module('directives').directive('casePopover', ['$log', '$timeout', '$com
           });
           // style="position: absolute; top:'+offset.top +'px; width:'+ el.outerWidth() + 'px !important; left:'+ offset.left +'px;
           $('body').append($infoPopover);
+          var oneClick = (function( clickCount ) {
+            var handler = function(event) {
+              clickCount++;
+              if(clickCount >= 2 ) {
+                if ($infoPopover) {
+                  $infoPopover.remove();
+                  $infoPopover = undefined;
+                  // remove listener
+                }
+                document.removeEventListener('click', handler);
+                clickCount = 0;
+              }
+            };
+            return handler;
+          })( 0 );
+          document.addEventListener('click', oneClick);
         }
       }
 
