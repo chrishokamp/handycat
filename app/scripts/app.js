@@ -36,7 +36,9 @@ var App = window.App = angular.module('editorComponentsApp',
 
 })
 //.constant('baseUrl', 'http://protected-crag-2517.herokuapp.com/glossary');
-.constant('baseUrl', 'http://localhost:5000')
+//.constant('baseUrl', 'http://0.0.0.0:5002')
+//.constant('baseUrl', 'http://0.0.0.0:5002')
+.constant('baseUrl', 'http://panaceadcu.dh.bytemark.co.uk:5002')
 
 // Allow CORS
 .config(['$httpProvider', function($httpProvider) {

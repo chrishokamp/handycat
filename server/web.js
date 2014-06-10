@@ -111,5 +111,4 @@ app.get('/surface-forms/:lang/:entity', function(req, res){
 // other datasources to try:
 // wiktionary
 
-
-app.listen(process.env.PORT || 5000);
+app.listen(process.env.PORT || 5002);

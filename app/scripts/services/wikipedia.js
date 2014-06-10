@@ -27,8 +27,8 @@ angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl
         var queryUrl = concordanceUrl + '/' + lang.trim();
         $http.get(queryUrl, {
           params: {
-            srsearch: query,
-            origin: 'http://0.0.0.0:9000'
+            srsearch: query
+//            origin: 'http://0.0.0.0:9000'
           }
         })
         .success(function(res) {

@@ -33,7 +33,7 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
             phrase: phrase,
             from: fromLang,
             dest: toLang,
-            origin: 'http://0.0.0.0:9000'
+//            origin: 'http://0.0.0.0:9000'
           }
         })
           .success(function(res) {
