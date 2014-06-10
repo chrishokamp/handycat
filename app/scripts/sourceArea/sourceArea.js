@@ -5,7 +5,7 @@ angular.module('directives')
       scope: {
         // this comes from the Document service via segment via contentArea
         sourceSentence: '=',
-        annotatedSentence: '=',
+        annotatedSentence: '='
       },
       restrict: 'E',
       //templateUrl: 'scripts/sourceArea/sourceArea.html',
@@ -15,8 +15,8 @@ angular.module('directives')
         var tokenStrings = tokenizer.tokenize(scope.sourceSentence);
 
         // give each token an id, and also move to dot notation
-//        var tokens =  _.map(tokenStrings, function(tok, index) { return { index: index, token: tok} });
-        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span class="source-token">' + tok + '</span>'});
+        // watch out for the crazy regex in the next line! - used to escape single quotes
+        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span class="source-token"  ng-click="askGlossary(\''+ tok.replace('\'', '\\\'') + '\')">' + tok + '</span>'});
 //        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span popover tooltip="fun fun" class="source-token">' + tok + '</span>'});
 //        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span tooltip-html-unsafe="{{getLinkedData()}}" class="source-token">' + tok + '</span>'});
         var annotatedSentence = '<div class="annotated-source">' + tokenSpans.join(' ') + '</div>';
@@ -41,7 +41,7 @@ angular.module('directives')
             // test
             if (!(_.contains(alreadyMarked, surfaceForm))) {
               var re = new RegExp('(' + surfaceForm + ')', "g");
-              text = text.replace(re, '<span style="text-decoration: underline;" ng-click="setSurfaceForms($event)">$1</span>');
+              text = text.replace(re, '<span style="text-decoration: underline;" ng-click="setSurfaceForms($event);>$1</span>');
             }
             alreadyMarked.push(surfaceForm);
           });
@@ -63,6 +63,15 @@ angular.module('directives')
           var surfaceForm = $(e.target).text();
           $log.log('target text is: ' + surfaceForm);
           $scope.$emit('find-surface-forms', { 'sf': surfaceForm });
+        }
+        $scope.askGlossary = function(word) {
+          $log.log('ask glossary fired');
+          var fromLang = 'eng';
+          var toLang = 'deu';
+          $scope.$parent.queryGlossary(word, fromLang, toLang);
+          $scope.$parent.toggleToolbar(false);
+          $scope.$parent.glossary.glossaryQuery = word;
+
         }
 
       }
