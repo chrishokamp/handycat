@@ -55,7 +55,7 @@ Finally, once you've done all that, you should be able to run `grunt serve`, and
 
 # Building and Deploying
 
-* The command `grunt build --force` will build the client application into dist/
+* The command `grunt build` will build the client application into dist/
 
 
 ## TODOs and Notes

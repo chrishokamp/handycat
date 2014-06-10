@@ -306,7 +306,10 @@ module.exports = function (grunt) {
                         'data/**/*',
                         'bower_components/sass-bootstrap/fonts/**/*',
                         'fonts/**/*',
-                        'images/{,*/}*.{gif,web,png}'
+                        'images/{,*/}*.{gif,web,png}',
+//                        '../server/db/*.js',
+//                        '../server/*.js',
+//                        '../server/package.json'
                     ]
                 }, {
                     expand: true,

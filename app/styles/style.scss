@@ -35,7 +35,7 @@ h3 {
 	border-left: 5px solid transparent;
 	border-right: 5px solid transparent;
 
-	border-bottom: 5px solid black;
+	border-bottom: 5px solid #87cefa;
 }
 .edit-area-wrapper {
   margin-top: 16px;
@@ -228,6 +228,9 @@ span.drop-text {
 
 .info-popover {
   position: absolute;
+  div.btn {
+    opacity: 1.0 !important;
+  }
 //  background-color: pink;
 }
 
