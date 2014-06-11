@@ -17,8 +17,8 @@ angular.module('directives').directive('numberPopover', ['$log', '$timeout', '$c
             '<div class="info-popover text-center">' +
             '<div class="arrow-up"></div>' +
             '<div>' +
-              '<div ng-click="changeTokenNumber(\'Sg\')" class="btn btn-primary">S</div>' +
-              '<div ng-click="changeTokenNumber(\'Pl\')" class="btn btn-primary">P</div>' +
+              '<div logger="change-number-sin" ng-click="changeTokenNumber(\'Sg\')" class="btn btn-primary">S</div>' +
+              '<div logger="change-number-plu" ng-click="changeTokenNumber(\'Pl\')" class="btn btn-primary">P</div>' +
             '</div>' +
             '</div>';
 

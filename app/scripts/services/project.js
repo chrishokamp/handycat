@@ -40,13 +40,7 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
       stats: {},
 
       updateStat: function(stat, segment, data) {
-        var currentdate = new Date();
-        var date = currentdate.getDate() + "/"
-          + (currentdate.getMonth()+1)  + "/"
-          + currentdate.getFullYear() + " @ "
-          + currentdate.getHours() + ":"
-          + currentdate.getMinutes() + ":"
-          + currentdate.getSeconds();
+        var date = new Date().getTime();
         var self = this;
         self.log.push([stat, segment, data, date]);
         if (!(stat in self.stats)) {
