@@ -2,7 +2,7 @@
 // TODO: add editing stats
 // TODO: throw errors when we ask for segments that don't exist
 
-angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Document', '$log',
+angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Document', '$log','$rootScope',
     function($rootScope, SegmentOrder, Document, $log) {
 
     return {
@@ -36,9 +36,6 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
       // stores all the actions performed by the user in order
       log:[],
 
-      // aggregated usage of each operation. this object could be reconstructed from this.log
-      stats: {},
-
       updateStat: function(stat, segment, data) {
         $log.log('update stat');
         var date = new Date().getTime();
@@ -49,13 +46,6 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
           'data': data,
           'time': date
         });
-        if (!(stat in self.stats)) {
-          self.stats[stat] = [];
-          var nSegments = Document.segments.length;
-          for (var i = 0; i < nSegments; ++i)
-            self.stats[stat].push([]);
-        }
-        self.stats[stat][segment].push(date);
         console.log(self.log);
       }
     }

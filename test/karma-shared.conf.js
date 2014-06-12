@@ -49,11 +49,13 @@ module.exports = function() {
       'app/scripts/services/wikipedia.js',
       'app/scripts/services/morphology.js',
       'app/scripts/services/entityLinker.js',
+      'app/scripts/services/segmentOrder.js',
 
       // DIRECTIVES
       'app/scripts/directives.js',
       'app/scripts/directives/index.js',
       'app/scripts/directives/specialChars.js',
+      'app/scripts/directives/logger.js',
 
       // CONTROLLERS
       'app/scripts/controllers.js',

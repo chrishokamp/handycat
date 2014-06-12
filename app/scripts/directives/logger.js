@@ -19,12 +19,15 @@ angular.module('directives').directive('logger', ['project', 'Document', '$log',
       // you can get any extra data from the event object
       function loggerCallback(e) {
         $log.log('callback');
+        console.log('callback');
         $log.log(e);
         var action = attrs.logger;
         var index = $scope.index;
         var target = Document.targetSegments[index];
         project.updateStat(action, index, target);
       }
+
+      $scope.callback = loggerCallback;
     }
 
   };
