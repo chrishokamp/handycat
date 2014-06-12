@@ -19,10 +19,10 @@ angular.module('directives').directive('casePopover', ['$log', '$timeout', '$com
             '<div class="info-popover text-center">' +
               '<div class="arrow-up"></div>' +
               '<div>' +
-                '<div logger="change-case-nom" ng-click="changeTokenCase(\'Nom\')" class="btn btn-primary">N</div>' +
-                '<div logger="change-case-acc" ng-click="changeTokenCase(\'Acc\')" class="btn btn-primary">A</div>' +
-                '<div logger="change-case-dat" ng-click="changeTokenCase(\'Dat\')" class="btn btn-primary">D</div>' +
-                '<div logger="change-case-gen" ng-click="changeTokenCase(\'Gen\')" class="btn btn-primary">G</div>' +
+                '<div logger="change-case-nom"  ng-click="changeTokenCase(\'Nom\')" class="btn btn-primary">N</div>' +
+                '<div logger="change-case-acc"  ng-click="changeTokenCase(\'Acc\')" class="btn btn-primary">A</div>' +
+                '<div logger="change-case-dat"  ng-click="changeTokenCase(\'Dat\')" class="btn btn-primary">D</div>' +
+                '<div logger="change-case-gen"  ng-click="changeTokenCase(\'Gen\')" class="btn btn-primary">G</div>' +
               '</div>' +
             '</div>';
           //          var popoverHtml = '<div data-tooltip-html-unsafe="fun fun" tooltip-trigger="tooltipOpen" class="info-popover">TEST</div>';
@@ -56,13 +56,6 @@ angular.module('directives').directive('casePopover', ['$log', '$timeout', '$com
           document.addEventListener('click', oneClick);
         }
       }
-
-      $scope.$on('toggle-popovers', function() {
-        $log.log('heard toggle popover');
-        if ($infoPopover) {
-          $infoPopover.remove();
-        }
-      })
     }
   }
 }]);

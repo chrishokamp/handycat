@@ -1,14 +1,30 @@
-angular.module('directives').directive('logger', ['project', 'Document', function(project, Document) {
+angular.module('directives').directive('logger', ['project', 'Document', '$log', function(project, Document, $log) {
   return {
     restrict: 'A',
-
+    scope: true,
     link: function($scope, elem, attrs) {
-      elem.bind('click', function(e) {
+      // the default event to watch is 'click'
+      var eventName = 'click';
+      if (attrs.loggerEvent) {
+        eventName = attrs.loggerEvent;
+      }
+
+      if (eventName === 'click') {
+        elem.bind('click', loggerCallback);
+      } else {
+        // custom events within the angular app
+        $scope.$on(eventName, loggerCallback);
+      }
+
+      // you can get any extra data from the event object
+      function loggerCallback(e) {
+        $log.log('callback');
+        $log.log(e);
         var action = attrs.logger;
         var index = $scope.index;
         var target = Document.targetSegments[index];
         project.updateStat(action, index, target);
-      });
+      }
     }
 
   };

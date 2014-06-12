@@ -200,8 +200,7 @@ angular.module('controllers')
           $scope.changeNumberWorking = false;
         }
       );
-
-      Project.updateStat('changeNumber', $scope.$index, phrase);
+      $rootScope.$broadcast('change-token-number');
     }
   };
   $scope.changeTokenGender = function(param) {
@@ -229,7 +228,7 @@ angular.module('controllers')
           $scope.changeGenderWorking = false;
         }
       );
-      Project.updateStat('changeGender', $scope.$index, phrase);
+      $rootScope.$broadcast('change-token-gender');
     }
   };
   $scope.changeTokenCase = function(param) {
@@ -257,8 +256,8 @@ angular.module('controllers')
           $scope.changeCaseWorking = false;
         }
       );
-      Project.updateStat('changeCase', $scope.$index, phrase);
     }
+    $rootScope.$broadcast('change-token-case');
   };
 
   $scope.queryConcordancer = function(query, lang) {

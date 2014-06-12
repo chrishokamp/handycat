@@ -54,15 +54,6 @@ angular.module('directives').directive('numberPopover', ['$log', '$timeout', '$c
           document.addEventListener('click', oneClick);
         }
       }
-
-
-
-      $scope.$on('toggle-popovers', function() {
-        if ($infoPopover) {
-          $infoPopover.remove();
-        }
-      })
-
     }
   }
 }]);
