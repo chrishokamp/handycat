@@ -20,6 +20,9 @@ describe("Unit: Testing the logger directive", function() {
     console.log('test event');
     scope.$digest();
     scope.$broadcast('test-logger');
+    // TODO: try spying on the function
+    //http://tobyho.com/2011/12/15/jasmine-spy-cheatsheet/
+
     expect(logService['log'][0]['action']).toEqual('test-logger');
     done();
   });
