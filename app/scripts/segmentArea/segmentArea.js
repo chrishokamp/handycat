@@ -368,6 +368,8 @@ angular.module('controllers')
     Project.setActiveSegment(segId);
     Project.focusNextSegment();
 
+    $scope.isActive.active = false;
+
     // Update the current segment
     $scope.segment.targetDOM.textContent = $scope.segment.target;
     Document.revision++;
