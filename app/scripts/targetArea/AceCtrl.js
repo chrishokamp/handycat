@@ -249,21 +249,6 @@ angular.module('controllers').controller('AceCtrl',
     console.log(editor.getValue());
   };
 
-  // Event listeners that let other parts of the application touch the ace editor
-  $scope.$on('change-token-number', function() {
-    // Text to modify
-    var token = getCurrentTokenAndRange();
-    var original_text = token.token.value;
-    var modified_text = Morphology.changeNumber(original_text, $scope.language);
-
-    $scope.replaceSelection(modified_text);
-
-    // save this action
-    $scope.editHistory.push(
-      ruleMap.newRule('change-token-number', '', [original_text, modified_text],
-        'Change number "'+ original_text + '" -> "'+ modified_text +'"'));
-  });
-
   $scope.$on('propagate-action', function(event, action) {
     if (action['operation'] == 'change-token-number') {
       var content = $scope.editor.getValue().replace(new RegExp(action['change'][0]), action['change'][1]);
