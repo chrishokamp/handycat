@@ -9,6 +9,7 @@ var gzippo = require('gzippo')
 // use the node superagent module instead?
 
 app.use(cors());
+app.use(express.bodyParser());
 // app.use(app.router);
 params.extend(app);
 app.use(express.logger('dev'));
@@ -108,6 +109,14 @@ app.get('/surface-forms/:lang/:entity', function(req, res){
 //  res.send(searchResults);
 });
 
+// working -- how to manage which users can write to which logs? - see express passport & openID
+var ActionLogger = require('./logger/actionLogger');
+app.post('/logger', function(req, res){
+  console.log('posting to /logger');
+  ActionLogger.addEntryToSession(req, res);
+//  res.setHeader('Content-Type', 'application/json');
+//  res.send(searchResults);
+});
 // other datasources to try:
 // wiktionary
 

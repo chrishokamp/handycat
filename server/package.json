@@ -6,7 +6,8 @@
     "gzippo": "~0.2.0",
     "cors": "~2.2.0",
     "express-params": "0.0.3",
-    "mongodb": "^1.4.5"
+    "mongodb": "^1.4.5",
+    "passport": "^0.2.0"
   },
   "engines": {
     "node": ">=0.8.0"
