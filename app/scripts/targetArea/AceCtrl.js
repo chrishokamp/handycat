@@ -8,6 +8,7 @@ angular.module('controllers').controller('AceCtrl',
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
   var langTools = ace.require("ace/ext/language_tools");
+  ace.require('ace/ext/spellcheck');
 
   // an object representing the current edit mode
   // params:
@@ -286,6 +287,8 @@ angular.module('controllers').controller('AceCtrl',
 
     $scope.editor = editor;
     $scope.editor.session.setMode('ace/mode/text');
+
+    $scope.editor.setOption("spellcheck", true);
     $log.log("aceLoaded, logging the current mode:");
     $log.log($scope.editor.session);
 
