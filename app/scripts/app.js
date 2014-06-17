@@ -22,10 +22,6 @@ var App = window.App = angular.module('editorComponentsApp',
       url: '/project',
       templateUrl: 'views/project.html'
     })
-    .state('ace', {
-      url: '/ace',
-      templateUrl: 'scripts/aceEditor/ace-drag-test.html'
-    })
     .state('edit', {
       url: '/edit',
       templateUrl: 'views/edit.html'
@@ -33,11 +29,13 @@ var App = window.App = angular.module('editorComponentsApp',
 
   $urlRouterProvider
     .otherwise('/project');
-
 })
+
+// heroku
 //.constant('baseUrl', 'http://protected-crag-2517.herokuapp.com/glossary');
+// localhost
 //.constant('baseUrl', 'http://0.0.0.0:5002')
-//.constant('baseUrl', 'http://0.0.0.0:5002')
+// panacea
 .constant('baseUrl', 'http://panaceadcu.dh.bytemark.co.uk:5002')
 
 // Allow CORS

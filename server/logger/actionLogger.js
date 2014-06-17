@@ -27,7 +27,7 @@ db.open(function(err, db) {
 
 exports.addEntryToSession = function(req, res) {
   console.log(req.body);
-  // The session MUST already exist
+  // The session MUST already exist, because we need the ID
   var sessionId = req.body.sessionid.toString().trim();
   var logEntry = req.body.logentry.toString().trim();
 
@@ -45,6 +45,30 @@ exports.addEntryToSession = function(req, res) {
     });
   });
 };
+
+// add a new session with username and time, enforce unique
+// default username is 'anonymous', sessionId is unique
+exports.startSession = function(req, res) {
+  console.log(req.body);
+  // The session MUST already exist, because we need the ID
+  var sessionId = req.body.sessionid.toString().trim();
+  var logEntry = req.body.logentry.toString().trim();
+
+  db.collection('sessions', function(err, collection) {
+    collection.findOne({ 'sessionId': Number(sessionId) }, function(err, item) {
+      console.log('found item:');
+      console.log(item);
+//      if(item) {
+//        res.send(item['surface_forms']);
+//      } else {
+//        res.send([[entityName, 1]]);
+//
+//      }
+      res.send('test');
+    });
+  });
+};
+
 
 //exports.findbyid = function(req, res) {
 //    var id = req.params.id;
