@@ -5,13 +5,26 @@
     <!-- UPDATE: use glossary for the 'add word' feature -->
     <!-- TODO: get the TM matches for the source segment -->
 
+    <!-- This hr uses some space vertical space so the nav-bar do not hide part of the first segment -->
+    <hr>
+
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
 
         <div class="segment row" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments" index="$index"
              ng-init="segment = seg; init($index)">
             <a id="segment-{{$index}}"></a>
-            <p class="segment-index-label">Segment Index: {{$index}} <span class="segment-finished" ng-show="segmentState.completed">Complete</span></p>
+
+            <p class="segment-index-label">Segment Index: {{$index}}
+                <span class="segment-finished" ng-show="segmentState.completed">
+                    <button type="button" class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-ok"></span> Complete
+                </button></span>
+                 <span class="segment-finished" ng-hide="segmentState.completed">
+                    <button type="button" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-flag"></span> Pending
+                    </button></span>
+            </p>
 
             <div class="bottom-margin" ng-click="activate($index)">
                 <div class="row">
