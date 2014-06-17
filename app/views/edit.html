@@ -58,7 +58,8 @@
                                 <div class="col-xs-11">
                                     <div index="{{$index}}" class="content-card">
                                         <!-- the ace editor -->
-                                        <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="segment.target" ui-ace="{ onLoad : aceLoaded }"></div>
+                                        <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="segment.target"
+                                             ui-ace="{ onLoad : aceLoaded }" ng-paste="onPaste($event)" ng-copy="onCopy($event)"></div>
                                         <!--<div chars class="sample-show-hide" collapsed="showSpecialChars" special="germanChars" selected="insertChar(char)" ></div>-->
                                     </div>
                                 </div>
@@ -66,6 +67,9 @@
                                   <button logger="edit-mode-switch" tooltip="switch edit mode" tooltip-placement="right" ng-click="changeEditMode()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">
                                         <span>E</span>
                                   </button>
+                                    <button logger="edit-mode-next" tooltip="previous token" tooltip-placement="right" ng-click="selectPrevRange()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">
+                                        <span style="font-size: 7px" class="glyphicon glyphicon-arrow-left"></span>
+                                    </button>
                                   <button logger="edit-mode-next" tooltip="next token" tooltip-placement="right" ng-click="selectNextRange()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">
                                       <span style="font-size: 7px" class="glyphicon glyphicon-arrow-right"></span>
                                   </button>

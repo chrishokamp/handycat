@@ -53,6 +53,14 @@ angular.module('controllers').controller('AceCtrl',
         }
         selectRange(this.tokenRanges[this.currentRangeIndex]);
       },
+      selectPrevTokenRange: function() {
+        if (this.tokenRanges[this.currentRangeIndex-1]) {
+          this.currentRangeIndex -= 1;
+        } else {
+          this.currentRangeIndex = 0;
+        }
+        selectRange(this.tokenRanges[this.currentRangeIndex]);
+      },
       // note: inserting generally involves removing one space after, then inserting one space after at the new location
       // working - currently this function is "moveRight"
       // TODO: add a 'following whitespace' function
@@ -104,7 +112,7 @@ angular.module('controllers').controller('AceCtrl',
         // how to maintain the current range as its indices change?
         $scope.editor.focus();
       }
-    }
+    };
 
     // TODO: add logic to handle preceding and trailing whitespaces correctly
     // if there's a whitespace before, leave it
@@ -115,12 +123,16 @@ angular.module('controllers').controller('AceCtrl',
   // the following functions expose control of the current mode on the $scope
   $scope.selectNextRange = function() {
     currentMode.selectNextTokenRange();
-  }
+  };
+
+  $scope.selectPrevRange = function() {
+    currentMode.selectPrevTokenRange();
+  };
 
   // the following functions expose control of the current mode on the $scope
   $scope.moveCurrentEditRange = function() {
     currentMode.moveCurrentRange(1);
-  }
+  };
 
   // TODO: on change of content in editor, the currentMode needs to update its ranges immediately
   // select a range of text in the editor - note that this function must be declared before it is used to initialize an EditMode
@@ -234,7 +246,7 @@ angular.module('controllers').controller('AceCtrl',
     whitespaceRemoved = whitespaceRemoved.replace(/\s+$/, '');
     $scope.editor.getSession().setValue(whitespaceRemoved);
     $scope.editor.focus();
-  }
+  };
 
   // TESTING: dynamically set the mode
   // WORKING: add a text tokenization (word recognition) mode to ace
@@ -242,7 +254,7 @@ angular.module('controllers').controller('AceCtrl',
     var modeName = "text";
     $scope.editor.session.setMode('ace/mode/' + modeName);
     $log.log("Set mode to: " + modeName);
-  }
+  };
 
   $scope.currentPrefix = function() {
     var editor = $scope.editor;
@@ -404,6 +416,20 @@ angular.module('controllers').controller('AceCtrl',
       $log.log("TM already loaded for seg: " + $scope.sourceSegment);
     }
   };
+
+  //
+  $scope.onPaste = function(index, event) {
+    $log.log('paste event');
+    $log.log(event);
+    // TODO send to our logger
+  };
+
+  $scope.onCopy = function(index, event) {
+    $log.log('copy event');
+    $log.log(event);
+    // TODO send to our logger
+  };
+
 
 }]);
 
