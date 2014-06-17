@@ -35,7 +35,8 @@ angular.module('controllers').controller('ContentAreaCtrl',
   // WORKING - show a modal with the help
   $scope.items = ['item1', 'item2', 'item3'];
 
-  $scope.openHelp = function (size) {
+  $scope.
+    openHelp = function (size) {
 
     var modalInstance = $modal.open({
       templateUrl: 'scripts/contentArea/help-modal.html',

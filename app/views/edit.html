@@ -173,7 +173,10 @@
                                     </div>
                                 </div>
                             </tab>
-                            <tab heading="Edit history">
+                            <tab>
+                                <tab-heading>
+                                    Edit history <span class="badge" ng-show="editHistory.length">{{editHistory.length}}</span>
+                                </tab-heading>
                                 <div class="edit-history">
                                     <p>List of edits performed in this segment</p>
 

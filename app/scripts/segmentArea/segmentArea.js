@@ -17,7 +17,7 @@ angular.module('controllers')
   $scope.insertSurfaceForm = function(sf) {
     $log.log('INSERT SURFACE FORM: ' + sf);
     $scope.insertText(' ' + sf + ' ');
-  }
+  };
 
   $scope.getLink = function() {
     $log.log($scope.entities.entityMap);
@@ -27,7 +27,7 @@ angular.module('controllers')
 //    }
 //    return '';
 
-  }
+  };
 
   // (1) - surface forms
   // (2) - entity name (in German)
@@ -59,7 +59,7 @@ angular.module('controllers')
         $log.log($scope.entities.currentEntity.surfaceForms);
       }
     );
-  }
+  };
 
   $scope.linkSourceEntities = function() {
 
@@ -83,6 +83,7 @@ angular.module('controllers')
       },
       function(e) {
         $log.log('Error in entity linking request');
+        $log.log(e);
       }
     );
 
@@ -119,7 +120,7 @@ angular.module('controllers')
   // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
   $scope.isActive = { active:true };
-  $scope.segmentState = { currentState: 'untranslated', complete: false };
+  $scope.segmentState = { currentState: 'untranslated', completed: false };
 
   /*
   $scope.activate = function(index) {
@@ -191,16 +192,23 @@ angular.module('controllers')
           $log.log('the result from the morphology server: ');
           $log.log(result);
 
+          if (phrase !== result.data['converted_phrase'])
+            $scope.editHistory.push(
+              ruleMap.newRule('change-token-number', phrase, result.data['converted_phrase'],
+                              'Change number: ' + phrase + " → " + result.data['converted_phrase']));
+
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
           $scope.changeNumberWorking = false;
         },
         function(err) {
           $log.log('changeNumber failed');
+          $log.log(err);
           $scope.changeNumberWorking = false;
         }
       );
       $scope.$broadcast('change-token-number');
+
     }
   };
   $scope.changeTokenGender = function(param) {
@@ -219,12 +227,18 @@ angular.module('controllers')
           $log.log('the result from the morphology server: ');
           $log.log(result);
 
+          if (phrase !== result.data['converted_phrase'])
+            $scope.editHistory.push(
+              ruleMap.newRule('change-token-gender', phrase, result.data['converted_phrase'],
+                  'Change gender: ' + phrase + " → " + result.data['converted_phrase']));
+
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
           $scope.changeGenderWorking = false;
         },
         function(err) {
           $log.log('changeGender failed');
+          $log.log(err);
           $scope.changeGenderWorking = false;
         }
       );
@@ -246,6 +260,11 @@ angular.module('controllers')
         function(result) {
           $log.log('the result from the morphology server: ');
           $log.log(result);
+
+          if (phrase !== result.data['converted_phrase'])
+            $scope.editHistory.push(
+              ruleMap.newRule('change-token-case', phrase, result.data['converted_phrase'],
+                  'Change case: ' + phrase + " → " + result.data['converted_phrase']));
 
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
@@ -286,7 +305,7 @@ angular.module('controllers')
     $scope.insertText(char);
   };
 
-  // convert a snippet to trusted html - TODO: this isn't reusable becuase we send back x.snippet
+  // convert a snippet to trusted html - TODO: this isn't reusable because we send back x.snippet
   $scope.getSnippet = function(concordanceMatch) {
     return $sce.trustAsHtml(concordanceMatch.snippet);
   };
@@ -344,6 +363,9 @@ angular.module('controllers')
 
   // Trigger propagated edits
   $scope.$on('propagate-action', function(event, edit) {
+    if ($scope.segmentState.completed)
+      return; // do not modify completed segments
+
     $log.log(edit);
     if (edit.operation == 'copy-source-punctuation') {
       $scope.copySourcePunctuation();
