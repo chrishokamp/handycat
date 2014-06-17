@@ -160,8 +160,8 @@ angular.module('controllers').controller('AceCtrl',
 
   // pulse the color on change, so that it's clear where the change happened
   $scope.highlightRange = function(phraseRange) {
-    $log.log('Highlighting the range: ')
-    $log.log(phraseRange)
+    $log.log('Highlighting the range: ');
+    $log.log(phraseRange);
     var marker = $scope.editor.session.addMarker(phraseRange, 'changed_range');
     // remove the marker after a bit
     $timeout(
@@ -388,8 +388,10 @@ angular.module('controllers').controller('AceCtrl',
       var containerEditArea = $($scope.editor.container).parents('.segment');
       $log.log('parent segment element: ');
       $log.log(containerEditArea);
-// TODO: this only works for large displays, otherwise the offset is wrong
-      $(window).scrollTop($(containerEditArea).offset().top);
+
+      // smooth scrool
+      var top = document.getElementById('segment-' + $scope.index).offsetTop;
+      $("body").animate({scrollTop: top-300}, "slow");
     }
   });
 
