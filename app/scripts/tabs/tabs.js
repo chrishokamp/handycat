@@ -32,6 +32,8 @@ angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$a
 
   // Check if all the segments are marked as completed
   $scope.checkTranslationCompleted = function() {
+    if (!Document.loaded)
+      return false; // do not show completed before starting the job!
     for (var i = 0; i < Document.completedSegments.length; ++i)
       if (Document.completedSegments[i] == false)
         return false;

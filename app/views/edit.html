@@ -7,6 +7,7 @@
 
     <!-- This hr uses some space vertical space so the nav-bar do not hide part of the first segment -->
     <hr>
+    <a id="segment-{{$index}}"></a>
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
@@ -210,10 +211,11 @@
         <h2>Translation completed!</h2>
     </div>
 
+    <!--
     <div ng-controller="StatsController">
         <p>Stats</p>
         <div ng-repeat="s in log">
             <p>{{s[3]}}: {{s[0]}} {{s[1]}} {{s[2]}}</p>
         </div>
-    </div>
+    </div> -->
 </div>
