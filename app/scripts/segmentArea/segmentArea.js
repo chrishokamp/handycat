@@ -302,7 +302,7 @@ angular.module('controllers')
   };
 
 // TODO: collapse (remove from DOM) when this segment goes out of focus
-  $scope.isCollapsed = {collapsed: true};
+  $scope.isCollapsed = {collapsed: true, clicked: false};
   $scope.toggleToolbar = function(bool) {
     if (arguments.length > 0) {
       $scope.isCollapsed = { collapsed: bool };
@@ -374,6 +374,15 @@ angular.module('controllers')
     $scope.segment.targetDOM.textContent = $scope.segment.target;
     Document.revision++;
   };
+
+  // Re-opens a finished segment. Undoes what segmentFinished() did
+  $scope.reopen = function(idx) {
+    $scope.segmentState.completed = false;
+    Project.setActiveSegment(idx);
+    Project.focusNextSegment();
+    $scope.isActive.active = true;
+  };
+
 
 }]);
 
