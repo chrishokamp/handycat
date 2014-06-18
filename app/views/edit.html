@@ -162,7 +162,8 @@
 
                                 <div ng-show="concordancerError"><p>Error: Unable to access the concordance service.</p></div>
                             </tab>
-                            <tab heading="WordForms">
+
+                            <tab heading="WordForms" ng-show="false">
                                 <div class="word-forms">
                                     <div
                                             ng-repeat="word in otherWordForms"
@@ -183,7 +184,7 @@
                                     </div>
                                 </div>
                             </tab>
-                            <tab heading="Entities">
+                            <tab heading="Entities" ng-show="false">
                                 <div class="named-entities">
                                     <div>
                                         <div>Entity: <a ng-href="http://dbpedia.org/resource/{{entities.currentEntity.name}}">{{entities.currentEntity.name}}</a></div>
