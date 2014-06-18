@@ -104,9 +104,6 @@
                                         <i ng-show="changeCaseWorking" class="ion-loading-b"></i>
                                     </button>
                                 </div>
-                                <div class="col-xs-offset-1 col-xs-1 text-right">
-                                    <button logger="open-help" ng-click="openHelp()" tooltip="show help" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-question-sign"></span></button>
-                                </div>
                                 <div class="col-xs-1 text-right">
                                     <button logger="copy-source-punctuation" ng-click="copySourcePunctuation()" tooltip="copy punctuation from source" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-share-alt"></span></button>
                                 </div>
@@ -117,7 +114,7 @@
                                     <!--<button ng-click="nextMTSuggestion()" tooltip="next MT suggestion" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>-->
                                 <!--    <button logger="remove-extra-whitespace" ng-click="removeExtraWhitespace()" tooltip="remove extra whitespace" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>
                                 </div> -->
-                                <div class="col-xs-1 text-right">
+                                <div class="col-xs-offset-2 col-xs-1 text-right">
                                     <button logger="clear-editor" ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-remove"></span></button>
                                 </div>
                                 <div class="col-xs-1 text-right">
