@@ -111,13 +111,22 @@ app.get('/surface-forms/:lang/:entity', function(req, res){
 
 // working -- how to manage which users can write to which logs? - see express passport & openID
 var ActionLogger = require('./logger/actionLogger');
+app.post('/logger/:sessionId', function(req, res){
+  console.log('posting to /logger/:sessionId');
+  console.log('sessionId param: ' + req.param('sessionId') );
+//  ActionLogger.addEntryToSession(req, res);
+  res.setHeader('Content-Type', 'application/json');
+  res.send({ "logged": true });
+});
+
+var ActionLogger = require('./logger/actionLogger');
 app.post('/logger', function(req, res){
   console.log('posting to /logger');
-  ActionLogger.addEntryToSession(req, res);
-//  res.setHeader('Content-Type', 'application/json');
-//  res.send(searchResults);
+  res.setHeader('Content-Type', 'application/json');
+  res.send({ "sessionId": 1 });
 });
-// other datasources to try:
-// wiktionary
 
 app.listen(process.env.PORT || 5002);
+
+// other datasources to try:
+// wiktionary

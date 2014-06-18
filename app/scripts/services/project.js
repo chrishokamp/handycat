@@ -2,8 +2,8 @@
 // TODO: add editing stats
 // TODO: throw errors when we ask for segments that don't exist
 
-angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Document', '$log',
-    function($rootScope, SegmentOrder, Document, actionLogger, $log) {
+angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Document', 'session', '$log',
+    function($rootScope, SegmentOrder, Document, session, $log) {
 
     return {
       // set to true to show a textarea with the modifications of the XLIFF in real time.
@@ -46,7 +46,7 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
           'time': date
         }
         self.log.push(newAction);
-        actionLogger.logAction(newAction);
+        session.logAction(newAction);
         $log.log('update stat');
         $log.log(newAction);
       }
