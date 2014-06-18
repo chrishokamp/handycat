@@ -1,5 +1,5 @@
-angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$anchorScroll', 'Document',
-  function($scope, $location, $anchorScroll, Document) {
+angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$anchorScroll', 'Document', '$modal', '$log',
+  function($scope, $location, $anchorScroll, Document, $modal, $log) {
 
   $scope.tabs = [{
     title: "Translate",
@@ -17,6 +17,17 @@ angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$a
     disabled: false
 
   }];
+
+  $scope.showReplaceModal = function() {
+    var modalInstance = $modal.open({
+      templateUrl: 'scripts/contentArea/replace-modal.html',
+      controller: 'ReplaceCtrl'
+    });
+
+    modalInstance.result.then(function () {
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });  };
 
   $scope.$on('perform-propagation', function(event, action) {
     $scope.$broadcast('propagate-action', action);

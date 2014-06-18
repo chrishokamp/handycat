@@ -2,15 +2,22 @@
     <h3 class="modal-title">Find and replace</h3>
 </div>
 <div class="modal-body">
-    <ul>
-        <!--<li ng-repeat="item in items">-->
-            <!--<a ng-click="selected.item = item">{{ item }}</a>-->
-        <!--</li>-->
-        <li>Press Ctrl+Space for autocomplete</li>
-    </ul>
-    <!--Selected: <b>{{ selected.item }}</b>-->
+
+    <div class="input-group">
+        <span class="input-group-addon">Text</span>
+        <input type="text" class="form-control" ng-model="data.original">
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">Replace</span>
+        <input type="text" class="form-control" ng-model="data.change">
+    </div>
+
+    <p>The words in <em>Text</em> will be replaced by the words in <em>Replace</em> only in the segments that
+    are not complete.</p>
+
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-primary" ng-click="apply()">Apply</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>

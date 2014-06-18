@@ -169,6 +169,19 @@ angular.module('controllers')
     }
   };
 
+  $scope.findAndReplace = function(original, change) {
+    var regexp = '\\b' + original + '\\b';
+;
+    console.log($scope.segment.target);
+    var newTarget = $scope.segment.target.replace(new RegExp(regexp), change);
+    console.log(newTarget);
+    if (newTarget !== $scope.segment.target) {
+      $scope.segment.target = newTarget;
+      $scope.editHistory.push(
+        ruleMap.newRule('find-and-replace', original, change, 'Find and Replace: ' + original + " → " + change));
+    }
+  };
+
   // sets the current target token
   $scope.setCurrentToken = function(token) {
      $scope.currentToken = token;
@@ -369,6 +382,8 @@ angular.module('controllers')
     $log.log(edit);
     if (edit.operation == 'copy-source-punctuation') {
       $scope.copySourcePunctuation();
+    } else if (edit.operation == 'find-and-replace') {
+      $scope.findAndReplace(edit.original, edit.change);
     }
     // Add more action handlers here if needed.
   });
