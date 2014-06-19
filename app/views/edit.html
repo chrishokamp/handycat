@@ -35,10 +35,10 @@
                     <div class="col-sm-6 bottom-margin">
                         <div class="row">
                             <div class="col-xs-11">
-                                <div ng-show="segmentState.completed" class="ace_editor target segment-finished-target" ng-click="reopen($index)">
+                                <div ng-show="segmentState.completed" class="ace_editor target segment-finished-target frame" ng-click="reopen($index)">
                                     <p>{{segment.source}}</p>
                                 </div>
-                                <div ng-hide="segmentState.completed"  class="content-card">
+                                <div ng-hide="segmentState.completed"  class="content-card frame">
                                     <div class="source">
                                         <source-area ng-init="setSource(segment.source)" source-sentence="segment.source"></source-area>
                                         <div class="row">
@@ -52,12 +52,12 @@
                     </div>
                     <div ng-controller="AceCtrl" class="col-sm-6">
                         <div class="row">
-                            <div ng-show="segmentState.completed" class="ace_editor target segment-finished-target" ng-click="reopen($index)">
+                            <div ng-show="segmentState.completed" class="ace_editor target segment-finished-target frame" ng-click="reopen($index)">
                                 <p>{{segment.target}}</p>
                             </div>
                             <div ng-hide="segmentState.completed" class="editor-area">
                                 <div class="col-xs-11">
-                                    <div index="{{$index}}" class="content-card">
+                                    <div index="{{$index}}" class="content-card frame">
                                         <!-- the ace editor -->
                                         <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="segment.target"
                                              ui-ace="{ onLoad : aceLoaded }" ng-paste="onPaste($event)" ng-copy="onCopy($event)"></div>
@@ -136,7 +136,7 @@
                     <!-- TODO - make tabs active based on edit-area interactions -->
                         <tabset>
                             <tab heading="Glossary" ng-click="">
-                                <input type="text" ng-model="glossary.glossaryQuery" placeholder="Enter a search query..." />
+                                <input type="text" ng-model="glossary.glossaryQuery" placeholder="Enter a search query..." class="query-box"/>
                                 <button logger="query-glossary" ng-click="queryGlossary(glossary.glossaryQuery)" class="glossary-search btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
                                 <div class="search-result"
                                      ng-repeat="glossaryMatch in glossaryMatches"
@@ -148,7 +148,7 @@
                                 <div ng-show="glossaryMatches.length === 0"><p>No matches found for term: <b>{{ glossary.glossaryQuery }}</b></p></div>
                             </tab>
                             <tab heading="Concordance" ng-click="">
-                                <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." />
+                                <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />
                                 <button logger="concordance-query" ng-click="queryConcordancer(concordanceQuery, queryLang)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary lang-select" btn-radio="'en'" ng-model="queryLang">EN</button>

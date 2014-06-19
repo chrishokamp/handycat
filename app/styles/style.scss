@@ -11,9 +11,10 @@ body {
   // background: rgb(236, 236, 236);
 //  background: slategray;
 //  background: #ffffff;
-  background: lightgrey;
+  //background: lightgrey;
+  background-color: #f6f6f6;
 //  background-image:url('../images/ricepaper.png');
-  background-image:url('../images/broken_noise.png');
+  //background-image:url('../images/broken_noise.png');
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
   font-size: 18px;
 
@@ -259,8 +260,13 @@ span.drop-text {
 }
 .segment-finished-target {
   background-color: #90ee90;
-  padding: 5px;
+  padding: 10px;
   font-size: 18px !important;
+};
+
+.frame {
+  border-style: solid;
+  border-width: 1px;
 };
 
 /* Ace Editor Styles */
@@ -270,6 +276,7 @@ span.drop-text {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
   font-weight: normal;
   font-style: normal;
+  padding: 10px;
 }
 
 .ace_editor div {
@@ -361,6 +368,11 @@ span.drop-text {
     &:hover {
       background-color: coral;
     }
+    padding: 10px;
+  }
+
+  .query-box {
+    padding-left: 10px;
   }
 }
 
