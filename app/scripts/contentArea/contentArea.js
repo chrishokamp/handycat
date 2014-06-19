@@ -29,6 +29,9 @@ angular.module('controllers').controller('ContentAreaCtrl',
       if (Document.loaded) {
         $scope.xliff_content = new XMLSerializer().serializeToString( Document.DOM );
       }
+
+      // TODO add document name as thir argument
+      project.updateStat('document-loaded', -1, '');
     }
   );
 

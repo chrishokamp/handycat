@@ -2,7 +2,7 @@ angular.module('services')
 .factory('session', ['baseUrl', '$http', '$log', function(baseUrl,$http, $log) {
 // see http://stackoverflow.com/questions/22537311/angular-ui-router-login-authentication
 // shows how to do authentication with ui-router
-    var logUrl = baseUrl + '/logger'
+    var logUrl = baseUrl + '/logger';
 
     return {
       // todo - initialize this from login service
@@ -14,7 +14,7 @@ angular.module('services')
         // log the opening of the first segment
         var userData = {
           "userId": this.userId
-        }
+        };
         $http.post(logUrl + '/start', userData).then(
           function(res) {
             $log.log('SESSION INITIALIZED:');
@@ -43,7 +43,7 @@ angular.module('services')
             "userId": this.userId,
             "sessionId": sessionId,
             "timestamp": date
-          }
+          };
           angular.extend(logAction, sessionData);
           $http.post(logUrl + '/' + sessionId, { "logData": logAction }).then(
             function(res) {
