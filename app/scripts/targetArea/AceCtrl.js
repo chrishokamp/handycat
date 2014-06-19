@@ -376,28 +376,24 @@ angular.module('controllers').controller('AceCtrl',
   // logging each change to the editor
   // using input event instead of change since it's called with some timeout
   editor.on('input', function() {
-    $log.log('INPUT EVENT');
     var newValue= editor.getValue();
-    var logAction = {
-      "newValue": newValue,
-      "previousValue": previousValue
-    }
-    session.logAction(logAction)
-    previousValue = newValue;
-  })
-//      if (editor.session.getUndoManager().hasUndo())
-//          $('#save').removeClass("disabled");
-//      else
-//          $('#save').addClass("disabled");
-//
-//  });
-//
-//  $('#save').on("click", function() {
-//      editor.session.getUndoManager().markClean()
-//  })
+    if (newValue !== previousValue) {
+      var logAction = {
+        "action": "insert-text",
+        "newValue": newValue,
+        "previousValue": previousValue,
+        "segmentId": $scope.index
+      }
 
-     // applying deltas
-     //the applyDeltas(Object deltas) API takes an array of deltas. Changing my sample code above to editor.getSession().getDocument().applyDeltas([currentDelta]) plays back properly.
+      $log.log('INPUT EVENT');
+      $log.log('$scope.index: ' + $scope.index)
+      $log.log(logAction);
+
+      session.logAction(logAction)
+      previousValue = newValue;
+    }
+  })
+
   };  // end AceLoaded
 
 

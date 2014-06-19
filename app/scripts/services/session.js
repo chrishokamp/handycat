@@ -25,9 +25,7 @@ angular.module('services')
             // stat is the action name
             var firstAction = {
               'action': 'begin-segment',
-              'segmentId': 0,
-//              'data': 'test',
-//              'time': date
+              'segmentId': 0
             };
 
           }
@@ -36,16 +34,18 @@ angular.module('services')
       logAction: function(logAction) {
         // make sure that sessionId is already set
         if (this.sessionId !== undefined) {
+          var date = new Date().getTime();
           var sessionId = this.sessionId;
           $log.log('sessionId: ' + sessionId);
 
           // TODO: add date
           var sessionData = {
             "userId": this.userId,
-            "sessionId": sessionId
+            "sessionId": sessionId,
+            "timestamp": date
           }
           angular.extend(logAction, sessionData);
-          $http.post(logUrl + '/' + sessionId, logAction).then(
+          $http.post(logUrl + '/' + sessionId, { "logData": logAction }).then(
             function(res) {
               $log.log('LOG ACTION: ');
               $log.log(res.data);

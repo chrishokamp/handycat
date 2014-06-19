@@ -123,8 +123,8 @@ app.post('/logger/:sessionId', function(req, res){
   var sessionId = req.param('sessionId');
   console.log(sessionId);
   ActionLogger.addEntryToSession(sessionId, req, res);
-  res.setHeader('Content-Type', 'application/json');
-  res.send({ "logged": true });
+//  res.setHeader('Content-Type', 'application/json');
+//  res.send({ "logged": true });
 });
 
 app.listen(process.env.PORT || 5002);

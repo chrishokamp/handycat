@@ -37,19 +37,12 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
       log:[],
 
       updateStat: function(stat, segment, data) {
-        var date = new Date().getTime();
         var self = this;
-        // working - get:
-        // action name
-        // segmentId
-        // date
-        // if valPrevious and valNew are different, write them to data:
-        // note that typing events require special handling - 'text entry events'
+        // 'stat' is the action name
         var newAction = {
           'action': stat,
           'segmentId': segment,
-          'data': data,
-          'time': date
+          'data': data
         }
         self.log.push(newAction);
         session.logAction(newAction);

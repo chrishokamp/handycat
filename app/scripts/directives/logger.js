@@ -20,6 +20,9 @@ angular.module('directives').directive('logger', ['project', 'Document', '$log',
       function loggerCallback(e) {
         var action = attrs.logger;
         var index = $scope.index;
+
+        // Note: this is likely to be the _current_ target, because the callbacks haven't finished yet
+        // the ace editor input event can be used to get the new value
         var target = Document.targetSegments[index];
         project.updateStat(action, index, target);
       }

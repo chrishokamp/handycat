@@ -32,10 +32,16 @@ exports.addEntryToSession = function(sessionId, req, res) {
 //  var logEntry = req.body.logentry.toString().trim();
 
   db.collection('sessions', function(err, collection) {
-    collection.findOne({ '_id': new ObjectID(sessionId) }, function(err, item) {
-      console.log('found item:');
-//      console.log(item[0]._id.toString());
-      console.log(item);
+//    collection.findOne({ '_id': new ObjectID(sessionId) }, function(err, item) {
+//      console.log('found item:');
+////      console.log(item[0]._id.toString());
+//      console.log(item);
+
+      // push onto session.actions
+      collection.update(
+        { _id: new ObjectID(sessionId) },
+        { $push: { 'session.actions': req.body.logData } }
+      )
 //      if(item) {
 //        res.send(item['surface_forms']);
 //      } else {
@@ -44,7 +50,7 @@ exports.addEntryToSession = function(sessionId, req, res) {
 //      }
       res.send('test');
     });
-  });
+//  });
 };
 
 // add a new session with username and time, enforce unique
