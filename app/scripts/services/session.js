@@ -20,6 +20,7 @@ angular.module('services')
             $log.log('SESSION INITIALIZED:');
             $log.log(res.data);
             self.sessionId = res.data.sessionId;
+            $log.log('SET SESSION ID: ' + self.sessionId);
 
             // stat is the action name
             var firstAction = {
@@ -34,18 +35,23 @@ angular.module('services')
       },
       logAction: function(logAction) {
         // make sure that sessionId is already set
-        var sessionId = this.sessionId;
-        var sessionData = {
-          "userId": this.userId,
-          "sessionId": sessionId
-        }
-        angular.extend(logAction, sessionData);
-        $http.post(logUrl + '/' + sessionId, logAction).then(
-          function(res) {
-            $log.log('LOG ACTION: ');
-            $log.log(res.data);
+        if (this.sessionId !== undefined) {
+          var sessionId = this.sessionId;
+          $log.log('sessionId: ' + sessionId);
+
+          // TODO: add date
+          var sessionData = {
+            "userId": this.userId,
+            "sessionId": sessionId
           }
-        )
+          angular.extend(logAction, sessionData);
+          $http.post(logUrl + '/' + sessionId, logAction).then(
+            function(res) {
+              $log.log('LOG ACTION: ');
+              $log.log(res.data);
+            }
+          )
+        }
       }
 
     }

@@ -1,14 +1,16 @@
 
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'Document', 'tokenizer', 'Glossary', 'GermanStemmer', 'Morphology', '$http',
+  ['$scope', 'Document', 'tokenizer', 'Glossary', 'GermanStemmer', 'Morphology', 'session', '$http',
    '$timeout', '$log', 'ruleMap',
-   function($scope, Document, tokenizer, Glossary, GermanStemmer, Morphology, $http, $timeout, $log,
+   function($scope, Document, tokenizer, Glossary, GermanStemmer, Morphology, session, $http, $timeout, $log,
             ruleMap) {
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
   var langTools = ace.require("ace/ext/language_tools");
   ace.require('ace/ext/spellcheck');
+
+  var previousValue = '';
 
   // an object representing the current edit mode
   // params:
@@ -261,6 +263,7 @@ angular.module('controllers').controller('AceCtrl',
     console.log(editor.getValue());
   };
 
+  // TODO: log that the user propagated the n
   $scope.$on('propagate-action', function(event, action) {
     if (action['operation'] == 'change-token-number') {
       var content = $scope.editor.getValue().replace(new RegExp(action['change'][0]), action['change'][1]);
@@ -279,7 +282,6 @@ angular.module('controllers').controller('AceCtrl',
   // Use this function to configure the ace editor instance
   $scope.aceLoaded = function (ed) {
     var editor = ed;
-    var session = editor.session;
     var renderer = editor.renderer;
 
     $scope.editor = editor;
@@ -338,7 +340,7 @@ angular.module('controllers').controller('AceCtrl',
     editor.setShowPrintMargin(false);
     renderer.setScrollMargin(10,0,0,0);
     // wrap words
-    session.setUseWrapMode(true);
+    editor.session.setUseWrapMode(true);
     // this doesn't work from CSS for some reason
     editor.setFontSize(18);
 
@@ -364,13 +366,40 @@ angular.module('controllers').controller('AceCtrl',
       // its inner structure for adapting to a change in size
       editor.resize();
     };
+    // Set initial size to match initial content
     heightUpdateFunction();
 
     // Whenever a change happens inside the ACE editor, update
     // the height again
     editor.getSession().on('change', heightUpdateFunction);
-    // Set initial size to match initial content
+
+  // logging each change to the editor
+  // using input event instead of change since it's called with some timeout
+  editor.on('input', function() {
+    $log.log('INPUT EVENT');
+    var newValue= editor.getValue();
+    var logAction = {
+      "newValue": newValue,
+      "previousValue": previousValue
+    }
+    session.logAction(logAction)
+    previousValue = newValue;
+  })
+//      if (editor.session.getUndoManager().hasUndo())
+//          $('#save').removeClass("disabled");
+//      else
+//          $('#save').addClass("disabled");
+//
+//  });
+//
+//  $('#save').on("click", function() {
+//      editor.session.getUndoManager().markClean()
+//  })
+
+     // applying deltas
+     //the applyDeltas(Object deltas) API takes an array of deltas. Changing my sample code above to editor.getSession().getDocument().applyDeltas([currentDelta]) plays back properly.
   };  // end AceLoaded
+
 
   // BEGIN - managing the active segment - TODO: move this to segmentAreaCtrl
   // listen for the new segment event, if it's this segment, ask the TM for matches
@@ -431,6 +460,23 @@ angular.module('controllers').controller('AceCtrl',
     $log.log(event);
     // TODO send to our logger
   };
+
+     // logging each change to the editor
+     // using input event instead of change since it's called with some timeout
+//  editor.on('input', function() {
+//      if (editor.session.getUndoManager().hasUndo())
+//          $('#save').removeClass("disabled");
+//      else
+//          $('#save').addClass("disabled");
+//
+//  });
+//
+//  $('#save').on("click", function() {
+//      editor.session.getUndoManager().markClean()
+//  })
+
+     // applying deltas
+     //the applyDeltas(Object deltas) API takes an array of deltas. Changing my sample code above to editor.getSession().getDocument().applyDeltas([currentDelta]) plays back properly.
 
 
 }]);
