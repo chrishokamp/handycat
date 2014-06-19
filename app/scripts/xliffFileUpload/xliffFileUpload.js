@@ -34,7 +34,8 @@ angular.module('controllers').controller('UploadCtrl', ['$scope', 'fileReader', 
     //var fileUrl = 'data/enEs.xlf';
     // var fileUrl = 'data/enDe.xlf';
 //    var fileUrl = 'data/enDeSmall.xlf';
-    var fileUrl = 'data/dublin.xlf';
+    //var fileUrl = 'data/dublin.xlf';
+    var fileUrl = 'data/PEARL_TS2.xlf';
     $log.log("IN DEVELOPMENT MODE - loading local file: " + fileUrl);
 
     // autoload a file
