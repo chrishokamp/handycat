@@ -43,7 +43,7 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
           'action': stat,
           'segmentId': segment,
           'data': data
-        }
+        };
         self.log.push(newAction);
         session.logAction(newAction);
         $log.log('update stat');

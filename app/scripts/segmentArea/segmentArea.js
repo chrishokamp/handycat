@@ -384,6 +384,12 @@ angular.module('controllers')
       $scope.copySourcePunctuation();
     } else if (edit.operation == 'find-and-replace') {
       $scope.findAndReplace(edit.original, edit.change);
+    } else if (edit.operation == 'change-token-number') {
+      $scope.findAndReplace(edit.context, edit.change);
+    } else if (edit.operation == 'change-token-gender') {
+      $scope.findAndReplace(edit.context, edit.change);
+    } else if (edit.operation == 'change-token-case') {
+      $scope.findAndReplace(edit.context, edit.change);
     }
     // Add more action handlers here if needed.
   });
