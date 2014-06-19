@@ -421,7 +421,7 @@ angular.module('controllers')
   // Re-opens a finished segment. Undoes what segmentFinished() did
   $scope.reopen = function(idx) {
     $scope.segmentState.completed = false;
-    Project.setActiveSegment(idx);
+    Project.setActiveSegment(idx-1);
     Project.focusNextSegment();
     $scope.isActive.active = true;
   };
