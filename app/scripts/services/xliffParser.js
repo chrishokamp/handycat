@@ -2,7 +2,8 @@
 // TODO: we need a service representing the XLIFF DOM at all times
 // TODO: this service should be merged with the Document service
 
-angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Document','$http', '$log', function( $rootScope,fileReader,Document,$http,$log ) {
+// TODO: remove session service dependency
+angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Document', 'session', '$http', '$log', function( $rootScope,fileReader,Document, session, $http,$log ) {
   // Persistent DOMParser
   var parser = new DOMParser();
 
@@ -89,6 +90,9 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       // tell the world that the document loaded
       $log.log("firing document-loaded");
       $rootScope.$broadcast('document-loaded');
+
+      // TODO: remove this
+      session.startSession();
     },
     // working - the source may not be segmented with <seg-source> tags -- there may only be a single <source> tag
     getTranslatableSegments: function(xmlDoc) {

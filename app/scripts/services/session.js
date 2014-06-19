@@ -15,11 +15,20 @@ angular.module('services')
         var userData = {
           "userId": this.userId
         }
-        $http.post(logUrl, userData).then(
+        $http.post(logUrl + '/start', userData).then(
           function(res) {
             $log.log('SESSION INITIALIZED:');
             $log.log(res.data);
             self.sessionId = res.data.sessionId;
+
+            // stat is the action name
+            var firstAction = {
+              'action': 'begin-segment',
+              'segmentId': 0,
+//              'data': 'test',
+//              'time': date
+            };
+
           }
         )
       },

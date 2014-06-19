@@ -2,8 +2,8 @@
 // Author: chrishokamp
 
 var  mongo = require('mongodb'),
-MongoClient = require('mongodb').MongoClient;
-//  ObjectID = require('mongodb').ObjectID,
+MongoClient = require('mongodb').MongoClient,
+ObjectID = require('mongodb').ObjectID;
 //  BSON = require('mongodb').pure().BSON,
 //  assert = require('assert');
 
@@ -25,15 +25,16 @@ db.open(function(err, db) {
   }
 });
 
-exports.addEntryToSession = function(req, res) {
-  console.log(req.body);
+exports.addEntryToSession = function(sessionId, req, res) {
   // The session MUST already exist, because we need the ID
-  var sessionId = req.body.sessionid.toString().trim();
-  var logEntry = req.body.logentry.toString().trim();
+//  var sessionId = req.body.sessionid.toString().trim();
+  // sessionId is the mongodb _id field
+//  var logEntry = req.body.logentry.toString().trim();
 
   db.collection('sessions', function(err, collection) {
-    collection.findOne({ 'sessionId': Number(sessionId) }, function(err, item) {
+    collection.findOne({ '_id': new ObjectID(sessionId) }, function(err, item) {
       console.log('found item:');
+//      console.log(item[0]._id.toString());
       console.log(item);
 //      if(item) {
 //        res.send(item['surface_forms']);
@@ -48,27 +49,35 @@ exports.addEntryToSession = function(req, res) {
 
 // add a new session with username and time, enforce unique
 // default username is 'anonymous', sessionId is unique
+// assign unique key to session
 exports.startSession = function(req, res) {
   console.log(req.body);
-  // The session MUST already exist, because we need the ID
-  var sessionId = req.body.sessionid.toString().trim();
-  var logEntry = req.body.logentry.toString().trim();
 
+  // insert a new session, add one item for the start
   db.collection('sessions', function(err, collection) {
-    collection.findOne({ 'sessionId': Number(sessionId) }, function(err, item) {
-      console.log('found item:');
-      console.log(item);
-//      if(item) {
-//        res.send(item['surface_forms']);
-//      } else {
-//        res.send([[entityName, 1]]);
-//
-//      }
-      res.send('test');
-    });
+    collection.insert({ session: {} }, function(err, insertedObj) {
+      console.log('NEW SESSION: obj id:');
+      var objId = insertedObj[0]._id.toString();
+      console.log(objId);
+      res.send({ "sessionId": objId });
+    })
+
+//    collection.find({_id: "myId"}, {_id: 1}).limit(1)
+//    collection.findOne({ 'sessionId': Number(sessionId) }, function(err, item) {
+//      console.log('found item:');
+//      console.log(item);
+////      if(item) {
+////        res.send(item['surface_forms']);
+////      } else {
+////        res.send([[entityName, 1]]);
+////
+////      }
+//    });
   });
 };
 
+
+//console.log(user._id.toString());
 
 //exports.findbyid = function(req, res) {
 //    var id = req.params.id;

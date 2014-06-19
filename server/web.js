@@ -109,21 +109,22 @@ app.get('/surface-forms/:lang/:entity', function(req, res){
 //  res.send(searchResults);
 });
 
+// Note that this route must be first, since /logger/:sessionId also matches
+var ActionLogger = require('./logger/actionLogger');
+app.post('/logger/start', function(req, res){
+  console.log('posting to /logger/start');
+  ActionLogger.startSession(req, res);
+});
+
 // working -- how to manage which users can write to which logs? - see express passport & openID
 var ActionLogger = require('./logger/actionLogger');
 app.post('/logger/:sessionId', function(req, res){
   console.log('posting to /logger/:sessionId');
-  console.log('sessionId param: ' + req.param('sessionId') );
-//  ActionLogger.addEntryToSession(req, res);
+  var sessionId = req.param('sessionId');
+  console.log(sessionId);
+  ActionLogger.addEntryToSession(sessionId, req, res);
   res.setHeader('Content-Type', 'application/json');
   res.send({ "logged": true });
-});
-
-var ActionLogger = require('./logger/actionLogger');
-app.post('/logger', function(req, res){
-  console.log('posting to /logger');
-  res.setHeader('Content-Type', 'application/json');
-  res.send({ "sessionId": 1 });
 });
 
 app.listen(process.env.PORT || 5002);
