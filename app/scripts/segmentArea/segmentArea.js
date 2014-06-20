@@ -157,6 +157,11 @@ angular.module('controllers')
     $log.log('setTextSelection fired, selectedToken: '+$scope.selectedToken+' selectedRange: ' + $scope.selectedRange);
   };
 
+  $scope.clearSelection = function() {
+    $scope.selectedToken = '';
+    $scope.selectedRange = '';
+  };
+
   $scope.copySourcePunctuation = function() {
     $log.log('copy source called');
     var source = $scope.segment.source;
@@ -215,6 +220,7 @@ angular.module('controllers')
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
           $scope.changeNumberWorking = false;
+          $scope.clearSelection();
         },
         function(err) {
           $log.log('changeNumber failed');
@@ -250,6 +256,7 @@ angular.module('controllers')
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
           $scope.changeGenderWorking = false;
+          $scope.clearSelection();
         },
         function(err) {
           $log.log('changeGender failed');
@@ -284,6 +291,7 @@ angular.module('controllers')
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
           $scope.changeCaseWorking = false;
+          $scope.clearSelection();
         },
         function(err) {
           $log.log('changeCase failed: ' + err);
