@@ -9,6 +9,10 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
       // set to true to show a textarea with the modifications of the XLIFF in real time.
       debugXLIFF: false,
 
+
+      // Indicates whether or not show th smart buttons. Used for the July 2014 testing.
+      showSmartButtons: true,
+
       // order of segments
       activeSegment: 0,
       setActiveSegment: function(segId) {

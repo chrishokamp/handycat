@@ -1,5 +1,12 @@
-angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$anchorScroll', 'Document', '$modal', '$log',
-  function($scope, $location, $anchorScroll, Document, $modal, $log) {
+angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$anchorScroll', 'Document', '$modal',
+  '$log', 'project',
+  function($scope, $location, $anchorScroll, Document, $modal, $log, Project) {
+
+
+  $scope.toggleSmartButtons = function() {
+    Project.showSmartButtons = !Project.showSmartButtons;
+  };
+
 
   $scope.tabs = [{
     title: "Translate",
@@ -96,5 +103,6 @@ angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$a
       $modalInstance.dismiss('cancel');
     };
   };
+
 
 }]);

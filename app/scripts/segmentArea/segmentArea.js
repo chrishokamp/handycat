@@ -14,6 +14,8 @@ angular.module('controllers')
 
   $scope.test = { 'test': 'TEST'};
 
+  $scope.project = Project;
+
   $scope.insertSurfaceForm = function(sf) {
     $log.log('INSERT SURFACE FORM: ' + sf);
     $scope.insertText(' ' + sf + ' ');

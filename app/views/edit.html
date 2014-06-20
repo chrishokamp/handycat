@@ -64,7 +64,7 @@
                                         <!--<div chars class="sample-show-hide" collapsed="showSpecialChars" special="germanChars" selected="insertChar(char)" ></div>-->
                                     </div>
                                 </div>
-                                <div class="reorder-toolbar col-xs-1 move-left" ng-show="isActive.active">
+                                <div class="reorder-toolbar col-xs-1 move-left" ng-show="isActive.active && project.showSmartButtons">
                                   <button logger="edit-mode-switch" tooltip="switch edit mode" tooltip-placement="right" ng-click="changeEditMode()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">
                                         <span>E</span>
                                   </button>
@@ -86,26 +86,26 @@
                             <div class="row">
                                 <div class="col-xs-1">
                                     <!--<button ng-click="changeTokenNumber()" tooltip="change the number of the selected phrase" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom">-->
-                                    <button logger="change-number" number-popover ng-click="togglePopover()" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom">
+                                    <button logger="change-number" number-popover ng-click="togglePopover()" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom" ng-show="project.showSmartButtons">
                                         <span class="ion-pound" ng-show="!changeNumberWorking"></span>
                                         <i ng-show="changeNumberWorking" class="ion-loading-b"></i>
                                     </button>
                                 </div>
                                 <div class="col-xs-1">
-                                    <button logger="change-gender" gender-popover ng-click="togglePopover()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip-placement="bottom">
+                                    <button logger="change-gender" gender-popover ng-click="togglePopover()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip-placement="bottom" ng-show="project.showSmartButtons">
                                         <!--<button gender-popover ng-click="togglePopover()" ng-click="changeTokenGender()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change gender of the selected phrase" tooltip-placement="bottom">-->
                                         <span class="ion-male"></span>
                                         <i ng-show="changeGenderWorking" class="ion-loading-b"></i>
                                     </button>
                                 </div>
                                 <div class="col-xs-1">
-                                    <button logger="change-case" case-popover ng-click="togglePopover()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip-placement="bottom">
+                                    <button logger="change-case" case-popover ng-click="togglePopover()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip-placement="bottom" ng-show="project.showSmartButtons">
                                         <span class="ion-ios7-briefcase"></span>
                                         <i ng-show="changeCaseWorking" class="ion-loading-b"></i>
                                     </button>
                                 </div>
                                 <div class="col-xs-1 text-right">
-                                    <button logger="copy-source-punctuation" ng-click="copySourcePunctuation()" tooltip="copy punctuation from source" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-share-alt"></span></button>
+                                    <button logger="copy-source-punctuation" ng-click="copySourcePunctuation()" tooltip="copy punctuation from source" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph" ng-show="project.showSmartButtons"><span class="glyphicon glyphicon-share-alt"></span></button>
                                 </div>
                                 <div class="col-xs-1 text-right">
                                     <button logger="toggle-toolbar" ng-click="toggleToolbar()" tooltip="toggle toolbar" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-wrench"></span></button>
@@ -114,8 +114,9 @@
                                     <!--<button ng-click="nextMTSuggestion()" tooltip="next MT suggestion" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>-->
                                 <!--    <button logger="remove-extra-whitespace" ng-click="removeExtraWhitespace()" tooltip="remove extra whitespace" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>
                                 </div> -->
+
                                 <div class="col-xs-offset-2 col-xs-1 text-right">
-                                    <button logger="clear-editor" ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-remove"></span></button>
+                                    <button logger="clear-editor" ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph" ng-show="project.showSmartButtons"><span class="glyphicon glyphicon-remove"></span></button>
                                 </div>
                                 <div class="col-xs-1 text-right">
                                     <button logger="segment-finished" ng-click="segmentFinished($index)" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
@@ -172,7 +173,7 @@
                                     </div>
                                 </div>
                             </tab>
-                            <tab>
+                            <tab ng-show="project.showSmartButtons">
                                 <tab-heading>
                                     Edit history <span class="badge" ng-show="editHistory.length">{{editHistory.length}}</span>
                                 </tab-heading>
