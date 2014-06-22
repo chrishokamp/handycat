@@ -15,7 +15,7 @@ angular.module('controllers').controller('UploadCtrl', ['$scope', 'fileReader', 
     function() {
       $log.log('UploadCtrl: dropSupported changed to: ' + $scope.dropSupported);
     }
-  )
+  );
 
   // make sure that a file has been uploaded, parse it, and transition to translation
   $scope.startTranslation = function() {
@@ -25,10 +25,22 @@ angular.module('controllers').controller('UploadCtrl', ['$scope', 'fileReader', 
     XliffParser.readFile($scope.selectedFiles[0]);
 // TODO: only initiate this transition if the file is successfully loaded and parsed
     $state.go('edit');
-  }
+  };
+
+  // Load a specific file from the server
+  $scope.loadFileFromServer = function(which) {
+    var fileUrl = 'data/' + which;
+    // autoload a file
+    XliffParser.loadLocalFile(fileUrl);
+
+    // go to the edit state
+    $scope.$on('document-loaded', function(e) {
+      $state.go('edit');
+    });
+  };
 
   // DEVELOPMENT UTILITY
-  var development = true;
+  var development = false;
 // Dev flag - load file by default
   if (development) {
     //var fileUrl = 'data/enEs.xlf';
