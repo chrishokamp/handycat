@@ -182,8 +182,9 @@
 
                                     <div ng-repeat="edit in editHistory track by $index">
                                         {{edit.description}}
-                                        <button ng-hide="segmentNumber != edit.segment" ng-click="propagateEdit($index)">Propagate</button>
-                                        <span ng-hide="segmentNumber == edit.segment">(propagated from segment {{edit.segment}})</span>
+                                        <button type="button" class="btn btn-default" ng-hide="segmentNumber != edit.segment" ng-click="propagateEdit($index)">
+                                            <span class="glyphicon glyphicon-fullscreen"></span> Propagate to other segments
+                                        </button>
                                     </div>
                                 </div>
                             </tab>
