@@ -18,9 +18,9 @@ angular.module('directives').directive('genderPopover', ['$log', '$timeout', '$c
             '<div class="info-popover text-center">' +
               '<div class="arrow-up"></div>' +
               '<div>' +
-                '<div logger="change-gender-fem" ng-click="changeTokenGender(\'Fem\')" class="btn btn-primary">F</div>' +
-                '<div logger="change-gender-masc" ng-click="changeTokenGender(\'Masc\')" class="btn btn-primary">M</div>' +
-                '<div logger="change-gender-neut" ng-click="changeTokenGender(\'Neut\')" class="btn btn-primary">N</div>' +
+                '<div logger="change-gender-fem" ng-click="changeTokenGender(\'Fem\')" class="btn btn-primary" style="width: 90px">Feminine</div>' +
+                '<div logger="change-gender-masc" ng-click="changeTokenGender(\'Masc\')" class="btn btn-primary" style="width: 90px">Masculine</div>' +
+                '<div logger="change-gender-neut" ng-click="changeTokenGender(\'Neut\')" class="btn btn-primary" style="width: 90px">Neuter</div>' +
               '</div>' +
             '</div>';
           //          var popoverHtml = '<div data-tooltip-html-unsafe="fun fun" tooltip-trigger="tooltipOpen" class="info-popover">TEST</div>';
