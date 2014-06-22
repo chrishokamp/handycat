@@ -176,8 +176,9 @@ angular.module('controllers')
     }
   };
 
+
   $scope.findAndReplace = function(original, change, segment) {
-    var regexp = '\\b' + original + '\\b';
+    var regexp = original;
     console.log($scope.segment.target);
     var newTarget = $scope.segment.target.replace(new RegExp(regexp), change);
     console.log(newTarget);
@@ -185,6 +186,19 @@ angular.module('controllers')
       $scope.segment.target = newTarget;
       $scope.editHistory.push(
         ruleMap.newRule('find-and-replace', original, change, 'Find and Replace: ' + original + " → " + change,
+                        segment));
+    }
+  };
+
+  $scope.findAndReplaceTokens = function(original, change, segment) {
+    var regexp = '\\b' + original + '\\b';
+    console.log($scope.segment.target);
+    var newTarget = $scope.segment.target.replace(new RegExp(regexp), change);
+    console.log(newTarget);
+    if (newTarget !== $scope.segment.target) {
+      $scope.segment.target = newTarget;
+      $scope.editHistory.push(
+        ruleMap.newRule('find-and-replace-tokens', original, change, 'Find and Replace tokens: ' + original + " → " + change,
                         segment));
     }
   };
@@ -397,14 +411,16 @@ angular.module('controllers')
     $log.log(edit);
     if (edit.operation == 'copy-source-punctuation') {
       $scope.copySourcePunctuation(from);
+    } else if (edit.operation == 'find-and-replace-tokens') {
+      $scope.findAndReplaceTokens(edit.original, edit.change, from);
     } else if (edit.operation == 'find-and-replace') {
       $scope.findAndReplace(edit.original, edit.change, from);
     } else if (edit.operation == 'change-token-number') {
-      $scope.findAndReplace(edit.context, edit.change, from);
+      $scope.findAndReplaceTokens(edit.context, edit.change, from);
     } else if (edit.operation == 'change-token-gender') {
-      $scope.findAndReplace(edit.context, edit.change, from);
+      $scope.findAndReplaceTokens(edit.context, edit.change, from);
     } else if (edit.operation == 'change-token-case') {
-      $scope.findAndReplace(edit.context, edit.change, from);
+      $scope.findAndReplaceTokens(edit.context, edit.change, from);
     }
     // Add more action handlers here if needed.
   });
