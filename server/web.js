@@ -119,8 +119,8 @@ app.post('/logger/start', function(req, res){
 // working -- how to manage which users can write to which logs? - see express passport & openID
 var ActionLogger = require('./logger/actionLogger');
 app.post('/logger/:sessionId', function(req, res){
-  console.log('posting to /logger/:sessionId');
   var sessionId = req.param('sessionId');
+  console.log('posting to /logger/:sessionId with id ' + sessionId);
   console.log(sessionId);
   ActionLogger.addEntryToSession(sessionId, req, res);
 //  res.setHeader('Content-Type', 'application/json');

@@ -41,7 +41,8 @@ exports.addEntryToSession = function(sessionId, req, res) {
       collection.update(
         { _id: new ObjectID(sessionId) },
         { $push: { 'session.actions': req.body.logData } }
-      )
+      );
+
 //      if(item) {
 //        res.send(item['surface_forms']);
 //      } else {
@@ -66,7 +67,7 @@ exports.startSession = function(req, res) {
       var objId = insertedObj[0]._id.toString();
       console.log(objId);
       res.send({ "sessionId": objId });
-    })
+    });
 
 //    collection.find({_id: "myId"}, {_id: 1}).limit(1)
 //    collection.findOne({ 'sessionId': Number(sessionId) }, function(err, item) {
