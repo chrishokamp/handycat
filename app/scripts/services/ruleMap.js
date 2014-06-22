@@ -33,12 +33,13 @@ angular.module('services')
         1
       );
     },
-    newRule: function(operation, context, change, description) {
+    newRule: function(operation, context, change, description, segment) {
       rule = {
         'operation':operation,
         'context':context,
         'change':change,
-        'description':description
+        'description':description,
+        'segment':segment
       };
 
       if (!this.contains(rule)) {

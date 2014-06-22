@@ -13,7 +13,7 @@
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
 
         <div class="segment row" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments" index="$index"
-             ng-init="segment = seg; init($index)">
+             ng-init="segment = seg; init($index); segmentNumber = $index">
             <a id="segment-{{$index}}"></a>
 
             <p class="segment-index-label">Segment Index: {{$index}}
@@ -105,7 +105,7 @@
                                     </button>
                                 </div>
                                 <div class="col-xs-1 text-right">
-                                    <button logger="copy-source-punctuation" ng-click="copySourcePunctuation()" tooltip="copy punctuation from source" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph" ng-show="project.showSmartButtons"><span class="glyphicon glyphicon-share-alt"></span></button>
+                                    <button logger="copy-source-punctuation" ng-click="copySourcePunctuation($index)" tooltip="copy punctuation from source" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph" ng-show="project.showSmartButtons"><span class="glyphicon glyphicon-share-alt"></span></button>
                                 </div>
                                 <div class="col-xs-1 text-right">
                                     <button logger="toggle-toolbar" ng-click="toggleToolbar()" tooltip="toggle toolbar" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-wrench"></span></button>
@@ -180,8 +180,10 @@
                                 <div class="edit-history">
                                     <p>List of edits performed in this segment</p>
 
-                                    <div ng-repeat="edit in editHistory">
-                                        {{edit.description}} <button ng-click="propagateEdit($index)">Propagate</button>
+                                    <div ng-repeat="edit in editHistory track by $index">
+                                        {{edit.description}}
+                                        <button ng-hide="segmentNumber != edit.segment" ng-click="propagateEdit($index)">Propagate</button>
+                                        <span ng-hide="segmentNumber == edit.segment">(propagated from segment {{edit.segment}})</span>
                                     </div>
                                 </div>
                             </tab>

@@ -162,8 +162,8 @@ angular.module('controllers')
     $scope.selectedRange = '';
   };
 
-  $scope.copySourcePunctuation = function() {
-    $log.log('copy source called');
+  $scope.copySourcePunctuation = function(segment) {
+    $log.log('copy source called from segment ' + segment);
     var source = $scope.segment.source;
     var target = $scope.segment.target;
     $scope.segment.target = copyPunctuation.copySourcePunctuation(source, target);
@@ -172,20 +172,20 @@ angular.module('controllers')
     // Only adds the action to the edit history if it actually did something.
     if ($scope.segment.target !== target) {
       $scope.editHistory.push(
-        ruleMap.newRule('copy-source-punctuation', '', '', 'Copy punctuation from source segment'));
+        ruleMap.newRule('copy-source-punctuation', '', '', 'Copy punctuation from source segment', segment));
     }
   };
 
-  $scope.findAndReplace = function(original, change) {
+  $scope.findAndReplace = function(original, change, segment) {
     var regexp = '\\b' + original + '\\b';
-;
     console.log($scope.segment.target);
     var newTarget = $scope.segment.target.replace(new RegExp(regexp), change);
     console.log(newTarget);
     if (newTarget !== $scope.segment.target) {
       $scope.segment.target = newTarget;
       $scope.editHistory.push(
-        ruleMap.newRule('find-and-replace', original, change, 'Find and Replace: ' + original + " → " + change));
+        ruleMap.newRule('find-and-replace', original, change, 'Find and Replace: ' + original + " → " + change,
+                        segment));
     }
   };
 
@@ -215,7 +215,8 @@ angular.module('controllers')
           if (phrase !== result.data['converted_phrase'])
             $scope.editHistory.push(
               ruleMap.newRule('change-token-number', phrase, result.data['converted_phrase'],
-                              'Change number: ' + phrase + " → " + result.data['converted_phrase']));
+                              'Change number: ' + phrase + " → " + result.data['converted_phrase'],
+                              $scope.$index));
 
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
@@ -251,7 +252,8 @@ angular.module('controllers')
           if (phrase !== result.data['converted_phrase'])
             $scope.editHistory.push(
               ruleMap.newRule('change-token-gender', phrase, result.data['converted_phrase'],
-                  'Change gender: ' + phrase + " → " + result.data['converted_phrase']));
+                  'Change gender: ' + phrase + " → " + result.data['converted_phrase'],
+                  $scope.$index));
 
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
@@ -286,7 +288,8 @@ angular.module('controllers')
           if (phrase !== result.data['converted_phrase'])
             $scope.editHistory.push(
               ruleMap.newRule('change-token-case', phrase, result.data['converted_phrase'],
-                  'Change case: ' + phrase + " → " + result.data['converted_phrase']));
+                  'Change case: ' + phrase + " → " + result.data['converted_phrase'],
+                  $scope.$index));
 
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
@@ -380,8 +383,8 @@ angular.module('controllers')
   // The event will probably be received by the broadcaster as well so the action handlers
   // should check first if the edit should be applied or not.
   $scope.propagateEdit = function(index) {
-      $rootScope.$broadcast('propagate-action', $scope.editHistory[index]);
-      Project.updateStat('propagateAction', $scope.$index, $scope.editHistory[index].operation);
+    $rootScope.$broadcast('propagate-action', $scope.editHistory[index]);
+    Project.updateStat('propagateAction', $scope.$index, $scope.editHistory[index].operation);
   };
 
   // Trigger propagated edits
@@ -389,17 +392,19 @@ angular.module('controllers')
     if ($scope.segmentState.completed)
       return; // do not modify completed segments
 
+    var from = edit.segment;
+
     $log.log(edit);
     if (edit.operation == 'copy-source-punctuation') {
-      $scope.copySourcePunctuation();
+      $scope.copySourcePunctuation(from);
     } else if (edit.operation == 'find-and-replace') {
-      $scope.findAndReplace(edit.original, edit.change);
+      $scope.findAndReplace(edit.original, edit.change, from);
     } else if (edit.operation == 'change-token-number') {
-      $scope.findAndReplace(edit.context, edit.change);
+      $scope.findAndReplace(edit.context, edit.change, from);
     } else if (edit.operation == 'change-token-gender') {
-      $scope.findAndReplace(edit.context, edit.change);
+      $scope.findAndReplace(edit.context, edit.change, from);
     } else if (edit.operation == 'change-token-case') {
-      $scope.findAndReplace(edit.context, edit.change);
+      $scope.findAndReplace(edit.context, edit.change, from);
     }
     // Add more action handlers here if needed.
   });
