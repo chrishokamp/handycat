@@ -21,6 +21,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       });
     },
     parseXML: function(rawText) {
+      Document.init();
       var self = this;
       var xml = parser.parseFromString(rawText, "text/xml");
       // Set Document DOM to the parsed result

@@ -19,6 +19,21 @@ angular.module('services').factory('Document', function( ) {
     sourceLang: '',
     targetLang: '',
     DOM: {},
-    completedSegments:[]
+    completedSegments:[],
+
+    init: function() {
+      var self = this;
+      self.ready = false;
+      self.loaded = false;
+      self.revision = undefined;
+      self.sourceSegments.length = 0;
+      self.targetSegments.length = 0;
+      self.segments.length = 0;
+      self.translatableNodes.lenght = 0;
+      self.sourceLang = '';
+      self.targetLang = '';
+      self.DOM = {};
+      self.completedSegments.lenght = 0;
+    }
   }
 });
