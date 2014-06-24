@@ -230,52 +230,52 @@
 </trans-unit>
 
 <trans-unit id="23">
-<source></source>
+<source>The council of Europe's cybercrime treaty uses the term 'cybercrime' to refer to offenses ranging from criminal activity against data to content and copyright infringement [Krone, 2005].</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">The council of Europe's cybercrime treaty uses the term 'cybercrime' to refer to offenses ranging from criminal activity against data to content and copyright infringement [Krone, 2005].</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Die Council von Europa der Computerkriminalität Treaty verwendet den Begriff 'Computerkriminalität', ansprechen Offenses ranging von kriminellen die Daten, die sie vor der und copyright infringement [Krone, 2005].</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="24">
-<source></source>
+<source>Includes a reporting agent that you can install on legacy Symantec antivirus servers, so that a reporting server can collect events from these servers as well.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">Includes a reporting agent that you can install on legacy Symantec antivirus servers, so that a reporting server can collect events from these servers as well.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Enthält einen Berichterstellungs-Agenten, den sie auf älteren Symantec Antivirus-Servern installieren können, damit eine Berichterstellungs-Server können auch ereignisse von diesen Servern sammeln.</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="25">
-<source></source>
+<source>Look in the "dial-up and virtual private network settings" box.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">Look in the "dial-up and virtual private network settings" box.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Suchen Sie im Dialogfeld "eine DFÜ-Verbindung wird und VPN-Einstellungen".</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="26">
-<source></source>
+<source>paidstorageexpiration1 _ 12 = To keep your pc, your identity, and your data protected, please renew your product subscription to continue the automatic and comprehensive protection that Norton 360 provides, including online backup.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">paidstorageexpiration1 _ 12 = To keep your pc, your identity, and your data protected, please renew your product subscription to continue the automatic and comprehensive protection that Norton 360 provides, including online backup.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">paidstorageexpiration1 _ 12 = Um Ihren Computer, ihre Identität und Ihre Daten geschützt bitte erneuern sie Ihr Produktabonnement, um Sie weiterhin den automatischen und umfassenden Schutz sowie das Online-Backup von Norton 360.</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="27">
-<source></source>
+<source>= info that might be found in Afterburner</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">= info that might be found in Afterburner</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">= Informationen, die möglicherweise in Afterburner vorhanden sind</mrk>
 </target>
 </trans-unit>
 
@@ -291,32 +291,32 @@
 
 
 <trans-unit id="29">
-<source></source>
+<source>1. Copy 500mb or 1gb of data from the backup server to the concerned remote server and note the time required to complete the copy operation (this can be done by creating a universal naming convention (UNC) to another server by going to start|run and typing in {1} {2} and then copying the data once the drive displayed).</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">1. Copy 500mb or 1gb of data from the backup server to the concerned remote server and note the time required to complete the copy operation (this can be done by creating a universal naming convention (UNC) to another server by going to start|run and typing in {1} {2} and then copying the data once the drive displayed).</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">1. Kopieren Sie 500mb oder 1gb von Daten vom Backup Server auf den beteiligten Remote-Server und beachten sie die erforderliche zeit zur durchführung des Kopieen-Vorgangs (dieser kann fertig sind, indem erstellen einer Universelle Benennungssystem Convention (UNC) auf einem anderen Server zu starten, werden  ausführen und Internet-Adresse {1} {2} und wählen Sie kopieren sie Daten sobald das Laufwerk angezeigt wird).</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="30">
-<source></source>
+<source>Autofix has detected that the antivirus feature was disabled.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">Autofix has detected that the antivirus feature was disabled.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Autofix hat festgestellt, dass die Antivirus-Funktion deaktiviert wurde.</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="31">
-<source></source>
+<source>-- "lu1845: this product prevented Liveupdate from updating it.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">-- "lu1845: this product prevented Liveupdate from updating it.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">-- "lu1845: dieses Produkt verhinderte, dass Liveupdate von aktualisieren.</mrk>
 </target>
 </trans-unit>
 
@@ -331,32 +331,32 @@
 </trans-unit>
 
 <trans-unit id="33">
-<source></source>
+<source>2) Synchronize the product with Symantec servers and set the number of subscription days to accurately reflect subscription time.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">2) Synchronize the product with Symantec servers and set the number of subscription days to accurately reflect subscription time.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">2) Mit den Symantec-Servern synchronisieren Sie das Produkt und die Anzahlen der verbleibenden Tage so einstellt, dass die korrekte Abonnementlaufzeit.</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="34">
-<source></source>
+<source>{1} {2} If you have a trial or introductory subscription of Norton Internet Security 2006 (often provided by our partners with a computer or other hardware purchase), you must first purchase a regular subscription to be eligible to receive the 2007 product feature updates.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">{1} {2} If you have a trial or introductory subscription of Norton Internet Security 2006 (often provided by our partners with a computer or other hardware purchase), you must first purchase a regular subscription to be eligible to receive the 2007 product feature updates.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">{1} {2} Wenn Sie ein Probe- oder Einführungsabonnement von Norton Internet Security 2006 besitzen (häufig von unseren Partnern mit einem Computer oder anderer erworbener Hardware mitgeliefert), müssen Sie zuerst ein reguläres Abonnement erwerben, um Anspruch auf die 2007-Produktfunktionsaktualisierungen zu erhalten.</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="35">
-<source></source>
+<source>Turn off automatic Liveupdate</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">Turn off automatic Liveupdate</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Deaktivieren Sie "automatisches Liveupdate" </mrk>
 </target>
 </trans-unit>
 
@@ -371,42 +371,42 @@
 </trans-unit>
 
 <trans-unit id="37">
-<source></source>
+<source>Go to www.digitalriver.com/csenter the customers order number and password</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">Go to www.digitalriver.com/csenter the customers order number and password</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Wechseln Sie zu www.digitalriver.com/csenter sie den Kunden Bestellnummer und Kennwort</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="38">
-<source></source>
+<source>If it is correct click Finish.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">If it is correct click Finish.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Wenn Sie korrekt sind, klicken Sie auf "fertig stellen".</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="39">
-<source></source>
+<source>Customer’s message/issue unclear-2 {1}: can you explain that further, please?</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">Customer’s message/issue unclear-2 {1}: can you explain that further, please?</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Kunden Meldung/Problem unclear-2 { 1 }: Können Sie erklären sie dem Kunden, dass, bitte?</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="40">
-<source></source>
+<source>The default settings that cause the FTP alert to display are:</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">The default settings that cause the FTP alert to display are:</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Die Standardeinstellung hinaus die die FTP Warnmeldung angezeigt:</mrk>
 </target>
 </trans-unit>
 
@@ -421,22 +421,22 @@
 </trans-unit>
 
 <trans-unit id="42">
-<source></source>
+<source>To start the computer, it must be on the first drive, and it must contain an operating system.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">To start the computer, it must be on the first drive, and it must contain an operating system.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Starten Sie den Computer neu, muss er auf den ersten Laufwerks, und muss eine Betriebssystem enthalten.</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="43">
-<source></source>
+<source>These features are included in the Norton internet security add-on pack at no additional cost.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">These features are included in the Norton internet security add-on pack at no additional cost.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Diese Funktion sind kostenlos im Norton Internet Security add-on pack für Sie erhältlich.</mrk>
 </target>
 </trans-unit>
 
@@ -451,42 +451,42 @@
 </trans-unit>
 
 <trans-unit id="45">
-<source></source>
+<source>{1}{2} You can determine that the personal firewall is learning in two ways: {3}</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">{1}{2} You can determine that the personal firewall is learning in two ways: {3}</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">{1}{2} Sie können, dass die persönliche Firewall die OLernfunktion in zwei möglichkeiten: {3}</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="46">
-<source></source>
+<source>You might want to change your backup settings for a variety of reasons.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">You might want to change your backup settings for a variety of reasons.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Vielleicht möchten ändern der Backup-Einstellungen für eine Vielzahl von Gründe .</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="47">
-<source></source>
+<source>{1} to archive the files, copy the files to a separate place on the hard drive or to a CD disc or DVD disc.{2}</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">{1} to archive the files, copy the files to a separate place on the hard drive or to a CD disc or DVD disc.{2}</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">{1} Um die Dateien zu archivieren, kopieren Sie die Dateien in einen separaten Bereich auf der Festplatte oder auf eine CD oder DVD.{2}</mrk>
 </target>
 </trans-unit>
 
 <trans-unit id="48">
-<source></source>
+<source>An animated overview of how phishing works, as well as how it is used to commit cybercrime.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">An animated overview of how phishing works, as well as how it is used to commit cybercrime.</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Eine animierte Einführung in so funktioniert phishing, wie Sie verwendet wird, um illegale bezeichnet.</mrk>
 </target>
 </trans-unit>
 
@@ -501,12 +501,12 @@
 </trans-unit>
 
 <trans-unit id="50">
-<source></source>
+<source>The BE license key format is the same as the prior releases (only the fulfillment method has changed)</source>
 <seg-source>
-	<mrk mid="0" mtype="seg"></mrk> 
+	<mrk mid="0" mtype="seg">The BE license key format is the same as the prior releases (only the fulfillment method has changed)</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg"></mrk>
+	<mrk mid="0" mtype="seg">Sein Lizenzschlüssel format genauso wie die vorhergehende Versionen (nur die Fulfillment Methode geändert hat)</mrk>
 </target>
 </trans-unit>
 

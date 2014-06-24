@@ -491,12 +491,12 @@
 </trans-unit>
 
 <trans-unit id="49">
-<source>You need to remove a symantec ghost client from a client computer, or you need to switch the client computer's binding from one ghost console to another.</source>
+<source>The file name will have random letters and numbers, similar to this:</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">You need to remove a symantec ghost client from a client computer, or you need to switch the client computer's binding from one ghost console to another.</mrk> 
+	<mrk mid="0" mtype="seg">The file name will have random letters and numbers, similar to this:</mrk> 
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
-	<mrk mid="0" mtype="seg">Sie müssen entfernen Sie eine Symantec Ghost Client über eine Client-Computer, oder Sie müssen des Clients Computers so ordnen von einem Ghost-Konsole auf anderen.</mrk>
+	<mrk mid="0" mtype="seg">Der Dateiname wird willkürlich ausgewählte Buchstaben und Zahlen, etwa so aus:</mrk>
 </target>
 </trans-unit>
 
