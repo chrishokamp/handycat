@@ -1,5 +1,7 @@
 // TODO: remove document service -- this controller should change route once the document has loaded
-angular.module('controllers').controller('UploadCtrl', ['$scope', 'fileReader', '$timeout', 'XliffParser', 'Document', '$state', '$log', function($scope, fileReader, $timeout, XliffParser, Document, $state, $log) {
+angular.module('controllers').controller('UploadCtrl',
+  ['$scope', 'fileReader', '$timeout', 'XliffParser', 'Document', '$state', '$log',
+  function($scope, fileReader, $timeout, XliffParser, Document, $state, $log) {
 // TODO: remember that different file types will require different parsers
 
 
@@ -7,6 +9,8 @@ angular.module('controllers').controller('UploadCtrl', ['$scope', 'fileReader', 
   $scope.fileAdded = false;
   $scope.dropSupported = false;
   $scope.selectedFiles = [];
+
+  $scope.parser = XliffParser;
 
   $scope.$watch(
     function() {

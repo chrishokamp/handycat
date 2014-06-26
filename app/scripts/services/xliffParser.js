@@ -3,34 +3,54 @@
 // TODO: this service should be merged with the Document service
 
 // TODO: remove session service dependency
-angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Document', 'session', '$http', '$log', function( $rootScope,fileReader,Document, session, $http,$log ) {
+angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Document', 'session', '$http', '$log',
+  function($rootScope, fileReader, Document, session, $http, $log) {
   // Persistent DOMParser
   var parser = new DOMParser();
 
   return {
     // call file reader, then parse the result as XML
 
-// Only allow non-Upload controllers to touch this object once the file has been loaded and parsed
+    // Only allow non-Upload controllers to touch this object once the file has been loaded and parsed
     readFile: function(file) {
       var self = this;
-      $log.log("inside parse");
-
       var promise = fileReader.readAsText(file);
       promise.then(function(result) {
         self.parseXML(result);
       });
     },
+
+    // True if the last parseXML call found an error parsing the Xliff
+    parsingError: false,
+
     parseXML: function(rawText) {
       Document.init();
       var self = this;
       var xml = parser.parseFromString(rawText, "text/xml");
+
+      // Parsing error?
+      var parserError = xml.querySelector('parsererror');
+      if (parserError !== null) {
+        $log.error("error while parsing");
+        $log.error(parserError);
+        self.parsingError = true;
+        return;
+      } else
+        self.parsingError = true;
+
       // Set Document DOM to the parsed result
       Document.DOM = xml;
 
       var file = xml.querySelector("file");
 
+      // Read the source and target language
       var sourceLang = file.getAttribute('source-language');
       var targetLang = file.getAttribute('target-language');
+
+      if (sourceLang !== 'en-us')
+        $log.warn('Source language ' + sourceLang + ' is not supported yet.');
+      if (targetLang !== 'de')
+        $log.warn('Target language ' + targetLang + ' is not supported yet.');
 
       // Working -- segmentation with <seg-source> and <mrk> tags is Optional -- add support for pure <source> and <target>
       var sourceSegments = this.getTranslatableSegments(xml);
@@ -38,10 +58,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       // for every segment, get its matching target mrk, if it exists - note: it may not exist
       var targetSegments = _.map(sourceSegments,
         function(seg) {
-          $log.log("logging the source segment node:");
-          $log.log(seg);
           if (seg.nodeName === 'mrk') {
-            $log.log("nodeName is mrk");
             return self.getMrkTarget(xml, seg);
           }
           // there's no mrks inside <target>, just a <target> -- TODO: do we require target nodes to exist?
@@ -57,12 +74,9 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
           var sourceText = seg[0].textContent;
           var targetText = seg[1] ? seg[1].textContent : '';
           if (!seg[1]) {
-            //$log.log(' ' + seg[0]);
-            $log.log(seg[0]);
             var mid = seg[0].getAttribute('mid');
-            $log.log("target segment missing: " + mid);
+            $log.info("Target segment missing: " + mid);
             seg[1] = self.createNewMrkTarget(Document.DOM, seg[0], '', targetLang);
-            $log.log(seg[1]);
           }
 
           var segPair = {
@@ -89,7 +103,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       // flip the flag on the Document object
       Document.loaded = true;
       // tell the world that the document loaded
-      $log.log("firing document-loaded");
+      $log.info("Firing document-loaded event");
       $rootScope.$broadcast('document-loaded');
 
       // TODO: remove this
