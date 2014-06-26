@@ -8,6 +8,7 @@ angular.module('services')
       // todo - initialize this from login service
       userId: 0,
       sessionId: undefined,
+      sessionIdShort: undefined,
       startSession: function() {
         var self = this;
         // the user is logged in, initialize a new session, and get back the unique session id
@@ -20,6 +21,7 @@ angular.module('services')
             $log.log('SESSION INITIALIZED:');
             $log.log(res.data);
             self.sessionId = res.data.sessionId;
+            self.sessionIdShort = self.sessionId.substring(16, 24);
             $log.log('SET SESSION ID: ' + self.sessionId);
 
             // stat is the action name

@@ -136,6 +136,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
     getSegId: function(seg) {
       return seg.getAttribute("mid");
     },
+
     getTransUnitId: function(seg) {
       var transunitNode = seg.parentNode.parentNode;
       return transunitNode.getAttribute("id");
