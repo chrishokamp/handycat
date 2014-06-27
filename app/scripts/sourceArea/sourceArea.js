@@ -16,7 +16,10 @@ angular.module('directives')
 
         // give each token an id, and also move to dot notation
         // watch out for the crazy regex in the next line! - used to escape single quotes
-        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span class="source-token"  ng-click="askGlossary(\''+ tok.replace('\'', '\\\'') + '\')">' + tok + '</span>'});
+        var tokenSpans =  _.map(tokenStrings, function(tok, index) {
+          var tokNorm = tok.replace(/'/g, "\\'").replace('"', '');
+          return '<span class="source-token"  ng-click="askGlossary(\''+ tokNorm + '\')">' + tok + '</span>';
+        });
 //        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span popover tooltip="fun fun" class="source-token">' + tok + '</span>'});
 //        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span tooltip-html-unsafe="{{getLinkedData()}}" class="source-token">' + tok + '</span>'});
         var annotatedSentence = '<div class="annotated-source">' + tokenSpans.join(' ') + '</div>';
