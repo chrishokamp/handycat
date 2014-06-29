@@ -6,6 +6,9 @@ angular.module('controllers').controller('ContentAreaCtrl',
   if (Document.segments.length === 0) {
     $state.go('project');
   }
+
+  project.updateStat('document-loaded', -1, '');
+
   // DEV UTILS
   $scope.showXLIFF = project.debugXLIFF;
   // END DEV UTILS
@@ -29,9 +32,6 @@ angular.module('controllers').controller('ContentAreaCtrl',
       if (Document.loaded) {
         $scope.xliff_content = new XMLSerializer().serializeToString( Document.DOM );
       }
-
-      // TODO add document name as thir argument
-      project.updateStat('document-loaded', -1, '');
     }
   );
 
