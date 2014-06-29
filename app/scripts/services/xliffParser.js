@@ -36,7 +36,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
         self.parsingError = true;
         return;
       } else
-        self.parsingError = true;
+        self.parsingError = false;
 
       // Set Document DOM to the parsed result
       Document.DOM = xml;
