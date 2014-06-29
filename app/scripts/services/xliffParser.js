@@ -25,6 +25,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
 
     parseXML: function(rawText) {
       Document.init();
+      session.startSession();
+
       var self = this;
       var xml = parser.parseFromString(rawText, "text/xml");
 
@@ -106,8 +108,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       $log.info("Firing document-loaded event");
       $rootScope.$broadcast('document-loaded');
 
-      // TODO: remove this
-      session.startSession();
     },
     // working - the source may not be segmented with <seg-source> tags -- there may only be a single <source> tag
     getTranslatableSegments: function(xmlDoc) {
