@@ -7,7 +7,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
     $state.go('project');
   }
 
-  project.updateStat('document-loaded', -1, '');
+  project.updateStat('pearl-document-loaded', -1, '');
 
   // DEV UTILS
   $scope.showXLIFF = project.debugXLIFF;
