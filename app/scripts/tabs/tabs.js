@@ -7,6 +7,7 @@ angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$a
 
   $scope.toggleSmartButtons = function() {
     Project.showSmartButtons = !Project.showSmartButtons;
+    Project.updateStat('pearl-show-smart-buttons', -1, Project.showSmartButtons);
   };
 
 
