@@ -1,8 +1,9 @@
 angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$anchorScroll', 'Document', '$modal',
-  '$log', 'project', 'session',
-  function($scope, $location, $anchorScroll, Document, $modal, $log, Project, session) {
+  '$log', 'project', 'session', 'loggerUrl',
+  function($scope, $location, $anchorScroll, Document, $modal, $log, Project, session, loggerUrl) {
 
   $scope.session = session;
+  $scope.url = loggerUrl;
 
   $scope.toggleSmartButtons = function() {
     Project.showSmartButtons = !Project.showSmartButtons;
