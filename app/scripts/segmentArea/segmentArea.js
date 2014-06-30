@@ -184,9 +184,10 @@ angular.module('controllers')
     console.log(newTarget);
     if (newTarget !== $scope.segment.target) {
       $scope.segment.target = newTarget;
+      var msg = 'Find and Replace: ' + original + " → " + change;
       $scope.editHistory.push(
-        ruleMap.newRule('find-and-replace', original, change, 'Find and Replace: ' + original + " → " + change,
-                        segment));
+        ruleMap.newRule('find-and-replace', original, change, msg, segment));
+      Project.updateStat('pearl-find-and-replace', $scope.$index, msg);
     }
   };
 
@@ -197,9 +198,10 @@ angular.module('controllers')
     console.log(newTarget);
     if (newTarget !== $scope.segment.target) {
       $scope.segment.target = newTarget;
+      var msg = 'Find and Replace tokens: ' + original + " → " + change;
       $scope.editHistory.push(
-        ruleMap.newRule('find-and-replace-tokens', original, change, 'Find and Replace tokens: ' + original + " → " + change,
-                        segment));
+        ruleMap.newRule('find-and-replace-tokens', original, change, msg, segment));
+      Project.updateStat('pearl-find-and-replace-tokens', $scope.$index, msg);
     }
   };
 
@@ -226,11 +228,12 @@ angular.module('controllers')
           $log.log('the result from the morphology server: ');
           $log.log(result);
 
-          if (phrase !== result.data['converted_phrase'])
+          if (phrase !== result.data['converted_phrase']) {
+            var msg = 'Change number: ' + phrase + " → " + result.data['converted_phrase'] + " " + param;
             $scope.editHistory.push(
-              ruleMap.newRule('change-token-number', phrase, result.data['converted_phrase'],
-                              'Change number: ' + phrase + " → " + result.data['converted_phrase'],
-                              $scope.$index));
+              ruleMap.newRule('change-token-number', phrase, result.data['converted_phrase'], msg, $scope.$index));
+            Project.updateStat('pearl-change-number', $scope.$index, msg);
+          }
 
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
@@ -263,11 +266,12 @@ angular.module('controllers')
           $log.log('the result from the morphology server: ');
           $log.log(result);
 
-          if (phrase !== result.data['converted_phrase'])
+          if (phrase !== result.data['converted_phrase']) {
+            var msg = 'Change gender: ' + phrase + " → " + result.data['converted_phrase'] + " " + param;
             $scope.editHistory.push(
-              ruleMap.newRule('change-token-gender', phrase, result.data['converted_phrase'],
-                  'Change gender: ' + phrase + " → " + result.data['converted_phrase'],
-                  $scope.$index));
+              ruleMap.newRule('change-token-gender', phrase, result.data['converted_phrase'], msg, $scope.$index));
+            Project.updateStat('pearl-change-gender', $scope.$index, msg);
+          }
 
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
@@ -299,11 +303,12 @@ angular.module('controllers')
           $log.log('the result from the morphology server: ');
           $log.log(result);
 
-          if (phrase !== result.data['converted_phrase'])
+          if (phrase !== result.data['converted_phrase']) {
+            var msg = 'Change case: ' + phrase + " → " + result.data['converted_phrase'] + " " + param;
             $scope.editHistory.push(
-              ruleMap.newRule('change-token-case', phrase, result.data['converted_phrase'],
-                  'Change case: ' + phrase + " → " + result.data['converted_phrase'],
-                  $scope.$index));
+              ruleMap.newRule('change-token-case', phrase, result.data['converted_phrase'], msg, $scope.$index));
+            Project.updateStat('pearl-change-case', $scope.$index, msg);
+          }
 
           // this function is on the AceCtrl
           $scope.insertText(result.data['converted_phrase']);
