@@ -9,6 +9,7 @@ angular.module('services')
       userId: 0,
       sessionId: undefined,
       sessionIdShort: undefined,
+      sessionPromise: undefined,
       startSession: function() {
         var self = this;
         // the user is logged in, initialize a new session, and get back the unique session id
@@ -16,7 +17,7 @@ angular.module('services')
         var userData = {
           "userId": this.userId
         };
-        $http.post(logUrl + '/start', userData).then(
+        self.sessionPromise = $http.post(logUrl + '/start', userData).then(
           function(res) {
             $log.log('SESSION INITIALIZED:');
             $log.log(res.data);
@@ -34,10 +35,14 @@ angular.module('services')
         )
       },
       logAction: function(logAction) {
+        var self = this;
         // make sure that sessionId is already set
-        if (this.sessionId !== undefined) {
+        self.sessionPromise.then( function(r) {
+          if (self.sessionId == undefined)
+            $log.error('no id set!');
+
           var date = new Date().getTime();
-          var sessionId = this.sessionId;
+          var sessionId = self.sessionId;
           $log.log('sessionId: ' + sessionId);
 
           // TODO: add date
@@ -53,7 +58,7 @@ angular.module('services')
               $log.log(res.data);
             }
           )
-        }
+        });
       }
 
     }
