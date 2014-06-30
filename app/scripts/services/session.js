@@ -1,8 +1,8 @@
 angular.module('services')
-.factory('session', ['baseUrl', '$http', '$log', function(baseUrl,$http, $log) {
+.factory('session', ['loggerUrl', '$http', '$log', function(loggerUrl, $http, $log) {
 // see http://stackoverflow.com/questions/22537311/angular-ui-router-login-authentication
 // shows how to do authentication with ui-router
-    var logUrl = baseUrl + '/logger';
+    var logUrl = loggerUrl + '/logger';
 
     return {
       // todo - initialize this from login service
@@ -47,7 +47,7 @@ angular.module('services')
             "timestamp": date
           };
           angular.extend(logAction, sessionData);
-          $http.post(logUrl + '/' + sessionId, { "logData": logAction }).then(
+          $http.post(logUrl + '/session/' + sessionId, { "logData": logAction }).then(
             function(res) {
               $log.log('LOG ACTION: ');
               $log.log(res.data);

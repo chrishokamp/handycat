@@ -37,6 +37,7 @@ var App = window.App = angular.module('editorComponentsApp',
 //.constant('baseUrl', 'http://0.0.0.0:5002')
 // panacea
 .constant('baseUrl', 'http://panaceadcu.dh.bytemark.co.uk:5002')
+.constant('loggerUrl', 'http://panaceadcu.dh.bytemark.co.uk:5001')
 
 // Allow CORS
 .config(['$httpProvider', function($httpProvider) {
