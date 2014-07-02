@@ -60,9 +60,16 @@ app.get('/glossary', function(req, res){
   // fromlang
   // tolang
   // query
-  // note the & is missing from the first param
-  var from = 'from=' + req.query.from;
-  var to = '&dest=' + req.query.dest;
+  // TODO: understand why the parsing of the params sometimes doesn't work
+  var fromLang=req.query.from;
+  var toLang=req.query.dest;
+  if (fromLang === undefined)
+    fromLang='eng';
+  if (toLang === undefined)
+    toLang='deu';
+  // note the & is missing from the 'from' param
+  var from = 'from=' + fromLang;
+  var to = '&dest=' + toLang;
   var phrase = '&phrase=' + encodeURIComponent(req.query.phrase);
   var format = '&format=json'
   console.log('the req phrase param is: ' + req.query.phrase);
@@ -72,7 +79,7 @@ app.get('/glossary', function(req, res){
     path: '/gapi/translate?' + from + to + phrase + format,
     method: 'GET'
 // EXAMPLE:
-// http://glosbe.com/gapi/tm?from=eng&dest=deuk&format=json&phrase="the company grew"&pretty=true
+// http://glosbe.com/gapi/tm?from=eng&dest=deu&format=json&phrase="the company grew"&pretty=true
   };
   getJSON.getJSON(options,
     function(result) {
