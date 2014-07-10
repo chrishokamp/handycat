@@ -6064,7 +6064,7 @@ var EditSession = function(text, mode) {
             path = mode || "ace/mode/text";
         }
         if (!this.$modes["ace/mode/text"])
-            console.log('NO TEXT MODE');
+            console.log('Inside Ace Editor source: NO TEXT MODE');
             this.$modes["ace/mode/text"] = new TextMode();
             console.log(this.$modes["ace/mode/text"]);
 
@@ -9788,8 +9788,8 @@ var BackgroundTokenizer = function(tokenizer, editor) {
         this.running = false;
     };
     this.getTokens = function(row) {
-        console.log("getTokens: the current lines in the AceEditor");
-        console.log(this.lines)
+//        console.log("getTokens: the current lines in the AceEditor");
+//        console.log(this.lines)
         return this.lines[row] || this.$tokenizeRow(row);
     };
     this.getState = function(row) {

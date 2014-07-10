@@ -3,16 +3,19 @@ angular.module('services').factory('GermanStemmer', ['$http', '$log', function($
     var deStemmer = new Stemmer();
     // load the stem map
 
+    // WORKING - removed this service for optimization
     var stemMap = {};
-    $http.get('data/smart_word_forms/german_stem_map.json')
-      .success(function(data) {
-        $log.log("GOT THE STEM MAP");
-        $log.log("Map for key: gross");
-        $log.log(data['gross']);
 
-        // initialize the stemMap
-        stemMap = data;
-      })
+    // commented for performance testing
+//    $http.get('data/smart_word_forms/german_stem_map.json')
+//      .success(function(data) {
+//        $log.log("GOT THE STEM MAP");
+//        $log.log("Map for key: gross");
+//        $log.log(data['gross']);
+//
+//        // initialize the stemMap
+//        stemMap = data;
+//      })
 
     return {
       stem: function(word) {

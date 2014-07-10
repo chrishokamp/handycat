@@ -44,11 +44,11 @@ angular.module('controllers').controller('UploadCtrl',
   };
 
   // DEVELOPMENT UTILITY
-  var development = false;
+  var development = true;
 // Dev flag - load file by default
   if (development) {
-    //var fileUrl = 'data/enEs.xlf';
-    // var fileUrl = 'data/enDe.xlf';
+//    var fileUrl = 'data/enEs.xlf';
+//    var fileUrl = 'data/enDe.xlf';
 //    var fileUrl = 'data/enDeSmall.xlf';
     //var fileUrl = 'data/dublin.xlf';
     var fileUrl = 'data/PEARL_TS2.xlf';

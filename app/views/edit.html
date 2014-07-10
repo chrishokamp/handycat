@@ -7,7 +7,7 @@
 
     <!-- This hr uses some space vertical space so the nav-bar do not hide part of the first segment -->
     <hr>
-    <a id="segment-{{$index}}"></a>
+    <!--<a id="segment-{{$index}}"></a>-->
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
@@ -45,164 +45,172 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- For the named-entity tagger -->
+                                 <!--For the named-entity tagger-->
                                 <!--<button class="btn btn-primary" ng-click="linkSourceEntities(); toggleToolbar();">Tag Entities</button>-->
                             </div>
                         </div>
                     </div>
-                    <div ng-controller="AceCtrl" class="col-sm-6">
-                        <div class="row">
-                            <div ng-show="segmentState.completed" class="ace_editor target segment-finished-target frame" ng-click="reopen($index)">
-                                <p>{{segment.target}}</p>
-                            </div>
-                            <div ng-hide="segmentState.completed" class="editor-area">
-                                <div class="col-xs-11">
-                                    <div index="{{$index}}" class="content-card frame">
-                                        <!-- the ace editor -->
-                                        <div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="segment.target"
-                                             ui-ace="{ onLoad : aceLoaded }" ng-paste="onPaste($event)" ng-copy="onCopy($event)"></div>
-                                        <!--<div chars class="sample-show-hide" collapsed="showSpecialChars" special="germanChars" selected="insertChar(char)" ></div>-->
-                                    </div>
-                                </div>
-                                <div class="reorder-toolbar col-xs-1 move-left" ng-show="isActive.active && project.showSmartButtons">
-                                  <button logger="edit-mode-switch" tooltip="switch edit mode" tooltip-placement="right" ng-click="changeEditMode()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">
-                                        <span>E</span>
-                                  </button>
-                                    <button logger="edit-mode-next" tooltip="previous token" tooltip-placement="right" ng-click="selectPrevRange()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">
-                                        <span style="font-size: 7px" class="glyphicon glyphicon-arrow-left"></span>
-                                    </button>
-                                  <button logger="edit-mode-next" tooltip="next token" tooltip-placement="right" ng-click="selectNextRange()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">
-                                      <span style="font-size: 7px" class="glyphicon glyphicon-arrow-right"></span>
-                                  </button>
-                                  <button logger="edit-mode-move" tooltip="move range" tooltip-placement="right" ng-click="moveCurrentEditRange()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">
-                                      <span style="font-size: 7px" class="ion-arrow-move"></span>
-                                  </button>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- TODO: use the 'currentToken' property on the AceCtrl instead of 'selectedToken' -->
-                        <div collapse="false" ng-show="isActive.active">
+                    <!--<div ng-controller="AceCtrl" class="col-sm-6">-->
+                        <!--<div class="row">-->
+                            <!--<div ng-show="segmentState.completed" class="ace_editor target segment-finished-target frame" ng-click="reopen($index)">-->
+                                <!--<p>{{segment.target}}</p>-->
+                            <!--</div>-->
+                            <!--<div ng-hide="segmentState.completed" class="editor-area">-->
+                                <!--<div class="col-xs-11">-->
+                                    <!--<div index="{{$index}}" class="content-card frame">-->
+                                        <!--&lt;!&ndash; the ace editor &ndash;&gt;-->
+                                        <!--<div class="ace_editor target" id="ace_editor-{{$index}}" ng-model="segment.target"-->
+                                             <!--ui-ace="{ onLoad : aceLoaded }" ng-paste="onPaste($event)" ng-copy="onCopy($event)"></div>-->
+                                        <!--&lt;!&ndash;<div chars class="sample-show-hide" collapsed="showSpecialChars" special="germanChars" selected="insertChar(char)" ></div>&ndash;&gt;-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="reorder-toolbar col-xs-1 move-left" ng-show="isActive.active && project.showSmartButtons">-->
+                                  <!--<button logger="edit-mode-switch" tooltip="switch edit mode" tooltip-placement="right" ng-click="changeEditMode()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">-->
+                                        <!--<span>E</span>-->
+                                  <!--</button>-->
+                                    <!--<button logger="edit-mode-next" tooltip="previous token" tooltip-placement="right" ng-click="selectPrevRange()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">-->
+                                        <!--<span style="font-size: 7px" class="glyphicon glyphicon-arrow-left"></span>-->
+                                    <!--</button>-->
+                                  <!--<button logger="edit-mode-next" tooltip="next token" tooltip-placement="right" ng-click="selectNextRange()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">-->
+                                      <!--<span style="font-size: 7px" class="glyphicon glyphicon-arrow-right"></span>-->
+                                  <!--</button>-->
+                                  <!--<button logger="edit-mode-move" tooltip="move range" tooltip-placement="right" ng-click="moveCurrentEditRange()" ng-disabled="segmentState.completed" class="btn btn-primary mode-glyph">-->
+                                      <!--<span style="font-size: 7px" class="ion-arrow-move"></span>-->
+                                  <!--</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!-- working - prototyping dynamic addition of the Ace Editor -->
+                        <div class="col-sm-6">
                             <div class="row">
-                                <div class="col-xs-1">
-                                    <!--<button ng-click="changeTokenNumber()" tooltip="change the number of the selected phrase" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom">-->
-                                    <button logger="change-number" tooltip="Change number" number-popover ng-click="togglePopover()" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom" ng-show="project.showSmartButtons">
-                                        <span class="ion-pound" ng-show="!changeNumberWorking"></span>
-                                        <i ng-show="changeNumberWorking" class="ion-loading-b"></i>
-                                    </button>
-                                </div>
-                                <div class="col-xs-1">
-                                    <button logger="change-gender" tooltip="Change gender" gender-popover ng-click="togglePopover()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip-placement="bottom" ng-show="project.showSmartButtons">
-                                        <!--<button gender-popover ng-click="togglePopover()" ng-click="changeTokenGender()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change gender of the selected phrase" tooltip-placement="bottom">-->
-                                        <span class="ion-male"></span>
-                                        <i ng-show="changeGenderWorking" class="ion-loading-b"></i>
-                                    </button>
-                                </div>
-                                <div class="col-xs-1">
-                                    <button logger="change-case" tooltip="Change case" case-popover ng-click="togglePopover()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip-placement="bottom" ng-show="project.showSmartButtons">
-                                        <span class="ion-ios7-briefcase"></span>
-                                        <i ng-show="changeCaseWorking" class="ion-loading-b"></i>
-                                    </button>
-                                </div>
-                                <div class="col-xs-1 text-right">
-                                    <button logger="copy-source-punctuation" ng-click="copySourcePunctuation($index)" tooltip="copy punctuation from source" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph" ng-show="project.showSmartButtons"><span class="glyphicon glyphicon-share-alt"></span></button>
-                                </div>
-                                <div class="col-xs-1 text-right">
-                                    <button logger="toggle-toolbar" ng-click="toggleToolbar()" tooltip="toggle toolbar" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-wrench"></span></button>
-                                </div>
-                                <!-- white space button removed for test with translators <div class="col-xs-1 text-right"> -->
-                                    <!--<button ng-click="nextMTSuggestion()" tooltip="next MT suggestion" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>-->
-                                <!--    <button logger="remove-extra-whitespace" ng-click="removeExtraWhitespace()" tooltip="remove extra whitespace" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>
-                                </div> -->
-
-                                <div class="col-xs-offset-2 col-xs-1 text-right">
-                                    <button logger="clear-editor" ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph" ng-show="project.showSmartButtons"><span class="glyphicon glyphicon-remove"></span></button>
-                                </div>
-                                <div class="col-xs-1 text-right">
-                                    <button logger="segment-finished" ng-click="segmentFinished($index)" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
-                                </div>
-                                <!--<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>-->
+                                <static-target text="{{segment.target}}"></static-target>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <!-- TODO: use the 'currentToken' property on the AceCtrl instead of 'selectedToken' -->
+                        <!--<div collapse="false" ng-show="isActive.active">-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-xs-1">-->
+                                    <!--&lt;!&ndash;<button ng-click="changeTokenNumber()" tooltip="change the number of the selected phrase" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom">&ndash;&gt;-->
+                                    <!--<button logger="change-number" tooltip="Change number" number-popover ng-click="togglePopover()" ng-disabled="segmentState.completed" class="btn btn-primary morph-glyph" tooltip-placement="bottom" ng-show="project.showSmartButtons">-->
+                                        <!--<span class="ion-pound" ng-show="!changeNumberWorking"></span>-->
+                                        <!--<i ng-show="changeNumberWorking" class="ion-loading-b"></i>-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-1">-->
+                                    <!--<button logger="change-gender" tooltip="Change gender" gender-popover ng-click="togglePopover()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip-placement="bottom" ng-show="project.showSmartButtons">-->
+                                        <!--&lt;!&ndash;<button gender-popover ng-click="togglePopover()" ng-click="changeTokenGender()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip="change gender of the selected phrase" tooltip-placement="bottom">&ndash;&gt;-->
+                                        <!--<span class="ion-male"></span>-->
+                                        <!--<i ng-show="changeGenderWorking" class="ion-loading-b"></i>-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-1">-->
+                                    <!--<button logger="change-case" tooltip="Change case" case-popover ng-click="togglePopover()" type="button" class="btn btn-primary morph-glyph" ng-disabled="segmentState.completed" tooltip-placement="bottom" ng-show="project.showSmartButtons">-->
+                                        <!--<span class="ion-ios7-briefcase"></span>-->
+                                        <!--<i ng-show="changeCaseWorking" class="ion-loading-b"></i>-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-1 text-right">-->
+                                    <!--<button logger="copy-source-punctuation" ng-click="copySourcePunctuation($index)" tooltip="copy punctuation from source" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph" ng-show="project.showSmartButtons"><span class="glyphicon glyphicon-share-alt"></span></button>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-1 text-right">-->
+                                    <!--<button logger="toggle-toolbar" ng-click="toggleToolbar()" tooltip="toggle toolbar" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-wrench"></span></button>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash; white space button removed for test with translators <div class="col-xs-1 text-right"> &ndash;&gt;-->
+                                    <!--&lt;!&ndash;<button ng-click="nextMTSuggestion()" tooltip="next MT suggestion" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>&ndash;&gt;-->
+                                <!--&lt;!&ndash;    <button logger="remove-extra-whitespace" ng-click="removeExtraWhitespace()" tooltip="remove extra whitespace" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>-->
+                                <!--</div> &ndash;&gt;-->
+
+                                <!--<div class="col-xs-offset-2 col-xs-1 text-right">-->
+                                    <!--<button logger="clear-editor" ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph" ng-show="project.showSmartButtons"><span class="glyphicon glyphicon-remove"></span></button>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-1 text-right">-->
+                                    <!--<button logger="segment-finished" ng-click="segmentFinished($index)" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;<button ng-click="showSpecialChars = !showSpecialChars" class="btn btn-primary pull-right"><span>Show special</span></button>&ndash;&gt;-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <!-- The tools for editing -->
                 <!--<div class="ace-toolbar container" ng-show="toolbarOpen" collapse="toolbarOpen">-->
-                <div class="info-toolbar" collapse="isCollapsed['collapsed'] || segmentState.completed" ng-show="isActive.active">
-                    <div
-                        class="translation-toolbar"
-                    >
-                    <!-- Working - move to tabset -->
-                    <!-- Working - Add smart pluralize here first, then move to the edit area -->
-                    <!-- TODO - make tabs active based on edit-area interactions -->
-                        <tabset>
-                            <tab heading="Glossary" ng-click="">
-                                <input type="text" ng-model="glossary.glossaryQuery" placeholder="Enter a search query..." class="query-box"/>
-                                <button logger="query-glossary" ng-click="queryGlossary(glossary.glossaryQuery)" class="glossary-search btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-                                <div class="search-result"
-                                     ng-repeat="glossaryMatch in glossaryMatches"
-                                     ng-click="insertText(glossaryMatch)"
-                                     ng-show="glossaryMatches"
-                                >{{glossaryMatch}}</div>
 
-                                <div ng-hide="glossaryMatches !== undefined"><p>Error: Unable to access the glossary service.</p></div>
-                                <div ng-show="glossaryMatches.length === 0"><p>No matches found for term: <b>{{ glossary.glossaryQuery }}</b></p></div>
-                            </tab>
-                            <tab heading="Concordance" ng-click="">
-                                <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />
-                                <button logger="concordance-query" ng-click="queryConcordancer(concordanceQuery, queryLang)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary lang-select" btn-radio="'en'" ng-model="queryLang">EN</button>
-                                    <button type="button" class="btn btn-primary lang-select" btn-radio="'de'" ng-model="queryLang">DE</button>
-                                </div>
-                                <div class="search-result"
-                                     ng-repeat="concordanceMatch in concordanceMatches"
-                                     ng-bind-html="getSnippet(concordanceMatch)"
-                                     ng-hide="concordancerError"
-                                ></div>
+                <!--<div class="info-toolbar" collapse="isCollapsed['collapsed'] || segmentState.completed" ng-show="isActive.active">-->
+                    <!--<div-->
+                        <!--class="translation-toolbar"-->
+                    <!-->-->
+                    <!--&lt;!&ndash; Working - move to tabset &ndash;&gt;-->
+                    <!--&lt;!&ndash; Working - Add smart pluralize here first, then move to the edit area &ndash;&gt;-->
+                    <!--&lt;!&ndash; TODO - make tabs active based on edit-area interactions &ndash;&gt;-->
+                        <!--<tabset>-->
+                            <!--<tab heading="Glossary" ng-click="">-->
+                                <!--<input type="text" ng-model="glossary.glossaryQuery" placeholder="Enter a search query..." class="query-box"/>-->
+                                <!--<button logger="query-glossary" ng-click="queryGlossary(glossary.glossaryQuery)" class="glossary-search btn btn-success"><span class="glyphicon glyphicon-search"></span></button>-->
+                                <!--<div class="search-result"-->
+                                     <!--ng-repeat="glossaryMatch in glossaryMatches"-->
+                                     <!--ng-click="insertText(glossaryMatch)"-->
+                                     <!--ng-show="glossaryMatches"-->
+                                <!-->{{glossaryMatch}}</div>-->
 
-                                <div ng-show="concordancerError"><p>Error: Unable to access the concordance service.</p></div>
-                            </tab>
+                                <!--<div ng-hide="glossaryMatches !== undefined"><p>Error: Unable to access the glossary service.</p></div>-->
+                                <!--<div ng-show="glossaryMatches.length === 0"><p>No matches found for term: <b>{{ glossary.glossaryQuery }}</b></p></div>-->
+                            <!--</tab>-->
+                            <!--<tab heading="Concordance" ng-click="">-->
+                                <!--<input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />-->
+                                <!--<button logger="concordance-query" ng-click="queryConcordancer(concordanceQuery, queryLang)" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>-->
+                                <!--<div class="btn-group">-->
+                                    <!--<button type="button" class="btn btn-primary lang-select" btn-radio="'en'" ng-model="queryLang">EN</button>-->
+                                    <!--<button type="button" class="btn btn-primary lang-select" btn-radio="'de'" ng-model="queryLang">DE</button>-->
+                                <!--</div>-->
+                                <!--<div class="search-result"-->
+                                     <!--ng-repeat="concordanceMatch in concordanceMatches"-->
+                                     <!--ng-bind-html="getSnippet(concordanceMatch)"-->
+                                     <!--ng-hide="concordancerError"-->
+                                <!--></div>-->
 
-                            <tab heading="WordForms" ng-show="false">
-                                <div class="word-forms">
-                                    <div
-                                            ng-repeat="word in otherWordForms"
-                                    >
-                                        <button logger="word-forms-replace" class="btn btn-default" ng-click="replaceSelection(word)">{{word}}</button>
-                                    </div>
-                                </div>
-                            </tab>
-                            <tab ng-show="project.showSmartButtons">
-                                <tab-heading>
-                                    Edit history <span class="badge" ng-show="editHistory.length">{{editHistory.length}}</span>
-                                </tab-heading>
-                                <div class="edit-history">
-                                    <p>List of edits performed in this segment</p>
+                                <!--<div ng-show="concordancerError"><p>Error: Unable to access the concordance service.</p></div>-->
+                            <!--</tab>-->
 
-                                    <div ng-repeat="edit in editHistory track by $index">
-                                        {{edit.description}}
-                                        <button type="button" class="btn btn-default" ng-hide="segmentNumber != edit.segment" ng-click="propagateEdit($index)">
-                                            <span class="glyphicon glyphicon-fullscreen"></span> Propagate to other segments
-                                        </button>
-                                    </div>
-                                </div>
-                            </tab>
-                            <tab heading="Entities" ng-show="false">
-                                <div class="named-entities">
-                                    <div>
-                                        <div>Entity: <a ng-href="http://dbpedia.org/resource/{{entities.currentEntity.name}}">{{entities.currentEntity.name}}</a></div>
-                                        <div class="surface-form" ng-repeat="sf in entities.currentEntity.surfaceForms | orderBy:'-count'">
-                                            <!-- on click, insert entity -->
-                                            <div ng-click="insertSurfaceForm(sf.name)">{{sf.name}}: {{sf.count}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </tab>
-                        </tabset>
+                            <!--<tab heading="WordForms" ng-show="false">-->
+                                <!--<div class="word-forms">-->
+                                    <!--<div-->
+                                            <!--ng-repeat="word in otherWordForms"-->
+                                    <!-->-->
+                                        <!--<button logger="word-forms-replace" class="btn btn-default" ng-click="replaceSelection(word)">{{word}}</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</tab>-->
+                            <!--<tab ng-show="project.showSmartButtons">-->
+                                <!--<tab-heading>-->
+                                    <!--Edit history <span class="badge" ng-show="editHistory.length">{{editHistory.length}}</span>-->
+                                <!--</tab-heading>-->
+                                <!--<div class="edit-history">-->
+                                    <!--<p>List of edits performed in this segment</p>-->
 
-                    </div>
-                </div>
+                                    <!--<div ng-repeat="edit in editHistory track by $index">-->
+                                        <!--{{edit.description}}-->
+                                        <!--<button type="button" class="btn btn-default" ng-hide="segmentNumber != edit.segment" ng-click="propagateEdit($index)">-->
+                                            <!--<span class="glyphicon glyphicon-fullscreen"></span> Propagate to other segments-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</tab>-->
+                            <!--<tab heading="Entities" ng-show="false">-->
+                                <!--<div class="named-entities">-->
+                                    <!--<div>-->
+                                        <!--<div>Entity: <a ng-href="http://dbpedia.org/resource/{{entities.currentEntity.name}}">{{entities.currentEntity.name}}</a></div>-->
+                                        <!--<div class="surface-form" ng-repeat="sf in entities.currentEntity.surfaceForms | orderBy:'-count'">-->
+                                            <!--&lt;!&ndash; on click, insert entity &ndash;&gt;-->
+                                            <!--<div ng-click="insertSurfaceForm(sf.name)">{{sf.name}}: {{sf.count}}</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</tab>-->
+                        <!--</tabset>-->
+
+                    <!--</div>-->
+                <!--</div>-->
                 <hr/>
             </div>
         </div>

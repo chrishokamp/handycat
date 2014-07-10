@@ -382,10 +382,10 @@ angular.module('controllers')
    $scope.$broadcast('clear-editor');
   };
 
-  $scope.getOtherWordForms = function(stemmedToken) {
-    $log.log('other word forms called with: ' + stemmedToken);
-    $scope.otherWordForms = GermanStemmer.getOtherForms(stemmedToken);
-  };
+//  $scope.getOtherWordForms = function(stemmedToken) {
+//    $log.log('other word forms called with: ' + stemmedToken);
+//    $scope.otherWordForms = GermanStemmer.getOtherForms(stemmedToken);
+//  };
 
 // TODO: use a promise
   // prep the model

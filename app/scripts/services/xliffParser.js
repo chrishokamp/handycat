@@ -28,7 +28,12 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       session.startSession();
 
       var self = this;
+      $log.log('PARSING STARTED');
+      $log.log(Date.now());
+
       var xml = parser.parseFromString(rawText, "text/xml");
+      $log.log('PARSING ENDED');
+      $log.log(Date.now());
 
       // Parsing error?
       var parserError = xml.querySelector('parsererror');
@@ -71,6 +76,9 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       // we can assume that translators will want to translate every segment, so there should be at least an
       // empty target node corresponding to each source node
       var sourceWithTarget = _.zip(sourceSegments, targetSegments);
+      $log.log('ZIPPED SOURCE WITH TARGET');
+      $log.log(Date.now());
+
       _.each(sourceWithTarget,
         function(seg) {
           var sourceText = seg[0].textContent;
@@ -97,7 +105,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
           Document.translatableNodes.push(seg);
 
           Document.completedSegments.push(false);
-        });
+      });
+
       Document.sourceLang = sourceLang;
       Document.targetLang = targetLang;
       // initialize the revision property on the document object
@@ -106,6 +115,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       Document.loaded = true;
       // tell the world that the document loaded
       $log.info("Firing document-loaded event");
+      $log.log(Date.now());
       $rootScope.$broadcast('document-loaded');
 
     },
@@ -179,6 +189,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
     },
     // utility function to grab a local file from a string url
     loadLocalFile: function(filepath) {
+      $log.log('LOADING LOCAL FILE');
+      $log.log(Date.now());
       // if filepath exists
       var xliffFile = '';
       if (filepath) xliffFile = filepath;
@@ -187,6 +199,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       //This will make the request, then call the parser and fire the document loaded event
       $http.get(xliffFile)
         .success(function(data) {
+          $log.log('LOCAL FILE LOADED');
+          $log.log(Date.now());
           //$log.log("Local File Data: " + data); // tested
           self.parseXML(data);
         });

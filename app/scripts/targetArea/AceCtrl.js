@@ -288,8 +288,8 @@ angular.module('controllers').controller('AceCtrl',
     $scope.editor.session.setMode('ace/mode/text');
 
     $scope.editor.setOption("spellcheck", true);
-    $log.log("aceLoaded, logging the current mode:");
-    $log.log($scope.editor.session);
+//    $log.log("aceLoaded, logging the current mode:");
+//    $log.log($scope.editor.session);
 
     // we want to always know what text the user currently has selected
     // TODO: change this to listen for a selection change
@@ -312,7 +312,8 @@ angular.module('controllers').controller('AceCtrl',
     editor.on('click', function(e) {
       var tokenAndRange = getCurrentTokenAndRange();
       var token = tokenAndRange.token;
-      var stemmedToken = GermanStemmer.stem(token.value);
+
+//      var stemmedToken = GermanStemmer.stem(token.value);
 
       // make sure the user isn't trying to click into the same token to edit it
       if ($scope.lastToken !== token) {
