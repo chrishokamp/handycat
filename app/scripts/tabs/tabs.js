@@ -28,6 +28,14 @@ angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$a
 
   }];
 
+  // based on http://updates.html5rocks.com/2011/08/Saving-generated-files-on-the-client-side
+  // and http://stackoverflow.com/a/15031019
+  $scope.saveDocument = function() {
+    console.error('prueba!');
+    var bb = new Blob([new XMLSerializer().serializeToString( Document.DOM )], {type: "application/xml"});
+    saveAs(bb, "document.xliff");
+  };
+
   $scope.showReplaceModal = function() {
     var modalInstance = $modal.open({
       templateUrl: 'scripts/contentArea/replace-modal.html',
