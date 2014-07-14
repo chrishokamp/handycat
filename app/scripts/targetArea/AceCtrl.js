@@ -414,12 +414,7 @@ angular.module('controllers').controller('AceCtrl',
       // ask the TM
 //      $log.log('augmenting the TM for seg index: ' + $scope.index);
 //      $scope.augmentTM($scope.minPhraseLen);
-      $log.log("focusing the editor for segment: " + data.currentSegment);
       $scope.editor.focus();
-      var containerEditArea = $($scope.editor.container).parents('.segment');
-      $log.log('parent segment element: ');
-      $log.log(containerEditArea);
-
       // smooth scrool
       var top = document.getElementById('segment-' + $scope.index).offsetTop;
       $("body").animate({scrollTop: top-300}, "slow");

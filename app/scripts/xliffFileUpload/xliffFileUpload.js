@@ -59,7 +59,7 @@ angular.module('controllers').controller('UploadCtrl',
 
     // go to the edit state
     $scope.$on('document-loaded', function(e) {
-      $state.go('edit');
+      $state.go('edit.segment', { segmentId: 0 });
     });
   }
 

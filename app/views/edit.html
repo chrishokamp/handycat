@@ -5,9 +5,8 @@
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
-
         <!-- repeat for each segment -->
-        <div class="segment row" ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}" ng-controller="SegmentAreaCtrl" ng-repeat="seg in segments" index="$index"
+        <div class="segment row" ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}" ng-controller="SegmentAreaCtrl" end-repeat ng-repeat="seg in segments" index="$index"
              ng-init="segment = seg; init($index); segmentNumber = $index">
             <a id="segment-{{$index}}"></a>
 

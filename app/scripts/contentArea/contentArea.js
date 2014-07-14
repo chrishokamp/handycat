@@ -1,11 +1,37 @@
 // Holds all of the translation pairs and handles the interface with the Document service
 // Content area is the place for global control of the /edit view
 angular.module('controllers').controller('ContentAreaCtrl',
-    ['$scope', 'Document', 'project', '$location', '$anchorScroll', '$state', '$modal', '$log',
-    function($scope, Document, project, $location, $anchorScroll, $state, $modal, $log) {
+    ['$scope', 'Document', 'project', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log',
+    function($scope, Document, project, $location, $state, $stateParams, $modal, $rootScope, $log) {
   if (Document.segments.length === 0) {
     $state.go('project');
   }
+
+  // this fires once the view content has completely loaded
+  $rootScope.$on('repeat-finished', function (event) {
+    var segmentId = $stateParams.segmentId;
+    if (segmentId) {
+      var anchorElem = document.getElementById('segment-' + segmentId);
+      $log.log(anchorElem);
+      if (anchorElem) {
+        var top = anchorElem.offsetTop;
+        $("body").animate({scrollTop: top-60}, "slow");
+      }
+    }
+  });
+
+  // if the state changes during the session without a reload
+  $rootScope.$on('$stateChangeStart',
+    function(event, toState, toParams, fromState, fromParams){
+      var segmentId = toParams.segmentId;
+      if (toState.name.match(/edit\.segment/) && segmentId) {
+        var anchorElem = document.getElementById('segment-' + segmentId);
+        if (anchorElem) {
+          var top = anchorElem.offsetTop;
+          $("body").animate({scrollTop: top-60}, "slow");
+        }
+      }
+  });
 
   project.updateStat('pearl-document-loaded', -1, '');
 
@@ -20,6 +46,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
 
   // watch the flag on the Documents service
   $scope.$watch(function() {
+
       return Document.revision;
     },
     function() {
@@ -31,6 +58,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
       // dev mode only
       if (Document.loaded) {
         $scope.xliff_content = new XMLSerializer().serializeToString( Document.DOM );
+
       }
     }
   );

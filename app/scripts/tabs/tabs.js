@@ -10,7 +10,6 @@ angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$a
     Project.updateStat('pearl-show-smart-buttons', -1, Project.showSmartButtons);
   };
 
-
   $scope.tabs = [{
     title: "Translate",
     active: true,

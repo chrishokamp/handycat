@@ -24,15 +24,13 @@ angular.module('services').factory('project', ['$rootScope', 'SegmentOrder', 'Do
         return SegmentOrder.nextSegment(this.activeSegment);
       },
       focusNextSegment: function() {
-        var self = this;
-        var next = self.getNextSegment();
-        self.setSegment(next);
+        var next = this.getNextSegment();
+        this.setSegment(next);
       },
       setSegment: function(segIndex) {
-        var self = this;
-        self.activeSegment = segIndex;
+        this.activeSegment = segIndex;
         if (segIndex != -1)
-          $rootScope.$broadcast('changeSegment', {currentSegment: self.activeSegment});
+          $rootScope.$broadcast('changeSegment', {currentSegment: this.activeSegment});
         return this.activeSegment;
       },
 
