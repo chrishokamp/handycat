@@ -4,7 +4,8 @@ angular.module('directives').directive('staticTarget', ['$compile', '$log', func
   return {
     restrict: 'E',
     // TODO: add the existing template for a non-active segment - remember to display if it's been translated or not
-    template: '<p>{{segment.target}}</p>',
+    // WORKING: pending, active, and completed are segment-level properties, and should be handled there
+    template: '<p class="source">{{segment.target}}</p>',
     link: function($scope,el){
       el.on('click', function() {
         $log.log('targetText was clicked...');

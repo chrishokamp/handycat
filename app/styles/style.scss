@@ -247,11 +247,20 @@ span.drop-text {
 }
 
 /* Segment Area Styles */
-.segment-finished {
-  background-color: #87cefa;
-  font-size: medium;
-  color: red;
+.segment {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  padding-top: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
+.segment.pending {
+  border: 1px dotted #D48651;
+}
+.segment.completed {
+  border: 1px dotted #90ee90;
+}
+
 .segment-index-label {
 //  color: white;
   color: #708090;
