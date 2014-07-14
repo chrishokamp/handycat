@@ -282,9 +282,9 @@ angular.module('controllers').controller('AceCtrl',
   // Use this function to configure the ace editor instance
   $scope.aceLoaded = function (ed) {
     var editor = ed;
-    var renderer = editor.renderer;
 
     $scope.editor = editor;
+
     $scope.editor.session.setMode('ace/mode/text');
 
     $scope.editor.setOption("spellcheck", true);
@@ -336,6 +336,7 @@ angular.module('controllers').controller('AceCtrl',
 //    langTools.addCompleter(glossaryCompleter);
 
     // modify some of the display params for the Ace Editor
+    var renderer = editor.renderer;
     renderer.setShowGutter(false);
     // hide the print margin
     editor.setShowPrintMargin(false);
@@ -361,6 +362,9 @@ angular.module('controllers').controller('AceCtrl',
       $log.log(newHeight);
 
       // emit ace editor height up the scope hierarchy - height change directives listen for current-height event
+      if (newHeight < 80) {
+        newHeight = 80;
+      }
       $scope.$emit('change-height', { "height": newHeight });
 
       // This call is required for the editor to fix all of
@@ -394,6 +398,7 @@ angular.module('controllers').controller('AceCtrl',
       previousValue = newValue;
     }
   })
+    editor.focus();
 
   };  // end AceLoaded
 

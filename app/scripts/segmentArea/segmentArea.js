@@ -24,11 +24,6 @@ angular.module('controllers')
   $scope.getLink = function() {
     $log.log($scope.entities.entityMap);
     return 'http://dbpedia.org/resource/' + $scope.entities.currentEntity.name;
-//    if ($scope.entities.entityMap[surfaceForm]) {
-//      return $scope.entities.entityMap[surfaceForm];
-//    }
-//    return '';
-
   };
 
   // (1) - surface forms
@@ -90,36 +85,8 @@ angular.module('controllers')
     );
 
 
-    // result looks like this:
-
-//Object {@text: "Blaise Pascal designed and constructed the first w…hanical calculator, Pascal's calculator, in 1642.", @confidence: "0.5", @support: "0", @types: "", @sparql: ""…}
-//@confidence: "0.5"
-//@policy: "whitelist"
-//@sparql: ""
-//@support: "0"
-//@text: "Blaise Pascal designed and constructed the first working mechanical calculator, Pascal's calculator, in 1642."
-//@types: ""
-//Resources: Array[2]
-//0: Object
-//@URI: "http://dbpedia.org/resource/Blaise_Pascal"
-//@offset: "0"
-//@percentageOfSecondRank: "4.0041326330454826E-20"
-//@similarityScore: "1.0"
-//@support: "515"
-//@surfaceForm: "Blaise Pascal"
-//@types: "DBpedia:Agent,Schema:Person,Http://xmlns.com/foaf/0.1/Person,DBpedia:Person,DBpedia:Philosopher"
-//__proto__: Object
-//1: Object
-//@URI: "http://dbpedia.org/resource/Mechanical_calculator"
-//@offset: "57"
-//@percentageOfSecondRank: "0.2968657118710354"
-//@similarityScore: "0.7710898598415911"
-//@support: "126"
-//@surfaceForm: "mechanical calculator"
-//@types: "
   };
 
-  // Note: don't do $scope.$watches, because we reuse this controller many times!
   // TODO: set this only when this is the active scope
   $scope.isActive = { active:true };
   $scope.segmentState = { currentState: 'untranslated', completed: false };

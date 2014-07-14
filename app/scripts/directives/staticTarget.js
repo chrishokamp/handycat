@@ -8,10 +8,12 @@ angular.module('directives').directive('staticTarget', ['$compile', '$log', func
     link: function($scope,el){
       el.on('click', function() {
         $log.log('targetText was clicked...');
-        // Working - move to unit test - DON'T PASS LITERAL TEXT TO NG-MODEL
-        var newHtml = '<div ng-model="segment.target" ui-ace="{onLoad: aceLoaded}" ng-controller="AceCtrl"></div>'
+        $scope.test = { 'test': 'this is a test'};
+        var newHtml = '<ng-include src="\'scripts/directives/target-area.html\'"></div>'
         var compiledHtml = $compile(newHtml)($scope);
         el.replaceWith(compiledHtml);
+        $log.log('new element:');
+        $log.log(el);
       })
     }
   }

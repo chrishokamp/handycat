@@ -1,0 +1,22 @@
+<div ng-controller="AceCtrl">
+    <div class="content-card frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
+    <div collapse="false" ng-show="isActive.active">
+        <div class="row">
+            <div class="col-xs-offset-6 col-xs-1 text-right">
+                <button logger="copy-source-punctuation" ng-click="copySourcePunctuation($index)" tooltip="copy punctuation from source" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph" ng-show="project.showSmartButtons"><span class="glyphicon glyphicon-share-alt"></span></button>
+            </div>
+            <div class="col-xs-1 text-right">
+                <button logger="toggle-toolbar" ng-click="toggleToolbar()" tooltip="toggle toolbar" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-wrench"></span></button>
+            </div>
+            <div class="col-xs-1 text-right">
+                <button logger="remove-extra-whitespace" ng-click="removeExtraWhitespace()" tooltip="remove extra whitespace" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-flash"></span></button>
+            </div>
+            <div class="col-xs-1 text-right">
+                <button logger="clear-editor" ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph" ng-show="project.showSmartButtons"><span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+            <div class="col-xs-1 text-right">
+                <button logger="segment-finished" ng-click="segmentFinished($index)" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

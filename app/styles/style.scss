@@ -141,13 +141,12 @@ ul.nav-tabs > li {
 }
 
 %ace-editor-height {
-  min-height: 100px;
+  min-height: 102px;
 }
 
 .content-card {
   @extend %ace-editor-height;
   background-color: white;
-//  height: 100px;
   overflow-y: hidden;
   overflow-x: hidden;
   padding-left: 3px;
