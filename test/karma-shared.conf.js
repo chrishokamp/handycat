@@ -2,14 +2,14 @@ module.exports = function() {
   return {
     frameworks: ['jasmine'],
     reporters: ['progress'],
-    browsers: ['Chrome'],
-    autoWatch: false,
-    singleRun: true,
+    browsers: ['PhantomJS'],
+    autoWatch: true,
+//    singleRun: false,
     colors: true,
     basePath: '../',
 
     // these are default values anyway
-    singleRun: false,
+//    singleRun: false,
     colors: true,
 
     files : [
