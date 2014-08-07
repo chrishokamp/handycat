@@ -2,88 +2,14 @@
 // this is a source + target pair
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
-  '$rootScope', '$scope', 'Wikipedia', 'Glossary', 'GermanStemmer', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-  'Morphology', 'Document', 'project', 'entityLinker', 'entityDB',
-  function($rootScope, $scope, Wikipedia, Glossary, GermanStemmer, $sce, $log, ruleMap, copyPunctuation, Morphology,
-           Document, Project, entityLinker, entityDB) {
-
-  $scope.entities = {};
-  $scope.entities.entityMap = {};
-  $scope.entities.currentEntity = {};
-  $scope.entities.entityData = {};
+  '$rootScope', '$scope', 'Wikipedia', 'Glossary', '$sce', '$log', 'ruleMap', 'copyPunctuation',
+  'Document', 'project',
+  function($rootScope, $scope, Wikipedia, Glossary, $sce, $log, ruleMap, copyPunctuation,
+           Document, Project) {
 
   $scope.test = { 'test': 'TEST'};
 
   $scope.project = Project;
-
-  $scope.insertSurfaceForm = function(sf) {
-    $log.log('INSERT SURFACE FORM: ' + sf);
-    $scope.insertText(' ' + sf + ' ');
-  };
-
-  $scope.getLink = function() {
-    $log.log($scope.entities.entityMap);
-    return 'http://dbpedia.org/resource/' + $scope.entities.currentEntity.name;
-  };
-
-  // (1) - surface forms
-  // (2) - entity name (in German)
-  // (1) - return entity name
-  $scope.$on('find-surface-forms', function(e, data) {
-    $log.log('find-surface-forms heard in segmentArea');
-    $scope.findSurfaceForms(data.sf);
-  });
-
-  $scope.findSurfaceForms = function(entityName) {
-
-//    var entityName = 'Berlin';
-    $log.log('entityName: ' + entityName);
-    var sfPromise = entityDB.queryEntities(entityName);
-    sfPromise.then(
-      function(res) {
-        $log.log('queried entities for surface form of: ' + entityName);
-        $log.log(res.data);
-        var surfaceForms = res.data;
-
-        $scope.entities.currentEntity.surfaceForms = [];
-        $scope.entities.currentEntity.name = entityName;
-        angular.forEach(surfaceForms, function(sf) {
-          var sfObj = { 'name': sf[0], 'count': parseFloat(sf[1]) };
-          $log.log(sfObj);
-          $scope.entities.currentEntity.surfaceForms.push(sfObj);
-        });
-        $log.log("surfaceForms:");
-        $log.log($scope.entities.currentEntity.surfaceForms);
-      }
-    );
-  };
-
-  $scope.linkSourceEntities = function() {
-
-    $log.log('linkSourceEntities');
-    var annotationPromise = entityLinker.annotate($scope.segment.source);
-
-    // see http://stackoverflow.com/questions/18690804/insert-and-parse-html-into-view-using-angularjs
-    annotationPromise.then(
-      function (res) {
-        $log.log('entity linking res: ');
-        $log.log(res.data);
-        var result = res.data;
-        if (result.Resources) {
-          $scope.entities.entityData = result.Resources;
-          $scope.entities.entityMap[result['@surfaceForm']] = result['@URI'];
-
-          // tell the source area that we've got entities
-          // source area should tag, compile, and replace
-          $scope.$broadcast('update-source', { 'entityData': result.Resources });
-        }
-      },
-      function(e) {
-        $log.log('Error in entity linking request');
-        $log.log(e);
-      }
-    );
-  };
 
   // TODO: set this only when this is the active scope
   $scope.isActive = { active:true };
@@ -183,120 +109,6 @@ angular.module('controllers')
      $scope.currentToken = token;
   };
 
-  $scope.changeTokenNumber = function(param) {
-    $log.log('Change token number param: ' + param);
-    // toggle the working state of the button
-    $scope.changeNumberWorking = true;
-
-    // the current selection is a range object from the Ace Editor
-    if ($scope.selectedToken && $scope.selectedRange) {
-      $log.log('change token number');
-      var phrase = $scope.selectedToken;
-      $log.log('the phrase to change is: ' + phrase);
-
-//      var res = Morphology.changeNumber(phrase, 'de');
-      var res = Morphology.changeNumber(phrase, 'de', param);
-      res.then(
-        function(result) {
-          $log.log('the result from the morphology server: ');
-          $log.log(result);
-
-          if (phrase !== result.data['converted_phrase']) {
-            var msg = 'Change number: ' + phrase + " → " + result.data['converted_phrase'] + " " + param;
-            $scope.editHistory.push(
-              ruleMap.newRule('change-token-number', phrase, result.data['converted_phrase'], msg, $scope.$index));
-            Project.updateStat('pearl-change-number', $scope.$index, msg);
-          }
-
-          // this function is on the AceCtrl
-          $scope.insertText(result.data['converted_phrase']);
-          $scope.changeNumberWorking = false;
-          $scope.clearSelection();
-        },
-        function(err) {
-          $log.log('changeNumber failed');
-          $log.log(err);
-          $scope.changeNumberWorking = false;
-        }
-      );
-      $scope.$broadcast('change-token-number');
-
-    }
-  };
-  $scope.changeTokenGender = function(param) {
-    // toggle the working state of the button
-    $scope.changeGenderWorking = true;
-
-    // the current selection is a range object from the Ace Editor
-    if ($scope.selectedToken && $scope.selectedRange) {
-      $log.log('change token gender');
-      var phrase = $scope.selectedToken;
-      $log.log('the phrase to change is: ' + phrase);
-
-      var res = Morphology.changeGender(phrase, 'de', param);
-      res.then(
-        function(result) {
-          $log.log('the result from the morphology server: ');
-          $log.log(result);
-
-          if (phrase !== result.data['converted_phrase']) {
-            var msg = 'Change gender: ' + phrase + " → " + result.data['converted_phrase'] + " " + param;
-            $scope.editHistory.push(
-              ruleMap.newRule('change-token-gender', phrase, result.data['converted_phrase'], msg, $scope.$index));
-            Project.updateStat('pearl-change-gender', $scope.$index, msg);
-          }
-
-          // this function is on the AceCtrl
-          $scope.insertText(result.data['converted_phrase']);
-          $scope.changeGenderWorking = false;
-          $scope.clearSelection();
-        },
-        function(err) {
-          $log.log('changeGender failed');
-          $log.log(err);
-          $scope.changeGenderWorking = false;
-        }
-      );
-      $scope.$broadcast('change-token-gender');
-    }
-  };
-  $scope.changeTokenCase = function(param) {
-    // toggle the working state of the button
-    $scope.changeCaseWorking = true;
-
-    // the current selection is a range object from the Ace Editor
-    if ($scope.selectedToken && $scope.selectedRange) {
-      $log.log('change token case');
-      var phrase = $scope.selectedToken;
-      $log.log('the phrase to change is: ' + phrase);
-
-      var res = Morphology.changeCase(phrase, 'de', param);
-      res.then(
-        function(result) {
-          $log.log('the result from the morphology server: ');
-          $log.log(result);
-
-          if (phrase !== result.data['converted_phrase']) {
-            var msg = 'Change case: ' + phrase + " → " + result.data['converted_phrase'] + " " + param;
-            $scope.editHistory.push(
-              ruleMap.newRule('change-token-case', phrase, result.data['converted_phrase'], msg, $scope.$index));
-            Project.updateStat('pearl-change-case', $scope.$index, msg);
-          }
-
-          // this function is on the AceCtrl
-          $scope.insertText(result.data['converted_phrase']);
-          $scope.changeCaseWorking = false;
-          $scope.clearSelection();
-        },
-        function(err) {
-          $log.log('changeCase failed: ' + err);
-          $scope.changeCaseWorking = false;
-        }
-      );
-    }
-    $scope.$broadcast('change-token-case');
-  };
-
   $scope.queryConcordancer = function(query, lang) {
     $log.log('query is: ' + query + ', lang is: ' + lang);
     $scope.concordancerError = false;
@@ -355,11 +167,6 @@ angular.module('controllers')
    $scope.$broadcast('clear-editor');
   };
 
-//  $scope.getOtherWordForms = function(stemmedToken) {
-//    $log.log('other word forms called with: ' + stemmedToken);
-//    $scope.otherWordForms = GermanStemmer.getOtherForms(stemmedToken);
-//  };
-
 // TODO: use a promise
   // prep the model
   var glossary = {};
@@ -380,28 +187,28 @@ angular.module('controllers')
   };
 
   // Trigger propagated edits
-  $scope.$on('propagate-action', function(event, edit) {
-    if ($scope.segmentState.completed)
-      return; // do not modify completed segments
-
-    var from = edit.segment;
-
-    $log.log(edit);
-    if (edit.operation == 'copy-source-punctuation') {
-      $scope.copySourcePunctuation(from);
-    } else if (edit.operation == 'find-and-replace-tokens') {
-      $scope.findAndReplaceTokens(edit.original, edit.change, from);
-    } else if (edit.operation == 'find-and-replace') {
-      $scope.findAndReplace(edit.original, edit.change, from);
-    } else if (edit.operation == 'change-token-number') {
-      $scope.findAndReplaceTokens(edit.context, edit.change, from);
-    } else if (edit.operation == 'change-token-gender') {
-      $scope.findAndReplaceTokens(edit.context, edit.change, from);
-    } else if (edit.operation == 'change-token-case') {
-      $scope.findAndReplaceTokens(edit.context, edit.change, from);
-    }
-    // Add more action handlers here if needed.
-  });
+//  $scope.$on('propagate-action', function(event, edit) {
+//    if ($scope.segmentState.completed)
+//      return; // do not modify completed segments
+//
+//    var from = edit.segment;
+//
+//    $log.log(edit);
+//    if (edit.operation == 'copy-source-punctuation') {
+//      $scope.copySourcePunctuation(from);
+//    } else if (edit.operation == 'find-and-replace-tokens') {
+//      $scope.findAndReplaceTokens(edit.original, edit.change, from);
+//    } else if (edit.operation == 'find-and-replace') {
+//      $scope.findAndReplace(edit.original, edit.change, from);
+//    } else if (edit.operation == 'change-token-number') {
+//      $scope.findAndReplaceTokens(edit.context, edit.change, from);
+//    } else if (edit.operation == 'change-token-gender') {
+//      $scope.findAndReplaceTokens(edit.context, edit.change, from);
+//    } else if (edit.operation == 'change-token-case') {
+//      $scope.findAndReplaceTokens(edit.context, edit.change, from);
+//    }
+//    // Add more action handlers here if needed.
+//  });
 
   $scope.addToEditHistory = function(edit) {
     $scope.editHistory.push(edit);
@@ -429,6 +236,7 @@ angular.module('controllers')
   };
 
   // Re-opens a finished segment. Undoes what segmentFinished() did
+  // TODO: this should be handled within the element itself -- there should be a single interface to segmentState
   $scope.reopen = function(idx) {
     $scope.segmentState.completed = false;
     Project.setActiveSegment(idx-1);

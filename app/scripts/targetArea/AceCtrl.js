@@ -1,9 +1,8 @@
 
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'Document', 'tokenizer', 'Glossary', 'GermanStemmer', 'Morphology', 'session', '$http',
+  ['$scope', 'Document', 'tokenizer', 'Glossary', 'session', '$http',
    '$timeout', '$log', 'ruleMap',
-   function($scope, Document, tokenizer, Glossary, GermanStemmer, Morphology, session, $http, $timeout, $log,
-            ruleMap) {
+   function($scope, Document, tokenizer, Glossary, session, $http, $timeout, $log, ruleMap) {
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
@@ -312,8 +311,6 @@ angular.module('controllers').controller('AceCtrl',
     editor.on('click', function(e) {
       var tokenAndRange = getCurrentTokenAndRange();
       var token = tokenAndRange.token;
-
-//      var stemmedToken = GermanStemmer.stem(token.value);
 
       // make sure the user isn't trying to click into the same token to edit it
       if ($scope.lastToken !== token) {

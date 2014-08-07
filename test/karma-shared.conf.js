@@ -43,7 +43,6 @@ module.exports = function() {
       'app/scripts/services/xliffParser.js',
       'app/scripts/services/document.js',
       'app/scripts/services/tokenizer.js',
-      'app/scripts/services/germanStemmer.js',
       'app/scripts/services/translationMemory.js',
       'app/scripts/services/project.js',
       'app/scripts/services/wikipedia.js',
