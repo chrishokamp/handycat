@@ -60,12 +60,15 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     // Chris - apparently some UI tests only work with Chrome
-    browsers: ['Chrome'],
-    //browsers: ['PhantomJS'],
+
+//    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
     //browsers: ['Firefox'],
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: true
+    singleRun: false,
+    autoWatch: true
   });
+
 };

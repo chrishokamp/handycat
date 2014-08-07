@@ -83,13 +83,19 @@ angular.module('controllers')
         $log.log(e);
       }
     );
-
-
   };
 
   // TODO: set this only when this is the active scope
   $scope.isActive = { active:true };
+
+  // working: only one field on this object (not currentState AND completed)
   $scope.segmentState = { currentState: 'untranslated', completed: false };
+
+  // this is the interface to segment state -- always change via this interface
+  $scope.changeSegmentState = function changeSegmentState (stateName) {
+    $scope.segmentState = stateName;
+    $scope.$broadcast('change-segment-state', { 'newState': stateName })
+  }
 
   /*
   $scope.activate = function(index) {
@@ -404,6 +410,7 @@ angular.module('controllers')
   // List of edit actions performed on this segment
   $scope.editHistory = [];
 
+  // TODO: project should listen for this event, we shouldn't have a separate function to update the project
   $scope.segmentFinished = function(segId) {
     $log.log("segId is: " + segId);
 
