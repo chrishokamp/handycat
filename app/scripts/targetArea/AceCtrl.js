@@ -287,8 +287,6 @@ angular.module('controllers').controller('AceCtrl',
     $scope.editor.session.setMode('ace/mode/text');
 
     $scope.editor.setOption("spellcheck", true);
-//    $log.log("aceLoaded, logging the current mode:");
-//    $log.log($scope.editor.session);
 
     // we want to always know what text the user currently has selected
     // TODO: change this to listen for a selection change
@@ -375,7 +373,7 @@ angular.module('controllers').controller('AceCtrl',
     // the height again
     editor.getSession().on('change', heightUpdateFunction);
 
-  // logging each change to the editor
+  // logging each change to the editor - TODO: should this be event based?
   // using input event instead of change since it's called with some timeout
   editor.on('input', function() {
     var newValue= editor.getValue();
