@@ -1,5 +1,5 @@
 angular.module('services')
-.factory('session', ['loggerUrl', '$http', '$log', function(loggerUrl, $http, $log) {
+.factory('session', ['loggerUrl', 'SegmentOrder', 'Document', '$http', '$rootScope', '$log', function(loggerUrl, SegmentOrder, Document, $http, $rootScope, $log) {
 // see http://stackoverflow.com/questions/22537311/angular-ui-router-login-authentication
 // shows how to do authentication with ui-router
     var logUrl = loggerUrl + '/logger';
@@ -71,7 +71,6 @@ angular.module('services')
         }
       },
 
-
       // Functions controlling movement through the document
       // order of segments
       activeSegment: 0,
@@ -79,7 +78,7 @@ angular.module('services')
         this.activeSegment = segId;
       },
       getNextSegment: function() {
-        if (SegmentOrder.order.length == 0)
+        if (SegmentOrder.order.length === 0)
           SegmentOrder.getOrder(Document.segments);
         return SegmentOrder.nextSegment(this.activeSegment);
       },

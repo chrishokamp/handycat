@@ -45,6 +45,7 @@ module.exports = function() {
       'app/scripts/services/tokenizer.js',
       'app/scripts/services/translationMemory.js',
       'app/scripts/services/project.js',
+      'app/scripts/services/session.js',
       'app/scripts/services/wikipedia.js',
       'app/scripts/services/morphology.js',
       'app/scripts/services/entityLinker.js',

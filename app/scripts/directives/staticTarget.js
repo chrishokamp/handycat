@@ -7,6 +7,7 @@ angular.module('directives').directive('staticTarget', ['$compile', '$log', func
     // WORKING: pending, active, and completed are segment-level properties, and should be handled there
     template: '<p class="source">{{segment.target}}</p>',
     link: function($scope,el){
+      $scope.index = $scope.id.index;
       el.on('click', function() {
         $log.log('targetText was clicked...');
         $scope.test = { 'test': 'this is a test'};

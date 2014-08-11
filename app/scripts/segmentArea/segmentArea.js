@@ -3,13 +3,15 @@
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'Wikipedia', 'Glossary', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-  'Document', 'project',
+  'Document', 'session',
   function($rootScope, $scope, Wikipedia, Glossary, $sce, $log, ruleMap, copyPunctuation,
-           Document, Project) {
+           Document, Session) {
 
   $scope.test = { 'test': 'TEST'};
 
-  $scope.project = Project;
+  $scope.project = Session;
+  // this gets reset in the template
+  $scope.id = {};
 
   // TODO: set this only when this is the active scope
   $scope.isActive = { active:true };
@@ -18,6 +20,7 @@ angular.module('controllers')
   $scope.segmentState = { currentState: 'untranslated', completed: false };
 
   // this is the interface to segment state -- always change via this interface
+  // states: [ 'pending', 'editing', 'complete' ]
   $scope.changeSegmentState = function changeSegmentState (stateName) {
     $scope.segmentState = stateName;
     $scope.$broadcast('change-segment-state', { 'newState': stateName })
@@ -67,7 +70,7 @@ angular.module('controllers')
     var target = $scope.segment.target;
     $scope.segment.target = copyPunctuation.copySourcePunctuation(source, target);
 
-    Project.updateStat('copyPunctuation', $scope.$index);
+    Session.updateStat('copyPunctuation', $scope.$index);
     // Only adds the action to the edit history if it actually did something.
     if ($scope.segment.target !== target) {
       $scope.editHistory.push(
@@ -86,7 +89,7 @@ angular.module('controllers')
       var msg = 'Find and Replace: ' + original + " → " + change;
       $scope.editHistory.push(
         ruleMap.newRule('find-and-replace', original, change, msg, segment));
-      Project.updateStat('pearl-find-and-replace', $scope.$index, msg);
+      Session.updateStat('pearl-find-and-replace', $scope.$index, msg);
     }
   };
 
@@ -100,7 +103,7 @@ angular.module('controllers')
       var msg = 'Find and Replace tokens: ' + original + " → " + change;
       $scope.editHistory.push(
         ruleMap.newRule('find-and-replace-tokens', original, change, msg, segment));
-      Project.updateStat('pearl-find-and-replace-tokens', $scope.$index, msg);
+      Session.updateStat('pearl-find-and-replace-tokens', $scope.$index, msg);
     }
   };
 
@@ -112,7 +115,7 @@ angular.module('controllers')
   $scope.queryConcordancer = function(query, lang) {
     $log.log('query is: ' + query + ', lang is: ' + lang);
     $scope.concordancerError = false;
-    Project.updateStat('queryConcordancer', $scope.$index, query);
+    Session.updateStat('queryConcordancer', $scope.$index, query);
     Wikipedia.getConcordances(query, lang);
   };
 
@@ -174,7 +177,7 @@ angular.module('controllers')
   $scope.glossary = glossary;
   $scope.queryGlossary = function(query, fromLang, toLang) {
     Glossary.getMatches(query, updateGlossaryArea, fromLang, toLang);
-    Project.updateStat('queryGlossary', $scope.$index, query);
+    Session.updateStat('queryGlossary', $scope.$index, query);
   };
 
   // Informs other segments that they should make a change.
@@ -183,7 +186,7 @@ angular.module('controllers')
   // should check first if the edit should be applied or not.
   $scope.propagateEdit = function(index) {
     $rootScope.$broadcast('propagate-action', $scope.editHistory[index]);
-    Project.updateStat('propagateAction', $scope.$index, $scope.editHistory[index].operation);
+    Session.updateStat('propagateAction', $scope.$index, $scope.editHistory[index].operation);
   };
 
   // Trigger propagated edits
@@ -222,11 +225,11 @@ angular.module('controllers')
     $log.log("segId is: " + segId);
 
     $scope.segmentState.completed = true;
-    Project.updateStat('segmentFinished', segId);
+    Session.updateStat('segmentFinished', segId);
 
     Document.completedSegments[segId] = true;
-    Project.setActiveSegment(segId);
-    Project.focusNextSegment();
+    Session.setActiveSegment(segId);
+    Session.focusNextSegment();
 
     $scope.isActive.active = false;
 
@@ -239,11 +242,25 @@ angular.module('controllers')
   // TODO: this should be handled within the element itself -- there should be a single interface to segmentState
   $scope.reopen = function(idx) {
     $scope.segmentState.completed = false;
-    Project.setActiveSegment(idx-1);
-    Project.focusNextSegment();
+    Session.setActiveSegment(idx-1);
+    Session.focusNextSegment();
     $scope.isActive.active = true;
   };
 
+  // when the changeSegment event fires, each AceCtrl scope responds
+  $scope.$on('changeSegment', function(e,data) {
+    $log.log('Heard changeSegment, my index is: ' + $scope.index);
+    $log.log('Data.currentSegment is: ' + data.currentSegment);
+    if (data.currentSegment === $scope.index) {
+      // focus the editor
+      // todo: focus when the directive loads
+//      $scope.editor.focus();
+
+      // smooth scroll
+      var top = document.getElementById('segment-' + $scope.index).offsetTop;
+      $("body").animate({scrollTop: top-130}, "slow");
+    }
+  });
 
 }]);
 

@@ -398,25 +398,6 @@ angular.module('controllers').controller('AceCtrl',
   };  // end AceLoaded
 
 
-  // BEGIN - managing the active segment - TODO: move this to segmentAreaCtrl
-  // listen for the new segment event, if it's this segment, ask the TM for matches
-  // TODO: the query logic for the tokenizer is currently flawed -- way too many queries get produced (see augmentTM)
-  // also, focus the editor
-  $scope.$on('changeSegment', function(e,data) {
-    $log.log('Heard changeSegment, my index is: ' + $scope.index);
-    $log.log('Data.currentSegment is: ' + data.currentSegment);
-    if (data.currentSegment === $scope.index) {
-      // ask the TM
-//      $log.log('augmenting the TM for seg index: ' + $scope.index);
-//      $scope.augmentTM($scope.minPhraseLen);
-      $scope.editor.focus();
-      // smooth scrool
-      var top = document.getElementById('segment-' + $scope.index).offsetTop;
-      $("body").animate({scrollTop: top-300}, "slow");
-    }
-  });
-
-  // end move to segment area ctrl
 
 // TODO: maintain the current TM matches based on the selected token in the source side
   $scope.minPhraseLen = 15;
@@ -440,7 +421,6 @@ angular.module('controllers').controller('AceCtrl',
     }
   };
 
-  //
   $scope.onPaste = function(index, event) {
     $log.log('paste event');
     $log.log(event);
