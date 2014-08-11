@@ -26,144 +26,141 @@ angular.module('controllers')
     $scope.$broadcast('change-segment-state', { 'newState': stateName })
   }
 
-  /*
-  $scope.activate = function(index) {
-  $log.log("Index: " + $scope.index);
-    $rootScope.$broadcast('activate-segment', index);
-  };
-
   $scope.$on('activate-segment', function(event, index) {
-      $log.log("Index: " + $scope.index + " " + "index: " + index);
-    $scope.isActive.active = $scope.index == index;
-  });*/
-
-  $scope.language = Document.targetLang;
-
-  // for the concordancer - default to English
-  $scope.queryLang = 'en';
-
-// currently the model names on the child controllers are different
-  $scope.setSource = function(sourceSentence) {
-    $log.log("setSource");
-    $log.log("source is: " + sourceSentence);
-    $scope.segment.source = sourceSentence;
-  };
-  $scope.setTarget = function(targetSentence) {
-     $scope.segment.target = targetSentence;
-  };
-
-  // Text currently selected in the child editor
-  $scope.setTextSelection = function(text, range) {
-    $scope.selectedToken = text;
-    $scope.selectedRange = range;
-    $log.log('setTextSelection fired, selectedToken: '+$scope.selectedToken+' selectedRange: ' + $scope.selectedRange);
-  };
-
-  $scope.clearSelection = function() {
-    $scope.selectedToken = '';
-    $scope.selectedRange = '';
-  };
-
-  $scope.copySourcePunctuation = function(segment) {
-    $log.log('copy source called from segment ' + segment);
-    var source = $scope.segment.source;
-    var target = $scope.segment.target;
-    $scope.segment.target = copyPunctuation.copySourcePunctuation(source, target);
-
-    Session.updateStat('copyPunctuation', $scope.$index);
-    // Only adds the action to the edit history if it actually did something.
-    if ($scope.segment.target !== target) {
-      $scope.editHistory.push(
-        ruleMap.newRule('copy-source-punctuation', '', '', 'Copy punctuation from source segment', segment));
+    if ($scope.index === index) {
+      // tell the scope to create the editor element
+      $scope.$broadcast('activate');
     }
-  };
 
-
-  $scope.findAndReplace = function(original, change, segment) {
-    var regexp = original;
-    console.log($scope.segment.target);
-    var newTarget = $scope.segment.target.replace(new RegExp(regexp), change);
-    console.log(newTarget);
-    if (newTarget !== $scope.segment.target) {
-      $scope.segment.target = newTarget;
-      var msg = 'Find and Replace: ' + original + " → " + change;
-      $scope.editHistory.push(
-        ruleMap.newRule('find-and-replace', original, change, msg, segment));
-      Session.updateStat('pearl-find-and-replace', $scope.$index, msg);
-    }
-  };
-
-  $scope.findAndReplaceTokens = function(original, change, segment) {
-    var regexp = '\\b' + original + '\\b';
-    console.log($scope.segment.target);
-    var newTarget = $scope.segment.target.replace(new RegExp(regexp), change);
-    console.log(newTarget);
-    if (newTarget !== $scope.segment.target) {
-      $scope.segment.target = newTarget;
-      var msg = 'Find and Replace tokens: ' + original + " → " + change;
-      $scope.editHistory.push(
-        ruleMap.newRule('find-and-replace-tokens', original, change, msg, segment));
-      Session.updateStat('pearl-find-and-replace-tokens', $scope.$index, msg);
-    }
-  };
-
-  // sets the current target token
-  $scope.setCurrentToken = function(token) {
-     $scope.currentToken = token;
-  };
-
-  $scope.queryConcordancer = function(query, lang) {
-    $log.log('query is: ' + query + ', lang is: ' + lang);
-    $scope.concordancerError = false;
-    Session.updateStat('queryConcordancer', $scope.$index, query);
-    Wikipedia.getConcordances(query, lang);
-  };
-
-  $scope.$on('concordancer-updated', function() {
-// does $scope.$apply happen automagically? - answer: no, so we have to listen for the event
-    $scope.concordanceMatches = Wikipedia.currentQuery;
   });
 
-  $scope.$on('concordancer-error', function() {
-    $scope.concordancerError = true;
-  });
-
-  // special chars toolbar showing
-  $scope.showSpecialChars = true;
-
-  // testing the special chars directive
-  $scope.germanChars = ['ä','ö','ü','Ä','Ö','Ü','ß'];
-  $scope.insertChar = function(char) {
-    $log.log("char to insert: " + char);
-    $scope.insertText(char);
-  };
-
-  // convert a snippet to trusted html - TODO: this isn't reusable because we send back x.snippet
-  $scope.getSnippet = function(concordanceMatch) {
-    return $sce.trustAsHtml(concordanceMatch.snippet);
-  };
-
-  // used as a callback for the glossary
-  var updateGlossaryArea = function(glossaryMatches) {
-    $log.log('Inside callback, the glossary matches: ');
-    $log.log(glossaryMatches);
-    if (glossaryMatches)
-      $scope.glossaryMatches = glossaryMatches.map(function(item) {
-        return item.text;
-      });
-  };
-
-// TODO: collapse (remove from DOM) when this segment goes out of focus
-  $scope.isCollapsed = {collapsed: true, clicked: false};
-  $scope.toggleToolbar = function(bool) {
-    if (arguments.length > 0) {
-      $scope.isCollapsed = { collapsed: bool };
-// TODO: there is a broken corner-case here
-    } else {
-      $scope.isCollapsed = { collapsed: !$scope.isCollapsed.collapsed };
-    }
-    $log.log("isCollapsed: the value of isCollapsed is: " + $scope.isCollapsed.collapsed);
-  };
+//  $scope.language = Document.targetLang;
+//
+//  // for the concordancer - default to English
+//  $scope.queryLang = 'en';
+//
+//// currently the model names on the child controllers are different
+//  $scope.setSource = function(sourceSentence) {
+//    $log.log("setSource");
+//    $log.log("source is: " + sourceSentence);
+//    $scope.segment.source = sourceSentence;
+//  };
+//  $scope.setTarget = function(targetSentence) {
+//     $scope.segment.target = targetSentence;
+//  };
+//
+//  // Text currently selected in the child editor
+//  $scope.setTextSelection = function(text, range) {
+//    $scope.selectedToken = text;
+//    $scope.selectedRange = range;
+//    $log.log('setTextSelection fired, selectedToken: '+$scope.selectedToken+' selectedRange: ' + $scope.selectedRange);
+//  };
+//
+//  $scope.clearSelection = function() {
+//    $scope.selectedToken = '';
+//    $scope.selectedRange = '';
+//  };
+//
+//  $scope.copySourcePunctuation = function(segment) {
+//    $log.log('copy source called from segment ' + segment);
+//    var source = $scope.segment.source;
+//    var target = $scope.segment.target;
+//    $scope.segment.target = copyPunctuation.copySourcePunctuation(source, target);
+//
+//    Session.updateStat('copyPunctuation', $scope.$index);
+//    // Only adds the action to the edit history if it actually did something.
+//    if ($scope.segment.target !== target) {
+//      $scope.editHistory.push(
+//        ruleMap.newRule('copy-source-punctuation', '', '', 'Copy punctuation from source segment', segment));
+//    }
+//  };
+//
+//
+//  $scope.findAndReplace = function(original, change, segment) {
+//    var regexp = original;
+//    console.log($scope.segment.target);
+//    var newTarget = $scope.segment.target.replace(new RegExp(regexp), change);
+//    console.log(newTarget);
+//    if (newTarget !== $scope.segment.target) {
+//      $scope.segment.target = newTarget;
+//      var msg = 'Find and Replace: ' + original + " → " + change;
+//      $scope.editHistory.push(
+//        ruleMap.newRule('find-and-replace', original, change, msg, segment));
+//      Session.updateStat('pearl-find-and-replace', $scope.$index, msg);
+//    }
+//  };
+//
+//  $scope.findAndReplaceTokens = function(original, change, segment) {
+//    var regexp = '\\b' + original + '\\b';
+//    console.log($scope.segment.target);
+//    var newTarget = $scope.segment.target.replace(new RegExp(regexp), change);
+//    console.log(newTarget);
+//    if (newTarget !== $scope.segment.target) {
+//      $scope.segment.target = newTarget;
+//      var msg = 'Find and Replace tokens: ' + original + " → " + change;
+//      $scope.editHistory.push(
+//        ruleMap.newRule('find-and-replace-tokens', original, change, msg, segment));
+//      Session.updateStat('pearl-find-and-replace-tokens', $scope.$index, msg);
+//    }
+//  };
+//
+//  // sets the current target token
+//  $scope.setCurrentToken = function(token) {
+//     $scope.currentToken = token;
+//  };
+//
+//  $scope.queryConcordancer = function(query, lang) {
+//    $log.log('query is: ' + query + ', lang is: ' + lang);
+//    $scope.concordancerError = false;
+//    Session.updateStat('queryConcordancer', $scope.$index, query);
+//    Wikipedia.getConcordances(query, lang);
+//  };
+//
+//  $scope.$on('concordancer-updated', function() {
+//// does $scope.$apply happen automagically? - answer: no, so we have to listen for the event
+//    $scope.concordanceMatches = Wikipedia.currentQuery;
+//  });
+//
+//  $scope.$on('concordancer-error', function() {
+//    $scope.concordancerError = true;
+//  });
+//
+//  // special chars toolbar showing
+//  $scope.showSpecialChars = true;
+//
+//  // testing the special chars directive
+//  $scope.germanChars = ['ä','ö','ü','Ä','Ö','Ü','ß'];
+//  $scope.insertChar = function(char) {
+//    $log.log("char to insert: " + char);
+//    $scope.insertText(char);
+//  };
+//
+//  // convert a snippet to trusted html - TODO: this isn't reusable because we send back x.snippet
+//  $scope.getSnippet = function(concordanceMatch) {
+//    return $sce.trustAsHtml(concordanceMatch.snippet);
+//  };
+//
+//  // used as a callback for the glossary
+//  var updateGlossaryArea = function(glossaryMatches) {
+//    $log.log('Inside callback, the glossary matches: ');
+//    $log.log(glossaryMatches);
+//    if (glossaryMatches)
+//      $scope.glossaryMatches = glossaryMatches.map(function(item) {
+//        return item.text;
+//      });
+//  };
+//
+//// TODO: collapse (remove from DOM) when this segment goes out of focus
+//  $scope.isCollapsed = {collapsed: true, clicked: false};
+//  $scope.toggleToolbar = function(bool) {
+//    if (arguments.length > 0) {
+//      $scope.isCollapsed = { collapsed: bool };
+//// TODO: there is a broken corner-case here
+//    } else {
+//      $scope.isCollapsed = { collapsed: !$scope.isCollapsed.collapsed };
+//    }
+//    $log.log("isCollapsed: the value of isCollapsed is: " + $scope.isCollapsed.collapsed);
+//  };
 
   $scope.clearEditor = function() {
    $log.log('clear editor fired on the segment control');
@@ -213,9 +210,9 @@ angular.module('controllers')
 //    // Add more action handlers here if needed.
 //  });
 
-  $scope.addToEditHistory = function(edit) {
-    $scope.editHistory.push(edit);
-  };
+//  $scope.addToEditHistory = function(edit) {
+//    $scope.editHistory.push(edit);
+//  };
 
   // List of edit actions performed on this segment
   $scope.editHistory = [];
@@ -252,10 +249,8 @@ angular.module('controllers')
     $log.log('Heard changeSegment, my index is: ' + $scope.index);
     $log.log('Data.currentSegment is: ' + data.currentSegment);
     if (data.currentSegment === $scope.index) {
-      // focus the editor
-      // todo: focus when the directive loads
-//      $scope.editor.focus();
-
+      // tell the staticTarget directive to create the editor element
+      $scope.$broadcast('activate');
       // smooth scroll
       var top = document.getElementById('segment-' + $scope.index).offsetTop;
       $("body").animate({scrollTop: top-130}, "slow");

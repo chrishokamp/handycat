@@ -10,13 +10,23 @@ angular.module('directives').directive('staticTarget', ['$compile', '$log', func
       $scope.index = $scope.id.index;
       el.on('click', function() {
         $log.log('targetText was clicked...');
-        $scope.test = { 'test': 'this is a test'};
         var newHtml = '<ng-include src="\'scripts/directives/target-area.html\'"></div>'
         var compiledHtml = $compile(newHtml)($scope);
         el.replaceWith(compiledHtml);
         $log.log('new element:');
         $log.log(el);
-      })
+      });
+
+      $scope.$on('activate', function() {
+        $log.log('targetText was clicked...');
+        var newHtml = '<ng-include src="\'scripts/directives/target-area.html\'"></div>'
+        var compiledHtml = $compile(newHtml)($scope);
+        el.replaceWith(compiledHtml);
+        $log.log('new element:');
+        $log.log(el);
+
+      });
+
     }
   }
 }]);
