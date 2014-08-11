@@ -1,4 +1,4 @@
-angular.module('directives').directive('logger', ['project', 'Document', '$log', function(project, Document, $log) {
+angular.module('directives').directive('logger', ['session', 'Document', '$log', function(session, Document, $log) {
   return {
     restrict: 'A',
     scope: true,
@@ -24,7 +24,8 @@ angular.module('directives').directive('logger', ['project', 'Document', '$log',
         // Note: this is likely to be the _current_ target, because the callbacks haven't finished yet
         // the ace editor input event can be used to get the new value
         var target = Document.targetSegments[index];
-        project.updateStat(action, index, target);
+        session.updateStat(action, index, target);
+
       }
 
       $scope.callback = loggerCallback;

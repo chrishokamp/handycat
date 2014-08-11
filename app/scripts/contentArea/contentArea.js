@@ -1,8 +1,8 @@
 // Holds all of the translation pairs and handles the interface with the Document service
 // Content area is the place for global control of the /edit view
 angular.module('controllers').controller('ContentAreaCtrl',
-    ['$scope', 'Document', 'project', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log',
-    function($scope, Document, project, $location, $state, $stateParams, $modal, $rootScope, $log) {
+    ['$scope', 'Document', 'session', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log',
+    function($scope, Document, session, $location, $state, $stateParams, $modal, $rootScope, $log) {
   if (Document.segments.length === 0) {
     $state.go('project');
   }
@@ -33,10 +33,10 @@ angular.module('controllers').controller('ContentAreaCtrl',
       }
   });
 
-  project.updateStat('pearl-document-loaded', -1, '');
+  session.updateStat('pearl-document-loaded', -1, '');
 
   // DEV UTILS
-  $scope.showXLIFF = project.debugXLIFF;
+  $scope.showXLIFF = session.debugXLIFF;
   // END DEV UTILS
 
   $scope.language = Document.targetLang;

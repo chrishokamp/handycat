@@ -2,10 +2,10 @@ angular.module('controllers', []);
 //angular.module('editorComponentsApp.controllers', []);
 
 angular.module('controllers')
-.controller('StatsController', ['$scope', 'project', function($scope, project) {
+.controller('StatsController', ['$scope', 'session', function($scope, session) {
 
-  $scope.log = project.log;
-  $scope.stats = project.stats;
+  $scope.log = session.log;
+  $scope.stats = session.stats;
 
 }]);
 
