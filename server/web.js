@@ -1,21 +1,84 @@
-var gzippo = require('gzippo')
-	, express = require('express')
-	, params = require('express-params')
-	, http = require('http')
-	, getJSON = require('./getJSON')
-	, cors = require('cors')
-	, app = express();
+var express = require('express')
+   bodyParser = require('body-parser'),
+   cookieParser = require('cookie-parser'),
+   http = require('http'),
+   session = require('express-session'),
+   errorHandler = require('express-error-handler'),
+   methodOverride = require('method-override'),
+//   logger = require('express-logger'),
+   passport = require('passport'),
+   path = require('path'),
+   fs = require('fs'),
+   mongoStore = require('connect-mongo')(session),
+	 params = require('express-params'),
+	 cors = require('cors'),
+	 getJSON = require('./getJSON'),
+   config = require('./config/config')
 
-// use the node superagent module instead?
+var app = express();
+
+// Connect to database
+var db = require('./db/mongo').db;
+
+// Bootstrap models - Chris - let's you avoid adding each module explicitly
+var modelsPath = path.join(__dirname, 'models');
+fs.readdirSync(modelsPath).forEach(function (file) {
+  require(modelsPath + '/' + file);
+});
+
+var pass = require('./config/pass');
+
+// App Configuration
+var env = process.env.NODE_ENV || 'development';
+
+if ('development' == env) {
+   // configure stuff here
+  app.use(express.static(path.join(__dirname, '.tmp')));
+  app.use(express.static(path.join(__dirname, 'app')));
+  app.use(errorHandler());
+  app.set('views', __dirname + '/app/views');
+}
+
+if ('production' == env) {
+  app.use(express.favicon(path.join(__dirname, 'public', 'favicon.ico')));
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.set('views', __dirname + '/views');
+}
+
+// TODO: logging isn't working currently
+//app.use(logger('dev'));
 
 app.use(cors());
-app.use(express.bodyParser());
+
+// bodyParser should be above methodOverride
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(methodOverride());
+
+// cookieParser should be above session
+app.use(cookieParser());
+// express/mongo session storage
+app.use(session({
+  secret: config.secret,
+  store: new mongoStore({
+    url: config.db,
+    collection: 'sessions'
+  }),
+  resave: true,
+  saveUninitialized: true
+}));
+
 // app.use(app.router);
 params.extend(app);
-app.use(express.logger('dev'));
 
-// for hosting the app using express
-app.use(gzippo.staticGzip("" + __dirname + "/../"));
+// for hosting the app using express - TODO: check this and delete if not needed
+//app.use(gzippo.staticGzip("" + __dirname + "/../"));
+
+// TODO: move routes to a separate file and bootstrap
+//Bootstrap routes
+//require('./lib/config/routes')(app);
 
 // add a route to query media wiki
 app.param('lang', /^\w{2}$/);
@@ -137,4 +200,4 @@ app.post('/logger/:sessionId', function(req, res){
 app.listen(process.env.PORT || 5002);
 
 // other datasources to try:
-// wiktionary
+// tausdata, wiktionary
