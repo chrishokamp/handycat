@@ -11,12 +11,12 @@ exports.ensureAuthenticated = function ensureAuthenticated(req, res, next) {
 /**
  * Blog authorizations routing middleware
  */
-// TODO: extend this to make it work for our routes -- users need access to projects, xliff files, etc...
-//exports.blog = {
-//  hasAuthorization: function(req, res, next) {
-//    if (req.blog.creator._id.toString() !== req.user._id.toString()) {
-//      return res.send(403);
-//    }
-//    next();
-//  }
-//};
+// TODO: extend this middleware to accomodate shared projects
+exports.project = {
+  hasAuthorization: function(req, res, next) {
+    if (req.project.creator._id.toString() !== req.user._id.toString()) {
+      return res.send(403);
+    }
+    next();
+  }
+};

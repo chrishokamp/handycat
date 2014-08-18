@@ -19,18 +19,17 @@ module.exports = function(app) {
   app.post('/auth/session', session.login);
   app.delete('/auth/session', session.logout);
 
-  // Translation Project Routes
+  // Translation Project Routes - these routes let users interact with their projects
   var projects = require('../controllers/projects');
   // Chris - ensureAuthenticated middleware controls access to the route
-//  app.get('/api/blogs',auth.ensureAuthenticated, blogs.all);
-  app.get('/api/blogs',auth.ensureAuthenticated, blogs.all);
-  app.post('/api/blogs', auth.ensureAuthenticated, blogs.create);
-  app.get('/api/blogs/:blogId', blogs.show);
-  app.put('/api/blogs/:blogId', auth.ensureAuthenticated, auth.blog.hasAuthorization, blogs.update);
-  app.delete('/api/blogs/:blogId', auth.ensureAuthenticated, auth.blog.hasAuthorization, blogs.destroy);
+  app.get('/api/projects',auth.ensureAuthenticated, projects.all);
+  app.post('/api/projects', auth.ensureAuthenticated, projects.create);
+  app.get('/api/projects/:projectId', projects.show);
+  app.put('/api/projects/:projectId', auth.ensureAuthenticated, auth.project.hasAuthorization, projects.update);
+  app.delete('/api/projects/:projectId', auth.ensureAuthenticated, auth.project.hasAuthorization, projects.destroy);
 
-  //Setting up the blogId param
-  app.param('blogId', blogs.blog);
+  //Setting up the projectId param
+  app.param('projectId', projects.project);
 
   // Angular Routes
   app.get('/partials/*', function(req, res) {

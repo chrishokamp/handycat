@@ -4,12 +4,13 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 // TODO: working - make the schema for a translation project
-var BlogPostSchema = new Schema({
+var ProjectSchema = new Schema({
   title: {
     type: String,
     index: true,
     required: true
   },
+  // the xml content of the xliff file
   content: {
     type: String,
     default: '',
@@ -31,8 +32,7 @@ var BlogPostSchema = new Schema({
 /**
  * Pre hook.
  */
-
-BlogPostSchema.pre('save', function(next, done){
+ProjectSchema.pre('save', function(next, done){
   if (this.isNew)
     this.created = Date.now();
 
@@ -44,7 +44,7 @@ BlogPostSchema.pre('save', function(next, done){
 /**
  * Statics
  */
-BlogPostSchema.statics = {
+ProjectSchema.statics = {
   load: function(id, cb) {
     this.findOne({
       _id: id
@@ -55,12 +55,11 @@ BlogPostSchema.statics = {
 /**
  * Methods
  */
-
-BlogPostSchema.statics.findByTitle = function (title, callback) {
+ProjectSchema.statics.findByTitle = function (title, callback) {
   return this.find({ title: title }, callback);
 }
 
-BlogPostSchema.methods.expressiveQuery = function (creator, date, callback) {
+ProjectSchema.methods.expressiveQuery = function (creator, date, callback) {
   return this.find('creator', creator).where('date').gte(date).run(callback);
 }
 
@@ -80,10 +79,9 @@ function slugGenerator (options){
   };
 };
 
-BlogPostSchema.plugin(slugGenerator());
+ProjectSchema.plugin(slugGenerator());
 
 /**
  * Define model.
  */
-
-mongoose.model('BlogPost', BlogPostSchema);
+mongoose.model('Project', ProjectSchema);
