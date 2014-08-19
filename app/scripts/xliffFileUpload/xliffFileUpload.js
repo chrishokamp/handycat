@@ -44,7 +44,7 @@ angular.module('controllers').controller('UploadCtrl',
   };
 
   // DEVELOPMENT UTILITY
-  var development = true;
+  var development = false;
 // Dev flag - load file by default
   if (development) {
 //    var fileUrl = 'data/enEs.xlf';

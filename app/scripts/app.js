@@ -3,6 +3,7 @@ var App = window.App = angular.module('editorComponentsApp',
       [
         'ui.router',
         'ngResource',
+        'ngCookies',
         'ngSanitize',
         'controllers',
         'directives',
@@ -28,16 +29,28 @@ var App = window.App = angular.module('editorComponentsApp',
     })
     .state('edit.segment', {
       url: '/segment/:segmentId'
-    });
+    })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'views/login.html',
+      controller: 'LoginCtrl'
+    })
+    .state('/signup', {
+      url: '/signup',
+      templateUrl: 'views/signup.html',
+      controller: 'SignupCtrl'
+    })
 
   $urlRouterProvider
-    .otherwise('/project');
+    .otherwise('/login');
 })
 
 // heroku
 //.constant('baseUrl', 'http://protected-crag-2517.herokuapp.com/glossary');
+
 // localhost
 .constant('baseUrl', 'http://0.0.0.0:5002')
+
 // panacea
 //.constant('baseUrl', 'http://panaceadcu.dh.bytemark.co.uk:5002')
 .constant('loggerUrl', 'http://panaceadcu.dh.bytemark.co.uk:5001')

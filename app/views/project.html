@@ -43,7 +43,7 @@
         <p>Please select a language pair</p>
     </div> -->
 
-    <div ng-controller="UploadCtrl" class="container">
+    <div ng-controller="UploadCtrl">
 
     <!--working - collapse the drag area when a file is uploaded-->
         <div class="alert alert-success slide-in" ng-click="fileAdded=!fileAdded" ng-hide="!fileAdded">
@@ -53,6 +53,7 @@
          <div class="alert alert-danger slide-in" ng-show="parser.parsingError && !fileAdded">
             Error: The uploaded file is not a valid XLIFF file.
          </div>
+
 
         <div class="upload-area slide-in" ng-hide="fileAdded">
             <div class="row" >
@@ -72,7 +73,7 @@
                 <!--<input type="file" ng-file-select="onFileSelect($files)" multiple> -->
             </div>
         </div> <!-- end upload area -->
-        <div class="container">
+        <div>
             <div class="row">
                 <div class="col-xs-12 selected-files" ng-show="selectedFiles.length > 0">
                     <h3>Selected File:</h3>
@@ -87,6 +88,14 @@
                         <!--<button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>-->
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- create the project management interface -->
+        <div ng-controller="ProjectCtrl">
+            <h1>Your Projects</h1>
+            <div ng-repeat="project in projects">
+                <p>{{project.name}}</p>
             </div>
         </div>
 

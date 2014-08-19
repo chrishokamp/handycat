@@ -12,6 +12,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
     // call file reader, then parse the result as XML
 
     // Only allow non-Upload controllers to touch this object once the file has been loaded and parsed
+    // TODO: should the user's device really be reading the file - or should the server send the file?
     readFile: function(file) {
       var self = this;
       var promise = fileReader.readAsText(file);

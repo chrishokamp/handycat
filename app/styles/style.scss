@@ -24,6 +24,10 @@ body {
    width:460px;             /* As IE ignores !important it will set width as 1000px; */
 }
 
+#login-wrapper {
+  background-color: #87cefa;
+}
+
 h3 {
   padding: 4px 0 4px 0;
 }
