@@ -20,10 +20,11 @@ var App = window.App = angular.module('editorComponentsApp',
 )
 .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider
-    .state('project', {
-      url: '/project',
-      templateUrl: 'views/project.html'
+    .state('projects', {
+      url: '/projects',
+      templateUrl: 'views/projects.html'
     })
+    // TODO: this should be edit/projectId, so that users can drop directly into a project
     .state('edit', {
       url: '/edit',
       templateUrl: 'views/edit.html'
