@@ -19,7 +19,6 @@
     "angular-animate": "~1.2.13",
     "ionicons": "~1.4.1",
     "angular-ui-router": "~0.2.10",
-    "angular-route": "~1.2.22",
     "file-saver": "https://github.com/eligrey/FileSaver.js.git",
     "angular-http-auth": "*"
   },

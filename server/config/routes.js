@@ -35,7 +35,8 @@ module.exports = function(app) {
   //Setting up the projectId param
   app.param('projectId', projects.project);
 
-  // Angular Routes
+  // Angular Routes -- chris - how to use these?
+  // Note: in the demo app, the structure is /views/partials/..., so here we are appending to the /views param
   app.get('/partials/*', function(req, res) {
     var requestedView = path.join('./', req.url);
     res.render(requestedView);
@@ -46,7 +47,9 @@ module.exports = function(app) {
       res.cookie('user', JSON.stringify(req.user.user_info));
     }
 
+    // express will look for this in the path under the 'views' property (see web.js)
     res.render('../../app/index.html');
+//    res.render('index.html');
   });
 
 }
