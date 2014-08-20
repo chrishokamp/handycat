@@ -12,7 +12,8 @@ angular.module('controllers')
           $scope.errors = {};
 
           if (!err) {
-            $location.path('/');
+            // Chris: redirect to the entry point of the application after login
+            $location.path('/project');
           } else {
             angular.forEach(err.errors, function(error, field) {
               form[field].$setValidity('mongoose', false);

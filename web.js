@@ -12,21 +12,21 @@ var express = require('express')
    mongoStore = require('connect-mongo')(session),
 	 params = require('express-params'),
 	 cors = require('cors'),
-	 getJSON = require('./getJSON'),
-   config = require('./config/config')
+	 getJSON = require('./server/getJSON'),
+   config = require('./server/config/config')
 
 var app = express();
 
 // Connect to database
-var db = require('./db/mongo').db;
+var db = require('./server/db/mongo').db;
 
 // Bootstrap models - Chris - let's you avoid adding each module explicitly
-var modelsPath = path.join(__dirname, 'models');
+var modelsPath = path.join(__dirname, '/server/models');
 fs.readdirSync(modelsPath).forEach(function (file) {
   require(modelsPath + '/' + file);
 });
 
-var pass = require('./config/pass');
+var pass = require('./server/config/pass');
 
 // App Configuration
 var env = process.env.NODE_ENV || 'development';
@@ -45,9 +45,13 @@ if ('production' == env) {
   app.set('views', __dirname + '/views');
 }
 
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
 // TODO: logging isn't working currently
 //app.use(logger('dev'));
 
+// TODO: remove this
 app.use(cors());
 
 // bodyParser should be above methodOverride
@@ -70,15 +74,20 @@ app.use(session({
   saveUninitialized: true
 }));
 
+// use passport session
+app.use(passport.initialize());
+app.use(passport.session());
+
+//routes should be at the last
+//app.use(app.router);
+
 // app.use(app.router);
 params.extend(app);
 
-// for hosting the app using express - TODO: check this and delete if not needed
-//app.use(gzippo.staticGzip("" + __dirname + "/../"));
 
 // TODO: move routes to a separate file and bootstrap
 //Bootstrap routes
-//require('./lib/config/routes')(app);
+require('./server/config/routes')(app);
 
 // add a route to query media wiki
 app.param('lang', /^\w{2}$/);
@@ -165,12 +174,14 @@ app.get('/glossary', function(req, res){
 
       //console.log(JSON.stringify(searchResults, null, 3));
       res.setHeader('Content-Type', 'application/json');
+//      res.setHeader('Content-Type', 'application/json');
       res.send(searchResults);
     });
 
 });
 
-var DbEntities = require('./db/queryEntities');
+//var DbEntities = require('./server/db/queryEntities');
+var DbEntities = require('./server/db/queryEntities');
 // MONGO DB ENTITY STORE ROUTES
 app.get('/surface-forms/:lang/:entity', function(req, res){
   console.log('i just got a GET request to /surface');
@@ -180,14 +191,14 @@ app.get('/surface-forms/:lang/:entity', function(req, res){
 });
 
 // Note that this route must be first, since /logger/:sessionId also matches
-var ActionLogger = require('./logger/actionLogger');
+var ActionLogger = require('./server/logger/actionLogger');
 app.post('/logger/start', function(req, res){
   console.log('posting to /logger/start');
   ActionLogger.startSession(req, res);
 });
 
 // working -- how to manage which users can write to which logs? - see express passport & openID
-var ActionLogger = require('./logger/actionLogger');
+var ActionLogger = require('./server/logger/actionLogger');
 app.post('/logger/:sessionId', function(req, res){
   var sessionId = req.param('sessionId');
   console.log('posting to /logger/:sessionId with id ' + sessionId);
@@ -201,3 +212,6 @@ app.listen(process.env.PORT || 5002);
 
 // other datasources to try:
 // tausdata, wiktionary
+
+// for hosting the app using express - TODO: check this and delete if not needed
+//app.use(gzippo.staticGzip("" + __dirname + "/../"));

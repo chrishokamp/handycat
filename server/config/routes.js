@@ -22,6 +22,10 @@ module.exports = function(app) {
   // Translation Project Routes - these routes let users interact with their projects
   var projects = require('../controllers/projects');
   // Chris - ensureAuthenticated middleware controls access to the route
+  // TODO: remove this temporary route after building RESTful API
+
+//  app.get('/api/project',auth.ensureAuthenticated, function(req,));
+
   app.get('/api/projects',auth.ensureAuthenticated, projects.all);
   app.post('/api/projects', auth.ensureAuthenticated, projects.create);
   app.get('/api/projects/:projectId', projects.show);
@@ -42,7 +46,7 @@ module.exports = function(app) {
       res.cookie('user', JSON.stringify(req.user.user_info));
     }
 
-    res.render('index.html');
+    res.render('../../app/index.html');
   });
 
 }
