@@ -1,9 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<!-- create the project management interface -->
+<div>
+    <a ui-sref="projects.create" class="btn btn-primary">Create Project</a>
+</div>
+<div ng-controller="ProjectCtrl">
+    <h1>Your Projects</h1>
+    <div ng-repeat="project in projects">
+        <p>{{project.name}}</p>
+    </div>
+</div>
 
-</body>
-</html>
+<div>
+    <h3 style="text-align: center;">Or click one of these testing files:
+        <a ng-click="loadFileFromServer('PEARL_TS1.xlf')">Test 1</a>,
+        <a ng-click="loadFileFromServer('PEARL_TS2.xlf')">Test 2</a>
+    </h3>
+</div>
+
