@@ -21,37 +21,44 @@ var App = window.App = angular.module('editorComponentsApp',
 .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider
     .state('projects', {
+      abstract: true,
       url: '/projects',
-      templateUrl: 'views/projects.html'
+      templateUrl: '/views/projects.html'
+    })
+    .state('projects.list', {
+      url: '/list',
+      templateUrl: '/views/partials/projects/project-list.html'
     })
     .state('projects.create', {
       url: '/create',
-      templateUrl: 'views/partials/projects/create.html'
+      templateUrl: '/views/partials/projects/create.html'
 //    controller: 'BlogsCtrl'
     })
     // TODO: this should be edit/projectId, so that users can drop directly into a project
     .state('edit', {
       url: '/edit',
-      templateUrl: 'views/edit.html'
+      templateUrl: '/views/edit.html'
     })
     .state('edit.segment', {
       url: '/segment/:segmentId'
     })
     .state('login', {
       url: '/login',
-      templateUrl: 'views/login.html',
+      templateUrl: '/views/login.html',
       controller: 'LoginCtrl'
     })
     .state('/signup', {
       url: '/signup',
-      templateUrl: 'views/signup.html',
+      templateUrl: '/views/signup.html',
       controller: 'SignupCtrl'
     })
 
   $urlRouterProvider
     .otherwise('/login');
 
-  $locationProvider.html5Mode(true);
+    // Note: enabling html5Mode requires you to make absolute paths in index.html
+    // see: http://stackoverflow.com/questions/24763489/html5-mode-ui-router-uncaught-syntaxerror-unexpected-token
+//  $locationProvider.html5Mode(true);
 })
 
 // heroku
