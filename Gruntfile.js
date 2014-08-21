@@ -93,7 +93,7 @@ module.exports = function (grunt) {
         ],
         tasks: ['express:dev'],
         options: {
-          livereload: LIVERELOAD_PORT,
+//          livereload: LIVERELOAD_PORT,
 //          nospawn: true //Without this option specified express won't be reloaded
           spawn: false
         }
