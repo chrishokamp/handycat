@@ -24,6 +24,11 @@ var App = window.App = angular.module('editorComponentsApp',
       url: '/projects',
       templateUrl: 'views/projects.html'
     })
+    .state('projects.create', {
+      url: '/create',
+      templateUrl: 'views/partials/projects/create.html'
+//    controller: 'BlogsCtrl'
+    })
     // TODO: this should be edit/projectId, so that users can drop directly into a project
     .state('edit', {
       url: '/edit',

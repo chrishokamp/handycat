@@ -48,7 +48,7 @@ exports.update = function(req, res) {
 };
 
 /**
- * Delete a blog
+ * Delete a project
  */
 exports.destroy = function(req, res) {
   var project = req.project;
@@ -63,15 +63,16 @@ exports.destroy = function(req, res) {
 };
 
 /**
- * Show a blog
+ * Show a project
  */
 exports.show = function(req, res) {
   res.json(req.project);
 };
 
 /**
- * List of Blogs
+ * List of projects
  */
+// TODO: this should be specific to each user
 exports.all = function(req, res) {
   Project.find().sort('-created').populate('creator', 'username').exec(function(err, projects) {
     if (err) {
