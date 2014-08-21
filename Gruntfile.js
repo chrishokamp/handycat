@@ -1,6 +1,6 @@
 'use strict';
 var LIVERELOAD_PORT = 35729;
-//var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
+var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
@@ -20,7 +20,7 @@ module.exports = function (grunt) {
 //  grunt.loadNpmTasks('grunt-angular-templates');
 //  grunt.loadNpmTasks('grunt-autoprefixer');
 //
-//  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   // configurable paths
   var yeomanConfig = {
@@ -36,7 +36,8 @@ module.exports = function (grunt) {
     yeoman: yeomanConfig,
     express: {
       options: {
-        port: process.env.PORT || 9000
+        port: process.env.PORT || 9000,
+        livereload: LIVERELOAD_PORT
       },
       dev: {
         options: {
@@ -51,11 +52,11 @@ module.exports = function (grunt) {
         }
       }
     },
-    open: {
-      server: {
-        url: 'http://localhost:<%= express.options.port %>'
-      }
-    },
+//    open: {
+//      server: {
+//        url: 'http://localhost:<%= express.options.port %>'
+//      }
+//    },
     watch: {
       coffee: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
@@ -65,18 +66,18 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.coffee'],
         tasks: ['coffee:test']
       },
-//      livereload: {
-//        options: {
-//          livereload: LIVERELOAD_PORT
-//        },
-//        files: [
-//          '<%= yeoman.app %>/{,*/}*.html',
-//          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-//          '{.tmp,<%= yeoman.app %>}/scripts/**/*.js',
-//          '{.tmp,<%= yeoman.app %>}/views/{,*/}*.html',
-//          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-//        ]
-//      },
+      livereload: {
+        options: {
+          livereload: LIVERELOAD_PORT
+        },
+        files: [
+          '<%= yeoman.app %>/{,*/}*.html',
+          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+          '{.tmp,<%= yeoman.app %>}/scripts/**/*.js',
+          '{.tmp,<%= yeoman.app %>}/views/{,*/}*.html',
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+        ]
+      },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer']
@@ -92,18 +93,19 @@ module.exports = function (grunt) {
         ],
         tasks: ['express:dev'],
         options: {
-          livereload: true,
-          // Chris: commented for testing
-          nospawn: true //Without this option specified express won't be reloaded
+          livereload: LIVERELOAD_PORT,
+//          nospawn: true //Without this option specified express won't be reloaded
+          spawn: false
         }
+
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
       },
-//      gruntfile: {
-//        files: ['Gruntfile.js']
-//      }
+      gruntfile: {
+        files: ['Gruntfile.js']
+      }
     },
     connect: {
       options: {
@@ -149,11 +151,11 @@ module.exports = function (grunt) {
         }
       }
     },
-//        open: {
-//            server: {
-//                url: 'http://localhost:<%= connect.options.port %>'
-//            }
-//        },
+        open: {
+            server: {
+                url: 'http://localhost:<%= connect.options.port %>'
+            }
+        },
     clean: {
       dist: {
         files: [{
