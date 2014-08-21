@@ -313,15 +313,9 @@ angular.module('controllers').controller('AceCtrl',
       // make sure the user isn't trying to click into the same token to edit it
       if ($scope.lastToken !== token) {
         $scope.lastToken = token;
-
-        // note - these properties are on the parent (segmentCtrl)
-//        $scope.$apply(
-//          function() {
-//          }
-//        );
-            $scope.toggleToolbar(false);
-            $scope.queryGlossary(token.value, 'deu', 'eng');
-            $scope.glossary.glossaryQuery = token.value;
+//            $scope.toggleToolbar(false);
+//            $scope.queryGlossary(token.value, 'deu', 'eng');
+//            $scope.glossary.glossaryQuery = token.value;
       }
     });
 
@@ -396,8 +390,6 @@ angular.module('controllers').controller('AceCtrl',
     editor.focus();
 
   };  // end AceLoaded
-
-
 
 // TODO: maintain the current TM matches based on the selected token in the source side
   $scope.minPhraseLen = 15;

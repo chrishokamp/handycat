@@ -4,7 +4,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
     ['$scope', 'Document', 'session', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log',
     function($scope, Document, session, $location, $state, $stateParams, $modal, $rootScope, $log) {
   if (Document.segments.length === 0) {
-    $state.go('projects');
+    $state.go('projects.list');
   }
 
   // this fires once the view content has completely loaded

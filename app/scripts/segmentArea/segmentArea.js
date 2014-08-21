@@ -49,18 +49,18 @@ angular.module('controllers')
 //     $scope.segment.target = targetSentence;
 //  };
 //
+
 //  // Text currently selected in the child editor
-//  $scope.setTextSelection = function(text, range) {
-//    $scope.selectedToken = text;
-//    $scope.selectedRange = range;
-//    $log.log('setTextSelection fired, selectedToken: '+$scope.selectedToken+' selectedRange: ' + $scope.selectedRange);
-//  };
-//
-//  $scope.clearSelection = function() {
-//    $scope.selectedToken = '';
-//    $scope.selectedRange = '';
-//  };
-//
+$scope.setTextSelection = function(text, range) {
+  $scope.selectedToken = text;
+  $scope.selectedRange = range;
+  $log.log('setTextSelection fired, selectedToken: '+$scope.selectedToken+' selectedRange: ' + $scope.selectedRange);
+};
+$scope.clearSelection = function() {
+  $scope.selectedToken = '';
+  $scope.selectedRange = '';
+};
+
 //  $scope.copySourcePunctuation = function(segment) {
 //    $log.log('copy source called from segment ' + segment);
 //    var source = $scope.segment.source;
