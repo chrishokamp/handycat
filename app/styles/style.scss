@@ -10,9 +10,8 @@
 body {
   // background: rgb(236, 236, 236);
 //  background: slategray;
-//  background: #ffffff;
-  //background: lightgrey;
-  background-color: #f6f6f6;
+//  background-color: #f6f6f6;
+  background-color: #F5F8F5;
 //  background-image:url('../images/ricepaper.png');
   //background-image:url('../images/broken_noise.png');
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
@@ -115,6 +114,10 @@ body {
 
 h3 {
   padding: 4px 0 4px 0;
+}
+
+.slate {
+  background-color: currentcolor;
 }
 
 // upward pointing triangle
