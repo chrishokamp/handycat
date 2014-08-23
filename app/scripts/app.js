@@ -29,11 +29,40 @@ var App = window.App = angular.module('editorComponentsApp',
       url: '/list',
       templateUrl: '/views/partials/projects/project-list.html'
     })
-    .state('projects.create', {
+//    .state('projects.create', {
+//      url: '/create',
+//      templateUrl: '/views/partials/projects/create.html'
+////    controller: 'BlogsCtrl'
+//    })
+    			.state('projects.create', {
       url: '/create',
-      templateUrl: '/views/partials/projects/create.html'
-//    controller: 'BlogsCtrl'
-    })
+//					url: '/single-event/:id',
+					onEnter: ['$stateParams', '$state', '$modal', '$log', function($stateParams, $state, $modal, $log) {
+            // todo: close on state change
+						$modal.open({
+              templateUrl: '/views/partials/projects/create.html',
+							controller: 'CreateProjectCtrl',
+							backdrop: false,
+							keyboard: false
+						})
+						.result.then(function(result) {
+							$state.go('projects.list', { reload: false });
+						});
+					}]
+//      $scope.modalInstance = $modal.open({
+//        templateUrl: 'add.html',
+//        controller: 'AddCtrl'
+//      });
+//      $scope.modalInstance.result.then(function() {
+//        console.log('Success');
+//      }, function() {
+//        console.log('Cancelled');
+//      })['finally'](function(){
+//        // unset modalInstance to prevent double close of modal when $routeChangeStart
+//        $scope.modalInstance = undefined
+//      });
+				})
+
     // TODO: this should be edit/projectId, so that users can drop directly into a project
     .state('edit', {
       url: '/edit',
