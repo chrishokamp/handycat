@@ -13,6 +13,7 @@ angular.module('controllers')
       console.log(to.name);
       if (to.name !== 'projects.create') {
         // Note: this requires the custom ui-bootstrap version (0.12.0)
+        // only $dismiss works currently, not $close
         $scope.$dismiss();
       }
     });

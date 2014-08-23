@@ -2,9 +2,9 @@
 // TODO: we need a service representing the XLIFF DOM at all times
 // TODO: this service should be merged with the Document service
 
-// TODO: remove session service dependency
-angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Document', 'session', '$http', '$log',
-  function($rootScope, fileReader, Document, session, $http, $log) {
+// Note: the 'Logger' service is only included here so that it is ready to hear 'document-loaded' when the event fires
+angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Document', 'session', 'Logger', '$http', '$log',
+  function($rootScope, fileReader, Document, session, Logger, $http, $log) {
   // Persistent DOMParser
   var parser = new DOMParser();
 
@@ -115,6 +115,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       // flip the flag on the Document object
       Document.loaded = true;
       // tell the world that the document loaded
+
       $log.info("Firing document-loaded event");
       $log.log(Date.now());
       $rootScope.$broadcast('document-loaded');

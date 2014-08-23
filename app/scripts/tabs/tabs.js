@@ -1,14 +1,14 @@
 angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$anchorScroll', 'Document', '$modal',
-  '$log', 'project', 'session', 'loggerUrl',
-  function($scope, $location, $anchorScroll, Document, $modal, $log, Project, session, loggerUrl) {
+  '$log', 'session', 'loggerUrl',
+  function($scope, $location, $anchorScroll, Document, $modal, $log, session, loggerUrl) {
 
   $scope.session = session;
   $scope.url = loggerUrl;
 
-  $scope.toggleSmartButtons = function() {
-    Project.showSmartButtons = !Project.showSmartButtons;
-    Project.updateStat('pearl-show-smart-buttons', -1, Project.showSmartButtons);
-  };
+//  $scope.toggleSmartButtons = function() {
+//    Project.showSmartButtons = !Project.showSmartButtons;
+//    Project.updateStat('pearl-show-smart-buttons', -1, Project.showSmartButtons);
+//  };
 
   $scope.tabs = [{
     title: "Translate",

@@ -3,9 +3,14 @@
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'Wikipedia', 'Glossary', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-  'Document', 'session',
+  'Document', 'session', 'Logger',
   function($rootScope, $scope, Wikipedia, Glossary, $sce, $log, ruleMap, copyPunctuation,
-           Document, Session) {
+           Document, Session, Logger) {
+
+  $scope.outputLog = function () {
+    $log.log('SEGMENT AREA OUTPUT LOG');
+    Logger.exportJSON();
+  }
 
   $scope.test = { 'test': 'TEST'};
 

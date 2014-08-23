@@ -28,7 +28,6 @@ angular.module('services').factory('Document', function( ) {
       self.revision = undefined;
       self.sourceSegments.length = 0;
       self.targetSegments.length = 0;
-      var l = [1,2,3];
       self.segments.length = 0;
       self.translatableNodes.length = 0;
       self.sourceLang = '';
