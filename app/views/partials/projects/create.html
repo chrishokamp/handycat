@@ -23,12 +23,30 @@
         </div>
         <div class="row">
             <div class="col-xs-6 col-centered text-center">
-                <span class="btn btn-default btn-file">Choose a File<input class="file-input" type="file" ng-file-select="onFileSelect($files)" /></span>
+                <label class="btn btn-default btn-file">Choose a File<input class="file-input" type="file" ng-file-select="onFileSelect($files)" /></label>
+            <!--<input type="file" ng-file-select="onFileSelect($files)" multiple>-->
             </div>
-            <!--<input type="file" ng-file-select="onFileSelect($files)" multiple> -->
         </div>
     </div>
     <div>
+    <h1>MOVE THIS AND CHANGE LOGIC</h1>
+    <div>
+        <div class="row">
+            <div class="col-xs-12 selected-files" ng-show="selectedFiles.length > 0">
+                <h3>Selected File:</h3>
+                <div class="sel-file row" ng-repeat="f in selectedFiles">
+                    <div class="col-xs-7">{{f.name}} - size: {{f.size}}B - type: {{f.type}}</div>
+                    <div class="col-xs-1 col-xs-offset-1 start-translation"><button  ng-click="startTranslation(); fileAdded = false;" class="btn btn-info">Translate</button></div>
+
+                    <!--<button class="button" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>-->
+                    <!--<span class="progress" ng-show="progress[$index] >= 0">-->
+                    <!--<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>-->
+                    <!--</span>-->
+                    <!--<button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
         <h3 style="text-align: center;">Or click one of these testing files:
             <a ng-click="loadFileFromServer('PEARL_TS1.xlf')">Test 1</a>,
             <a ng-click="loadFileFromServer('PEARL_TS2.xlf')">Test 2</a>
@@ -36,21 +54,3 @@
     </div>
 </div><!-- end upload area -->
 
-<h1>MOVE THIS AND CHANGE LOGIC</h1>
-<div>
-    <div class="row">
-        <div class="col-xs-12 selected-files" ng-show="selectedFiles.length > 0">
-            <h3>Selected File:</h3>
-            <div class="sel-file row" ng-repeat="f in selectedFiles">
-                <div class="col-xs-7">{{f.name}} - size: {{f.size}}B - type: {{f.type}}</div>
-                <div class="col-xs-1 col-xs-offset-1 start-translation"><button  ng-click="startTranslation(); fileAdded = false;" class="btn btn-info">Translate</button></div>
-
-                <!--<button class="button" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>-->
-                <!--<span class="progress" ng-show="progress[$index] >= 0">-->
-                <!--<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>-->
-                <!--</span>-->
-                <!--<button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>-->
-            </div>
-        </div>
-    </div>
-</div>
