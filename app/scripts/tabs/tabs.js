@@ -1,3 +1,6 @@
+// TODO: rename this controller to something better -- should be the controller for the entire page
+// TODO: the catNav directive has its own controller - move navigation functions there
+
 angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$anchorScroll', 'Document', '$modal',
   '$log', 'session', 'loggerUrl',
   function($scope, $location, $anchorScroll, Document, $modal, $log, session, loggerUrl) {

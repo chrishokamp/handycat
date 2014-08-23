@@ -34,9 +34,9 @@ angular.module('services')
     return {
       Log: Log,
       exportJSON: function () {
-        var out = JSON.stringify(this.Log.segments);
-        $log.log('LOGGING DOCUMENT');
-        $log.log(out);
+        // pretty stringify with indent = 2
+        var out = JSON.stringify(this.Log.segments, undefined, 2);
+        return out;
       }
 
     }
