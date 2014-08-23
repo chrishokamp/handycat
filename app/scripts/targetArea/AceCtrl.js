@@ -283,6 +283,8 @@ angular.module('controllers').controller('AceCtrl',
     var editor = ed;
 
     $scope.editor = editor;
+    // expose getValue to the segmentArea
+    $scope.$parent.getValue = $scope.editor.getValue();
 
     $scope.editor.session.setMode('ace/mode/text');
 

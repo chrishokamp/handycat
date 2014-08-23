@@ -12,8 +12,6 @@ angular.module('controllers')
     Logger.exportJSON();
   }
 
-  $scope.test = { 'test': 'TEST'};
-
   $scope.project = Session;
   // this gets reset in the template
   $scope.id = {};
@@ -29,6 +27,7 @@ angular.module('controllers')
   $scope.changeSegmentState = function changeSegmentState (stateName) {
     $scope.segmentState = stateName;
     $scope.$broadcast('change-segment-state', { 'newState': stateName })
+
   }
 
   $scope.$on('activate-segment', function(event, index) {
@@ -36,7 +35,6 @@ angular.module('controllers')
       // tell the scope to create the editor element
       $scope.$broadcast('activate');
     }
-
   });
 
 //  $scope.language = Document.targetLang;
@@ -235,6 +233,16 @@ $scope.clearSelection = function() {
 
     $scope.isActive.active = false;
 
+    // TODO: the segment state should be directly tied to the XLIFF document, there should be only a single place where this state data is stored
+    // TODO: this is a quick hack
+    $log.log('LOGGING FINAL VALUES');
+    $log.log(segId);
+    $log.log(typeof(segId));
+    $log.log(Logger.Log);
+    $log.log('logged LOGGER');
+    Logger.Log.segments[segId].final = $scope.segment.target;
+    $log.log(Logger.Log.segments[segId].final);
+
     // Update the current segment
     $scope.segment.targetDOM.textContent = $scope.segment.target;
     Document.revision++;
@@ -250,6 +258,7 @@ $scope.clearSelection = function() {
   };
 
   // when the changeSegment event fires, each AceCtrl scope responds
+  // TODO: this event overlaps with change-segment-state
   $scope.$on('changeSegment', function(e,data) {
     $log.log('Heard changeSegment, my index is: ' + $scope.index);
     $log.log('Data.currentSegment is: ' + data.currentSegment);

@@ -18,10 +18,10 @@ angular.module('services')
       $log.log('LOGGER INITIALIZED');
       angular.forEach(_.zip(Document.sourceSegments, Document.targetSegments, new Array(Document.sourceSegments.length)),
         function(tuple) {
-          // the final field should be empty before editing
+          // the final field should be empty before the user starts editing
           Log.initSegment(tuple[0], tuple[1], '');
         });
-    });    // a document is a list of segments
+    });
 
     var Log = {
       segments: [],
