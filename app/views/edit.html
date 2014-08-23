@@ -9,8 +9,6 @@
         <div class="segment row" ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}" ng-controller="SegmentAreaCtrl" end-repeat ng-repeat="seg in segments"
              ng-init="segment = seg; init($index); segmentNumber = $index; id.index = $index;">
             <a id="segment-{{$index}}"></a>
-            <a class="btn btn-primary" ng-click="outputLog()">OUTPUT LOG</a>
-
             <p class="segment-index-label">Segment Index: {{$index}}
                 <span class="segment-finished" ng-show="segmentState.completed">
                     <button type="button" class="btn btn-default btn-xs">
