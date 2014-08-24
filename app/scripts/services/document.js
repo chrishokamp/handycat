@@ -4,7 +4,7 @@
 
 // properties = { segments: <numSegments>, docTree: { <documentObject> } }
 
-angular.module('services').factory('Document', function( ) {
+angular.module('services').factory('Document',['$log', function($log) {
 
   // Working - functions to update, delete, and modify nodes in the XLIFF
   return {
@@ -25,7 +25,10 @@ angular.module('services').factory('Document', function( ) {
     completedSegments:[],
 
     getDOMString: function () {
-      return new XMLSerializer().serializeToString( Document.DOM );
+      var domString = new XMLSerializer().serializeToString( this.DOM );
+      $log.log('DOM STRING');
+      $log.log(domString);
+      return domString;
     },
 
     init: function() {
@@ -43,5 +46,5 @@ angular.module('services').factory('Document', function( ) {
       self.completedSegments.length = 0;
     }
   }
-});
+}]);
 

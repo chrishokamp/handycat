@@ -1,15 +1,27 @@
-<!--working - collapse the drag area when a file is uploaded-->
-<div ng-controller="CreateProjectCtrl">
+<div class="text-center" ng-controller="CreateProjectCtrl">
+
+    <div class="pull-right"><button class="btn btn-primary" ng-click="close()">X</button></div>
+    <br/>
+    <h3>Create a New Translation Project</h3>
+    <hr/>
+
+    <!--alert user to the state of their uploaded file-->
     <div class="alert alert-success slide-in" ng-click="fileAdded=!fileAdded" ng-hide="!fileAdded">
         Click to change your file...
     </div>
-
     <div class="alert alert-danger slide-in" ng-show="parser.parsingError && !fileAdded">
         Error: The uploaded file is not a valid XLIFF file.
     </div>
 
-    <div ><button class="btn btn-primary" ng-click="close()">X</button></div>
+    <form role="form">
+        <div class="form-group">
+            <label class="pull-left" for="projectName">Project Name</label>
+            <input type="text" class="form-control" id="projectName" ng-model="title" placeholder="Enter a project name..." />
+        </div>
+    </form>
+    <hr/>
 
+    <h4>Select an XLIFF file:</h4>
     <div ng-controller="UploadCtrl">
         <div class="slide-in">
             <div class="row" >
@@ -37,9 +49,9 @@
                     <div class="col-xs-1"><i ng-show="documentLoading" class="icon ion-loading-c"></i></div>
                     <div class="col-xs-1">
                         <button
-                                ng-click="startTranslation(); fileAdded = false;"
+                                ng-click="create(); fileAdded = false;"
                                 class="btn btn-info"
-                                >
+                        >
                             Create Project
                         </button>
                     </div>
