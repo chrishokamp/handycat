@@ -8,9 +8,6 @@
 }
 
 body {
-  // background: rgb(236, 236, 236);
-//  background: slategray;
-//  background-color: #f6f6f6;
   background-color: #F5F8F5;
 //  background-image:url('../images/ricepaper.png');
   //background-image:url('../images/broken_noise.png');
@@ -112,8 +109,11 @@ body {
   cursor: pointer;
 }
 
-h3 {
-  padding: 4px 0 4px 0;
+.modal-dialog {
+  width: 80%;
+  margin: auto;
+  margin-top: 60px;
+  padding: 0;
 }
 
 .slate {
@@ -177,15 +177,6 @@ h3 {
 
 .file-input {
   margin-top: 20px;
-}
-
-%bottom-margin {
-  margin-bottom: 10px;
-
-}
-
-.start-translation {
-  @extend %bottom-margin;
 }
 
 .user-info {

@@ -49,18 +49,6 @@ var App = window.App = angular.module('editorComponentsApp',
 							$state.go('projects.list', { reload: false });
 						});
 					}]
-//      $scope.modalInstance = $modal.open({
-//        templateUrl: 'add.html',
-//        controller: 'AddCtrl'
-//      });
-//      $scope.modalInstance.result.then(function() {
-//        console.log('Success');
-//      }, function() {
-//        console.log('Cancelled');
-//      })['finally'](function(){
-//        // unset modalInstance to prevent double close of modal when $routeChangeStart
-//        $scope.modalInstance = undefined
-//      });
 				})
 
     // TODO: this should be edit/projectId, so that users can drop directly into a project
