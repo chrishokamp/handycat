@@ -1,5 +1,5 @@
 angular.module('controllers')
-.controller('CreateProjectCtrl', ['Document', 'Projects', '$log', '$scope', '$rootScope', function(Document, Projects, $log, $scope, $rootScope) {
+.controller('CreateProjectCtrl', ['Document', 'Projects', '$state', '$log', '$scope', '$rootScope', function(Document, Projects, $state, $log, $scope, $rootScope) {
     // To let close the Single Event modal
     $scope.close = function() {
       $scope.$close(true);
@@ -8,24 +8,12 @@ angular.module('controllers')
     $scope.validXLIFF = false;
     $scope.documentLoading = false;
 
-    // create the project, and drop to edit mode for that project
-      // the project data should already be on the scope
-      // is the XLIFF already parsed? - there should be a validation check to make sure this is a valid XLIFF
 
-      // this is the current parsing flow
-      // autoload a file
-//      XliffParser.loadLocalFile(fileUrl);
-
-      // go to the edit state
-//      $scope.$on('document-loaded', function(e) {
-//        $state.go('edit.segment', { segmentId: 0 });
-//      });
-      // create the project on the server
-
+    // TODO: this function is currently unused
+      // TODO: send a promise back from the xliffParser instead of using events
     // when a file is added, do the parsing immediately
     // call XliffParser, wait for the document loaded event, then flip the validXLIFF flag on the $scope
     function parse() {
-      // TODO: send a promise back from the xliffParser
       $scope.documentLoading = true;
       $scope.$on('document-loaded', function() {
         $scope.validXLIFF = true;
@@ -44,14 +32,18 @@ angular.module('controllers')
       }
     });
 
+    // is the XLIFF already parsed? - there should be a validation check to make sure this is a valid XLIFF
     $scope.create = function() {
       var project = new Projects({
         title: $scope.title,
         content: Document.getDOMString()
       });
       project.$save(function(response) {
-        //Chris: where does the router send this?
 //        $location.path("projects/" + response._id);
+
+        // TODO: pass in the project id as parameter to the route
+//        $state.go('projects.edit');
+        $state.go('edit');
         $log.log('PROJECT SAVED');
       });
 
@@ -62,6 +54,7 @@ angular.module('controllers')
 //      blog.$remove();
 //
 //      for (var i in $scope.blogs) {
+
 //        if ($scope.blogs[i] == blog) {
 //          $scope.blogs.splice(i, 1);
 //        }
