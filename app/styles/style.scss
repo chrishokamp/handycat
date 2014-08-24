@@ -20,6 +20,11 @@ body {
    width:460px;             /* As IE ignores !important it will set width as 1000px; */
 }
 
+// TODO: the content needs to always stay below the nav
+.main-content {
+  margin-top: 50px;
+}
+
 #login-wrapper {
   background-color: #87cefa;
 }

@@ -2,17 +2,17 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#handycat-menu">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Pearl</a>
+            <a class="navbar-brand">HandyCAT</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="handycat-menu">
             <!--<button type="button" class="btn btn-default navbar-btn">Sign in</button>-->
             <ul class="nav navbar-nav">
                 <li class="active"><a>Projects</a></li>
@@ -27,12 +27,11 @@
                 <li><a ng-click="openHelp()">Help</a></li>
                 <li><a ng-href="{{url}}/logger/session/{{session.sessionId}}" target="_blank">Session: {{session.sessionIdShort}}</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <!--<li><a href="#">Link</a></li>-->
+            <ul ng-show="currentUser" class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.username }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a ng-click="toggleSmartButtons()">Show/hide buttons</a></li>
+                        <!--<li><a ng-click="toggleSmartButtons()">Show/hide buttons</a></li>-->
                     </ul>
                 </li>
             </ul>
