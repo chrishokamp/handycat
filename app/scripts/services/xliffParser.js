@@ -2,8 +2,8 @@
 // TODO: this service should be merged with the Document service
 
 // Note: the 'Logger' service is only included here so that it is ready to hear 'document-loaded' when the event fires
-angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Document', 'session', 'Logger', '$http', '$log',
-  function($rootScope, fileReader, Document, session, Logger, $http, $log) {
+angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Document', 'session', 'Logger', '$q', '$http', '$log',
+  function($rootScope, fileReader, Document, session, Logger, $q, $http, $log) {
   // Persistent DOMParser
   var parser = new DOMParser();
 
@@ -35,6 +35,9 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
     parseXML: function(rawText) {
       Document.init();
       session.startSession();
+
+     var deferred = $q.defer();
+
 
       var self = this;
       $log.log('PARSING STARTED');
@@ -122,12 +125,15 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       Document.revision = 0;
       // flip the flag on the Document object
       Document.loaded = true;
-      // tell the world that the document loaded
 
+      // TODO: remove the document-loaded event, and use the result of the resolved promise directly
+      // tell the world that the document loaded
       $log.info("Firing document-loaded event");
       $log.log(Date.now());
       $rootScope.$broadcast('document-loaded');
+      deferred.resolve(true);
 
+      return deferred.promise;
     },
     // working - the source may not be segmented with <seg-source> tags -- there may only be a single <source> tag
     getTranslatableSegments: function(xmlDoc) {

@@ -3,9 +3,12 @@
 angular.module('controllers').controller('ContentAreaCtrl',
     ['$scope', 'Document', 'session', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log',
     function($scope, Document, session, $location, $state, $stateParams, $modal, $rootScope, $log) {
-  if (Document.segments.length === 0) {
-    $state.go('projects.list');
-  }
+
+  // Working - make sure that we get the project from the server before this controller is initialized
+
+//  if (Document.segments.length === 0) {
+//    $state.go('projects.list');
+//  }
 
   // this fires once the view content has completely loaded
   $rootScope.$on('repeat-finished', function (event) {

@@ -1,4 +1,6 @@
-<div ng-controller="TabsCtrl">
+
+<!-- TODO: completely remove the TabsCtrl - meta-state can be managed in ProjectCtrl -->
+<div ng-init="findOne()" ng-controller="TabsCtrl">
     <cat-nav></cat-nav>
     <!-- This hr uses some space vertical space so the nav-bar do not hide part of the first segment -->
     <hr>
@@ -6,7 +8,10 @@
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
         <!-- repeat for each segment -->
-        <div class="segment row" ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}" ng-controller="SegmentAreaCtrl" end-repeat ng-repeat="seg in segments"
+        <div class="segment row" ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}"
+             ng-controller="SegmentAreaCtrl"
+             ng-repeat="seg in segments"
+             end-repeat
              ng-init="segment = seg; init($index); segmentNumber = $index; id.index = $index;">
             <a id="segment-{{$index}}"></a>
             <p class="segment-index-label">Segment Index: {{$index}}

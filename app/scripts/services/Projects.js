@@ -2,7 +2,7 @@
 
 // TODO: what is the exact API to /projects ?
 angular.module('services')
-  .factory('Projects', function ($resource) {
+  .factory('Projects', ['$resource', function ($resource) {
     return $resource('api/projects/:projectId', {
       projectId: '@_id'
     }, {
@@ -10,4 +10,4 @@ angular.module('services')
         method: 'PUT'
       }
     });
-  });
+  }]);

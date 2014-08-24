@@ -29,11 +29,6 @@ var App = window.App = angular.module('editorComponentsApp',
       url: '/list',
       templateUrl: '/views/partials/projects/project-list.html'
     })
-//    .state('projects.create', {
-//      url: '/create',
-//      templateUrl: '/views/partials/projects/create.html'
-////    controller: 'BlogsCtrl'
-//    })
     			.state('projects.create', {
       url: '/create',
 //					url: '/single-event/:id',
@@ -50,15 +45,31 @@ var App = window.App = angular.module('editorComponentsApp',
 						});
 					}]
 				})
-
-    // TODO: this should be edit/projectId, so that users can drop directly into a project
-    .state('edit', {
-      url: '/edit',
-      templateUrl: '/views/edit.html'
+    .state('projects.edit', {
+      url: '/:projectId/edit',
+      templateUrl: '/views/edit.html',
+      controller: 'ProjectCtrl',
+//      resolve: {
+//        Projects: 'Projects',
+//        XliffParser: 'XliffParser',
+//        Document: 'Document',
+        // TODO: get a promise back from the Document service as well
+//        documentLoaded: function(Projects, XliffParser, Document, $stateParams, $log) {
+//          // load, parse, init document, set segments (linked directly to document) on controller
+//          return Projects.get({projectId: $stateParams.projectId})
+//            .then(function (projectObj) {
+//              return XliffParser.parseXML(projectObj.content)
+//            });
+//        }
+//      }
     })
-    .state('edit.segment', {
-      url: '/segment/:segmentId'
-    })
+//    .state('edit', {
+//      url: '/edit',
+//      templateUrl: '/views/edit.html'
+//    })
+//    .state('edit.segment', {
+//      url: '/segment/:segmentId'
+//    })
     .state('login', {
       url: '/login',
       templateUrl: '/views/login.html',
