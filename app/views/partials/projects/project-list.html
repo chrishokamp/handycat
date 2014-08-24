@@ -2,10 +2,10 @@
 <div>
     <a ui-sref="projects.create" class="btn btn-primary">Create Project</a>
 </div>
-<div ng-controller="ProjectCtrl">
+<div ng-init="find()" ng-controller="ProjectCtrl">
     <h1>Your Projects</h1>
     <div ng-repeat="project in projects">
-        <p>{{project.name}}</p>
+        <p>{{project.title}}</p>
     </div>
 </div>
 
