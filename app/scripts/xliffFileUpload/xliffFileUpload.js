@@ -25,13 +25,13 @@ angular.module('controllers').controller('UploadCtrl',
   $scope.startTranslation = function() {
     // use the fileReader service to read the file (via the HTML5 FileAPI)
     // assume there's only a single file in the array for now
-// TODO: set the current file on one of the services to persist it through the session
     XliffParser.readFile($scope.selectedFiles[0]);
 // TODO: only initiate this transition if the file is successfully loaded and parsed
     $state.go('edit');
   };
 
   // Load a specific file from the server
+  // TODO: remove this function
   $scope.loadFileFromServer = function(which) {
     var fileUrl = 'data/' + which;
     // autoload a file
@@ -71,16 +71,12 @@ angular.module('controllers').controller('UploadCtrl',
     // show the user what the selected files are
     // assume this is a single file for now
     $scope.selectedFiles = $files;
+    $log.log('SCOPE FILES');
+    $log.log($files);
 
-    //$files: an array of files selected, each file has name, size, and type.
-// TODO: support multiple files?
-//    for (var i = 0; i < $files.length; i++) {
-//      $scope.progress = 0;
-//      var file = $files[i];
-//      //$log.log("Logging the file:")
-//      //$log.log(file);
-//
-//    }
+    // parse the file immediately
+    XliffParser.readFile($scope.selectedFiles[0]);
+
   };
 
 // TODO: implement fileProgress from the xliffParser

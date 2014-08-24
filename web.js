@@ -81,7 +81,6 @@ app.use(passport.session());
 //routes should be at the last
 //app.use(app.router);
 
-// app.use(app.router);
 params.extend(app);
 
 

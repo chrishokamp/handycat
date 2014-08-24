@@ -18,8 +18,15 @@ angular.module('services').factory('Document', function( ) {
     translatableNodes: [],
     sourceLang: '',
     targetLang: '',
+
+    // The stringified DOM is what we want to pass back and forth to the server
     DOM: {},
+
     completedSegments:[],
+
+    getDOMString: function () {
+      return new XMLSerializer().serializeToString( Document.DOM );
+    },
 
     init: function() {
       var self = this;
@@ -37,3 +44,4 @@ angular.module('services').factory('Document', function( ) {
     }
   }
 });
+

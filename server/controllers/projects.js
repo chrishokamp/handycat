@@ -1,10 +1,10 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-  Blog = mongoose.model('Project');
+  Project = mongoose.model('Project');
 
 /**
- * Find blog by id
+ * Find project by id
  */
 exports.project = function(req, res, next, id) {
   Project.load(id, function(err, project) {
@@ -16,8 +16,9 @@ exports.project = function(req, res, next, id) {
 };
 
 /**
- * Create a blog
+ * Create a project
  */
+// TODO: what is in req.body?
 exports.create = function(req, res) {
   var project = new Project(req.body);
   project.creator = req.user;

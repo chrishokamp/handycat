@@ -1,4 +1,3 @@
-// this service wraps the fileReader (fileReader implementation is done with promises)
 // TODO: we need a service representing the XLIFF DOM at all times
 // TODO: this service should be merged with the Document service
 
@@ -9,20 +8,29 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
   var parser = new DOMParser();
 
   return {
-    // call file reader, then parse the result as XML
-
-    // Only allow non-Upload controllers to touch this object once the file has been loaded and parsed
-    // TODO: should the user's device really be reading the file - or should the server send the file?
+    // True if the last parseXML call found an error parsing the Xliff
+    parsingError: false,
     readFile: function(file) {
       var self = this;
       var promise = fileReader.readAsText(file);
       promise.then(function(result) {
         self.parseXML(result);
       });
-    },
 
-    // True if the last parseXML call found an error parsing the Xliff
-    parsingError: false,
+    },
+    // utility function to grab a local file from a string url
+    loadLocalFile: function(filepath) {
+      // if filepath exists
+      var xliffFile = '';
+      if (filepath) xliffFile = filepath;
+
+      var self = this;
+      //This will make the request, then call the parser and fire the document loaded event
+      $http.get(xliffFile)
+        .success(function(data) {
+          self.parseXML(data);
+        });
+    },
 
     parseXML: function(rawText) {
       Document.init();
@@ -189,23 +197,5 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
 
       return mrkTarget;
     },
-    // utility function to grab a local file from a string url
-    loadLocalFile: function(filepath) {
-      $log.log('LOADING LOCAL FILE');
-      $log.log(Date.now());
-      // if filepath exists
-      var xliffFile = '';
-      if (filepath) xliffFile = filepath;
-
-      var self = this;
-      //This will make the request, then call the parser and fire the document loaded event
-      $http.get(xliffFile)
-        .success(function(data) {
-          $log.log('LOCAL FILE LOADED');
-          $log.log(Date.now());
-          //$log.log("Local File Data: " + data); // tested
-          self.parseXML(data);
-        });
-    }
   }
 }]);

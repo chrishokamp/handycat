@@ -192,10 +192,6 @@ h3 {
   margin-top: 10px;
 }
 
-.selected-files {
-  color: #f5f5f5;
-}
-
 /* End project view styles */
 
 /* styles for the editing view */
@@ -244,7 +240,6 @@ ul.nav-tabs > li {
   padding-left: 3px;
   // leave a little space between the two
 //  overflow-y: hidden;
-  //background-color: white;
 }
 
 .cat-glyph {
@@ -354,7 +349,6 @@ span.drop-text {
 }
 
 .segment-index-label {
-//  color: white;
   color: #708090;
   font-size: small;
 }

@@ -6,8 +6,7 @@
 angular.module('services')
 .factory('Logger', ['Document', '$rootScope', '$log', function(Document, $rootScope, $log) {
 
-    // an api to allow add, delete, update segment
-    // segment completion is implicit in the data
+    // segment completion is implicit in the data (if the 'final' field is different from hyp, the segment has been edited)
 
     // Initialize with the source, hypothesis, and update when the user presses "complete"
     // TODO: how are the different editing phases captured in the XLIFF standard?
@@ -18,14 +17,19 @@ angular.module('services')
     // Question 2: Post-editing is different than translating from scratch -- if the user didn't post edit, the logs may not help nearly as much
     // Sticking with XLIFF, and writing in- out- converters would be the industry and standard guys' preference
     // How much more work will this be than creating an application-specific persistence format?
+    // TODO: what are the critical parsers that we certainly need?
+    // txt - line by line
+    // txt with ||| separator
 
     // to initialize the logger when a new XLIFF document loads
     $rootScope.$on('document-loaded', function(e) {
-      angular.forEach(_.zip(Document.sourceSegments, Document.targetSegments, new Array(Document.sourceSegments.length)),
+      // note that Documents.targetSegments is duplicated here
+      angular.forEach(_.zip(Document.sourceSegments, Document.targetSegments, Document.targetSegments),
         function(tuple) {
-          // the final field should be empty before the user starts editing
-          Log.initSegment(tuple[0], tuple[1], '');
-        });
+          // the final field should be empty before the user starts editingr
+          Log.initSegment(tuple[0], tuple[1], tuple[2]);
+        }
+      );
     });
 
     var Log = {
