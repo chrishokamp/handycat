@@ -29,8 +29,8 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 var pass = require('./server/config/pass');
 
 // App Configuration
-//var env = process.env.NODE_ENV || 'development';
-var env = 'production';
+var env = process.env.NODE_ENV || 'development';
+//var env = 'production';
 
 if ('development' == env) {
    // configure stuff here
