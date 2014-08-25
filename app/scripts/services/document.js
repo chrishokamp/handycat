@@ -26,8 +26,6 @@ angular.module('services').factory('Document',['$log', function($log) {
 
     getDOMString: function () {
       var domString = new XMLSerializer().serializeToString( this.DOM );
-      $log.log('DOM STRING');
-      $log.log(domString);
       return domString;
     },
 

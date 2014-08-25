@@ -19,7 +19,6 @@ angular.module('controllers')
   // TODO: set this only when this is the active scope
   $scope.isActive = { active:true };
 
-
   // TODO: segment state should be directly linked to the XLIFF document
   // working: only one field on this object (not currentState AND completed)
   $scope.segmentState = { currentState: 'untranslated', completed: false };
@@ -48,6 +47,7 @@ angular.module('controllers')
 //  $scope.setSource = function(sourceSentence) {
 //    $log.log("setSource");
 //    $log.log("source is: " + sourceSentence);
+
 //    $scope.segment.source = sourceSentence;
 //  };
 //  $scope.setTarget = function(targetSentence) {
@@ -79,7 +79,6 @@ $scope.clearSelection = function() {
 //        ruleMap.newRule('copy-source-punctuation', '', '', 'Copy punctuation from source segment', segment));
 //    }
 //  };
-//
 //
 //  $scope.findAndReplace = function(original, change, segment) {
 //    var regexp = original;
@@ -248,10 +247,14 @@ $scope.clearSelection = function() {
 
     // Update the project on the server
     // TODO: actually put the project object on the $scope, and update directly
-//      var project = $scope.project;
-//      project.$update(function() {
+      var projectResource = $scope.projectResource;
+      $log.log('PROJECT');
+      $log.log(projectResource);
+      projectResource.content = Document.getDOMString();
+      projectResource.$update(function() {
 //        $location.path('blogs/' + blog._id);
-//      });
+        $log.log('Project updated');
+      });
 
   };
 

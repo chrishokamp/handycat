@@ -1,10 +1,5 @@
 angular.module('controllers')
 .controller('ProjectCtrl', ['$scope', 'Projects', 'XliffParser', '$stateParams', '$log', function($scope, Projects, XliffParser, $stateParams, $log) {
-    $scope.projects = [
-      { "name": "test-project1"},
-      { "name": "test-project2"},
-      { "name": "test-project3"},
-    ];
 
     // Chris: this is called when the project-list template is initialized
     $scope.find = function() {
@@ -19,8 +14,10 @@ angular.module('controllers')
       Projects.get({
         projectId: $stateParams.projectId
       }, function(project) {
-        $log.log('PROJECT RETRIEVED');
-        $scope.project = project;
+
+        // $scope.projectResource now holds a reference to the $resource
+        // the Document service will hold the XML content after the doc is parsed by xliffParser
+        $scope.projectResource = project;
         XliffParser.parseXML(project.content);
       });
     };
