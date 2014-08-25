@@ -3,9 +3,9 @@
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'Wikipedia', 'Glossary', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-  'Document', 'session', 'Logger', 'Project',
+  'Document', 'session', 'Logger', 'Projects',
   function($rootScope, $scope, Wikipedia, Glossary, $sce, $log, ruleMap, copyPunctuation,
-           Document, Session, Logger, Project) {
+           Document, Session, Logger, Projects) {
 
   $scope.outputLog = function () {
     $log.log('SEGMENT AREA OUTPUT LOG');

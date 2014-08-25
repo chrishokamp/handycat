@@ -36,14 +36,14 @@ angular.module('services').factory('Document',['$log', function($log) {
       self.ready = false;
       self.loaded = false;
       self.revision = undefined;
-      self.sourceSegments.length = 0;
-      self.targetSegments.length = 0;
-      self.segments.length = 0;
-      self.translatableNodes.length = 0;
+      self.sourceSegments = [];
+      self.targetSegments = [];
+      self.segments = [];
+      self.translatableNodes = [];
       self.sourceLang = '';
       self.targetLang = '';
       self.DOM = {};
-      self.completedSegments.length = 0;
+      self.completedSegments = [];
     }
   }
 }]);
