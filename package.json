@@ -1,20 +1,23 @@
 {
-  "name": "angularpassport",
+  "name": "handycat",
   "version": "0.0.0",
   "dependencies": {
     "express": "*",
     "body-parser": "*",
     "cookie-parser": "*",
     "express-session": "*",
-    "express-error-handler": "*",
+    "express-params": "*",
     "express-logger": "*",
+    "express-error-handler": "*",
     "method-override": "*",
     "passport": "*",
     "passport-local": "*",
     "mongoose": "*",
+    "mongodb": "*",
     "ejs": "~0.8.4",
     "underscore": "~1.5.2",
-    "connect-mongo": "*"
+    "connect-mongo": "*",
+    "cors": "*"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

@@ -39,12 +39,7 @@ angular.module('controllers')
         content: Document.getDOMString()
       });
       project.$save(function(response) {
-//        $location.path("projects/" + response._id);
-
-        // TODO: pass in the project id as parameter to the route
-//        $state.go('projects.edit');
-        $state.go('edit');
-        $log.log('PROJECT SAVED');
+        $state.go('projects.list');
       });
 
       $scope.title = "";

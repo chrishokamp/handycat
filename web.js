@@ -29,7 +29,8 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 var pass = require('./server/config/pass');
 
 // App Configuration
-var env = process.env.NODE_ENV || 'development';
+//var env = process.env.NODE_ENV || 'development';
+var env = 'production';
 
 if ('development' == env) {
    // configure stuff here
@@ -83,11 +84,10 @@ app.use(passport.session());
 
 params.extend(app);
 
-
-// TODO: move routes to a separate file and bootstrap
 //Bootstrap routes
 require('./server/config/routes')(app);
 
+// TODO: move these routes to a separate file and bootstrap
 // add a route to query media wiki
 app.param('lang', /^\w{2}$/);
 app.get('/wikipedia/:lang', function(req, res){

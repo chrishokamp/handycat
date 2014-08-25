@@ -462,22 +462,22 @@ module.exports = function (grunt) {
         html: ['<%= yeoman.dist %>/*.html']
       }
     },
-    // ngmin: {
-    //     dist: {
-    //         files: [{
-    //             expand: true,
-    //             cwd: '<%= yeoman.dist %>/scripts',
-    //             src: '*.js',
-    //             dest: '<%= yeoman.dist %>/scripts'
-    //         }]
-    //     }
-    // },
+    ngmin: {
+         dist: {
+             files: [{
+                 expand: true,
+                 cwd: '<%= yeoman.dist %>/scripts',
+                 src: '*.js',
+                 dest: '<%= yeoman.dist %>/scripts'
+             }]
+         }
+    },
     uglify: {
       files: [{
         expand: true,
         cwd: '<%= yeoman.dist %>/scripts',
 // TODO: add scripts.js here
-        src: 'vendor.js',
+        src: '*.js',
         dest: '<%= yeoman.dist %>/scripts'
 //                    '<%= yeoman.dist %>/scripts/scripts.js': [
 //                        '<%= yeoman.dist %>/scripts/scripts.js'
@@ -486,8 +486,7 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-//          cwd: '<%= yeoman.dist %>/scripts',
-          cwd: '.tmp/scripts',
+          cwd: '<%= yeoman.dist %>/scripts',
           src: '*.js',
           dest: '<%= yeoman.dist %>/scripts'
           //'<%= yeoman.dist %>/scripts/scripts.js': [
@@ -560,7 +559,7 @@ module.exports = function (grunt) {
     'concat',
     'copy',
     'cdnify',
-//    'ngmin',
+    'ngmin',
     'cssmin',
     'uglify:dist',
     'rev',

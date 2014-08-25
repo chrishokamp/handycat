@@ -48,7 +48,7 @@ module.exports = function(app) {
     }
 
     // express will look for this in the path under the 'views' property (see web.js)
-    res.render('../../app/index.html');
+    res.render('index.html');
 //    res.render('index.html');
   });
 
