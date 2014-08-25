@@ -88,9 +88,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       // we can assume that translators will want to translate every segment, so there should be at least an
       // empty target node corresponding to each source node
       var sourceWithTarget = _.zip(sourceSegments, targetSegments);
-      $log.log('ZIPPED SOURCE WITH TARGET');
-      $log.log(Date.now());
-
       _.each(sourceWithTarget,
         function(seg) {
           var sourceText = seg[0].textContent;

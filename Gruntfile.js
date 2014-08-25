@@ -17,7 +17,7 @@ module.exports = function (grunt) {
 //  grunt.loadNpmTasks('grunt-karma');
 //
 //  // to automatically add templates to the $templateCache
-//  grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks('grunt-angular-templates');
 //  grunt.loadNpmTasks('grunt-autoprefixer');
 //
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
@@ -373,6 +373,34 @@ module.exports = function (grunt) {
           src: [
             'generated/*'
           ]
+        },
+          {
+            expand: true,
+            cwd: '.tmp/concat/scripts',
+            dest: '<%= yeoman.dist %>/scripts',
+            src: [
+              '*.js'
+            ]
+          }
+        ],
+      },
+      heroku: {
+        files: [{
+          expand: true,
+          dot: true,
+          dest: 'heroku',
+          src: [
+            '<%= yeoman.dist %>/**',
+//            '<%= yeoman.views %>/**'
+          ]
+        }, {
+          expand: true,
+          dest: 'heroku',
+          src: [
+            'package.json',
+            'web.js',
+            'server/**/*'
+          ]
         }]
       },
       styles: {
@@ -382,7 +410,6 @@ module.exports = function (grunt) {
         src: '{,*/}*.css'
       }
     },
-
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
@@ -459,7 +486,8 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>/scripts',
+//          cwd: '<%= yeoman.dist %>/scripts',
+          cwd: '.tmp/scripts',
           src: '*.js',
           dest: '<%= yeoman.dist %>/scripts'
           //'<%= yeoman.dist %>/scripts/scripts.js': [
@@ -532,12 +560,11 @@ module.exports = function (grunt) {
     'concat',
     'copy',
     'cdnify',
-    //'ngmin',
+//    'ngmin',
     'cssmin',
-    //'uglify:dist',
+    'uglify:dist',
     'rev',
     'usemin',
-    // testing - TODO - add templates path to index.html
     'ngtemplates'
   ]);
 
@@ -556,6 +583,12 @@ module.exports = function (grunt) {
   grunt.registerTask('autotest:unit', ['connect:testserver','karma:unit_auto']);
   grunt.registerTask('autotest:midway', ['connect:testserver','karma:midway_auto']);
   grunt.registerTask('autotest:e2e', ['connect:testserver','karma:e2e_auto']);
+
+  grunt.registerTask('heroku', [
+    'build',
+    'clean:heroku',
+    'copy:heroku'
+  ]);
 
   //installation-related
 // TODO: use this to build the dev environment with automatic installation

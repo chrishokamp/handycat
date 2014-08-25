@@ -19,6 +19,8 @@ angular.module('controllers')
   // TODO: set this only when this is the active scope
   $scope.isActive = { active:true };
 
+
+  // TODO: segment state should be directly linked to the XLIFF document
   // working: only one field on this object (not currentState AND completed)
   $scope.segmentState = { currentState: 'untranslated', completed: false };
 
@@ -225,25 +227,23 @@ $scope.clearSelection = function() {
     $log.log("segId is: " + segId);
 
     $scope.segmentState.completed = true;
+    $scope.isActive.active = false;
+
     Session.updateStat('segmentFinished', segId);
 
     Document.completedSegments[segId] = true;
     Session.setActiveSegment(segId);
     Session.focusNextSegment();
 
-    $scope.isActive.active = false;
 
     // TODO: the segment state should be directly tied to the XLIFF document, there should be only a single place where this state data is stored
     // TODO: this is a quick hack
     $log.log('LOGGING FINAL VALUES');
-    $log.log(segId);
-    $log.log(typeof(segId));
-    $log.log(Logger.Log);
-    $log.log('logged LOGGER');
     Logger.Log.segments[segId].final = $scope.segment.target;
     $log.log(Logger.Log.segments[segId].final);
 
     // Update the current segment
+    // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
     $scope.segment.targetDOM.textContent = $scope.segment.target;
     Document.revision++;
   };

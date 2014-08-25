@@ -40,9 +40,9 @@ if ('development' == env) {
 }
 
 if ('production' == env) {
-  app.use(express.favicon(path.join(__dirname, 'public', 'favicon.ico')));
-  app.use(express.static(path.join(__dirname, 'public')));
-  app.set('views', __dirname + '/views');
+//  app.use(express.favicon(path.join(__dirname, 'dist', 'favicon.ico')));
+  app.use(express.static(path.join(__dirname, 'dist')));
+  app.set('views', __dirname + '/dist/views');
 }
 
 app.engine('html', require('ejs').renderFile);
@@ -211,6 +211,3 @@ app.listen(process.env.PORT || 5002);
 
 // other datasources to try:
 // tausdata, wiktionary
-
-// for hosting the app using express - TODO: check this and delete if not needed
-//app.use(gzippo.staticGzip("" + __dirname + "/../"));

@@ -3,6 +3,7 @@
 // the rendered json is always in sync with the server
 
 // segments: [ {id: <id>, source: <source>, hyp: <hypothesis>, final: <post-edited revision> } ]
+// This service currently serves as the XLIFF2JSON converter
 angular.module('services')
 .factory('Logger', ['Document', '$rootScope', '$log', function(Document, $rootScope, $log) {
 
@@ -11,6 +12,7 @@ angular.module('services')
     // Initialize with the source, hypothesis, and update when the user presses "complete"
     // TODO: how are the different editing phases captured in the XLIFF standard?
     // WORKING: how do we capture and save the state of segments?
+    //    UPDATE: in the <alt-trans> tag, there is support for { accepted | rejected | ... }
     // This is a big design decision which relies on degree to which we want to be dependent upon the XLIFF standard
     // The design decision is whether to stick with XLIFF, or to design our own persistence model
     // Question 1: does XLIFF even provide for the option to save both the original hypothesis, and the post-edited version?
