@@ -3,9 +3,9 @@
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'Wikipedia', 'Glossary', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-  'Document', 'session', 'Logger',
+  'Document', 'session', 'Logger', 'Project',
   function($rootScope, $scope, Wikipedia, Glossary, $sce, $log, ruleMap, copyPunctuation,
-           Document, Session, Logger) {
+           Document, Session, Logger, Project) {
 
   $scope.outputLog = function () {
     $log.log('SEGMENT AREA OUTPUT LOG');
@@ -235,7 +235,6 @@ $scope.clearSelection = function() {
     Session.setActiveSegment(segId);
     Session.focusNextSegment();
 
-
     // TODO: the segment state should be directly tied to the XLIFF document, there should be only a single place where this state data is stored
     // TODO: this is a quick hack
     $log.log('LOGGING FINAL VALUES');
@@ -246,6 +245,14 @@ $scope.clearSelection = function() {
     // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
     $scope.segment.targetDOM.textContent = $scope.segment.target;
     Document.revision++;
+
+    // Update the project on the server
+    // TODO: actually put the project object on the $scope, and update directly
+//      var project = $scope.project;
+//      project.$update(function() {
+//        $location.path('blogs/' + blog._id);
+//      });
+
   };
 
   // Re-opens a finished segment. Undoes what segmentFinished() did
