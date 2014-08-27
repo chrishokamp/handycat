@@ -120,8 +120,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       Document.targetLang = targetLang;
       // initialize the revision property on the document object
       Document.revision = 0;
-      // flip the flag on the Document object
-      Document.loaded = true;
 
       // TODO: remove the document-loaded event, and use the result of the resolved promise directly
       // tell the world that the document loaded

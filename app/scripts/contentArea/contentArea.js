@@ -58,11 +58,6 @@ angular.module('controllers').controller('ContentAreaCtrl',
       // segments is a list of [source, target] pairs
       $scope.segments = Document.segments;
 
-      // dev mode only
-      if (Document.loaded) {
-        $scope.xliff_content = new XMLSerializer().serializeToString( Document.DOM );
-
-      }
     }
   );
 

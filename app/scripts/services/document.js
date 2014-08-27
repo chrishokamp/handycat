@@ -8,9 +8,9 @@ angular.module('services').factory('Document',['$log', function($log) {
 
   // Working - functions to update, delete, and modify nodes in the XLIFF
   return {
-    ready: false,
     loaded: false,
     revision: undefined,
+    DOM: undefined,
     sourceSegments: [],
     targetSegments: [],
     // testing: these are pairs of source + target
@@ -20,7 +20,6 @@ angular.module('services').factory('Document',['$log', function($log) {
     targetLang: '',
 
     // The stringified DOM is what we want to pass back and forth to the server
-    DOM: {},
 
     completedSegments:[],
 
@@ -31,16 +30,16 @@ angular.module('services').factory('Document',['$log', function($log) {
 
     init: function() {
       var self = this;
-      self.ready = false;
       self.loaded = false;
       self.revision = undefined;
+      self.DOM = undefined;
       self.sourceSegments = [];
       self.targetSegments = [];
       self.segments = [];
       self.translatableNodes = [];
       self.sourceLang = '';
       self.targetLang = '';
-      self.DOM = {};
+
       self.completedSegments = [];
     }
   }
