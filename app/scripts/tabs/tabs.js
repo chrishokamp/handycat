@@ -8,11 +8,6 @@ angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$a
   $scope.session = session;
   $scope.url = loggerUrl;
 
-//  $scope.toggleSmartButtons = function() {
-//    Project.showSmartButtons = !Project.showSmartButtons;
-//    Project.updateStat('pearl-show-smart-buttons', -1, Project.showSmartButtons);
-//  };
-
   $scope.tabs = [{
     title: "Translate",
     active: true,
@@ -63,7 +58,7 @@ angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$a
 
   // Check if all the segments are marked as completed
   $scope.checkTranslationCompleted = function() {
-    if (!Document.loaded)
+    if (!Document.DOM)
       return false; // do not show completed before starting the job!
     for (var i = 0; i < Document.completedSegments.length; ++i)
       if (Document.completedSegments[i] == false)
@@ -73,9 +68,6 @@ angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$a
     return true;
   };
 
-
-  // WORKING - show a modal with the help
-  $scope.items = ['item1', 'item2', 'item3'];
 
   $scope.
     openHelp = function (size) {
