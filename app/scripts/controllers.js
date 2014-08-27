@@ -8,6 +8,7 @@ angular.module('controllers')
 
 }]);
 
+// the controller for find and replace
 angular.module('controllers').controller('ReplaceCtrl', [ '$scope', '$rootScope', '$modalInstance', '$log',
   function($scope, $rootScope, $modalInstance, $log) {
   $scope.data = {original:'', change:''};
