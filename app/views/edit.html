@@ -12,11 +12,13 @@
         <!-- repeat for each segment -->
         <!-- working - how to identify each segment uniquely -->
         <div class="segment row" ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}"
+             id="segment-{{$index}}"
              ng-controller="SegmentAreaCtrl"
              ng-repeat="seg in segments"
              end-repeat
-             ng-init="segment = seg; init($index); segmentNumber = $index; id.index = $index;">
-            <a id="segment-{{$index}}"></a>
+             ng-init="segment = seg; init($index); segmentNumber = $index; id.index = $index;"
+        >
+            <a id="anchor-{{$index}}"></a>
             <p class="segment-index-label">Segment Index: {{$index}}
                 <span class="segment-finished" ng-show="segmentState.completed">
                     <button type="button" class="btn btn-default btn-xs">
