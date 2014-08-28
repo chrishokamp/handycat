@@ -5,14 +5,12 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#handycat-menu">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand">HandyCAT</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="handycat-menu">
+        <div class="navbar-collapse navbar-left" id="handycat-menu">
             <!--<button type="button" class="btn btn-default navbar-btn">Sign in</button>-->
             <ul class="nav navbar-nav">
                 <li class="active"><a ui-sref="projects.list">Projects</a></li>
@@ -24,10 +22,16 @@
                         <li><a ng-click="saveXLIFF()">Download document</a></li>
                     </ul>
                 </li>
-                <li><a ng-click="openHelp()">Help</a></li>
-                <li><a ng-href="{{url}}/logger/session/{{session.sessionId}}" target="_blank">Session: {{session.sessionIdShort}}</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Help<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a ng-click="openHelp()">Show Help</a></li>
+                        <li class="divider"></li>
+                        <li><a ng-href="{{url}}/logger/session/{{session.sessionId}}" target="_blank">Session: {{session.sessionIdShort}}</a></li>
+                    </ul>
+                </li>
             </ul>
-            <ul ng-show="currentUser" class="nav navbar-nav navbar-right">
+            <ul ng-show="currentUser" class="nav navbar-nav">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">{{ currentUser.username }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -35,6 +39,12 @@
                     </ul>
                 </li>
             </ul>
+            <div class="btn-group navbar-right">
+                <button type="button" ng-click="toggleToolbar()" class="btn navbar-btn btn-primary">
+                    <span class="glyphicon glyphicon-wrench"></span>
+                </button>
+            </div>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
+
 </nav>

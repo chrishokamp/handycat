@@ -74,9 +74,6 @@ angular.module('services')
       // Functions controlling movement through the document
       // order of segments
       activeSegment: 0,
-      setActiveSegment: function(segId) {
-        this.activeSegment = segId;
-      },
       getNextSegment: function() {
         if (SegmentOrder.order.length === 0)
           SegmentOrder.getOrder(Document.segments);

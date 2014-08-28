@@ -4,9 +4,13 @@
     <!-- This hr uses some space vertical space so the nav-bar do not hide part of the first segment -->
     <hr>
 
+    <!-- this is a singleton directive containing the toolbar -->
+    <toolbar></toolbar>
+
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
         <!-- repeat for each segment -->
+        <!-- working - how to identify each segment uniquely -->
         <div class="segment row" ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}"
              ng-controller="SegmentAreaCtrl"
              ng-repeat="seg in segments"
@@ -53,7 +57,6 @@
                     </div>
                 </div>
             </div>
-            <toolbar></toolbar>
         </div>
     </div>
 

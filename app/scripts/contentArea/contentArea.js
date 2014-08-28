@@ -5,10 +5,18 @@ angular.module('controllers').controller('ContentAreaCtrl',
     function($scope, Document, session, $location, $state, $stateParams, $modal, $rootScope, $log) {
 
   // Working - make sure that we get the project from the server before this controller is initialized
-
 //  if (Document.segments.length === 0) {
 //    $state.go('projects.list');
 //  }
+
+  // TODO: focus the edit area -- edit areas call the translation memory onFocus
+  // start by focusing project.currentSegment
+
+
+  $scope.language = Document.targetLang;
+  $scope.numSegments = Document.segments.length;
+  // each segment is a reference to the segment in the Document service
+  $scope.segments = Document.segments;
 
   // this fires once the view content has completely loaded
   $rootScope.$on('repeat-finished', function (event) {
@@ -42,10 +50,6 @@ angular.module('controllers').controller('ContentAreaCtrl',
   $scope.showXLIFF = session.debugXLIFF;
   // END DEV UTILS
 
-  $scope.language = Document.targetLang;
-  $scope.numSegments = Document.segments.length;
-  // each segment is a reference to the segment in the Document service
-  $scope.segments = Document.segments;
 
   // watch the flag on the Documents service
   $scope.$watch(function() {
@@ -62,7 +66,5 @@ angular.module('controllers').controller('ContentAreaCtrl',
   );
 
 
-  // TODO: focus the edit area -- edit areas call the translation memory onFocus
-  // start by focusing project.currentSegment
 
 }]);

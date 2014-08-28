@@ -1,5 +1,4 @@
-// static target is a directive that represents the target when we are NOT EDITING
-// WORKING - swap <static-target> with <editable-target> depending upon the state of the segment
+// this directive dynamically adds the complex targetArea only when it is needed
 angular.module('directives').directive('staticTarget', ['$compile', '$log', function($compile, $log) {
   return {
     restrict: 'E',

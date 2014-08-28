@@ -1,4 +1,4 @@
-angular.module('directives').directive('catNav', ['Logger', 'Document', '$log', function(Logger, Document, $log) {
+angular.module('directives').directive('catNav', ['Logger', 'Document', '$rootScope', '$log', function(Logger, Document, $rootScope, $log) {
   return {
     restrict: 'E',
     replace: 'true',
@@ -24,6 +24,12 @@ angular.module('directives').directive('catNav', ['Logger', 'Document', '$log', 
         saveAs(bb, "edit-log.json");
       };
 
+      // TODO: switch to toggle on-off
+      $scope.toggleToolbar = function () {
+        $log.log('TOGGLE TOOLBAR');
+        $rootScope.$broadcast('show-toolbar');
+
+      }
     }
   }
 }]);

@@ -231,7 +231,6 @@ $scope.clearSelection = function() {
     Session.updateStat('segmentFinished', segId);
 
     Document.completedSegments[segId] = true;
-    Session.setActiveSegment(segId);
     Session.focusNextSegment();
 
     // TODO: the segment state should be directly tied to the XLIFF document, there should be only a single place where this state data is stored
@@ -260,15 +259,17 @@ $scope.clearSelection = function() {
 
   // Re-opens a finished segment. Undoes what segmentFinished() did
   // TODO: this should be handled within the element itself -- there should be a single interface to segmentState
+  // it's wrong to set Session.activeSegment here
   $scope.reopen = function(idx) {
     $scope.segmentState.completed = false;
-    Session.setActiveSegment(idx-1);
+    Session.activeSegment(idx-1);
     Session.focusNextSegment();
     $scope.isActive.active = true;
   };
 
   // when the changeSegment event fires, each AceCtrl scope responds
   // TODO: this event overlaps with change-segment-state
+  // the change segment event is fired from changeSegment
   $scope.$on('changeSegment', function(e,data) {
     $log.log('Heard changeSegment, my index is: ' + $scope.index);
     $log.log('Data.currentSegment is: ' + data.currentSegment);
