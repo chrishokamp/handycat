@@ -27,7 +27,7 @@ angular.module('controllers').controller('UploadCtrl',
     // assume there's only a single file in the array for now
     XliffParser.readFile($scope.selectedFiles[0]);
 // TODO: only initiate this transition if the file is successfully loaded and parsed
-    $state.go('edit');
+    $state.go('projects.edit');
   };
 
   // Load a specific file from the server
@@ -39,7 +39,7 @@ angular.module('controllers').controller('UploadCtrl',
 
     // go to the edit state
     $scope.$on('document-loaded', function(e) {
-      $state.go('edit');
+      $state.go('projects.edit');
     });
   };
 
@@ -59,7 +59,7 @@ angular.module('controllers').controller('UploadCtrl',
 
     // go to the edit state
     $scope.$on('document-loaded', function(e) {
-      $state.go('edit.segment', { segmentId: 0 });
+      $state.go('projects.edit', { segmentId: 0 });
     });
   }
 

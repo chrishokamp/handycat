@@ -63,13 +63,6 @@ var App = window.App = angular.module('editorComponentsApp',
 //        }
 //      }
     })
-//    .state('edit', {
-//      url: '/edit',
-//      templateUrl: '/views/edit.html'
-//    })
-//    .state('edit.segment', {
-//      url: '/segment/:segmentId'
-//    })
     .state('login', {
       url: '/login',
       templateUrl: '/views/login.html',
