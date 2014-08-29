@@ -2,8 +2,14 @@
 // TODO: the catNav directive has its own controller - move navigation functions there
 
 angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$anchorScroll', 'Document', '$modal',
-  '$log', 'session', 'loggerUrl',
-  function($scope, $location, $anchorScroll, Document, $modal, $log, session, loggerUrl) {
+  '$log', 'session', 'loggerUrl', '$rootScope',
+  function($scope, $location, $anchorScroll, Document, $modal, $log, session, loggerUrl, $rootScope) {
+
+  // TODO: move this to a proper global controller for the edit area
+  // global user options (may be accessed or changed from child controllers
+    $scope.selected = {
+      toolbar: false
+    }
 
   $scope.session = session;
   $scope.url = loggerUrl;

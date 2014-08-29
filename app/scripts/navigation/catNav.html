@@ -40,7 +40,8 @@
                 </li>
             </ul>
             <div class="btn-group navbar-right">
-                <button type="button" ng-click="toggleToolbar()" class="btn navbar-btn btn-primary">
+                <!-- TODO: use the selected parameter of this button - pass true/false into toggleToolbar(<bool>) -->
+                <button type="button" ng-click="selected.toolbar=!selected.toolbar" ng-class="{selected: selected.toolbar}" class="btn navbar-btn btn-primary">
                     <span class="glyphicon glyphicon-wrench"></span>
                 </button>
             </div>

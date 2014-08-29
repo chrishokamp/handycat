@@ -195,10 +195,14 @@ body {
 /* End project view styles */
 
 /* styles for the editing view */
+// navbar toggle toolbar
+.selected {
+  color: pink;
+  background-color: pink !important;
+}
 
 /* info toolbar */
 .info-toolbar {
-//  position: absolute;
 
 }
 
