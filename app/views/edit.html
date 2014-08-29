@@ -6,13 +6,14 @@
 
     <!-- this is a singleton directive containing the toolbar -->
     <!-- TODO: active-segment should be passed into the directive -->
-    <toolbar class="info-toolbar" visible="visible.toolbar"></toolbar>
+    <toolbar class="info-toolbar" ng-show="visible.toolbar"></toolbar>
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
         <!-- repeat for each segment -->
         <!-- working - how to identify each segment uniquely -->
-        <div class="segment row" ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}"
+        <div class="segment row"
+             ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}"
              id="segment-{{$index}}"
              ng-controller="SegmentAreaCtrl"
              ng-repeat="seg in segments"

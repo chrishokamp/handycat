@@ -4,15 +4,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
     ['$scope', 'Document', 'session', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log',
     function($scope, Document, session, $location, $state, $stateParams, $modal, $rootScope, $log) {
 
-  // Working - make sure that we get the project from the server before this controller is initialized
-//  if (Document.segments.length === 0) {
-//    $state.go('projects.list');
-//  }
-
   // TODO: focus the edit area -- edit areas call the translation memory onFocus
-  // start by focusing project.currentSegment
-
-
   $scope.language = Document.targetLang;
   $scope.numSegments = Document.segments.length;
   // each segment is a reference to the segment in the Document service
@@ -20,10 +12,10 @@ angular.module('controllers').controller('ContentAreaCtrl',
 
   // this fires once the view content has completely loaded
   $rootScope.$on('repeat-finished', function (event) {
+    session.focusNextSegment();
     var segmentId = $stateParams.segmentId;
     if (segmentId) {
       var anchorElem = document.getElementById('segment-' + segmentId);
-      $log.log(anchorElem);
       if (anchorElem) {
         var top = anchorElem.offsetTop;
         $("body").animate({scrollTop: top-60}, "slow");
