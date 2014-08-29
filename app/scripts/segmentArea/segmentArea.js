@@ -259,11 +259,9 @@ $scope.clearSelection = function() {
 
   // Re-opens a finished segment. Undoes what segmentFinished() did
   // TODO: this should be handled within the element itself -- there should be a single interface to segmentState
-  // it's wrong to set Session.activeSegment here
   $scope.reopen = function(idx) {
     $scope.segmentState.completed = false;
-    Session.activeSegment(idx-1);
-    Session.focusNextSegment();
+    Session.setSegment(idx);
     $scope.isActive.active = true;
   };
 

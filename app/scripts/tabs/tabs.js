@@ -7,9 +7,9 @@ angular.module('controllers').controller('TabsCtrl', ['$scope', '$location', '$a
 
   // TODO: move this to a proper global controller for the edit area
   // global user options (may be accessed or changed from child controllers
-    $scope.selected = {
-      toolbar: false
-    }
+  $scope.visible = {
+    toolbar: false
+  }
 
   $scope.session = session;
   $scope.url = loggerUrl;

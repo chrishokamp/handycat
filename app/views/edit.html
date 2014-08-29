@@ -5,8 +5,8 @@
     <hr>
 
     <!-- this is a singleton directive containing the toolbar -->
-    <!--<toolbar visible="true"></toolbar>-->
-    <toolbar visible="selected.toolbar"></toolbar>
+    <!-- TODO: active-segment should be passed into the directive -->
+    <toolbar class="info-toolbar" visible="visible.toolbar"></toolbar>
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
