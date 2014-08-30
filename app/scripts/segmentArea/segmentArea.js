@@ -276,7 +276,9 @@ $scope.clearSelection = function() {
       $scope.$broadcast('activate');
       // smooth scroll
       var top = document.getElementById('segment-' + $scope.index).offsetTop;
-      $("body").animate({scrollTop: top-130}, "slow");
+      // scroll and add space for the navbar
+      var navBarHeight = 100;
+      $("body").animate({scrollTop: top - navBarHeight}, "slow");
     }
   });
 
