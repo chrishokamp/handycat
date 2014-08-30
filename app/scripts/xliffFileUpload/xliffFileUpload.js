@@ -4,7 +4,6 @@ angular.module('controllers').controller('UploadCtrl',
   function($scope, fileReader, $timeout, XliffParser, Document, $state, $log) {
 // TODO: remember that different file types will require different parsers
 
-
   // does the browser support drag n drop?
   $scope.fileAdded = false;
   $scope.dropSupported = false;
@@ -47,10 +46,6 @@ angular.module('controllers').controller('UploadCtrl',
   var development = false;
 // Dev flag - load file by default
   if (development) {
-//    var fileUrl = 'data/enEs.xlf';
-//    var fileUrl = 'data/enDe.xlf';
-//    var fileUrl = 'data/enDeSmall.xlf';
-    //var fileUrl = 'data/dublin.xlf';
     var fileUrl = 'data/PEARL_TS2.xlf';
     $log.log("IN DEVELOPMENT MODE - loading local file: " + fileUrl);
 

@@ -25,6 +25,7 @@ body {
   margin-top: 50px;
 }
 
+
 #login-wrapper {
   background-color: #87cefa;
 }
@@ -176,6 +177,10 @@ body {
 .inline-header {
    display: inline-block;
   vertical-align: baseline;
+}
+
+.project-list-background {
+  background-color: beige;
 }
 
 // TODO: this is problematic with bootstrap's grid system

@@ -1,12 +1,16 @@
 <!-- create the project management interface -->
-<div>
-    <a ui-sref="projects.create" class="btn btn-primary">Create Project</a>
-</div>
-<div ng-init="find()" ng-controller="ProjectCtrl">
-    <h1>Your Projects</h1>
-    <div ng-repeat="project in projects">
-        <div><a ui-sref="projects.edit({projectId: project._id})">{{project.title}}</a></div>
+<div class="project-list-background">
+    <div>
+        <a ui-sref="projects.create" class="btn btn-primary">Create Project</a>
+    </div>
+    <div ng-init="find()" ng-controller="ProjectCtrl">
+        <h1>Your Projects</h1>
+        <hr/>
+        <div class="container">
+            <div ng-repeat="project in projects">
+                <div><a ui-sref="projects.edit({projectId: project._id})">{{project.title}}</a></div>
+                <hr/>
+            </div>
+        </div>
     </div>
 </div>
-
-
