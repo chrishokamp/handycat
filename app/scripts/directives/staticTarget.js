@@ -1,14 +1,15 @@
 // this directive dynamically adds the complex targetArea only when it is needed
-angular.module('directives').directive('staticTarget', ['$compile', '$log', function($compile, $log) {
+angular.module('directives').directive('staticTarget', ['session', '$compile', '$log', function(session, $compile, $log) {
   return {
     restrict: 'E',
-    // TODO: add the existing template for a non-active segment - remember to display if it's been translated or not
     // WORKING: pending, active, and completed are segment-level properties, and should be handled there
     template: '<p class="source">{{segment.target}}</p>',
     link: function($scope,el){
       $scope.index = $scope.id.index;
       el.on('click', function() {
         $log.log('targetText was clicked...');
+        // TODO: don't scroll when the segment is activated in this way
+        session.setSegment($scope.index);
         var newHtml = '<ng-include src="\'scripts/directives/target-area.html\'"></div>'
         var compiledHtml = $compile(newHtml)($scope);
         el.replaceWith(compiledHtml);
