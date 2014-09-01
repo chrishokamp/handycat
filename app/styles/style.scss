@@ -3,21 +3,28 @@
 
 * {
   -webkit-border-radius: 0 !important;
-     -moz-border-radius: 0 !important;
-          border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
 }
 
 body {
   background-color: #F5F8F5;
-//  background-image:url('../images/ricepaper.png');
+  //  background-image:url('../images/ricepaper.png');
   //background-image:url('../images/broken_noise.png');
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
   font-size: 18px;
 
-// minimum supported widths
-   min-width: 460px; /* suppose you want minimun width of 1000px */
-   width: auto !important;  /* Firefox will set width as auto */
-   width:460px;             /* As IE ignores !important it will set width as 1000px; */
+  // minimum supported widths
+  min-width: 460px; /* suppose you want minimun width of 1000px */
+  width: auto !important;  /* Firefox will set width as auto */
+  width:460px;             /* As IE ignores !important it will set width as 1000px; */
+}
+
+.blue {
+  background-color: #99AFCC;
+}
+.grey {
+  background-color: #73B0FF;
 }
 
 // TODO: the content needs to always stay below the nav
@@ -132,13 +139,13 @@ body {
 
 // upward pointing triangle
 .arrow-up {
-    margin: auto;
-	width: 0;
-	height: 0;
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
 
-	border-bottom: 5px solid #87cefa;
+  border-bottom: 5px solid #87cefa;
 }
 .edit-area-wrapper {
   margin-top: 16px;
@@ -146,47 +153,47 @@ body {
 
 /* style file input as a button (with bootstrap 3) */
 .btn-file {
-    margin-top: 12px;
-    position: relative;
-    overflow: hidden;
-    background-color: #f5f5f5;
-    border: 1px solid #696969;
-    &:hover {
-      background-color: darken(#f5f5f5, 20%);
-    }
+  margin-top: 12px;
+  position: relative;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border: 1px solid #696969;
+  &:hover {
+    background-color: darken(#f5f5f5, 20%);
+  }
 }
 .btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 999px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 999px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
 }
 
 /* end: style file input as button */
 
 /* styles for the project view */
 .inline-header {
-   display: inline-block;
+  display: inline-block;
   vertical-align: baseline;
 }
 
 .project-list-background {
-  background-color: beige;
+//  background-color: beige;
 }
 
 // TODO: this is problematic with bootstrap's grid system
 .col-centered{
-    float: none;
-    margin: 0 auto;
+  float: none;
+  margin: 0 auto;
 }
 
 .file-input {
@@ -202,13 +209,13 @@ body {
 /* styles for the editing view */
 // navbar toggle toolbar
 .selected {
-//  color: pink;
+  //  color: pink;
   background-color: darker(pink) !important;
 }
 
 /* info toolbar */
 .info-toolbar {
-//  position: absolute;
+  //  position: absolute;
 
 }
 
@@ -250,7 +257,7 @@ ul.nav-tabs > li {
   overflow-x: hidden;
   padding-left: 3px;
   // leave a little space between the two
-//  overflow-y: hidden;
+  //  overflow-y: hidden;
 }
 
 .cat-glyph {
@@ -276,7 +283,7 @@ ul.nav-tabs > li {
       margin-left: 0;
     }
   }
-//  padding: 0;
+  //  padding: 0;
   top: -2px;
 }
 
@@ -317,7 +324,7 @@ span.drop-text {
   width:100%;
   margin-top: 12px;
   margin-bottom: 6px;
-//  overflow-x: hidden;
+  //  overflow-x: hidden;
 }
 
 .surface-form {
@@ -329,7 +336,7 @@ span.drop-text {
   div.btn {
     opacity: 1.0 !important;
   }
-//  background-color: pink;
+  //  background-color: pink;
 }
 
 .source-token {
@@ -353,10 +360,10 @@ span.drop-text {
   padding-right: 10px;
 }
 .segment.pending {
-//  border: 1px dotted #D48651;
+  //  border: 1px dotted #D48651;
 }
 .segment.completed {
-//  border: 1px dotted #90ee90;
+  //  border: 1px dotted #90ee90;
 
 }
 
@@ -391,7 +398,7 @@ span.drop-text {
 
 // don't highlight the active line
 .ace_active-line {
- background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .ace_selected_token {
@@ -400,7 +407,7 @@ span.drop-text {
 
 /* hack to hide the scrollbars in the ace editor */
 .ace_scrollbar {
-//    display: none !important;
+  //    display: none !important;
 }
 
 /* TODO: use marker.renderer to find a solution that can handle future edits */
@@ -493,7 +500,7 @@ span.drop-text {
 /* as the element is hidden */
 .slide-in.ng-hide-add,
 .slide-in.ng-hide-remove {
-   -webkit-transition:0.5s linear all;
+  -webkit-transition:0.5s linear all;
   transition:0.5s linear all;
 
   /* remember to add this */

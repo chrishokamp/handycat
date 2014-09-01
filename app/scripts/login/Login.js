@@ -1,11 +1,14 @@
 angular.module('controllers')
-.controller('LoginCtrl', ['$scope', 'Auth', '$location', '$state', function($scope, Auth, $location, $state) {
+.controller('LoginCtrl', ['$scope', 'Auth', '$location', '$state', '$timeout', function($scope, Auth, $location, $state, $timeout) {
     $scope.error = {};
     $scope.user = {};
 
-    if ($scope.currentUser) {
-      $state.go('projects.list');
-    }
+    $timeout(
+      function() {
+        if ($scope.currentUser) {
+          $state.go('projects.list');
+        }
+      },0);
 
     $scope.login = function(form) {
       Auth.login('password', {
