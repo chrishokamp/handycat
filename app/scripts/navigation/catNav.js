@@ -1,4 +1,4 @@
-angular.module('directives').directive('catNav', ['Logger', 'Document', '$rootScope', '$log', function(Logger, Document, $rootScope, $log) {
+angular.module('directives').directive('catNav', ['Logger', 'Document', 'Auth', '$rootScope', '$log', function(Logger, Document, Auth, $rootScope, $log) {
   return {
     restrict: 'E',
     replace: 'true',
@@ -30,6 +30,15 @@ angular.module('directives').directive('catNav', ['Logger', 'Document', '$rootSc
         $rootScope.$broadcast('show-toolbar');
 
       }
+
+      $scope.logout = function() {
+        Auth.logout(function(err) {
+          if(!err) {
+            $location.path('/login');
+          }
+        });
+      };
+
     }
   }
 }]);
