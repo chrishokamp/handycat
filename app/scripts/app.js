@@ -37,8 +37,8 @@ var App = window.App = angular.module('editorComponentsApp',
 						$modal.open({
               templateUrl: '/views/partials/projects/create.html',
 							controller: 'CreateProjectCtrl',
-							backdrop: false,
-							keyboard: false
+							backdrop: true,
+							keyboard: true
 						})
 						.result.then(function(result) {
 							$state.go('projects.list', { reload: false });
