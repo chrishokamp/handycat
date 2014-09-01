@@ -1,17 +1,14 @@
 <!-- TODO: completely remove the TabsCtrl - meta-state can be managed in ProjectCtrl -->
 <div ng-init="findOne()" ng-controller="TabsCtrl">
     <cat-nav></cat-nav>
-    <!-- This hr uses some space vertical space so the nav-bar do not hide part of the first segment -->
-    <hr>
 
-    <!-- this is a singleton directive containing the toolbar -->
+    <!-- singleton directive containing the toolbar -->
     <!-- TODO: active-segment should be passed into the directive -->
     <toolbar class="info-toolbar" ng-show="visible.toolbar"></toolbar>
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
         <!-- repeat for each segment -->
-        <!-- working - how to identify each segment uniquely -->
         <div class="segment row"
              ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}"
              id="segment-{{$index}}"
