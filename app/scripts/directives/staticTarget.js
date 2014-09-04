@@ -3,9 +3,11 @@ angular.module('directives').directive('staticTarget', ['session', '$compile', '
   return {
     restrict: 'E',
     // WORKING: pending, active, and completed are segment-level properties, and should be handled there
-    template: '<p class="source">{{segment.target}}</p>',
+    template: '<div class="content-card frame"><div class="target">{{segment.target}}</div></div>',
     link: function($scope,el){
       $scope.index = $scope.id.index;
+      // make the height the same as the source (max of source+target heights)
+
       el.on('click', function() {
         $log.log('targetText was clicked...');
         // TODO: don't scroll when the segment is activated in this way
