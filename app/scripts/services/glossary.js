@@ -43,6 +43,10 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
             var phrases = res;
             $log.log("Glossary result: " + res);
 
+            // Limit the glossary to 4 results for now
+            // TODO(ximo) make this an option
+            phrases = phrases.slice(0, 3);
+
             // cache the result
             self.glossary[phrase] = phrases;
             callback(phrases);
