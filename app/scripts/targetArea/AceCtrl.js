@@ -288,6 +288,9 @@ angular.module('controllers').controller('AceCtrl',
     $scope.editor.session.setMode('ace/mode/text');
 
     $scope.editor.setOption("spellcheck", true);
+
+    // TODO(ximo) when Joss and Sharon checks this. Make it and option
+    $scope.editor.setOption("showInvisibles", true);
 //    $log.log("aceLoaded, logging the current mode:");
 //    $log.log($scope.editor.session);
 
