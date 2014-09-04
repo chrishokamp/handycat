@@ -3,7 +3,7 @@
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'Wikipedia', 'Glossary', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-  'Document', 'session', 'Logger', 'Projects',
+  'Document', 'editSession', 'Logger', 'Projects',
   function($rootScope, $scope, Wikipedia, Glossary, $sce, $log, ruleMap, copyPunctuation,
            Document, Session, Logger, Projects) {
 

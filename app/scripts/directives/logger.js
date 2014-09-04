@@ -1,4 +1,4 @@
-angular.module('directives').directive('logger', ['session', 'Document', '$log', function(session, Document, $log) {
+angular.module('directives').directive('logger', ['editSession', 'Document', '$log', function(session, Document, $log) {
   return {
     restrict: 'A',
     scope: true,

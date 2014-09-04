@@ -1,5 +1,5 @@
 // this directive dynamically adds the complex targetArea only when it is needed
-angular.module('directives').directive('staticTarget', ['session', '$compile', '$log', function(session, $compile, $log) {
+angular.module('directives').directive('staticTarget', ['editSession', '$compile', '$log', function(session, $compile, $log) {
   return {
     restrict: 'E',
     // WORKING: pending, active, and completed are segment-level properties, and should be handled there

@@ -2,7 +2,7 @@
 // TODO: this service should be merged with the Document service
 
 // Note: the 'Logger' service is only included here so that it is ready to hear 'document-loaded' when the event fires
-angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Document', 'session', 'Logger', '$q', '$http', '$log',
+angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Document', 'editSession', 'Logger', '$q', '$http', '$log',
   function($rootScope, fileReader, Document, session, Logger, $q, $http, $log) {
   // Persistent DOMParser
   var parser = new DOMParser();

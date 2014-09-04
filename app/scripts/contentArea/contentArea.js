@@ -1,7 +1,7 @@
 // Holds all of the translation pairs and handles the interface with the Document service
 // Content area is the place for global control of the /edit view
 angular.module('controllers').controller('ContentAreaCtrl',
-    ['$scope', 'Document', 'session', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log',
+    ['$scope', 'Document', 'editSession', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log',
     function($scope, Document, session, $location, $state, $stateParams, $modal, $rootScope, $log) {
 
   // TODO: focus the edit area -- edit areas call the translation memory onFocus

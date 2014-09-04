@@ -1,6 +1,6 @@
 
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'Document', 'tokenizer', 'Glossary', 'session', '$http',
+  ['$scope', 'Document', 'tokenizer', 'Glossary', 'editSession', '$http',
    '$timeout', '$log', 'ruleMap',
    function($scope, Document, tokenizer, Glossary, session, $http, $timeout, $log, ruleMap) {
 

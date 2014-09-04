@@ -1,4 +1,4 @@
-angular.module('directives').directive('toolbar', ['session', '$log', function(session, $log) {
+angular.module('directives').directive('toolbar', ['editSession', '$log', function(session, $log) {
   return {
     restrict: 'E',
     templateUrl: 'scripts/directives/toolbar.html',
