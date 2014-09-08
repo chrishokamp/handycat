@@ -6825,7 +6825,10 @@ var EditSession = function(text, mode) {
                 addSplit(split);
                 continue;
             }
-            var minSplit = Math.max(split - (isCode ? 10 : wrapLimit-(wrapLimit>>2)), lastSplit - 1);
+            // Sharon was complaining that long german words were cutted instead of wraped to the next line.
+            // It turns out that a maximum size of 10 is hardcoded here. Changed it to 30.
+            var maxWordSize = 30;
+            var minSplit = Math.max(split - (isCode ? maxWordSize : wrapLimit-(wrapLimit>>2)), lastSplit - 1);
             while (split > minSplit && tokens[split] < PLACEHOLDER_START) {
                 split --;
             }
