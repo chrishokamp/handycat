@@ -18,7 +18,7 @@ exports.project = function(req, res, next, id) {
 /**
  * Create a project
  */
-// TODO: what is in req.body?
+// TODO: what is in req.body? - update: whatever gets sent from the client
 exports.create = function(req, res) {
   var project = new Project(req.body);
   project.creator = req.user;
@@ -75,7 +75,10 @@ exports.show = function(req, res) {
  */
 // TODO: this should be specific to each user
 exports.all = function(req, res) {
-  Project.find().sort('-created').populate('creator', 'username').exec(function(err, projects) {
+  var userId = mongoose.Types.ObjectId(req.user._id);
+  console.log('USER: ');
+  console.log(userId);
+  Project.find({creator: {_id: userId}}).sort('-created').populate('creator', 'username').exec(function(err, projects) {
     if (err) {
       res.json(500, err);
     } else {

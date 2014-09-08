@@ -14,8 +14,12 @@ module.exports = function(app) {
   // Direct users here to register for an account: http://www.tausdata.org/index.php/component/users/?view=registration
   app.post('/users/tausdata', users.setTausData);
 
+  // sample call to the TAUS segment API
+  // https://www.tausdata.org/api/segment.json?source_lang=en-US&target_lang=fr-FR&q=data+center
+  // TODO: create routes for interacting with TAUS data
+  // TODO: graceful warnings and fallback if the API isn't working, or the user isn't registered
+
   // Check if username is available
-  // todo: probably should be a query on users
   app.get('/auth/check_username/:username', users.exists);
 
   // Session Routes
@@ -34,7 +38,7 @@ module.exports = function(app) {
 
   app.get('/api/projects',auth.ensureAuthenticated, projects.all);
   app.post('/api/projects', auth.ensureAuthenticated, projects.create);
-  app.get('/api/projects/:projectId', projects.show);
+  app.get('/api/projects/:projectId', auth.ensureAuthenticated, projects.show);
   app.put('/api/projects/:projectId', auth.ensureAuthenticated, auth.project.hasAuthorization, projects.update);
   app.delete('/api/projects/:projectId', auth.ensureAuthenticated, auth.project.hasAuthorization, projects.destroy);
 
