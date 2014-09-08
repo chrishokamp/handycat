@@ -9,6 +9,11 @@ module.exports = function(app) {
   app.post('/auth/users', users.create);
   app.get('/auth/users/:userId', users.show);
 
+  // TAUS data API routes
+  // note: a new user needs to register with TAUS for this to work
+  // Direct users here to register for an account: http://www.tausdata.org/index.php/component/users/?view=registration
+  app.post('/users/tausdata', users.setTausData);
+
   // Check if username is available
   // todo: probably should be a query on users
   app.get('/auth/check_username/:username', users.exists);
@@ -18,6 +23,7 @@ module.exports = function(app) {
   app.get('/auth/session', auth.ensureAuthenticated, session.session);
   app.post('/auth/session', session.login);
   app.delete('/auth/session', session.logout);
+
 
   // Translation Project Routes - these routes let users interact with their projects
   var projects = require('../controllers/projects');
@@ -34,6 +40,7 @@ module.exports = function(app) {
 
   //Setting up the projectId param
   app.param('projectId', projects.project);
+
 
   // Angular Routes -- chris - how to use these?
   // Note: in the demo app, the structure is /views/partials/..., so here we are appending to the /views param

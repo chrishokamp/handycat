@@ -2,6 +2,7 @@ var express = require('express')
    bodyParser = require('body-parser'),
    cookieParser = require('cookie-parser'),
    http = require('http'),
+   https = require('https'),
    session = require('express-session'),
    errorHandler = require('express-error-handler'),
    methodOverride = require('method-override'),
@@ -56,10 +57,10 @@ app.set('view engine', 'html');
 app.use(cors());
 
 // bodyParser should be above methodOverride
-app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use(bodyParser.json());
 app.use(methodOverride());
 
 // cookieParser should be above session
@@ -207,7 +208,15 @@ app.post('/logger/:sessionId', function(req, res){
 //  res.send({ "logged": true });
 });
 
-app.listen(process.env.PORT || 5002);
+//app.listen(process.env.PORT || 5002);
+http.createServer(app).listen(process.env.PORT || 5002);
+
+// For https -- note that you need a certificate for this to work
+//var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+//var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+//var credentials = {key: privateKey, cert: certificate};
+//https.createServer(options, app).listen(443);
+//https.createServer(options, app).listen(8443);
 
 // other datasources to try:
 // tausdata, wiktionary

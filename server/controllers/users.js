@@ -63,3 +63,25 @@ exports.exists = function (req, res, next) {
     }
   });
 }
+
+exports.setTausData = function (req, res, next) {
+  var userId = req.body.userId;
+  var tausUsername = req.body.tausUsername;
+  var tausPassword = req.body.tausPassword;
+
+  if (!tausUsername || !tausPassword) {
+    return next(new Error('tausUsername or tausPassword fields are not parsable as strings'));
+  }
+
+  User.findById(ObjectId(userId), function (err, user) {
+    if (err) {
+      return next(new Error('Failed to load User'));
+    }
+    if (user) {
+      user.update({'tausUsername': tausUsername, 'tausPassword': tausPassword})
+      res.send(200, "User's TAUS data was updated");
+    } else {
+      res.send(404, 'USER_NOT_FOUND')
+    }
+  });
+}
