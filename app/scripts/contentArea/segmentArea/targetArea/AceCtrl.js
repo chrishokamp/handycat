@@ -2,7 +2,7 @@
 angular.module('controllers').controller('AceCtrl',
   ['$scope', 'Document', 'tokenizer', 'Glossary', 'editSession', '$http',
    '$timeout', '$log', 'ruleMap',
-   function($scope, Document, tokenizer, Glossary, session, $http, $timeout, $log, ruleMap) {
+   function($scope, Document, tokenizer, Glossary, editSession, $http, $timeout, $log, ruleMap) {
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
@@ -277,6 +277,13 @@ angular.module('controllers').controller('AceCtrl',
     e.preventDefault();
     clearEditor();
   });
+  $scope.$watch(function() {
+    return editSession.activeSegment;
+  }, function(segId) {
+    if (segId == $scope.index) {
+      $scope.editor.focus();
+    }
+  });
 
   // Use this function to configure the ace editor instance
   $scope.aceLoaded = function (ed) {
@@ -292,8 +299,6 @@ angular.module('controllers').controller('AceCtrl',
 
     // TODO(ximo) when Joss and Sharon checks this. Make it and option
     $scope.editor.setOption("showInvisibles", true);
-//    $log.log("aceLoaded, logging the current mode:");
-//    $log.log($scope.editor.session);
 
     // we want to always know what text the user currently has selected
     // TODO: change this to listen for a selection change
@@ -390,7 +395,7 @@ angular.module('controllers').controller('AceCtrl',
       $log.log('$scope.index: ' + $scope.index)
       $log.log(logAction);
 
-      session.logAction(logAction)
+      editSession.logAction(logAction)
       previousValue = newValue;
     }
   })

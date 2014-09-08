@@ -7,16 +7,22 @@ angular.module('services')
     return {
       // set to true to show a textarea with the modifications of the XLIFF in real time.
       debugXLIFF: false,
-
-      // Indicates whether or not show the smart buttons. Used for the July 2014 testing.
-      showSmartButtons: true,
-
-      // todo - initialize this from login service
       userId: 0,
       sessionId: undefined,
       sessionIdShort: undefined,
       sessionPromise: undefined,
+
       startSession: function() {
+        // reinitialize (called from XliffParser when a new doc is parsed)
+        this.activeSegment= undefined;
+        this.debugXLIFF= false;
+
+        this.userId= 0;
+        this.sessionId= undefined;
+        this.sessionIdShort= undefined;
+        this.sessionPromise= undefined;
+        // TODO: initialize this from the server
+        this.setSegment(0);
         var self = this;
         // the user is logged in, initialize a new session, and get back the unique session id
         // log the opening of the first segment

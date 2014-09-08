@@ -2,7 +2,7 @@
 // Content area is the place for global control of the /edit view
 angular.module('controllers').controller('ContentAreaCtrl',
     ['$scope', 'Document', 'editSession', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log',
-    function($scope, Document, session, $location, $state, $stateParams, $modal, $rootScope, $log) {
+    function($scope, Document, editSession, $location, $state, $stateParams, $modal, $rootScope, $log) {
 
   // TODO: focus the edit area -- edit areas call the translation memory onFocus
   $scope.language = Document.targetLang;
@@ -12,7 +12,9 @@ angular.module('controllers').controller('ContentAreaCtrl',
 
   // this fires once the view content has completely loaded
   $rootScope.$on('repeat-finished', function (event) {
-    session.focusNextSegment();
+    // quick hack -- just activate segment 0
+    editSession.setSegment(0);
+
     var segmentId = $stateParams.segmentId;
     if (segmentId) {
       var anchorElem = document.getElementById('segment-' + segmentId);
@@ -36,10 +38,10 @@ angular.module('controllers').controller('ContentAreaCtrl',
       }
   });
 
-  session.updateStat('pearl-document-loaded', -1, '');
+  editSession.updateStat('pearl-document-loaded', -1, '');
 
   // DEV UTILS
-  $scope.showXLIFF = session.debugXLIFF;
+  $scope.showXLIFF = editSession.debugXLIFF;
   // END DEV UTILS
 
 

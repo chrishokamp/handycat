@@ -11,12 +11,10 @@ angular.module('directives').directive('staticTarget', ['editSession', '$compile
       el.on('click', function() {
         $log.log('targetText was clicked...');
         // TODO: don't scroll when the segment is activated in this way
-        session.setSegment($scope.index);
         var newHtml = '<ng-include src="\'scripts/directives/target-area.html\'"></div>'
         var compiledHtml = $compile(newHtml)($scope);
         el.replaceWith(compiledHtml);
-        $log.log('new element:');
-        $log.log(el);
+        session.setSegment($scope.index);
       });
 
       $scope.$on('activate', function() {
@@ -24,9 +22,6 @@ angular.module('directives').directive('staticTarget', ['editSession', '$compile
         var newHtml = '<ng-include src="\'scripts/directives/target-area.html\'"></div>'
         var compiledHtml = $compile(newHtml)($scope);
         el.replaceWith(compiledHtml);
-        $log.log('new element:');
-        $log.log(el);
-
       });
 
     }
