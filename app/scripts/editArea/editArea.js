@@ -2,16 +2,18 @@
 // TODO: the catNav directive has its own controller - move navigation functions there
 
 angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', 'Document', '$modal',
-  '$log', 'editSession', 'loggerUrl', '$rootScope',
-  function($scope, $location, $anchorScroll, Document, $modal, $log, session, loggerUrl, $rootScope) {
+  '$log', 'editSession', 'loggerUrl', '$rootScope', 'Wikipedia', 'Document',
+  function($scope, $location, $anchorScroll, Document, $modal, $log, session, loggerUrl, $rootScope, Wikipedia,
+           Document) {
 
   // TODO: move this to a proper global controller for the edit area
   // global user options (may be accessed or changed from child controllers
   $scope.visible = {
     toolbar: false
-  }
+  };
 
   $scope.session = session;
+  $scope.document = Document;
   $scope.url = loggerUrl;
 
   $scope.tabs = [{
@@ -121,6 +123,21 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     $scope.$broadcast('toggleShowInvisibleChars', value);
   };
 
+  // Concordance
+  $scope.queryConcordancer = function(query, lang) {
+    if (!lang)
+      lang = $scope.document.sourceLang;
+    $scope.concordancerError = false;
+    //Session.updateStat('queryConcordancer', $scope.$index, query);
+    Wikipedia.getConcordances(query, lang);
+  };
 
+  $scope.$on('concordancer-updated', function() {
+    // does $scope.$apply happen automagically? - answer: no, so we have to listen for the event
+    $scope.concordanceMatches = Wikipedia.currentQuery;
+  });
 
+  $scope.$on('concordancer-error', function() {
+    $scope.concordancerError = true;
+  });
 }]);

@@ -2,15 +2,15 @@
 // this is a source + target pair
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
-  '$rootScope', '$scope', 'Wikipedia', 'Glossary', '$sce', '$log', 'ruleMap', 'copyPunctuation',
-  'Document', 'editSession', 'Logger', 'Projects',
-  function($rootScope, $scope, Wikipedia, Glossary, $sce, $log, ruleMap, copyPunctuation,
-           Document, Session, Logger, Projects) {
+  '$rootScope', '$scope', 'Wikipedia', 'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'Document', 'editSession',
+   'Logger', 'Projects',
+  function($rootScope, $scope, Wikipedia, Glossary, $log, ruleMap, copyPunctuation, Document, Session, Logger,
+           Projects) {
 
   $scope.outputLog = function () {
     $log.log('SEGMENT AREA OUTPUT LOG');
     Logger.exportJSON();
-  }
+  };
 
   $scope.project = Session;
   // this gets reset in the template
@@ -113,22 +113,6 @@ $scope.clearSelection = function() {
 //     $scope.currentToken = token;
 //  };
 //
-//  $scope.queryConcordancer = function(query, lang) {
-//    $log.log('query is: ' + query + ', lang is: ' + lang);
-//    $scope.concordancerError = false;
-//    Session.updateStat('queryConcordancer', $scope.$index, query);
-//    Wikipedia.getConcordances(query, lang);
-//  };
-//
-//  $scope.$on('concordancer-updated', function() {
-//// does $scope.$apply happen automagically? - answer: no, so we have to listen for the event
-//    $scope.concordanceMatches = Wikipedia.currentQuery;
-//  });
-//
-//  $scope.$on('concordancer-error', function() {
-//    $scope.concordancerError = true;
-//  });
-//
 //  // special chars toolbar showing
 //  $scope.showSpecialChars = true;
 //
@@ -137,11 +121,6 @@ $scope.clearSelection = function() {
 //  $scope.insertChar = function(char) {
 //    $log.log("char to insert: " + char);
 //    $scope.insertText(char);
-//  };
-//
-//  // convert a snippet to trusted html - TODO: this isn't reusable because we send back x.snippet
-//  $scope.getSnippet = function(concordanceMatch) {
-//    return $sce.trustAsHtml(concordanceMatch.snippet);
 //  };
 //
 //  // used as a callback for the glossary

@@ -19,14 +19,17 @@
         </tab>
         <tab heading="Concordance" ng-click="">
             <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />
-            <button logger="concordance-query" ng-click="queryConcordancer(concordanceQuery, queryLang)" class="glossary-search btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+            <button logger="concordance-query" ng-click="queryConcordancer(concordanceQuery, queryLang)"
+                    class="glossary-search btn btn-success">
+                <span class="glyphicon glyphicon-search"></span></button>
             <div class="btn-group">
-                <button type="button" class="btn btn-primary lang-select" btn-radio="'en'" ng-model="queryLang">EN</button>
-                <button type="button" class="btn btn-primary lang-select" btn-radio="'de'" ng-model="queryLang">DE</button>
+                <button type="button" class="btn btn-primary lang-select" btn-radio="'{{document.sourceLang}}'"
+                        ng-model="queryLang">{{document.sourceLang}}</button>
+                <button type="button" class="btn btn-primary lang-select" btn-radio="'{{document.targetLang}}'"
+                        ng-model="queryLang">{{document.targetLang}}</button>
             </div>
             <div class="search-result"
-                 ng-repeat="concordanceMatch in concordanceMatches"
-                 ng-bind-html="getSnippet(concordanceMatch)"
+                 ng-repeat="concordanceMatch in concordanceMatches" ng-bind-html="concordanceMatch"
                  ng-hide="concordancerError"
             ></div>
 

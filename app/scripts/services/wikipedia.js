@@ -2,11 +2,14 @@
 // a sample query
 // http://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch="indubitably"&srprop=snippet
 
-angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl', '$log', function($http, $rootScope, baseUrl, $log) {
+angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl', '$log', '$sce',
+  function($http, $rootScope, baseUrl, $log, $sce) {
 
   // the query url: 'http://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=snippet';
   var urlPrefix = '/wikipedia';
   var concordanceUrl = baseUrl + urlPrefix;
+
+  var maxResults = 4;
 
 // TODO: set this url dynamically, because we dont know where we're getting deployed from
 //  var baseUrl = 'http://localhost:5000/wikipedia';
@@ -17,12 +20,12 @@ angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl
     currentQuery: [],
     getConcordances: function(query, lang) {
       $log.log('inside Wikipedia service, query is: ' + query + ', lang is: ' + lang);
+      lang = lang.split('-')[0]; // en-us -> en
       var self = this;
       if (self.concordances[lang] && self.concordances[lang][query]) {
         currentQuery = self.concordances[lang][query];
         $log.log('I already have results for query: ' + query);
       } else {
-
         // TODO: make sure the backend actually returns responses to this query
         var queryUrl = concordanceUrl + '/' + lang.trim();
         $http.get(queryUrl, {
@@ -32,10 +35,11 @@ angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl
           }
         })
         .success(function(res) {
-          $log.log('results for: ' + query);
-          $log.log(res);
 
-          var snippets = res;
+          var snippets = [];
+          for (var i = 0; i < Math.min(res.length, maxResults); ++i)
+            snippets.push($sce.trustAsHtml(res[i].snippet));
+
           if(self.concordances[lang]) {
             self.concordances[lang][query] = snippets;
           } else {
