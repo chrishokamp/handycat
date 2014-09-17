@@ -55,6 +55,9 @@ Finally, once you've done all that, you should be able to run `grunt serve`, and
     node web.js
     ```
 
+### Using Grunt
+* if you're getting an error in the grunt build process, do `grunt <your_command> --force --verbose` and look through the output to see what might be causing the problem.
+
 ## Testing
 
 # Building and Deploying
