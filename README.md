@@ -46,6 +46,7 @@ Finally, once you've done all that, you should be able to run `grunt serve`, and
 
 ### Styles
 * the project uses [sass](http://sass-lang.com/) and makes use of mixins and css variables in the app/styles/ directory
+* you need at least sass 3.3 -- do `sass -v` to check your version, `gem install sass` to install/update
 
 ## Running the Servers
 * to start the server to the glossary and concordancer endpoints, do:     
