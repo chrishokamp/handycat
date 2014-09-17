@@ -1,0 +1,37 @@
+// project icon size
+$icon-size: 28px;
+$bold: 800;
+
+.project-title {
+  text-align: left;
+  font-weight: $bold;
+  font-family: Roboto Slab, Roboto, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.project-icon {
+  font-size: $icon-size;
+}
+
+// Project Creation
+.drop-box {
+  margin-top: 20px;
+  border: 5px dashed blue;
+  height: 100px;
+  &:hover {
+    border: 5px dashed yellow;
+  }
+
+}
+
+.drop-box.dragover {
+  border: 5px dashed yellow;
+  background-color: blue;
+}
+
+span.drop-message {
+  display: inline-block;
+  margin-top: 10px;
+}
+span.drop-text {
+  font-size: 12px;
+}

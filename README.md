@@ -44,12 +44,19 @@ Finally, once you've done all that, you should be able to run `grunt serve`, and
 ### Code Style
 * use *two spaces* to indent javascript
 
+### Styles
+* the project uses [sass](http://sass-lang.com/) and makes use of mixins and css variables in the app/styles/ directory
+* you need at least sass 3.3 -- do `sass -v` to check your version, `gem install sass` to install/update
+
 ## Running the Servers
 * to start the server to the glossary and concordancer endpoints, do:     
     ```
     cd server/     
     node web.js
     ```
+
+### Using Grunt
+* if you're getting an error in the grunt build process, do `grunt <your_command> --force --verbose` and look through the output to see what might be causing the problem.
 
 ## Testing
 
