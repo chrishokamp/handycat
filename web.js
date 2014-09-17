@@ -101,13 +101,11 @@ app.get('/wikipedia/:lang', function(req, res){
   var searchQuery = encodeURIComponent(req.query.srsearch);
   var query = '&srsearch=' + searchQuery;
 
-  var lang_host = '';
-  if(lang === 'en') {
-      console.log('lang is: en');
-      lang_host = 'en.wikipedia.org';
-  } else if (lang === 'de') {
-      lang_host = 'de.wikipedia.org';
-  }
+  // removes the region from the language (if any)
+  // en-US -> en, es-ES -> es
+  var lang = lang.split('-')[0];
+  var lang_host = lang + '.wikipedia.org';
+
   var options = {
     host: lang_host,
     path: '/w/api.php?action=query&format=json&list=search&srprop=snippet' + query,
