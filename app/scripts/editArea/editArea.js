@@ -115,5 +115,12 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     };
   };
 
+  // Shows/hides the invisible characters (space is a dot, etc)
+  // Destination of a ng-click from toolbar.html
+  $scope.updateShowInvisibleChars = function(value) {
+    $scope.$broadcast('toggleShowInvisibleChars', value);
+  };
+
+
 
 }]);

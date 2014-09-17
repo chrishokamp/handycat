@@ -272,6 +272,10 @@ angular.module('controllers').controller('AceCtrl',
     }
   });
 
+  $scope.$on('toggleShowInvisibleChars', function(event, value) {
+    $scope.editor.setOption("showInvisibles", value);
+  });
+
   // The Segment area is the parent of the AceCtrl
   $scope.$on('clear-editor', function(e) {
     e.preventDefault();
@@ -296,9 +300,6 @@ angular.module('controllers').controller('AceCtrl',
     $scope.editor.session.setMode('ace/mode/text');
 
     $scope.editor.setOption("spellcheck", true);
-
-    // TODO(ximo) when Joss and Sharon checks this. Make it and option
-    $scope.editor.setOption("showInvisibles", true);
 
     // we want to always know what text the user currently has selected
     // TODO: change this to listen for a selection change
