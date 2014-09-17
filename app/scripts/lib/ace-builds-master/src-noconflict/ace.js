@@ -6064,9 +6064,7 @@ var EditSession = function(text, mode) {
             path = mode || "ace/mode/text";
         }
         if (!this.$modes["ace/mode/text"])
-            console.log('Inside Ace Editor source: NO TEXT MODE');
             this.$modes["ace/mode/text"] = new TextMode();
-            console.log(this.$modes["ace/mode/text"]);
 
         if (this.$modes[path] && !options) {
             this.$onChangeMode(this.$modes[path]);

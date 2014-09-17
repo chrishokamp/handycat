@@ -7,7 +7,6 @@ angular.module('controllers').controller('AceCtrl',
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
   var langTools = ace.require("ace/ext/language_tools");
-  ace.require('ace/ext/spellcheck');
 
   var previousValue = '';
 
@@ -169,7 +168,7 @@ angular.module('controllers').controller('AceCtrl',
       function() {
         $scope.editor.getSession().removeMarker(marker);
       }, 2000);
-  }
+  };
 
   // get the current selection from the editor
   var getSelection = function() {
@@ -299,18 +298,14 @@ angular.module('controllers').controller('AceCtrl',
 
     $scope.editor.session.setMode('ace/mode/text');
 
-    $scope.editor.setOption("spellcheck", true);
-
     // we want to always know what text the user currently has selected
     // TODO: change this to listen for a selection change
     editor.on('mouseup',
       function(e) {
         $timeout(function() {
-          $log.log('MOUSE UP event');
           // this would only exist when the user has just selected something
           var currentSelection = getSelection();
           var text = editor.session.getTextRange(currentSelection);
-          $log.log("currentSelection: " + currentSelection + ", text: " + text);
           // this function is on segmentAreaCtrl
           $scope.setTextSelection(text, currentSelection);
         }, 500);
@@ -360,9 +355,6 @@ angular.module('controllers').controller('AceCtrl',
                 * editor.renderer.lineHeight
                 + editor.renderer.scrollBar.getWidth();
 
-      $log.log("Editor height: ");
-      $log.log(newHeight);
-
       // emit ace editor height up the scope hierarchy - height change directives listen for current-height event
       if (newHeight < 80) {
         newHeight = 80;
@@ -391,10 +383,6 @@ angular.module('controllers').controller('AceCtrl',
           "previousValue": previousValue,
           "segmentId": $scope.index
         };
-
-        $log.log('INPUT EVENT');
-        $log.log('$scope.index: ' + $scope.index);
-        $log.log(logAction);
 
         editSession.logAction(logAction);
         previousValue = newValue;

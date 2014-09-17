@@ -269,8 +269,6 @@ $scope.clearSelection = function() {
   // TODO: this event overlaps with change-segment-state
   // the change segment event is fired from changeSegment
   $scope.$on('changeSegment', function(e,data) {
-    $log.log('Heard changeSegment, my index is: ' + $scope.index);
-    $log.log('Data.currentSegment is: ' + data.currentSegment);
     if (data.currentSegment === $scope.index) {
       // tell the staticTarget directive to create the editor element
       $scope.$broadcast('activate');
