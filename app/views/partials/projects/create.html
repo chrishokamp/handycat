@@ -20,24 +20,19 @@
         </div>
     </form>
     <hr/>
-
-    <h4>Select an XLIFF file:</h4>
     <div ng-controller="UploadCtrl">
-        <div>
-            <div class="row" >
-                <div
-                        class="drop-box col-xs-6 col-centered text-center"
-                        ng-file-drop="onFileSelect($files);"
-                        ng-file-drop-available="dropSupported=true"
-                        >
-                    <div class="row"><span class="drop-message drop-text">Drag in an XLIFF file to get started</span></div>
-                    <div class="row"><span class="glyphicon glyphicon-plus drop-text"></span></div>
-                </div>
+        <div class="row" >
+            <div
+                    class="drop-box col-xs-2 col-centered text-center"
+                    ng-file-drop="onFileSelect($files);"
+                    ng-file-drop-available="dropSupported=true"
+                    >
+                <div class="row"><span class="drop-message drop-text">Drag in an XLIFF file</span></div>
+                <div class="row"><span class="glyphicon glyphicon-plus drop-text"></span></div>
             </div>
-            <div class="row">
-                <div class="col-xs-6 col-centered text-center">
-                    <label class="btn btn-default btn-file">Choose a File<input class="file-input" type="file" ng-file-select="onFileSelect($files)" /></label>
-                </div>
+            <h5>OR</h5>
+            <div class="col-xs-6 col-centered text-center">
+                <label class="btn btn-default btn-file">Choose a File<input class="file-input" type="file" ng-file-select="onFileSelect($files)" /></label>
             </div>
         </div>
 
@@ -58,6 +53,7 @@
             </div>
         </div>
 
+        <hr/>
         <h3 style="text-align: center;">Or click one of these testing files:
             <a ng-click="loadFileFromServer('PEARL_TS1.xlf')">Test 1</a>,
             <a ng-click="loadFileFromServer('PEARL_TS2.xlf')">Test 2</a>

@@ -303,29 +303,6 @@ ul.nav-tabs > li {
   top: -2px;
 }
 
-/* file upload and project management */
-.drop-box {
-  margin-top: 80px;
-  border: 5px dashed blue;
-  height: 200px;
-  &:hover {
-    border: 5px dashed yellow;
-  }
-
-}
-
-.drop-box.dragover {
-  border: 5px dashed yellow;
-  background-color: blue;
-}
-
-span.drop-message {
-  display: inline-block;
-  margin-top: 40px;
-}
-span.drop-text {
-  font-size: 30px;
-}
 
 
 %crosshair {
