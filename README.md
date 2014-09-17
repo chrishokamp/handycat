@@ -37,7 +37,9 @@ To set up your development environment, it's strongly recommended that you use t
   * make sure that your ruby installation's bin/ folder is on your `$PATH`
  
 
-Finally, once you've done all that, you should be able to run `grunt serve`, and fire up a server which watches all of the files in the repo, and automagically reloads whenever you change something. 
+Finally, once you've done all that, you should be able to run `grunt express-server`, and fire up a server which watches all of the files in the repo, and automagically reloads whenever you change something. 
+
+The command was previously `grunt serve`, but this was changed so that both the server and the UI reload automagically.
 
 ## Development
 
