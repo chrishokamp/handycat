@@ -380,27 +380,36 @@ angular.module('controllers').controller('AceCtrl',
     // the height again
     editor.getSession().on('change', heightUpdateFunction);
 
-  // logging each change to the editor - TODO: should this be event based?
-  // using input event instead of change since it's called with some timeout
-  editor.on('input', function() {
-    var newValue= editor.getValue();
-    if (newValue !== previousValue) {
-      var logAction = {
-        "action": "insert-text",
-        "newValue": newValue,
-        "previousValue": previousValue,
-        "segmentId": $scope.index
+    // logging each change to the editor - TODO: should this be event based?
+    // using input event instead of change since it's called with some timeout
+    editor.on('input', function() {
+      var newValue= editor.getValue();
+      if (newValue !== previousValue) {
+        var logAction = {
+          "action": "insert-text",
+          "newValue": newValue,
+          "previousValue": previousValue,
+          "segmentId": $scope.index
+        };
+
+        $log.log('INPUT EVENT');
+        $log.log('$scope.index: ' + $scope.index);
+        $log.log(logAction);
+
+        editSession.logAction(logAction);
+        previousValue = newValue;
       }
-
-      $log.log('INPUT EVENT');
-      $log.log('$scope.index: ' + $scope.index)
-      $log.log(logAction);
-
-      editSession.logAction(logAction)
-      previousValue = newValue;
-    }
-  })
+    });
     editor.focus();
+
+    // Keyboard shortcuts
+    editor.commands.addCommands([{
+      name: 'Finish current segment',
+      bindKey: {win: 'Ctrl-Enter', mac:'Ctrl-Enter'},
+      exec: function(editor, line) {
+        $scope.$parent.segmentFinished($scope.$index);
+      }
+    }]);
 
   };  // end AceLoaded
 
