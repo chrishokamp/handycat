@@ -1,0 +1,12 @@
+// project icon size
+$icon-size: 28px;
+$bold: 800;
+
+.project-title {
+  text-align: left;
+  font-weight: $bold;
+}
+
+.project-icon {
+  font-size: $icon-size;
+}

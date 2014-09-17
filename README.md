@@ -44,6 +44,9 @@ Finally, once you've done all that, you should be able to run `grunt serve`, and
 ### Code Style
 * use *two spaces* to indent javascript
 
+### Styles
+* the project uses [sass](http://sass-lang.com/) and makes use of mixins and css variables in the app/styles/ directory
+
 ## Running the Servers
 * to start the server to the glossary and concordancer endpoints, do:     
     ```
