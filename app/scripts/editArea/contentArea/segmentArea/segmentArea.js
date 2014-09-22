@@ -125,13 +125,6 @@ $scope.clearSelection = function() {
 //    $scope.insertText(char);
 //  };
 //
-//  // used as a callback for the glossary
-  var updateGlossaryArea = function(glossaryMatches) {
-    if (glossaryMatches) {
-      // the toolbar should be listening for this
-      $rootScope.$broadcast('update-glossary-area', glossaryMatches);
-    }
-  };
 //
 //// TODO: collapse (remove from DOM) when this segment goes out of focus
 //  $scope.isCollapsed = {collapsed: true, clicked: false};
@@ -150,15 +143,6 @@ $scope.clearSelection = function() {
    $scope.$broadcast('clear-editor');
   };
 
-// TODO: use a promise
-  // prep the model
-  var glossary = {};
-  glossary.glossaryQuery = undefined;
-  $scope.glossary = glossary;
-  $scope.queryGlossary = function(query, fromLang, toLang) {
-    Glossary.getMatches(query, updateGlossaryArea, fromLang, toLang);
-    Session.updateStat('queryGlossary', $scope.$index, query);
-  };
 
   // Informs other segments that they should make a change.
   // The event argument is a unique object created by the ruleMap service.

@@ -11,7 +11,7 @@ angular.module('directives').directive('toolbar', ['editSession', '$log', '$time
           return session.activeSegment;
         },
         function(index) {
-          $log.log('ACTIVE SEGMENT CHANGED');
+          $log.log('toolbar: ACTIVE SEGMENT CHANGED');
           $log.log(index);
           var above = $('#segment-' + index);
           $(above).after(el);
@@ -24,7 +24,7 @@ angular.module('directives').directive('toolbar', ['editSession', '$log', '$time
       $(above).after(el);
 
       $scope.$on('update-glossary-area', function(evt, data) {
-        $log.log('toolbar heard update-glossary-area');
+        $log.log('toolbar: update-glossary-area');
         $log.log(data);
 
         $scope.glossaryMatches = data.map(function(item) {

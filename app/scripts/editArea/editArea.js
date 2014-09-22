@@ -7,12 +7,13 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
            Document) {
 
   // TODO: move this to a proper global controller for the edit area
-  // global user options (may be accessed or changed from child controllers
+  // global user options (may be accessed or changed from child controllers)
   $scope.visible = {
     toolbar: false
   };
 
   $scope.session = session;
+  // TODO: remove the Document service and set document data directly on this controller
   $scope.document = Document;
   $scope.url = loggerUrl;
 
@@ -106,6 +107,21 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     $scope.$broadcast('toggleShowInvisibleChars', value);
   };
 
+  // used as a callback for the glossary
+  var updateGlossaryArea = function(glossaryMatches) {
+    if (glossaryMatches) {
+      // the toolbar should be listening for this
+      $rootScope.$broadcast('update-glossary-area', glossaryMatches);
+    }
+  };
+
+  $scope.queryGlossary = function(query, fromLang, toLang) {
+    Glossary.getMatches(query, updateGlossaryArea, fromLang, toLang);
+    Session.updateStat('queryGlossary', $scope.$index, query);
+  };
+
+  // Working - use a callback here just like with the glossary
+  // Working - remove the event listener here - give it to the toolbar
   // Concordance
   $scope.queryConcordancer = function(query, lang) {
     if (!lang)

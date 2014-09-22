@@ -17,6 +17,7 @@ angular.module('controllers')
 
         // $scope.projectResource now holds a reference to the $resource
         // the Document service will hold the XML content after the doc is parsed by xliffParser
+        // WORKING - remove the Document service, put its functionality on the EditAreaCtrl
         $scope.projectResource = project;
         XliffParser.parseXML(project.content);
       });
@@ -25,25 +26,27 @@ angular.module('controllers')
     // TODO: the XLIFF data should be stored on the $scope of the ProjectCtrl
     // TODO: there should be one ProjectCtrl for each project, and a separate ProjectListCtrl to handle the list of projects
 
-    // TODO: implement project.delete and project.update
-//    $scope.remove = function(blog) {
-//      blog.$remove();
-//
-//      for (var i in $scope.blogs) {
+    // TODO: show confirmation modal
+    $scope.remove = function(project) {
+      $log.log('Remove project');
+      project.$remove();
 
-//        if ($scope.blogs[i] == blog) {
-//          $scope.blogs.splice(i, 1);
-//        }
-//      }
-//    };
-//
+      for (var i in $scope.projects) {
+
+        if ($scope.projects[i] == project) {
+          $scope.projects.splice(i, 1);
+        }
+      }
+    };
+
+    // TODO: this function should be accessible from project.create
 //    $scope.update = function() {
 //      //
-//      var blog = $scope.blog;
-//      blog.$update(function() {
-//        $location.path('blogs/' + blog._id);
+//      var project = $scope.project;
+//      project.$update(function() {
+//        $location.path('projects/' + project._id);
 //      });
 //    };
-//
+
 }]);
 
