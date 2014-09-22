@@ -22,5 +22,28 @@ angular.module('controllers')
       });
     };
 
+    // TODO: the XLIFF data should be stored on the $scope of the ProjectCtrl
+    // TODO: there should be one ProjectCtrl for each project, and a separate ProjectListCtrl to handle the list of projects
+
+    // TODO: implement project.delete and project.update
+//    $scope.remove = function(blog) {
+//      blog.$remove();
+//
+//      for (var i in $scope.blogs) {
+
+//        if ($scope.blogs[i] == blog) {
+//          $scope.blogs.splice(i, 1);
+//        }
+//      }
+//    };
+//
+//    $scope.update = function() {
+//      //
+//      var blog = $scope.blog;
+//      blog.$update(function() {
+//        $location.path('blogs/' + blog._id);
+//      });
+//    };
+//
 }]);
 

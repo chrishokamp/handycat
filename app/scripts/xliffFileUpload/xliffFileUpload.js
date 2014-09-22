@@ -1,10 +1,10 @@
-// TODO: remove document service -- this controller should change route once the document has loaded
 angular.module('controllers').controller('UploadCtrl',
   ['$scope', 'fileReader', '$timeout', 'XliffParser', 'Document', '$state', '$log',
   function($scope, fileReader, $timeout, XliffParser, Document, $state, $log) {
 // TODO: remember that different file types will require different parsers
+// try to select which parser we want based on the file extension
 
-  // does the browser support drag n drop?
+  // does the browser support drag n drop? - assume yes
   $scope.fileAdded = false;
   $scope.dropSupported = false;
   $scope.selectedFiles = [];
@@ -26,11 +26,11 @@ angular.module('controllers').controller('UploadCtrl',
     // assume there's only a single file in the array for now
     XliffParser.readFile($scope.selectedFiles[0]);
 // TODO: only initiate this transition if the file is successfully loaded and parsed
-    $state.go('projects.edit');
+    $state.go('projects.translate');
   };
 
   // Load a specific file from the server
-  // TODO: remove this function
+  // TODO: make this function exactly as if the user had loaded a local file
   $scope.loadFileFromServer = function(which) {
     var fileUrl = 'data/' + which;
     // autoload a file
@@ -38,25 +38,9 @@ angular.module('controllers').controller('UploadCtrl',
 
     // go to the edit state
     $scope.$on('document-loaded', function(e) {
-      $state.go('projects.edit');
+      $state.go('projects.translate');
     });
   };
-
-  // DEVELOPMENT UTILITY
-  var development = false;
-// Dev flag - load file by default
-  if (development) {
-    var fileUrl = 'data/PEARL_TS2.xlf';
-    $log.log("IN DEVELOPMENT MODE - loading local file: " + fileUrl);
-
-    // autoload a file
-    XliffParser.loadLocalFile(fileUrl);
-
-    // go to the edit state
-    $scope.$on('document-loaded', function(e) {
-      $state.go('projects.edit', { segmentId: 0 });
-    });
-  }
 
 // TODO: get file type (assume xlf for now)
   $scope.onFileSelect = function ($files) {
@@ -71,7 +55,6 @@ angular.module('controllers').controller('UploadCtrl',
 
     // parse the file immediately
     XliffParser.readFile($scope.selectedFiles[0]);
-
   };
 
 // TODO: implement fileProgress from the xliffParser
