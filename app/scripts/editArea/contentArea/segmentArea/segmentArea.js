@@ -117,6 +117,8 @@ $scope.clearSelection = function() {
 //  $scope.showSpecialChars = true;
 //
 //  // testing the special chars directive
+    // TODO - let the user set this up
+    // Let the user define the macros they want to use
 //  $scope.germanChars = ['ä','ö','ü','Ä','Ö','Ü','ß'];
 //  $scope.insertChar = function(char) {
 //    $log.log("char to insert: " + char);
@@ -124,14 +126,12 @@ $scope.clearSelection = function() {
 //  };
 //
 //  // used as a callback for the glossary
-//  var updateGlossaryArea = function(glossaryMatches) {
-//    $log.log('Inside callback, the glossary matches: ');
-//    $log.log(glossaryMatches);
-//    if (glossaryMatches)
-//      $scope.glossaryMatches = glossaryMatches.map(function(item) {
-//        return item.text;
-//      });
-//  };
+  var updateGlossaryArea = function(glossaryMatches) {
+    if (glossaryMatches) {
+      // the toolbar should be listening for this
+      $rootScope.$broadcast('update-glossary-area', glossaryMatches);
+    }
+  };
 //
 //// TODO: collapse (remove from DOM) when this segment goes out of focus
 //  $scope.isCollapsed = {collapsed: true, clicked: false};
