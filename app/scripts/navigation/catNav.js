@@ -1,4 +1,4 @@
-angular.module('directives').directive('catNav', ['Logger', 'Document', 'Auth', '$rootScope', '$log', function(Logger, Document, Auth, $rootScope, $log) {
+angular.module('directives').directive('catNav', ['Logger', 'Document', 'Auth', '$location', '$rootScope', '$log', function(Logger, Document, Auth, $location, $rootScope, $log) {
   return {
     restrict: 'E',
     replace: 'true',
