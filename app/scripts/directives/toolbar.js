@@ -1,8 +1,9 @@
-angular.module('directives').directive('toolbar', ['editSession', '$log', function(session, $log) {
+angular.module('directives').directive('toolbar', ['editSession', '$log', '$timeout', function(session, $log, $timeout) {
   return {
     restrict: 'E',
     templateUrl: 'scripts/directives/toolbar.html',
     link: function($scope, el, attrs){
+     $timeout(function(){
       $scope.$watch(
         function () {
           return session.activeSegment;
@@ -17,7 +18,7 @@ angular.module('directives').directive('toolbar', ['editSession', '$log', functi
 //            $(document).remove
           $(above).after(el);
         }
-      );
+      )},0);
 
       // when the directive gets initialized
       var index = session.activeSegment;
