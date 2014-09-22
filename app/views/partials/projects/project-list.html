@@ -9,7 +9,7 @@
         <h3>Your Projects</h3>
         <hr/>
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-12">
                 <div class="row" ng-repeat="project in projects" ng-class-even="'blue'" ng-class-odd="'grey'">
                     <div class="btn col-xs-10 project-title" ui-sref="projects.edit({projectId: project._id})">
                         {{project.title}}
