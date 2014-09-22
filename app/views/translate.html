@@ -6,7 +6,7 @@
     <toolbar class="info-toolbar" ng-show="visible.toolbar"></toolbar>
 
     <!-- translation area -->
-    <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl" ng-show="tabs[0].active">
+    <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl">
         <!-- repeat for each segment -->
         <div class="segment row"
              ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}"

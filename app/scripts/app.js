@@ -29,7 +29,7 @@ var App = window.App = angular.module('editorComponentsApp',
       url: '/list',
       templateUrl: '/views/partials/projects/project-list.html'
     })
-    			.state('projects.create', {
+    .state('projects.create', {
       url: '/create',
 //					url: '/single-event/:id',
 					onEnter: ['$stateParams', '$state', '$modal', '$log', function($stateParams, $state, $modal, $log) {
@@ -45,9 +45,26 @@ var App = window.App = angular.module('editorComponentsApp',
 						});
 					}]
 				})
+    // edit the project information
     .state('projects.edit', {
-      url: '/:projectId/edit',
-      templateUrl: '/views/edit.html',
+      url: '/edit',
+//					url: '/single-event/:id',
+      onEnter: ['$stateParams', '$state', '$modal', '$log', function($stateParams, $state, $modal, $log) {
+        // todo: make sure that this state gets resolved with the clicked project's details
+        $modal.open({
+          templateUrl: '/views/partials/projects/create.html',
+          controller: 'CreateProjectCtrl',
+          backdrop: true,
+          keyboard: true
+        })
+          .result.then(function(result) {
+            $state.go('projects.list', { reload: false });
+          });
+      }]
+    })
+    .state('projects.translate', {
+      url: '/:projectId/translate',
+      templateUrl: '/views/translate.html',
       controller: 'ProjectCtrl',
 //      resolve: {
 //        Projects: 'Projects',
@@ -98,7 +115,6 @@ var App = window.App = angular.module('editorComponentsApp',
 	delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }])
 
-// TODO: where is currentUser getting set?
 // check window.location to see where we are, and set the baseUrl accordingly
 .run(['$location', '$rootScope', 'Auth', '$log', function($location, $rootScope, Auth, $log) {
   //watching the value of the currentUser variable.

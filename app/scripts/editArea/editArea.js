@@ -16,23 +16,6 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
   $scope.document = Document;
   $scope.url = loggerUrl;
 
-  $scope.tabs = [{
-    title: "Translate",
-    active: true,
-    disabled: false
-  },
-  {
-    title: "Statistics",
-    active: false,
-    disabled: false
-  },
-  {
-    title: "Project",
-    active: false,
-    disabled: false
-
-  }];
-
   // based on http://updates.html5rocks.com/2011/08/Saving-generated-files-on-the-client-side
   // and http://stackoverflow.com/a/15031019
   $scope.saveDocument = function() {
