@@ -7,12 +7,10 @@ angular.module('services').factory('SegmentOrder', ['$http', '$rootScope', 'base
 
   var SegmentOrder = {
     order: [],
-    getOrder: function (segments) {
-      $log.log('GET ORDER - here are segments: ');
+    initSegmentOrder: function (segments) {
+      $log.log('Initializing SegmentOrder - here are segments: ');
       $log.log(segments);
 
-      $log.log(segments);
-      // if we don't have the segment order service, the order is 0, 1, 2, ...
       for (var i = 0; i < segments.length; ++i)
         this.order.push(i);
 

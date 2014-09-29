@@ -1,4 +1,4 @@
-angular.module('directives').directive('logger', ['editSession', 'Document', '$log', function(session, Document, $log) {
+angular.module('directives').directive('logger', ['editSession', '$log', function(session, $log) {
   return {
     restrict: 'A',
     scope: true,
@@ -23,7 +23,7 @@ angular.module('directives').directive('logger', ['editSession', 'Document', '$l
 
         // Note: this is likely to be the _current_ target, because the callbacks haven't finished yet
         // the ace editor input event can be used to get the new value
-        var target = Document.targetSegments[index];
+        var target = $scope.document.targetSegments[index];
         session.updateStat(action, index, target);
 
       }

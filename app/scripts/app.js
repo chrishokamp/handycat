@@ -66,19 +66,6 @@ var App = window.App = angular.module('editorComponentsApp',
       url: '/:projectId/translate',
       templateUrl: '/views/translate.html',
       controller: 'ProjectCtrl',
-//      resolve: {
-//        Projects: 'Projects',
-//        XliffParser: 'XliffParser',
-//        Document: 'Document',
-        // TODO: get a promise back from the Document service as well
-//        documentLoaded: function(Projects, XliffParser, Document, $stateParams, $log) {
-//          // load, parse, init document, set segments (linked directly to document) on controller
-//          return Projects.get({projectId: $stateParams.projectId})
-//            .then(function (projectObj) {
-//              return XliffParser.parseXML(projectObj.content)
-//            });
-//        }
-//      }
     })
     .state('login', {
       url: '/login',

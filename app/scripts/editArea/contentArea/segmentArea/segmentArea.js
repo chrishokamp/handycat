@@ -2,17 +2,16 @@
 // this is a source + target pair
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
-  '$rootScope', '$scope', 'Wikipedia', 'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'Document', 'editSession',
-   'Logger', 'Projects',
-  function($rootScope, $scope, Wikipedia, Glossary, $log, ruleMap, copyPunctuation, Document, Session, Logger,
-           Projects) {
+  '$rootScope', '$scope', 'Wikipedia', 'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'editSession',
+   'Logger', 'Projects', 'XliffParser',
+  function($rootScope, $scope, Wikipedia, Glossary, $log, ruleMap, copyPunctuation, Session, Logger,
+           Projects, XliffParser) {
 
   $scope.outputLog = function () {
     $log.log('SEGMENT AREA OUTPUT LOG');
     Logger.exportJSON();
   };
 
-  $scope.project = Session;
   // this gets reset in the template
   $scope.id = {};
 
@@ -20,14 +19,14 @@ angular.module('controllers')
   $scope.isActive = { active:true };
 
   // TODO: segment state should be directly linked to the XLIFF document
+  // TODO: currently not implemented
   // working: only one field on this object (not currentState AND completed)
+  // states: [ 'pending', 'editing', 'complete' ]
   $scope.segmentState = { currentState: 'untranslated', completed: false };
 
   // this is the interface to segment state -- always change via this interface
-  // states: [ 'pending', 'editing', 'complete' ]
   $scope.changeSegmentState = function changeSegmentState (stateName) {
     $scope.segmentState = stateName;
-    $scope.$broadcast('change-segment-state', { 'newState': stateName })
 
   }
 
@@ -38,8 +37,6 @@ angular.module('controllers')
     }
   });
 
-//  $scope.language = Document.targetLang;
-//
 //  // for the concordancer - default to English
 //  $scope.queryLang = 'en';
 //
@@ -186,37 +183,32 @@ $scope.clearSelection = function() {
 
   // TODO: project should listen for this event, we shouldn't have a separate function to update the project
   $scope.segmentFinished = function(segId) {
-    $log.log("segId is: " + segId);
-
+    $log.log("SEGMENT FINISHED - segId is: " + segId);
     $scope.segmentState.completed = true;
     $scope.isActive.active = false;
 
     Session.updateStat('segmentFinished', segId);
 
-    Document.completedSegments[segId] = true;
+    // TODO: call a function on the document API - document API should all be in EditAreaCtrl
+    // TODO: this is not the right interface -- completedSegments should not be stored outside of the XLIFF DOM
+    // -- big question: should we maintain a javascript document model, or only use the XLIFF DOM
+    $scope.document.completedSegments[segId] = true;
+
+    // TODO: the rest of this function should be on the EditAreaCtrl
+    // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
+    //
     Session.focusNextSegment();
 
-    // TODO: the segment state should be directly tied to the XLIFF document, there should be only a single place where this state data is stored
-    // TODO: this is a quick hack
-    $log.log('LOGGING FINAL VALUES');
-    Logger.Log.segments[segId].final = $scope.segment.target;
-    $log.log(Logger.Log.segments[segId].final);
-
-    // Update the current segment
+    // Update the current segment in the XLIFF DOM
     // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
     $scope.segment.targetDOM.textContent = $scope.segment.target;
-    Document.revision++;
+    $scope.document.revision++;
 
     // Update the project on the server
-    // TODO: actually put the project object on the $scope, and update directly
-      var projectResource = $scope.projectResource;
-      $log.log('PROJECT');
-      $log.log(projectResource);
-      projectResource.content = Document.getDOMString();
-      projectResource.$update(function() {
-//        $location.path('blogs/' + blog._id);
-        $log.log('Project updated');
-      });
+    $scope.projectResource.content = XliffParser.getDOMString($scope.document.DOM);
+    $scope.projectResource.$update(function() {
+      $log.log('Project updated');
+    });
 
   };
 
@@ -230,7 +222,8 @@ $scope.clearSelection = function() {
 
   // when the changeSegment event fires, each AceCtrl scope responds
   // TODO: this event overlaps with change-segment-state
-  // the change segment event is fired from changeSegment
+  // the change segment event is fired from changeSegment in the editSession service
+  // TODO: move this code to EditAreaCtrl
   $scope.$on('changeSegment', function(e,data) {
     if (data.currentSegment === $scope.index) {
       // tell the staticTarget directive to create the editor element
@@ -244,4 +237,3 @@ $scope.clearSelection = function() {
   });
 
 }]);
-

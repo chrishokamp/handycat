@@ -5,7 +5,7 @@
 // segments: [ {id: <id>, source: <source>, hyp: <hypothesis>, final: <post-edited revision> } ]
 // This service currently serves as the XLIFF2JSON converter
 angular.module('services')
-.factory('Logger', ['Document', '$rootScope', '$log', function(Document, $rootScope, $log) {
+.factory('Logger', ['$rootScope', '$log', function($rootScope, $log) {
 
     // segment completion is implicit in the data (if the 'final' field is different from hyp, the segment has been edited)
 
@@ -24,15 +24,16 @@ angular.module('services')
     // txt with ||| separator
 
     // to initialize the logger when a new XLIFF document loads
-    $rootScope.$on('document-loaded', function(e) {
-      // note that Documents.targetSegments is duplicated here
-      angular.forEach(_.zip(Document.sourceSegments, Document.targetSegments, Document.targetSegments),
-        function(tuple) {
-          // the final field should be empty before the user starts editingr
-          Log.initSegment(tuple[0], tuple[1], tuple[2]);
-        }
-      );
-    });
+    // TODO: refactor to take the log information as args
+//    $rootScope.$on('document-loaded', function(e) {
+//      // note that Documents.targetSegments is duplicated here
+//      angular.forEach(_.zip(Document.sourceSegments, Document.targetSegments, Document.targetSegments),
+//        function(tuple) {
+//          // the final field should be empty before the user starts editingr
+//          Log.initSegment(tuple[0], tuple[1], tuple[2]);
+//        }
+//      );
+//    });
 
     var Log = {
       segments: [],

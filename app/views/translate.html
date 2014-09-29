@@ -1,4 +1,4 @@
-<div ng-init="findOne()" ng-controller="EditAreaCtrl">
+<div ng-init="loadProject()" ng-controller="EditAreaCtrl">
     <cat-nav></cat-nav>
 
     <!-- singleton directive containing the toolbar -->
@@ -60,9 +60,10 @@
         </div>
     </div>
 
-    <div ng-show="checkTranslationCompleted()" id="footmsg">
-        <h2>Translation Job completed!</h2>
-    </div>
+    <!-- TODO: refactor this into a watch function -->
+    <!--<div ng-show="checkTranslationCompleted()" id="footmsg">-->
+        <!--<h2>Translation Job completed!</h2>-->
+    <!--</div>-->
 
     <!--
     <div ng-controller="StatsController">

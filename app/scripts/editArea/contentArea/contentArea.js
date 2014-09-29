@@ -1,14 +1,31 @@
-// Holds all of the translation pairs and handles the interface with the Document service
+// Holds all of the translation pairs and handles the interface with the document API
 // Content area is the place for global control of the /edit view
 angular.module('controllers').controller('ContentAreaCtrl',
-    ['$scope', 'Document', 'editSession', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log',
-    function($scope, Document, editSession, $location, $state, $stateParams, $modal, $rootScope, $log) {
+    ['$scope', 'editSession', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log', '$timeout',
+    function($scope, editSession, $location, $state, $stateParams, $modal, $rootScope, $log, $timeout) {
 
-  // TODO: focus the edit area -- edit areas call the translation memory onFocus
-  $scope.language = Document.targetLang;
-  $scope.numSegments = Document.segments.length;
-  // each segment is a reference to the segment in the Document service
-  $scope.segments = Document.segments;
+      // TODO: remove the manual timeout -- wait for promise to resolve
+      $timeout(function() {
+        $scope.language = $scope.document.targetLang;
+        $scope.numSegments = $scope.document.segments.length;
+        // each segment is a reference to the segment in the Document service
+        $scope.segments = $scope.document.segments;
+        $log.log('SEGMENTS');
+        $log.log($scope.segments);
+        // watch the flag on the Documents service
+        $scope.$watch(function() {
+
+            return $scope.document.revision;
+          },
+          function() {
+            $log.log("ContentAreaCtrl: Number of segments in document: " + $scope.document.segments.length);
+
+            // segments is a list of [source, target] pairs
+            $scope.segments = $scope.document.segments;
+
+          }
+        );
+      },500);
 
   // this fires once the view content has completely loaded
   $rootScope.$on('repeat-finished', function (event) {
@@ -45,19 +62,6 @@ angular.module('controllers').controller('ContentAreaCtrl',
   // END DEV UTILS
 
 
-  // watch the flag on the Documents service
-  $scope.$watch(function() {
-
-      return Document.revision;
-    },
-    function() {
-      $log.log("ContentAreaCtrl: Number of segments in document: " + Document.segments.length);
-
-      // segments is a list of [source, target] pairs
-      $scope.segments = Document.segments;
-
-    }
-  );
 
 
 

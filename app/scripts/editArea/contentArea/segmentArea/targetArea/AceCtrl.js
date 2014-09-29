@@ -1,8 +1,8 @@
 
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'Document', 'tokenizer', 'Glossary', 'editSession', '$http',
+  ['$scope', 'tokenizer', 'Glossary', 'editSession', '$http',
    '$timeout', '$log', 'ruleMap',
-   function($scope, Document, tokenizer, Glossary, editSession, $http, $timeout, $log, ruleMap) {
+   function($scope, tokenizer, Glossary, editSession, $http, $timeout, $log, ruleMap) {
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;

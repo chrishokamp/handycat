@@ -37,7 +37,7 @@ angular.module('controllers')
     $scope.create = function() {
       var project = new Projects({
         title: $scope.title,
-        content: Document.getDOMString()
+        content: XliffParser.getDOMString($scope.pendingDocument)
       });
       project.$save(function(response) {
         $state.go('projects.list');
@@ -47,28 +47,24 @@ angular.module('controllers')
     };
 
     // WORKING: refactor the Document service so that the .translate state always initializes a new controller
-    // TODO: there should NOT be a global Document object in the app
-    // user specifies the URL of an XLIFF file, we grab it, parse it, then do Document.getDOMString()
+    // user specifies the URL of an XLIFF file, we grab it, parse it, then save it on the server
     // TODO: we need to go to the .translate state once the file is parsed
     // the XliffParser should return a promise, the translate state should wait for that promise to resolve before rendering
     $scope.createFromURL = function(xliffFileUrl) {
       $log.log('create from URL fired...');
       $http.get(xliffFileUrl)
         .success(function(data) {
-          XliffParser.parseXML(data);
-        });
-
+          var pendingDocument = XliffParser.parseXML(data);
+          var project = new Projects({
+            title: $scope.title,
+            content: XliffParser.getDOMString(pendingDocument)
+          });
+          project.$save(function(response) {
+            $state.go('projects.list');
+          });
+          $scope.title = "";
       // transition back to the project-list
-      $scope.$on('document-loaded', function(e) {
-        var project = new Projects({
-          title: $scope.title,
-          content: Document.getDOMString()
         });
-        project.$save(function(response) {
-          $state.go('projects.list');
-        });
-        $scope.title = "";
-      });
     }
 
 }]);

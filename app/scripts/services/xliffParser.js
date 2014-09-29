@@ -1,9 +1,10 @@
 // TODO: we need a service representing the XLIFF DOM at all times
-// TODO: this service should be merged with the Document service
+// - refactoring - the XLIFF parser should just return an object which provides a javascript interface to the XLIFF DOM
+// - the API to the XLIFF DOM should be in the editArea, XLIFF objects should not be global in the app
 
 // Note: the 'Logger' service is only included here so that it is ready to hear 'document-loaded' when the event fires
-angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Document', 'editSession', 'Logger', '$q', '$http', '$log',
-  function($rootScope, fileReader, Document, session, Logger, $q, $http, $log) {
+angular.module('services').factory('XliffParser', ['$rootScope','fileReader', 'editSession', 'Logger', '$q', '$http', '$log',
+  function($rootScope, fileReader, session, Logger, $q, $http, $log) {
   // Persistent DOMParser
   var parser = new DOMParser();
 
@@ -32,20 +33,26 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
         });
     },
 
+    // Working - this is just a function -- shouldn't interface with the Document object at all
+    // just parse and return
     parseXML: function(rawText) {
-      Document.init();
+//      Document.init();
+      // Working - just return the Document object from this function
+      var Document = {};
       session.startSession();
 
      var deferred = $q.defer();
-
 
       var self = this;
       $log.log('PARSING STARTED');
       $log.log(Date.now());
 
       var xml = parser.parseFromString(rawText, "text/xml");
+
       $log.log('PARSING ENDED');
       $log.log(Date.now());
+      $log.log('XLIFF DOM');
+      $log.log(xml);
 
       // Parsing error?
       var parserError = xml.querySelector('parsererror');
@@ -59,6 +66,16 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
 
       // Set Document DOM to the parsed result
       Document.DOM = xml;
+      // Working - the XLIFF parser returns a Document representation of the XLIFF
+      Document.sourceSegments = [];
+      Document.targetSegments = [];
+      Document.segments = [];
+      Document.translatableNodes = [];
+      Document.completedSegments = [];
+      Document.sourceLang = sourceLang;
+      Document.targetLang = targetLang;
+      // initialize the revision property on the document object
+      Document.revision = 0;
 
       var file = xml.querySelector("file");
 
@@ -116,19 +133,18 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
           Document.completedSegments.push(false);
       });
 
-      Document.sourceLang = sourceLang;
-      Document.targetLang = targetLang;
-      // initialize the revision property on the document object
-      Document.revision = 0;
 
       // TODO: remove the document-loaded event, and use the result of the resolved promise directly
       // tell the world that the document loaded
-      $log.info("Firing document-loaded event");
-      $log.log(Date.now());
-      $rootScope.$broadcast('document-loaded');
-      deferred.resolve(true);
+//      $log.info("Firing document-loaded event");
+//      $log.log(Date.now());
+//      $rootScope.$broadcast('document-loaded');
+//      deferred.resolve(true);
 
-      return deferred.promise;
+//      return deferred.promise;
+      $log.log('Xliff parser returning');
+      $log.log(Document);
+      return Document;
     },
     // working - the source may not be segmented with <seg-source> tags -- there may only be a single <source> tag
     getTranslatableSegments: function(xmlDoc) {
@@ -197,6 +213,11 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader','Do
       targetNode.appendChild(mrkTarget);
 
       return mrkTarget;
+    },
+    // util to stringify an XML dom (takes a DOM as argument)
+    getDOMString: function (xmlObj) {
+      var domString = new XMLSerializer().serializeToString(xmlObj);
+      return domString;
     },
   }
 }]);

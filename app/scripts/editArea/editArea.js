@@ -1,10 +1,29 @@
-// TODO: rename this controller to something better -- should be the controller for the entire page
-// TODO: the catNav directive has its own controller - move navigation functions there
+angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal',
+  '$log', 'editSession', 'SegmentOrder', 'loggerUrl', '$rootScope', 'Wikipedia', 'Projects', 'XliffParser', '$stateParams',
+  function($scope, $location, $anchorScroll, $modal, $log, editSession, segmentOrder, loggerUrl, $rootScope, Wikipedia,
+           Projects, XliffParser, $stateParams) {
 
-angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', 'Document', '$modal',
-  '$log', 'editSession', 'loggerUrl', '$rootScope', 'Wikipedia', 'Document',
-  function($scope, $location, $anchorScroll, Document, $modal, $log, session, loggerUrl, $rootScope, Wikipedia,
-           Document) {
+  // Working -- get the project resource from state params on ng-init
+  $log.log('EditAreaCtrl init');
+  $log.log('stateParams:');
+  // This is the init function that sets up an edit session
+  $log.log($stateParams);
+  $scope.loadProject = function () {
+    Projects.get({
+      projectId: $stateParams.projectId
+    }, function(projectResource) {
+      // WORKING - parse the project's XLIFF, and set up the API to its DOM
+      $log.log('This states projectResource is: ');
+      $log.log(projectResource);
+      $scope.projectResource = projectResource;
+      $scope.document = XliffParser.parseXML(projectResource.content);
+      // initialize the SegmentOrder service
+      segmentOrder.initSegmentOrder($scope.document.segments);
+      $log.log('$scope.document loaded and parsed');
+
+    })
+  }
+
 
   // TODO: move this to a proper global controller for the edit area
   // global user options (may be accessed or changed from child controllers)
@@ -12,16 +31,15 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     toolbar: false
   };
 
-  $scope.session = session;
-  // TODO: remove the Document service and set document data directly on this controller
-  $scope.document = Document;
+  $scope.session = editSession;
   $scope.url = loggerUrl;
+
+
 
   // based on http://updates.html5rocks.com/2011/08/Saving-generated-files-on-the-client-side
   // and http://stackoverflow.com/a/15031019
   $scope.saveDocument = function() {
-    console.error('prueba!');
-    var bb = new Blob([new XMLSerializer().serializeToString( Document.DOM )], {type: "application/xml"});
+    var bb = new Blob([new XMLSerializer().serializeToString( $scope.document.DOM )], {type: "application/xml"});
     saveAs(bb, "document.xliff");
   };
 
@@ -50,10 +68,10 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
   // Check if all the segments are marked as completed
   $scope.checkTranslationCompleted = function() {
-    if (!Document.DOM)
+    if (!$scope.document.DOM)
       return false; // do not show completed before starting the job!
-    for (var i = 0; i < Document.completedSegments.length; ++i)
-      if (Document.completedSegments[i] == false)
+    for (var i = 0; i < $scope.document.completedSegments.length; ++i)
+      if ($scope.document.completedSegments[i] == false)
         return false;
     if (!$scope.scrollDone)
       $scope.scrollToBottom();
