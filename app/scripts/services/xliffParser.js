@@ -3,8 +3,8 @@
 // - the API to the XLIFF DOM should be in the editArea, XLIFF objects should not be global in the app
 
 // Note: the 'Logger' service is only included here so that it is ready to hear 'document-loaded' when the event fires
-angular.module('services').factory('XliffParser', ['$rootScope','fileReader', 'editSession', 'Logger', '$q', '$http', '$log',
-  function($rootScope, fileReader, session, Logger, $q, $http, $log) {
+angular.module('services').factory('XliffParser', ['$rootScope','fileReader', 'Logger', '$q', '$http', '$log',
+  function($rootScope, fileReader, Logger, $q, $http, $log) {
   // Persistent DOMParser
   var parser = new DOMParser();
 
@@ -37,10 +37,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', 'e
     // just parse and return
     parseXML: function(rawText) {
 //      Document.init();
-      // Working - just return the Document object from this function
-      var Document = {};
-      session.startSession();
-
+    // Working - just return the Document object from this function
+    var Document = {};
      var deferred = $q.defer();
 
       var self = this;

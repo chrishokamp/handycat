@@ -281,7 +281,7 @@ angular.module('controllers').controller('AceCtrl',
     clearEditor();
   });
   $scope.$watch(function() {
-    return editSession.activeSegment;
+    return $scope.activeSegment;
   }, function(segId) {
     if (segId == $scope.index) {
       $scope.editor.focus();

@@ -1,4 +1,4 @@
-angular.module('directives').directive('toolbar', ['editSession', '$log', '$timeout', function(session, $log, $timeout) {
+angular.module('directives').directive('toolbar', ['editSession', '$log', '$timeout', '$interval', function(editSession, $log, $timeout, $interval) {
   // this directive shares scope with the current active segment area
   // the toolbar communicates with the segment area to perform queries and populate new data
   return {
@@ -8,7 +8,7 @@ angular.module('directives').directive('toolbar', ['editSession', '$log', '$time
      $timeout(function(){
       $scope.$watch(
         function () {
-          return session.activeSegment;
+          return $scope.activeSegment;
         },
         function(index) {
           $log.log('toolbar: ACTIVE SEGMENT CHANGED');
@@ -18,10 +18,17 @@ angular.module('directives').directive('toolbar', ['editSession', '$log', '$time
         }
       )},0);
 
+      $timeout(
+        function() {
+          $log.log('current $scope')
+          $log.log($scope);
+        }, 3000
+      )
+
       // when the directive gets initialized
-      var index = session.activeSegment;
-      var above = $('#segment-' + index);
-      $(above).after(el);
+//      var index = editSession.activeSegment;
+//      var above = $('#segment-' + index);
+//      $(above).after(el);
 
       $scope.$on('update-glossary-area', function(evt, data) {
         $log.log('toolbar: update-glossary-area');

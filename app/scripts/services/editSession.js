@@ -1,3 +1,5 @@
+// This service should only be for logging -- anything specific to editing a particular XLIFF should be on the EditArea/ContentArea Controllers
+
 angular.module('services')
 .factory('editSession', ['loggerUrl', 'SegmentOrder', '$http', '$rootScope', '$log',
     function(loggerUrl, SegmentOrder, $http, $rootScope, $log) {
@@ -6,17 +8,14 @@ angular.module('services')
       var logUrl = loggerUrl + '/logger';
 
       return {
-        // set to true to show a textarea with the modifications of the XLIFF in real time.
-        debugXLIFF: false,
         userId: 0,
         sessionId: undefined,
         sessionIdShort: undefined,
         sessionPromise: undefined,
 
+        // TODO: this function was previously called from the XliffParser
+        // TODO: we want to be able to replay every action taken by the user
         startSession: function() {
-          // reinitialize (called from XliffParser when a new doc is parsed)
-          this.activeSegment= undefined;
-          this.debugXLIFF= false;
 
           this.userId= 0;
           this.sessionId= undefined;
@@ -80,12 +79,12 @@ angular.module('services')
 
         // Functions controlling movement through the document
         // order of segments
-        activeSegment: undefined,
-        getNextSegment: function() {
+//        activeSegment: undefined,
+        getNextSegment: function(currentSegment) {
 //          if (SegmentOrder.order.length === 0)
             // TODO: throw error here
 //            SegmentOrder.getOrder(Document.segments);
-          return SegmentOrder.nextSegment(this.activeSegment);
+          return SegmentOrder.nextSegment(currentSegment);
         },
         focusNextSegment: function() {
           var next = this.getNextSegment();
@@ -93,10 +92,9 @@ angular.module('services')
           this.setSegment(next);
         },
         setSegment: function(segIndex) {
-          this.activeSegment = segIndex;
           if (segIndex != -1)
-            $rootScope.$broadcast('changeSegment', {currentSegment: this.activeSegment});
-          return this.activeSegment;
+            $rootScope.$broadcast('changeSegment', {currentSegment: segIndex});
+          return segIndex;
         },
 
         // stats

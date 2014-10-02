@@ -3,10 +3,10 @@
 
     <!-- singleton directive containing the toolbar -->
     <!-- TODO: active-segment should be passed into the directive -->
-    <toolbar class="info-toolbar" ng-show="visible.toolbar"></toolbar>
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl">
+    <toolbar class="info-toolbar" ng-show="visible.toolbar"></toolbar>
         <!-- repeat for each segment -->
         <div class="segment row"
              ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}"
@@ -28,6 +28,7 @@
                        <span class="glyphicon glyphicon-flag"></span> Pending
                    </button>
                 </span>
+            <!--<p>{{test.test}}</p>-->
             </p>
 
             <div class="bottom-margin" ng-click="activate($index)">

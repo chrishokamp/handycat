@@ -4,14 +4,12 @@ angular.module('controllers').controller('ContentAreaCtrl',
     ['$scope', 'editSession', '$location', '$state', '$stateParams', '$modal', '$rootScope', '$log', '$timeout',
     function($scope, editSession, $location, $state, $stateParams, $modal, $rootScope, $log, $timeout) {
 
-      // TODO: remove the manual timeout -- wait for promise to resolve
+      // TODO: remove the manual timeout -- wait for promise to resolve when we hit the edit route
       $timeout(function() {
         $scope.language = $scope.document.targetLang;
         $scope.numSegments = $scope.document.segments.length;
         // each segment is a reference to the segment in the Document service
         $scope.segments = $scope.document.segments;
-        $log.log('SEGMENTS');
-        $log.log($scope.segments);
         // watch the flag on the Documents service
         $scope.$watch(function() {
 
@@ -29,8 +27,11 @@ angular.module('controllers').controller('ContentAreaCtrl',
 
   // this fires once the view content has completely loaded
   $rootScope.$on('repeat-finished', function (event) {
+    $log.log('Heard repeat-finished');
     // quick hack -- just activate segment 0
     editSession.setSegment(0);
+    // TODO: initialize this from the session metadata on the server
+    $scope.activeSegment = 0;
 
     var segmentId = $stateParams.segmentId;
     if (segmentId) {
@@ -58,11 +59,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
   editSession.updateStat('pearl-document-loaded', -1, '');
 
   // DEV UTILS
-  $scope.showXLIFF = editSession.debugXLIFF;
+  $scope.showXLIFF = fae:wo
   // END DEV UTILS
-
-
-
-
 
 }]);
