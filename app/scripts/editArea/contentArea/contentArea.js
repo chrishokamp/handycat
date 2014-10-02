@@ -59,7 +59,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
   editSession.updateStat('pearl-document-loaded', -1, '');
 
   // DEV UTILS
-  $scope.showXLIFF = fae:wo
+  $scope.showXLIFF = false;
   // END DEV UTILS
 
 }]);
