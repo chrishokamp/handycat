@@ -21,6 +21,7 @@ var UserSchema = new Schema({
   admin: Boolean,
   guest: Boolean,
   provider: String,
+
   tausUsername: String,
   tausPassword: String
 });
@@ -39,6 +40,7 @@ UserSchema
     return this._password;
   });
 
+// Chris: this is what gets returned and used in the client
 UserSchema
   .virtual('user_info')
   .get(function () {
@@ -94,6 +96,19 @@ UserSchema.pre('save', function(next) {
 /**
  * Methods
  */
+/**
+ * Statics
+ */
+UserSchema.statics = {
+  load: function(id, cb) {
+    console.log('LOAD FUNCTION CALLED');
+    console.log('id: ' + id)
+    this.findOne({
+      _id: mongoose.Types.ObjectId(id)
+//    }).populate('email', 'username').exec(cb);
+  }).exec(cb);
+  }
+};
 
 UserSchema.methods = {
 

@@ -3,9 +3,7 @@
 var mongoose = require('mongoose'),
   Project = mongoose.model('Project');
 
-/**
- * Find project by id
- */
+// Find project by id
 exports.project = function(req, res, next, id) {
   Project.load(id, function(err, project) {
     if (err) return next(err);

@@ -6,21 +6,34 @@ var path = require('path'),
 module.exports = function(app) {
   // User Routes
   var users = require('../controllers/users');
+
   app.post('/auth/users', users.create);
   app.get('/auth/users/:userId', users.show);
+  // todo: this lets any logged-in user update another user's taus TM data
+  app.put('/auth/users/:userId', auth.ensureAuthenticated, users.update);
+  app.delete('/auth/users/:userId', auth.ensureAuthenticated, auth.project.hasAuthorization, users.destroy);
 
-  // TAUS data API routes
-  // note: a new user needs to register with TAUS for this to work
-  // Direct users here to register for an account: http://www.tausdata.org/index.php/component/users/?view=registration
-  app.post('/users/tausdata', users.setTausData);
 
   // sample call to the TAUS segment API
   // https://www.tausdata.org/api/segment.json?source_lang=en-US&target_lang=fr-FR&q=data+center
   // TODO: create routes for interacting with TAUS data
   // TODO: graceful warnings and fallback if the API isn't working, or the user isn't registered
 
+  // TAUS data API routes - TODO - extend this into a general interface to translation memories
+  // note: a new user needs to register with TAUS for this to work
+  // Direct users here to register for an account: http://www.tausdata.org/index.php/component/users/?view=registration
+  app.post('/users/tm', auth.ensureAuthenticated, users.setTausData);
+  // TODO - implement errors in case user doesn't have TAUS credentials
+  app.get('/users/tm', auth.ensureAuthenticated, users.queryTM);
+
+
   // Check if username is available
   app.get('/auth/check_username/:username', users.exists);
+
+  // this makes req.project available (via a  side-effect)
+  // checking - i don't actually know what this does
+  // - automatically calls a function when this parameter is present
+  app.param('userId', users.user);
 
   // Session Routes
   var session = require('../controllers/session');
@@ -32,9 +45,6 @@ module.exports = function(app) {
   // Translation Project Routes - these routes let users interact with their projects
   var projects = require('../controllers/projects');
   // Chris - ensureAuthenticated middleware controls access to the route
-  // TODO: remove this temporary route after building RESTful API
-
-//  app.get('/api/project',auth.ensureAuthenticated, function(req,));
 
   app.get('/api/projects',auth.ensureAuthenticated, projects.all);
   app.post('/api/projects', auth.ensureAuthenticated, projects.create);
@@ -43,6 +53,7 @@ module.exports = function(app) {
   app.delete('/api/projects/:projectId', auth.ensureAuthenticated, auth.project.hasAuthorization, projects.destroy);
 
   //Setting up the projectId param
+  // this makes req.project available (via a  side-effect)
   app.param('projectId', projects.project);
 
 
