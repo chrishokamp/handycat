@@ -1,5 +1,5 @@
 angular.module('controllers')
-.controller('CreateProjectCtrl', ['Document', 'XliffParser', 'Projects', '$state', '$log', '$scope', '$http', function(Document, XliffParser, Projects, $state, $log, $scope, $http) {
+.controller('CreateProjectCtrl', ['XliffParser', 'Projects', '$state', '$log', '$scope', '$http', function(XliffParser, Projects, $state, $log, $scope, $http) {
 
     $scope.title = 'default-project';
 
@@ -46,15 +46,13 @@ angular.module('controllers')
       $scope.title = "";
     };
 
-    // WORKING: refactor the Document service so that the .translate state always initializes a new controller
     // user specifies the URL of an XLIFF file, we grab it, parse it, then save it on the server
-    // TODO: we need to go to the .translate state once the file is parsed
-    // the XliffParser should return a promise, the translate state should wait for that promise to resolve before rendering
+    // TODO: the XliffParser should return a promise, the translate state should wait for that promise to resolve before rendering
     $scope.createFromURL = function(xliffFileUrl) {
       $log.log('create from URL fired...');
       $http.get(xliffFileUrl)
         .success(function(data) {
-          var pendingDocument = XliffParser.parseXML(data);
+          var pendingDocument = XliffParser.parseXML(data).DOM;
           var project = new Projects({
             title: $scope.title,
             content: XliffParser.getDOMString(pendingDocument)

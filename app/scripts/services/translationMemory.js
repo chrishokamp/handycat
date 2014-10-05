@@ -52,8 +52,10 @@ angular.module('services').factory('TranslationMemory', ['$http', '$timeout', '$
       if (!self)
         var self = this;
 
-      // for amagama
+      // TODO: consistent client-side API to the translationMemory -- the client shouldn't worry about WHICH tm is being called      // for amagama
       var queryUrl = getUrl + encodeURIComponent(query) + '?min_similarity=' + this.similarityThreshold;
+
+      // for TausData
 
       // for myMemory
       // var queryUrl = mymemoryUrl + encodeURIComponent(query) + langPairStr;

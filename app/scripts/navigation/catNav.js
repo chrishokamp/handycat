@@ -14,8 +14,9 @@ angular.module('directives').directive('catNav', ['Logger', 'Auth', '$location',
         // based on http://updates.html5rocks.com/2011/08/Saving-generated-files-on-the-client-side
         // and http://stackoverflow.com/a/15031019
         $scope.saveXLIFF = function() {
-          var bb = new Blob([new XMLSerializer().serializeToString( Document.DOM )], {type: "application/xml"});
-          saveAs(bb, "document.xliff");
+//          var bb = new Blob([new XMLSerializer().serializeToString( Document.DOM )], {type: "application/xml"});
+          $log.log('NOT IMPLEMENTED');
+//          saveAs(bb, "document.xliff");
         };
         $scope.saveJSON = function() {
           $log.log("saving JSON");

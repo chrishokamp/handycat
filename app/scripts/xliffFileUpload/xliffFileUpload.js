@@ -1,6 +1,6 @@
 angular.module('controllers').controller('UploadCtrl',
-  ['$scope', 'fileReader', '$timeout', 'XliffParser', 'Document', '$state', '$log',
-  function($scope, fileReader, $timeout, XliffParser, Document, $state, $log) {
+  ['$scope', 'fileReader', '$timeout', 'XliffParser', '$state', '$log',
+  function($scope, fileReader, $timeout, XliffParser, $state, $log) {
 // TODO: remember that different file types will require different parsers
 // try to select which parser we want based on the file extension
 

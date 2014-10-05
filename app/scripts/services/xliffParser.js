@@ -214,6 +214,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', 'L
     },
     // util to stringify an XML dom (takes a DOM as argument)
     getDOMString: function (xmlObj) {
+      $log.log('XmlObj: ');
+      $log.log(xmlObj);
       var domString = new XMLSerializer().serializeToString(xmlObj);
       return domString;
     },

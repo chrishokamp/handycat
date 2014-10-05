@@ -86,7 +86,10 @@ angular.module('services')
     // TODO:
     // 1- get credentials on server
     // 2- when the user wants TM stuff, get their TAUS credentials, and send
+    // - Question: should the TM be mediated by the server or not?
+    // - Answer: yes, because we want a consistent API to all TMs, no matter where they are
     setCredentials: function (username, password) {
+      // WORKING - post credentials to '/users/tausdata'
       var encoded = Base64.encode(username + ':' + password);
       $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
       $cookieStore.put('authdata', encoded);
