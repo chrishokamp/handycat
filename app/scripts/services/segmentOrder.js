@@ -22,6 +22,7 @@ angular.module('services').factory('SegmentOrder', ['$http', '$rootScope', 'base
       return o;
     },
     nextSegment: function(current) {
+      $log.log('nextSegment - current: ' + current);
       var index = this.order.indexOf(current);
       if (index != -1) {
         if (index+1 == this.order.length)

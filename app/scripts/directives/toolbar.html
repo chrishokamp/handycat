@@ -4,15 +4,12 @@
     <tabset>
         <tab heading="Translation Memory">
             <div class="search-result"
-                 ng-repeat="glossaryMatch in glossaryMatches"
-                 ng-click="insertText(glossaryMatch)"
-                 ng-show="glossaryMatches"
+                 ng-repeat="tmMatch in tmMatches"
+                 ng-click="insertText(tmMatch)"
+                 ng-show="tmMatches"
             >
-                TEST
+                {{tmMatch}}
             </div>
-
-            <!--<div ng-hide="glossaryMatches !== undefined"><p>Error: Unable to access the glossary service.</p></div>-->
-            <!--<div ng-show="glossaryMatches.length === 0"><p>No matches found for term: <b>{{ glossary.glossaryQuery }}</b></p></div>-->
         </tab>
         <tab heading="Glossary">
             <input type="text" ng-model="glossary.glossaryQuery" placeholder="Enter a search query..." class="query-box"/>

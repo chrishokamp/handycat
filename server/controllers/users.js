@@ -140,8 +140,11 @@ exports.queryTM = function (req, res, next) {
       var combined = new Buffer(tausUsername + ':' + tausPassword).toString('base64');
       var from = 'source_lang=' + req.query.sourceLang;
       var to = 'target_lang=' + req.query.targetLang;
+      // TODO: dynamically decide whether to use fuzzy=true or fuzzy=false
+      var fuzzy = 'fuzzy=' + false;
+      var direction = 'direction=' + 'forward';
       var query = 'q=' + req.query.query;
-      var qParams = [from, to, query].join('&')
+      var qParams = [from, to, fuzzy, direction, query].join('&')
 
       var options = {
         host: 'tausdata.org',

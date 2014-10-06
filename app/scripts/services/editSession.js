@@ -79,20 +79,22 @@ angular.module('services')
 
         // Functions controlling movement through the document
         // order of segments
-//        activeSegment: undefined,
         getNextSegment: function(currentSegment) {
+          $log.log('editSession - get next segment - currentSegment is: ' + currentSegment);
 //          if (SegmentOrder.order.length === 0)
             // TODO: throw error here
 //            SegmentOrder.getOrder(Document.segments);
           return SegmentOrder.nextSegment(currentSegment);
         },
-        focusNextSegment: function() {
-          var next = this.getNextSegment();
+        focusNextSegment: function(currentSegment) {
+          var next = this.getNextSegment(currentSegment);
           $log.log('editSession: setting next segment as: ' + next);
           this.setSegment(next);
         },
         setSegment: function(segIndex) {
+          $log.log('EditSession - trying to set next segment as: ' + segIndex);
           if (segIndex != -1)
+            $log.log('editSession: $broadcasting changeSegment - next segment is: ' + segIndex);
             $rootScope.$broadcast('changeSegment', {currentSegment: segIndex});
           return segIndex;
         },

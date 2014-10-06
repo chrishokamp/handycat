@@ -15,7 +15,7 @@ angular.module('controllers')
   // this gets reset in the template
   $scope.id = {};
 
-  // TODO: set this only when this is the active scope
+  // TODO: set this only when this is actually the active scope
   $scope.isActive = { active:true };
 
   // TODO: segment state should be directly linked to the XLIFF document
@@ -196,8 +196,9 @@ $scope.clearSelection = function() {
 
     // TODO: the rest of this function should be on the EditAreaCtrl
     // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
-    //
-    Session.focusNextSegment();
+    // - this line is CRITICAL - tells the UI to move to the next segment
+    $log.log('$scope.index: ' + $scope.index);
+    Session.focusNextSegment($scope.index);
 
     // Update the current segment in the XLIFF DOM
     // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF

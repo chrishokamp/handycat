@@ -13,6 +13,7 @@ angular.module('controllers')
       $scope.alerts.splice(index, 1);
     };
 
+    // user can register for a TAUS data account here: https://www.tausdata.org/index.php/component/users/?view=registration
     $scope.updateUserTausCredentials = function() {
       $log.log('TausUsername: ' + $scope.TausUsername);
       $log.log('TausPassword: ' + $scope.TausPassword);

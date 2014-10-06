@@ -43,6 +43,12 @@ angular.module('controllers').controller('ContentAreaCtrl',
     }
   });
 
+  // listen for a segment change, and reset $scope.activeSegment accordingly
+  $scope.$on('changeSegment', function(evt, data) {
+    $scope.activeSegment = data.currentSegment
+  })
+
+
   // if the state changes during the session without a reload
   $rootScope.$on('$stateChangeStart',
     function(event, toState, toParams, fromState, fromParams){
