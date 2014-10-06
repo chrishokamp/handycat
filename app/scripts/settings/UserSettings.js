@@ -3,6 +3,15 @@ angular.module('controllers')
 
     // Working -- make sure the user is loaded on the $scope
     // the user resource should already be globally loaded on the rootscope
+    $scope.alerts = [];
+
+    $scope.addAlert = function(type, message) {
+      $scope.alerts.push({type: type, msg: message});
+    };
+
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };
 
 
 //      $scope.loadProject = function () {
@@ -30,7 +39,9 @@ angular.module('controllers')
       $scope.currentUser.tausPassword = $scope.TausPassword;
 
       $scope.currentUser.$update(function() {
+        // TODO: show alert
         $log.log('current user updated');
+        $scope.addAlert('success', 'TAUS credentials updated!')
       })
     }
 

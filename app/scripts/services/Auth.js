@@ -28,6 +28,7 @@ angular.module('services')
               $log.log('current user: ');
               $log.log(userResource);
               $rootScope.currentUser = userResource;
+//              $cookieStore.put('user', user);
               return cb();
             });
           }, function(err) {

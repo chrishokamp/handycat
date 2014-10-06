@@ -69,12 +69,7 @@ var App = window.App = angular.module('editorComponentsApp',
     })
     .state('settings', {
       url: '/settings',
-      template: '<div class="input-group input-group-lg" >' +
-        '<h3>Settings</h3>' +
-        '<p>Taus Username<input type="text" class="form-control" ng-model="TausUsername" placeholder="<taus username>"></p>' +
-        '<p>Taus password<input type="text" class="form-control" ng-model="TausPassword" placeholder="<taus password>"></p>' +
-        '<button class="form-control btn btn-primary" ng-click="updateUserTausCredentials()">Update</button>' +
-        '</div>',
+      templateUrl: '/views/settings.html',
       controller: 'UserSettingsCtrl'
     })
     .state('login', {

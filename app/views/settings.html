@@ -1,0 +1,9 @@
+<div>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+</div>
+<div class="input-group input-group-lg" >
+    <h3>Settings</h3>
+    <p>Taus Username<input type="text" class="form-control" ng-model="TausUsername" placeholder="<taus username>"></p>
+    <p>Taus password<input type="text" class="form-control" ng-model="TausPassword" placeholder="<taus password>"></p>
+    <button class="form-control btn btn-primary" ng-click="updateUserTausCredentials()">Update</button>
+</div>
