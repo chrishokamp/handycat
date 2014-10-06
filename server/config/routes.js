@@ -24,8 +24,10 @@ module.exports = function(app) {
   // Direct users here to register for an account: http://www.tausdata.org/index.php/component/users/?view=registration
   app.post('/users/tm', auth.ensureAuthenticated, users.setTausData);
   // TODO - implement errors in case user doesn't have TAUS credentials
-  app.get('/users/tm', auth.ensureAuthenticated, users.queryTM);
+//  app.get('/users/tm', auth.ensureAuthenticated, users.queryTM);
 
+  // Working - implement /users/:userId/tm - this user's TM resources
+  app.get('/users/:userId/tm', auth.ensureAuthenticated, users.queryTM)
 
   // Check if username is available
   app.get('/auth/check_username/:username', users.exists);

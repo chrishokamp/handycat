@@ -11,6 +11,7 @@ angular.module('directives').directive('toolbar', ['editSession', '$log', '$time
           return $scope.activeSegment;
         },
         function(index) {
+          // TODO: reinitialize the toolbar fields when the active segment changes
           $log.log('toolbar: ACTIVE SEGMENT CHANGED');
           $log.log(index);
           var above = $('#segment-' + index);
@@ -18,6 +19,7 @@ angular.module('directives').directive('toolbar', ['editSession', '$log', '$time
         }
       )},0);
 
+      // testing
       $timeout(
         function() {
           $log.log('current $scope')
@@ -25,11 +27,7 @@ angular.module('directives').directive('toolbar', ['editSession', '$log', '$time
         }, 3000
       )
 
-      // when the directive gets initialized
-//      var index = editSession.activeSegment;
-//      var above = $('#segment-' + index);
-//      $(above).after(el);
-
+      // Events for interacting with the toolbar
       $scope.$on('update-glossary-area', function(evt, data) {
         $log.log('toolbar: update-glossary-area');
         $log.log(data);
@@ -39,6 +37,16 @@ angular.module('directives').directive('toolbar', ['editSession', '$log', '$time
         });
       })
 
+      $scope.$on('update-tm-area', function(evt, data) {
+        $log.log('toolbar: update-tm-area');
+        $log.log(data);
+
+        // TODO: datastructure for TM matches -- isomorphic to TBX specification
+//        $scope.tmMatches = data.map(function(item) {
+//          return item.text;
+//        });
+        $scope.tmMatches = data
+      })
     }
   }
 }]);

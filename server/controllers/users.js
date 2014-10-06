@@ -79,8 +79,8 @@ exports.user = function(req, res, next, id) {
     console.log(user)
     if (err) return next(err);
     if (!user) return next(new Error('Failed to load user ' + id));
-    // testing1
-    req.aUser = user;
+    // testing - put the user onto the req for downstream use
+    req.user = user;
     next();
   });
 };
@@ -109,7 +109,11 @@ exports.setTausData = function (req, res, next) {
   });
 }
 
+var getJSON = require('../getJSON').getJSON;
 exports.queryTM = function (req, res, next) {
+  console.log('inside queryTM');
+
+  // Working - the user should already be on the req
   var userId = req.params.userId;
 
   // see using express with HTTP basic Auth
@@ -121,22 +125,54 @@ exports.queryTM = function (req, res, next) {
     if (user) {
       var tausUsername = user.tausUsername;
       var tausPassword = user.tausPassword;
+      // TODO: check if user has login credentials for this TM
+      if (!tausUsername || !tausPassword) {
+        return next(new Error('tausUsername or tausPassword fields are not parsable as strings'));
+      }
+
+//Username and password are combined into a string "username:password"
+//The resulting string is then encoded using the RFC2045-MIME variant of Base64, except not limited to 76 char/line[9]
+//The authorization method and a space i.e. "Basic " is then put before the encoded string.
+
       console.log('tausUsername: ' + tausUsername);
       console.log('tausPassword: ' + tausPassword);
+
+      var combined = new Buffer(tausUsername + ':' + tausPassword).toString('base64');
+      var from = 'source_lang=' + req.query.sourceLang;
+      var to = 'target_lang=' + req.query.targetLang;
+      var query = 'q=' + req.query.query;
+      var qParams = [from, to, query].join('&')
+
+      var options = {
+        host: 'tausdata.org',
+        path: '/api/segment.json?' + qParams,
+        method: 'GET',
+        // https
+        port: 443,
+        headers: {
+          accept: '*/*',
+          Authorization: 'Basic ' + combined
+        }
+      }
+
+      // TODO: handle TAUSdata API errors (first param of callbacks)
+      getJSON(options,
+        function(result) {
+          var matches = result;
+          // get data from the TAUS api, then send it in the callback
 //      res.send(200, "User's TAUS data was updated");
-      res.send(200);
-    } else {
-      res.send(404, 'USER_NOT_FOUND')
+          console.log('result from TAUS')
+          console.log(matches)
+          res.send(matches);
+        });
+
     }
+    // TODO: check if user has login credentials for this TM
+    else {
+      return next(new Error('error in API to TAUSdata'));
+    }
+    // retrieve the user from mongo, get the taus credentials, and call the taus api with the query
   });
-
-
-  // TODO: check if user has login credentials for this TM
-  if (!tausUsername || !tausPassword) {
-    return next(new Error('tausUsername or tausPassword fields are not parsable as strings'));
-  }
-
-  // retrieve the user from mongo, get the taus credentials, and call the taus api with the query
 
 }
 

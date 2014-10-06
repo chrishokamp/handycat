@@ -1,5 +1,5 @@
 angular.module('controllers')
-.controller('UserSettingsCtrl', ['$scope', 'User', '$log', function($scope, User, $log) {
+.controller('UserSettingsCtrl', ['$scope', 'User', 'TranslationMemory', '$log', function($scope, User, TranslationMemory, $log) {
 
     // Working -- make sure the user is loaded on the $scope
     // the user resource should already be globally loaded on the rootscope
@@ -12,22 +12,6 @@ angular.module('controllers')
     $scope.closeAlert = function(index) {
       $scope.alerts.splice(index, 1);
     };
-
-
-//      $scope.loadProject = function () {
-//    Projects.get({
-//      projectId: $stateParams.projectId
-//    }, function(projectResource) {
-//      // WORKING - parse the project's XLIFF, and set up the API to its DOM
-//      $log.log('This states projectResource is: ');
-//      $log.log(projectResource);
-//      $scope.projectResource = projectResource;
-//      $scope.document = XliffParser.parseXML(projectResource.content);
-//      // initialize the SegmentOrder service
-//      segmentOrder.initSegmentOrder($scope.document.segments);
-//      $log.log('$scope.document loaded and parsed');
-//
-//    })
 
     $scope.updateUserTausCredentials = function() {
       $log.log('TausUsername: ' + $scope.TausUsername);
@@ -45,8 +29,21 @@ angular.module('controllers')
       })
     }
 
-    // test call to tausdata (test that credentials are valid)
-  // Update the project on the server
+    // TODO: test call to tausdata (test that credentials are valid)
+    $scope.testTM = function() {
+      // call the TAUS TM from the server, and ask for a segment
+      // https://www.tausdata.org/api/segment.json?source_lang=en-US&target_lang=fr-FR&q=data+center
+      // Update the project on the server
+      $log.log('Testing TM - userId is: ' + $scope.currentUser._id);
+      var queryObj = { userId: $scope.currentUser._id, sourceLang: 'en-US', targetLang: 'fr-FR', query: 'swimming pool'};
+      $log.log('Translation Memory');
+      $log.log(TranslationMemory);
+      TranslationMemory.get(queryObj, function(tmResponse) {
+        $log.log('TM responded, result is: ');
+        $log.log(tmResponse);
+
+      });
+    }
 
     // TODO - where can we see the current user resource? - is it on $rootScope?
 //    $scope.projectResource.content = XliffParser.getDOMString($scope.document.DOM);
