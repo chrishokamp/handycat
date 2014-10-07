@@ -85,6 +85,8 @@ exports.user = function(req, res, next, id) {
   });
 };
 
+// WORKING - generalize resource setup so that different resources can use the same interface
+// --> getting data from the TM should look no different than getting data from a MT engine, or a human
 exports.setTausData = function (req, res, next) {
   var userId = req.body.userId;
   var tausUsername = req.body.tausUsername;
