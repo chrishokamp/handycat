@@ -8,7 +8,11 @@
                  ng-click="insertText(tmMatch)"
                  ng-show="tmMatches"
             >
-                {{tmMatch}}
+                <div class="row">
+                    <div class="col-xs-5">{{tmMatch.source}}</div>
+                    <div class="col-xs-5">{{tmMatch.target}}</div>
+                    <div class="col-xs-2">{{tmMatch.provider.name}}</div>
+                </div>
             </div>
         </tab>
         <tab heading="Glossary">
