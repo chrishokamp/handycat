@@ -18,19 +18,13 @@ angular.module('directives').directive('catNav', ['Logger', 'Auth', '$location',
           $log.log('NOT IMPLEMENTED');
 //          saveAs(bb, "document.xliff");
         };
+
         $scope.saveJSON = function() {
           $log.log("saving JSON");
           $log.log(Logger.exportJSON());
           var bb = new Blob([Logger.exportJSON()], {type: "application/json"});
           saveAs(bb, "edit-log.json");
         };
-
-        // TODO: switch to toggle on-off
-        $scope.toggleToolbar = function () {
-          $log.log('TOGGLE TOOLBAR');
-          $rootScope.$broadcast('show-toolbar');
-
-        }
 
         $scope.logout = function() {
           Auth.logout(function(err) {

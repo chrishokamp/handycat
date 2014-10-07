@@ -1,11 +1,9 @@
-//@import url(http://fonts.googleapis.com/css?family=Gilda+Display&subset=latin,latin-ext);
-//@import url(http://fonts.googleapis.com/css?family=Cardo&subset=latin,latin-ext);
-
 @import "vendor/web-fonts";
 @include web-fonts(Roboto Slab);
 
 // partials
 @import "partials/projects";
+@import "partials/hud-toolbar";
 
 * {
   -webkit-border-radius: 0 !important;
@@ -27,6 +25,10 @@ body {
 
   // to put the content below the nav
   padding-top: 50px;
+
+  // leave space for the hud-toolbar in the 'translate' state
+  // TODO - apply this style only in the translate state
+  padding-bottom: 50px;
 }
 
 .blue {
@@ -35,12 +37,6 @@ body {
 .grey {
   background-color: #73B0FF;
 }
-
-// TODO: the content needs to always stay below the nav
-.main-content {
-  margin-top: 50px;
-}
-
 
 #login-wrapper {
   background-color: #87cefa;
