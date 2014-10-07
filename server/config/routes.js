@@ -11,7 +11,7 @@ module.exports = function(app) {
   app.get('/auth/users/:userId', users.show);
   // todo: this lets any logged-in user update another user's taus TM data
   app.put('/auth/users/:userId', auth.ensureAuthenticated, users.update);
-  app.delete('/auth/users/:userId', auth.ensureAuthenticated, auth.project.hasAuthorization, users.destroy);
+  app.delete('/auth/users/:userId', auth.ensureAuthenticated, users.destroy);
 
 
   // sample call to the TAUS segment API
@@ -27,7 +27,7 @@ module.exports = function(app) {
 //  app.get('/users/tm', auth.ensureAuthenticated, users.queryTM);
 
   // Working - implement /users/:userId/tm - this user's TM resources
-  app.get('/users/:userId/tm', auth.ensureAuthenticated, users.queryTM)
+  app.get('/users/:userId/tm', auth.ensureAuthenticated, users.queryTM, users.tmFilter)
 
   // Check if username is available
   app.get('/auth/check_username/:username', users.exists);

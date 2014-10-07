@@ -87,10 +87,18 @@ app.use(passport.session());
 
 params.extend(app);
 
-//Bootstrap routes
+// TODO: move this to routes, call the TM inside the TM middleware
+app.use('/users/:userId/tm', function(req, res, next) {
+  // invoked for any request starting with /users
+  console.log('Inside TM middleware')
+  next();
+});
+
+//Bootstrap routes - remember that routes must be added after application middleware
 require('./server/config/routes')(app);
 
 // TODO: move these routes to a separate file and bootstrap
+
 // add a route to query media wiki
 app.param('lang', /^\w{2}$/);
 app.get('/wikipedia/:lang', function(req, res){

@@ -166,7 +166,8 @@ exports.queryTM = function (req, res, next) {
 //      res.send(200, "User's TAUS data was updated");
           console.log('result from TAUS')
           console.log(matches)
-          res.send(matches);
+          res.matches = matches;
+          next();
         });
 
     }
@@ -178,6 +179,18 @@ exports.queryTM = function (req, res, next) {
   });
 
 }
+
+// functions to filter the TM results
+exports.tmFilter = function(req, res) {
+  console.log('users.tmFilter fired');
+  if (res) {
+    res.send(200, "User's TAUS data was updated");
+  } else {
+    res.send(404, 'USER_NOT_FOUND')
+  }
+}
+
+
 
 /**
  * Update a user
