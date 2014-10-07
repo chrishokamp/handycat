@@ -3,28 +3,6 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
   function($scope, $location, $anchorScroll, $modal, $log, editSession, segmentOrder, loggerUrl, $rootScope, Wikipedia,
            Projects, XliffParser, $stateParams) {
 
-  // Working -- get the project resource from state params on ng-init
-  $log.log('EditAreaCtrl init');
-  $log.log('stateParams:');
-  // This is the init function that sets up an edit session
-  $log.log($stateParams);
-  $scope.loadProject = function () {
-    Projects.get({
-      projectId: $stateParams.projectId
-    }, function(projectResource) {
-      // WORKING - parse the project's XLIFF, and set up the API to its DOM
-      $log.log('This states projectResource is: ');
-      $log.log(projectResource);
-      $scope.projectResource = projectResource;
-      $scope.document = XliffParser.parseXML(projectResource.content);
-      // initialize the SegmentOrder service
-      segmentOrder.initSegmentOrder($scope.document.segments);
-      $log.log('$scope.document loaded and parsed');
-
-    })
-  }
-
-
   // TODO: move this to a proper global controller for the edit area
   // global user options (may be accessed or changed from child controllers)
   $scope.visible = {
@@ -33,6 +11,28 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
   $scope.session = editSession;
   $scope.url = loggerUrl;
+
+  // TODO: resolve the projectResource and the parsed document object before this state loads
+  // This is the init function that sets up an edit session
+  $scope.loadProject = function () {
+    Projects.get({
+      projectId: $stateParams.projectId
+    }, function(projectResource) {
+      $scope.projectResource = projectResource;
+      XliffParser.parseXML(projectResource.content).then(
+        function(documentObj) {
+          $scope.document = documentObj;
+          // initialize the SegmentOrder service
+          segmentOrder.initSegmentOrder($scope.document.segments);
+          $log.log('$scope.document loaded and parsed');
+        },
+       function(err) {
+          console.error('editArea: error initializing $scope.document');
+        }
+      )
+    });
+  }
+
 
 
 

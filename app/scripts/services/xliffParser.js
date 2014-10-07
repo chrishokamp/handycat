@@ -2,9 +2,8 @@
 // - refactoring - the XLIFF parser should just return an object which provides a javascript interface to the XLIFF DOM
 // - the API to the XLIFF DOM should be in the editArea, XLIFF objects should not be global in the app
 
-// Note: the 'Logger' service is only included here so that it is ready to hear 'document-loaded' when the event fires
-angular.module('services').factory('XliffParser', ['$rootScope','fileReader', 'Logger', '$q', '$http', '$log',
-  function($rootScope, fileReader, Logger, $q, $http, $log) {
+angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$q', '$http', '$log',
+  function($rootScope, fileReader, $q, $http, $log) {
   // Persistent DOMParser
   var parser = new DOMParser();
 
@@ -14,9 +13,11 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', 'L
     readFile: function(file) {
       var self = this;
       var promise = fileReader.readAsText(file);
-      promise.then(function(result) {
-        self.parseXML(result);
+      // TODO: how to chain these properly?
+      return promise.then(function(result) {
+        return self.parseXML(result);
       });
+//      return promise;
 
     },
     // utility function to grab a local file from a string url
@@ -26,11 +27,13 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', 'L
       if (filepath) xliffFile = filepath;
 
       var self = this;
-      //This will make the request, then call the parser and fire the document loaded event
-      $http.get(xliffFile)
+      //This will make the request, then call the parser
+      var xliffPromise = $http.get(xliffFile)
         .success(function(data) {
           self.parseXML(data);
         });
+
+      return xliffPromise;
     },
 
     // Working - this is just a function -- shouldn't interface with the Document object at all
@@ -54,13 +57,19 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', 'L
 
       // Parsing error?
       var parserError = xml.querySelector('parsererror');
-      if (parserError !== null) {
+//      if (parserError !== null) {
+      if (xml.documentElement.nodeName == "parsererror") {
+        console.log("Error while parsing XLIFF file");
         $log.error("error while parsing");
-        $log.error(parserError);
+        var errorString = new XMLSerializer().serializeToString(parserError);
+        $log.error(errorString);
+
+        $log.error(new XMLSerializer().serializeToString(xml));
         self.parsingError = true;
         return;
-      } else
+      } else {
         self.parsingError = false;
+      }
 
       // Set Document DOM to the parsed result
       Document.DOM = xml;
@@ -134,15 +143,12 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', 'L
 
       // TODO: remove the document-loaded event, and use the result of the resolved promise directly
       // tell the world that the document loaded
-//      $log.info("Firing document-loaded event");
-//      $log.log(Date.now());
-//      $rootScope.$broadcast('document-loaded');
-//      deferred.resolve(true);
-
-//      return deferred.promise;
       $log.log('Xliff parser returning');
-      $log.log(Document);
-      return Document;
+//      $log.log(Document);
+      deferred.resolve(Document);
+
+//      return Document;
+      return deferred.promise;
     },
     // working - the source may not be segmented with <seg-source> tags -- there may only be a single <source> tag
     getTranslatableSegments: function(xmlDoc) {

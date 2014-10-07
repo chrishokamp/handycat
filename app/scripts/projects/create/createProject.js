@@ -35,15 +35,19 @@ angular.module('controllers')
 
     // is the XLIFF already parsed? - there should be a validation check to make sure this is a valid XLIFF
     $scope.create = function() {
-      var project = new Projects({
-        title: $scope.title,
-        content: XliffParser.getDOMString($scope.pendingDocument)
-      });
-      project.$save(function(response) {
-        $state.go('projects.list');
-      });
+      if ($scope.pendingDocument) {
+        var project = new Projects({
+          title: $scope.title,
+          content: XliffParser.getDOMString($scope.pendingDocument)
+        });
+        project.$save(function(response) {
+          $state.go('projects.list');
+        });
 
-      $scope.title = "";
+        $scope.title = "";
+      } else {
+        console.error('createProject: no pendingDocument on $scope')
+      }
     };
 
     // user specifies the URL of an XLIFF file, we grab it, parse it, then save it on the server

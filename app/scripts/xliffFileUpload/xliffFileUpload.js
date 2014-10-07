@@ -9,8 +9,6 @@ angular.module('controllers').controller('UploadCtrl',
   $scope.dropSupported = false;
   $scope.selectedFiles = [];
 
-  $scope.parser = XliffParser;
-
   $scope.$watch(
     function() {
       return $scope.dropSupported;
@@ -29,19 +27,6 @@ angular.module('controllers').controller('UploadCtrl',
     $state.go('projects.translate');
   };
 
-  // Load a specific file from the server
-  // TODO: make this function exactly as if the user had loaded a local file
-  $scope.loadFileFromServer = function(which) {
-    var fileUrl = 'data/' + which;
-    // autoload a file
-    XliffParser.loadLocalFile(fileUrl);
-
-    // go to the edit state
-    $scope.$on('document-loaded', function(e) {
-      $state.go('projects.translate');
-    });
-  };
-
 // TODO: get file type (assume xlf for now)
   $scope.onFileSelect = function ($files) {
     $log.log("inside file select");
@@ -53,8 +38,21 @@ angular.module('controllers').controller('UploadCtrl',
     $log.log('SCOPE FILES');
     $log.log($files);
 
-    // parse the file immediately
-    XliffParser.readFile($scope.selectedFiles[0]);
+    // parse the file immediately when it is selected
+    var xliffPromise = XliffParser.readFile($scope.selectedFiles[0]);
+    $log.log('xliffPromise: ');
+    $log.log(xliffPromise);
+      xliffPromise.then(
+      function(documentObj) {
+        $log.log('documentObj is: ');
+        $log.log(documentObj);
+        // TODO: refactor XLIFF parsing functions into browser XML parsing and application data extracti
+        // $scope.$parent is createProjectCtrl
+        $scope.$parent.pendingDocument = documentObj.DOM;
+        $log.log('$scope.$parent');
+        $log.log($scope.$parent);
+      }
+    );
   };
 
 // TODO: implement fileProgress from the xliffParser
