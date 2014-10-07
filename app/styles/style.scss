@@ -4,6 +4,7 @@
 // partials
 @import "partials/projects";
 @import "partials/hud-toolbar";
+@import "partials/widget-area";
 
 * {
   -webkit-border-radius: 0 !important;
@@ -460,7 +461,7 @@ ul.nav-tabs > li {
     &:hover {
       background-color: coral;
     }
-    padding: 10px;
+//    padding: 10px;
   }
 
   .query-box {
