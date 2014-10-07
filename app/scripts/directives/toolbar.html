@@ -6,13 +6,16 @@
             <div class="search-result"
                  ng-repeat="tmMatch in tmMatches"
                  ng-click="insertText(tmMatch)"
-                 ng-show="tmMatches"
+                 ng-show="tmMatches.length > 0"
             >
-                <div class="row">
+                <div class="row" ng-show="tmMatches.length > 0">
                     <div class="col-xs-5">{{tmMatch.source}}</div>
                     <div class="col-xs-5">{{tmMatch.target}}</div>
                     <div class="col-xs-2">{{tmMatch.provider.name}}</div>
                 </div>
+            </div>
+            <div class="row" ng-show="!tmMatches || tmMatches.length === 0">
+                <p>No TM match for: {{currentSourceText}}</p>
             </div>
         </tab>
         <tab heading="Glossary">
