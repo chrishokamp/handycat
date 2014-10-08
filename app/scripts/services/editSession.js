@@ -92,6 +92,7 @@ angular.module('services')
           this.setSegment(next);
         },
         setSegment: function(segIndex) {
+          // TODO: if there are no more segments, we need to do something different!
           $log.log('EditSession - trying to set next segment as: ' + segIndex);
           if (segIndex != -1)
             $log.log('editSession: $broadcasting changeSegment - next segment is: ' + segIndex);

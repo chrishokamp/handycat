@@ -85,6 +85,16 @@ exports.user = function(req, res, next, id) {
   });
 };
 
+// (1) User queries TM
+// (2) we get responses from all of this user's resources
+// (3) we order those responses by some criteria
+// (4) we return the ordered list to the UI
+// (5) add an optional 'filter' param to only check certain resources (?)
+
+// put all of this user's source-->target resources onto the req
+//exports.addUserResources
+
+
 // WORKING - generalize resource setup so that different resources can use the same interface
 // --> getting data from the TM should look no different than getting data from a MT engine, or a human
 exports.setTausData = function (req, res, next) {

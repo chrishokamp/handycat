@@ -16,7 +16,6 @@ exports.project = function(req, res, next, id) {
 /**
  * Create a project
  */
-// TODO: what is in req.body? - update: whatever gets sent from the client
 exports.create = function(req, res) {
   var project = new Project(req.body);
   project.creator = req.user;
@@ -71,7 +70,7 @@ exports.show = function(req, res) {
 /**
  * List of projects
  */
-// TODO: this should be specific to each user
+// TODO: this should be specific to each user, but users don't currently store which projects they own
 exports.all = function(req, res) {
   var userId = mongoose.Types.ObjectId(req.user._id);
   console.log('USER: ');
