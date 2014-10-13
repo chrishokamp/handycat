@@ -17,6 +17,14 @@ describe("Midway: AceCtrl", function() {
       expect(tokenizer.tokenize).not.toBe(null)
     }
   );
+
+  it('should maintain the current prefix as the user types',
+    function(done) {
+      var tokenizer = tester.inject('tokenizer');
+      expect(tokenizer).not.toBe(null)
+      expect(tokenizer.tokenize).not.toBe(null)
+    }
+  );
 //  // test that Activities refresh works correctly
 //  it('should refresh Activities and Updates on the refresh-activities event',
 //    function(done) {

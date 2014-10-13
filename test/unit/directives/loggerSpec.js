@@ -10,7 +10,7 @@ describe("Unit: Testing the logger directive", function() {
 //  }));
   beforeEach(function(){
     inject(function($rootScope, $compile, $injector) {
-      logService = $injector.get('session');
+      logService = $injector.get('editSession');
       scope = $rootScope.$new();
       element = angular.element('<div logger="test-logger" logger-event="test-event"></div>');
       // compile the element on this scope

@@ -13,13 +13,16 @@ module.exports = function(app) {
   app.put('/auth/users/:userId', auth.ensureAuthenticated, users.update);
   app.delete('/auth/users/:userId', auth.ensureAuthenticated, users.destroy);
 
-
+  // TAUS data API routes
+  // note: a new user needs to register with TAUS for this to work
+  // Direct users here to register for an account: http://www.tausdata.org/index.php/component/users/?view=registration
   // sample call to the TAUS segment API
   // https://www.tausdata.org/api/segment.json?source_lang=en-US&target_lang=fr-FR&q=data+center
-  // TODO: create routes for interacting with TAUS data
-  // TODO: graceful warnings and fallback if the API isn't working, or the user isn't registered
+  app.post('/users/tausdata', users.setTausData);
+  // call the taus data API with source_lang=en-US, target_lang=fr-FR, q=<user query>
+  app.get('/users/tausdata', users.setTausData);
 
-  // TAUS data API routes - TODO - extend this into a general interface to translation memories
+  // TAUS data API routes - TODO - extend this into a general interface to translation memories - move taus-specific code outside of this module
   // note: a new user needs to register with TAUS for this to work
   // Direct users here to register for an account: http://www.tausdata.org/index.php/component/users/?view=registration
   app.post('/users/tm', auth.ensureAuthenticated, users.setTausData);
