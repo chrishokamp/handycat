@@ -15,19 +15,6 @@
             </div>
         </div>
     </div>
-    <!-- working - test adding a simple typeahead here -->
-    <!-- TODO: attach to the actual controller component -->
-    <div ng-controller="TypeaheadCtrl">
-    <!--<input type="text" ng-model="filterString" class="form-control">-->
-    <!--<h3 typeahead="state for state in states | filter:$viewValue | limitTo:8">PIZZA</h3>-->
-        <!--<h3 typeahead="state for state in states | filter:selected | limitTo:8">PIZZA</h3>-->
-        <!-- TODO - there is something weird here with multiple ng-models on the same $scope -->
-        <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" typeahead-append-to-body="true">
-    <!-- TODO: there is a conflict between the input's ng-model, and the 'selected' ng-model for the typeahead
-    <!--TODO: the typeahead pops up only when the $parsers/$renderers or $setViewValue fires-->
-    <!-- TODO: we need to make the typeahead more general -- (fires on an event(?) -->
- <!--<input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" class="form-control">-->
-    <!--<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>-->
+    <div ng-model="selected" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='testCallback($item, $model, $label)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>
 
-    </div>
 </div>

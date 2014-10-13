@@ -1,8 +1,26 @@
 
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'tokenizer', 'Glossary', 'editSession', '$http',
-   '$timeout', '$log', 'ruleMap',
-   function($scope, tokenizer, Glossary, editSession, $http, $timeout, $log, ruleMap) {
+  ['$scope', 'tokenizer', 'editSession', '$q', '$filter', '$http',
+   '$timeout', '$log',
+   function($scope, tokenizer, editSession, $q, $filter, $http, $timeout, $log) {
+
+   $scope.testCallback = function($item, $model, $label) {
+     $log.log('Test callback called with: ');
+     $log.log($item + ' ' + $model + ' ' + $label);
+   }
+
+   $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
+  // use the default substring filter
+  $scope.getLocation = function(val) {
+    var defer = $q.defer();
+  //  filter:$viewValue
+    var matches = $filter('limitTo')($filter('filter')($scope.states, val), 8);
+    defer.resolve(matches);
+
+    return defer.promise;
+  };
+  // TODO: remove after testing
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
@@ -126,7 +144,6 @@ angular.module('controllers').controller('AceCtrl',
     return prefix;
   };
 
-
   // The Segment area is the parent of the AceCtrl
   $scope.$on('clear-editor', function(e) {
     e.preventDefault();
@@ -154,17 +171,17 @@ angular.module('controllers').controller('AceCtrl',
 
     // we want to always know what text the user currently has selected
     // TODO: change this to listen for a selection change
-    editor.on('mouseup',
-      function(e) {
-        $timeout(function() {
-          // this would only exist when the user has just selected something
-          var currentSelection = getSelection();
-          var text = editor.session.getTextRange(currentSelection);
-          // this function is on segmentAreaCtrl
-          $scope.setTextSelection(text, currentSelection);
-        }, 500);
-      }
-    );
+//    editor.on('mouseup',
+//      function(e) {
+//        $timeout(function() {
+//          // this would only exist when the user has just selected something
+//          var currentSelection = getSelection();
+//          var text = editor.session.getTextRange(currentSelection);
+//          // this function is on segmentAreaCtrl
+//          $scope.setTextSelection(text, currentSelection);
+//        }, 500);
+//      }
+//    );
 
     // working - select the current token based on the edit mode
     // the logic here is complex -- add unit tests
