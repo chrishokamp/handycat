@@ -23,7 +23,7 @@ angular.module('services')
 
       self.setSpans = function(text) {
         var tokenPromise = spanTokenizer(text);
-        // Careful -- side effect!
+        // Careful -- side effect on tokenRanges!
         tokenPromise.then(
           function(tokenList) {
             self.tokenRanges = _.map(tokenList, function(obj) {
@@ -49,7 +49,20 @@ angular.module('services')
         return spanDetokenizer(self.tokenRanges.map(function (r) {return r[2]}));
       }
 
-      //
+      // it should know which token an index is in
+      self.tokenAtIdx = function(stringIdx) {
+        var insideToken = -1;
+        self.tokenRanges.forEach(function(tok, tokIdx) {
+          if (stringIdx >= tok[0] && stringIdx <= tok[1]) {
+            insideToken = tokIdx;
+          }
+        });
+        return insideToken;
+      }
+
+      self.idxToString = function(tokenIdx) {
+        return self.tokenRanges[tokenIdx][2];
+      }
 
     }
 

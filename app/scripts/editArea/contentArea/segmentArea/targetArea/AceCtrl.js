@@ -9,152 +9,15 @@ angular.module('controllers').controller('AceCtrl',
   var util = ace.require('./autocomplete/util')
   var langTools = ace.require("ace/ext/language_tools");
 
-
+  // used by the logger -- TODO: remove this
   var previousValue = '';
 
-  // an object representing the current edit mode
-  // params:
-  // spanTokenizer - a function which returns a promise containing token ranges to select
-  // selectRange - a function which takes a range as its argument - will be called by this object with a range to select
-  // resolving to a list of tokens in the format - { 'token': <token>, 'start': <start_index>, 'end': <end_index> }
-  var EditMode = function(spanTokenizer, selectRange) {
-    return {
-      // remember that tokenRanges can and will be updated asynchronously
-      tokenRanges: [],
-      modeName: '',
-      // holds the index of the current token range
-      currentRangeIndex: null,
-      // TODO: implement hasRange -- see ace editor source
-      // if we have a token at { column, row }, return that range, else return null
-      setSpans: function(text) {
-        var self = this;
-        self.tokenRanges = [];
-        var tokenPromise = spanTokenizer(text);
-        tokenPromise.then(
-          function(tokenList) {
-            self.tokenRanges = _.map(tokenList, function(obj) {
-              // currently we don't allow multiple rows, and we wrap the text, so the row is always = 0
-              return new aceRange(0, obj.start, 0, obj.end);
-            });
-            // select the first of the tokenRanges - be careful - this is a side-effect
-            selectRange(self.tokenRanges[0]);
-            self.currentRangeIndex = 0;
-          },
-          function(err) {
-            $log.log("ERROR: AceCtrl: there was an error getting the token ranges");
-          }
-        );
-      },
-      selectNextTokenRange: function() {
-        if (this.tokenRanges[this.currentRangeIndex+1]) {
-          this.currentRangeIndex += 1;
-        } else {
-          this.currentRangeIndex = 0;
-        }
-        selectRange(this.tokenRanges[this.currentRangeIndex]);
-      },
-      selectPrevTokenRange: function() {
-        if (this.tokenRanges[this.currentRangeIndex-1]) {
-          this.currentRangeIndex -= 1;
-        } else {
-          this.currentRangeIndex = 0;
-        }
-        selectRange(this.tokenRanges[this.currentRangeIndex]);
-      },
-      // note: inserting generally involves removing one space after, then inserting one space after at the new location
-      // working - currently this function is "moveRight"
-      // TODO: add a 'following whitespace' function
-      moveCurrentRange: function(location) {
-        var tokenText = $scope.editor.getSession().getDocument().getTextRange(this.tokenRanges[this.currentRangeIndex]);
-        var startingIndex = this.currentRangeIndex;
-        var nextIndex = 0;
+  // BEGIN AceEditor API
 
-        // working - now we increment by 1, but this should be an arbitrary index - i.e. a 'swap' instead of a 'move'
-        if (this.tokenRanges[startingIndex + 1]) {
-          nextIndex = startingIndex + 1;
-        }
-
-        var originalRange = this.tokenRanges[startingIndex];
-        //remove the original text + 1 space
-        var extendedRange = angular.extend(originalRange, extendedRange);
-        extendedRange.end.column += 1;
-
-        $scope.editor.getSession().getDocument().remove(originalRange);
-
-        // update all of the ranges from currentIndex-nextIndex-1 - (remember the extra whitespace)
-        for (var i=startingIndex; i<nextIndex; i++) {
-          // move the ranges in between one slot back
-          var offset = tokenText.length;
-          var oldRange = this.tokenRanges[i+1];
-          var updatedRange = new aceRange(0, oldRange['start']['column']-offset, 0, oldRange['end']['column']-offset);
-          this.tokenRanges[i] = updatedRange;
-        }
-
-        // note that this block depends upon the updated ranges above
-        var insertPosition = { "row": 0, "column":this.tokenRanges[startingIndex]['end']['column'] };
-
-        var newRange = new aceRange(0, insertPosition['column'], 0, insertPosition['column']+tokenText.length);
-
-        // place the range in its new slot
-        this.tokenRanges[nextIndex] = newRange;
-
-        // update the edit mode state
-        this.currentRangeIndex = nextIndex;
-
-        // do the actual insertion into the editor
-        // add a space after tokenText
-        tokenText = tokenText + ' ';
-        $scope.editor.getSession().getDocument().insert(insertPosition, tokenText);
-        selectRange(newRange);
-
-        // how to maintain the current range as its indices change?
-        $scope.editor.focus();
-      }
-    };
-
-    // TODO: add logic to handle preceding and trailing whitespaces correctly
-    // if there's a whitespace before, leave it
-    // if there's a whitespace after, delete it with the range.
-    // handle insertion whitespace logic SEPARATELY
-  };
-
-  // the following functions expose control of the current mode on the $scope
-  $scope.selectNextRange = function() {
-    currentMode.selectNextTokenRange();
-  };
-
-  $scope.selectPrevRange = function() {
-    currentMode.selectPrevTokenRange();
-  };
-
-  // the following functions expose control of the current mode on the $scope
-  $scope.moveCurrentEditRange = function() {
-    currentMode.moveCurrentRange(1);
-  };
-
-  // select a range of text in the editor - note that this function must be declared before it is used to initialize an EditMode
   var selectRange = function(aRange) {
     $scope.editor.session.selection.setRange(aRange);
     $scope.editor.focus();
   };
-  var currentMode = EditMode(tokenizer.getTokenRanges, selectRange);
-
-  // swaps the edit mode - should be a function on the editor
-  $scope.changeEditMode = function() {
-    // clear existing selections
-    // highlight the first token of this view
-    // set state on the EditMode
-    // make sure that the edit mode updates when there are changes in the UI
-    // we need functions like 'put after' / 'put before'
-
-    // initialize spans on the current editing mode
-    currentMode.setSpans($scope.editor.getSession().getValue());
-
-  };
-  // end edit mode API
-
-  // BEGIN AceEditor API
-
 
   // RESET the text for this editor instance
   $scope.setText = function(text) {

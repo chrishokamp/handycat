@@ -70,8 +70,25 @@ describe('Unit: test the EditModeFactory', function () {
       CharEditMode.swapTokens(0,1);
       expect(CharEditMode.renderCurrentTokens()).toEqual('oSme content');
     });
+    it('knows which token index an integer index is inside', function() {
+      var testSen = 'Some content';
+      var CharEditMode = EditModeFactory.getInstance(charTokenizer, charDetokenizer);
+      CharEditMode.setSpans(testSen);
 
+      $rootScope.$digest();
+      var tokenIdx = CharEditMode.tokenAtIdx(5);
+      expect(tokenIdx).toEqual(5);
+    });
+    it('can return the string representation of a token', function() {
+      var testSen = 'Some content';
+      var CharEditMode = EditModeFactory.getInstance(charTokenizer, charDetokenizer);
+      CharEditMode.setSpans(testSen);
 
+      $rootScope.$digest();
+      var tokenString = CharEditMode.idxToString(5);
+      expect(tokenString).toEqual('c');
+
+    });
   });
 });
 
