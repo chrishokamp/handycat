@@ -219,10 +219,10 @@ angular.module('ui.ace', []).constant('uiAceConfig', {}).directive('uiAce', [
         }, true);
 
         // TODO: move to directive!
-        scope.$on('change-height', function(evt, data) {
-          console.log("ace directive heard change-height");
-          elm.height(data.height + "px");
-        })
+//        scope.$on('change-height', function(evt, data) {
+//          console.log("ace directive heard change-height");
+//          elm.height(data.height + "px");
+//        })
       }
     };
   }

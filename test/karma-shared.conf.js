@@ -55,6 +55,7 @@ module.exports = function() {
         'app/scripts/services/Session.js',
         'app/scripts/services/User.js',
         'app/scripts/services/Base64.js',
+        'app/scripts/services/EditModeFactory.js',
         'app/scripts/directives.js',
         'app/scripts/navigation/catNav.js',
         'app/scripts/directives/index.js',

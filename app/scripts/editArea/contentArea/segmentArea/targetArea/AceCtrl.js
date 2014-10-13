@@ -264,21 +264,6 @@ angular.module('controllers').controller('AceCtrl',
   };
 
 
-
-  // TODO: log that the user propagated the n
-//  $scope.$on('propagate-action', function(event, action) {
-//    if (action['operation'] == 'change-token-number') {
-//      var content = $scope.editor.getValue().replace(new RegExp(action['change'][0]), action['change'][1]);
-//      $scope.editor.setValue(content);
-//    } else {
-//      $log.log('Unknown action: ' + action['type']);
-//    }
-//  });
-
-//  $scope.$on('toggleShowInvisibleChars', function(event, value) {
-//    $scope.editor.setOption("showInvisibles", value);
-//  });
-
   // The Segment area is the parent of the AceCtrl
   $scope.$on('clear-editor', function(e) {
     e.preventDefault();
@@ -377,6 +362,8 @@ angular.module('controllers').controller('AceCtrl',
 
     // Whenever a change happens inside the ACE editor, update
     // the height again
+    // TODO: only update the height when it actually changes
+    // use a directive to synchronize the heights of SourceArea and TargetArea
     editor.getSession().on('change', heightUpdateFunction);
 
     // logging each change to the editor - TODO: should this be event based?
@@ -426,18 +413,6 @@ angular.module('controllers').controller('AceCtrl',
     }
   };
 
-  $scope.onPaste = function(index, event) {
-    $log.log('paste event');
-    $log.log(event);
-    // TODO send to our logger
-  };
-
-  $scope.onCopy = function(index, event) {
-    $log.log('copy event');
-    $log.log(event);
-    // TODO send to our logger
-  };
-
      // logging each change to the editor
      // using input event instead of change since it's called with some timeout
 //  editor.on('input', function() {
@@ -455,6 +430,19 @@ angular.module('controllers').controller('AceCtrl',
      // applying deltas
      //the applyDeltas(Object deltas) API takes an array of deltas. Changing my sample code above to editor.getSession().getDocument().applyDeltas([currentDelta]) plays back properly.
 
+  // TODO: log that the user propagated the n
+//  $scope.$on('propagate-action', function(event, action) {
+//    if (action['operation'] == 'change-token-number') {
+//      var content = $scope.editor.getValue().replace(new RegExp(action['change'][0]), action['change'][1]);
+//      $scope.editor.setValue(content);
+//    } else {
+//      $log.log('Unknown action: ' + action['type']);
+//    }
+//  });
+
+//  $scope.$on('toggleShowInvisibleChars', function(event, value) {
+//    $scope.editor.setOption("showInvisibles", value);
+//  });
 
 }]);
 
