@@ -15,6 +15,6 @@
             </div>
         </div>
     </div>
-    <div ng-model="selected" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='testCallback($item, $model, $label)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>
+    <div ng-model="selected" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='setText($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>
 
 </div>

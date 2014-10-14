@@ -216,6 +216,7 @@ angular.module('controllers').controller('AceCtrl',
     editor.setFontSize(18);
 
     // working - don't scroll - height should match the text
+    // TODO: move matching height to a directive
     var heightUpdateFunction = function() {
 
       // http://stackoverflow.com/questions/11584061/
