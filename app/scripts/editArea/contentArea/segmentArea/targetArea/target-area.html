@@ -1,9 +1,9 @@
 <div ng-controller="AceCtrl">
-    <div ng-show="segmentState.completed" class="content-card segment-finished-target frame" ng-click="reopen($index)">
+    <div ng-show="segmentState.completed" class="segment-finished-target frame" ng-style="internalHeightStyle" ng-click="reopen($index)">
         <p>{{segment.target}}</p>
     </div>
     <div ng-show="!segmentState.completed">
-        <div class="content-card frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
+        <div class="frame" height-watcher ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
         <div ng-show="isActive.active">
             <div class="pull-right">
                 <div class="inline">

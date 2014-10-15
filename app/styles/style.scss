@@ -252,25 +252,18 @@ ul.nav-tabs > li {
   left: -30px;
 }
 
-%ace-editor-height {
-  min-height: 102px;
-}
-
 .source, .target {
   margin-top: 12px;
 }
 
 .content-card {
-  @extend %ace-editor-height;
+  min-height: 100px;
   background-color: white;
   overflow-y: hidden;
   overflow-x: hidden;
   padding-left: 3px;
   line-height: normal;
   font-size: 18px;
-  width:100%;
-  // leave a little space between the two
-  //  overflow-y: hidden;
 }
 
 .cat-glyph {

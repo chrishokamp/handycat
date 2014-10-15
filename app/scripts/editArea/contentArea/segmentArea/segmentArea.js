@@ -14,6 +14,17 @@ angular.module('controllers')
 
   // this gets reset in the template
   $scope.id = {};
+  // default height for editor components
+  $scope.height = {'editorHeight': 100};
+  $scope.$watch(
+    function() {
+      return $scope.height.editorHeight;
+    },
+    function(val) {
+      $scope.internalHeightStyle = {'height': val};
+    }
+  );
+
 
   // TODO: set this only when this is actually the active scope
   $scope.isActive = { active:true };

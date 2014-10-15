@@ -222,30 +222,32 @@ angular.module('controllers').controller('AceCtrl',
       // http://stackoverflow.com/questions/11584061/
       // add 1 to screen length to get some extra space
       var screenLength = editor.getSession().getScreenLength();
-      screenLength += 1;
+//      screenLength += 1;
       var newHeight =
                 screenLength
                 * editor.renderer.lineHeight
                 + editor.renderer.scrollBar.getWidth();
 
+      $scope.height.editorHeight = newHeight;
       // emit ace editor height up the scope hierarchy - height change directives listen for current-height event
-      if (newHeight < 80) {
-        newHeight = 80;
-      }
-      $scope.$emit('change-height', { "height": newHeight });
+
+//      if (newHeight < 80) {
+//        newHeight = 80;
+//      }
+//      $scope.$emit('change-height', { "height": newHeight });
 
       // This call is required for the editor to fix all of
       // its inner structure for adapting to a change in size
       editor.resize();
     };
     // Set initial size to match initial content
-    heightUpdateFunction();
+//    heightUpdateFunction();
 
     // Whenever a change happens inside the ACE editor, update
     // the height again
     // TODO: only update the height when it actually changes
     // use a directive to synchronize the heights of SourceArea and TargetArea
-    editor.getSession().on('change', heightUpdateFunction);
+    $scope.$on('update-height', heightUpdateFunction);
 
     // logging each change to the editor - TODO: should this be event based?
     // using input event instead of change since it's called with some timeout
