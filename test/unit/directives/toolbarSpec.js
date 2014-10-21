@@ -1,10 +1,25 @@
 // TODO: switch to toolbarSpec
 // model test after the ui-bootstrap tests
+
+// External things that the toolbar relies on:
+// Services: 'editSession', 'TranslationMemory', '$log', '$timeout', '$rootScope'
+// parent $scope variables:
+// $scope.activeSegment
+// $scope.document.segments[index].source;
+// $scope.currentSourceText
+
+// Internal variables it updates:
+//  $scope.tmMatches
+//    $scope.glossaryMatches
+
+// Events:  $scope.$on('update-tm-area', function(evt, data) {
+
+
 describe('toolbar directive tests', function () {
 
   var $scope, $compile;
 
-  beforeEach(module('servers'));
+  beforeEach(module('services'));
   beforeEach(module(function($compileProvider) {
     // TODO: Working: only necessary when directive relies on ngModel
     $compileProvider.directive('formatter', function () {
@@ -22,10 +37,6 @@ describe('toolbar directive tests', function () {
     $scope = _$rootScope_;
     // set test data on the toolbar's scope
 //    $scope.source = ['foo', 'bar', 'baz'];
-//    $scope.states = [
-//      {code: 'AL', name: 'Alaska'},
-//      {code: 'CL', name: 'California'}
-//    ];
     $compile = _$compile_;
     $document = _$document_;
     $timeout = _$timeout_;
@@ -39,18 +50,6 @@ describe('toolbar directive tests', function () {
     return el;
   };
 
-  var findInput = function (element) {
-    return element.find('input');
-  };
-
-  var findDropDown = function (element) {
-    return element.find('ul.dropdown-menu');
-  };
-
-  var findMatches = function (element) {
-    return findDropDown(element).find('li');
-  };
-
   var triggerKeyDown = function (element, keyCode) {
     var inputEl = findInput(element);
     var e = $.Event('keydown');
@@ -62,68 +61,53 @@ describe('toolbar directive tests', function () {
   beforeEach(function () {
     this.addMatchers({
       toBeClosed: function () {
-        var typeaheadEl = findDropDown(this.actual);
+        var toolbarEl = this.actual;
+        console.log(toolbarEl);
         this.message = function () {
-          return 'Expected "' + angular.mock.dump(typeaheadEl) + '" to be closed.';
+          return 'Expected "' + angular.mock.dump(toolbarEl) + '" to be closed.';
         };
-        return typeaheadEl.hasClass('ng-hide') === true;
+        return toolbarEl.hasClass('ng-hide') === true;
 
-      }, toBeOpenWithActive: function (noOfMatches, activeIdx) {
-
-        var typeaheadEl = findDropDown(this.actual);
-        var liEls = findMatches(this.actual);
-
+      },
+      toBeOpen: function () {
+        var toolbarEl = this.actual;
+//        angular.mock.dump(toolbarEl);
+        console.log(toolbarEl);
         this.message = function () {
           return 'Expected "' + this.actual + '" to be opened.';
         };
-        return typeaheadEl.length === 1 && typeaheadEl.hasClass('ng-hide') === false && liEls.length === noOfMatches && $(liEls[activeIdx]).hasClass('active');
+        return toolbarEl.hasClass('ng-hide') === false;
       }
     });
   });
 
-  afterEach(function () {
-    findDropDown($document.find('body')).remove();
-  });
+//  afterEach(function () {
+//    findDropDown($document.find('body')).remove();
+//  });
 
   //coarse grained, "integration" tests
   describe('initial state and model changes', function () {
 
     it('should be closed by default', function () {
-      var element = prepareInputEl('<div><input ng-model="result" typeahead="item for item in source"></div>');
+      var element = prepareInputEl('<toolbar class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
       expect(element).toBeClosed();
+    });
+
+    it('should open when it is supposed to', function () {
+      var element = prepareInputEl('<toolbar class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
+      $scope.visible = { 'toolbar': true };
+      $scope.$digest();
+      expect(element).toBeOpen();
     });
 
     it('should not be open if the prefix matches a model', function() {
 
     });
 
-    it('should correctly render initial state if the "as" keyword is used', function () {
-
-      $scope.result = $scope.states[0];
-
-      var element = prepareInputEl('<div><input ng-model="result" typeahead="state as state.name for state in states"></div>');
-      var inputEl = findInput(element);
-
-      expect(inputEl.val()).toEqual('Alaska');
-    });
-
-    it('should default to bound model for initial rendering if there is not enough info to render label', function () {
-
-      $scope.result = $scope.states[0].code;
-
-      var element = prepareInputEl('<div><input ng-model="result" typeahead="state.code as state.name + state.code for state in states"></div>');
-      var inputEl = findInput(element);
-
-      expect(inputEl.val()).toEqual('AL');
-    });
-
-    it('should not get open on model change', function () {
-      var element = prepareInputEl('<div><input ng-model="result" typeahead="item for item in source"></div>');
-      $scope.$apply(function () {
-        $scope.result = 'foo';
-      });
-      expect(element).toBeClosed();
-    });
   });
+
+  // toolbar core functionality
+  // should be able to transclude its widgets
+  // specify widgets in markup
 
 });
