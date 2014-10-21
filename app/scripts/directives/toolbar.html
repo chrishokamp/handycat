@@ -1,73 +1,65 @@
 <!-- The tools for editing: glossary, concordance, edits -->
 <!-- render and populate its fields dynamically -->
-<div class="widget-area">
-    <tabset>
-        <tab heading="Translation Memory">
-            <div class="container">
-                <div class="search-result"
-                     ng-repeat="tmMatch in tmMatches"
-                     ng-click="insertText(tmMatch)"
-                     ng-show="tmMatches.length > 0"
-                        >
-                    <div class="row" ng-show="tmMatches.length > 0">
-                        <div class="col-xs-5">{{tmMatch.source}}</div>
-                        <div class="col-xs-5">{{tmMatch.target}}</div>
-                        <div class="col-xs-2">{{tmMatch.provider.name}}</div>
-                    </div>
+<div class="widget-area row">
+    <tabset class="widget-wrapper col-xs-6 col-xs-offset-6">
+        <tab heading="TM">
+            <div class="search-result"
+                 ng-repeat="tmMatch in tmMatches"
+                 ng-click="insertText(tmMatch)"
+                 ng-show="tmMatches.length > 0"
+                    >
+                <div class="row" ng-show="tmMatches.length > 0">
+                    <div class="col-xs-5">{{tmMatch.source}}</div>
+                    <div class="col-xs-5">{{tmMatch.target}}</div>
+                    <div class="col-xs-2">{{tmMatch.provider.name}}</div>
                 </div>
-                <div class="row" ng-show="!tmMatches || tmMatches.length === 0">
-                    <p>No TM match for: {{currentSourceText}}</p>
-                </div>
+            </div>
+            <div class="row" ng-show="!tmMatches || tmMatches.length === 0">
+                <p class="col-xs-12">No TM match for: {{currentSourceText}}</p>
             </div>
         </tab>
         <tab heading="Glossary">
-            <div class="container">
-                <input type="text" ng-model="glossary.glossaryQuery" placeholder="Enter a search query..." class="query-box"/>
-                <button logger="query-glossary" ng-click="queryGlossary(glossary.glossaryQuery)" class="glossary-search btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-                <div class="search-result"
-                     ng-repeat="glossaryMatch in glossaryMatches"
-                     ng-click="insertText(glossaryMatch)"
-                     ng-show="glossaryMatches"
-                        >{{glossaryMatch}}</div>
+            <input type="text" ng-model="glossary.glossaryQuery" placeholder="Enter a search query..." class="query-box"/>
+            <button logger="query-glossary" ng-click="queryGlossary(glossary.glossaryQuery)" class="glossary-search btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+            <div class="search-result"
+                 ng-repeat="glossaryMatch in glossaryMatches"
+                 ng-click="insertText(glossaryMatch)"
+                 ng-show="glossaryMatches"
+                    >{{glossaryMatch}}</div>
 
-                <div ng-hide="glossaryMatches !== undefined"><p>Error: Unable to access the glossary service.</p></div>
-                <div ng-show="glossaryMatches.length === 0"><p>No matches found for term: <b>{{ glossary.glossaryQuery }}</b></p></div>
-            </div>
+            <div ng-hide="glossaryMatches !== undefined"><p>Error: Unable to access the glossary service.</p></div>
+            <div ng-show="glossaryMatches.length === 0"><p>No matches found for term: <b>{{ glossary.glossaryQuery }}</b></p></div>
         </tab>
         <tab heading="Concordance" ng-click="">
-            <div class="container">
-                <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />
-                <button logger="concordance-query" ng-click="queryConcordancer(concordanceQuery, queryLang)"
-                        class="glossary-search btn btn-success">
-                    <span class="glyphicon glyphicon-search"></span></button>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary lang-select" btn-radio="'{{document.sourceLang}}'"
-                            ng-model="queryLang">{{document.sourceLang}}</button>
-                    <button type="button" class="btn btn-primary lang-select" btn-radio="'{{document.targetLang}}'"
-                            ng-model="queryLang">{{document.targetLang}}</button>
-                </div>
-                <div class="search-result"
-                     ng-repeat="concordanceMatch in concordanceMatches" ng-bind-html="concordanceMatch"
-                     ng-hide="concordancerError"
-                        ></div>
-
-                <div ng-show="concordancerError"><p>Error: Unable to access the concordance service.</p></div>
+            <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />
+            <button logger="concordance-query" ng-click="queryConcordancer(concordanceQuery, queryLang)"
+                    class="glossary-search btn btn-success">
+                <span class="glyphicon glyphicon-search"></span></button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary lang-select" btn-radio="'{{document.sourceLang}}'"
+                        ng-model="queryLang">{{document.sourceLang}}</button>
+                <button type="button" class="btn btn-primary lang-select" btn-radio="'{{document.targetLang}}'"
+                        ng-model="queryLang">{{document.targetLang}}</button>
             </div>
+            <div class="search-result"
+                 ng-repeat="concordanceMatch in concordanceMatches" ng-bind-html="concordanceMatch"
+                 ng-hide="concordancerError"
+                    ></div>
+
+            <div ng-show="concordancerError"><p>Error: Unable to access the concordance service.</p></div>
         </tab>
         <tab>
             <tab-heading>
                 Edit history <span class="badge" ng-show="editHistory.length">{{editHistory.length}}</span>
             </tab-heading>
-            <div class="container">
-                <div class="edit-history">
-                    <p>List of edits performed in this segment</p>
+            <div class="edit-history">
+                <p>List of edits performed in this segment</p>
 
-                    <div ng-repeat="edit in editHistory track by $index">
-                        {{edit.description}}
-                        <button type="button" class="btn btn-default" ng-hide="segmentNumber != edit.segment" ng-click="propagateEdit($index)">
-                            <span class="glyphicon glyphicon-fullscreen"></span> Propagate to other segments
-                        </button>
-                    </div>
+                <div ng-repeat="edit in editHistory track by $index">
+                    {{edit.description}}
+                    <button type="button" class="btn btn-default" ng-hide="segmentNumber != edit.segment" ng-click="propagateEdit($index)">
+                        <span class="glyphicon glyphicon-fullscreen"></span> Propagate to other segments
+                    </button>
                 </div>
             </div>
         </tab>
@@ -75,17 +67,15 @@
             <tab-heading>
                 Settings
             </tab-heading>
-            <div class="container">
-                <div class="settings">
-                    <p>Show invisible characters
-                        <button type="button" class="btn btn-primary" ng-model="showInvisibleChars"
-                                btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-init="showInvisibleChars=0"
-                                ng-click="updateShowInvisibleChars(!showInvisibleChars)">
-                            <span ng-hide="showInvisibleChars">Off</span>
-                            <span ng-show="showInvisibleChars">On</span>
-                        </button>
-                    </p>
-                </div>
+            <div class="settings">
+                <p>Show invisible characters
+                    <button type="button" class="btn btn-primary" ng-model="showInvisibleChars"
+                            btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-init="showInvisibleChars=0"
+                            ng-click="updateShowInvisibleChars(!showInvisibleChars)">
+                        <span ng-hide="showInvisibleChars">Off</span>
+                        <span ng-show="showInvisibleChars">On</span>
+                    </button>
+                </p>
             </div>
         </tab>
     </tabset>

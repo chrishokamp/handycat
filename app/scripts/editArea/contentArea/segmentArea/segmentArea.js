@@ -15,7 +15,7 @@ angular.module('controllers')
   // this gets reset in the template
   $scope.id = {};
   // default height for editor components
-  $scope.height = {'editorHeight': 100};
+  $scope.height = {'editorHeight': 0};
   $scope.$watch(
     function() {
       return $scope.height.editorHeight;

@@ -21,6 +21,7 @@ angular.module('directives').directive('toolbar', ['editSession', 'TranslationMe
           $(above).after(el);
           $log.log('TOOLBAR - current $scope.activeSegment is: ' + $scope.activeSegment);
           // make the calls for this toolbar location -- check the TM, etc...
+          // TODO: this breaks on the last index
           var currentSourceText = $scope.document.segments[index].source;
           $log.log('currentSourceText: ' + currentSourceText);
 

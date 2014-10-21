@@ -571,17 +571,18 @@ module.exports = function (grunt) {
 
 
   // TODO: note the difference between connect:test and connect:testserver
+  // this is the only one currently in use
+//  grunt.registerTask('autotest', ['autotest:unit']);
 
-  grunt.registerTask('test', ['connect:testserver','karma:unit','karma:midway', 'karma:e2e']);
-  grunt.registerTask('test:unit', ['karma:unit']);
-  grunt.registerTask('test:midway', ['connect:test','karma:midway']);
-  grunt.registerTask('test:e2e', ['connect:testserver', 'karma:e2e']);
+//  grunt.registerTask('test', ['connect:testserver','karma:unit','karma:midway', 'karma:e2e']);
+  grunt.registerTask('test:unit', ['connect:testserver', 'karma:unit']);
+//  grunt.registerTask('test:midway', ['connect:test','karma:midway']);
+//  grunt.registerTask('test:e2e', ['connect:testserver', 'karma:e2e']);
 
   //keeping these around for legacy use
-  grunt.registerTask('autotest', ['autotest:unit']);
-  grunt.registerTask('autotest:unit', ['connect:testserver','karma:unit_auto']);
-  grunt.registerTask('autotest:midway', ['connect:testserver','karma:midway_auto']);
-  grunt.registerTask('autotest:e2e', ['connect:testserver','karma:e2e_auto']);
+//  grunt.registerTask('autotest:unit', ['connect:testserver','karma:unit_auto']);
+//  grunt.registerTask('autotest:midway', ['connect:testserver','karma:midway_auto']);
+//  grunt.registerTask('autotest:e2e', ['connect:testserver','karma:e2e_auto']);
 
   grunt.registerTask('heroku', [
     'build',

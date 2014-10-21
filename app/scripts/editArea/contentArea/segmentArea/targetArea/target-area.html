@@ -1,20 +1,26 @@
-<div ng-controller="AceCtrl">
-    <div ng-show="segmentState.completed" class="segment-finished-target frame" ng-style="internalHeightStyle" ng-click="reopen($index)">
-        <p>{{segment.target}}</p>
-    </div>
-    <div ng-show="!segmentState.completed">
-        <div class="frame" height-watcher ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
-        <div ng-show="isActive.active">
-            <div class="pull-right">
-                <div class="inline">
-                    <button logger="clear-editor" ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-remove"></span></button>
-                </div>
-                <div class="inline">
-                    <button logger="segment-finished" ng-click="segmentFinished($index)" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
+<div class="col-xs-12" ng-controller="AceCtrl">
+    <div class="row">
+
+        <div ng-show="segmentState.completed" class="col-xs-12 segment-finished-target frame" ng-style="internalHeightStyle" ng-click="reopen($index)">
+            <p>{{segment.target}}</p>
+        </div>
+        <div ng-show="!segmentState.completed" class="col-xs-12" height-watcher>
+            <div class="row" style="position: relative;">
+                <div class="col-xs-12 frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
+                <!--TODO: move styles to .scss - work at removing bootstrap grid -->
+                <div ng-show="isActive.active" class="pull-right" style="position: absolute; top: 0px; right: -40px">
+                    <div>
+                        <div>
+                            <button logger="segment-finished" ng-click="segmentFinished($index)" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-ok-sign"></span></button>
+                        </div>
+                        <div>
+                            <button logger="clear-editor" ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed" class="btn btn-primary cat-glyph"><span class="glyphicon glyphicon-remove"></span></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div ng-model="selected" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='setText($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>
+        <div ng-model="selected" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='setText($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>
 
+    </div>
 </div>

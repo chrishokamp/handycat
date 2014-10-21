@@ -5,5 +5,40 @@
     overflow-y: scroll;
     overflow-x: hidden;
   }
-
+  .widget-wrapper {
+    padding: 0;
+  }
 }
+
+
+
+.tab-pane {
+  background-color: white;
+  min-height: 70px;
+  input {
+    width: 60%;
+  }
+  button {
+    margin-left: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .search-result {
+    &:hover {
+      background-color: coral;
+    }
+    padding: 10px;
+  }
+
+  .query-box {
+    padding-left: 10px;
+  }
+}
+
+.lang-select {
+  background-color: grey;
+  &:active {
+    background-color: blue;
+  }
+}
+

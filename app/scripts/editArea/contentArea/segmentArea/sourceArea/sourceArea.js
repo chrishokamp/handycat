@@ -8,7 +8,6 @@ angular.module('directives')
         annotatedSentence: '='
       },
       restrict: 'E',
-      //templateUrl: 'scripts/sourceArea/sourceArea.html',
       link: function(scope,el,attrs){
         // tokens should be undefined here
 //        $log.log('sourceArea directive - tokens: ' + scope.tokens);
@@ -20,14 +19,9 @@ angular.module('directives')
           var tokNorm = tok.replace(/'/g, "\\'").replace('"', '');
           return '<span class="source-token"  ng-click="askGlossary(\''+ tokNorm + '\')">' + tok + '</span>';
         });
-//        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span popover tooltip="fun fun" class="source-token">' + tok + '</span>'});
-//        var tokenSpans =  _.map(tokenStrings, function(tok, index) { return '<span tooltip-html-unsafe="{{getLinkedData()}}" class="source-token">' + tok + '</span>'});
         var annotatedSentence = '<div class="annotated-source">' + tokenSpans.join(' ') + '</div>';
-//        $log.log('annotatedSentence is: ' + annotatedSentence);
 
         var compiledHTML = $compile(annotatedSentence)(scope);
-//        scope.annotatedSentence = annotatedSentence;
-//        $log.log('compiledHTML is:' + compiledHTML);
         el.append(compiledHTML);
 
         // update source with new data
@@ -48,10 +42,8 @@ angular.module('directives')
             }
             alreadyMarked.push(surfaceForm);
           });
-          $log.log('replaced text: ' + text);
           text = '<div>' + text + '</div>';
           var compiledHTML = $compile(text)(scope);
-          $log.log('compiledHTML is:' + compiledHTML);
           el.html(compiledHTML);
 
         })

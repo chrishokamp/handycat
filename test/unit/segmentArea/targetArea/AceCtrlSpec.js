@@ -115,6 +115,12 @@ describe("Unit: Testing the AceCtrl", function() {
       expect(prefix).toBe('s');
     });
 
+    it('can add text at the current cursor location', function() {
+      //
+
+
+    });
+
   });
 
   // EditMode tests - note that the edit mode depends upon the tokenizer function that you pass in

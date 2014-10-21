@@ -228,6 +228,7 @@ angular.module('controllers').controller('AceCtrl',
                 * editor.renderer.lineHeight
                 + editor.renderer.scrollBar.getWidth();
 
+      // TODO: remove hard-coding here and in the heightWatcher directive
       $scope.height.editorHeight = newHeight;
       // emit ace editor height up the scope hierarchy - height change directives listen for current-height event
 
@@ -247,7 +248,7 @@ angular.module('controllers').controller('AceCtrl',
     // the height again
     // TODO: only update the height when it actually changes
     // use a directive to synchronize the heights of SourceArea and TargetArea
-    $scope.$on('update-height', heightUpdateFunction);
+//    $scope.$on('update-height', heightUpdateFunction);
 
     // logging each change to the editor - TODO: should this be event based?
     // using input event instead of change since it's called with some timeout
