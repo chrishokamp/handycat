@@ -63,23 +63,24 @@ describe('toolbar directive tests', function () {
 
   //custom matchers
   beforeEach(function () {
-    this.addMatchers({
+    jasmine.addMatchers({
       toBeClosed: function () {
-        var toolbarEl = this.actual;
-        console.log(toolbarEl);
-        this.message = function () {
-          return 'Expected "' + dump(toolbarEl) + '" to be closed.';
-        };
-        return toolbarEl.hasClass('ng-hide') === true;
-
+        return {
+          compare: function(actual, expected) {
+            return {
+              pass: actual.hasClass('ng-hide') === true
+            }
+          }
+        }
       },
       toBeOpen: function () {
-        var toolbarEl = this.actual;
-        console.log(toolbarEl);
-        this.message = function () {
-          return 'Expected "' + this.actual + '" to be opened.';
-        };
-        return toolbarEl.hasClass('ng-hide') === false;
+        return {
+          compare: function(actual, expected) {
+            return {
+              pass: actual.hasClass('ng-hide') === false
+            }
+          }
+        }
       }
     });
   });

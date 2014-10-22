@@ -2,7 +2,8 @@ module.exports = function() {
   return {
     frameworks: ['jasmine'],
     reporters: ['progress'],
-    browsers: ['PhantomJS'],
+//    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
     autoWatch: true,
 //    singleRun: false,
     colors: true,

@@ -17,7 +17,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
       return promise.then(function(result) {
         return self.parseXML(result);
       });
-//      return promise;
 
     },
     // utility function to grab a local file from a string url
@@ -123,8 +122,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
           }
 
           var segPair = {
-            source: sourceText,
-            target: targetText,
+            source: seg[0].textContent,
+            target: seg[1].textContent,
             sourceDOM: seg[0],
             targetDOM: seg[1]
           };
