@@ -7,21 +7,6 @@ angular.module('controllers')
       $scope.$close(true);
     };
 
-    $scope.validXLIFF = false;
-    $scope.documentLoading = false;
-
-    // TODO: this function is currently unused
-      // TODO: send a promise back from the xliffParser instead of using events
-    // when a file is added, do the parsing immediately
-    // call XliffParser, wait for the document loaded event, then flip the validXLIFF flag on the $scope
-    function parse() {
-      $scope.documentLoading = true;
-      $scope.$on('document-loaded', function() {
-        $scope.validXLIFF = true;
-        $scope.documentLoading = false;
-      })
-    }
-
     // make sure the modal closes if we change states
     $scope.$on('$stateChangeStart', function(ev, to, toParams, from, fromParams) {
       console.log('logging to:');
@@ -56,16 +41,20 @@ angular.module('controllers')
       $log.log('create from URL fired...');
       $http.get(xliffFileUrl)
         .success(function(data) {
-          var pendingDocument = XliffParser.parseXML(data).DOM;
-          var project = new Projects({
-            title: $scope.title,
-            content: XliffParser.getDOMString(pendingDocument)
-          });
-          project.$save(function(response) {
-            $state.go('projects.list');
-          });
-          $scope.title = "";
-      // transition back to the project-list
+          XliffParser.parseXML(data).then(
+            function(docObj) {
+              var pendingDocument = docObj.DOM;
+              var project = new Projects({
+                title: $scope.title,
+                content: XliffParser.getDOMString(pendingDocument)
+              });
+              project.$save(function(response) {
+                $state.go('projects.list');
+              });
+              $scope.title = "";
+              // transition back to the project-list
+            }
+          );
         });
     }
 

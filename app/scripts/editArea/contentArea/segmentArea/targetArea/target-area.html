@@ -6,7 +6,7 @@
         </div>
         <div ng-show="!segmentState.completed" class="col-xs-12" height-watcher>
             <div class="row" style="position: relative;">
-                <div class="col-xs-12 frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.targetDOM.textContent"></div>
+                <div class="col-xs-12 frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
                 <!--TODO: move styles to .scss - work at removing bootstrap grid -->
                 <div ng-show="isActive.active" class="pull-right" style="position: absolute; top: 0px; right: -40px">
                     <div>
