@@ -20,7 +20,7 @@
         </tab>
         <tab heading="Glossary">
             <input type="text" ng-model="glossary.glossaryQuery" placeholder="Enter a search query..." class="query-box"/>
-            <button logger="query-glossary" ng-click="queryGlossary(glossary.glossaryQuery)" class="glossary-search btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+            <button ng-click="queryGlossary(glossary.glossaryQuery)" class="glossary-search btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
             <div class="search-result"
                  ng-repeat="glossaryMatch in glossaryMatches"
                  ng-click="insertText(glossaryMatch)"
@@ -32,7 +32,7 @@
         </tab>
         <tab heading="Concordance" ng-click="">
             <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />
-            <button logger="concordance-query" ng-click="queryConcordancer(concordanceQuery, queryLang)"
+            <button ng-click="queryConcordancer(concordanceQuery, queryLang)"
                     class="glossary-search btn btn-success">
                 <span class="glyphicon glyphicon-search"></span></button>
             <div class="btn-group">

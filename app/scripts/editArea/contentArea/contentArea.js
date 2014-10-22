@@ -8,11 +8,8 @@ angular.module('controllers').controller('ContentAreaCtrl',
       $timeout(function() {
         $scope.language = $scope.document.targetLang;
         $scope.numSegments = $scope.document.segments.length;
-        // each segment is a reference to the segment in the Document service
         $scope.segments = $scope.document.segments;
-        // watch the flag on the Documents service
         $scope.$watch(function() {
-
             return $scope.document.revision;
           },
           function() {

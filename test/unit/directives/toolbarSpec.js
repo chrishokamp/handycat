@@ -17,9 +17,12 @@
 
 describe('toolbar directive tests', function () {
 
-  var $scope, $compile;
+  var $scope, $rootScope, $compile;
 
-  beforeEach(module('services'));
+//  beforeEach(module('services'));
+  beforeEach(module('directives'));
+  beforeEach(module('scripts/directives/toolbar.html'));
+  // TODO: switch path reference using http when
   beforeEach(module(function($compileProvider) {
     // TODO: Working: only necessary when directive relies on ngModel
     $compileProvider.directive('formatter', function () {
@@ -35,6 +38,7 @@ describe('toolbar directive tests', function () {
   }));
   beforeEach(inject(function (_$rootScope_, _$compile_, _$document_, _$timeout_, $sniffer) {
     $scope = _$rootScope_;
+    $rootScope = _$rootScope_;
     // set test data on the toolbar's scope
 //    $scope.source = ['foo', 'bar', 'baz'];
     $compile = _$compile_;
@@ -64,14 +68,13 @@ describe('toolbar directive tests', function () {
         var toolbarEl = this.actual;
         console.log(toolbarEl);
         this.message = function () {
-          return 'Expected "' + angular.mock.dump(toolbarEl) + '" to be closed.';
+          return 'Expected "' + dump(toolbarEl) + '" to be closed.';
         };
         return toolbarEl.hasClass('ng-hide') === true;
 
       },
       toBeOpen: function () {
         var toolbarEl = this.actual;
-//        angular.mock.dump(toolbarEl);
         console.log(toolbarEl);
         this.message = function () {
           return 'Expected "' + this.actual + '" to be opened.';
@@ -81,9 +84,11 @@ describe('toolbar directive tests', function () {
     });
   });
 
-//  afterEach(function () {
-//    findDropDown($document.find('body')).remove();
-//  });
+  afterEach(function () {
+    $rootScope.$destroy();
+    $scope.$destroy();
+  });
+
 
   //coarse grained, "integration" tests
   describe('initial state and model changes', function () {
@@ -100,11 +105,43 @@ describe('toolbar directive tests', function () {
       expect(element).toBeOpen();
     });
 
-    it('should not be open if the prefix matches a model', function() {
+  });
 
+  describe('linking with parent scope', function () {
+
+    it('should keep track of the active segment property of its parent', function() {
+      $scope = $rootScope.$new();
+      var element = prepareInputEl('<toolbar class="info-toolbar" active-segment="activeSegment" ng-show="visible.toolbar"></toolbar>');
+
+      $rootScope.activeSegment = 1;
+      $rootScope.$digest();
+
+      var isolateScope = element.isolateScope();
+      expect(isolateScope.activeSegment).toEqual(1);
+      expect(isolateScope.segments).toBeUndefined();
+    });
+
+    it('should keep track of the array of segment objects on the parent scope', function() {
+      $scope = $rootScope.$new();
+      var element = prepareInputEl('<toolbar class="info-toolbar" active-segment="activeSegment" segments="document.segments" ng-show="visible.toolbar"></toolbar>');
+      var testSegment = { source: 'a source sentence', target: 'a target sentence', sourceDOM: 'DOMstub',targetDOM: 'DOMstub'};
+
+      $rootScope.document = { segments: [testSegment]};
+      $rootScope.activeSegment = 0;
+      $rootScope.$digest();
+
+      var isolateScope = element.isolateScope();
+      expect(isolateScope.segments[isolateScope.activeSegment]).toEqual(testSegment);
+
+      $rootScope.activeSegment = 1;
+      $rootScope.$digest();
+      expect(isolateScope.segments[isolateScope.activeSegment]).toBeUndefined();
     });
 
   });
+
+
+
 
   // toolbar core functionality
   // should be able to transclude its widgets

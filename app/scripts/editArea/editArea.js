@@ -22,6 +22,9 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       XliffParser.parseXML(projectResource.content).then(
         function(documentObj) {
           $scope.document = documentObj;
+          // The segment exchange format (in document.segments) is:
+//          var segPair = { source: sourceText, target: targetText, sourceDOM: seg[0],targetDOM: seg[1]};
+
           // initialize the SegmentOrder service
           segmentOrder.initSegmentOrder($scope.document.segments);
           $log.log('$scope.document loaded and parsed');
@@ -32,9 +35,6 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       )
     });
   }
-
-
-
 
   // based on http://updates.html5rocks.com/2011/08/Saving-generated-files-on-the-client-side
   // and http://stackoverflow.com/a/15031019

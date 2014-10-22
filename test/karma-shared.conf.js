@@ -12,6 +12,15 @@ module.exports = function() {
 //    singleRun: false,
     colors: true,
 
+
+    // generate js files from html templates
+    preprocessors: {
+      'app/scripts/directives/*.html': 'ng-html2js'
+    },
+    ngHtml2JsPreprocessor: {
+        // strip app from the file path
+        stripPrefix: 'app/'
+    },
     files : [
       // Vendor code
       // exactly the order from index.html
@@ -87,6 +96,9 @@ module.exports = function() {
 
       // application entry point
         'app/scripts/app.js',
+
+      // templates
+      'app/scripts/directives/toolbar.html',
 
         'app/scripts/cat.templates.js',
 
