@@ -5,6 +5,7 @@
 @import "partials/projects";
 @import "partials/hud-toolbar";
 @import "partials/widget-area";
+@import "partials/segment";
 
 * {
   -webkit-border-radius: 0 !important;
@@ -318,40 +319,8 @@ ul.nav-tabs > li {
   }
 }
 
-/* Segment Area Styles */
-.segment {
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  padding-top: 4px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.segment.pending {
-  //  border: 1px dotted #D48651;
-}
-.segment.completed {
-  //  border: 1px dotted #90ee90;
-
-}
-
-.segment-index-label {
-  color: #708090;
-  font-size: small;
-}
-.segment-finished-target {
-  background-color: #90ee90;
-  padding: 10px;
-  font-size: 18px !important;
-};
-
-.frame {
-//  border-style: solid;
-//  border-width: 1px;
-};
-
 /* Ace Editor Styles */
 .ace_editor {
-    box-shadow: 8px 8px 4px #888;
   line-height: normal;
   // sync min-height with content-card
   min-height: 200px;

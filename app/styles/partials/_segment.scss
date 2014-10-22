@@ -1,0 +1,33 @@
+.segment {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  padding-top: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.activeshadow {
+  .content-card {
+    box-shadow: 4px 4px 2px #888;
+  }
+  .ace_editor {
+    box-shadow: 4px 4px 2px #888;
+  }
+}
+.segment.pending {
+  //  border: 1px dotted #D48651;
+}
+.segment.completed {
+  //  border: 1px dotted #90ee90;
+
+}
+
+.segment-index-label {
+  color: #708090;
+  font-size: small;
+}
+.segment-finished-target {
+  background-color: #90ee90;
+  padding: 10px;
+  font-size: 18px !important;
+};
+

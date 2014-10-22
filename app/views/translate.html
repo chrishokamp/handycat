@@ -13,7 +13,7 @@
 
         <!-- repeat for each segment -->
         <div class="segment row"
-             ng-class="{ pending: !segmentState.completed, completed: segmentState.completed}"
+             ng-class="{  pending: !segmentState.completed, completed: segmentState.completed}"
              id="segment-{{$index}}"
              ng-controller="SegmentAreaCtrl"
              ng-repeat="seg in segments"
@@ -21,7 +21,7 @@
              ng-init="segment = seg; init($index); segmentNumber = $index; id.index = $index;"
         >
             <a id="anchor-{{$index}}"></a>
-            <p class="segment-index-label">Segment Index: {{$index}}
+            <div class="segment-index-label">Segment Index: {{$index}}
                 <span class="segment-finished" ng-show="segmentState.completed">
                     <button type="button" class="btn btn-default btn-xs">
                         <span class="glyphicon glyphicon-ok"></span> Complete
@@ -32,31 +32,31 @@
                        <span class="glyphicon glyphicon-flag"></span> Pending
                    </button>
                 </span>
-            <!--<p>{{test.test}}</p>-->
-            </p>
-
-            <div class="bottom-margin" ng-click="activate($index)">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="col-xs-12 bottom-margin">
-                                <div ng-show="segmentState.completed" class="segment-finished-target frame" ng-style="internalHeightStyle" ng-click="reopen($index)">
-                                    <p>{{segment.source}}</p>
-                                </div>
-                                <div ng-hide="segmentState.completed" height-watcher class="content-card frame">
-                                    <div class="source">
-                                        <source-area ng-init="setSource(segment.sourceDOM.textContent)" source-sentence="segment.sourceDOM.textContent"></source-area>
+            </div>
+            <div ng-class="{activeshadow: activeSegment === $index}">
+                <div class="bottom-margin" ng-click="activate($index)">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-xs-12 bottom-margin">
+                                    <div ng-show="segmentState.completed" class="segment-finished-target frame" ng-style="internalHeightStyle" ng-click="reopen($index)">
+                                        <p>{{segment.source}}</p>
+                                    </div>
+                                    <div ng-hide="segmentState.completed" height-watcher class="content-card frame">
+                                        <div class="source">
+                                            <source-area ng-init="setSource(segment.sourceDOM.textContent)" source-sentence="segment.sourceDOM.textContent"></source-area>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- working - prototyping dynamic addition of the Ace Editor -->
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="bottom-margin">
-                                <static-target text="{{segment.target}}"></static-target>
+                        <!-- working - prototyping dynamic addition of the Ace Editor -->
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="bottom-margin">
+                                    <static-target text="{{segment.target}}"></static-target>
+                                </div>
                             </div>
                         </div>
                     </div>
