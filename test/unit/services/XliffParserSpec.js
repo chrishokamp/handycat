@@ -62,8 +62,8 @@ describe('XliffParser', function () {
       XliffParser.parseXML(sampleXliff).then(
         function(res) {
           console.log('INSIDE XliffParser callback');
-          parsedXliff = res;
-          expect(XliffParser.getDOMString(res.DOM)).toEqual(sampleXliff);
+          parsedXliff = res.DOM;
+          expect(XliffParser.getDOMString(parsedXliff)).toEqual(sampleXliff);
         }
       ).finally(done);
 
@@ -72,5 +72,49 @@ describe('XliffParser', function () {
     });
 
   });
+
+  // Integration test (testing downstream usage)
+  describe('Writing into nodes of the Xliff DOM should also change the text nodes', function (done) {
+
+    it('should create text nodes properly', function(done) {
+      var parsedObject;
+      var s1 = 'My extension';
+
+      XliffParser.parseXML(sampleXliff).then(
+        function(res) {
+          console.log('INSIDE XliffParser callback');
+          parsedObject = res;
+          expect(parsedObject.segments[0].sourceDOM.textContent).toEqual(s1);
+        }
+      ).finally(done);
+
+      expect(undefined).toEqual(parsedObject);
+      $timeout.flush();
+
+    });
+
+    it('should maintain changes', function(done) {
+      var parsedObject;
+      var t1 = 'Meine Erweiterung';
+      var t2 = 'Mein Hund';
+
+      XliffParser.parseXML(sampleXliff).then(
+        function(res) {
+          console.log('INSIDE XliffParser callback');
+          parsedObject = res;
+          expect(parsedObject.segments[0].targetDOM.textContent).toEqual(t1);
+          parsedObject.segments[0].targetDOM.textContent = t2;
+          var nodeString = XliffParser.getDOMString(parsedObject.segments[0].targetDOM);
+          expect(nodeString).toEqual('<target>' + t2 + '</target>');
+
+        }
+      ).finally(done);
+
+      expect(undefined).toEqual(parsedObject);
+      $timeout.flush();
+
+    });
+  });
+
 
 });

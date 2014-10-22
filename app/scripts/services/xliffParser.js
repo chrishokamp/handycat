@@ -122,8 +122,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
           }
 
           var segPair = {
-            source: seg[0].textContent,
-            target: seg[1].textContent,
             sourceDOM: seg[0],
             targetDOM: seg[1]
           };

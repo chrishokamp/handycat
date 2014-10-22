@@ -45,7 +45,7 @@
                                 </div>
                                 <div ng-hide="segmentState.completed" height-watcher class="content-card frame">
                                     <div class="source">
-                                        <source-area ng-init="setSource(segment.source)" source-sentence="segment.source"></source-area>
+                                        <source-area ng-init="setSource(segment.sourceDOM.textContent)" source-sentence="segment.sourceDOM.textContent"></source-area>
                                     </div>
                                 </div>
                             </div>
