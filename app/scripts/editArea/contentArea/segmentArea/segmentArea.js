@@ -48,22 +48,7 @@ angular.module('controllers')
     }
   });
 
-//  // for the concordancer - default to English
-//  $scope.queryLang = 'en';
-//
-//// currently the model names on the child controllers are different
-//  $scope.setSource = function(sourceSentence) {
-//    $log.log("setSource");
-//    $log.log("source is: " + sourceSentence);
-
-//    $scope.segment.source = sourceSentence;
-//  };
-//  $scope.setTarget = function(targetSentence) {
-//     $scope.segment.target = targetSentence;
-//  };
-//
-
-//  // Text currently selected in the child editor
+// Text currently selected in the child editor
 $scope.setTextSelection = function(text, range) {
   $scope.selectedToken = text;
   $scope.selectedRange = range;
@@ -102,38 +87,6 @@ $scope.clearSelection = function() {
 //    }
 //  };
 //
-//  $scope.findAndReplaceTokens = function(original, change, segment) {
-//    var regexp = '\\b' + original + '\\b';
-//    console.log($scope.segment.target);
-//    var newTarget = $scope.segment.target.replace(new RegExp(regexp), change);
-//    console.log(newTarget);
-//    if (newTarget !== $scope.segment.target) {
-//      $scope.segment.target = newTarget;
-//      var msg = 'Find and Replace tokens: ' + original + " → " + change;
-//      $scope.editHistory.push(
-//        ruleMap.newRule('find-and-replace-tokens', original, change, msg, segment));
-//      Session.updateStat('pearl-find-and-replace-tokens', $scope.$index, msg);
-//    }
-//  };
-//
-//  // sets the current target token
-//  $scope.setCurrentToken = function(token) {
-//     $scope.currentToken = token;
-//  };
-//
-//  // special chars toolbar showing
-//  $scope.showSpecialChars = true;
-//
-//  // testing the special chars directive
-    // TODO - let the user set this up
-    // Let the user define the macros they want to use
-//  $scope.germanChars = ['ä','ö','ü','Ä','Ö','Ü','ß'];
-//  $scope.insertChar = function(char) {
-//    $log.log("char to insert: " + char);
-//    $scope.insertText(char);
-//  };
-//
-//
 //// TODO: collapse (remove from DOM) when this segment goes out of focus
 //  $scope.isCollapsed = {collapsed: true, clicked: false};
 //  $scope.toggleToolbar = function(bool) {
@@ -160,34 +113,6 @@ $scope.clearSelection = function() {
     $rootScope.$broadcast('propagate-action', $scope.editHistory[index]);
     Session.updateStat('propagateAction', $scope.$index, $scope.editHistory[index].operation);
   };
-
-  // Trigger propagated edits
-//  $scope.$on('propagate-action', function(event, edit) {
-//    if ($scope.segmentState.completed)
-//      return; // do not modify completed segments
-//
-//    var from = edit.segment;
-//
-//    $log.log(edit);
-//    if (edit.operation == 'copy-source-punctuation') {
-//      $scope.copySourcePunctuation(from);
-//    } else if (edit.operation == 'find-and-replace-tokens') {
-//      $scope.findAndReplaceTokens(edit.original, edit.change, from);
-//    } else if (edit.operation == 'find-and-replace') {
-//      $scope.findAndReplace(edit.original, edit.change, from);
-//    } else if (edit.operation == 'change-token-number') {
-//      $scope.findAndReplaceTokens(edit.context, edit.change, from);
-//    } else if (edit.operation == 'change-token-gender') {
-//      $scope.findAndReplaceTokens(edit.context, edit.change, from);
-//    } else if (edit.operation == 'change-token-case') {
-//      $scope.findAndReplaceTokens(edit.context, edit.change, from);
-//    }
-//    // Add more action handlers here if needed.
-//  });
-
-//  $scope.addToEditHistory = function(edit) {
-//    $scope.editHistory.push(edit);
-//  };
 
   // List of edit actions performed on this segment
   $scope.editHistory = [];
