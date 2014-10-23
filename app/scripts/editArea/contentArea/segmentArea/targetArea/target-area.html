@@ -20,7 +20,8 @@
                 </div>
             </div>
         </div>
-        <div ng-model="selected" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='setText($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>
+        <div ng-model="selected" place-after="ace_cursor" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='insertText($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>
+        <!--<div place-after="ace_cursor">PLACE AFTER</div>-->
 
     </div>
 </div>

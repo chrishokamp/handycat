@@ -49,10 +49,11 @@ angular.module('controllers').controller('AceCtrl',
 
   $scope.insertText = function(text) {
     var editor = $scope.editor;
-    // TODO: separate this from insertText
-//    $scope.replaceSelection(text);
+    editor.insert(text);
     editor.focus();
   };
+
+
 
   // get the current selection from the editor
   $scope.getSelection = function() {
@@ -92,9 +93,9 @@ angular.module('controllers').controller('AceCtrl',
 
 
   // let the $parent controller see insertText, so that we can hit it from sibling controllers
-  $scope.$parent.insertText = $scope.insertText;
+//  $scope.$parent.insertText = $scope.insertText;
   // let the parent see replaceSelection
-  $scope.$parent.replaceSelection = $scope.replaceSelection;
+//  $scope.$parent.replaceSelection = $scope.replaceSelection;
 
   // get the range of the current token under the cursor
   var getCurrentTokenAndRange = function() {
