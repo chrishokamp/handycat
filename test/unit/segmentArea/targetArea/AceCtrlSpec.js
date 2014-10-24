@@ -116,31 +116,45 @@ describe("Unit: Testing the AceCtrl", function() {
     });
 
     it('can add text at the current cursor location', function() {
-      //
-
-
-    });
-
-    it('deletes text the prefix text when overwritePrefix is called', function() {
-      // empty, add text, delete text
       var testText = "This is a test sentence";
       scope.insertText(testText);
       var editor = scope.editor;
-      var session = editor.getSession();
 
       var prefix = scope.currentWordPrefix();
       expect(prefix).toBe('sentence');
 
-
-      scope.editor.getSelection().moveCursorBy(0, -7);
       var pos = editor.getCursorPosition();
-      var line = session.getLine(pos.row);
-      var prefix = util.retrievePrecedingIdentifier(line, pos.column);
+      expect(pos['column']).toEqual(testText.length);
+
+      var testText2 = "test two";
+      scope.insertText(testText2);
+      var prefix = scope.currentWordPrefix();
+      expect(prefix).toBe('two');
+      var pos = editor.getCursorPosition();
+      expect(pos['column']).toEqual(testText.length + testText2.length);
+
+    });
+
+    it('deletes text the prefix text when overwritePrefix is called', function() {
+//      var prefix = util.retrievePrecedingIdentifier(line, pos.column);
       // TODO: how does the ace editor overwrite the autocomplete prefix?
       // TODO: what happens on select in the ace autocomplete?
-      expect(prefix).toBe('s');
+      // keyboard doesn't work with ace autocomplete (only supports mouse selection)
+      var startingText = "This is a test sentence";
+      scope.insertText(startingText);
+      var prefix = scope.currentWordPrefix();
+      expect(prefix).toBe('sentence');
 
+      // empty, add text, delete text
+      var newText = 'rabid dog';
+      scope.overwritePrefix(newText);
+      var prefix = scope.currentWordPrefix();
+      expect(prefix).toBe('dog');
 
+      var currentValue = scope.getValue();
+      expect(currentValue).toEqual('This is a test rabid dog')
+//      // TODO: how does the ace editor overwrite the autocomplete prefix?
+//      // TODO: what happens on select in the ace autocomplete?
     });
 
   });

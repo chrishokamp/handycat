@@ -53,6 +53,9 @@ angular.module('controllers').controller('AceCtrl',
     editor.focus();
   };
 
+  $scope.getValue = function() {
+    return $scope.editor.getSession().getValue();
+  }
 
 
   // get the current selection from the editor
@@ -145,6 +148,18 @@ angular.module('controllers').controller('AceCtrl',
     return prefix;
   };
 
+  $scope.overwritePrefix = function(newText) {
+    var editor = $scope.editor;
+    var session = editor.getSession();
+    var pos = editor.getCursorPosition();
+    var line = session.getLine(pos.row);
+    var prefix = util.retrievePrecedingIdentifier(line, pos.column);
+    // get prefix range, and replace it
+//    var insertPoint =
+    var prefixRange = new aceRange(pos.row, pos.column - prefix.length, pos.row, pos.column);
+    var newCursorLocation = editor.session.getDocument().replace(prefixRange, newText);
+    return newCursorLocation;
+  }
   // The Segment area is the parent of the AceCtrl
   $scope.$on('clear-editor', function(e) {
     e.preventDefault();
