@@ -99,9 +99,33 @@ describe("Unit: Testing the AceCtrl", function() {
     it('returns the right value from $scope.currentWordPrefix', function() {
       // empty, add text, delete text
       var testText = "This is a test sentence";
-      scope.setText(testText);
+      scope.insertText(testText);
       var editor = scope.editor;
+      var session = editor.getSession();
+
+      var prefix = scope.currentWordPrefix();
+      expect(prefix).toBe('sentence');
+
+
       // move the cursor
+      scope.editor.getSelection().moveCursorBy(0, -7);
+      var pos = editor.getCursorPosition();
+      var line = session.getLine(pos.row);
+      var prefix = util.retrievePrecedingIdentifier(line, pos.column);
+      expect(prefix).toBe('s');
+    });
+
+    it('can add text at the current cursor location', function() {
+      //
+
+
+    });
+
+    it('deletes text the prefix text when overwritePrefix is called', function() {
+      // empty, add text, delete text
+      var testText = "This is a test sentence";
+      scope.insertText(testText);
+      var editor = scope.editor;
       var session = editor.getSession();
 
       var prefix = scope.currentWordPrefix();
@@ -112,11 +136,9 @@ describe("Unit: Testing the AceCtrl", function() {
       var pos = editor.getCursorPosition();
       var line = session.getLine(pos.row);
       var prefix = util.retrievePrecedingIdentifier(line, pos.column);
+      // TODO: how does the ace editor overwrite the autocomplete prefix?
+      // TODO: what happens on select in the ace autocomplete?
       expect(prefix).toBe('s');
-    });
-
-    it('can add text at the current cursor location', function() {
-      //
 
 
     });
