@@ -3,10 +3,11 @@
 
     <!-- the hud-toolbar goes at the bottom -->
     <!-- TODO: encapsulate component css for hud-toolbar -->
-    <hud-toolbar></hud-toolbar>
+    <div class="navbar-fixed-bottom"> <hud-toolbar></hud-toolbar></div>
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl">
+    <div class="container">
 
         <!-- singleton directive containing the toolbar -->
         <toolbar class="widget-toolbar" active-segment="activeSegment" segments="document.segments" ng-show="visible.toolbar"></toolbar>
@@ -64,6 +65,7 @@
             </div>
         </div>
     </div>
+    </div>
 
     <!-- TODO: refactor this into a watch function -->
     <!--<div ng-show="checkTranslationCompleted()" id="footmsg">-->
@@ -79,3 +81,4 @@
     </div> -->
 
 </div>
+

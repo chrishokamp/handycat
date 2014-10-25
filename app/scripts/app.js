@@ -14,6 +14,7 @@ var App = window.App = angular.module('editorComponentsApp',
         'ngAnimate',
         'ui.bootstrap.tooltip',
         'http-auth-interceptor',
+        'snap'
         //'filters',
         //'ngTouch'
       ]

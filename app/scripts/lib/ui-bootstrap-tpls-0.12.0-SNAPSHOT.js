@@ -2,7 +2,7 @@
  * angular-ui-bootstrap
  * http://angular-ui.github.io/bootstrap/
 
- * Version: 0.12.0-SNAPSHOT - 2014-10-13
+ * Version: 0.12.0-SNAPSHOT - 2014-10-25
  * License: MIT
  */
 angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.transition","ui.bootstrap.collapse","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.bindHtml","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.dateparser","ui.bootstrap.position","ui.bootstrap.datepicker","ui.bootstrap.dropdown","ui.bootstrap.typeahead","ui.bootstrap.flextypeahead","ui.bootstrap.modal","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker"]);
@@ -2136,17 +2136,6 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position', 'ui.bootstrap
           scope.select({activeIdx:activeIdx});
         };
 
-        // Chris - testing
-        scope.$watch(
-          function () {
-            return scope.matches;
-          },
-          function(){
-//        $document.unbind('click', dismissClickHandler);
-              $log.log('Popup scope destroyed');
-          });
-
-
       }
     };
   }])
@@ -2282,6 +2271,7 @@ angular.module('ui.bootstrap.flextypeahead', ['ui.bootstrap.position', 'ui.boots
           //it might happen that several async queries were in progress if a user were typing fast
           //but we are interested only in responses that correspond to the current view value
           // Chris - commented - we want to use whatever got passed to this function
+          // Chris - TODO: only use the most recent request when the user is typing fast
 //          var onCurrentRequest = (inputValue === modelCtrl.$viewValue);
           var onCurrentRequest = true;
           if (onCurrentRequest && hasFocus) {
@@ -2363,9 +2353,11 @@ angular.module('ui.bootstrap.flextypeahead', ['ui.bootstrap.position', 'ui.boots
 
       scope.$watch(triggerFunction,
         function(val) {
+            console.log('WATCHING - val is: ' + val);
+          // Chris - and the element is open - add logic
           if (val && val.length >= minSearch) {
-            $log.log('trigger function fired');
-            $log.log('DATA: ' + val);
+            console.log('WATCHING inside if');
+            console.log('DATA: ' + val);
             hasFocus = true;
             getMatchesAsync(val);
 
@@ -2373,11 +2365,15 @@ angular.module('ui.bootstrap.flextypeahead', ['ui.bootstrap.position', 'ui.boots
             // TODO: add this event to the shared element
             // the 'capture' method isn't working
             // could it be because Ace is listening for 'keydown', or some other version of the event?
-            document.getElementsByTagName('body')[0].addEventListener("keydown", keyboardHandler, true);
+            $('body').get(0).addEventListener('keydown', keyboardHandler, true);
+//              $('body').on('keydown', keyboardHandler);
+//              $(element).on('keydown', keyboardHandler);
+              console.log('Added event listener');
 
           } else {
             // remove event listeners
             $('body').off('keydown', keyboardHandler);
+              console.log('Removing event listener');
             resetMatches();
           }
         }
@@ -2470,7 +2466,8 @@ angular.module('ui.bootstrap.flextypeahead', ['ui.bootstrap.position', 'ui.boots
       // bind these events only when the typeahead is open
       // TODO - bind these to the parent element shared by the typeahead and its input (the element with the controller)
       var keyboardHandler = function (evt) {
-        $log.log('Keydown event handler');
+        console.log('Keydown event handler');
+        console.log('event.which: ' + evt.which);
         //typeahead is open and an "interesting" key was pressed
         if (scope.matches.length === 0 || HOT_KEYS.indexOf(evt.which) === -1) {
           return;

@@ -15,6 +15,7 @@
 
       <!-- TODO: sass-bootstrap is included from the main.scss sass file -->
       <!-- build:css styles/vendor.css -->
+      <link rel="stylesheet" href="bower_components/angular-snap/angular-snap.css" />
       <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />
       <!-- endbuild -->
 
@@ -29,7 +30,7 @@
     <!-- Chris: server-side routing will control how this path is handled -->
     <!-- TODO: put the navbar inside our states -->
     <!--<div ng-include="" src="'partials/navbar.html'"></div>-->
-    <cat-nav></cat-nav>
+    <!--<cat-nav></cat-nav>-->
     <div class="container" ui-view></div>
 
     <!--[if lt IE 9]>
@@ -53,6 +54,8 @@
     <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+    <script src="bower_components/snapjs/snap.js"></script>
+    <script src="bower_components/angular-snap/angular-snap.js"></script>
 
     <script src="scripts/lib/angular-ui-ace/ui-ace.js"></script>
     <script src="scripts/lib/german_snowball_stemmer.js"></script>
