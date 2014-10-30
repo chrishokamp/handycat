@@ -2,29 +2,46 @@
 // this is a source + target pair
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
-  '$rootScope', '$scope', 'Wikipedia', 'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'editSession',
+  '$rootScope', '$scope', 'TranslationMemory', 'Wikipedia', 'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'editSession',
    'Logger', 'Projects', 'XliffParser',
-  function($rootScope, $scope, Wikipedia, Glossary, $log, ruleMap, copyPunctuation, Session, Logger,
+  function($rootScope, $scope, TranslationMemory, Wikipedia, Glossary, $log, ruleMap, copyPunctuation, Session, Logger,
            Projects, XliffParser) {
 
-  $scope.outputLog = function () {
-    $log.log('SEGMENT AREA OUTPUT LOG');
-    Logger.exportJSON();
-  };
+    $scope.outputLog = function () {
+      $log.log('SEGMENT AREA OUTPUT LOG');
+      Logger.exportJSON();
+    };
 
-  // this gets reset in the template
-  $scope.id = {};
-  // default height for editor components
-  $scope.height = {'editorHeight': 0};
-  $scope.$watch(
-    function() {
-      return $scope.height.editorHeight;
-    },
-    function(val) {
-      $scope.internalHeightStyle = {'height': val};
+    // this gets reset in the template
+    $scope.id = {};
+
+    // WORKING
+    // when the translation promise resolves, add the result to the translation options, which are also rendered to the user
+    // a HandyCAT resource obj has name + url -- {'name': 'google-translate', url: '/users/:userId/tm/'}
+    // TODO: the url field shouldn't actually be necessary - the server looks up resources by name
+    // TODO: as a proxy to named lookup, just always call the same url from client -- i.e. /users/:userId/tm/
+    // the server should look up the required user credentials for the particular resource
+    $scope.queryResource = function(query, resourceObj) {
+      var queryObj = { userId: $scope.currentUser._id, sourceLang: 'en-US', targetLang: 'fr-FR', query: query};
+
+      TranslationMemory.get(queryObj, function(tmResponse) {
+        $log.log('SegmentControl: Translation Memory responded');
+        // TODO: ensure that the TM objects conform to the HandyCAT provenance specification
+        $scope.resourceResponses.push(tmResponse);
+
+      });
     }
-  );
 
+    // default height for editor components
+    $scope.height = {'editorHeight': 0};
+    $scope.$watch(
+      function() {
+        return $scope.height.editorHeight;
+      },
+      function(val) {
+        $scope.internalHeightStyle = {'height': val};
+      }
+    );
 
   // TODO: set this only when this is actually the active scope
   $scope.isActive = { active:true };
@@ -48,82 +65,16 @@ angular.module('controllers')
     }
   });
 
-// Text currently selected in the child editor
-$scope.setTextSelection = function(text, range) {
-  $scope.selectedToken = text;
-  $scope.selectedRange = range;
-  $log.log('setTextSelection fired, selectedToken: '+$scope.selectedToken+' selectedRange: ' + $scope.selectedRange);
-};
-$scope.clearSelection = function() {
-  $scope.selectedToken = '';
-  $scope.selectedRange = '';
-};
-
-//  $scope.copySourcePunctuation = function(segment) {
-//    $log.log('copy source called from segment ' + segment);
-//    var source = $scope.segment.source;
-//    var target = $scope.segment.target;
-//    $scope.segment.target = copyPunctuation.copySourcePunctuation(source, target);
-//
-//    Session.updateStat('copyPunctuation', $scope.$index);
-//    // Only adds the action to the edit history if it actually did something.
-//    if ($scope.segment.target !== target) {
-//      $scope.editHistory.push(
-//        ruleMap.newRule('copy-source-punctuation', '', '', 'Copy punctuation from source segment', segment));
-//    }
-//  };
-//
-//  $scope.findAndReplace = function(original, change, segment) {
-//    var regexp = original;
-//    console.log($scope.segment.target);
-//    var newTarget = $scope.segment.target.replace(new RegExp(regexp), change);
-//    console.log(newTarget);
-//    if (newTarget !== $scope.segment.target) {
-//      $scope.segment.target = newTarget;
-//      var msg = 'Find and Replace: ' + original + " → " + change;
-//      $scope.editHistory.push(
-//        ruleMap.newRule('find-and-replace', original, change, msg, segment));
-//      Session.updateStat('pearl-find-and-replace', $scope.$index, msg);
-//    }
-//  };
-//
-//// TODO: collapse (remove from DOM) when this segment goes out of focus
-//  $scope.isCollapsed = {collapsed: true, clicked: false};
-//  $scope.toggleToolbar = function(bool) {
-//    if (arguments.length > 0) {
-//      $scope.isCollapsed = { collapsed: bool };
-//// TODO: there is a broken corner-case here
-//    } else {
-//      $scope.isCollapsed = { collapsed: !$scope.isCollapsed.collapsed };
-//    }
-//    $log.log("isCollapsed: the value of isCollapsed is: " + $scope.isCollapsed.collapsed);
-//  };
-
   $scope.clearEditor = function() {
    $log.log('clear editor fired on the segment control');
    $scope.$broadcast('clear-editor');
   };
-
-
-  // Informs other segments that they should make a change.
-  // The event argument is a unique object created by the ruleMap service.
-  // The event will probably be received by the broadcaster as well so the action handlers
-  // should check first if the edit should be applied or not.
-  $scope.propagateEdit = function(index) {
-    $rootScope.$broadcast('propagate-action', $scope.editHistory[index]);
-    Session.updateStat('propagateAction', $scope.$index, $scope.editHistory[index].operation);
-  };
-
-  // List of edit actions performed on this segment
-  $scope.editHistory = [];
 
   // TODO: project should listen for this event, we shouldn't have a separate function to update the project
   $scope.segmentFinished = function(segId) {
     $log.log("SEGMENT FINISHED - segId is: " + segId);
     $scope.segmentState.completed = true;
     $scope.isActive.active = false;
-
-    Session.updateStat('segmentFinished', segId);
 
     // TODO: call a function on the document API - document API should all be in EditAreaCtrl
     // TODO: this is not the right interface -- completedSegments should not be stored outside of the XLIFF DOM

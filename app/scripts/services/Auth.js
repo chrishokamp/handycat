@@ -72,6 +72,7 @@ angular.module('services')
 //              return cb();
             });
           }, function(err) {
+              $log.log('Error retrieving User from server');
 //            return cb(err.data);
           });
 

@@ -11,9 +11,8 @@ describe("Unit: Testing the AceCtrl", function() {
       scope = $rootScope.$new();
       // mock the 'segment' property on the parent scope (simulates SegmentAreaCtrl)
       var segment = { source: "test sentence", target: "Testsatz"};
-      // mocks of properties/functions on parent controller
+      // mocks of properties/functions on parent controller (SegmentCtrl)
       scope.segment = segment;
-      scope.setSource = function(test) {};
 
       // now create the controller with mocks for the services
       ctrl = $controller('AceCtrl', {$scope: scope, Document:{}, tokenizer:{}, Glossary:{}, ruleMap: {}, session: {} });

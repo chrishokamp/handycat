@@ -3,14 +3,12 @@ angular.module('directives')
     // take the text inside the element, tokenize it, and wrap in spans that we can interact with
     return {
       scope: {
-        // this comes from the Document service via segment via contentArea
+        // this comes from contentArea via editArea
         sourceSentence: '=',
         annotatedSentence: '='
       },
       restrict: 'E',
       link: function(scope,el,attrs){
-        // tokens should be undefined here
-//        $log.log('sourceArea directive - tokens: ' + scope.tokens);
         var tokenStrings = tokenizer.tokenize(scope.sourceSentence);
 
         // give each token an id, and also move to dot notation

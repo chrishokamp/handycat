@@ -1,9 +1,11 @@
+<md-content>
+
 <div ng-init="loadProject()" ng-controller="EditAreaCtrl">
     <cat-nav></cat-nav>
 
     <!-- the hud-toolbar goes at the bottom -->
     <!-- TODO: encapsulate component css for hud-toolbar -->
-    <div class="navbar-fixed-bottom"> <hud-toolbar></hud-toolbar></div>
+    <!--<div class="navbar-fixed-bottom"> <hud-toolbar></hud-toolbar></div>-->
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl">
@@ -24,14 +26,14 @@
             <a id="anchor-{{$index}}"></a>
             <div class="segment-index-label">Segment Index: {{$index}}
                 <span class="segment-finished" ng-show="segmentState.completed">
-                    <button type="button" class="btn btn-default btn-xs">
-                        <span class="glyphicon glyphicon-ok"></span> Complete
-                    </button>
+                    <md-button>
+                      <span class="glyphicon glyphicon-ok"></span> Complete
+                    </md-button>
                 </span>
                 <span class="segment-finished" ng-hide="segmentState.completed">
-                   <button type="button" class="btn btn-default btn-xs">
-                       <span class="glyphicon glyphicon-flag"></span> Pending
-                   </button>
+                   <md-button>
+                     <span class="glyphicon glyphicon-flag"></span> Pending
+                   </md-button>
                 </span>
             </div>
             <div ng-class="{activeshadow: activeSegment === $index}">
@@ -45,14 +47,13 @@
                                     </div>
                                     <div ng-hide="segmentState.completed" height-watcher class="content-card frame">
                                         <div class="source">
-                                            <source-area ng-init="setSource(segment.sourceDOM.textContent)" source-sentence="segment.sourceDOM.textContent"></source-area>
+                                          <source-area source-sentence="segment.sourceDOM.textContent"></source-area>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- working - prototyping dynamic addition of the Ace Editor -->
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="bottom-margin">
@@ -81,4 +82,5 @@
     </div> -->
 
 </div>
+  </md-content>
 

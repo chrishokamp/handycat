@@ -14,7 +14,8 @@ var App = window.App = angular.module('editorComponentsApp',
         'ngAnimate',
         'ui.bootstrap.tooltip',
         'http-auth-interceptor',
-        'snap'
+        'snap',
+        'ngMaterial'
         //'filters',
         //'ngTouch'
       ]
@@ -102,21 +103,16 @@ var App = window.App = angular.module('editorComponentsApp',
 .constant('baseUrl', 'http://panaceadcu.dh.bytemark.co.uk:5002')
 .constant('loggerUrl', 'http://panaceadcu.dh.bytemark.co.uk:5001')
 
-// Allow CORS
-.config(['$httpProvider', function($httpProvider) {
-	$httpProvider.defaults.useXDomain = true;
-	delete $httpProvider.defaults.headers.common['X-Requested-With'];
-}])
 
 // check window.location to see where we are, and set the baseUrl accordingly
 .run(['$location', '$rootScope', 'Auth', '$log', function($location, $rootScope, Auth, $log) {
   //watching the value of the currentUser variable.
     $rootScope.$watch('currentUser', function(currentUser) {
-    // if no currentUser and on a page that requires authorization then try to update it
-    // will trigger 401s if user does not have a valid session
-    if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) == -1 )) {
-      Auth.currentUser();
-    }
+      // if no currentUser and on a page that requires authorization then try to update it
+      // will trigger 401s if user does not have a valid session
+      if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) == -1 )) {
+        Auth.currentUser();
+      }
   });
 
   // On catching 401 errors, redirect to the login page.
@@ -124,6 +120,12 @@ var App = window.App = angular.module('editorComponentsApp',
     $location.path('/login');
     return false;
   });
+}])
+
+// Allow CORS
+.config(['$httpProvider', function($httpProvider) {
+	$httpProvider.defaults.useXDomain = true;
+	delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }])
 
   // see: https://github.com/angular-ui/bootstrap/blob/master/src/tooltip/tooltip.js

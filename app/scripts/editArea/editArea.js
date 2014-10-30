@@ -66,7 +66,8 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     $scope.scrollDone = true;
   };
 
-  // Check if all the segments are marked as completed
+  // Check if all the segments are marked as complete
+  // TODO: refactor to remove document.completedSegments (we don't need to maintain a separate list just to determine if the job is finished or not)
   $scope.checkTranslationCompleted = function() {
     if (!$scope.document.DOM)
       return false; // do not show completed before starting the job!

@@ -6,15 +6,22 @@
 @import "partials/hud-toolbar";
 @import "partials/widget-area";
 @import "partials/segment";
+@import "partials/nav-toolbar";
 
 * {
-  -webkit-border-radius: 0 !important;
-  -moz-border-radius: 0 !important;
-  border-radius: 0 !important;
+//  -webkit-border-radius: 0 !important;
+//  -moz-border-radius: 0 !important;
+//  border-radius: 0 !important;
 }
 
 body {
-  background-color: #F5F8F5;
+//  background-color: #F5F8F5;
+  // md 200 weight blue
+//  background-color: #81d4fa;
+  // md 100 weight blue
+  background-color: #b3e5fc;
+
+  //  background-color: #F5F8F5;
   //  background-image:url('../images/ricepaper.png');
   //background-image:url('../images/broken_noise.png');
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
@@ -28,9 +35,10 @@ body {
   // to put the content below the nav
   padding-top: 50px;
 
-  // leave space for the hud-toolbar in the 'translate' state
-  // TODO - apply this style only in the translate state
-  padding-bottom: 50px;
+}
+
+.snap-content {
+  background-color: #b3e5fc;
 }
 
 .blue {
@@ -214,7 +222,6 @@ body {
 /* End project view styles */
 
 /* styles for the editing view */
-// navbar toggle toolbar
 .selected {
   //  color: pink;
   background-color: darker(pink) !important;
@@ -304,7 +311,6 @@ ul.nav-tabs > li {
   div.btn {
     opacity: 1.0 !important;
   }
-  //  background-color: pink;
 }
 
 .source-token {

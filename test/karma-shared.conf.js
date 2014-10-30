@@ -26,8 +26,9 @@ module.exports = function() {
       // Vendor code
       // exactly the order from index.html
 
-      'app/bower_components/jquery/jquery.js',
+        'app/bower_components/jquery/jquery.js',
         'app/bower_components/angular/angular.js',
+        'app/bower_components/angular-aria/angular-aria.js',
         'app/bower_components/angular-ui-router/release/angular-ui-router.js',
         'app/bower_components/sass-bootstrap/dist/js/bootstrap.js',
         'app/bower_components/angular-resource/angular-resource.js',
@@ -40,6 +41,11 @@ module.exports = function() {
         'app/bower_components/ng-file-upload/angular-file-upload.js',
         'app/bower_components/angular-animate/angular-animate.js',
         'app/bower_components/angular-http-auth/src/http-auth-interceptor.js',
+        'app/bower_components/snapjs/snap.js',
+        'app/bower_components/angular-snap/angular-snap.js',
+        'app/bower_components/hammerjs/hammer.js',
+        'app/bower_components/angular-material/angular-material.js',
+
         'app/scripts/lib/angular-ui-ace/ui-ace.js',
         'app/scripts/lib/german_snowball_stemmer.js',
         'app/scripts/lib/ace-builds-master/src-noconflict/ace.js',

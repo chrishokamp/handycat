@@ -1,16 +1,70 @@
 <div class="project-wrapper">
-    <snap-drawer>
-        <p>Hello from drawer!</p>
-        <button snap-close>Close</button>
+  <snap-drawer>
+      <md-list>
+        <md-item>
+          <!--<md-item-content>-->
+          <!--<div class="md-tile-content">-->
+          <a ng-href="/">HandyCAT</a>
+        </md-item>
+        <md-divider></md-divider>
+        <md-item>
+          <a ui-sref="projects.list">Projects</a>
+        </md-item>
+        <md-divider></md-divider>
+        <md-item>
+          <md-list>Actions
+            <md-divider></md-divider>
+            <md-item><a ng-click="saveJSON()">Output JSON Log</a></md-item>
+            <md-divider></md-divider>
+            <md-item><a ng-click="saveXLIFF()">Download document</a></md-item>
+          </md-list>
+        </md-item>
+        <md-divider></md-divider>
+        <md-item>
+          <a ng-click="openHelp()">Show Help</a>
+        </md-item>
+        <md-divider></md-divider>
+        <!--</md-item>-->
+        <!--<md-item ng-repeat="item in messages">-->
+          <!--<md-item-content>-->
+            <!--<div class="md-tile-content">-->
+              <!--<h3>{{item.what}}</h3>-->
+              <!--<h4>{{item.who}}</h4>-->
+              <!--<p>-->
+                <!--{{item.notes}}-->
+              <!--</p>-->
+            <!--</div>-->
+          <!--</md-item-content>-->
+          <!--<md-divider ng-if="!$last"></md-divider>-->
+        <!--</md-item>-->
+      </md-list>
+    <h4>HandyCAT Menu</h4>
+
+    <div>
+
+
+        <!--<li class="divider"></li>-->
+        <!--<li><a ng-href="{{url}}/logger/session/{{session.sessionId}}" target="_blank">Session: {{session.sessionIdShort}}</a></li>-->
+
+        <ul ng-show="currentUser">
+          <a> {{ currentUser.username }}</a>
+
+          <ul>
+            <li><a ui-sref="settings">Settings</a></li>
+            <li><a ng-click="logout()">Logout</a></li>
+          </ul>
+        </ul>
+
+          <button snap-close>Close</button>
+      </div>
+
     </snap-drawer>
 
-    <snap-content>
-        <!--<div class="container">-->
+  <snap-content snap-options="{touchToDrag:false}">
     <!-- TODO: add controller for the snapper, use scope to manage menu items -->
     <div ui-view></div>
 
 
     <div class="footer"></div>
-     <!--</div>-->
         </snap-content>
 </div>

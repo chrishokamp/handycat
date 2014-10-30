@@ -96,6 +96,8 @@ exports.user = function(req, res, next, id) {
 
 
 // WORKING - generalize resource setup so that different resources can use the same interface
+// A user possesses translation resources that map from source --> target
+// the server provides mappings which convert the HandyCAT internal API to the resource's end API
 // --> getting data from the TM should look no different than getting data from a MT engine, or a human
 exports.setTausData = function (req, res, next) {
   var userId = req.body.userId;

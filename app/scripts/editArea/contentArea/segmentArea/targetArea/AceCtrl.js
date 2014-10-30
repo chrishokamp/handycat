@@ -215,7 +215,17 @@ angular.module('controllers').controller('AceCtrl',
     });
 
     // enable autocompletion, and set the autocompleters from the autocompleters service
-    editor.setOptions({enableBasicAutocompletion: true});
+    // these functions are in: lib/ace/ext/language_tools.js
+    // see lines 68-111 in autocomplete.js
+    // lines 237 adds the keyboard handlers to the ace popup
+    // see also:lib/ace/keyboard/keybinding.js
+
+    editor.setOptions(
+      {
+        enableBasicAutocompletion: true,
+        enableLiveAutocompletion: true,
+        enable: true,
+      });
 // This creates a custom autocomplete function for Ace! - fuckin cool
 //    langTools.addCompleter(glossaryCompleter);
     //editor.getSession().setUseWrapMode(true);

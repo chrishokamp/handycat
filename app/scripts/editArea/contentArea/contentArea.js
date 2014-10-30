@@ -5,6 +5,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
     function($scope, editSession, $location, $state, $stateParams, $modal, $rootScope, $log, $timeout) {
 
       // TODO: remove the manual timeout -- wait for promise to resolve when we hit the edit route
+      // $scope.document gets set by EditAreaCtrl in $scope.loadProject
       $timeout(function() {
         $scope.language = $scope.document.targetLang;
         $scope.numSegments = $scope.document.segments.length;

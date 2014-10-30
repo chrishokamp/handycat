@@ -1,6 +1,6 @@
 Error.stackTraceLimit = Infinity;
 
-var express = require('express')
+var express = require('express'),
    bodyParser = require('body-parser'),
    cookieParser = require('cookie-parser'),
    http = require('http'),
