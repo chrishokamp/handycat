@@ -1,0 +1,2 @@
+# run jasmine-node and watch for changes
+jasmine-node --autotest .
