@@ -3,9 +3,9 @@
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'TranslationMemory', 'Wikipedia', 'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'editSession',
-   'Logger', 'Projects', 'XliffParser',
+   'Logger', 'Projects', 'XliffParser', '$http',
   function($rootScope, $scope, TranslationMemory, Wikipedia, Glossary, $log, ruleMap, copyPunctuation, Session, Logger,
-           Projects, XliffParser) {
+           Projects, XliffParser, $http) {
 
     $scope.outputLog = function () {
       $log.log('SEGMENT AREA OUTPUT LOG');
@@ -14,6 +14,10 @@ angular.module('controllers')
 
     // this gets reset in the template
     $scope.id = {};
+    // this object holds the functions and properties that children can freely read and/or override
+    $scope.shared = {
+      setText: function() {$log.log('segmentArea setText fired');}
+    }
 
 
     // WORKING
@@ -22,12 +26,24 @@ angular.module('controllers')
     // response API: {provider: <provider name>, target: <target text>}
     // databind the insertText event in the editor directive
     $scope.translationResources = [
-      {'provider': 'HandyCAT', 'target': 'test translation'},
       {'provider': 'HandyCAT', 'target': 'test translation'}
     ];
-    // this object holds the functions that children can override
-    $scope.shared = {
-      setText: function() {$log.log('segmentArea setText fired');}
+
+    $scope.testQuery = function(sourceQuery) {
+      var transProm = $http({
+        url: 'http://localhost:5001/translate/google/de',
+        method: "GET",
+        params: {query: sourceQuery}
+      });
+      transProm.then(
+        function (res) {
+          $log.log('promise resolved:');
+          $log.log(res);
+          $scope.translationResources.push({'provider': 'HandyCAT', 'target': res.data.target})
+        }, function (err) {
+          $log.log('Error retrieving translation');
+        }
+      )
     }
 
     // when the translation promise resolves, add the result to the translation options, which are also rendered to the user
@@ -48,17 +64,6 @@ angular.module('controllers')
 
       });
     }
-
-    // default height for editor components
-    $scope.height = {'editorHeight': 0};
-    $scope.$watch(
-      function() {
-        return $scope.height.editorHeight;
-      },
-      function(val) {
-        $scope.internalHeightStyle = {'height': val};
-      }
-    );
 
   // TODO: set this only when this is actually the active scope
   $scope.isActive = { active:true };

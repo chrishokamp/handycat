@@ -12,7 +12,7 @@
       <div class="container">
 
         <!-- singleton directive containing the toolbar -->
-        <toolbar class="widget-toolbar" active-segment="activeSegment" segments="document.segments" ng-show="visible.toolbar"></toolbar>
+        <!--<toolbar class="widget-toolbar" active-segment="activeSegment" segments="document.segments" ng-show="visible.toolbar"></toolbar>-->
 
         <!-- repeat for each segment -->
         <div class="segment row"
@@ -55,10 +55,10 @@
                 <div class="col-sm-6">
                   <div class="row">
                     <div class="col-xs-12 bottom-margin">
-                      <div ng-show="segmentState.completed" class="segment-finished-target frame" ng-style="internalHeightStyle" ng-click="reopen($index)">
+                      <div ng-show="segmentState.completed" class="segment-finished-target" ng-click="reopen($index)">
                         <p>{{segment.source}}</p>
                       </div>
-                      <div ng-hide="segmentState.completed" class="content-card frame">
+                      <div ng-hide="segmentState.completed" class="content-card">
                         <div class="source">
                           <source-area source-sentence="segment.sourceDOM.textContent"></source-area>
                         </div>
