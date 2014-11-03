@@ -1,3 +1,15 @@
+.segment-muted-text {
+  color: #708090;
+  font-size: small;
+  margin-bottom: 0;
+}
+.translation-buttons {
+  margin:0;
+  padding:0;
+}
+
+
+
 .segment {
   margin-bottom: 10px;
   padding-bottom: 10px;
@@ -21,10 +33,6 @@
 
 }
 
-.segment-index-label {
-  color: #708090;
-  font-size: small;
-}
 .segment-finished-target {
   background-color: #90ee90;
   padding: 10px;

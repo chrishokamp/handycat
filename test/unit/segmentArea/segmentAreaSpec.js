@@ -50,7 +50,6 @@ describe("Unit: Testing the SegmentAreaCtrl", function() {
       scope.currentUser = currentUser;
       spyOn(TranslationMemory, 'get');
 
-
     });
 
     it('should be able to retrieve a translation for the current source segment', function() {
@@ -74,11 +73,23 @@ describe("Unit: Testing the SegmentAreaCtrl", function() {
       //var queryObj = { userId: scope.currentUser._id, sourceLang: 'en-US', targetLang: 'fr-FR', query: query};
       //scope.queryResource(testResource, sourceSegment);
 
-
-
-
-
     });
+
+    it('should have a shared object containing functions that children can override', function() {
+      // create a child controller with scope.new(), and hit the functions in $scope.shared
+      scope.shared.setText();
+      var childScope = scope.$new();
+      var setText = function() {
+        childScope.testText = 'test';
+      }
+      expect(childScope.testText).toBeUndefined();
+      childScope.setText = setText;
+      scope.shared.setText = setText;
+
+      // call the function on the parent controller
+      scope.shared.setText();
+      expect(childScope.testText).toEqual('test');
+    })
 
   });
 

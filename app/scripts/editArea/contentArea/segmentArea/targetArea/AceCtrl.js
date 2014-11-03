@@ -38,16 +38,24 @@ angular.module('controllers').controller('AceCtrl',
   };
 
   // RESET the text for this editor instance
-  $scope.setText = function(text) {
+  var setText = function(text) {
     var editor = $scope.editor;
     if (editor) {
       editor.setValue(text);
+      editor.focus();
     } else {
       throw new Error('AceCtrl: $scope.setText() was called, but there is no editor on the $scope');
     }
   };
+  $scope.setText = setText;
+  // override(expose) this function on parent controllers if it exists (note - the if block is for testing)
+  if ($scope.shared && typeof($scope.shared) === 'object'){
+    $scope.shared.setText = setText;
+  }
+
 
   $scope.insertText = function(text) {
+    $log.log('Insert text fired');
     var editor = $scope.editor;
     editor.insert(text);
     editor.focus();

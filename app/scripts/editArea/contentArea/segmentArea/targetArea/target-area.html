@@ -1,12 +1,15 @@
 <div class="col-xs-12" ng-controller="AceCtrl">
     <div class="row">
+        <!-- the appearance of the segment when the user has indicated that it is complete -->
         <div ng-show="segmentState.completed" class="col-xs-12 segment-finished-target frame" ng-style="internalHeightStyle" ng-click="reopen($index)">
             <p>{{segment.target}}</p>
         </div>
-        <div ng-show="!segmentState.completed" class="col-xs-12" height-watcher>
+
+        <!-- the editing area and controls -->
+        <div ng-show="!segmentState.completed" class="col-xs-12">
             <div class="row" style="position: relative;">
                 <div class="col-xs-12 frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
-                <!--TODO: move styles to .scss - work at removing bootstrap grid -->
+                <!--  the side-controls of the target area -->
                 <div ng-show="isActive.active" class="pull-right" style="position: absolute; top: 0px; right: -40px">
                     <div>
                         <div>
@@ -26,7 +29,6 @@
             </div>
         </div>
         <div ng-model="selected" place-after="ace_cursor" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='overwritePrefix($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>
-        <!--<div place-after="ace_cursor">PLACE AFTER</div>-->
 
     </div>
 </div>

@@ -1,15 +1,15 @@
 <md-content>
 
-<div ng-init="loadProject()" ng-controller="EditAreaCtrl">
+  <div ng-init="loadProject()" ng-controller="EditAreaCtrl">
     <cat-nav></cat-nav>
 
     <!-- the hud-toolbar goes at the bottom -->
-    <!-- TODO: encapsulate component css for hud-toolbar -->
+    <!-- TODO: encapsulate component css for hud-toolbar - add a second dissapearing toolbar below the main menu -->
     <!--<div class="navbar-fixed-bottom"> <hud-toolbar></hud-toolbar></div>-->
 
     <!-- translation area -->
     <div class="edit-area-wrapper" ng-controller="ContentAreaCtrl">
-    <div class="container">
+      <div class="container">
 
         <!-- singleton directive containing the toolbar -->
         <toolbar class="widget-toolbar" active-segment="activeSegment" segments="document.segments" ng-show="visible.toolbar"></toolbar>
@@ -22,55 +22,68 @@
              ng-repeat="seg in segments"
              end-repeat
              ng-init="segment = seg; init($index); segmentNumber = $index; id.index = $index;"
-        >
-            <a id="anchor-{{$index}}"></a>
-            <div class="segment-index-label">Segment Index: {{$index}}
-                <span class="segment-finished" ng-show="segmentState.completed">
-                    <md-button>
-                      <span class="glyphicon glyphicon-ok"></span> Complete
-                    </md-button>
-                </span>
-                <span class="segment-finished" ng-hide="segmentState.completed">
-                   <md-button>
-                     <span class="glyphicon glyphicon-flag"></span> Pending
-                   </md-button>
-                </span>
+          >
+          <!-- just an anchor to let us find this place in the DOM -->
+          <a id="anchor-{{$index}}"></a>
+          <!-- the segment info row -->
+          <div class="row segment-muted-text">
+            <div class="col-xs-4">Segment Index: {{$index}}
+                <!--<span class="segment-finished" ng-show="segmentState.completed">-->
+                    <!--<md-button>-->
+                      <!--<span class="glyphicon glyphicon-ok"></span> Complete-->
+                    <!--</md-button>-->
+                <!--</span>-->
+                <!--<span class="segment-finished" ng-hide="segmentState.completed">-->
+                   <!--<md-button>-->
+                     <!--<span class="glyphicon glyphicon-flag"></span> Pending-->
+                   <!--</md-button>-->
+                <!--</span>-->
             </div>
-            <div ng-class="{activeshadow: activeSegment === $index}">
-                <div class="bottom-margin" ng-click="activate($index)">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-xs-12 bottom-margin">
-                                    <div ng-show="segmentState.completed" class="segment-finished-target frame" ng-style="internalHeightStyle" ng-click="reopen($index)">
-                                        <p>{{segment.source}}</p>
-                                    </div>
-                                    <div ng-hide="segmentState.completed" height-watcher class="content-card frame">
-                                        <div class="source">
-                                          <source-area source-sentence="segment.sourceDOM.textContent"></source-area>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+              <div class="col-xs-6 pull-right translation-buttons">
+                <span>retrieving translations<i class="ion-loading-c"></i></span>
+                <span
+                  ng-repeat="resource in translationResources"
+                >
+                  <md-button ng-click="shared.setText(resource.target)">{{resource.provider}}</md-button>
+                </span>
+              </div>
+          </div>
+          <!-- the source and target rows -->
+          <div ng-class="{activeshadow: activeSegment === $index}">
+            <div class="bottom-margin" ng-click="activate($index)">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-xs-12 bottom-margin">
+                      <div ng-show="segmentState.completed" class="segment-finished-target frame" ng-style="internalHeightStyle" ng-click="reopen($index)">
+                        <p>{{segment.source}}</p>
+                      </div>
+                      <div ng-hide="segmentState.completed" class="content-card frame">
+                        <div class="source">
+                          <source-area source-sentence="segment.sourceDOM.textContent"></source-area>
                         </div>
-
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="bottom-margin">
-                                    <static-target text="{{segment.target}}"></static-target>
-                                </div>
-                            </div>
-                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="bottom-margin">
+                      <static-target text="{{segment.target}}"></static-target>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
     </div>
 
     <!-- TODO: refactor this into a watch function -->
     <!--<div ng-show="checkTranslationCompleted()" id="footmsg">-->
-        <!--<h2>Translation Job completed!</h2>-->
+    <!--<h2>Translation Job completed!</h2>-->
     <!--</div>-->
 
     <!--
@@ -81,6 +94,6 @@
         </div>
     </div> -->
 
-</div>
-  </md-content>
+  </div>
+</md-content>
 

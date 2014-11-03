@@ -4,7 +4,7 @@ describe("hello-protractor", function () {
   describe("index", function () {
     it("should display the correct title", function () {
       ptor.get('/#');
-      expect(ptor.getTitle()).toBe("PEARL");
+      expect(ptor.getTitle()).toBe("HandyCAT");
     });
   });
 

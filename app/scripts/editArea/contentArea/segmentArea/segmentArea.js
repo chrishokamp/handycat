@@ -15,7 +15,21 @@ angular.module('controllers')
     // this gets reset in the template
     $scope.id = {};
 
+
     // WORKING
+    // create buttons for the user's translation resources -- we know what resources they have from $scope.currentUser
+    // buttons appear when the translation is ready, onClick the value gets put into the editor or translation component
+    // response API: {provider: <provider name>, target: <target text>}
+    // databind the insertText event in the editor directive
+    $scope.translationResources = [
+      {'provider': 'HandyCAT', 'target': 'test translation'},
+      {'provider': 'HandyCAT', 'target': 'test translation'}
+    ];
+    // this object holds the functions that children can override
+    $scope.shared = {
+      setText: function() {$log.log('segmentArea setText fired');}
+    }
+
     // when the translation promise resolves, add the result to the translation options, which are also rendered to the user
     // a HandyCAT resource obj has name + url -- {'name': 'google-translate', url: '/users/:userId/tm/'}
     // TODO: the url field shouldn't actually be necessary - the server looks up resources by name
@@ -24,10 +38,13 @@ angular.module('controllers')
     $scope.queryResource = function(query, resourceObj) {
       var queryObj = { userId: $scope.currentUser._id, sourceLang: 'en-US', targetLang: 'fr-FR', query: query};
 
+      // this is the general-purpose interface to translation components and providers
       TranslationMemory.get(queryObj, function(tmResponse) {
         $log.log('SegmentControl: Translation Memory responded');
         // TODO: ensure that the TM objects conform to the HandyCAT provenance specification
-        $scope.resourceResponses.push(tmResponse);
+        // response API: {provider: <provider name>, target: <target text>}
+        $scope.translationResources.push(tmResponse);
+
 
       });
     }

@@ -577,6 +577,7 @@ module.exports = function (grunt) {
 //  grunt.registerTask('test', ['connect:testserver','karma:unit','karma:midway', 'karma:e2e']);
   grunt.registerTask('test:unit', ['connect:testserver', 'karma:unit']);
 //  grunt.registerTask('test:midway', ['connect:test','karma:midway']);
+//  Working - switch to protractor all the way
 //  grunt.registerTask('test:e2e', ['connect:testserver', 'karma:e2e']);
 
   //keeping these around for legacy use

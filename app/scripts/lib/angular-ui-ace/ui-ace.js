@@ -72,6 +72,10 @@ angular.module('ui.ace', []).constant('uiAceConfig', {}).directive('uiAce', [
       restrict: 'EA',
       require: '?ngModel',
       link: function (scope, elm, attrs, ngModel) {
+        console.log('Chris: ui-ace');
+        //console.log(scope);
+        console.log(scope.insertText);
+        console.log(scope.$parent.insertText);
         /**
          * Corresponds the uiAceConfig ACE configuration.
          * @type object
