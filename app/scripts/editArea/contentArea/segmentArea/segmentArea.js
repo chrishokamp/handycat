@@ -16,7 +16,11 @@ angular.module('controllers')
     $scope.id = {};
     // this object holds the functions and properties that children can freely read and/or override
     $scope.shared = {
-      setText: function() {$log.log('segmentArea setText fired');}
+      setText: function() {$log.log('segmentArea setText fired');},
+      sourceTranslations: function() {
+        // when this is called from a child controller, get all of the translations for this segment
+        $scope.testQuery($scope.segment.source);
+      }
     }
 
 
@@ -25,11 +29,16 @@ angular.module('controllers')
     // buttons appear when the translation is ready, onClick the value gets put into the editor or translation component
     // response API: {provider: <provider name>, target: <target text>}
     // databind the insertText event in the editor directive
+
+    // this obj holds the result of querying the user's various translation resources
     $scope.translationResources = [
-      {'provider': 'HandyCAT', 'target': 'test translation'}
+      //{'provider': 'HandyCAT', 'target': 'test translation'}
     ];
 
+    
+
     $scope.testQuery = function(sourceQuery) {
+      $scope.translationsPending = true;
       var transProm = $http({
         url: 'http://localhost:5001/translate/google/de',
         method: "GET",
@@ -40,8 +49,10 @@ angular.module('controllers')
           $log.log('promise resolved:');
           $log.log(res);
           $scope.translationResources.push({'provider': 'HandyCAT', 'target': res.data.target})
+          $scope.translationsPending = false;
         }, function (err) {
           $log.log('Error retrieving translation');
+          $scope.translationsPending = false;
         }
       )
     }

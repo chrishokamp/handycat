@@ -40,7 +40,9 @@
                 <!--</span>-->
             </div>
               <div class="col-xs-6 pull-right translation-buttons">
-                <span>retrieving translations<i class="ion-loading-c"></i></span>
+
+                <md-button ng-click="shared.sourceTranslations(segment.source)"><i class="ion-ios7-bolt"></i></md-button>
+                <span ng-show="translationsPending">retrieving translations<i class="ion-loading-c"></i></span>
                 <span
                   ng-repeat="resource in translationResources"
                 >
