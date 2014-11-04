@@ -90,7 +90,6 @@ describe("Unit: Testing the SegmentAreaCtrl", function() {
       scope.shared.setText();
       expect(childScope.testText).toEqual('test');
     })
-
   });
 
 

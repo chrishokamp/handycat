@@ -1,20 +1,12 @@
 angular.module('controllers')
-.controller('CreateProjectCtrl', ['XliffParser', 'Projects', '$state', '$log', '$scope', '$http', function(XliffParser, Projects, $state, $log, $scope, $http) {
+.controller('CreateProjectCtrl', ['XliffParser', 'Projects', '$state', '$log', '$scope', '$http', '$mdDialog', function(XliffParser, Projects, $state, $log, $scope, $http, $mdDialog) {
 
     $scope.title = 'default-project';
 
-    $scope.close = function() {
-      $scope.$close(true);
-    };
-
     // make sure the modal closes if we change states
     $scope.$on('$stateChangeStart', function(ev, to, toParams, from, fromParams) {
-      console.log('logging to:');
-      console.log(to.name);
       if (to.name !== 'projects.create') {
-        // Note: this requires the custom ui-bootstrap version (0.12.0)
-        // only $dismiss works currently, not $close
-        $scope.$dismiss();
+        $scope.closeDialog();
       }
     });
 
@@ -33,6 +25,10 @@ angular.module('controllers')
       } else {
         console.error('createProject: no pendingDocument on $scope')
       }
+    };
+
+    $scope.closeDialog = function() {
+      $mdDialog.hide();
     };
 
     // user specifies the URL of an XLIFF file, we grab it, parse it, then save it on the server

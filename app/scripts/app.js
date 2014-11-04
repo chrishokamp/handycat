@@ -31,9 +31,9 @@ var App = window.App = angular.module('editorComponentsApp',
       url: '/list',
       templateUrl: '/views/partials/projects/project-list.html'
     })
-    .state('projects.create', {
-      url: '/create',
-//					url: '/single-event/:id',
+    // TODO: factor out the common logic between projects.create and projects.edit
+    .state('projects.edit', {
+      url: '/edit',
 					onEnter: ['$stateParams', '$state', '$modal', '$log', function($stateParams, $state, $modal, $log) {
             // todo: close on state change
 						$modal.open({
@@ -48,20 +48,24 @@ var App = window.App = angular.module('editorComponentsApp',
 					}]
 				})
     // edit the project information
-    .state('projects.edit', {
-      url: '/edit',
-//					url: '/single-event/:id',
-      onEnter: ['$stateParams', '$state', '$modal', '$log', function($stateParams, $state, $modal, $log) {
-        // todo: make sure that this state gets resolved with the clicked project's details
-        $modal.open({
+    .state('projects.create', {
+      url: '/create',
+        onEnter: ['$stateParams', '$state', '$log', '$mdDialog', function($stateParams, $state, $log, $mdDialog) {
+          function afterShowAnimation() {
+            $log.log('afterShowAnimation fired');
+          }
+        $mdDialog.show({
           templateUrl: '/views/partials/projects/create.html',
           controller: 'CreateProjectCtrl',
-          backdrop: true,
-          keyboard: true
+          onComplete: afterShowAnimation
         })
-          .result.then(function(result) {
+        .then(function(result) {
+            $log.log('Inside $mdDialog promise resolution');
             $state.go('projects.list', { reload: false });
-          });
+        }, function(err) {
+            $log.log('Error: $mdDialog promise resolution error callback');
+            $state.go('projects.list', { reload: false });
+        });
       }]
     })
     .state('projects.translate', {

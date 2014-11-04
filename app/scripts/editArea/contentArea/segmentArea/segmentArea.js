@@ -29,13 +29,11 @@ angular.module('controllers')
     // buttons appear when the translation is ready, onClick the value gets put into the editor or translation component
     // response API: {provider: <provider name>, target: <target text>}
     // databind the insertText event in the editor directive
-
     // this obj holds the result of querying the user's various translation resources
     $scope.translationResources = [
       //{'provider': 'HandyCAT', 'target': 'test translation'}
     ];
 
-    
 
     $scope.testQuery = function(sourceQuery) {
       $scope.translationsPending = true;
