@@ -3,15 +3,16 @@
 
 // partials
 @import "partials/projects";
+@import "partials/translate";
 @import "partials/hud-toolbar";
 @import "partials/widget-area";
 @import "partials/segment";
 @import "partials/nav-toolbar";
 
 * {
-//  -webkit-border-radius: 0 !important;
-//  -moz-border-radius: 0 !important;
-//  border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
 }
 
 body {
@@ -408,41 +409,41 @@ ul.nav-tabs > li {
 
 /* animations */
 /* as the element is hidden */
-.slide-in.ng-hide-add,
-.slide-in.ng-hide-remove {
-  -webkit-transition:0.5s linear all;
-  transition:0.5s linear all;
-
-  /* remember to add this */
-  display:block!important;
-  opacity:1;
-
-}
-/* as the element is shown */
-.slide-in.ng-hide {
-  opacity:0;
-}
-
-
-/* where is this used? */
-.sample-show-hide.ng-hide-add, .sample-show-hide.ng-hide-remove {
-  -webkit-transition:all linear 0.5s;
-  -moz-transition:all linear 0.5s;
-  -o-transition:all linear 0.5s;
-  transition:all linear 0.5s;
-  display:block!important;
-}
-
-.sample-show-hide.ng-hide-add.ng-hide-add-active,
-.sample-show-hide.ng-hide-remove {
-  opacity:0;
-}
-
-.sample-show-hide.ng-hide-add,
-.sample-show-hide.ng-hide-remove.ng-hide-remove-active {
-  opacity:1;
-}
-
+//.slide-in.ng-hide-add,
+//.slide-in.ng-hide-remove {
+//  -webkit-transition:0.5s linear all;
+//  transition:0.5s linear all;
+//
+//  /* remember to add this */
+//  display:block!important;
+//  opacity:1;
+//
+//}
+///* as the element is shown */
+//.slide-in.ng-hide {
+//  opacity:0;
+//}
+//
+//
+///* where is this used? */
+//.sample-show-hide.ng-hide-add, .sample-show-hide.ng-hide-remove {
+//  -webkit-transition:all linear 0.5s;
+//  -moz-transition:all linear 0.5s;
+//  -o-transition:all linear 0.5s;
+//  transition:all linear 0.5s;
+//  display:block!important;
+//}
+//
+//.sample-show-hide.ng-hide-add.ng-hide-add-active,
+//.sample-show-hide.ng-hide-remove {
+//  opacity:0;
+//}
+//
+//.sample-show-hide.ng-hide-add,
+//.sample-show-hide.ng-hide-remove.ng-hide-remove-active {
+//  opacity:1;
+//}
+//
 @-webkit-keyframes fade-out {
   0%   { opacity: 1; }
   100% { opacity: 0; }

@@ -5,7 +5,8 @@ angular.module('directives')
       projectName: '=',
       projectCreated: '=',
       projectState: '=',
-      projectCreator: '='
+      projectCreator: '=',
+      projectId: '='
     },
     link: function($scope, el, attrs) {
       if (typeof($scope.projectCreated) === 'string') {

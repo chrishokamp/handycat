@@ -1,6 +1,15 @@
-<md-content>
+<section ng-controller="EditAreaCtrl">
 
-  <div ng-init="loadProject()" ng-controller="EditAreaCtrl">
+  <!-- show the loading sheet before the ng-repeat is finished -->
+  <!-- scope.on repeat-finished -->
+  <div ng-show="visible.projectLoading" layout="vertical" layout-align="center center" class="page-loading-overlay">
+    <h4 class="text-info">Project Loading...</h4>
+    <md-progress-linear mode="indeterminate"></md-progress-linear>
+  </div>
+
+  <div ng-init="loadProject()">
+
+    <!-- Working: use the md-angular toolbar component instead -->
     <cat-nav></cat-nav>
 
     <!-- the hud-toolbar goes at the bottom -->
@@ -28,27 +37,27 @@
           <!-- the segment info row -->
           <div class="row segment-muted-text">
             <div class="col-xs-4">Segment Index: {{$index}}
-                <!--<span class="segment-finished" ng-show="segmentState.completed">-->
-                    <!--<md-button>-->
-                      <!--<span class="glyphicon glyphicon-ok"></span> Complete-->
-                    <!--</md-button>-->
-                <!--</span>-->
-                <!--<span class="segment-finished" ng-hide="segmentState.completed">-->
-                   <!--<md-button>-->
-                     <!--<span class="glyphicon glyphicon-flag"></span> Pending-->
-                   <!--</md-button>-->
-                <!--</span>-->
+              <!--<span class="segment-finished" ng-show="segmentState.completed">-->
+              <!--<md-button>-->
+              <!--<span class="glyphicon glyphicon-ok"></span> Complete-->
+              <!--</md-button>-->
+              <!--</span>-->
+              <!--<span class="segment-finished" ng-hide="segmentState.completed">-->
+              <!--<md-button>-->
+              <!--<span class="glyphicon glyphicon-flag"></span> Pending-->
+              <!--</md-button>-->
+              <!--</span>-->
             </div>
-              <div class="col-xs-6 pull-right translation-buttons">
+            <div class="col-xs-6 pull-right translation-buttons">
 
-                <md-button ng-click="shared.sourceTranslations(segment.source)"><i class="ion-ios7-bolt"></i></md-button>
-                <span ng-show="translationsPending">retrieving translations<i class="ion-loading-c"></i></span>
+              <md-button ng-click="shared.sourceTranslations(segment.source)"><i class="ion-ios7-bolt"></i></md-button>
+              <span ng-show="translationsPending">retrieving translations<i class="ion-loading-c"></i></span>
                 <span
                   ng-repeat="resource in translationResources"
-                >
+                  >
                   <md-button ng-click="shared.setText(resource.target)">{{resource.provider}}</md-button>
                 </span>
-              </div>
+            </div>
           </div>
           <!-- the source and target rows -->
           <div ng-class="{activeshadow: activeSegment === $index}">
@@ -97,5 +106,4 @@
     </div> -->
 
   </div>
-</md-content>
-
+</section>

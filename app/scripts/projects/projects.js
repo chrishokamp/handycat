@@ -2,13 +2,6 @@
 // TODO: right now the ProjectCtrl handles both 'Projects' and 'Project'
 angular.module('controllers')
 .controller('ProjectCtrl', ['$scope', 'Projects', 'XliffParser', '$stateParams', '$state', '$log', '$mdSidenav', function($scope, Projects, XliffParser, $stateParams, $state, $log, $mdSidenav) {
-    $scope.toggleLeft = function() {
-      $mdSidenav('left').toggle();
-    };
-    $scope.close = function() {
-      $mdSidenav('left').close();
-    };
-
 
     // Chris: this is called when the project-list template is initialized
     $scope.find = function() {
