@@ -3,15 +3,20 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
-// TODO: working - make the schema for a translation project
 var ProjectSchema = new Schema({
-  title: {
+  name: {
     type: String,
     index: true,
     required: true
   },
   // the xml content of the xliff file
   content: {
+    type: String,
+    default: ''
+  },
+  // the state of the project - TODO: add metadata about the user's position in the  and performance
+  // TODO: the state of the project can be determined programatically from the XLIFF's contents, this is the correct way to check
+  state: {
     type: String,
     default: '',
     trim: true
@@ -55,8 +60,8 @@ ProjectSchema.statics = {
 /**
  * Methods
  */
-ProjectSchema.statics.findByTitle = function (title, callback) {
-  return this.find({ title: title }, callback);
+ProjectSchema.statics.findByTitle = function (name, callback) {
+  return this.find({ name: name }, callback);
 }
 
 ProjectSchema.methods.expressiveQuery = function (creator, date, callback) {
@@ -69,7 +74,7 @@ ProjectSchema.methods.expressiveQuery = function (creator, date, callback) {
 
 function slugGenerator (options){
   options = options || {};
-  var key = options.key || 'title';
+  var key = options.key || 'name';
 
   return function slugGenerator(schema){
     schema.path(key).set(function(v){

@@ -1,0 +1,41 @@
+<div layout="vertical">
+  <md-divider></md-divider>
+  <div layout="horizontal">
+    <div layout="horizontal" flex layout-padding>
+      <h5 class="text-capitalize text-muted">
+        Project name:&nbsp
+      </h5>
+      <h5>{{projectName}}</h5>
+    </div>
+  </div>
+  <md-divider></md-divider>
+  <div layout="vertical" layout-padding>
+    <div layout="horizontal">
+      <div flex layout="vertical">
+        <div><span class="text-muted">Owner:&nbsp</span><span flex>{{projectCreator}}</span></div>
+        <div layout="horizontal">
+          <span flex class="text-muted">Created on {{projectCreated | date: 'fullDate'}}</span>
+        </div>
+      </div>
+      <div>
+        <md-button
+          ng-show='projectState === "completed"'
+          class="attract"
+          >
+          <i class="ion-ios7-checkmark-outline"></i>
+        </md-button>
+        <md-button
+          ng-show='projectState === "pending"'
+          class="takeAction"
+          >
+          <i class="ion-edit"></i>
+        </md-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div layout="horizontal">
+  <md-button flex>View</md-button>
+  <md-button flex>Translate</md-button>
+
+</div>

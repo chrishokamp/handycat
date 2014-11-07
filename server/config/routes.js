@@ -14,6 +14,7 @@ module.exports = function(app) {
   app.delete('/auth/users/:userId', auth.ensureAuthenticated, users.destroy);
 
   // TAUS data API routes
+  // Working - use named resources to map a user's available resources to their URLs
   // note: a new user needs to register with TAUS for this to work
   // Direct users here to register for an account: http://www.tausdata.org/index.php/component/users/?view=registration
   // sample call to the TAUS segment API
@@ -76,7 +77,6 @@ module.exports = function(app) {
 
     // express will look for this in the path under the 'views' property (see web.js)
     res.render('index.html');
-//    res.render('index.html');
   });
 
 }

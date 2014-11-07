@@ -83,6 +83,7 @@ module.exports = function() {
         'app/scripts/editArea/contentArea/segmentArea/sourceArea/sourceArea.js',
         'app/scripts/editArea/contentArea/segmentArea/targetArea/AceCtrl.js',
         'app/scripts/directives/specialChars.js',
+        'app/scripts/projects/menuItem.js',
 
         'app/scripts/tokenRow/tokenRow.js',
         'app/scripts/tokenRow/draggable.js',

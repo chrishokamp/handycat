@@ -23,7 +23,7 @@ var app = express();
 // Connect to database
 var db = require('./server/db/mongo').db;
 
-// Bootstrap models - Chris - let's you avoid adding each module explicitly
+// Bootstrap models - Chris - let's you avoid adding each model explicitly
 var modelsPath = path.join(__dirname, '/server/models');
 fs.readdirSync(modelsPath).forEach(function (file) {
   require(modelsPath + '/' + file);

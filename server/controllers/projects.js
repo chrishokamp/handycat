@@ -22,7 +22,8 @@ exports.create = function(req, res) {
 
   project.save(function(err) {
     if (err) {
-      res.json(500, err);
+      console.log(err);
+      res.status(500).json(err);
     } else {
       res.json(project);
     }
@@ -34,7 +35,7 @@ exports.create = function(req, res) {
  */
 exports.update = function(req, res) {
   var project = req.project;
-  project.title = req.body.title;
+  project.name = req.body.name;
   project.content = req.body.content;
   project.save(function(err) {
     if (err) {
