@@ -55,7 +55,6 @@ app.set('view engine', 'html');
 // TODO: logging isn't working currently
 //app.use(logger('dev'));
 
-// TODO: remove this
 app.use(cors());
 
 // bodyParser should be above methodOverride

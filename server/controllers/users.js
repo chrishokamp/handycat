@@ -85,6 +85,48 @@ exports.user = function(req, res, next, id) {
   });
 };
 
+/**
+ * Update a user
+ */
+exports.update = function(req, res) {
+  // TODO - where does req.user come from? - is it provided by $resource?
+  var user = req.user;
+  var id = user._id;
+//  delete user._doc._id;
+
+  var tausUsername = req.body.tausUsername;
+  var tausPassword = req.body.tausPassword;
+//  user.save(function(err) {
+  User.update({ '_id': id }, {$set: { tausUsername: tausUsername, tausPassword: tausPassword}}, function(err, doc) {
+    if (err) {
+      console.log('Error in user update');
+      console.log(err)
+      res.json(500, err);
+    } else {
+      user.tausUsername = req.body.tausUsername;
+      user.tausPassword = req.body.tausPassword;
+      res.json(doc);
+    }
+  });
+};
+
+/**
+ * Delete a user
+ */
+exports.destroy = function(req, res) {
+  var user = req.user;
+
+  user.remove(function(err) {
+    if (err) {
+      res.json(500, err);
+    } else {
+      res.json(user);
+    }
+  });
+};
+
+// API TO TRANSLATION RESOURCES
+
 // (1) User queries TM
 // (2) we get responses from all of this user's resources
 // (3) we order those responses by some criteria
@@ -94,6 +136,8 @@ exports.user = function(req, res, next, id) {
 // put all of this user's source-->target resources onto the req
 //exports.addUserResources
 
+// a user's tm is stored in their mongo database, and it grows over time
+// each user has one or more graph tms -- see resource.js for the implementation
 
 // WORKING - generalize resource setup so that different resources can use the same interface
 // A user possesses translation resources that map from source --> target
@@ -198,50 +242,9 @@ exports.queryTM = function (req, res, next) {
 exports.tmFilter = function(req, res) {
   console.log('users.tmFilter fired');
   if (res) {
-    res.send(200, "User's TAUS data was updated");
+    res.send(400, "NOT IMPLEMENTED");
   } else {
     res.send(404, 'USER_NOT_FOUND')
   }
 }
 
-
-
-/**
- * Update a user
- */
-exports.update = function(req, res) {
-  // TODO - where does req.user come from? - is it provided by $resource?
-  var user = req.user;
-  var id = user._id;
-//  delete user._doc._id;
-
-  var tausUsername = req.body.tausUsername;
-  var tausPassword = req.body.tausPassword;
-//  user.save(function(err) {
-  User.update({ '_id': id }, {$set: { tausUsername: tausUsername, tausPassword: tausPassword}}, function(err, doc) {
-    if (err) {
-      console.log('Error in user update');
-      console.log(err)
-      res.json(500, err);
-    } else {
-      user.tausUsername = req.body.tausUsername;
-      user.tausPassword = req.body.tausPassword;
-      res.json(doc);
-    }
-  });
-};
-
-/**
- * Delete a project
- */
-exports.destroy = function(req, res) {
-  var project = req.project;
-
-  project.remove(function(err) {
-    if (err) {
-      res.json(500, err);
-    } else {
-      res.json(project);
-    }
-  });
-};

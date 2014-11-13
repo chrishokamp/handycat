@@ -4,8 +4,12 @@ var path = require('path'),
     auth = require('../config/auth');
 
 module.exports = function(app) {
+
   // User Routes
   var users = require('../controllers/users');
+
+  // - automatically calls a function when the userId parameter is present
+  app.param('userId', users.user);
 
   app.post('/auth/users', users.create);
   app.get('/auth/users/:userId', users.show);
@@ -13,21 +17,19 @@ module.exports = function(app) {
   app.put('/auth/users/:userId', auth.ensureAuthenticated, users.update);
   app.delete('/auth/users/:userId', auth.ensureAuthenticated, users.destroy);
 
-  // TAUS data API routes
+  // TAUS data API routes - TODO - extend this into a general interface to translation memories - move taus-specific code outside of this module
   // Working - use named resources to map a user's available resources to their URLs
-  // note: a new user needs to register with TAUS for this to work
+  // note: a new user needs to register with TAUS - or the specific translation service for this to work
   // Direct users here to register for an account: http://www.tausdata.org/index.php/component/users/?view=registration
   // sample call to the TAUS segment API
+  // TODO - implement errors to let users know which translation services they can access
   // https://www.tausdata.org/api/segment.json?source_lang=en-US&target_lang=fr-FR&q=data+center
   app.post('/users/tausdata', users.setTausData);
   // call the taus data API with source_lang=en-US, target_lang=fr-FR, q=<user query>
   app.get('/users/tausdata', users.setTausData);
 
-  // TAUS data API routes - TODO - extend this into a general interface to translation memories - move taus-specific code outside of this module
-  // note: a new user needs to register with TAUS for this to work
-  // Direct users here to register for an account: http://www.tausdata.org/index.php/component/users/?view=registration
+  // TODO: this route should add an entry to the TM
   app.post('/users/tm', auth.ensureAuthenticated, users.setTausData);
-  // TODO - implement errors in case user doesn't have TAUS credentials
 //  app.get('/users/tm', auth.ensureAuthenticated, users.queryTM);
 
   // Working - implement /users/:userId/tm - this user's TM resources
@@ -36,13 +38,18 @@ module.exports = function(app) {
   // Check if username is available
   app.get('/auth/check_username/:username', users.exists);
 
-  // this makes req.project available (via a  side-effect)
-  // checking - i don't actually know what this does
-  // - automatically calls a function when this parameter is present
-  app.param('userId', users.user);
+  // Resource routes
+  // app.get('/translate', resource.checkCache, resource.translate);
+  // when we hit this route, first check the cache to see if we already know the translation
+  // the cache is a graph tm instance
+  // if we do retrieve a translation, add it to the cache
+
+  // TODO: make sure that we are getting the cache item from the SAME RESOURCE
+  // the cache needs to store the resource by name, because we need to query on that
 
   // Session Routes
   var session = require('../controllers/session');
+
   app.get('/auth/session', auth.ensureAuthenticated, session.session);
   app.post('/auth/session', session.login);
   app.delete('/auth/session', session.logout);
@@ -50,7 +57,9 @@ module.exports = function(app) {
 
   // Translation Project Routes - these routes let users interact with their projects
   var projects = require('../controllers/projects');
-  // Chris - ensureAuthenticated middleware controls access to the route
+
+  // this makes req.project available (via a  side-effect)
+  app.param('projectId', projects.project);
 
   app.get('/api/projects',auth.ensureAuthenticated, projects.all);
   app.post('/api/projects', auth.ensureAuthenticated, projects.create);
@@ -58,13 +67,8 @@ module.exports = function(app) {
   app.put('/api/projects/:projectId', auth.ensureAuthenticated, auth.project.hasAuthorization, projects.update);
   app.delete('/api/projects/:projectId', auth.ensureAuthenticated, auth.project.hasAuthorization, projects.destroy);
 
-  //Setting up the projectId param
-  // this makes req.project available (via a  side-effect)
-  app.param('projectId', projects.project);
-
-
-  // Angular Routes -- chris - how to use these?
-  // Note: in the demo app, the structure is /views/partials/..., so here we are appending to the /views param
+  // Angular Routes
+  // here we are appending to the /views param because web.js sets it up that way
   app.get('/partials/*', function(req, res) {
     var requestedView = path.join('./', req.url);
     res.render(requestedView);
