@@ -88,8 +88,8 @@ params.extend(app);
 
 // TODO: move this to routes, call the TM inside the TM middleware
 app.use('/users/:userId/tm', function(req, res, next) {
-  // invoked for any request starting with /users
-  console.log('Inside TM middleware')
+  // invoked for any request starting with /users/:userId/tm
+  console.log('Inside web.js - test TM middleware')
   next();
 });
 

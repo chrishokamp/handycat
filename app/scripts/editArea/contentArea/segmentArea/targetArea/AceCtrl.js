@@ -1,8 +1,19 @@
 
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'tokenizer', 'editSession', '$q', '$filter', '$http',
+  ['$scope', 'tokenizer', 'editSession', '$q', '$filter', '$http', 'autocompleters',
    '$timeout', '$log',
-   function($scope, tokenizer, editSession, $q, $filter, $http, $timeout, $log) {
+   function($scope, tokenizer, editSession, $q, $filter, $http, autocompleters, $timeout, $log) {
+
+   // working - utils for autocompletion
+     // TODO: use the autocompleters service to resolve the autocompleters for the user
+     // GET /autocompleters --
+     // params that let us know what autocompleters the user has:
+     // source lang
+     // target lang
+     // domain
+     // TODO: there should be a selection dialog where the user can choose which autocompleters they want to use
+     // a user's autocompleters grow over time
+     // as they select segments, we log: { source: source-text, target_prefix: target-text, completion: <selected unit from autocomplete> }
 
    $scope.testCallback = function($item, $model, $label) {
      $log.log('Test callback called with: ');
@@ -27,11 +38,12 @@ angular.module('controllers').controller('AceCtrl',
   var util = ace.require('./autocomplete/util')
   var langTools = ace.require("ace/ext/language_tools");
 
+  // end utils for autocompletion
+
   // used by the logger -- TODO: remove this
   var previousValue = '';
 
   // BEGIN AceEditor API
-
   var selectRange = function(aRange) {
     $scope.editor.session.selection.setRange(aRange);
     $scope.editor.focus();
@@ -100,13 +112,6 @@ angular.module('controllers').controller('AceCtrl',
     // refocus the AceEditor
     $scope.editor.focus();
   };
-
-
-
-  // let the $parent controller see insertText, so that we can hit it from sibling controllers
-//  $scope.$parent.insertText = $scope.insertText;
-  // let the parent see replaceSelection
-//  $scope.$parent.replaceSelection = $scope.replaceSelection;
 
   // get the range of the current token under the cursor
   var getCurrentTokenAndRange = function() {
@@ -232,9 +237,24 @@ angular.module('controllers').controller('AceCtrl',
       {
         enableBasicAutocompletion: true,
         enableLiveAutocompletion: true,
-        enable: true,
+        enable: true
       });
-// This creates a custom autocomplete function for Ace! - fuckin cool
+
+    // automatically show the autocomplete - hack from stackoverflow
+    editor.commands.on("afterExec", function(e){
+      if (e.command.name == "insertstring"&&/^[\w.]$/.test(e.args)) {
+        editor.execCommand("startAutocomplete")
+      }
+    })
+
+
+    // Add the users autocompleters
+    autocompleters.autocompleters.forEach(
+      function(autocompleteFunc) {
+        langTools.addCompleter(autocompleteFunc);
+      }
+    )
+
 //    langTools.addCompleter(glossaryCompleter);
     //editor.getSession().setUseWrapMode(true);
 

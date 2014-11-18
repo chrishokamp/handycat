@@ -11,6 +11,8 @@ module.exports = function(app) {
   // - automatically calls a function when the userId parameter is present
   app.param('userId', users.user);
 
+  // Check if username is available
+  app.get('/auth/check_username/:username', users.exists);
   app.post('/auth/users', users.create);
   app.get('/auth/users/:userId', users.show);
   // todo: this lets any logged-in user update another user's taus TM data
@@ -26,23 +28,27 @@ module.exports = function(app) {
   // https://www.tausdata.org/api/segment.json?source_lang=en-US&target_lang=fr-FR&q=data+center
   app.post('/users/tausdata', users.setTausData);
   // call the taus data API with source_lang=en-US, target_lang=fr-FR, q=<user query>
-  app.get('/users/tausdata', users.setTausData);
+  //app.get('/users/tausdata', users.setTausData);
 
-  // TODO: this route should add an entry to the TM
+  // TODO: this route should actually add add an entry to the TM, not set the user's taus data
   app.post('/users/tm', auth.ensureAuthenticated, users.setTausData);
 //  app.get('/users/tm', auth.ensureAuthenticated, users.queryTM);
 
   // Working - implement /users/:userId/tm - this user's TM resources
-  app.get('/users/:userId/tm', auth.ensureAuthenticated, users.queryTM, users.tmFilter)
-
-  // Check if username is available
-  app.get('/auth/check_username/:username', users.exists);
+  // if there isn't an entry in the user's tm, ask the global TM
+  app.get('/users/:userId/tm', auth.ensureAuthenticated, users.checkTMCache, users.queryTM);
+  // TODO - add a 'global' user whose resources are accessible to every other user (i.e. global.checkTMCache)
 
   // Resource routes
   // app.get('/translate', resource.checkCache, resource.translate);
+  // for each resource that the user can access, check to see if the
   // when we hit this route, first check the cache to see if we already know the translation
   // the cache is a graph tm instance
   // if we do retrieve a translation, add it to the cache
+
+  // adding resources -- because different resources have completely different APIs and signatures
+  // we need to recognize resources by name, and call different functions based on the name of the resource
+  // the resource management component is complex and standalone enough to be another app
 
   // TODO: make sure that we are getting the cache item from the SAME RESOURCE
   // the cache needs to store the resource by name, because we need to query on that

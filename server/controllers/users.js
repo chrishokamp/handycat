@@ -75,8 +75,6 @@ exports.exists = function (req, res, next) {
 exports.user = function(req, res, next, id) {
   console.log('user controller - id: ' + id);
   User.load(id, function(err, user) {
-    console.log('User Loaded');
-    console.log(user)
     if (err) return next(err);
     if (!user) return next(new Error('Failed to load user ' + id));
     // testing - put the user onto the req for downstream use
@@ -167,11 +165,20 @@ exports.setTausData = function (req, res, next) {
   });
 }
 
+// check the user's translation memory cache to see if we've translated this segment before
+exports.checkTMCache = function(req, res, next) {
+  console.log('users.checkTMCache');
+// mock data
+  var sampleRes = {"provider":{"name":"Lingua Custodia","id":10635},"owner":{"name":"ECB","id":10975},"source":"Based on the reference amount of 4 million euro for the period 2002-2005 and 1 million euro for 2006, the annual appropriations authorised under the Pericles programme, were Euros 1.2 million for 2002; Euros 0.9 million for 2003;","industry":{"name":"Financials","id":12},"source_lang":{"name":"English (United States)","id":"en-us"},"target":"Sur la base du montant de référence de 4 millions d ' euros pour la période 2002-2005 et d ' un million d ' euros pour 2006, les crédits annuels autorisés dans le cadre du programme Pericles étaient de 1,2 millions d ' euros pour 2002, 0,9 million d ' euros pour 2003, 0,9 million d ' euros pour 2004, 1 million d ' euros pour 2005 et 1 million d ' euros pour 2006.","content_type":{"name":"Financial Documentation","id":10},"product":{"name":"Default","id":12512},"id":"en-us_fr-fr_11128729","target_lang":{"name":"French (France)","id":"fr-fr"}}
+  var userId = req.params.userId;
+  res.json(200, sampleRes);
+  //next();
+}
+
 var getJSON = require('../getJSON').getJSON;
 exports.queryTM = function (req, res, next) {
-  console.log('inside queryTM');
+  //console.log('inside queryTM');
 
-  // Working - the user should already be on the req
   var userId = req.params.userId;
 
   // see using express with HTTP basic Auth
@@ -238,7 +245,7 @@ exports.queryTM = function (req, res, next) {
 
 }
 
-// functions to filter the TM results
+// functions to filter, rank, sort the TM results
 exports.tmFilter = function(req, res) {
   console.log('users.tmFilter fired');
   if (res) {

@@ -1,6 +1,47 @@
 angular.module('services')
-.factory('autocompleters', ['$log', function($log) {
+.factory('autocompleters', ['$http', '$log', function($http, $log) {
 
+    // Working:
+    // the server returns base URLs to endpoints that implement our autocomplete API
+    // foreach url returned by the server, we init a new autocompleter, and push it onto this.autocompleters
+
+    var testUrl = 'http://localhost:8000/';
+    var testSource = 'delicious sandwich';
+
+    var autocompleteManager = {
+      autocompleters: []
+    }
+
+    // TODO: constrain completions by source sentence (and source language!)
+    // TODO: each segment should init an autocomplete function which returns an ace autocomplete function where the server call is correctly parameterized
+    var testAutocomplete = {
+      getCompletions: function(editor, session, pos, prefix, callback) {
+        if (prefix.length === 0) {
+          callback(null, []);
+          return
+        }
+        $http.get(testUrl,
+          {
+            params: {
+              prefix: prefix,
+              sourceSegment: testSource
+            }
+          }
+        )
+          .success(
+          function (completions) {
+            callback(null, completions.map(function (ea) {
+              $log.log("inside autocomplete callback, item from completer is: ");
+              $log.log(ea);
+              return {name: ea.completion, value: ea.completion, score: 1, meta: "test autocompleter"}
+            }));
+          })
+      }
+    }
+
+    autocompleteManager.autocompleters.push(testAutocomplete);
+
+    // old code
     var tmCompleter = {
       getCompletions: function(editor, session, pos, prefix, callback) {
         if (prefix.length === 0) { callback(null, []); return }
@@ -18,7 +59,7 @@ angular.module('services')
       }
     };
 
-
+    // old code
     var glossaryCompleter = {
       getCompletions: function(editor, session, pos, prefix, callback) {
         if (prefix.length === 0) { callback(null, []); return }
@@ -49,4 +90,49 @@ angular.module('services')
 //              })
 //          }
 //      }
+
+    return autocompleteManager;
 }]);
+
+
+
+    // COPIED TEXT
+// This creates a custom autocomplete function for Ace! - fuckin cool
+//    var keyWordCompleter = {
+//    getCompletions: function(editor, session, pos, prefix, callback) {
+//        var state = editor.session.getState(pos.row);
+//        var completions = session.$mode.getCompletions(state, session, pos, prefix);
+//        callback(null, completions);
+//    }
+//};
+
+//var snippetCompleter = {
+//    getCompletions: function(editor, session, pos, prefix, callback) {
+//        var scope = snippetManager.$getScope(editor);
+//        var snippetMap = snippetManager.snippetMap;
+//        var completions = [];
+//        [scope, "_"].forEach(function(scope) {
+//            var snippets = snippetMap[scope] || [];
+//            for (var i = snippets.length; i--;) {
+//                var s = snippets[i];
+//                var caption = s.name || s.tabTrigger;
+//                if (!caption)
+//                    continue;
+//                completions.push({
+//                    caption: caption,
+//                    snippet: s.content,
+//                    meta: s.tabTrigger && !s.name ? s.tabTrigger + "\u21E5 " : "snippet"
+//                });
+//            }
+//        }, this);
+//        callback(null, completions);
+//    }
+//};
+
+//var completers = [snippetCompleter, textCompleter, keyWordCompleter];
+//exports.addCompleter = function(completer) {
+//    completers.push(completer);
+//};
+
+    // END COPIED TEXT
+

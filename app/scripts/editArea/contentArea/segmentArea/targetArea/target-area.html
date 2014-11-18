@@ -6,11 +6,18 @@
             <p>{{segment.target}}</p>
         </div>
 
-        <!-- the editing area and controls -->
+        <!-- the editing panel and controls -->
         <div ng-show="!segmentState.completed" class="col-xs-12">
             <div class="row" style="position: relative;">
                 <div class="col-xs-12 frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
-                <!--  the side-controls of the target area -->
+
+
+                <!--the translation resource selection component-->
+              <!-- when opened, it animates to cover its container component-->
+                <div class="col-xs-12 frame">SELECT TRANSLATION</div>
+
+
+                <!--  the side-controls of the target panel -->
                 <div ng-show="isActive.active" class="pull-right" style="position: absolute; top: 0px; right: -40px">
                     <div>
                         <div>
