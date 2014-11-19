@@ -28,7 +28,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
     $log.log('Heard repeat-finished');
     // quick hack -- just activate segment 0
     editSession.setSegment(0);
-    // TODO: initialize this from the session metadata on the server
+    // TODO: initialize the session metadata from the session metadata on the server
     $scope.activeSegment = 0;
 
     var segmentId = $stateParams.segmentId;

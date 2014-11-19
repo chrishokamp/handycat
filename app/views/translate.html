@@ -7,13 +7,11 @@
     <md-progress-linear mode="indeterminate"></md-progress-linear>
   </div>
 
+  <!--TODO: the loadProject() function causes a cascade of timeouts in child controllers -- the document object should resolve before this scope loads-->
   <div ng-init="loadProject()">
 
-    <!-- Working: use the md-angular toolbar component instead -->
-    <cat-nav></cat-nav>
 
-    <!-- the hud-toolbar goes at the bottom -->
-    <!-- TODO: encapsulate component css for hud-toolbar - add a second dissapearing toolbar below the main menu -->
+    <!-- TODO: remove the HUD toolbar, put the controls for the toolbar elsewhere -->
     <!--<div class="navbar-fixed-bottom"> <hud-toolbar></hud-toolbar></div>-->
 
     <!-- translation area -->
