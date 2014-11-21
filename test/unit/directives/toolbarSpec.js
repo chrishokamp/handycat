@@ -19,7 +19,7 @@ describe('toolbar directive tests', function () {
 
   var $scope, $rootScope, $compile;
 
-//  beforeEach(module('services'));
+  beforeEach(module('services'));
   beforeEach(module('directives'));
   beforeEach(module('scripts/directives/toolbar.html'));
   // TODO: switch path reference using http when

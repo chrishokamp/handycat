@@ -15,7 +15,7 @@ describe("Unit: Testing the AceCtrl", function() {
       scope.segment = segment;
 
       // now create the controller with mocks for the services
-      ctrl = $controller('AceCtrl', {$scope: scope, Document:{}, tokenizer:{}, Glossary:{}, ruleMap: {}, session: {} });
+      ctrl = $controller('AceCtrl', {$scope: scope, Document:{}, tokenizer:{}, Glossary:{}, ruleMap: {}, session: {}, autocompleters: {autocompleters: []} });
   //    dump(scope);
 
       // TODO: move this to a 'prepareElement() function which is called inside each spec
