@@ -16,9 +16,9 @@
           selector-options="sampleOptions"
           ></translation-selector>
       </div>
+      <!--TODO: add the translation selector component - change css to fit with target area css-->
+      <div class="col-xs-12 frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
     </div>
-    <!--TODO: add the translation selector component - change css to fit with target area css-->
-    <div class="col-xs-12 frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
 
     <!--  the side-controls of the target panel -->
     <div ng-show="isActive.active" class="pull-right" style="position: absolute; top: 0px; right: -40px">

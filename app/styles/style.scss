@@ -24,9 +24,6 @@ body {
   // md 100 weight blue
   background-color: #b3e5fc;
 
-  //  background-color: #F5F8F5;
-  //  background-image:url('../images/ricepaper.png');
-  //background-image:url('../images/broken_noise.png');
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
   font-size: 18px;
 
@@ -41,7 +38,10 @@ body {
 }
 
 .snap-content {
-  background-color: #b3e5fc;
+    background-color: white;
+    background-image:url('../images/ricepaper.png');
+//  background-image:url('../images/broken_noise.png');
+//  background-color: #b3e5fc;
 }
 
 .blue {
