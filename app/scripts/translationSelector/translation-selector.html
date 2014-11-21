@@ -1,0 +1,12 @@
+<div layout="vertical">
+  <div
+    ng-repeat="selectorOption in selectorOptions"
+    layout="vertical"
+    flex
+    layout-padding
+  >
+    <!--the translation item controls showing and hiding its own provenance info-->
+    <translation-item item="selectorOption" on-select="onSelect"></translation-item>
+  </div>
+
+</div>

@@ -7,6 +7,13 @@ angular.module('controllers')
   function($rootScope, $scope, TranslationMemory, Wikipedia, Glossary, $log, ruleMap, copyPunctuation, Session, Logger,
            Projects, XliffParser, $http) {
 
+    $scope.clickTest = function() {
+      $log.log('CLICKITY');
+      $log.log('showTranslations:');
+      $scope.showTranslations = !$scope.showTranslations;
+      $log.log($scope.showTranslations);
+    }
+
     $scope.outputLog = function () {
       $log.log('SEGMENT AREA OUTPUT LOG');
       Logger.exportJSON();

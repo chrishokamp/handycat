@@ -1,42 +1,45 @@
 <div class="col-xs-12" ng-controller="AceCtrl" >
 
-    <div class="row">
-        <!-- the appearance of the segment when the user has indicated that it is complete -->
-        <div ng-show="segmentState.completed" class="col-xs-12 segment-finished-target" ng-click="reopen($index)">
-            <p>{{segment.target}}</p>
-        </div>
-
-        <!-- the editing panel and controls -->
-        <div ng-show="!segmentState.completed" class="col-xs-12">
-            <div class="row" style="position: relative;">
-                <div class="col-xs-12 frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
-
-
-                <!--the translation resource selection component-->
-              <!-- when opened, it animates to cover its container component-->
-                <div class="col-xs-12 frame">SELECT TRANSLATION</div>
-
-
-                <!--  the side-controls of the target panel -->
-                <div ng-show="isActive.active" class="pull-right" style="position: absolute; top: 0px; right: -40px">
-                    <div>
-                        <div>
-                          <md-button ng-click="segmentFinished($index)" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-ok-sign"></span></md-button>
-                        </div>
-                        <div>
-                          <md-button ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-remove"></span></md-button>
-                        </div>
-                        <div>
-                          <md-button ng-click="clearEditor()" tooltip="undo" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-undo"></span></md-button>
-                        </div>
-                        <div>
-                          <md-button ng-click="clearEditor()" tooltip="redo" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-undo"></span></md-button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ng-model="selected" place-after="ace_cursor" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='overwritePrefix($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>
-
+  <div class="row">
+    <!-- the appearance of the segment when the user has indicated that it is complete -->
+    <div ng-show="segmentState.completed" class="col-xs-12 segment-finished-target" ng-click="reopen($index)">
+      <p>{{segment.target}}</p>
     </div>
+
+    <!-- the editing panel and controls -->
+    <div ng-show="!segmentState.completed" class="col-xs-12">
+      <!--the translation resource selection component-->
+      <!-- when opened, it animates to cover its container component-->
+      <div ng-show="showTranslations" class="cssSlideUp cover-all">
+        <translation-selector
+          on-select="clickSomething"
+          selector-options="sampleOptions"
+          ></translation-selector>
+      </div>
+    </div>
+    <!--TODO: add the translation selector component - change css to fit with target area css-->
+    <div class="col-xs-12 frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
+
+    <!--  the side-controls of the target panel -->
+    <div ng-show="isActive.active" class="pull-right" style="position: absolute; top: 0px; right: -40px">
+      <div>
+        <div>
+          <md-button ng-click="segmentFinished($index)" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-ok-sign"></span></md-button>
+        </div>
+        <div>
+          <md-button ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-remove"></span></md-button>
+        </div>
+        <div>
+          <md-button ng-click="clearEditor()" tooltip="undo" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-undo"></span></md-button>
+        </div>
+        <div>
+          <md-button ng-click="clearEditor()" tooltip="redo" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-undo"></span></md-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-model="selected" place-after="ace_cursor" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='overwritePrefix($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>
+
+</div>
 </div>

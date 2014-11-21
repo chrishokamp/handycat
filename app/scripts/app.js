@@ -15,7 +15,8 @@ var App = window.App = angular.module('editorComponentsApp',
         'ui.bootstrap.tooltip',
         'http-auth-interceptor',
         'snap',
-        'ngMaterial'
+        'ngMaterial',
+        //'summaryMenu'
         //'filters',
         //'ngTouch'
       ]
