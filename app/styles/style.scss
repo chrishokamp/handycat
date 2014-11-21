@@ -44,11 +44,23 @@ body {
 //  background-color: #b3e5fc;
 }
 
-.blue {
+.doc-content {
+  max-width: 864px;
+  margin: auto;
+}
+
+.grey {
   background-color: #99AFCC;
 }
-.grey {
+.blue {
   background-color: #73B0FF;
+}
+.orange {
+  background-color: orange;
+}
+
+.green {
+  background-color: green;
 }
 
 #login-wrapper {

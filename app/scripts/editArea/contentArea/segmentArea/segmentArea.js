@@ -7,12 +7,62 @@ angular.module('controllers')
   function($rootScope, $scope, TranslationMemory, Wikipedia, Glossary, $log, ruleMap, copyPunctuation, Session, Logger,
            Projects, XliffParser, $http) {
 
+    // TODO: testing only
+    $scope.sampleOptions = [
+      {'segment': 'Schließen Sie alle laufenden Programme, und starten Sie den Computer neu .',
+        'created': 'August 26, 1984',
+        'quality': 0.95,
+        'provider': 'Google Translate'
+      },
+      {'segment': 'es-zh-test',
+        'created': 'Novemeber 15, 2013',
+        'projectState': 'completed',
+        'quality': 0.2,
+        'projectCreator': 'Chris Hokamp'
+      },
+      {'segment': 'million dollar translation project',
+        'created': 'January 26, 2014',
+        'quality': 0.3,
+        'projectState': 'pending',
+        'projectCreator': 'Chris Hokamp'
+      },
+      {'segment': 'es-zh-test',
+        'created': 'Novemeber 15, 2013',
+        'quality': 0.5,
+        'projectState': 'completed',
+        'projectCreator': 'Chris Hokamp'
+      },
+      {'segment': 'million dollar translation project',
+        'created': 'January 26, 2014',
+        'quality': 0.9,
+        'projectState': 'pending',
+        'projectCreator': 'Chris Hokamp'
+      },
+      {'segment': 'es-zh-test',
+        'created': 'Novemeber 15, 2013',
+        'quality': 0.9,
+        'projectState': 'completed',
+        'projectCreator': 'Chris Hokamp'
+      },
+      {'segment': 'million dollar translation project',
+        'created': 'January 26, 2014',
+        'quality': 0.9,
+        'projectState': 'pending',
+        'projectCreator': 'Chris Hokamp'
+      },
+      {'segment': 'million dollar translation project',
+        'created': 'January 26, 2014',
+        'quality': 0.9,
+        'projectCreator': 'Chris Hokamp'
+      }
+    ];
     $scope.clickTest = function() {
       $log.log('CLICKITY');
       $log.log('showTranslations:');
       $scope.showTranslations = !$scope.showTranslations;
       $log.log($scope.showTranslations);
     }
+    // TODO: End testing only
 
     $scope.outputLog = function () {
       $log.log('SEGMENT AREA OUTPUT LOG');

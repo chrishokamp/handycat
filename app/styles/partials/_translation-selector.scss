@@ -3,15 +3,15 @@ $indigo500: #3F51B5;
 $indigo300: #7986CB;
 
 .cover-all {
+  background-color: lightblue;
   position: absolute;
   top:0;
   height:200px;
   z-index: 1000;
-  background-color: antiquewhite;
-  width: 100%;
+  width: 96%;
   overflow-x: hidden;
   overflow-y: scroll;
-  margin-left: -14px;
+//  margin-left: -10px;
   //  overflow: scroll;
 }
 // Animations
@@ -26,4 +26,22 @@ $indigo300: #7986CB;
 .cssSlideUp.ng-hide {
   height:0;
 }
+
+// todo: move these to the project list partial
+.selector {
+  background-color: $indigo500;
+}
+
+.info-panel {
+  background-color: $indigo900;
+}
+
+.attract {
+  background-color: green;
+}
+
+.takeAction {
+  background-color: orange;
+}
+
 

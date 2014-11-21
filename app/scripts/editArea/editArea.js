@@ -6,7 +6,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
   // TODO: move this to a proper global controller for the edit area
   // global user options (may be accessed or changed from child controllers)
   $scope.visible = {
-    toolbar: true,
+    toolbar: false,
     projectLoading: true
   };
 
