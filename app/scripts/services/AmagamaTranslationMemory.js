@@ -2,7 +2,7 @@
 // TODO- align subsegments to their source token ids - this requires tokenization!
 // TODO: formalize the TM item data model
 
-angular.module('services').factory('TranslationMemory', ['$http', '$timeout', '$log', function( $http, $timeout, $log ) {
+angular.module('services').factory('AmagamaTranslationMemory', ['$http', '$timeout', '$log', function( $http, $timeout, $log ) {
   // An interface to a translation memory on the backend (currently uses the Amagama TM server)
   // Each segment has its own controller, so we don't need to call the callback with an index
 
