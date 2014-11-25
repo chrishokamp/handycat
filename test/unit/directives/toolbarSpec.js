@@ -22,9 +22,16 @@ describe('toolbar directive tests', function () {
   beforeEach(module('services'));
   beforeEach(module('directives'));
   beforeEach(module('scripts/directives/toolbar.html'));
-  // TODO: switch path reference using http when
+  beforeEach(function() {
+    // mock the TranslationMemory service
+    module(function($provide) {
+      $provide.value('TranslationMemory', {});
+    });
+  });
+
   beforeEach(module(function($compileProvider) {
-    // TODO: Working: only necessary when directive relies on ngModel
+
+      // TODO: Working: only necessary when directive relies on ngModel
     $compileProvider.directive('formatter', function () {
       return {
         require: 'ngModel',
