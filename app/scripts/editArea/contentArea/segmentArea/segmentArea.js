@@ -89,6 +89,7 @@ angular.module('controllers')
     // this obj holds the result of querying the user's various translation resources
     $scope.translationResources = [
       //{'provider': 'HandyCAT', 'target': 'test translation'}
+      {'provider': 'HandyCAT', 'target': 'test translation'}
     ];
 
 
@@ -108,8 +109,7 @@ angular.module('controllers')
         }, function (err) {
           $log.log('Error retrieving translation');
           $scope.translationsPending = false;
-        }
-      )
+        })
     }
 
     // when the translation promise resolves, add the result to the translation options, which are also rendered to the user
@@ -126,7 +126,6 @@ angular.module('controllers')
         // TODO: ensure that the TM objects conform to the HandyCAT provenance specification
         // response API: {provider: <provider name>, target: <target text>}
         $scope.translationResources.push(tmResponse);
-
 
       });
     }

@@ -17,3 +17,36 @@ nav {
 //-webkit-user-drag: none;
 //-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 //}
+.menu-item.menu-title {
+color: #888;
+font-size: 26px;
+padding-left: 16px;
+text-align: left;
+text-transform: uppercase;
+}
+
+.menu-item {
+  background: none;
+  border-width: 0;
+  cursor: pointer;
+  display: block;
+  color: #333;
+  font-size: large;
+  line-height: 40px;
+  max-height: 40px;
+  opacity: 1;
+  margin: 0;
+  outline: none;
+  padding: 0px 28px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  width: 100%;
+  z-index: 1;
+  -webkit-transition: 0.2s ease-in-out;
+  -webkit-transition-property: max-height, background-color, opacity;
+  -moz-transition: 0.2s ease-in-out;
+  -moz-transition-property: max-height, background-color, opacity;
+  transition: 0.2s ease-in-out;
+  transition-property: max-height, background-color, opacity;
+}
