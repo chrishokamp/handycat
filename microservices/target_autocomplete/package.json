@@ -1,0 +1,14 @@
+{
+  "name": "target_autocomplete",
+  "version": "0.0.0",
+  "description": "autocomplete service",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine-node"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autocomplete": "0.0.2"
+  }
+}
