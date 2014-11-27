@@ -35,24 +35,17 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
       return xliffPromise;
     },
 
-    // Working - this is just a function -- shouldn't interface with the Document object at all
-    // just parse and return
+    // parse an XLIFF file and return
     parseXML: function(rawText) {
+      // TODO: different code paths for XLIFF 1.2 vs. 2.0 (this is the only way to support both)
 //      Document.init();
     // Working - just return the Document object from this function
-    var Document = {};
-     var deferred = $q.defer();
-
+      var deferred = $q.defer();
       var self = this;
-      $log.log('PARSING STARTED');
-      $log.log(Date.now());
+
+//<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0"
 
       var xml = parser.parseFromString(rawText, "text/xml");
-
-      $log.log('PARSING ENDED');
-      $log.log(Date.now());
-      $log.log('XLIFF DOM');
-      $log.log(xml);
 
       // Parsing error?
       var parserError = xml.querySelector('parsererror');
@@ -70,6 +63,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
         self.parsingError = false;
       }
 
+      var Document = {};
       // Set Document DOM to the parsed result
       Document.DOM = xml;
       // Working - the XLIFF parser returns a Document representation of the XLIFF
@@ -84,6 +78,10 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
       Document.revision = 0;
 
       var file = xml.querySelector("file");
+      var xliffTag = xml.querySelector("xliff");
+
+      $log.log('xliff version: ');
+      $log.log(xliffTag.getAttribute('version'));
 
       // Read the source and target language
       var sourceLang = file.getAttribute('source-language');

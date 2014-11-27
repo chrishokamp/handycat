@@ -92,6 +92,7 @@ describe('XliffParser', function () {
       $timeout.flush();
 
     });
+    
 
     it('should maintain changes', function(done) {
       var parsedObject;
