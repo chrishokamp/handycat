@@ -1,4 +1,6 @@
 ### This is a trie-based autocomplete using the node-autocomplete library
+
+First, run `npm install` from the autocomplete directory to install the dependencies.     
         
 - To run the autocomplete server, do:     
 `node autocomplete.js`       
