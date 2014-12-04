@@ -179,6 +179,7 @@ angular.module('controllers')
     // TODO: call a function on the document API - document API should all be in EditAreaCtrl
     // TODO: this is not the right interface -- completedSegments should not be stored outside of the XLIFF DOM
     // -- big question: should we maintain a javascript document model, or only use the XLIFF DOM
+    // ----> answer: we cannot use the XLIFF dom directly because angular doesn't let us use DOM nodes as models
     $scope.document.completedSegments[segId] = true;
 
     // TODO: the rest of this function should be on the EditAreaCtrl
@@ -199,6 +200,9 @@ angular.module('controllers')
       $log.log('Project updated');
     });
 
+    // update the user's translation resources (update the TM)
+    // what is the data model for a TM object { sourceLang: <sourceLang>, targetLang: <targetLang>, source: <source>, target: <target>, createdBy: <creator>, date: <date> }
+
   };
 
   // Re-opens a finished segment. Undoes what segmentFinished() did
@@ -209,7 +213,7 @@ angular.module('controllers')
     $scope.isActive.active = true;
   };
 
-  // when the changeSegment event fires, each AceCtrl scope responds
+  // when the changeSegment event fires, each SegmentAreaCtrl scope responds
   // TODO: this event overlaps with change-segment-state
   // the change segment event is fired from changeSegment in the editSession service
   // TODO: move this code to EditAreaCtrl
@@ -224,5 +228,4 @@ angular.module('controllers')
       $("body").animate({scrollTop: top - navBarHeight}, "slow");
     }
   });
-
 }]);
