@@ -26,7 +26,7 @@ module.exports = function() {
       // Vendor code
       // exactly the order from index.html
 
-        'app/bower_components/jquery/jquery.js',
+        'app/bower_components/jquery/dist/jquery.js',
         'app/bower_components/angular/angular.js',
         'app/bower_components/angular-aria/angular-aria.js',
         'app/bower_components/angular-ui-router/release/angular-ui-router.js',
@@ -77,7 +77,7 @@ module.exports = function() {
         'app/scripts/directives/index.js',
         'app/scripts/directives/logger.js',
         'app/scripts/directives/endRepeat.js',
-        'app/scripts/directives/targetArea/staticTarget.js',
+        'app/scripts/editArea/contentArea/segmentArea/targetArea/staticTarget.js',
         'app/scripts/directives/toolbar.js',
         'app/scripts/editArea/toolbar/hud-toolbar.js',
         'app/scripts/editArea/contentArea/segmentArea/sourceArea/sourceArea.js',

@@ -1,6 +1,6 @@
 angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal',
-  '$log', 'editSession', 'SegmentOrder', 'loggerUrl', '$rootScope', 'Wikipedia', '$timeout', 'Projects', 'XliffParser', '$stateParams',
-  function($scope, $location, $anchorScroll, $modal, $log, editSession, segmentOrder, loggerUrl, $rootScope, Wikipedia, $timeout,
+  '$log', 'editSession', 'SegmentOrder', '$rootScope', 'Wikipedia', '$timeout', 'Projects', 'XliffParser', '$stateParams',
+  function($scope, $location, $anchorScroll, $modal, $log, editSession, segmentOrder, $rootScope, Wikipedia, $timeout,
            Projects, XliffParser, $stateParams) {
 
   // TODO: move this to a proper global controller for the edit area
@@ -11,7 +11,6 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
   };
 
   $scope.session = editSession;
-  $scope.url = loggerUrl;
 
   // TODO: resolve the projectResource and the parsed document object before this state loads
   // This is the init function that sets up an edit session

@@ -4,9 +4,14 @@ describe("Unit: Testing the AceCtrl", function() {
   // remember: describe() creates a suite, it() creates a spec
   // disable with xdescribe() and xit()
 
+  // issues:
+  // ace requires ui.ace, which is required by the editorComponentsApp module
+  // if we require editorComponentsApp, then we need to mock the call to /auth/session, because authentication gets set up in app.js
+
   beforeEach(function() {
     module('editorComponentsApp');
-    inject(function($controller, $rootScope, $compile, _$timeout_) {
+    inject(function($controller, $rootScope, $compile, _$timeout_, $httpBackend) {
+      $httpBackend.when('GET', '/auth/session').respond({'currentUser': 'testUser'});
       $timeout = _$timeout_;
       scope = $rootScope.$new();
       // mock the 'segment' property on the parent scope (simulates SegmentAreaCtrl)
@@ -15,11 +20,11 @@ describe("Unit: Testing the AceCtrl", function() {
       scope.segment = segment;
 
       // now create the controller with mocks for the services
-      ctrl = $controller('AceCtrl', {$scope: scope, Document:{}, tokenizer:{}, Glossary:{}, ruleMap: {}, session: {}, autocompleters: {autocompleters: []} });
-  //    dump(scope);
+      ctrl = $controller('AceCtrl', {$scope: scope, Document:{}, tokenizer:{}, Glossary:{}, ruleMap: {}, session: {}, autocompleters: {autocompleters: []}, editSession: {} });
 
       // TODO: move this to a 'prepareElement() function which is called inside each spec
-      element = angular.element('<div ui-ace="{ onLoad : aceLoaded }"></div>');
+      element = angular.element('<div ui-ace="{ onLoad : aceLoaded }" ng-model="testModel"></div>');
+
       // compile the element on this scope
       $compile(element)(scope);
     });

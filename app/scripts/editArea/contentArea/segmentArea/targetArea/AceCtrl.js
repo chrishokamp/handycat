@@ -4,34 +4,6 @@ angular.module('controllers').controller('AceCtrl',
    '$timeout', '$log',
    function($scope, tokenizer, editSession, $q, $filter, $http, autocompleters, $timeout, $log) {
 
-   // working - utils for autocompletion
-     // TODO: use the autocompleters service to resolve the autocompleters for the user
-     // GET /autocompleters --
-     // params that let us know what autocompleters the user has:
-     // source lang
-     // target lang
-     // domain
-     // TODO: there should be a selection dialog where the user can choose which autocompleters they want to use
-     // a user's autocompleters grow over time
-     // as they select segments, we log: { source: source-text, target_prefix: target-text, completion: <selected unit from autocomplete> }
-
-   $scope.testCallback = function($item, $model, $label) {
-     $log.log('Test callback called with: ');
-     $log.log($item + ' ' + $model + ' ' + $label);
-   }
-
-   $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-
-  // use the default substring filter
-  $scope.getLocation = function(val) {
-    var defer = $q.defer();
-  //  filter:$viewValue
-    var matches = $filter('limitTo')($filter('filter')($scope.states, val), 8);
-    defer.resolve(matches);
-
-    return defer.promise;
-  };
-  // TODO: remove after testing
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
@@ -40,8 +12,6 @@ angular.module('controllers').controller('AceCtrl',
 
   // end utils for autocompletion
 
-  // used by the logger -- TODO: remove this
-  var previousValue = '';
 
   // BEGIN AceEditor API
   var selectRange = function(aRange) {
@@ -179,17 +149,9 @@ angular.module('controllers').controller('AceCtrl',
     clearEditor();
   });
 
-  // it should focus if the parent scope changes activeSegment to $segId
-  $scope.$watch(function() {
-    return $scope.activeSegment;
-  }, function(segId) {
-    if (segId == $scope.index) {
-      $scope.editor.focus();
-    }
-  });
-
   // Use this function to configure the ace editor instance
   $scope.aceLoaded = function (ed) {
+    console.log('Ace Loaded fired');
     var editor = ed;
 
     $scope.editor = editor;
@@ -211,6 +173,16 @@ angular.module('controllers').controller('AceCtrl',
 //        }, 500);
 //      }
 //    );
+
+    // it should focus if the parent scope changes activeSegment to $segId
+    // TODO: this causes tests to fail
+    $scope.$watch(function() {
+      return $scope.activeSegment;
+    }, function(segId) {
+      if (segId == $scope.index) {
+        $scope.editor.focus();
+      }
+    });
 
     // working - select the current token based on the edit mode
     // the logic here is complex -- add unit tests
@@ -309,6 +281,8 @@ angular.module('controllers').controller('AceCtrl',
 
     // logging each change to the editor - TODO: should this be event based?
     // using input event instead of change since it's called with some timeout
+    // used by the logger -- TODO: remove this
+    var previousValue = '';
     editor.on('input', function() {
       var newValue= editor.getValue();
       if (newValue !== previousValue) {
@@ -319,7 +293,7 @@ angular.module('controllers').controller('AceCtrl',
           "segmentId": $scope.index
         };
 
-        editSession.logAction(logAction);
+        //editSession.logAction(logAction);
         previousValue = newValue;
       }
     });
