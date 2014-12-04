@@ -15,7 +15,7 @@ angular.module('directives')
         $log.log($scope.projectCreated);
       }
     },
-    templateUrl: 'views/partials/projects/menu-item.html'
+    templateUrl: 'scripts/projects/menu-item.html'
   }
 }]);
 

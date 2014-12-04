@@ -1,17 +1,17 @@
-<div layout="vertical" layout-padding>
-  <div layout="horizontal">
+<div layout="column" layout-padding>
+  <div layout="row">
     <div flex>{{item.segment}}</div>
     <md-button ng-click="onSelect(item.segment)" layout-align="center center">
       <i class="ion-ios7-checkmark-outline" ></i>
     </md-button>
   </div>
   <md-button ng-click="showInfo = !showInfo"><i class="ion-ios7-information-outline"></i></md-button>
-  <div layout="vertical" class="provider-info" ng-show="showInfo">
-    <div layout="horizontal" layout-align="center center" layout-padding>
-      <strong>Provider:&nbsp</strong></span><div flex layout="horizontal"><strong>{{item.provider || 'chris hokamp'}}</strong></div>
+  <div layout="column" class="provider-info" ng-show="showInfo">
+    <div layout="row" layout-align="center center" layout-padding>
+      <strong>Provider:&nbsp</strong></span><div flex layout="row"><strong>{{item.provider || 'chris hokamp'}}</strong></div>
     </div>
-    <div layout="horizontal" layout-align="center center" layout-padding>
-      <strong>Quality:&nbsp</strong></span><div flex layout="horizontal" layout-align="center center" class="quality-indicator"><strong>{{item.quality}}</strong></div>
+    <div layout="row" layout-align="center center" layout-padding>
+      <strong>Quality:&nbsp</strong></span><div flex layout="row" layout-align="center center" class="quality-indicator"><strong>{{item.quality}}</strong></div>
     </div>
   </div>
   <md-divider></md-divider>

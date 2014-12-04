@@ -1,19 +1,16 @@
 <!-- create the project management interface -->
   <!-- Working: redo this interface with material design -->
-<section ng-controller="ProjectCtrl" layout="vertical" layout-fill flex class="doc-content">
+<section ng-controller="ProjectCtrl" layout="column" layout-fill flex class="doc-content">
 
   <!--<md-toolbar layout="horizontal" layout-align="end" class="md-theme-indigo">-->
   <!--<div layout="horizontal" layout-align="end" class="md-theme-indigo">&ndash;&gt;-->
-    <div layout="horizontal" layout-padding layout-align="end">
+    <div layout="row" layout-padding layout-align="end">
       <md-button ui-sref="projects.create"><i class="ion-ios7-plus-outline"></i></md-button>
   </div>
   <!--</md-toolbar>-->
 
   <md-content flex class="md-padding">
-    <md-button ng-click="toggleLeft()" class="md-primary" hide-md>
-      Toggle left
-    </md-button>
-    <div ng-init="find()" layout="vertical" class="doc-content">
+    <div ng-init="find()" layout="column" class="doc-content">
       <md-list>
         <md-item>
           <menu-item

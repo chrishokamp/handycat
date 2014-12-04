@@ -80,6 +80,21 @@ angular.module('controllers')
       }
     }
 
+    // TODO: set this only when this is actually the active scope
+    $scope.isActive = { active:true };
+
+    // TODO: segment state should be directly linked to the XLIFF document
+    // TODO: currently not implemented
+    // working: only one field on this object (not currentState AND completed)
+    // states: [ 'pending', 'editing', 'complete' ]
+    $scope.segmentState = { currentState: 'untranslated', completed: false };
+
+    // this is the interface to segment state -- always change via this interface
+    $scope.changeSegmentState = function changeSegmentState (stateName) {
+      $scope.segmentState = stateName;
+
+    }
+
 
     // WORKING
     // create buttons for the user's translation resources -- we know what resources they have from $scope.currentUser
@@ -130,20 +145,6 @@ angular.module('controllers')
       });
     }
 
-  // TODO: set this only when this is actually the active scope
-  $scope.isActive = { active:true };
-
-  // TODO: segment state should be directly linked to the XLIFF document
-  // TODO: currently not implemented
-  // working: only one field on this object (not currentState AND completed)
-  // states: [ 'pending', 'editing', 'complete' ]
-  $scope.segmentState = { currentState: 'untranslated', completed: false };
-
-  // this is the interface to segment state -- always change via this interface
-  $scope.changeSegmentState = function changeSegmentState (stateName) {
-    $scope.segmentState = stateName;
-
-  }
 
   $scope.$on('activate-segment', function(event, index) {
     if ($scope.index === index) {

@@ -41,6 +41,6 @@ try:
     port = int(sys.argv[1])
 except:
     port = 5001
-  
+
 app.run(debug=True, host='0.0.0.0', port=port)
 print('flask app is running on port: {}'.format(port))

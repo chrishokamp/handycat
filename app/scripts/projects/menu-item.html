@@ -1,7 +1,7 @@
-<div layout="vertical">
+<div layout="column">
   <md-divider></md-divider>
-  <div layout="horizontal">
-    <div layout="horizontal" flex layout-padding>
+  <div layout="row">
+    <div layout="row" flex layout-padding>
       <h5 class="text-capitalize text-muted">
         Project name:&nbsp
       </h5>
@@ -9,11 +9,11 @@
     </div>
   </div>
   <md-divider></md-divider>
-  <div layout="vertical" layout-padding>
-    <div layout="horizontal">
-      <div flex layout="vertical">
+  <div layout="column" layout-padding>
+    <div layout="row">
+      <div flex layout="column">
         <div><span class="text-muted">Owner:&nbsp</span><span flex>{{projectCreator}}</span></div>
-        <div layout="horizontal">
+        <div layout="row">
           <span flex class="text-muted">Created on {{projectCreated | date: 'fullDate'}}</span>
         </div>
       </div>
@@ -34,7 +34,7 @@
     </div>
   </div>
 </div>
-<div layout="horizontal">
+<div layout="row">
   <md-button class='orange' ui-sref="projects.translate({projectId: projectId})" flex>View</md-button>
   <md-button class='green' ui-sref="projects.translate({projectId: projectId})" flex>Translate</md-button>
   <!--<div class="row" ng-repeat="project in projects" ng-class-even="'blue'" ng-class-odd="'grey'">-->
