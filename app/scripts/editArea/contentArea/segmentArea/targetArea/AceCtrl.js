@@ -1,23 +1,20 @@
-
+// this is an iterface to the ace editor, but the API it exposes should be easily adaptable to other text editing components
 angular.module('controllers').controller('AceCtrl',
   ['$scope', 'tokenizer', 'editSession', '$q', '$filter', '$http', 'autocompleters',
    '$timeout', '$log',
    function($scope, tokenizer, editSession, $q, $filter, $http, autocompleters, $timeout, $log) {
 
-
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
   var util = ace.require('./autocomplete/util')
   var langTools = ace.require("ace/ext/language_tools");
-
   // end utils for autocompletion
+
+  // TODO: implement this stuff
+  //    - the editor should listen for the 'focus' event to be $broadcast - $watching the
 
 
   // BEGIN AceEditor API
-  var selectRange = function(aRange) {
-    $scope.editor.session.selection.setRange(aRange);
-    $scope.editor.focus();
-  };
 
   // RESET the text for this editor instance
   var setText = function(text) {
@@ -35,7 +32,7 @@ angular.module('controllers').controller('AceCtrl',
     $scope.shared.setText = setText;
   }
 
-
+  // insert text at the caret location
   $scope.insertText = function(text) {
     $log.log('Insert text fired');
     var editor = $scope.editor;
@@ -43,10 +40,16 @@ angular.module('controllers').controller('AceCtrl',
     editor.focus();
   };
 
+  // get the text inside the editor
   $scope.getValue = function() {
     return $scope.editor.getSession().getValue();
   }
 
+  // select a range of text in the editor
+  var selectRange = function(aRange) {
+    $scope.editor.session.selection.setRange(aRange);
+    $scope.editor.focus();
+  };
 
   // get the current selection from the editor
   $scope.getSelection = function() {
@@ -55,7 +58,8 @@ angular.module('controllers').controller('AceCtrl',
     return editor.getSelectionRange();
   };
 
-  // pulse the color on change, so that it's clear where the change happened
+  // pulse the color on change, so that it's clear where a change happened
+  // the display of the marker depends upon the css for the marker class
   $scope.highlightRange = function(phraseRange) {
     var marker = $scope.editor.session.addMarker(phraseRange, 'changed_range');
     // remove the marker after a bit
@@ -66,7 +70,7 @@ angular.module('controllers').controller('AceCtrl',
   };
 
   // replace the current selection in the editor with this text
-  // TODO: this function is buggy - fix!
+  // TODO: this function is buggy - test and fix!
   $scope.replaceSelection = function(text) {
     var editor = $scope.editor;
     var currentSelection = getSelection();
@@ -160,7 +164,7 @@ angular.module('controllers').controller('AceCtrl',
 
     $scope.editor.session.setMode('ace/mode/text');
 
-    // we want to always know what text the user currently has selected
+    // we want to always know what text the user currently has selected because some functionality may fire when the user selects something
     // TODO: change this to listen for a selection change
 //    editor.on('mouseup',
 //      function(e) {
@@ -175,7 +179,8 @@ angular.module('controllers').controller('AceCtrl',
 //    );
 
     // it should focus if the parent scope changes activeSegment to $segId
-    // TODO: this causes tests to fail
+    // TODO: change this to be databound to the activeIdx on the editArea -- everytime the active index changes, the editor should refocus
+    // TODO: add the integration tests which confirm this behaviour
     $scope.$watch(function() {
       return $scope.activeSegment;
     }, function(segId) {
@@ -186,6 +191,8 @@ angular.module('controllers').controller('AceCtrl',
 
     // working - select the current token based on the edit mode
     // the logic here is complex -- add unit tests
+    // TODO - editModes actually belong in a separate component, not in a text editor
+    // TODO - each editMode should probably use a different component (at least it uses a different tokenizer/detokenizer pair)
     editor.on('click', function(e) {
       var tokenAndRange = getCurrentTokenAndRange();
       var token = tokenAndRange.token;
@@ -227,10 +234,9 @@ angular.module('controllers').controller('AceCtrl',
       }
     )
 
-//    langTools.addCompleter(glossaryCompleter);
-    //editor.getSession().setUseWrapMode(true);
 
     // modify some of the display params for the Ace Editor
+    //editor.getSession().setUseWrapMode(true);
     var renderer = editor.renderer;
     renderer.setShowGutter(false);
     // hide the print margin
@@ -243,45 +249,31 @@ angular.module('controllers').controller('AceCtrl',
 
     // end modifying display params
 
-
-    // working - don't scroll - height should match the text
     // TODO: move matching height to a directive
     var heightUpdateFunction = function() {
 
       // http://stackoverflow.com/questions/11584061/
       // add 1 to screen length to get some extra space
-      var screenLength = editor.getSession().getScreenLength();
+      //var screenLength = editor.getSession().getScreenLength();
 //      screenLength += 1;
-      var newHeight =
-                screenLength
-                * editor.renderer.lineHeight
-                + editor.renderer.scrollBar.getWidth();
+//      var newHeight =
+//                screenLength
+//                * editor.renderer.lineHeight
+//                + editor.renderer.scrollBar.getWidth();
 
       // TODO: remove hard-coding here and in the heightWatcher directive
-      $scope.height.editorHeight = newHeight;
+      //$scope.height.editorHeight = newHeight;
       // emit ace editor height up the scope hierarchy - height change directives listen for current-height event
-
-//      if (newHeight < 80) {
-//        newHeight = 80;
-//      }
-//      $scope.$emit('change-height', { "height": newHeight });
 
       // This call is required for the editor to fix all of
       // its inner structure for adapting to a change in size
-      editor.resize();
+      //editor.resize();
     };
-    // Set initial size to match initial content
-//    heightUpdateFunction();
-
-    // Whenever a change happens inside the ACE editor, update
-    // the height again
-    // TODO: only update the height when it actually changes
-    // use a directive to synchronize the heights of SourceArea and TargetArea
-//    $scope.$on('update-height', heightUpdateFunction);
 
     // logging each change to the editor - TODO: should this be event based?
     // using input event instead of change since it's called with some timeout
-    // used by the logger -- TODO: remove this
+    // used by the logger -- TODO: remove this code - a component should be unaware that it's being watched/logged
+    // a logger should just watch, not interfere with the component's code
     var previousValue = '';
     editor.on('input', function() {
       var newValue= editor.getValue();
@@ -328,36 +320,8 @@ angular.module('controllers').controller('AceCtrl',
     }
   };
 
-     // logging each change to the editor
-     // using input event instead of change since it's called with some timeout
-//  editor.on('input', function() {
-//      if (editor.session.getUndoManager().hasUndo())
-//          $('#save').removeClass("disabled");
-//      else
-//          $('#save').addClass("disabled");
-//
-//  });
-//
-//  $('#save').on("click", function() {
-//      editor.session.getUndoManager().markClean()
-//  })
-
-     // applying deltas
-     //the applyDeltas(Object deltas) API takes an array of deltas. Changing my sample code above to editor.getSession().getDocument().applyDeltas([currentDelta]) plays back properly.
-
-  // TODO: log that the user propagated the n
-//  $scope.$on('propagate-action', function(event, action) {
-//    if (action['operation'] == 'change-token-number') {
-//      var content = $scope.editor.getValue().replace(new RegExp(action['change'][0]), action['change'][1]);
-//      $scope.editor.setValue(content);
-//    } else {
-//      $log.log('Unknown action: ' + action['type']);
-//    }
-//  });
-
-//  $scope.$on('toggleShowInvisibleChars', function(event, value) {
-//    $scope.editor.setOption("showInvisibles", value);
-//  });
+  // applying deltas
+  //the applyDeltas(Object deltas) API takes an array of deltas. Changing my sample code above to editor.getSession().getDocument().applyDeltas([currentDelta]) plays back properly.
 
 }]);
 
