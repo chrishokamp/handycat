@@ -202,8 +202,31 @@ angular.module('controllers')
 
     // update the user's translation resources (update the TM)
     // what is the data model for a TM object { sourceLang: <sourceLang>, targetLang: <targetLang>, source: <source>, target: <target>, createdBy: <creator>, date: <date> }
+    // a new TM object is (at least) two nodes, the source segment and the target segment, both containing fields for creator, date created
+    var graphTMUrl = 'http://localhost:8899/tm';
+    $log.log('Scope document');
+    $log.log($scope.document);
+    var newTMNodes = [
+        {'lang': $scope.document.sourceLang, 'segment': $scope.segment.source },
+        {'lang': $scope.document.targetLang, 'segment': $scope.segment.target },
+      ];
 
-  };
+    var transProm = $http({
+      url: graphTMUrl,
+      method: "POST",
+      data: {
+        'nodes': newTMNodes
+      }
+    });
+    transProm.then(
+      function (res) {
+        $log.log('translation memory updated, the new nodes: ');
+        $log.log(res);
+      }, function (err) {
+        $log.log('Error updating the translation memory');
+      })
+
+  }; // end segmentFinished
 
   // Re-opens a finished segment. Undoes what segmentFinished() did
   // TODO: this should be handled within the element itself -- there should be a single interface to segmentState

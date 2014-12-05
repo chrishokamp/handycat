@@ -83,9 +83,14 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
       $log.log('xliff version: ');
       $log.log(xliffTag.getAttribute('version'));
 
-      // Read the source and target language
+      // Read the source and target language - set defaults to English and German
       var sourceLang = file.getAttribute('source-language');
+      if (!sourceLang) sourceLang = 'en';
+      Document.sourceLang = sourceLang;
+
       var targetLang = file.getAttribute('target-language');
+      if (!targetLang) targetLang = 'de';
+      Document.targetLang = targetLang;
 
       if (sourceLang !== 'en-us')
         $log.warn('Source language ' + sourceLang + ' is not supported yet.');

@@ -6,6 +6,7 @@
 angular.module('services')
 .factory('TranslationMemory', ['$resource', '$log', function($resource, $log) {
     // TODO: add routes to different named TMs, or put the name of the desired TM as an argument?
+    // TODO: how to provide a consistent API to all translation resources
     // TODO: how to cache requests to this $resource?
     return $resource('/users/:userId/tm/',
       {
