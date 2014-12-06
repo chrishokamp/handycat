@@ -7,7 +7,7 @@
     </div>
 
     <!-- the editing panel and controls -->
-    <div ng-show="!segmentState.completed" class="col-xs-12">
+    <div ng-show="!segmentState.completed" class="col-xs-12" ng-click="reopen($index)">
       <!--the translation resource selection component-->
       <!-- when opened, it animates to cover its container component-->
       <div ng-show="showTranslations" class="cssSlideUp cover-all">
@@ -39,7 +39,9 @@
     </div>
   </div>
 </div>
-<div ng-model="selected" place-after="ace_cursor" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='overwritePrefix($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>
+
+<!-- the enhanced typeahead component -->
+<!--<div ng-model="selected" place-after="ace_cursor" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='overwritePrefix($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>-->
 
 </div>
 </div>

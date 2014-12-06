@@ -157,7 +157,11 @@ angular.module('controllers')
       });
     }
 
-
+  // this is called when the user clicks anywhere in the segment area
+  $scope.activate = function($index) {
+    $log.log('activate: ' + $index);
+    $scope.reopen($index);
+  }
   $scope.$on('activate-segment', function(event, index) {
     if ($scope.index === index) {
       // tell the scope to create the editor element
@@ -186,6 +190,8 @@ angular.module('controllers')
     // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
     // - this line is CRITICAL - tells the UI to move to the next segment
     $log.log('$scope.index: ' + $scope.index);
+    // TODO: the logic of focusing the next segment is broken -- it causes the user to jump around
+    // TODO: how to keep the editing flow smooth, even when the user jumps out of order?
     Session.focusNextSegment($scope.index);
 
     // Update the current segment in the XLIFF DOM
@@ -229,6 +235,7 @@ angular.module('controllers')
   }; // end segmentFinished
 
   // Re-opens a finished segment. Undoes what segmentFinished() did
+  // TODO: this function assumes that there is already an editor on the scope, but Session.setSegment fires another event
   // TODO: this should be handled within the element itself -- there should be a single interface to segmentState
   $scope.reopen = function(idx) {
     $scope.segmentState.completed = false;

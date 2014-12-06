@@ -5,6 +5,18 @@ angular.module('services')
     // the server returns base URLs to endpoints that implement our autocomplete API
     // foreach url returned by the server, we init a new autocompleter, and push it onto this.autocompleters
 
+    // working - utils for autocompletion
+    // TODO: use the autocompleters service to resolve the autocompleters for the user
+    // GET /autocompleters --
+    // params that let us know what autocompleters the user has:
+    // source lang
+    // target lang
+    // domain
+    // TODO: there should be a selection dialog where the user can choose which autocompleters they want to use
+    // a user's autocompleters grow over time
+    // as they select segments, we log: { source: source-text, target_prefix: target-text, completion: <selected unit from autocomplete> }
+
+
     var testUrl = 'http://localhost:8000/';
     var testSource = 'delicious sandwich';
 
