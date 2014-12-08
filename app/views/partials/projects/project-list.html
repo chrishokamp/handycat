@@ -1,13 +1,9 @@
 <!-- create the project management interface -->
-  <!-- Working: redo this interface with material design -->
 <section ng-controller="ProjectCtrl" layout="column" layout-fill flex class="doc-content">
 
-  <!--<md-toolbar layout="horizontal" layout-align="end" class="md-theme-indigo">-->
-  <!--<div layout="horizontal" layout-align="end" class="md-theme-indigo">&ndash;&gt;-->
-    <div layout="row" layout-padding layout-align="end">
-      <md-button ui-sref="projects.create"><i class="ion-ios7-plus-outline"></i></md-button>
+    <div layout="row" flex layout-align="center center">
+      <md-button flex class='md-raised create-project-button' ui-sref="projects.create"><i class="ion-ios7-plus-outline"></i></md-button>
   </div>
-  <!--</md-toolbar>-->
 
   <md-content flex class="md-padding">
     <div ng-init="find()" layout="column" class="doc-content">

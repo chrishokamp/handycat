@@ -12,6 +12,10 @@ $bold: 800;
   font-size: $icon-size;
 }
 
+.create-project-button {
+  font-size: $icon-size;
+}
+
 // Project Creation
 .drop-box {
   margin-top: 20px;
@@ -20,7 +24,6 @@ $bold: 800;
   &:hover {
     border: 5px dashed yellow;
   }
-
 }
 
 .drop-box.dragover {
@@ -34,4 +37,13 @@ span.drop-message {
 }
 span.drop-text {
   font-size: 12px;
+}
+
+.close-button {
+  md-button {
+    font-size: $icon-size !important;
+  }
+  :hover {
+    background-color: red !important;
+  }
 }
