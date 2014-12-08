@@ -99,7 +99,7 @@ module.exports = function() {
         'app/scripts/editArea/editArea.js',
         'app/scripts/glossary/Glossary.js',
         'app/scripts/settings/UserSettings.js',
-        'app/scripts/xliffFileUpload/xliffFileUpload.js',
+        'app/scripts/projects/create/xliffFileUpload/xliffFileUpload.js',
         'app/scripts/languagePair/langPair.js',
 
       // application entry point

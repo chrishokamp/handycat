@@ -8,8 +8,6 @@
   padding:0;
 }
 
-
-
 .segment {
   margin-bottom: 10px;
   padding-bottom: 10px;
@@ -17,6 +15,17 @@
   padding-left: 10px;
   padding-right: 10px;
 }
+
+.content-card {
+  min-height: 200px;
+  background-color: white;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding-left: 3px;
+  line-height: normal;
+  font-size: 18px;
+}
+
 .activeshadow {
   .content-card {
     box-shadow: 4px 4px 2px #888;

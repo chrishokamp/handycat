@@ -22,6 +22,7 @@
         <toolbar class="widget-toolbar" active-segment="activeSegment" segments="document.segments" ng-show="visible.toolbar"></toolbar>
 
         <!-- repeat for each segment -->
+        <!--TODO: remove all bootstrap grid styling, switch to flexbox styles -->
         <div class="segment row"
              ng-class="{  pending: !segmentState.completed, completed: segmentState.completed}"
              id="segment-{{$index}}"

@@ -6,8 +6,10 @@
   <md-content>
     <br/>
     <h3>Create a New Translation Project</h3>
+    <md-button ng-click="showErrorToast()">toast</md-button>
     <hr/>
 
+    <!--TODO: remove this section in favor of toast messages-->
     <!--alert user to the state of their uploaded file-->
     <div class="alert alert-success slide-in" ng-click="fileAdded=!fileAdded" ng-hide="!fileAdded">
         Click to change your file...

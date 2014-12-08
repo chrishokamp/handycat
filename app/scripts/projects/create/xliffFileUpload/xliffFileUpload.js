@@ -18,16 +18,9 @@ angular.module('controllers').controller('UploadCtrl',
     }
   );
 
-  // make sure that a file has been uploaded, parse it, and transition to translation
-  $scope.startTranslation = function() {
-    // use the fileReader service to read the file (via the HTML5 FileAPI)
-    // assume there's only a single file in the array for now
-    XliffParser.readFile($scope.selectedFiles[0]);
-// TODO: only initiate this transition if the file is successfully loaded and parsed
-    $state.go('projects.translate');
-  };
 
 // TODO: get file type (assume xlf for now)
+    // this depends on ngFileUpload
   $scope.onFileSelect = function ($files) {
     $log.log("inside file select");
     $scope.fileAdded = true;
