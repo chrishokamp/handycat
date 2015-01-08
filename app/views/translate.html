@@ -24,7 +24,7 @@
         <!-- repeat for each segment -->
         <!--TODO: remove all bootstrap grid styling, switch to flexbox styles -->
         <div class="segment row"
-             ng-class="{  pending: !segmentState.completed, completed: segmentState.completed}"
+             ng-class="{  pending: !(getSegmentState(id.index) === 'translated'), completed: getSegmentState(id.index) === 'translated'}"
              id="segment-{{$index}}"
              ng-controller="SegmentAreaCtrl"
              ng-repeat="seg in segments"
@@ -72,7 +72,7 @@
                       </div>
                       <div ng-hide="segmentState.completed" class="content-card">
                         <div class="source">
-                          <source-area source-sentence="segment.sourceDOM.textContent"></source-area>
+                          <source-area source-sentence="segment.source"></source-area>
                         </div>
                       </div>
                     </div>

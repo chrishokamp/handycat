@@ -50,7 +50,7 @@ angular.module('controllers')
       Logger.exportJSON();
     };
 
-    // this gets reset in the template
+    // the id gets reset in the template
     $scope.id = {};
     // this object holds the functions and properties that children can freely read and/or override
     $scope.shared = {
@@ -63,6 +63,23 @@ angular.module('controllers')
 
     // TODO: set this only when this is actually the active scope
     $scope.isActive = { active:true };
+
+    // use $scope.getSegmentState from the template
+    $scope.getSegmentState = function(id) {
+      if (typeof(id) === 'number') {
+        return $scope.segments[$scope.id.index]['state'];
+      }
+      // segmentState may be an empty obj if the segment hasn't been initialized in the template
+      return 'initial';
+    }
+
+    $scope.setSegmentState = function(state) {
+      if (typeof(state) === 'string') {
+        $scope.segments[$scope.id.index]['state'] = state;
+      } else {
+        throw 'The state name must be a string';
+      }
+    }
 
     // TODO: segment state should be directly linked to the document model
     // working: only one field on this object (not currentState AND completed)
@@ -143,15 +160,10 @@ angular.module('controllers')
 
   // TODO: parent controller should listen for this event, we shouldn't have a separate function to update the project
   $scope.segmentFinished = function(segId) {
-    $log.log("SEGMENT FINISHED - segId is: " + segId);
-    $scope.segmentState.completed = true;
-    $scope.isActive.active = false;
-
     // TODO: call a function on the document API - document API should all be in EditAreaCtrl
-    // TODO: this is not the right interface -- completedSegments should not be stored outside of the XLIFF DOM
-    // -- big question: should we maintain a javascript document model, or only use the XLIFF DOM
-    // ----> answer: we cannot use the XLIFF dom directly because angular doesn't let us use DOM nodes as models
-    $scope.document.segmentStates[segId] = true;
+    $log.log("SEGMENT FINISHED - segId is: " + segId);
+    $scope.setSegmentState('translated');
+    $scope.isActive.active = false;
 
     // TODO: the rest of this function should be on the EditAreaCtrl
     // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
@@ -207,11 +219,11 @@ angular.module('controllers')
 
   // Re-opens a finished segment. Undoes what segmentFinished() did
   // TODO: this should be handled within the element itself -- there should be a single interface to segmentState
-  // TODO: working - segment state should always refer to the document model on the
+  // TODO: working - segment state should always refer to the document model on the EditArea scope
   $scope.reopen = function(idx) {
-    $scope.segmentState.completed = false;
+    $scope.setSegmentState('initial');
+
     Session.setSegment(idx);
-    $scope.isActive.active = true;
   };
 
   // when the changeSegment event fires, each SegmentAreaCtrl scope responds

@@ -69,6 +69,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
       Document.segments = [];
       Document.sourceLang = sourceLang;
       Document.targetLang = targetLang;
+
+      Document.segmentStates = [];
       // initialize the revision property on the document object
       Document.revision = 0;
 

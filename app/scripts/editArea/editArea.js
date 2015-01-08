@@ -1,6 +1,6 @@
 angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal',
-  '$log', 'editSession', 'SegmentOrder', '$rootScope', 'Wikipedia', '$timeout', 'Projects', 'XliffParser', '$stateParams',
-  function($scope, $location, $anchorScroll, $modal, $log, editSession, segmentOrder, $rootScope, Wikipedia, $timeout,
+  '$log', 'SegmentOrder', '$rootScope', 'Wikipedia', '$timeout', 'Projects', 'XliffParser', '$stateParams',
+  function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, $rootScope, Wikipedia, $timeout,
            Projects, XliffParser, $stateParams) {
 
   // TODO: move this to a proper global controller for the edit area
@@ -9,8 +9,6 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     toolbar: false,
     projectLoading: true
   };
-
-  $scope.session = editSession;
 
   // TODO: resolve the projectResource and the parsed document object before this state loads
   // This is the init function that sets up an edit session
@@ -22,11 +20,9 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       XliffParser.parseXML(projectResource.content).then(
         function(documentObj) {
           $scope.document = documentObj;
+
           // The segment exchange format (in document.segments) is:
 //          var segPair = { source: sourceText, target: targetText, sourceDOM: seg[0],targetDOM: seg[1]};
-
-          // initialize the SegmentOrder service
-          segmentOrder.initSegmentOrder($scope.document.segments);
           $log.log('$scope.document loaded and parsed');
 
           // TODO: there is a long pause here, find out why

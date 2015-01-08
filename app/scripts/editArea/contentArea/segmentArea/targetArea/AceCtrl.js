@@ -308,7 +308,7 @@ angular.module('controllers').controller('AceCtrl',
   $scope.augmentTM = function(minPhraseLen) {
     if (!tmQueried) {
       // Working - take every other item
-      var toks = tokenizer.tokenize($scope.sourceSegment);
+      var toks = tokenizer.tokenize($scope.segment.source);
 
       var subphrases = tokenizer.subphrases(toks,minPhraseLen);
       //$log.log("the subphrases: " + JSON.stringify(subphrases));
@@ -316,7 +316,7 @@ angular.module('controllers').controller('AceCtrl',
       TranslationMemory.populateTM(subphrases);
       tmQueried = true;
     } else {
-      $log.log("TM already loaded for seg: " + $scope.sourceSegment);
+      $log.log("TM already loaded for seg: " + $scope.segment.source);
     }
   };
 
