@@ -34,8 +34,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
             function() {
               $scope.visible.projectLoading = false;
             },
-            1000);
-
+            500);
         },
         function(err) {
           console.error('editArea: error initializing $scope.document');
@@ -77,6 +76,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
     // Check if all the segments are marked as complete
     // TODO: refactor to remove document.completedSegments (we don't need to maintain a separate list just to determine if the job is finished or not)
+    // Working - we check the state of the segments themselves
     $scope.checkTranslationCompleted = function() {
       if (!$scope.document.DOM)
         return false; // do not show completed before starting the job!

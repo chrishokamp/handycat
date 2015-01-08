@@ -64,17 +64,15 @@ angular.module('controllers')
     // TODO: set this only when this is actually the active scope
     $scope.isActive = { active:true };
 
-    // TODO: segment state should be directly linked to the XLIFF document
-    // TODO: currently not implemented
+    // TODO: segment state should be directly linked to the document model
     // working: only one field on this object (not currentState AND completed)
-    // states: [ 'pending', 'editing', 'complete' ]
-    $scope.segmentState = { currentState: 'untranslated', completed: false };
+    // states: ['initial', 'translated', 'reviewed', 'final']
+    //$scope.segmentState = { currentState: 'initial', completed: false };
 
     // this is the interface to segment state -- always change via this interface
-    $scope.changeSegmentState = function changeSegmentState (stateName) {
-      $scope.segmentState = stateName;
-
-    }
+    //$scope.changeSegmentState = function changeSegmentState (stateName) {
+    //  $scope.segmentState = stateName;
+    //}
 
 
     // WORKING
@@ -153,7 +151,7 @@ angular.module('controllers')
     // TODO: this is not the right interface -- completedSegments should not be stored outside of the XLIFF DOM
     // -- big question: should we maintain a javascript document model, or only use the XLIFF DOM
     // ----> answer: we cannot use the XLIFF dom directly because angular doesn't let us use DOM nodes as models
-    $scope.document.completedSegments[segId] = true;
+    $scope.document.segmentStates[segId] = true;
 
     // TODO: the rest of this function should be on the EditAreaCtrl
     // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
@@ -208,8 +206,8 @@ angular.module('controllers')
   }; // end segmentFinished
 
   // Re-opens a finished segment. Undoes what segmentFinished() did
-  // TODO: this function assumes that there is already an editor on the scope, but Session.setSegment fires another event
   // TODO: this should be handled within the element itself -- there should be a single interface to segmentState
+  // TODO: working - segment state should always refer to the document model on the
   $scope.reopen = function(idx) {
     $scope.segmentState.completed = false;
     Session.setSegment(idx);
