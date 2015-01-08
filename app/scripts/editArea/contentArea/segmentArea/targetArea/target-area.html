@@ -2,12 +2,12 @@
 
   <div class="row">
     <!-- the appearance of the segment when the user has indicated that it is complete -->
-    <div ng-show="segmentState.completed" class="col-xs-12 segment-finished-target" ng-click="activate($index)">
+    <div ng-show="getSegmentState($index) === 'translated'" class="col-xs-12 segment-finished-target" ng-click="activate($index)">
       <p>{{segment.target}}</p>
     </div>
 
     <!-- the editing panel and controls -->
-    <div ng-show="!segmentState.completed" class="col-xs-12" ng-click="activate($index)">
+    <div ng-show="getSegmentState($index) === 'initial'" class="col-xs-12" ng-click="activate($index)">
       <!--the translation resource selection component-->
       <!-- when opened, it animates to cover its container component-->
       <div ng-show="showTranslations" class="cssSlideUp cover-all">

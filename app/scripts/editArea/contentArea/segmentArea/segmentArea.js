@@ -41,7 +41,6 @@ angular.module('controllers')
       $log.log('CLICKITY');
       $log.log('showTranslations:');
       $scope.showTranslations = !$scope.showTranslations;
-      $log.log($scope.showTranslations);
     }
     // TODO: End testing only
 
@@ -68,6 +67,7 @@ angular.module('controllers')
     // use $scope.getSegmentState from the template
     $scope.getSegmentState = function(id) {
       if (typeof(id) === 'number') {
+        $log.log('getSegmentState: ' + $scope.segments[$scope.id.index]['state']);
         return $scope.segments[$scope.id.index]['state'];
       }
       // segmentState may be an empty obj if the segment hasn't been initialized in the template
@@ -131,7 +131,6 @@ angular.module('controllers')
       });
     }
 
-
   $scope.clearEditor = function() {
    $log.log('clear editor fired on the segment control');
    $scope.$broadcast('clear-editor');
@@ -147,10 +146,10 @@ angular.module('controllers')
     // TODO: the rest of this function should be on the EditAreaCtrl
     // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
     // - this line is CRITICAL - tells the UI to move to the next segment
-    $log.log('$scope.index: ' + $scope.index);
+    $log.log('$scope.index: ' + $scope.id.index);
 
     // TODO: WORKING - fix segment ordering logic NOW!
-    Session.focusNextSegment($scope.index, $scope.segments);
+    Session.focusNextSegment($scope.id.index, $scope.segments);
 
     // Update the current segment in the XLIFF DOM
     // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
@@ -202,7 +201,6 @@ angular.module('controllers')
   // TODO: in reopen, the editing components have already been created, so we need to avoid doing that again
   $scope.reopen = function(idx) {
     $log.log('REOPEN');
-    $scope.setSegmentState('initial');
     Session.setSegment(idx);
   };
 
@@ -212,15 +210,20 @@ angular.module('controllers')
   $scope.$on('changeSegment', function(e,data) {
     if (data.currentSegment === $scope.id.index) {
       $log.log('segment: ' + $scope.id.index + ' --- heard changeSegment');
+
       // tell the staticTarget directive to create the editor element
       $scope.$broadcast('activate');
 
+      // make sure the segment state is reverted to 'initial'
+      $scope.setSegmentState('initial');
+
       // smooth scroll
-      var top = document.getElementById('segment-' + $scope.index).offsetTop;
+      var top = document.getElementById('segment-' + $scope.id.index).offsetTop;
       // scroll and add space for the navbar
       var navBarHeight = 100;
       $("body").animate({scrollTop: top - navBarHeight}, "slow");
 
+      // set this flag to true for the view
       $scope.isActive = { active:true };
     }
   });
