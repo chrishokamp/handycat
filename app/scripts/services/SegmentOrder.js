@@ -3,6 +3,7 @@
 angular.module('services').factory('SegmentOrder', ['$http', '$rootScope', 'baseUrl', '$log',
     function($http, $rootScope, baseUrl, $log) {
 
+  // WORKING - set this up in configuration
   var routePrefix = 'http://0.0.0.0:5001/reorder';
 
   var SegmentOrder = {

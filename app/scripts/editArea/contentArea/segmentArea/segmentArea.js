@@ -143,7 +143,7 @@ angular.module('controllers')
    $scope.$broadcast('clear-editor');
   };
 
-  // TODO: project should listen for this event, we shouldn't have a separate function to update the project
+  // TODO: parent controller should listen for this event, we shouldn't have a separate function to update the project
   $scope.segmentFinished = function(segId) {
     $log.log("SEGMENT FINISHED - segId is: " + segId);
     $scope.segmentState.completed = true;
@@ -159,6 +159,10 @@ angular.module('controllers')
     // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
     // - this line is CRITICAL - tells the UI to move to the next segment
     $log.log('$scope.index: ' + $scope.index);
+
+    // TODO: WORKING - fix segment ordering logic NOW!
+    // related files:
+    // Session
     // TODO: the logic of focusing the next segment is broken -- it causes the user to jump around
     // TODO: how to keep the editing flow smooth, even when the user jumps out of order?
     Session.focusNextSegment($scope.index);
