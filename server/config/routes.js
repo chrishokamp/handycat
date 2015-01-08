@@ -63,7 +63,7 @@ module.exports = function(app) {
   // Translation Project Routes - these routes let users interact with their projects
   var projects = require('../controllers/projects');
 
-  // this makes req.project available (via a  side-effect)
+  // this makes req.project available (via a side-effect)
   app.param('projectId', projects.project);
 
   app.get('/api/projects',auth.ensureAuthenticated, projects.all);

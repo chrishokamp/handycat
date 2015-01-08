@@ -1,5 +1,5 @@
 var debug = require('debug')('auth');
-var passport = require('passport');
+
 /**
  *  Route middleware to ensure user is authenticated.
  */
@@ -26,9 +26,9 @@ exports.user = {
  * Project authorizations routing middleware
  */
 // TODO: extend this middleware to accomodate shared projects
+// TODO: this requires adding a 'shared_with' field to the resource -- add the user ids of the users who can access this project
 // we currently rely on passport's placing req.session.passport.user
 // TODO: by default, a user should only see their own projects
-// TODO: this requires adding a 'shared_with' field to the resource -- add the user ids of the users who can access this project
 exports.project = {
   hasAuthorization: function(req, res, next) {
     debug('PROJECT AUTH');
