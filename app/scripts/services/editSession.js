@@ -81,8 +81,7 @@ angular.module('services')
         // TODO: handle these completely within segmentOrder, no need for editSession here
         // order of segments
         focusNextSegment: function(currentSegment, segments) {
-          var next = SegmentOrder.nextSegment(currentSegment);
-          $log.log('editSession: setting next segment as: ' + next);
+          var next = SegmentOrder.nextSegment(currentSegment, segments);
           this.setSegment(next);
         },
         setSegment: function(segIndex) {

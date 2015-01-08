@@ -29,6 +29,7 @@ angular.module('controllers').controller('ContentAreaCtrl',
     // quick hack -- just activate segment 0
     editSession.setSegment(0);
     // TODO: initialize the session metadata from the session metadata on the server
+    // TODO: activeSegment is here so that the toolbar knows where it should go
     $scope.activeSegment = 0;
 
     var segmentId = $stateParams.segmentId;

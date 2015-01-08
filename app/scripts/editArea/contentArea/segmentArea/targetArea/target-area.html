@@ -2,12 +2,12 @@
 
   <div class="row">
     <!-- the appearance of the segment when the user has indicated that it is complete -->
-    <div ng-show="segmentState.completed" class="col-xs-12 segment-finished-target" ng-click="reopen($index)">
+    <div ng-show="segmentState.completed" class="col-xs-12 segment-finished-target" ng-click="activate($index)">
       <p>{{segment.target}}</p>
     </div>
 
     <!-- the editing panel and controls -->
-    <div ng-show="!segmentState.completed" class="col-xs-12" ng-click="reopen($index)">
+    <div ng-show="!segmentState.completed" class="col-xs-12" ng-click="activate($index)">
       <!--the translation resource selection component-->
       <!-- when opened, it animates to cover its container component-->
       <div ng-show="showTranslations" class="cssSlideUp cover-all">
@@ -24,7 +24,7 @@
     <div ng-show="isActive.active" class="pull-right" style="position: absolute; top: 0px; right: -40px">
       <div>
         <div>
-          <md-button ng-click="segmentFinished($index)" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-ok-sign"></span></md-button>
+          <md-button ng-click="segmentFinished($index)" ng-disabled="segment.state === 'translated'"><span class="glyphicon glyphicon-ok-sign"></span></md-button>
         </div>
         <div>
           <md-button ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-remove"></span></md-button>

@@ -64,6 +64,7 @@ angular.module('controllers')
     // TODO: set this only when this is actually the active scope
     $scope.isActive = { active:true };
 
+    // possible states: ['initial', 'translated', 'reviewed', 'final']
     // use $scope.getSegmentState from the template
     $scope.getSegmentState = function(id) {
       if (typeof(id) === 'number') {
@@ -80,17 +81,6 @@ angular.module('controllers')
         throw 'The state name must be a string';
       }
     }
-
-    // TODO: segment state should be directly linked to the document model
-    // working: only one field on this object (not currentState AND completed)
-    // states: ['initial', 'translated', 'reviewed', 'final']
-    //$scope.segmentState = { currentState: 'initial', completed: false };
-
-    // this is the interface to segment state -- always change via this interface
-    //$scope.changeSegmentState = function changeSegmentState (stateName) {
-    //  $scope.segmentState = stateName;
-    //}
-
 
     // WORKING
     // create buttons for the user's translation resources -- we know what resources they have from $scope.currentUser
@@ -141,17 +131,6 @@ angular.module('controllers')
       });
     }
 
-  // this is called when the user clicks anywhere in the segment area
-  $scope.activate = function($index) {
-    $log.log('activate: ' + $index);
-    $scope.reopen($index);
-  }
-  $scope.$on('activate-segment', function(event, index) {
-    if ($scope.index === index) {
-      // tell the scope to create the editor element
-      $scope.$broadcast('activate');
-    }
-  });
 
   $scope.clearEditor = function() {
    $log.log('clear editor fired on the segment control');
@@ -171,11 +150,7 @@ angular.module('controllers')
     $log.log('$scope.index: ' + $scope.index);
 
     // TODO: WORKING - fix segment ordering logic NOW!
-    // related files:
-    // Session
-    // TODO: the logic of focusing the next segment is broken -- it causes the user to jump around
-    // TODO: how to keep the editing flow smooth, even when the user jumps out of order?
-    Session.focusNextSegment($scope.index);
+    Session.focusNextSegment($scope.index, $scope.segments);
 
     // Update the current segment in the XLIFF DOM
     // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
@@ -217,28 +192,36 @@ angular.module('controllers')
 
   }; // end segmentFinished
 
+  // this is called when the user clicks anywhere in the segment area
+  $scope.activate = function($index) {
+    $log.log('activate: ' + $index);
+    $scope.reopen($index);
+  }
   // Re-opens a finished segment. Undoes what segmentFinished() did
-  // TODO: this should be handled within the element itself -- there should be a single interface to segmentState
-  // TODO: working - segment state should always refer to the document model on the EditArea scope
+  // TODO: we should only show the 'SAVE' button once the user has actually edited something (they shouldn't need to click 'check' again
+  // TODO: in reopen, the editing components have already been created, so we need to avoid doing that again
   $scope.reopen = function(idx) {
+    $log.log('REOPEN');
     $scope.setSegmentState('initial');
-
     Session.setSegment(idx);
   };
 
   // when the changeSegment event fires, each SegmentAreaCtrl scope responds
-  // TODO: this event overlaps with change-segment-state
   // the change segment event is fired from changeSegment in the editSession service
   // TODO: move this code to EditAreaCtrl
   $scope.$on('changeSegment', function(e,data) {
-    if (data.currentSegment === $scope.index) {
+    if (data.currentSegment === $scope.id.index) {
+      $log.log('segment: ' + $scope.id.index + ' --- heard changeSegment');
       // tell the staticTarget directive to create the editor element
       $scope.$broadcast('activate');
+
       // smooth scroll
       var top = document.getElementById('segment-' + $scope.index).offsetTop;
       // scroll and add space for the navbar
       var navBarHeight = 100;
       $("body").animate({scrollTop: top - navBarHeight}, "slow");
+
+      $scope.isActive = { active:true };
     }
   });
 }]);
