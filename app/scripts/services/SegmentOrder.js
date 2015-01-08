@@ -8,13 +8,14 @@ angular.module('services').factory('SegmentOrder', ['$http', '$rootScope', 'base
     // WORKING - get the lowest segment which is not yet translated - depends on the segment model
     nextSegment: function(current, allSegments) {
       $log.log('nextSegment - current: ' + current);
-      var index = this.order.indexOf(current);
-      if (index != -1) {
-        if (index+1 == this.order.length)
-          return -1;
-        return this.order[index + 1];
-      }
-      return 0;
+      //var index = this.order.indexOf(current);
+      //if (index != -1) {
+      //  if (index+1 == this.order.length)
+      //    return -1;
+      //  return this.order[index + 1];
+      //}
+      //return 0;
+      return 1;
     }
   };
 

@@ -1,4 +1,4 @@
-describe('Unit: test the SegmentOrder service', function () {
+xdescribe('Unit: test the SegmentOrder service', function () {
 
   var SegmentOrder, $q, $rootScope;
 

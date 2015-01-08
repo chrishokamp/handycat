@@ -57,6 +57,7 @@ module.exports = function() {
         'app/scripts/services/glossary.js',
         'app/scripts/services/fileReader.js',
         'app/scripts/services/xliffParser.js',
+        'app/scripts/services/xliffTwoParser.js',
         'app/scripts/services/tokenizer.js',
         'app/scripts/services/ruleMap.js',
         'app/scripts/services/copyPunctuation.js',

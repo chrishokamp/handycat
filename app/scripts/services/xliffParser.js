@@ -67,7 +67,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
       Document.DOM = xml;
       // Working - the XLIFF parser returns a Document representation of the XLIFF
       Document.segments = [];
-      Document.translatableNodes = [];
       Document.sourceLang = sourceLang;
       Document.targetLang = targetLang;
       // initialize the revision property on the document object
@@ -133,11 +132,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
 
           // Add the pairs so we can access both sides from a single ngRepeat
           Document.segments.push(segPair);
-
-          // TODO: make this useful
-          Document.translatableNodes.push(seg);
-
-          Document.completedSegments.push(false);
       });
 
 

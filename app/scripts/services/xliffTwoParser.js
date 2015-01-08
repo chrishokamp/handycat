@@ -1,7 +1,6 @@
-// - refactoring - the XLIFF parser should just return an object which provides a javascript interface to the XLIFF DOM
-// - the API to the XLIFF DOM should be in the editArea, XLIFF objects should not be global in the app
+// This is a parser for XLIFF 2.0 files
 
-angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$q', '$http', '$log',
+angular.module('services').factory('XliffTwoParser', ['$rootScope','fileReader', '$q', '$http', '$log',
   function($rootScope, fileReader, $q, $http, $log) {
   // Persistent DOMParser
   var parser = new DOMParser();
@@ -67,7 +66,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
       Document.DOM = xml;
       // Working - the XLIFF parser returns a Document representation of the XLIFF
       Document.segments = [];
-      Document.translatableNodes = [];
       Document.sourceLang = sourceLang;
       Document.targetLang = targetLang;
       // initialize the revision property on the document object
@@ -136,8 +134,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
 
           // TODO: make this useful
           Document.translatableNodes.push(seg);
-
-          Document.completedSegments.push(false);
       });
 
 
