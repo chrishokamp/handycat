@@ -1,9 +1,10 @@
 $indigo900: #1A237E;
 $indigo500: #3F51B5;
 $indigo300: #7986CB;
+$white: white;
 
 .cover-all {
-  background-color: lightblue;
+  background-color: $white;
   position: absolute;
   top:0;
   height:200px;
@@ -29,11 +30,11 @@ $indigo300: #7986CB;
 
 // todo: move these to the project list partial
 .selector {
-  background-color: $indigo500;
+  background-color: $white;
 }
 
 .info-panel {
-  background-color: $indigo900;
+  background-color: $white;
 }
 
 .attract {

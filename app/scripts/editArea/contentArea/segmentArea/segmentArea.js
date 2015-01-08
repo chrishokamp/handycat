@@ -21,52 +21,21 @@ angular.module('controllers')
     // as they select segments, we log: { source: source-text, target_prefix: target-text, completion: <selected unit from autocomplete> }
 
     $scope.sampleOptions = [
-      {'segment': 'Schließen Sie alle laufenden Programme, und starten Sie den Computer neu .',
-        'created': 'August 26, 1984',
+      {'segment': 'Zweifellos gibt es geheime Schwarzmarktgruppen im Internet, die große Mühe geben, von Strafverfolgung versteckt zu bleiben',
+        'created': 'January 26, 2014',
         'quality': 0.95,
+        'provider': 'Chris Hokamp'
+      },
+      {'segment': 'Zweifellos gibt es geheimere Schwarzmarkt-Gruppen im Internet, die große Mühe geben, Strafverfolgung verborgen bleiben.',
+        'created': 'August 26, 2013',
+        'quality': 0.8,
+        'provider': 'Microsoft Translator'
+      },
+      {'segment': 'Zweifellos gibt es geheimnisSchwarzMarktGruppen im Internet, die große Mühe geben, bleiben von Strafverfolgungs versteckt.',
+        'created': 'October 5, 2013',
+        'quality': 0.6,
         'provider': 'Google Translate'
       },
-      {'segment': 'es-zh-test',
-        'created': 'Novemeber 15, 2013',
-        'projectState': 'completed',
-        'quality': 0.2,
-        'projectCreator': 'Chris Hokamp'
-      },
-      {'segment': 'million dollar translation project',
-        'created': 'January 26, 2014',
-        'quality': 0.3,
-        'projectState': 'pending',
-        'projectCreator': 'Chris Hokamp'
-      },
-      {'segment': 'es-zh-test',
-        'created': 'Novemeber 15, 2013',
-        'quality': 0.5,
-        'projectState': 'completed',
-        'projectCreator': 'Chris Hokamp'
-      },
-      {'segment': 'million dollar translation project',
-        'created': 'January 26, 2014',
-        'quality': 0.9,
-        'projectState': 'pending',
-        'projectCreator': 'Chris Hokamp'
-      },
-      {'segment': 'es-zh-test',
-        'created': 'Novemeber 15, 2013',
-        'quality': 0.9,
-        'projectState': 'completed',
-        'projectCreator': 'Chris Hokamp'
-      },
-      {'segment': 'million dollar translation project',
-        'created': 'January 26, 2014',
-        'quality': 0.9,
-        'projectState': 'pending',
-        'projectCreator': 'Chris Hokamp'
-      },
-      {'segment': 'million dollar translation project',
-        'created': 'January 26, 2014',
-        'quality': 0.9,
-        'projectCreator': 'Chris Hokamp'
-      }
     ];
     $scope.clickTest = function() {
       $log.log('CLICKITY');

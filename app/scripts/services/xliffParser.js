@@ -83,6 +83,8 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
       $log.log('xliff version: ');
       $log.log(xliffTag.getAttribute('version'));
 
+      // TODO: fork here, depending on xliff version -- we want to support both 2.0 and 1.2 for the time being
+
       // Read the source and target language - set defaults to English and German
       var sourceLang = file.getAttribute('source-language');
       if (!sourceLang) sourceLang = 'en';
