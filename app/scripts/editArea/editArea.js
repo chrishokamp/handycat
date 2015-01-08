@@ -71,19 +71,15 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     };
 
     // Check if all the segments are marked as complete
-    // TODO: refactor to remove document.completedSegments (we don't need to maintain a separate list just to determine if the job is finished or not)
     // Working - we check the state of the segments themselves
     $scope.checkTranslationCompleted = function() {
       if (!$scope.document.DOM)
         return false; // do not show completed before starting the job!
-      for (var i = 0; i < $scope.document.completedSegments.length; ++i)
-        if ($scope.document.completedSegments[i] == false)
-          return false;
-      if (!$scope.scrollDone)
-        $scope.scrollToBottom();
-      return true;
-    };
 
+      return $scope.segments.every(function(val,idx) {
+        return val === 'translated';
+      });
+    };
 
     $scope.
       openHelp = function (size) {
@@ -110,7 +106,6 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     // Please note that $modalInstance represents a modal window (instance) dependency.
     // It is not the same as the $modal service used above.
     var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
-
       $scope.items = items;
       $scope.selected = {
         item: $scope.items[0]

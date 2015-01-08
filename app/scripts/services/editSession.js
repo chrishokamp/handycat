@@ -78,16 +78,10 @@ angular.module('services')
         },
 
         // Functions controlling movement through the document
+        // TODO: handle these completely within segmentOrder, no need for editSession here
         // order of segments
-        getNextSegment: function(currentSegment) {
-          $log.log('editSession - get next segment - currentSegment is: ' + currentSegment);
-//          if (SegmentOrder.order.length === 0)
-            // TODO: throw error here
-//            SegmentOrder.getOrder(Document.segments);
-          return SegmentOrder.nextSegment(currentSegment);
-        },
-        focusNextSegment: function(currentSegment) {
-          var next = this.getNextSegment(currentSegment);
+        focusNextSegment: function(currentSegment, segments) {
+          var next = SegmentOrder.nextSegment(currentSegment);
           $log.log('editSession: setting next segment as: ' + next);
           this.setSegment(next);
         },
@@ -117,8 +111,6 @@ angular.module('services')
           $log.log('update stat');
           $log.log(newAction);
         }
-
       }
-
 
     }]);
