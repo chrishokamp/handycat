@@ -77,24 +77,20 @@ exports.user = function(req, res, next, id) {
   User.load(id, function(err, user) {
     if (err) return next(err);
     if (!user) return next(new Error('Failed to load user ' + id));
-    // testing - put the user onto the req for downstream use
     req.user = user;
     next();
   });
 };
 
 /**
- * Update a user
+ * Update a user's data
  */
 exports.update = function(req, res) {
-  // TODO - where does req.user come from? - is it provided by $resource?
   var user = req.user;
   var id = user._id;
-//  delete user._doc._id;
 
   var tausUsername = req.body.tausUsername;
   var tausPassword = req.body.tausPassword;
-//  user.save(function(err) {
   User.update({ '_id': id }, {$set: { tausUsername: tausUsername, tausPassword: tausPassword}}, function(err, doc) {
     if (err) {
       console.log('Error in user update');

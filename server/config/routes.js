@@ -8,14 +8,15 @@ module.exports = function(app) {
   // User Routes
   var users = require('../controllers/users');
 
-  // - automatically calls a function when the userId parameter is present
-  app.param('userId', users.user);
+  // TODO: testing only
+  app.param('userId', auth.user.hasAuthorization);
 
   // Check if username is available
   app.get('/auth/check_username/:username', users.exists);
   app.post('/auth/users', users.create);
   app.get('/auth/users/:userId', users.show);
-  // todo: this lets any logged-in user update another user's taus TM data
+
+  // todo: this lets any logged-in user update another user's data
   app.put('/auth/users/:userId', auth.ensureAuthenticated, users.update);
   app.delete('/auth/users/:userId', auth.ensureAuthenticated, users.destroy);
 
@@ -24,13 +25,11 @@ module.exports = function(app) {
   // note: a new user needs to register with TAUS - or the specific translation service for this to work
   // Direct users here to register for an account: http://www.tausdata.org/index.php/component/users/?view=registration
   // sample call to the TAUS segment API
-  // TODO - implement errors to let users know which translation services they can access
   // https://www.tausdata.org/api/segment.json?source_lang=en-US&target_lang=fr-FR&q=data+center
   app.post('/users/tausdata', users.setTausData);
   // call the taus data API with source_lang=en-US, target_lang=fr-FR, q=<user query>
-  //app.get('/users/tausdata', users.setTausData);
 
-  // TODO: this route should actually add add an entry to the TM, not set the user's taus data
+  // TODO: this route should actually add add an entry to one or more TMs, not set the user's taus data
   app.post('/users/tm', auth.ensureAuthenticated, users.setTausData);
 //  app.get('/users/tm', auth.ensureAuthenticated, users.queryTM);
 

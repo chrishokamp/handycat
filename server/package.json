@@ -2,20 +2,21 @@
   "name": "glossary-server",
   "version": "0.0.1",
   "dependencies": {
-    "express": "*",
-    "gzippo": "*",
     "body-parser": "*",
+    "connect-mongo": "*",
     "cookie-parser": "*",
-    "express-session": "*",
+    "debug": "^2.1.1",
+    "ejs": "~0.8.4",
+    "express": "*",
     "express-error-handler": "*",
     "express-logger": "*",
+    "express-session": "*",
+    "gzippo": "*",
     "method-override": "*",
+    "mongoose": "*",
     "passport": "*",
     "passport-local": "*",
-    "mongoose": "*",
-    "ejs": "~0.8.4",
-    "underscore": "~1.5.2",
-    "connect-mongo": "*"
+    "underscore": "~1.5.2"
   },
   "engines": {
     "node": ">=0.8.0"

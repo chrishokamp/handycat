@@ -8,7 +8,6 @@ var express = require('express'),
    session = require('express-session'),
    errorHandler = require('express-error-handler'),
    methodOverride = require('method-override'),
-//   logger = require('express-logger'),
    passport = require('passport'),
    path = require('path'),
    fs = require('fs'),
@@ -66,7 +65,8 @@ app.use(methodOverride());
 
 // cookieParser should be above session
 app.use(cookieParser());
-// express/mongo session storage
+
+// express/mongo/passport session storage
 app.use(session({
   secret: config.secret,
   store: new mongoStore({
