@@ -3,7 +3,6 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
   function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, $rootScope, Wikipedia, $timeout,
            Projects, XliffParser, $stateParams) {
 
-  // TODO: move this to a proper global controller for the edit area
   // global user options (may be accessed or changed from child controllers)
   $scope.visible = {
     toolbar: false,
@@ -47,31 +46,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       saveAs(bb, "document.xliff");
     };
 
-    $scope.showReplaceModal = function() {
-      var modalInstance = $modal.open({
-        templateUrl: 'scripts/contentArea/replace-modal.html',
-        controller: 'ReplaceCtrl'
-      });
-
-      modalInstance.result.then(function () {
-      }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
-      });  };
-
-    $scope.$on('perform-propagation', function(event, action) {
-      $scope.$broadcast('propagate-action', action);
-    });
-
-    // Move to the bottom of the page when all the segments are complete
-    $scope.scrollDone = false;
-    $scope.scrollToBottom = function() {
-      $location.hash('footmsg');
-      $anchorScroll();
-      $scope.scrollDone = true;
-    };
-
     // Check if all the segments are marked as complete
-    // Working - we check the state of the segments themselves
     $scope.checkTranslationCompleted = function() {
       if (!$scope.document.DOM)
         return false; // do not show completed before starting the job!
@@ -81,12 +56,12 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       });
     };
 
+    // HELP MODAL
     $scope.
       openHelp = function (size) {
 
       var modalInstance = $modal.open({
         templateUrl: 'scripts/contentArea/help-modal.html',
-//      template: '<div>TEST MODAL</div>',
         controller: ModalInstanceCtrl,
         size: size,
         resolve: {
