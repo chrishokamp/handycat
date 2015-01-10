@@ -1,15 +1,15 @@
 <section ng-controller="EditAreaCtrl">
 
+  <!--LOADING OVERLAY-->
   <!-- show the loading sheet before the ng-repeat is finished -->
-  <!-- scope.on repeat-finished -->
   <div ng-show="visible.projectLoading" layout="vertical" layout-align="center center" class="page-loading-overlay">
     <h4 class="text-info">Project Loading...</h4>
     <md-progress-linear mode="indeterminate"></md-progress-linear>
   </div>
+  <!--END LOADING OVERLAY-->
 
   <!--TODO: the loadProject() function causes a cascade of timeouts in child controllers -- the document object should resolve before this scope loads-->
   <div ng-init="loadProject()">
-
 
     <!-- TODO: remove the HUD toolbar, put the controls for the toolbar elsewhere -->
     <div class="navbar-fixed-bottom"> <hud-toolbar></hud-toolbar></div>
@@ -18,10 +18,16 @@
     <div class="edit-area-wrapper">
       <div class="container">
 
+        <!--TOOLBAR-->
         <!-- singleton directive containing the toolbar -->
         <toolbar class="widget-toolbar" active-segment="activeSegment" segments="document.segments" ng-show="visible.toolbar"></toolbar>
+        <!--END TOOLBAR-->
 
         <!-- repeat for each segment -->
+        <!-- WORKING - the segment area is a container for widgets which provide styling and behavior on source and target sentences -->
+        <!-- WORKING - the button group lets the user select which component is currently showing -->
+        <!-- WORKING - components are directives which are databound to the segment object (or its properties)-->
+
         <!--TODO: remove all bootstrap grid styling, switch to flexbox styles -->
         <div class="segment row"
              ng-class="{  pending: !(getSegmentState(id.index) === 'translated'), completed: getSegmentState(id.index) === 'translated'}"
@@ -35,21 +41,12 @@
           <a id="anchor-{{$index}}"></a>
           <!-- the segment info row -->
           <div class="row segment-muted-text">
-            <div class="col-xs-4">Segment Index: {{$index}}
-              <!--<span class="segment-finished" ng-show="segmentState.completed">-->
-              <!--<md-button>-->
-              <!--<span class="glyphicon glyphicon-ok"></span> Complete-->
-              <!--</md-button>-->
-              <!--</span>-->
-              <!--<span class="segment-finished" ng-hide="segmentState.completed">-->
-              <!--<md-button>-->
-              <!--<span class="glyphicon glyphicon-flag"></span> Pending-->
-              <!--</md-button>-->
-              <!--</span>-->
-            </div>
+            <div class="col-xs-4">Segment Index: {{$index}}</div>
+
+            <!--TODO: WORKING - add selector buttons for every translation component-->
+            <!--TRANSLATION COMPONENT SELECTOR-->
             <div class="col-xs-6 pull-right translation-buttons">
 
-              <!--TODO: WORKING - replace this with the translation selector component-->
               <!--<md-button ng-click="shared.sourceTranslations(segment.source); showTranslations = !showTranslations"><i class="ion-ios7-bolt"></i></md-button>-->
               <md-button ng-click="clickTest()"><i class="ion-ios7-bolt"></i></md-button>
               <span ng-show="translationsPending">retrieving translations<i class="ion-loading-c"></i></span>
@@ -59,8 +56,11 @@
                   <md-button ng-click="shared.setText(resource.target)">{{resource.provider}}</md-button>
                 </span>
             </div>
+            <!--END TRANSLATION COMPONENT SELECTOR-->
           </div>
+
           <!-- the source and target rows -->
+          <!--TODO: - the source and target component containers should be 'component-container' directives-->
           <div ng-class="{activeshadow: activeSegment === $index}">
             <div class="bottom-margin">
               <div class="row">
@@ -82,6 +82,7 @@
                 <div class="col-sm-6">
                   <div class="row">
                     <div class="bottom-margin">
+                      <!--WORKING - add other components here-->
                       <static-target text="{{segment.target}}"></static-target>
                     </div>
                   </div>

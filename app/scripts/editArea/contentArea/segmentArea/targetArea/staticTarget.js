@@ -8,8 +8,7 @@ angular.module('directives').directive('staticTarget', ['editSession', '$compile
       // make the height the same as the source (max of source+target heights)
 
       // TODO: adding this component is slow
-      // TODO: either we need to load it beforehand (i.e. one segment early), or we need to find the bottleneck
-
+      // TODO: either we need to load it beforehand (i.e. one segment early), or we need to find the bottleneck (it's probably loading the ace editor)
       el.on('click', function() {
         $log.log('targetText was clicked...');
         var newHtml = '<div ng-include="\'scripts/editArea/contentArea/segmentArea/targetArea/target-area.html\'"></div>';
