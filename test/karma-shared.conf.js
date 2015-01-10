@@ -63,7 +63,7 @@ module.exports = function() {
         'app/scripts/services/copyPunctuation.js',
         'app/scripts/services/TranslationMemory.js',
         'app/scripts/services/wikipedia.js',
-        'app/scripts/services/segmentOrder.js',
+        'app/scripts/services/SegmentOrder.js',
         'app/scripts/services/editSession.js',
         'app/scripts/services/logger.js',
 

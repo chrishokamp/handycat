@@ -1,4 +1,4 @@
-describe('XliffTwoParser', function () {
+xdescribe('XliffTwoParser', function () {
 
   // TODO: implement the XLIFF 2.0 test suite on the parser (also the ITS test suite(?))
   // TODO: Remember that the XliffTwoParser returns a Document object (internal application representation)

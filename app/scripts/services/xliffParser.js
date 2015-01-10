@@ -62,6 +62,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
         self.parsingError = false;
       }
 
+      // BEGIN: define the application-internal document object
       var Document = {};
       // Set Document DOM to the parsed result
       Document.DOM = xml;
@@ -71,8 +72,10 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
       Document.targetLang = targetLang;
 
       Document.segmentStates = [];
+
       // initialize the revision property on the document object
       Document.revision = 0;
+      // END: define the application-internal document object
 
       var file = xml.querySelector("file");
       var xliffTag = xml.querySelector("xliff");
