@@ -1,7 +1,7 @@
 angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal',
-  '$log', 'SegmentOrder', '$rootScope', 'Wikipedia', '$timeout', 'Projects', 'XliffParser', '$stateParams',
-  function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, $rootScope, Wikipedia, $timeout,
-           Projects, XliffParser, $stateParams) {
+  '$log', 'SegmentOrder', 'editSession', '$rootScope', 'Wikipedia', '$timeout', 'Projects', 'XliffParser', '$stateParams', '$q',
+  function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, editSession, $rootScope, Wikipedia, $timeout,
+           Projects, XliffParser, $stateParams, $q) {
 
   // global user options (may be accessed or changed from child controllers)
   $scope.visible = {
@@ -9,6 +9,9 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     projectLoading: true
   };
 
+  $scope.test = $q.defer();
+
+  $scope.testProm = $scope.test.promise;
   // TODO: resolve the projectResource and the parsed document object before this state loads
   // This is the init function that sets up an edit session
   $scope.loadProject = function () {
@@ -19,6 +22,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       XliffParser.parseXML(projectResource.content).then(
         function(documentObj) {
           $scope.document = documentObj;
+          $scope.test.resolve();
 
           // The segment exchange format (in document.segments) is:
 //          var segPair = { source: sourceText, target: targetText, sourceDOM: seg[0],targetDOM: seg[1]};
@@ -133,4 +137,73 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     $scope.$on('concordancer-error', function() {
       $scope.concordancerError = true;
     });
-  }]);
+
+    // TODO: remove the manual timeout -- wait for promise to resolve when we hit the edit route
+    // add a promise to the parent scope that this scope can see
+    // put the document
+    // $scope.document gets set by EditAreaCtrl in $scope.loadProject
+    $scope.testProm.then(function() {
+      $log.log('Content area: then resolved');
+    })
+    $timeout(function() {
+      $scope.language = $scope.document.targetLang;
+      $scope.numSegments = $scope.document.segments.length;
+      $scope.segments = $scope.document.segments;
+      //  $scope.$watch(function() {
+      //      return $scope.document.revision;
+      //    },
+      //    function() {
+      //      $log.log("ContentAreaCtrl: Number of segments in document: " + $scope.document.segments.length);
+      //
+      //      // segments is a list of [source, target] pairs
+      //      $scope.segments = $scope.document.segments;
+      //
+      //    }
+      //  );
+    },500);
+
+    // this fires once the view content has completely loaded
+    $rootScope.$on('repeat-finished', function (event) {
+      $log.log('Heard repeat-finished');
+      // quick hack -- just activate segment 0
+      editSession.setSegment(0);
+      // TODO: initialize the session metadata from the session metadata on the server
+      // TODO: activeSegment is here so that the toolbar knows where it should go
+      $scope.activeSegment = 0;
+
+      var segmentId = $stateParams.segmentId;
+      if (segmentId) {
+        var anchorElem = document.getElementById('segment-' + segmentId);
+        if (anchorElem) {
+          var top = anchorElem.offsetTop;
+          $("body").animate({scrollTop: top-60}, "slow");
+        }
+      }
+    });
+
+    // listen for a segment change, and reset $scope.activeSegment accordingly
+    $scope.$on('changeSegment', function(evt, data) {
+      $scope.activeSegment = data.currentSegment
+    })
+
+
+    // if the state changes during the session without a reload
+    $rootScope.$on('$stateChangeStart',
+      function(event, toState, toParams, fromState, fromParams){
+        var segmentId = toParams.segmentId;
+        if (toState.name.match(/edit\.segment/) && segmentId) {
+          var anchorElem = document.getElementById('segment-' + segmentId);
+          if (anchorElem) {
+            var top = anchorElem.offsetTop;
+            $("body").animate({scrollTop: top-60}, "slow");
+          }
+        }
+      });
+
+    editSession.updateStat('pearl-document-loaded', -1, '');
+
+    // DEV UTILS
+    $scope.showXLIFF = false;
+    // END DEV UTILS
+
+ }]);

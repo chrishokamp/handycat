@@ -70,8 +70,6 @@ angular.module('services').factory('XliffTwoParser', ['$rootScope','fileReader',
       Document.targetLang = targetLang;
 
       Document.segmentStates = [];
-      // initialize the revision property on the document object
-      Document.revision = 0;
 
       var file = xml.querySelector("file");
       var xliffTag = xml.querySelector("xliff");

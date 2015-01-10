@@ -50,21 +50,6 @@
         </tab>
         <tab>
             <tab-heading>
-                Edit history <span class="badge" ng-show="editHistory.length">{{editHistory.length}}</span>
-            </tab-heading>
-            <div class="edit-history">
-                <p>List of edits performed in this segment</p>
-
-                <div ng-repeat="edit in editHistory track by $index">
-                    {{edit.description}}
-                    <button type="button" class="btn btn-default" ng-hide="segmentNumber != edit.segment" ng-click="propagateEdit($index)">
-                        <span class="glyphicon glyphicon-fullscreen"></span> Propagate to other segments
-                    </button>
-                </div>
-            </div>
-        </tab>
-        <tab>
-            <tab-heading>
                 Settings
             </tab-heading>
             <div class="settings">

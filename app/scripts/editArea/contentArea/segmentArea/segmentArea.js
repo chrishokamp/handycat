@@ -155,7 +155,6 @@ angular.module('controllers')
     // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
     // Right now, we depend on $scope.segment.targetDOM.textContent and $scope.segment.target being manually synced
     $scope.segment.targetDOM.textContent = $scope.segment.target;
-    $scope.document.revision++;
 
     // Update the project on the server
     $scope.projectResource.content = XliffParser.getDOMString($scope.document.DOM);

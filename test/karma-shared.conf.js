@@ -94,7 +94,6 @@ module.exports = function() {
         'app/scripts/projects/create/createProject.js',
         'app/scripts/login/Login.js',
         'app/scripts/signup/Signup.js',
-        'app/scripts/editArea/contentArea/contentArea.js',
         'app/scripts/projects/projects.js',
         'app/scripts/editArea/contentArea/segmentArea/segmentArea.js',
         'app/scripts/editArea/editArea.js',

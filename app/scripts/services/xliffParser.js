@@ -73,8 +73,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
 
       Document.segmentStates = [];
 
-      // initialize the revision property on the document object
-      Document.revision = 0;
       // END: define the application-internal document object
 
       var file = xml.querySelector("file");
