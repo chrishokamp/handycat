@@ -47,10 +47,14 @@
   </snap-drawer>
 
   <snap-content snap-options="{touchToDrag:false}">
-    <!-- TODO: add controller for the snapper, use scope and ng-repeat to manage menu items instead of hard-coding  -->
-    <cat-nav></cat-nav>
-    <div ui-view></div>
+    <div layout="column" layout-fill>
+      <cat-nav></cat-nav>
+      <!--md-content is here because the cat-nav places a md-toolbar element as its sibling -->
+      <md-content>
+        <div ui-view></div>
+      </md-content>
 
-    <div class="footer"></div>
+      <!--<div class="footer"></div>-->
+    </div>
   </snap-content>
 </div>
