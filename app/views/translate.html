@@ -16,6 +16,7 @@
 
     <!-- translation area -->
     <div class="edit-area-wrapper">
+      <!-- the container class is currently important because it pads the window -->
       <div class="container">
 
         <!--TOOLBAR-->
@@ -29,7 +30,9 @@
         <!-- WORKING - components are directives which are databound to the segment object (or its properties)-->
 
         <!--TODO: remove all bootstrap grid styling, switch to flexbox styles -->
-        <div class="segment row"
+        <div class="segment"
+             layout="column"
+             layout-fill
              ng-class="{  pending: !(getSegmentState(id.index) === 'translated'), completed: getSegmentState(id.index) === 'translated'}"
              id="segment-{{$index}}"
              ng-controller="SegmentAreaCtrl"
@@ -40,12 +43,12 @@
           <!-- just an anchor to let us find this place in the DOM -->
           <a id="anchor-{{$index}}"></a>
           <!-- the segment info row -->
-          <div class="row segment-muted-text">
-            <div class="col-xs-4">Segment Index: {{$index}}</div>
+          <div layout="row" class="segment-muted-text">
+            <div flex>Segment Index: {{$index}}</div>
 
             <!--TODO: WORKING - add selector buttons for every translation component-->
             <!--TRANSLATION COMPONENT SELECTOR-->
-            <div class="col-xs-6 pull-right translation-buttons">
+            <div flex class="translation-buttons">
 
               <!--<md-button ng-click="shared.sourceTranslations(segment.source); showTranslations = !showTranslations"><i class="ion-ios7-bolt"></i></md-button>-->
               <md-button ng-click="clickTest()"><i class="ion-ios7-bolt"></i></md-button>
@@ -61,32 +64,25 @@
 
           <!-- the source and target rows -->
           <!--TODO: - the source and target component containers should be 'component-container' directives-->
-          <div ng-class="{activeshadow: activeSegment === $index}">
-            <div class="bottom-margin">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="row">
-                    <div class="col-xs-12 bottom-margin">
-                      <div ng-show="segment.state === 'translated'" class="segment-finished-target">
-                        <p>{{segment.source}}</p>
-                      </div>
-                      <div ng-hide="segment.state === 'translated'" class="content-card">
-                        <div class="source">
-                          <source-area source-sentence="segment.source"></source-area>
-                        </div>
-                      </div>
-                    </div>
+          <!--WORKING - refactor to use ng-material grid-->
+          <div ng-class="{activeshadow: activeSegment === $index}" layout="row" layout-padding class="bottom-margin">
+            <div flex layout="column">
+              <div class="bottom-margin">
+                <div ng-show="segment.state === 'translated'" class="segment-finished-target">
+                  <p>{{segment.source}}</p>
+                </div>
+                <div ng-hide="segment.state === 'translated'" class="content-card">
+                  <div class="source">
+                    <source-area source-sentence="segment.source"></source-area>
                   </div>
                 </div>
+              </div>
+            </div>
 
-                <div class="col-sm-6">
-                  <div class="row">
-                    <div class="bottom-margin">
-                      <!--WORKING - add other components here-->
-                      <static-target text="{{segment.target}}"></static-target>
-                    </div>
-                  </div>
-                </div>
+            <div flex layout="column">
+              <div class="bottom-margin">
+                <!--WORKING - add other components here-->
+                <static-target text="{{segment.target}}"></static-target>
               </div>
             </div>
           </div>

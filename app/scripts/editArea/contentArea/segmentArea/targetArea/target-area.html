@@ -1,13 +1,13 @@
-<div class="col-xs-12" ng-controller="AceCtrl" >
+<div layout="column" ng-controller="AceCtrl" >
 
-  <div class="row">
+  <div layout="row">
     <!-- the appearance of the segment when the user has indicated that it is complete -->
-    <div ng-show="getSegmentState($index) === 'translated'" class="col-xs-12 segment-finished-target" ng-click="activate($index)">
+    <div flex ng-show="getSegmentState($index) === 'translated'" class="segment-finished-target" ng-click="activate($index)">
       <p>{{segment.target}}</p>
     </div>
 
     <!-- the editing panel and controls -->
-    <div ng-show="getSegmentState($index) === 'initial'" class="col-xs-12" ng-click="activate($index)">
+    <div flex ng-show="getSegmentState($index) === 'initial'" ng-click="activate($index)">
       <!--the translation resource selection component-->
       <!-- when opened, it animates to cover its container component-->
       <div ng-show="showTranslations" class="cssSlideUp cover-all">
@@ -17,11 +17,11 @@
           ></translation-selector>
       </div>
       <!--TODO: add the translation selector component - change css to fit with target area css-->
-      <div class="col-xs-12 frame" ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
+      <div ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
     </div>
 
     <!--  the side-controls of the target panel -->
-    <div ng-show="isActive.active" class="pull-right" style="position: absolute; top: 0px; right: -40px">
+      <div ng-show="isActive.active">
       <div>
         <div>
           <md-button ng-click="segmentFinished($index)" ng-disabled="segment.state === 'translated'"><span class="glyphicon glyphicon-ok-sign"></span></md-button>
@@ -43,5 +43,3 @@
 <!-- the enhanced typeahead component -->
 <!--<div ng-model="selected" place-after="ace_cursor" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='overwritePrefix($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>-->
 
-</div>
-</div>

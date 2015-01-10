@@ -1,19 +1,15 @@
-<md-toolbar md-scroll-shrink>
-  <div class="md-toolbar-tools md-toolbar-tools-top top-toolbar">
-  <div>
+<md-toolbar md-scroll-shrink="true">
+  <div layout="horizontal" class="md-toolbar-tools md-toolbar-tools-top top-toolbar">
     <a snap-toggle><md-button ><i class="ion-navicon-round" style="font-size: large;"></i></md-button></a>
 
-    <!--<span>My App's Title</span>-->
     <!-- fill up the space between left and right area -->
     <span flex></span>
 
     <md-button>
       {{ currentUser.username }}
     </md-button>
-    <!--TODO -- wire together-->
-    <!--<h4>HandyCAT Menu</h4>-->
 
-    <!--<div>-->
+    <!--TODO -- wire together-->
     <!--<li><a ng-href="{{url}}/logger/session/{{session.sessionId}}" target="_blank">Session: {{session.sessionIdShort}}</a></li>-->
 
     <!--<ul ng-show="currentUser">-->

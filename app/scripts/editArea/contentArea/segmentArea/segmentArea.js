@@ -7,8 +7,6 @@ angular.module('controllers')
   function($rootScope, $scope, TranslationMemory, Wikipedia, Glossary, $log, ruleMap, copyPunctuation, Session, Logger,
            Projects, XliffParser, $http) {
 
-    // TODO: testing only
-
     // working - utils for autocompletion
     // TODO: use the autocompleters service to resolve the autocompleters for the user
     // GET /autocompleters --

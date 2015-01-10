@@ -3,7 +3,7 @@ angular.module('directives').directive('staticTarget', ['editSession', '$compile
   return {
     restrict: 'E',
     // WORKING: pending, active, and completed are segment-level properties, and should be handled there
-    template: '<div class="content-card"><div class="target">{{segment.target}}</div></div>',
+    template: '<div class="content-card"><div>{{segment.target}}</div></div>',
     link: function($scope,el){
       // make the height the same as the source (max of source+target heights)
 
