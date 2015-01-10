@@ -48,21 +48,6 @@
 
             <div ng-show="concordancerError"><p>Error: Unable to access the concordance service.</p></div>
         </tab>
-        <tab>
-            <tab-heading>
-                Settings
-            </tab-heading>
-            <div class="settings">
-                <p>Show invisible characters
-                    <button type="button" class="btn btn-primary" ng-model="showInvisibleChars"
-                            btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-init="showInvisibleChars=0"
-                            ng-click="updateShowInvisibleChars(!showInvisibleChars)">
-                        <span ng-hide="showInvisibleChars">Off</span>
-                        <span ng-show="showInvisibleChars">On</span>
-                    </button>
-                </p>
-            </div>
-        </tab>
     </tabset>
 </div>
 
