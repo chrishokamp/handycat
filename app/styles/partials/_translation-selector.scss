@@ -6,10 +6,9 @@ $white: white;
 .cover-all {
   background-color: $white;
   position: absolute;
-  top:0;
   height:200px;
   z-index: 1000;
-  width: 96%;
+//  width: 96%;
   overflow-x: hidden;
   overflow-y: scroll;
 //  margin-left: -10px;

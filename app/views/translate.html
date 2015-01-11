@@ -67,11 +67,11 @@
           <!--WORKING - refactor to use ng-material grid-->
           <div ng-class="{activeshadow: activeSegment === $index}" layout="row" layout-padding class="bottom-margin">
             <div flex layout="column">
-              <div class="bottom-margin">
+              <div class="bottom-margin content-card">
                 <div ng-show="segment.state === 'translated'" class="segment-finished-target">
                   <p>{{segment.source}}</p>
                 </div>
-                <div ng-hide="segment.state === 'translated'" class="content-card">
+                <div ng-hide="segment.state === 'translated'">
                   <div class="source">
                     <source-area source-sentence="segment.source"></source-area>
                   </div>
@@ -80,7 +80,7 @@
             </div>
 
             <div flex layout="column">
-              <div class="bottom-margin">
+              <div class="bottom-margin content-card">
                 <!--WORKING - add other components here-->
                 <static-target text="{{segment.target}}"></static-target>
               </div>
