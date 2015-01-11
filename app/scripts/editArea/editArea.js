@@ -27,7 +27,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
         XliffParser.parseXML(projectResource.content).then(
           function(documentObj) {
             $scope.document = documentObj;
-            $scope.docPromise.resolve();
+            docDeferred.resolve();
 
             // The segment exchange format (in document.segments) is:
 //          var segPair = { source: sourceText, target: targetText, sourceDOM: seg[0],targetDOM: seg[1]};
