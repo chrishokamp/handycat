@@ -212,19 +212,19 @@ angular.module('controllers').controller('AceCtrl',
     // lines 237 adds the keyboard handlers to the ace popup
     // see also:lib/ace/keyboard/keybinding.js
 
-    editor.setOptions(
-      {
-        enableBasicAutocompletion: true,
-        enableLiveAutocompletion: true,
-        enable: true
-      });
-
-    // automatically show the autocomplete - hack from stackoverflow
-    editor.commands.on("afterExec", function(e){
-      if (e.command.name == "insertstring"&&/^[\w.]$/.test(e.args)) {
-        editor.execCommand("startAutocomplete")
-      }
-    })
+    //editor.setOptions(
+    //  {
+    //    enableBasicAutocompletion: true,
+    //    enableLiveAutocompletion: true,
+    //    enable: true
+    //  });
+    //
+    //// automatically show the autocomplete - hack from stackoverflow
+    //editor.commands.on("afterExec", function(e){
+    //  if (e.command.name == "insertstring"&&/^[\w.]$/.test(e.args)) {
+    //    editor.execCommand("startAutocomplete")
+    //  }
+    //})
 
 
     // Add the users autocompleters
@@ -232,11 +232,9 @@ angular.module('controllers').controller('AceCtrl',
       function(autocompleteFunc) {
         langTools.addCompleter(autocompleteFunc);
       }
-    )
-
+    );
 
     // modify some of the display params for the Ace Editor
-    //editor.getSession().setUseWrapMode(true);
     var renderer = editor.renderer;
     renderer.setShowGutter(false);
     // hide the print margin
@@ -244,31 +242,14 @@ angular.module('controllers').controller('AceCtrl',
     renderer.setScrollMargin(10,0,0,0);
     // wrap words
     editor.session.setUseWrapMode(true);
-    // this doesn't work from CSS for some reason
-    editor.setFontSize(18);
+
+    // see: https://github.com/ajaxorg/ace/wiki/Configuring-Ace
+    editor.setOptions({
+      fontSize: '18px',
+      fontFamily: 'Menlo, monospace'
+    });
 
     // end modifying display params
-
-    // TODO: move matching height to a directive
-    var heightUpdateFunction = function() {
-
-      // http://stackoverflow.com/questions/11584061/
-      // add 1 to screen length to get some extra space
-      //var screenLength = editor.getSession().getScreenLength();
-//      screenLength += 1;
-//      var newHeight =
-//                screenLength
-//                * editor.renderer.lineHeight
-//                + editor.renderer.scrollBar.getWidth();
-
-      // TODO: remove hard-coding here and in the heightWatcher directive
-      //$scope.height.editorHeight = newHeight;
-      // emit ace editor height up the scope hierarchy - height change directives listen for current-height event
-
-      // This call is required for the editor to fix all of
-      // its inner structure for adapting to a change in size
-      //editor.resize();
-    };
 
     // logging each change to the editor - TODO: should this be event based?
     // using input event instead of change since it's called with some timeout

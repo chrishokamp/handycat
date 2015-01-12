@@ -52,15 +52,15 @@
 
   </snap-drawer>
 
-  <snap-content snap-options="{touchToDrag:false}">
-    <div layout="column" layout-fill>
+  <snap-content layout-fill
+                class="edit-area-wrapper"
+                snap-options="{touchToDrag:false}"
+                layout="column"
+    >
       <cat-nav></cat-nav>
       <!--md-content is here because the cat-nav places a md-toolbar element as its sibling -->
       <md-content>
         <div ui-view></div>
       </md-content>
-
-      <!--<div class="footer"></div>-->
-    </div>
   </snap-content>
 </div>

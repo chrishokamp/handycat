@@ -1,5 +1,6 @@
 @import "vendor/web-fonts";
-@include web-fonts(Roboto Slab);
+//@include web-fonts(Roboto Slab);
+@include web-fonts("Droid+Serif+Mono");
 
 // partials
 @import "partials/projects";
@@ -18,13 +19,13 @@
 }
 
 body {
-//  background-color: #F5F8F5;
-  // md 200 weight blue
-//  background-color: #81d4fa;
-  // md 100 weight blue
-  background-color: #b3e5fc;
+//  background-color: #b3e5fc;
 
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+//  font-family: 'Droid Serif Mono', monospace;
+//  font-family:source-code-pro, Courier, Monaco, Menlo, "Ubuntu Mono", Consolas, monospace;
+
+  font-family:Menlo, monospace;
+
   font-size: 18px;
 
   // minimum supported widths
@@ -35,13 +36,6 @@ body {
   // to put the content below the nav
   padding-top: 50px;
 
-}
-
-.snap-content {
-    background-color: #87cefa;
-    background-image:url('../images/ricepaper.png');
-//  background-image:url('../images/broken_noise.png');
-//  background-color: #b3e5fc;
 }
 
 .doc-content {
@@ -178,7 +172,7 @@ body {
   border-bottom: 5px solid #87cefa;
 }
 .edit-area-wrapper {
-  margin-top: 30px;
+  background-color: #ffffff;
 }
 
 /* style file input as a button (with bootstrap 3) */
@@ -328,17 +322,14 @@ ul.nav-tabs > li {
 
 /* Ace Editor Styles */
 .ace_editor {
-  line-height: normal;
   // sync min-height with content-card
   min-height: 200px;
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
-  font-weight: normal;
-  font-style: normal;
-//  padding: 10px;
-}
-
-.ace_editor div {
-  font: inherit!important;
+  // we need to target the <div> to apply styles to the ace editors
+  div {
+    line-height: 1.4 !important;
+//    font-style: normal !important;
+//    font-weight: 400 !important;
+  }
 }
 
 // don't highlight the active line
@@ -348,11 +339,6 @@ ul.nav-tabs > li {
 
 .ace_selected_token {
   background-color: LightGreen;
-}
-
-/* hack to hide the scrollbars in the ace editor */
-.ace_scrollbar {
-  //    display: none !important;
 }
 
 /* TODO: use marker.renderer to find a solution that can handle future edits */
@@ -378,72 +364,6 @@ ul.nav-tabs > li {
   }
 }
 
-.inline {
-  display: inline-block;
-}
-
-.word {
-  display: inline-block;
-  text-align: center;
-  min-width: 50px;
-  border: 1px dotted orange;
-}
-
-.word:hover {
-  background-color: pink;
-}
-
-.gap {
-  display: inline-block;
-  width: 20px;
-}
-
-.drop-hover {
-  background-color: orange;
-  width: 20px;
-}
-
-.row-padded {
-  margin-bottom: 6px;
-}
-
-/* animations */
-/* as the element is hidden */
-//.slide-in.ng-hide-add,
-//.slide-in.ng-hide-remove {
-//  -webkit-transition:0.5s linear all;
-//  transition:0.5s linear all;
-//
-//  /* remember to add this */
-//  display:block!important;
-//  opacity:1;
-//
-//}
-///* as the element is shown */
-//.slide-in.ng-hide {
-//  opacity:0;
-//}
-//
-//
-///* where is this used? */
-//.sample-show-hide.ng-hide-add, .sample-show-hide.ng-hide-remove {
-//  -webkit-transition:all linear 0.5s;
-//  -moz-transition:all linear 0.5s;
-//  -o-transition:all linear 0.5s;
-//  transition:all linear 0.5s;
-//  display:block!important;
-//}
-//
-//.sample-show-hide.ng-hide-add.ng-hide-add-active,
-//.sample-show-hide.ng-hide-remove {
-//  opacity:0;
-//}
-//
-//.sample-show-hide.ng-hide-add,
-//.sample-show-hide.ng-hide-remove.ng-hide-remove-active {
-//  opacity:1;
-//}
-//
 @-webkit-keyframes fade-out {
   0%   { opacity: 1; }
   100% { opacity: 0; }
