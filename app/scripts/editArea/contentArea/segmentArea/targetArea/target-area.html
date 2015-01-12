@@ -2,9 +2,6 @@
 
   <div layout="row">
     <!-- the appearance of the segment when the user has indicated that it is complete -->
-    <div flex ng-show="getSegmentState($index) === 'translated'" class="segment-finished" ng-click="activate($index)">
-      <p>{{segment.target}}</p>
-    </div>
 
     <!-- the editing panel and controls -->
     <div flex ng-show="getSegmentState($index) === 'initial'" ng-click="activate($index)">
