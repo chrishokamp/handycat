@@ -9,7 +9,8 @@ describe("Unit: Testing the AceCtrl", function() {
   // if we require editorComponentsApp, then we need to mock the call to /auth/session, because authentication gets set up in app.js
 
   beforeEach(function() {
-    module('editorComponentsApp');
+    module('services');
+    module('controllers');
     inject(function($controller, $rootScope, $compile, _$timeout_, $httpBackend) {
       $httpBackend.when('GET', '/auth/session').respond({'currentUser': 'testUser'});
       $timeout = _$timeout_;

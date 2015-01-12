@@ -2,6 +2,7 @@ describe("Unit: Testing the SegmentAreaCtrl", function() {
   var ctrl, scope, element, TranslationMemory;
 
   beforeEach(function() {
+    module('ngResource');
     module('services');
     module('controllers');
     inject(function($controller, $rootScope, $compile, _TranslationMemory_) {
@@ -27,19 +28,10 @@ describe("Unit: Testing the SegmentAreaCtrl", function() {
     expect(scope.segment).toBe(undefined);
   });
 
-  it('should fire an event on changeSegmentState', function() {
-    var eventName = 'complete';
-    scope.$on('change-segment-state', function(evt, data) {
-      console.log('heard change-segment-state event!');
-      expect(data.newState).toEqual(eventName);
-    });
-    scope.changeSegmentState('complete');
-  });
-
   describe('handling input from translation resources', function () {
     beforeEach(function() {
       var segment = { source: "test sentence", target: "Testsatz"};
-      // mocks of properties/functions on parent controller
+      // mocks of properties/functions on parent controllers
       scope.segment = segment;
 
       var currentUser = {

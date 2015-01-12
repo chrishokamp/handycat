@@ -101,8 +101,6 @@ var App = window.App = angular.module('editorComponentsApp',
 // heroku
 //.constant('baseUrl', 'http://protected-crag-2517.herokuapp.com/glossary');
 
-// localhost
-.constant('baseUrl', 'http://0.0.0.0:5002')
 
 // panacea
 //.constant('baseUrl', 'http://panaceadcu.dh.bytemark.co.uk:5002')
