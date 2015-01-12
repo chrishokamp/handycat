@@ -10,9 +10,15 @@ angular.module('controllers').controller('AceCtrl',
   var langTools = ace.require("ace/ext/language_tools");
   // end utils for autocompletion
 
-  // TODO: implement this stuff
-  //    - the editor should listen for the 'focus' event to be $broadcast - $watching the
-
+  $scope.$watch(function() {
+    return $scope.isActive.active;
+  },
+  function(isActive) {
+    $log.log('HEARD ACTIVE CHANGE: ' + $scope.isActive.active + "id: " + $scope.id.index);
+    if (isActive) {
+      $scope.editor.focus();
+    }
+  });
 
   // BEGIN AceEditor API
 
@@ -212,19 +218,19 @@ angular.module('controllers').controller('AceCtrl',
     // lines 237 adds the keyboard handlers to the ace popup
     // see also:lib/ace/keyboard/keybinding.js
 
-    //editor.setOptions(
-    //  {
-    //    enableBasicAutocompletion: true,
-    //    enableLiveAutocompletion: true,
-    //    enable: true
-    //  });
-    //
-    //// automatically show the autocomplete - hack from stackoverflow
-    //editor.commands.on("afterExec", function(e){
-    //  if (e.command.name == "insertstring"&&/^[\w.]$/.test(e.args)) {
-    //    editor.execCommand("startAutocomplete")
-    //  }
-    //})
+    editor.setOptions(
+      {
+        enableBasicAutocompletion: true,
+        enableLiveAutocompletion: true,
+        enable: true
+      });
+
+    // automatically show the autocomplete - hack from stackoverflow
+    editor.commands.on("afterExec", function(e){
+      if (e.command.name == "insertstring"&&/^[\w.]$/.test(e.args)) {
+        editor.execCommand("startAutocomplete")
+      }
+    })
 
 
     // Add the users autocompleters

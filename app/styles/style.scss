@@ -1,6 +1,5 @@
 @import "vendor/web-fonts";
-//@include web-fonts(Roboto Slab);
-@include web-fonts("Droid+Serif+Mono");
+@include web-fonts(Roboto Slab);
 
 // partials
 @import "partials/projects";
@@ -19,13 +18,8 @@
 }
 
 body {
-//  background-color: #b3e5fc;
-
-//  font-family: 'Droid Serif Mono', monospace;
 //  font-family:source-code-pro, Courier, Monaco, Menlo, "Ubuntu Mono", Consolas, monospace;
-
   font-family:Menlo, monospace;
-
   font-size: 18px;
 
   // minimum supported widths

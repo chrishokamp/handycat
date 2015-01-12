@@ -203,7 +203,7 @@ angular.module('controllers')
 
   // when the changeSegment event fires, each SegmentAreaCtrl scope responds
   // the change segment event is fired from changeSegment in the editSession service
-  // TODO: move this code to EditAreaCtrl
+  // this event is fired by editSession service
   $scope.$on('changeSegment', function(e,data) {
     if (data.currentSegment === $scope.id.index) {
       $log.log('segment: ' + $scope.id.index + ' --- heard changeSegment');
@@ -215,10 +215,10 @@ angular.module('controllers')
       $scope.setSegmentState('initial');
 
       // smooth scroll
-      var top = document.getElementById('segment-' + $scope.id.index).offsetTop;
+      //var top = document.getElementById('segment-' + $scope.id.index).offsetTop;
       // scroll and add space for the navbar
-      var navBarHeight = 100;
-      $("body").animate({scrollTop: top - navBarHeight}, "slow");
+      //var navBarHeight = 100;
+      //$("body").animate({scrollTop: top - navBarHeight}, "slow");
 
       // set this flag to true for the view
       $scope.isActive = { active:true };

@@ -35,13 +35,6 @@
     box-shadow: 4px 4px 2px #888;
   }
 }
-.segment.pending {
-  //  border: 1px dotted #D48651;
-}
-.segment.completed {
-  //  border: 1px dotted #90ee90;
-
-}
 
 .segment-finished-target {
   background-color: #90ee90;
@@ -51,3 +44,7 @@
   font-size: 18px !important;
 };
 
+.segment-controls {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
