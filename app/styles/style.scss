@@ -269,23 +269,6 @@ ul.nav-tabs > li {
   background-color: grey;
 }
 
-.reorder-toolbar {
-  button {
-    width: 34px;
-    font-size: 8px;
-    margin: 0;
-    border: 0;
-    border-radius: 2px !important;
-    span {
-      margin-left: 0;
-    }
-  }
-  //  padding: 0;
-  top: -2px;
-}
-
-
-
 %crosshair {
   cursor: crosshair;
   background-color: green;
@@ -314,41 +297,6 @@ ul.nav-tabs > li {
   }
 }
 
-/* Ace Editor Styles */
-.ace_editor {
-  // sync min-height with content-card
-  min-height: 200px;
-  // we need to target the <div> to apply styles to the ace editors
-  div {
-    line-height: 1.4 !important;
-//    font-style: normal !important;
-//    font-weight: 400 !important;
-  }
-}
-
-// don't highlight the active line
-.ace_active-line {
-  background-color: transparent !important;
-}
-
-.ace_selected_token {
-  background-color: LightGreen;
-}
-
-/* TODO: use marker.renderer to find a solution that can handle future edits */
-.ace_marker-layer .was-selected {
-  background-color: red;
-  position: absolute;
-  z-index: 5;
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-.ace_marker-layer .was-selected:hover {
-  @extend %crosshair;
-}
-
-/* End Ace Editor Styles */
 
 /* media queries for different screen sizes */
 /* bootstrap has a breakpoint at 780 */

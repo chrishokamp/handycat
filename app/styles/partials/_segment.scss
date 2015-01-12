@@ -48,3 +48,39 @@
   margin-top: 4px;
   margin-bottom: 4px;
 }
+
+/* Ace Editor Styles */
+.ace_editor {
+  // sync min-height with content-card
+  min-height: 200px;
+  // we need to target the <div> to apply styles to the ace editors
+  div {
+    line-height: 1.4 !important;
+    //    font-style: normal !important;
+    //    font-weight: 400 !important;
+  }
+}
+
+// don't highlight the active line
+.ace_active-line {
+  background-color: transparent !important;
+}
+
+.ace_selected_token {
+  background-color: LightGreen;
+}
+
+/* TODO: use marker.renderer to find a solution that can handle future edits */
+.ace_marker-layer .was-selected {
+  background-color: red;
+  position: absolute;
+  z-index: 5;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.ace_marker-layer .was-selected:hover {
+  @extend %crosshair;
+}
+
+/* End Ace Editor Styles */
