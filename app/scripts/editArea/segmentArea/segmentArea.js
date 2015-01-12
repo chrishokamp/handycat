@@ -42,37 +42,6 @@ angular.module('controllers')
       $scope.showTranslations = !$scope.showTranslations;
     }
 
-    // this function lets children update the segment value
-    // TODO: a problem with this approach is that the user cannot go back to the previous value in the editor (cannot undo)
-    $scope.setTargetValue = function(newValue) {
-      $scope.segment.target = newValue;
-    }
-
-    // the id gets reset in the template
-    $scope.id = {};
-
-    // TODO: set this only when this is actually the active scope
-    $scope.isActive = { active:true };
-
-    // possible states: ['initial', 'translated', 'reviewed', 'final']
-    // use $scope.getSegmentState from the template
-    $scope.getSegmentState = function(id) {
-      if (typeof(id) === 'number') {
-        $log.log('getSegmentState: ' + $scope.segments[$scope.id.index]['state']);
-        return $scope.segments[$scope.id.index]['state'];
-      }
-      // segmentState may be an empty obj if the segment hasn't been initialized in the template
-      return 'initial';
-    }
-
-    $scope.setSegmentState = function(state) {
-      if (typeof(state) === 'string') {
-        $scope.segments[$scope.id.index]['state'] = state;
-      } else {
-        throw 'The state name must be a string';
-      }
-    }
-
     // WORKING
     // create buttons for the user's translation resources -- we know what resources they have from $scope.currentUser
     // buttons appear when the translation is ready, onClick the value gets put into the editor or translation component
@@ -120,6 +89,38 @@ angular.module('controllers')
         $scope.translationResources.push(tmResponse);
 
       });
+    }
+
+
+    // this function lets children update the segment model value
+    // TODO: a problem with this approach is that the user cannot go back to the previous value in the editor (cannot undo)
+    $scope.setTargetValue = function(newValue) {
+      $scope.segment.target = newValue;
+    }
+
+    // the id gets reset in the template
+    $scope.id = {};
+
+    // TODO: set this only when this is actually the active scope
+    $scope.isActive = { active:true };
+
+    // possible states: ['initial', 'translated', 'reviewed', 'final']
+    // use $scope.getSegmentState from the template
+    $scope.getSegmentState = function(id) {
+      if (typeof(id) === 'number') {
+        $log.log('getSegmentState: ' + $scope.segments[$scope.id.index]['state']);
+        return $scope.segments[$scope.id.index]['state'];
+      }
+      // segmentState may be an empty obj if the segment hasn't been initialized in the template
+      return 'initial';
+    }
+
+    $scope.setSegmentState = function(state) {
+      if (typeof(state) === 'string') {
+        $scope.segments[$scope.id.index]['state'] = state;
+      } else {
+        throw 'The state name must be a string';
+      }
     }
 
   $scope.clearEditor = function() {
