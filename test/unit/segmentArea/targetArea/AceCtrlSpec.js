@@ -9,12 +9,18 @@ describe("Unit: Testing the AceCtrl", function() {
   // if we require editorComponentsApp, then we need to mock the call to /auth/session, because authentication gets set up in app.js
 
   beforeEach(function() {
+    module('ui.ace');
     module('services');
     module('controllers');
     inject(function($controller, $rootScope, $compile, _$timeout_, $httpBackend) {
       $httpBackend.when('GET', '/auth/session').respond({'currentUser': 'testUser'});
       $timeout = _$timeout_;
       scope = $rootScope.$new();
+      // the AceCtrl watches this property
+      scope.isActive = {
+        active: true
+      };
+
       // mock the 'segment' property on the parent scope (simulates SegmentAreaCtrl)
       var segment = { source: "test sentence", target: "Testsatz"};
       // mocks of properties/functions on parent controller (SegmentCtrl)
@@ -32,16 +38,19 @@ describe("Unit: Testing the AceCtrl", function() {
   });
 
   beforeEach(function() {
-      Range = ace.require('ace/range').Range;
-      selectRangeInEditor = function (aceRange) {
+    Range = ace.require('ace/range').Range;
+    selectRangeInEditor = function (aceRange) {
       scope.editor.getSelection().setSelectionRange(aceRange);
     };
   });
 
   // insert text via user input or functions on the AceCtrl
   describe('basic editor functionalities', function() {
+    //beforeEach(function() {
+    //  scope.$digest();
+    //});
+
     it('should have an instance of the Ace editor', function() {
-      scope.$digest();
       expect(scope.editor).toBeDefined();
     });
 
@@ -163,11 +172,5 @@ describe("Unit: Testing the AceCtrl", function() {
     });
 
   });
-
-  // EditMode tests - note that the edit mode depends upon the tokenizer function that you pass in
-  // tokenEdit mode
-//  it('has an edit mode which can rearrange spans', function() {
-// })
-
 
 });

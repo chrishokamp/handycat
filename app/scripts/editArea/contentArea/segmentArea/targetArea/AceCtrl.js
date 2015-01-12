@@ -10,12 +10,12 @@ angular.module('controllers').controller('AceCtrl',
   var langTools = ace.require("ace/ext/language_tools");
   // end utils for autocompletion
 
+  // TODO: this assumes that isActive is available in the scope hierarchy -- move this into the API of the ace-editor directive
   $scope.$watch(function() {
     return $scope.isActive.active;
   },
   function(isActive) {
-    $log.log('HEARD ACTIVE CHANGE: ' + $scope.isActive.active + "id: " + $scope.id.index);
-    if (isActive) {
+    if (isActive && $scope.editor) {
       $scope.editor.focus();
     }
   });
@@ -33,10 +33,6 @@ angular.module('controllers').controller('AceCtrl',
     }
   };
   $scope.setText = setText;
-  // override(expose) this function on parent controllers if it exists (note - the if block is for testing)
-  if ($scope.shared && typeof($scope.shared) === 'object'){
-    $scope.shared.setText = setText;
-  }
 
   // insert text at the caret location
   $scope.insertText = function(text) {

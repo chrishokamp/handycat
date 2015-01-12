@@ -68,21 +68,15 @@ describe("Unit: Testing the SegmentAreaCtrl", function() {
 
     });
 
-    it('should have a shared object containing functions that children can override', function() {
-      // create a child controller with scope.new(), and hit the functions in $scope.shared
-      scope.shared.setText();
-      var childScope = scope.$new();
-      var setText = function() {
-        childScope.testText = 'test';
-      }
-      expect(childScope.testText).toBeUndefined();
-      childScope.setText = setText;
-      scope.shared.setText = setText;
+    // TODO: this test shows why segmentArea should be a directive
+    it('should be able to change the model of $scope.segment', function() {
+      expect(scope.segment).toBeDefined();
+      expect(scope.segment.target).toEqual("Testsatz");
+      var testText = 'test';
 
-      // call the function on the parent controller
-      scope.shared.setText();
-      expect(childScope.testText).toEqual('test');
-    })
+      scope.setTargetValue(testText);
+      expect(scope.segment.target).toEqual(testText);
+    });
   });
 
 
