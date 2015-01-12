@@ -121,18 +121,19 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       // TODO: activeSegment is here so that the toolbar knows where it should go
       $scope.activeSegment = 0;
 
-      var segmentId = $stateParams.segmentId;
-      if (segmentId) {
-        var anchorElem = document.getElementById('segment-' + segmentId);
-        if (anchorElem) {
-          var top = anchorElem.offsetTop;
-          $("body").animate({scrollTop: top-60}, "slow");
-        }
-      }
+      //var segmentId = $stateParams.segmentId;
+      //if (segmentId) {
+      //  var anchorElem = document.getElementById('segment-' + segmentId);
+      //  if (anchorElem) {
+      //    var top = anchorElem.offsetTop;
+      //    $("body").animate({scrollTop: top-60}, "slow");
+      //  }
+      //}
     });
 
     // listen for a segment change, and reset $scope.activeSegment accordingly
     $scope.$on('changeSegment', function(evt, data) {
+      $log.log('HEARD ACTIVE SEGMENT');
       $scope.activeSegment = data.currentSegment
     })
 

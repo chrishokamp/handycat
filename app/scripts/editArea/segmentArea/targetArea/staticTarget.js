@@ -2,8 +2,7 @@
 angular.module('directives').directive('staticTarget', ['editSession', '$compile', '$log', function(session, $compile, $log) {
   return {
     restrict: 'E',
-    // WORKING: pending, active, and completed are segment-level properties, and should be handled there
-    templateUrl: 'scripts/editArea/targetArea/static-target.html',
+    templateUrl: 'scripts/editArea/segmentArea/targetArea/static-target.html',
     link: function($scope,el){
       // make the height the same as the source (max of source+target heights)
 

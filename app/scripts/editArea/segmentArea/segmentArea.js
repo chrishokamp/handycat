@@ -127,27 +127,24 @@ angular.module('controllers')
    $scope.$broadcast('clear-editor');
   };
 
-  // TODO: parent controller should listen for this event, we shouldn't have a separate function to update the project
   $scope.segmentFinished = function(segId) {
-    // TODO: call a function on the document API - document API should all be in EditAreaCtrl
+    segId = Number(segId);
     $log.log("SEGMENT FINISHED - segId is: " + segId);
     $scope.setSegmentState('translated');
     $scope.isActive.active = false;
-
-    // TODO: the rest of this function should be on the EditAreaCtrl
-    // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
-    // - this line is CRITICAL - tells the UI to move to the next segment
-    $log.log('$scope.index: ' + $scope.id.index);
-
-    // TODO: WORKING - fix segment ordering logic NOW!
-    Session.focusNextSegment($scope.id.index, $scope.segments);
-
     // Update the current segment in the XLIFF DOM
     // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
     // Right now, we depend on $scope.segment.targetDOM.textContent and $scope.segment.target being manually synced
     $scope.segment.targetDOM.textContent = $scope.segment.target;
 
-    // Update the project on the server
+    // TODO: the rest of this function should be on the EditAreaCtrl because it is not specific to this segment
+    // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
+    // - this line is CRITICAL - tells the UI to move to the next segment
+    // TODO: WORKING - fix segment ordering logic NOW!
+    Session.focusNextSegment(segId, $scope.segments);
+
+
+    // Update the project on the server by syncing with the document model
     $scope.projectResource.content = XliffParser.getDOMString($scope.document.DOM);
     $scope.projectResource.$update(function() {
       $log.log('Project updated');
@@ -187,8 +184,8 @@ angular.module('controllers')
     $scope.reopen($index);
   }
   // Re-opens a finished segment. Undoes what segmentFinished() did
-  // TODO: we should only show the 'SAVE' button once the user has actually edited something (they shouldn't need to click 'check' again
-  // TODO: in reopen, the editing components have already been created, so we need to avoid doing that again
+  // TODO: we should only show the 'SAVE' (checkmark) button once the user has actually edited something (they shouldn't need to click 'check' again)
+  // TODO: in reopen, the editing components have already been created, so we need to avoid doing that again to be more efficient
   $scope.reopen = function(idx) {
     $log.log('REOPEN');
     Session.setSegment(idx);

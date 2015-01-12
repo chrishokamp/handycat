@@ -32,9 +32,8 @@
         <div class="segment"
              layout="column"
              layout-fill
-             ng-click="activate(id.index)"
              ng-class="{pending: !(getSegmentState(id.index) === 'translated'), completed: getSegmentState(id.index) === 'translated'}"
-             id="segment-{{$index}}"
+             id="segment-{{id.index}}"
              ng-controller="SegmentAreaCtrl"
              ng-repeat="seg in segments"
              end-repeat
@@ -64,7 +63,7 @@
           </div>
 
           <!-- the source and target rows -->
-          <div ng-class="{activeshadow: activeSegment === $index}" layout="row" layout-padding class="bottom-margin">
+          <div ng-class="{activeshadow: activeSegment === id.index}" layout="row" layout-padding class="bottom-margin">
             <div flex layout="column">
               <div class="bottom-margin content-card">
                 <div ng-show="segment.state === 'translated'" class="segment-finished">
@@ -78,8 +77,10 @@
               </div>
             </div>
 
-            <div flex layout="column">
-              <div class="bottom-margin content-card">
+            <div flex
+                 layout="column"
+            >
+              <div class="bottom-margin content-card" ng-click="activate(id.index)">
                 <div ng-show="segment.state === 'translated'" class="segment-finished">
                   <p>{{segment.target}}</p>
                 </div>
@@ -94,7 +95,12 @@
                 class="segment-controls"
               >
                   <div>
-                    <md-button ng-click="segmentFinished($index)" ng-disabled="segment.state === 'translated'"><span class="glyphicon glyphicon-ok-sign"></span></md-button>
+                    <md-button
+                      ng-click="segmentFinished(id.index)"
+                      ng-disabled="getSegmentState(id.index) === 'translated'"
+                      >
+                      <span class="glyphicon glyphicon-ok-sign"></span>
+                    </md-button>
                   </div>
                   <!--<div>-->
                   <!--<md-button ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-remove"></span></md-button>-->
