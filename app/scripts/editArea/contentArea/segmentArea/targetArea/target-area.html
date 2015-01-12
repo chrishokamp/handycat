@@ -2,7 +2,7 @@
 
   <div layout="row">
     <!-- the appearance of the segment when the user has indicated that it is complete -->
-    <div flex ng-show="getSegmentState($index) === 'translated'" class="segment-finished-target" ng-click="activate($index)">
+    <div flex ng-show="getSegmentState($index) === 'translated'" class="segment-finished" ng-click="activate($index)">
       <p>{{segment.target}}</p>
     </div>
 

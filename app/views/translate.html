@@ -2,13 +2,16 @@
 
   <!--LOADING OVERLAY-->
   <!-- show the loading sheet before the ng-repeat is finished -->
-  <div ng-show="visible.projectLoading" layout="vertical" layout-align="center center" class="page-loading-overlay">
+  <div ng-show="visible.projectLoading" layout="column"
+       layout-fill
+       layout-align="center center"
+       class="page-loading-overlay"
+    >
     <h4 class="text-info">Project Loading...</h4>
     <md-progress-linear mode="indeterminate"></md-progress-linear>
   </div>
   <!--END LOADING OVERLAY-->
 
-  <!--TODO: the loadProject() function causes a cascade of timeouts in child controllers -- the document object should resolve before this scope loads-->
   <div ng-init="loadProject()">
 
     <!-- TODO: remove the HUD toolbar, put the controls for the toolbar elsewhere -->
@@ -26,10 +29,6 @@
 
         <!-- repeat for each segment -->
         <!-- WORKING - the segment area is a container for widgets which provide styling and behavior on source and target sentences -->
-        <!-- WORKING - the button group lets the user select which component is currently showing -->
-        <!-- WORKING - components are directives which are databound to the segment object (or its properties)-->
-
-        <!--TODO: remove all bootstrap grid styling, switch to flexbox styles -->
         <div class="segment"
              layout="column"
              layout-fill
@@ -46,8 +45,9 @@
           <div layout="row" class="segment-muted-text">
             <div flex>Segment Index: {{$index}}</div>
 
-            <!--TODO: WORKING - add selector buttons for every translation component-->
             <!--TRANSLATION COMPONENT SELECTOR-->
+            <!-- WORKING - the button group lets the user select which component is currently showing -->
+            <!-- WORKING - components are directives which are databound to the segment object (or its properties)-->
             <div flex class="translation-buttons">
 
               <!--TODO: change clickTest-->
@@ -63,12 +63,10 @@
           </div>
 
           <!-- the source and target rows -->
-          <!--TODO: - the source and target component containers should be 'component-container' directives-->
-          <!--WORKING - refactor to use ng-material grid-->
           <div ng-class="{activeshadow: activeSegment === $index}" layout="row" layout-padding class="bottom-margin">
             <div flex layout="column">
               <div class="bottom-margin content-card">
-                <div ng-show="segment.state === 'translated'" class="segment-finished-target">
+                <div ng-show="segment.state === 'translated'" class="segment-finished">
                   <p>{{segment.source}}</p>
                 </div>
                 <div ng-hide="segment.state === 'translated'">
@@ -84,6 +82,7 @@
                 <!--WORKING - add other components here-->
                 <static-target text="{{segment.target}}"></static-target>
               </div>
+
               <!--  the segment-level controls for the target panel -->
               <div
                 ng-show="isActive.active"
