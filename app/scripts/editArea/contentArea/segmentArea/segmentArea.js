@@ -35,28 +35,21 @@ angular.module('controllers')
         'provider': 'Google Translate'
       },
     ];
+
     $scope.clickTest = function() {
       $log.log('CLICKITY');
       $log.log('showTranslations:');
       $scope.showTranslations = !$scope.showTranslations;
     }
-    // TODO: End testing only
 
-    $scope.outputLog = function () {
-      $log.log('SEGMENT AREA OUTPUT LOG');
-      Logger.exportJSON();
-    };
+    // this function lets children update the segment value
+    // TODO: a problem with this approach is that the user cannot go back to the previous value in the editor (cannot undo)
+    $scope.setTargetValue = function(newValue) {
+      $scope.segment.target = newValue;
+    }
 
     // the id gets reset in the template
     $scope.id = {};
-    // this object holds the functions and properties that children can freely read and/or override
-    $scope.shared = {
-      setText: function() {$log.log('segmentArea setText fired');},
-      sourceTranslations: function() {
-        // when this is called from a child controller, get all of the translations for this segment
-        $scope.testQuery($scope.segment.source);
-      }
-    }
 
     // TODO: set this only when this is actually the active scope
     $scope.isActive = { active:true };

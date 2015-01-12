@@ -18,9 +18,7 @@ angular.module('directives').directive('translationItem', ['$log', function($log
       }
 
       var color = getColor($scope.item.quality);
-      // TODO: animate this
       el.find('.quality-indicator').css('background-color', color);
-
     }
   }
 }]);
