@@ -7,16 +7,13 @@ angular.module('controllers')
   function($rootScope, $scope, TranslationMemory, Wikipedia, Glossary, $log, ruleMap, copyPunctuation, Session, Logger,
            Projects, XliffParser, $http) {
 
-    // working - utils for autocompletion
-    // TODO: use the autocompleters service to resolve the autocompleters for the user
-    // GET /autocompleters --
-    // params that let us know what autocompleters the user has:
-    // source lang
-    // target lang
-    // domain
-    // TODO: there should be a selection dialog where the user can choose which autocompleters they want to use
-    // a user's autocompleters grow over time
-    // as they select segments, we log: { source: source-text, target_prefix: target-text, completion: <selected unit from autocomplete> }
+
+    // this object tells us which translation widgets are available to the user
+    $scope.widgets = {
+      activeComponent: 'AceEditor',
+      translationSelector: false,
+      AceEditor: true
+    }
 
     $scope.sampleOptions = [
       {'segment': 'Zweifellos gibt es geheime Schwarzmarktgruppen im Internet, die große Mühe geben, von Strafverfolgung versteckt zu bleiben',
@@ -36,13 +33,7 @@ angular.module('controllers')
       },
     ];
 
-    $scope.clickTest = function() {
-      $log.log('CLICKITY');
-      $log.log('showTranslations:');
-      $scope.showTranslations = !$scope.showTranslations;
-    }
-
-    // WORKING
+    // WORKING - this should be part of the 'translationSelector' component
     // create buttons for the user's translation resources -- we know what resources they have from $scope.currentUser
     // buttons appear when the translation is ready, onClick the value gets put into the editor or translation component
     // response API: {provider: <provider name>, target: <target text>}
@@ -100,15 +91,13 @@ angular.module('controllers')
 
     // the id gets reset in the template
     $scope.id = {};
-
-    // TODO: set this only when this is actually the active scope
-    $scope.isActive = { active:true };
+    // this is used to manage showing and hiding components
+    $scope.isActive = { active: false };
 
     // possible states: ['initial', 'translated', 'reviewed', 'final']
     // use $scope.getSegmentState from the template
     $scope.getSegmentState = function(id) {
       if (typeof(id) === 'number') {
-        $log.log('getSegmentState: ' + $scope.segments[$scope.id.index]['state']);
         return $scope.segments[$scope.id.index]['state'];
       }
       // segmentState may be an empty obj if the segment hasn't been initialized in the template
@@ -215,4 +204,15 @@ angular.module('controllers')
       $scope.isActive = { active:true };
     }
   });
+
+    // working - utils for autocompletion
+    // TODO: use the autocompleters service to resolve the autocompleters for the user
+    // GET /autocompleters --
+    // params that let us know what autocompleters the user has:
+    // source lang
+    // target lang
+    // domain
+    // TODO: there should be a selection dialog where the user can choose which autocompleters they want to use
+    // a user's autocompleters grow over time
+    // as they select segments, we log: { source: source-text, target_prefix: target-text, completion: <selected unit from autocomplete> }
 }]);

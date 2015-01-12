@@ -7,8 +7,7 @@
     <div flex ng-show="getSegmentState($index) === 'initial'" ng-click="activate($index)">
       <!--the translation resource selection component-->
       <!-- when opened, it animates to cover its container component-->
-      <md-content>
-      <div ng-show="showTranslations" class="cssSlideUp cover-all">
+      <div ng-show="widgets.activeComponent === 'translationSelector'" class="cssSlideUp cover-all">
         <translation-selector
           on-select="setTargetValue"
           selector-options="sampleOptions"
@@ -16,7 +15,6 @@
       </div>
       <!--TODO: add the translation selector component - change css to fit with target area css-->
       <div ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>
-        </md-content>
     </div>
   </div>
 

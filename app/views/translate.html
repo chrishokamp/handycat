@@ -48,16 +48,21 @@
             <!--TRANSLATION COMPONENT SELECTOR-->
             <!-- WORKING - the button group lets the user select which component is currently showing -->
             <!-- WORKING - components are directives which are databound to the segment object (or its properties)-->
-            <div flex class="translation-buttons">
+            <div flex class="translation-buttons" ng-show="isActive.active">
+              <md-radio-group
+                layout="row"
+                ng-model="widgets.activeComponent"
+              >
+                <md-radio-button value="Editor" aria-label="Editor">Editor</md-radio-button>
+                <md-radio-button value="translationSelector" aria-label="Translation Selector">Translation Selector</md-radio-button>
+              </md-radio-group>
 
-              <!--TODO: change clickTest-->
-              <md-button ng-click="clickTest()"><i class="ion-ios7-bolt"></i></md-button>
-              <span ng-show="translationsPending">retrieving translations<i class="ion-loading-c"></i></span>
-                <span
-                  ng-repeat="resource in translationResources"
-                  >
-                  <md-button ng-click="shared.setText(resource.target)">{{resource.provider}}</md-button>
-                </span>
+              <!--<span ng-show="translationsPending">retrieving translations<i class="ion-loading-c"></i></span>-->
+                <!--<span-->
+                  <!--ng-repeat="resource in translationResources"-->
+                  <!-->
+                  <!--<md-button ng-click="shared.setText(resource.target)">{{resource.provider}}</md-button>-->
+                <!--</span>-->
             </div>
             <!--END TRANSLATION COMPONENT SELECTOR-->
           </div>
@@ -81,10 +86,12 @@
                  layout="column"
             >
               <div class="bottom-margin content-card" ng-click="activate(id.index)">
-                <div ng-show="segment.state === 'translated'" class="segment-finished">
-                  <p>{{segment.target}}</p>
-                </div>
-                <static-target text="{{segment.target}}"></static-target>
+                <md-content>
+                  <div ng-show="segment.state === 'translated'" class="segment-finished">
+                    <p>{{segment.target}}</p>
+                  </div>
+                  <static-target text="{{segment.target}}"></static-target>
+                </md-content>
               </div>
 
               <!--  the segment-level controls for the target panel -->
