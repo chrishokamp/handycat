@@ -64,7 +64,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       openHelp = function (size) {
 
       var modalInstance = $modal.open({
-        templateUrl: 'scripts/contentArea/help-modal.html',
+        templateUrl: 'scripts/editArea/help-modal.html',
         controller: ModalInstanceCtrl,
         size: size,
         resolve: {

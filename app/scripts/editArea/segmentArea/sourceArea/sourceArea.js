@@ -3,7 +3,6 @@ angular.module('directives')
     // take the text inside the element, tokenize it, and wrap in spans that we can interact with
     return {
       scope: {
-        // this comes from contentArea via editArea
         sourceSentence: '=',
         annotatedSentence: '='
       },
