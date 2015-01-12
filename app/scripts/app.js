@@ -106,7 +106,6 @@ var App = window.App = angular.module('editorComponentsApp',
 
 // panacea
 //.constant('baseUrl', 'http://panaceadcu.dh.bytemark.co.uk:5002')
-.constant('loggerUrl', 'http://panaceadcu.dh.bytemark.co.uk:5001')
 
 
 // check window.location to see where we are, and set the baseUrl accordingly

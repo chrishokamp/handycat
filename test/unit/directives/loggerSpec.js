@@ -3,7 +3,7 @@ describe("Unit: Testing the logger directive", function() {
   var scope, element, logService;
 
   beforeEach(module('services'));
-  beforeEach(module('editorComponentsApp'));
+  beforeEach(module('directives'));
 
 //  beforeEach(inject(function(session){
 //    logService = session;

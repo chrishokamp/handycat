@@ -2,7 +2,8 @@ describe("Unit: Testing the SegmentAreaCtrl", function() {
   var ctrl, scope, element, TranslationMemory;
 
   beforeEach(function() {
-    module('editorComponentsApp');
+    module('services');
+    module('controllers');
     inject(function($controller, $rootScope, $compile, _TranslationMemory_) {
       scope = $rootScope.$new();
 
