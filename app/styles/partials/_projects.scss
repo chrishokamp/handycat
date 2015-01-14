@@ -18,6 +18,7 @@ $bold: 800;
 
 // Project Creation
 .drop-box {
+  padding: 5px;
   border: 5px dashed blue;
   &:hover {
     border: 5px dashed yellow;
@@ -26,7 +27,7 @@ $bold: 800;
 
 .drop-box.dragover {
   border: 5px dashed yellow;
-  background-color: blue;
+  background-color: lightgrey;
 }
 
 span.drop-message {

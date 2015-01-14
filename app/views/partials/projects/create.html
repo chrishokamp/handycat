@@ -9,6 +9,7 @@
     <h3>Create a New Translation Project</h3>
     <md-button ng-click="showErrorToast()">toast</md-button>
     <md-divider></md-divider>
+
     <!--TODO: remove this section in favor of toast messages-->
     <!--alert user to the state of their uploaded file-->
     <div class="alert alert-success slide-in" ng-click="fileAdded=!fileAdded" ng-hide="!fileAdded">
@@ -19,9 +20,8 @@
     <!--</div>-->
 
     <form role="form">
-      <div class="form-group">
-        <label for="projectName">Project Name</label>
-        <input type="text" class="form-control" id="projectName" ng-model="name" placeholder="Enter a project name..." />
+      <div layout="column" layout-align="center start" layout-padding class="form-group">
+        <input flex type="text" class="form-control" id="projectName" ng-model="name" />
       </div>
     </form>
     <md-divider></md-divider>
@@ -34,8 +34,8 @@
           ng-file-drop="onFileSelect($files);"
           ng-file-drop-available="dropSupported=true"
           >
-          <div><span class="drop-message drop-text">Drag in an XLIFF file</span></div>
-          <div><span class="glyphicon glyphicon-plus drop-text"></span></div>
+            <div><span class="drop-message drop-text">Drag in an XLIFF file</span></div>
+            <div><span class="glyphicon glyphicon-plus drop-text"></span></div>
         </div>
         <h4 class="md-warn">OR</h4>
         <div>
@@ -69,8 +69,10 @@
       <md-divider></md-divider>
 
       <h3>Or click one of these testing files:
-        <a ng-click="createFromURL('data/PEARL_TS1.xlf')">Test 1</a>,
-        <a ng-click="createFromURL('data/PEARL_TS2.xlf')">Test 2</a>
+        <a ng-repeat='testfile in sampleFiles'
+           ng-click="createFromURL(testfile.url)">
+          {{testfile.name}}
+        </a>
       </h3>
     </div><!-- end upload area -->
   </md-content>

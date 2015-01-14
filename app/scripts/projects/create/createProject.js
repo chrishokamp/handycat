@@ -3,11 +3,12 @@ angular.module('controllers')
     function(XliffParser, Projects, $state, $log, $scope, $http, $mdDialog, $mdToast) {
 
       // set the default title
-      $scope.name = 'default-project';
+      $scope.name = 'Project Name';
 
       // add the hard-coded sample files
       $scope.sampleFiles = [
-
+        {name: 'en-de-test1', url: 'data/PEARL_TS1.xlf'},
+        {name: 'en-de-test2', url: 'data/PEARL_TS2.xlf'}
       ];
 
       // make sure the modal closes if we change states
@@ -21,7 +22,7 @@ angular.module('controllers')
       // the XLIFF parser must reject its promise if there is a parsing error
       $scope.create = function() {
         if ($scope.pendingDocument) {
-          var project = newProject($scope.name, $scope.pendingDocument);
+          var project = newProject(projectName, $scope.pendingDocument);
           project.$save(function(response) {
             $state.go('projects.list');
           });
