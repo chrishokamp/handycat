@@ -1,77 +1,77 @@
 <md-dialog>
 
-<div class="text-center">
-
   <div layout="row" layout-align="end" class="close-button">
-    <md-button layout-align="center center" class="md-raised md-warn" ng-click="closeDialog()"><i class="ion-android-close"></i></md-button>
+    <md-button layout-align="center center" class="md-raised md-warn" ng-click="closeDialog()">
+      <i class="ion-android-close"></i>
+    </md-button>
   </div>
-  <md-content>
-    <br/>
+  <md-content layout="column" layout-align="center center">
     <h3>Create a New Translation Project</h3>
     <md-button ng-click="showErrorToast()">toast</md-button>
-    <hr/>
-
+    <md-divider></md-divider>
     <!--TODO: remove this section in favor of toast messages-->
     <!--alert user to the state of their uploaded file-->
     <div class="alert alert-success slide-in" ng-click="fileAdded=!fileAdded" ng-hide="!fileAdded">
-        Click to change your file...
+      Click to change your file...
     </div>
-    <div class="alert alert-danger slide-in" ng-show="parser.parsingError && !fileAdded">
-        Error: The uploaded file is not a valid XLIFF file.
-    </div>
+    <!--<div class="alert alert-danger slide-in" ng-show="parser.parsingError && !fileAdded">-->
+    <!--Error: The uploaded file is not a valid XLIFF file.-->
+    <!--</div>-->
 
     <form role="form">
-        <div class="form-group">
-            <label class="pull-left" for="projectName">Project Name</label>
-            <input type="text" class="form-control" id="projectName" ng-model="name" placeholder="Enter a project name..." />
-        </div>
+      <div class="form-group">
+        <label for="projectName">Project Name</label>
+        <input type="text" class="form-control" id="projectName" ng-model="name" placeholder="Enter a project name..." />
+      </div>
     </form>
-    <hr/>
+    <md-divider></md-divider>
     <div ng-controller="UploadCtrl">
-        <div class="row" >
-            <div
-                    class="drop-box col-xs-2 col-centered text-center"
-                    ng-file-drop="onFileSelect($files);"
-                    ng-file-drop-available="dropSupported=true"
-                    >
-                <div class="row"><span class="drop-message drop-text">Drag in an XLIFF file</span></div>
-                <div class="row"><span class="glyphicon glyphicon-plus drop-text"></span></div>
-            </div>
-            <h5>OR</h5>
-            <div class="col-xs-6 col-centered text-center">
-                <label>Choose a File
-                  <!--<md-button>-->
-                    <input class="file-input btn btn-primary" type="file" ng-file-select="onFileSelect($files)" />
-                  <!--</md-button>-->
-                </label>
-            </div>
+      <div layout="column" layout-padding layout-align="center center">
+        <div
+          layout="column"
+          layout-align="center center"
+          class="drop-box"
+          ng-file-drop="onFileSelect($files);"
+          ng-file-drop-available="dropSupported=true"
+          >
+          <div><span class="drop-message drop-text">Drag in an XLIFF file</span></div>
+          <div><span class="glyphicon glyphicon-plus drop-text"></span></div>
         </div>
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="row" ng-repeat="f in selectedFiles">
-                    <div class="col-xs-7">{{f.name}} - size: {{f.size}}B - type: {{f.type}}</div>
-                    <div class="col-xs-1"><i ng-show="documentLoading" class="icon ion-loading-c"></i></div>
-                    <div class="col-xs-1">
-                        <button
-                                ng-click="create(); fileAdded = false;"
-                                class="btn btn-info"
-                        >
-                            Create Project
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <h4 class="md-warn">OR</h4>
+        <div>
+          <label>Choose a File
+            <!--<md-button>-->
+            <input class="file-input btn btn-primary" type="file" ng-file-select="onFileSelect($files)" />
+            <!--</md-button>-->
+          </label>
         </div>
+      </div>
 
-        <hr/>
-        <h3 style="text-align: center;">Or click one of these testing files:
-            <a ng-click="createFromURL('data/PEARL_TS1.xlf')">Test 1</a>,
-            <a ng-click="createFromURL('data/PEARL_TS2.xlf')">Test 2</a>
-        </h3>
+      <div layout="column" layout-align="center center">
+          <div
+            layout="row"
+            layout-align="center center"
+            layout-padding
+            ng-repeat="f in selectedFiles"
+          >
+            <div flex>{{f.name}} - size: {{f.size}}B - type: {{f.type}}</div>
+            <div><i ng-show="documentLoading" class="icon ion-loading-c"></i></div>
+            <div>
+              <md-button
+                ng-click="create(); fileAdded = false;"
+                class="md-primary"
+                >
+                Create Project
+              </md-button>
+            </div>
+          </div>
+      </div>
+      <md-divider></md-divider>
+
+      <h3>Or click one of these testing files:
+        <a ng-click="createFromURL('data/PEARL_TS1.xlf')">Test 1</a>,
+        <a ng-click="createFromURL('data/PEARL_TS2.xlf')">Test 2</a>
+      </h3>
     </div><!-- end upload area -->
-
-
- </md-content>
-</div>
+  </md-content>
 </md-dialog>
