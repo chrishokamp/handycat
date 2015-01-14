@@ -1,8 +1,8 @@
 // - refactoring - the XLIFF parser should just return an object which provides a javascript interface to the XLIFF DOM
 // - the API to the XLIFF DOM should be in the editArea, XLIFF objects should not be global in the app
 
-angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$q', '$http', '$log',
-  function($rootScope, fileReader, $q, $http, $log) {
+angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$q', '$log',
+  function($rootScope, fileReader, $q, $log) {
   // Persistent DOMParser
   var parser = new DOMParser();
 
