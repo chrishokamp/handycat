@@ -17,7 +17,7 @@ describe('XliffParser', function () {
   }));
   beforeEach(function() {
     sampleXliff = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>' +
-    '<xliff version="1.0">' +
+    '<xliff version="1.2">' +
        '<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2011-08-25T17:54:43Z" product-name="your-ext">' +
           '<header/>' +
           '<body>' +
@@ -35,7 +35,6 @@ describe('XliffParser', function () {
   });
   beforeEach(function() {
     spyOn(XliffParser, "readFile").and.callThrough();
-    spyOn(XliffParser, "loadLocalFile").and.callThrough();
     spyOn(XliffParser, "parseXML").and.callThrough();
 
   });
@@ -92,7 +91,7 @@ describe('XliffParser', function () {
       $timeout.flush();
 
     });
-    
+
 
     it('should maintain changes', function(done) {
       var parsedObject;

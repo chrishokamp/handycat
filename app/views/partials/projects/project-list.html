@@ -1,8 +1,15 @@
 <!-- create the project management interface -->
 <section ng-controller="ProjectCtrl" layout="column" layout-fill flex class="doc-content">
 
-    <div layout="row" flex layout-align="center center">
-      <md-button flex class='md-raised create-project-button' ui-sref="projects.create"><i class="ion-ios7-plus-outline"></i></md-button>
+    <div layout="column" flex layout-align="center center">
+      <h3>Create A New Project</h3>
+      <md-button
+        flex
+        class='md-raised create-project-button md-primary'
+        ui-sref="projects.create"
+      >
+        <i class="ion-ios7-plus-outline"></i>
+      </md-button>
   </div>
 
   <md-content flex class="md-padding">

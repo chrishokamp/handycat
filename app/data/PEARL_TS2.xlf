@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:okp="okapi-framework:xliff-extensions" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" version="1.2" its:version="2.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:okp="okapi-framework:xliff-extensions" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" version="1.2" its:version="2.0">
 <file original="http://en.wikipedia.org/wiki/Computer_science#History" source-language="en-us" target-language="de" datatype="html">
 
-<header><its:provenanceRecords xml:id="defaultprov" xmlns:xml="http://www.w3.org/XML/1998/namespace"><its:provenanceRecord revTool="PEARL - PE tool" revOrgRef="http://mobile-webcat.appspot.com" revPerson="Default-user" provRef="Default-ref"/></its:provenanceRecords> 
+<header><its:provenanceRecords xml:id="defaultprov" xmlns:xml="http://www.w3.org/XML/1998/namespace"><its:provenanceRecord revTool="PEARL - PE tool" revOrgRef="http://mobile-webcat.appspot.com" revPerson="Default-user" provRef="Default-ref"/></its:provenanceRecords>
 <its:provenanceRecords xml:id="pr1" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<its:provenanceRecord org="acme" orgRef="http://www.acme.com" tool="AcmeTranslator" provRef="http://www.acme.com/#23131223"/>
 </its:provenanceRecords>
@@ -9,7 +10,7 @@
 	<its:provenanceRecord org="Microsoft" orgRef="http://www.microsoft.com" tool="Bing Translator" provRef="http://www.prov.com/#23131223"/>
 </its:provenanceRecords>
 
-</header> 
+</header>
 
 <body>
 <trans-unit id="1">
@@ -21,7 +22,7 @@
 <trans-unit id="2">
 <source>Explore a backup image file with norton ghost 12.0</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Explore a backup image file with norton ghost 12.0</mrk> 
+	<mrk mid="0" mtype="seg">Explore a backup image file with norton ghost 12.0</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Explore ein Backup image file mit Norton Ghost 12.0</mrk>
@@ -31,7 +32,7 @@
 <trans-unit id="3">
 <source>I have disabled safe surfing because safe surfing is alerting me on a legitimate web site</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">I have disabled safe surfing because safe surfing is alerting me on a legitimate web site</mrk> 
+	<mrk mid="0" mtype="seg">I have disabled safe surfing because safe surfing is alerting me on a legitimate web site</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Ich habe Sicheres Surfen deaktiviert, weil Sicheres Surfen ist alerting me auf eine legitime Website</mrk>
@@ -41,7 +42,7 @@
 <trans-unit id="4">
 <source>Compression algorithms look for repeatable data patterns that can be compacted.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Compression algorithms look for repeatable data patterns that can be compacted.</mrk> 
+	<mrk mid="0" mtype="seg">Compression algorithms look for repeatable data patterns that can be compacted.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Komprimierungsalgorithmen suchen nach sich wiederholenden Datensequenzen, die Komprimiert werden können.</mrk>
@@ -51,7 +52,7 @@
 <trans-unit id="5">
 <source>As we have to identify the second error message before we proceed further, you will need to run liveupdate.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">As we have to identify the second error message before we proceed further, you will need to run liveupdate.</mrk> 
+	<mrk mid="0" mtype="seg">As we have to identify the second error message before we proceed further, you will need to run liveupdate.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Da wir für den zweiten Fehlermeldung, bevor wir fortfahren, müssen Sie Liveupdate ausführen.</mrk>
@@ -61,7 +62,7 @@
 <trans-unit id="6">
 <source>I’m very sorry, but I’m afraid I will not be able to assist with this product.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">I’m very sorry, but I’m afraid I will not be able to assist with this product.</mrk> 
+	<mrk mid="0" mtype="seg">I’m very sorry, but I’m afraid I will not be able to assist with this product.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Es tut mit leid, aber Ich muss nicht mehr bei diesem Produkt. </mrk>
@@ -72,7 +73,7 @@
 <trans-unit id="7">
 <source>For more information about these kinds of threats, read:</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">For more information about these kinds of threats, read:</mrk> 
+	<mrk mid="0" mtype="seg">For more information about these kinds of threats, read:</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Weitere Informationen zu diesen Arten von Bedrohungen, lesen Sie das Dokument:</mrk>
@@ -82,7 +83,7 @@
 <trans-unit id="8">
 <source>Autofix will detect the status of the product sos _ cancelled.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Autofix will detect the status of the product sos _ cancelled.</mrk> 
+	<mrk mid="0" mtype="seg">Autofix will detect the status of the product sos _ cancelled.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Autofix wird erkennen den Status des Produkts sos _ storniert.</mrk>
@@ -92,7 +93,7 @@
 <trans-unit id="9">
 <source>If you are able to connect to the internet, then the router configuration is incorrect.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">If you are able to connect to the internet, then the router configuration is incorrect.</mrk> 
+	<mrk mid="0" mtype="seg">If you are able to connect to the internet, then the router configuration is incorrect.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Wenn Sie eine Verbindung zum Internet herstellen können, ist die Router-Konfiguration falsch.</mrk>
@@ -102,7 +103,7 @@
 <trans-unit id="10">
 <source>You need to remove a symantec ghost client from a client computer, or you need to switch the client computer's binding from one ghost console to another.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">You need to remove a symantec ghost client from a client computer, or you need to switch the client computer's binding from one ghost console to another.</mrk> 
+	<mrk mid="0" mtype="seg">You need to remove a symantec ghost client from a client computer, or you need to switch the client computer's binding from one ghost console to another.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Sie müssen entfernen Sie eine Symantec Ghost Client über eine Client-Computer, oder Sie müssen des Clients Computers so ordnen von einem Ghost-Konsole auf anderen. </mrk>
@@ -112,7 +113,7 @@
 <trans-unit id="11">
 <source>Please skip this step, and continue with step 3 below.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Please skip this step, and continue with step 3 below.</mrk> 
+	<mrk mid="0" mtype="seg">Please skip this step, and continue with step 3 below.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Überspringen Sie bitte diesen Schritt, und fahren Sie unten mit Schritt 3 fort.</mrk>
@@ -122,7 +123,7 @@
 <trans-unit id="12">
 <source>Consider using the exchange system manager utility to adjust the deletion settings in each store's properties so that deleted items are retained for a period of time, allowing them to be recovered rather than restored.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Consider using the exchange system manager utility to adjust the deletion settings in each store's properties so that deleted items are retained for a period of time, allowing them to be recovered rather than restored.</mrk> 
+	<mrk mid="0" mtype="seg">Consider using the exchange system manager utility to adjust the deletion settings in each store's properties so that deleted items are retained for a period of time, allowing them to be recovered rather than restored.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Werden Sie das Dienstprogramm Exchange System Manager, um den Löschvorgang ändern Sie die Einstellungen in jedem Store den Eigenschaften damit gelöschte Objekte sind retained für einen Zeitraum, indem Sie die wiederhergestellt werden und wiederhergestellt werden . </mrk>
@@ -132,7 +133,7 @@
 <trans-unit id="13">
 <source>To start the computer, it must be on the first drive, and it must contain an operating system.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">To start the computer, it must be on the first drive, and it must contain an operating system.</mrk> 
+	<mrk mid="0" mtype="seg">To start the computer, it must be on the first drive, and it must contain an operating system.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Starten Sie den Computer neu, muss er auf den ersten Laufwerks, und muss eine Betriebssystem enthalten.</mrk>
@@ -142,7 +143,7 @@
 <trans-unit id="14">
 <source>Try to connect to any web site.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Try to connect to any web site.</mrk> 
+	<mrk mid="0" mtype="seg">Try to connect to any web site.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Versuchen Sie, eine Verbindung zu einer Website. </mrk>
@@ -152,7 +153,7 @@
 <trans-unit id="15">
 <source>I have disabled smart firewall as I cannot access a network location or device</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">I have disabled smart firewall as I cannot access a network location or device</mrk> 
+	<mrk mid="0" mtype="seg">I have disabled smart firewall as I cannot access a network location or device</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Ich habe die intelligente Firewall deaktiviert, da Ich kann auf einem Netzwerkadresse oder ein gerät</mrk>
@@ -162,7 +163,7 @@
 <trans-unit id="16">
 <source>Users are advised to use basic caution when carrying out activities using peer-to-peer applications.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Users are advised to use basic caution when carrying out activities using peer-to-peer applications.</mrk> 
+	<mrk mid="0" mtype="seg">Users are advised to use basic caution when carrying out activities using peer-to-peer applications.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Wir empfehlen Benutzern grundsätzlich vorsichtig zu sein beim von peer-to-peer-Anwendungen. </mrk>
@@ -172,7 +173,7 @@
 <trans-unit id="17">
 <source>2 . Make certain that a valid temporary location on the exchange server for log and patch files is specified, and that there is sufficient space in that location to accommodate the transaction logs being recovered.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">2 . Make certain that a valid temporary location on the exchange server for log and patch files is specified, and that there is sufficient space in that location to accommodate the transaction logs being recovered.</mrk> 
+	<mrk mid="0" mtype="seg">2 . Make certain that a valid temporary location on the exchange server for log and patch files is specified, and that there is sufficient space in that location to accommodate the transaction logs being recovered.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">2. Stellen Sie sicher, dass Sie eine gültige temporären Ort auf dem Exchange-Server für Protokoll und Patch Dateien wird angegeben wird, und dass es genügenden Speicherplatz in diesem Bereich zu accommodate die Transaktionsprotokolle wiederhergestellt werden. </mrk>
@@ -182,7 +183,7 @@
 <trans-unit id="18">
 <source>Through which of the following two components does N360 ensures that a customers PC is updated with latest virus definitions and other critical system updates:</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Through which of the following two components does N360 ensures that a customers PC is updated with latest virus definitions and other critical system updates:</mrk> 
+	<mrk mid="0" mtype="seg">Through which of the following two components does N360 ensures that a customers PC is updated with latest virus definitions and other critical system updates:</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Über welche der folgenden zwei Komponenten wird N360 wird sichergestellt, dass PC des kunden aktualisiert wird mit den neuesten Virendefinitionen und andere Critical System Updates:</mrk>
@@ -192,7 +193,7 @@
 <trans-unit id="19">
 <source>Please note: this article is designed to be followed by a very experienced technician as modification to the registry will be required.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Please note: this article is designed to be followed by a very experienced technician as modification to the registry will be required.</mrk> 
+	<mrk mid="0" mtype="seg">Please note: this article is designed to be followed by a very experienced technician as modification to the registry will be required.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Hinweis: dieses Artikels ist, gefolgt von einem sehr ist techniker als Veränderung die Registrierung werden.</mrk>
@@ -202,7 +203,7 @@
 <trans-unit id="20">
 <source>Browse and select the executable file for the program that you want to configure, and click { 1 } open { 2 }.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Browse and select the executable file for the program that you want to configure, and click { 1 } open { 2 }.</mrk> 
+	<mrk mid="0" mtype="seg">Browse and select the executable file for the program that you want to configure, and click { 1 } open { 2 }.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Klicken Sie auf "durchsuchen" und wählen Sie die ausführbare Datei für den Programm, das Sie konfigurieren möchten, und klicken Sie auf { 1 } öffnen { 2 }. </mrk>
@@ -213,7 +214,7 @@
 <trans-unit id="21">
 <source>If this page is open in any other web browser, please open it in Internet Explorer.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">If this page is open in any other web browser, please open it in Internet Explorer.</mrk> 
+	<mrk mid="0" mtype="seg">If this page is open in any other web browser, please open it in Internet Explorer.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Wenn diese Seite in einem anderen Webbrowser geöffnet ist, öffnen Sie Sie in Internet Explorer.</mrk>
@@ -223,7 +224,7 @@
 <trans-unit id="22">
 <source>Thank you for contacting Symantec, have a wonderful day.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Thank you for contacting Symantec, have a wonderful day.</mrk> 
+	<mrk mid="0" mtype="seg">Thank you for contacting Symantec, have a wonderful day.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Vielen dank für Ihre Anfrage an Symantec, und Ich wünsche Ihnen noch einen schönen Tag.</mrk>
@@ -233,7 +234,7 @@
 <trans-unit id="23">
 <source>The customer may have important information to provide you, or may need to clarify something.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">The customer may have important information to provide you, or may need to clarify something.</mrk> 
+	<mrk mid="0" mtype="seg">The customer may have important information to provide you, or may need to clarify something.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Die Kunde Ihnen wichtige Informationen zukommen lassen oder etwas aufklären.</mrk>
@@ -243,7 +244,7 @@
 <trans-unit id="24">
 <source>Please refer to your symantec support certificate for the terms and conditions of your agreement.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Please refer to your symantec support certificate for the terms and conditions of your agreement.</mrk> 
+	<mrk mid="0" mtype="seg">Please refer to your symantec support certificate for the terms and conditions of your agreement.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Finden Sie im Symantec-Unterstützungszertifikat den Bestimmungen und Bedingungen der Vereinbarung.</mrk>
@@ -253,7 +254,7 @@
 <trans-unit id="25">
 <source>{ 1 } most firewall programs display a small icon in the area near the clock.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">{ 1 } most firewall programs display a small icon in the area near the clock</mrk> 
+	<mrk mid="0" mtype="seg">{ 1 } most firewall programs display a small icon in the area near the clock</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">{ 1 } die meisten Firewall-Programm anzeige ein kleines in den Bereich neben der Uhr.</mrk>
@@ -263,7 +264,7 @@
 <trans-unit id="26">
 <source>Malicious flash content can be delivered through email.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Malicious flash content can be delivered through email.</mrk> 
+	<mrk mid="0" mtype="seg">Malicious flash content can be delivered through email.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Bösartige Flash-Inhalte können über E-mail verteilt werden.</mrk>
@@ -273,7 +274,7 @@
 <trans-unit id="27">
 <source>Please refer to your Symantec support certificate for the terms and conditions of your agreement.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Please refer to your Symantec support certificate for the terms and conditions of your agreement.</mrk> 
+	<mrk mid="0" mtype="seg">Please refer to your Symantec support certificate for the terms and conditions of your agreement.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Finden Sie im Symantec-Unterstützungszertifikat den Bestimmungen und Bedingung der Vereinbarung.</mrk>
@@ -283,7 +284,7 @@
 <trans-unit id="28">
 <source>In order to purchase an upgrade, please follow the steps below:</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">In order to purchase an upgrade, please follow the steps below:</mrk> 
+	<mrk mid="0" mtype="seg">In order to purchase an upgrade, please follow the steps below:</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Um ein Upgrade zu erwerben, befolgen Sie bitte die folgenden Schritte: </mrk>
@@ -293,7 +294,7 @@
 <trans-unit id="29">
 <source>Choose your product from the list below: whether there is a Windows Vista compatible version of your Norton product how do I find my version?</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Choose your product from the list below: whether there is a Windows Vista compatible version of your Norton product how do I find my version?</mrk> 
+	<mrk mid="0" mtype="seg">Choose your product from the list below: whether there is a Windows Vista compatible version of your Norton product how do I find my version?</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Wählen Sie Ihr Produkte aus der Liste unten: ob es ist eine Windows Vista-kompatible Version Ihres Produkts ermitteln mein Version? </mrk>
@@ -303,7 +304,7 @@
 <trans-unit id="30">
 <source>The hardware identifier cannot be used to determine the make or model of a computer or its components.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">The hardware identifier cannot be used to determine the make or model of a computer or its components.</mrk> 
+	<mrk mid="0" mtype="seg">The hardware identifier cannot be used to determine the make or model of a computer or its components.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Der hardware Kennung kann verwendet werden, um festzulegen, der Marke bzw. dem Modell der einem Computer oder der Komponenten.</mrk>
@@ -313,7 +314,7 @@
 <trans-unit id="31">
 <source>Real-time, 24x7 virus alerts sent to the partner, enabling network administrators and it professionals to remain focused on their business</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Real-time, 24x7 virus alerts sent to the partner, enabling network administrators and it professionals to remain focused on their business</mrk> 
+	<mrk mid="0" mtype="seg">Real-time, 24x7 virus alerts sent to the partner, enabling network administrators and it professionals to remain focused on their business</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Echtzeit, um die Warnmeldungen zu den Partner, der Netzwerkadministratoren und es Techniker, die sich auf Ihre noch gültig ist</mrk>
@@ -323,7 +324,7 @@
 <trans-unit id="32">
 <source>Norton Auto Renewal is a product feature that keeps your computer protected from the latest internet risks by automatically renewing your subscription at the regular subscription price (plus applicable tax, so you don't have to.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Norton Auto Renewal is a product feature that keeps your computer protected from the latest internet risks by automatically renewing your subscription at the regular subscription price (plus applicable tax, so you don't have to.</mrk> 
+	<mrk mid="0" mtype="seg">Norton Auto Renewal is a product feature that keeps your computer protected from the latest internet risks by automatically renewing your subscription at the regular subscription price (plus applicable tax, so you don't have to.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Die automatische Verlängerungsfunktion von Norton ist eine Produktfunktion, die dafür sorgt, dass Ihr Computer vor den neuesten Internetrisiken geschützt wird, indem automatisch die Verlängerung ihres Abonnements zum reguläres Abonnement zum regulären, damit Sie sich nicht selbst darum.</mrk>
@@ -333,7 +334,7 @@
 <trans-unit id="33">
 <source>You might want to change your backup settings for a variety of reasons.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">You might want to change your backup settings for a variety of reasons.</mrk> 
+	<mrk mid="0" mtype="seg">You might want to change your backup settings for a variety of reasons.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Vielleicht möchten ändern der backup-einstellungen für eine vielzahl von gründe.</mrk>
@@ -343,7 +344,7 @@
 <trans-unit id="34">
 <source>If you see any error message when you run liveupdate, cancel the error message and run liveupdate once again.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">If you see any error message when you run liveupdate, cancel the error message and run liveupdate once again.</mrk> 
+	<mrk mid="0" mtype="seg">If you see any error message when you run liveupdate, cancel the error message and run liveupdate once again.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Wenn Sie eine Fehlermeldung erhalten, wenn Sie Liveupdate ausführen, beenden Sie die Fehlermeldung und führen Sie liveupdate erneut aus.</mrk>
@@ -353,7 +354,7 @@
 <trans-unit id="35">
 <source>{1} please renew your maintenance contract in advance of the maintenance end date.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">{1} please renew your maintenance contract in advance of the maintenance end date.</mrk> 
+	<mrk mid="0" mtype="seg">{1} please renew your maintenance contract in advance of the maintenance end date.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">{1} bitte verlängern Sie Ihren Maintenance-Vertrag vor den Ablaufdatum für die Maintenance.</mrk>
@@ -363,7 +364,7 @@
 <trans-unit id="36">
 <source>Error: "(9999,172) Uninstall has failed" when installing a Norton product</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Error: "(9999,172) Uninstall has failed" when installing a Norton product</mrk> 
+	<mrk mid="0" mtype="seg">Error: "(9999,172) Uninstall has failed" when installing a Norton product</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Fehler: "(9999,172) Deinstallieren ist fehlgeschlagen" bei der installation eines norton-produkts </mrk>
@@ -373,7 +374,7 @@
 <trans-unit id="37">
 <source>You have a home network and you need to configure Norton 360 to work with your network.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">You have a home network and you need to configure Norton 360 to work with your network.</mrk> 
+	<mrk mid="0" mtype="seg">You have a home network and you need to configure Norton 360 to work with your network.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Sie haben ein Heimnetzwerk und müssen Sie konfigurieren Sie Norton 360 zur Zusammenarbeit mit Ihrem Netzwerk an. </mrk>
@@ -383,7 +384,7 @@
 <trans-unit id="38">
 <source>{1} What if this didn't work? {2}</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">{1} What if this didn't work? {2}</mrk> 
+	<mrk mid="0" mtype="seg">{1} What if this didn't work? {2}</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">{1} Was ist zu tun, wenn dies nicht funktioniert hat? {2}</mrk>
@@ -393,7 +394,7 @@
 <trans-unit id="39">
 <source>Uncheck {1} transaction security {2}.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Uncheck {1} transaction security {2}.</mrk> 
+	<mrk mid="0" mtype="seg">Uncheck {1} transaction security {2}.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Deaktivieren Sie {1} Banking- und Shopping-Sicherheit {2}.</mrk>
@@ -403,7 +404,7 @@
 <trans-unit id="40">
 <source>Restart the computer when you are asked to do so.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Restart the computer when you are asked to do so.</mrk> 
+	<mrk mid="0" mtype="seg">Restart the computer when you are asked to do so.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Starten Sie dem Computer neu, wenn Sie dazu aufgefordert werden.</mrk>
@@ -413,7 +414,7 @@
 <trans-unit id="41">
 <source>Symantec sends an order confirmation that includes the subscription key.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Symantec sends an order confirmation that includes the subscription key.</mrk> 
+	<mrk mid="0" mtype="seg">Symantec sends an order confirmation that includes the subscription key.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Symantec sendet eine Auftragsbestätigung, der das wiederzuherstellende Abonnementschlüssel.</mrk>
@@ -423,7 +424,7 @@
 <trans-unit id="42">
 <source>If you are getting certificate revocation error in the browser, go to step 3.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">If you are getting certificate revocation error in the browser, go to step 3.</mrk> 
+	<mrk mid="0" mtype="seg">If you are getting certificate revocation error in the browser, go to step 3.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Wenn Sie einen Zertifikat-Widerruf-Fehler zu erhalten Sie in the browser, fahren Sie mit Schritt 3 fort.</mrk>
@@ -433,7 +434,7 @@
 <trans-unit id="43">
 <source>This document describes how to install your Norton 2011 product on another computer.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">This document describes how to install your Norton 2011 product on another computer.</mrk> 
+	<mrk mid="0" mtype="seg">This document describes how to install your Norton 2011 product on another computer.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Dieses Dokument beschreibt, wie der Installation Ihres Norton 2011-Produkt auf einen weiteren Computer installieren.</mrk>
@@ -443,7 +444,7 @@
 <trans-unit id="44">
 <source>Sign into your norton account using your email address and password.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Sign into your norton account using your email address and password.</mrk> 
+	<mrk mid="0" mtype="seg">Sign into your norton account using your email address and password.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Bei ihrem Norton account melden Sie sich mit ihrer E-mail-Adresse und ihr Kennwort ein.</mrk>
@@ -453,7 +454,7 @@
 <trans-unit id="45">
 <source>Uninstall all of your norton 2006 programs</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Uninstall all of your norton 2006 programs</mrk> 
+	<mrk mid="0" mtype="seg">Uninstall all of your norton 2006 programs</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">deinstallieren Sie alle Norton-2006 Programm</mrk>
@@ -463,7 +464,7 @@
 <trans-unit id="46">
 <source>No matter where you are in your system cycle — implementation, upgrade, or optimization — we have a fast four-step model to assess your educational needs, design and deliver your training, and review your preparedness.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">No matter where you are in your system cycle — implementation, upgrade, or optimization — we have a fast four-step model to assess your educational needs, design and deliver your training, and review your preparedness.</mrk> 
+	<mrk mid="0" mtype="seg">No matter where you are in your system cycle — implementation, upgrade, or optimization — we have a fast four-step model to assess your educational needs, design and deliver your training, and review your preparedness.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Nein, dass das Problem, wodurch Sie in Ihrem System zu funktionieren — Implementierung upgrade oder Datenträgeroptimierung. Wir haben eine schnelle four-step Modell zu Sicherheitsbewertung Ihre Educational Design muss, und liefern Sie das Training und überprüfen Sie Ihre Preparedness.</mrk>
@@ -473,7 +474,7 @@
 <trans-unit id="47">
 <source>Choose your product from the list below: whether there is a windows vista compatible version of your norton product how do I find my version?</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">Choose your product from the list below: whether there is a windows vista compatible version of your norton product how do i find my version?</mrk> 
+	<mrk mid="0" mtype="seg">Choose your product from the list below: whether there is a windows vista compatible version of your norton product how do i find my version?</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Wählen Sie ihr Produkt aus der liste unten: ob es ist eine Windows vista-kompatible Version ihres Produkts ermitteln mein Version? </mrk>
@@ -483,7 +484,7 @@
 <trans-unit id="48">
 <source>If you do not know your order number and password, you can look up your order using your email address and last 5 digits of your credit card.</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">If you do not know your order number and password, you can look up your order using your email address and last 5 digits of your credit card.</mrk> 
+	<mrk mid="0" mtype="seg">If you do not know your order number and password, you can look up your order using your email address and last 5 digits of your credit card.</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Wenn Sie nicht wissen, ihre Bestellnummer und ihr Kennwort ein, können Sie ihre Bestellung über ihre E-mail-Adresse und den letzten 5 Ziffern ihrer Kreditkarte. </mrk>
@@ -493,7 +494,7 @@
 <trans-unit id="49">
 <source>The file name will have random letters and numbers, similar to this:</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">The file name will have random letters and numbers, similar to this:</mrk> 
+	<mrk mid="0" mtype="seg">The file name will have random letters and numbers, similar to this:</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Der Dateiname wird willkürlich ausgewählte Buchstaben und Zahlen, etwa so aus:</mrk>
@@ -503,7 +504,7 @@
 <trans-unit id="50">
 <source>After following the steps in this document, re-run Liveupdate."</source>
 <seg-source>
-	<mrk mid="0" mtype="seg">After following the steps in this document, re-run Liveupdate."</mrk> 
+	<mrk mid="0" mtype="seg">After following the steps in this document, re-run Liveupdate."</mrk>
 </seg-source>
 <target xml:lang="de" xmlns:xml="http://www.w3.org/XML/1998/namespace">
 	<mrk mid="0" mtype="seg">Nachdem die Schritte in diesem Dokument, re-run Liveupdate".</mrk>

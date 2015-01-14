@@ -5,6 +5,11 @@ angular.module('controllers')
       // set the default title
       $scope.name = 'default-project';
 
+      // add the hard-coded sample files
+      $scope.sampleFiles = [
+
+      ];
+
       // make sure the modal closes if we change states
       $scope.$on('$stateChangeStart', function(ev, to, toParams, from, fromParams) {
         if (to.name !== 'projects.create') {
@@ -50,9 +55,9 @@ angular.module('controllers')
       // This is primarily for the built-in demos
       // user specifies the URL of an XLIFF file, we grab it, parse it, then save it on the server
       $scope.createFromURL = function(xliffFileUrl) {
-        $log.log('create from URL fired...');
+        $log.log('create from URL fired: ' + xliffFileUrl);
         $http.get(xliffFileUrl)
-          .then(
+          .success(
           function (data) {
             XliffParser.parseXML(data).then(
               function (docObj) {
@@ -65,12 +70,10 @@ angular.module('controllers')
                   $state.go('projects.list');
                 });
               });
-          },
-          function(error) {
+          }).
+          error(function() {
             // show toast to user letting them know that this is not a valid XLIFF
-
-          }
-        )
+          });
       }
 
       var newProject = function (name, pendingDocument) {

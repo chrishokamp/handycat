@@ -35,7 +35,6 @@ xdescribe('XliffTwoParser', function () {
   });
   beforeEach(function() {
     spyOn(XliffTwoParser, "readFile").and.callThrough();
-    spyOn(XliffTwoParser, "loadLocalFile").and.callThrough();
     spyOn(XliffTwoParser, "parseXML").and.callThrough();
 
   });

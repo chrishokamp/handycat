@@ -7,8 +7,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
   var parser = new DOMParser();
 
   return {
-    // True if the last parseXML call found an error parsing the Xliff
-    parsingError: false,
     readFile: function(file) {
       var self = this;
       var promise = fileReader.readAsText(file);
@@ -16,50 +14,26 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
       return promise.then(function(result) {
         return self.parseXML(result);
       });
-
     },
-    // utility function to grab a local file from a string url
-    loadLocalFile: function(filepath) {
-      // if filepath exists
-      var xliffFile = '';
-      if (filepath) xliffFile = filepath;
-
-      var self = this;
-      //This will make the request, then call the parser
-      var xliffPromise = $http.get(xliffFile)
-        .success(function(data) {
-          self.parseXML(data);
-        });
-
-      return xliffPromise;
-    },
-
     // parse an XLIFF file and return
     parseXML: function(rawText) {
       // TODO: different code paths for XLIFF 1.2 vs. 2.0 (this is the only way to support both)
-//      Document.init();
-    // Working - just return the Document object from this function
+      // Working - just return the Document object from this function
       var deferred = $q.defer();
       var self = this;
 
-//<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0"
+      // a basic xliff wrapper tag:
+      //<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0"
 
       var xml = parser.parseFromString(rawText, "text/xml");
 
       // Parsing error?
       var parserError = xml.querySelector('parsererror');
-//      if (parserError !== null) {
       if (xml.documentElement.nodeName == "parsererror") {
-        console.log("Error while parsing XLIFF file");
-        $log.error("error while parsing");
         var errorString = new XMLSerializer().serializeToString(parserError);
+        $log.error("error while parsing");
         $log.error(errorString);
-
-        $log.error(new XMLSerializer().serializeToString(xml));
-        self.parsingError = true;
-        return;
-      } else {
-        self.parsingError = false;
+        deferred.reject("Error while parsing XLIFF file: " + errorString);
       }
 
       // BEGIN: define the application-internal document object
@@ -77,9 +51,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
 
       var file = xml.querySelector("file");
       var xliffTag = xml.querySelector("xliff");
-
-      $log.log('xliff version: ');
-      $log.log(xliffTag.getAttribute('version'));
 
       // TODO: fork here, depending on xliff version -- we want to support both 2.0 and 1.2 for the time being
 
@@ -137,14 +108,7 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
           Document.segments.push(segPair);
       });
 
-
-      // TODO: remove the document-loaded event, and use the result of the resolved promise directly
-      // tell the world that the document loaded
-      $log.log('Xliff parser returning');
-//      $log.log(Document);
       deferred.resolve(Document);
-
-//      return Document;
       return deferred.promise;
     },
     // working - the source may not be segmented with <seg-source> tags -- there may only be a single <source> tag
@@ -217,8 +181,6 @@ angular.module('services').factory('XliffParser', ['$rootScope','fileReader', '$
     },
     // util to stringify an XML dom (takes a DOM as argument)
     getDOMString: function (xmlObj) {
-      $log.log('XmlObj: ');
-      $log.log(xmlObj);
       var domString = new XMLSerializer().serializeToString(xmlObj);
       return domString;
     },

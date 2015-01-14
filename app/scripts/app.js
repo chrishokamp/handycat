@@ -72,7 +72,7 @@ var App = window.App = angular.module('editorComponentsApp',
     .state('projects.translate', {
       url: '/:projectId/translate',
       templateUrl: '/views/translate.html',
-      controller: 'ProjectCtrl',
+      controller: 'ProjectCtrl'
     })
     .state('settings', {
       url: '/settings',
