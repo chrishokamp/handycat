@@ -222,11 +222,12 @@ angular.module('controllers').controller('AceCtrl',
       });
 
     // automatically show the autocomplete - hack from stackoverflow
-    editor.commands.on("afterExec", function(e){
-      if (e.command.name == "insertstring"&&/^[\w.]$/.test(e.args)) {
-        editor.execCommand("startAutocomplete")
-      }
-    })
+    // TODO: this doesn't actually work, because the autocomplete hangs, or it automatically selects an incorrect match
+    //editor.commands.on("afterExec", function(e){
+    //  if (e.command.name == "insertstring"&&/^[\w.]$/.test(e.args)) {
+    //    editor.execCommand("startAutocomplete")
+    //  }
+    //})
 
 
     // Add the users autocompleters
