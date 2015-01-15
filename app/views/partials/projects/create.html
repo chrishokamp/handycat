@@ -11,10 +11,6 @@
     <md-divider></md-divider>
 
     <!--TODO: remove this section in favor of toast messages-->
-    <!--alert user to the state of their uploaded file-->
-    <div class="alert alert-success slide-in" ng-click="fileAdded=!fileAdded" ng-hide="!fileAdded">
-      Click to change your file...
-    </div>
     <!--<div class="alert alert-danger slide-in" ng-show="parser.parsingError && !fileAdded">-->
     <!--Error: The uploaded file is not a valid XLIFF file.-->
     <!--</div>-->
@@ -25,7 +21,7 @@
       </div>
     </form>
     <md-divider></md-divider>
-    <div ng-controller="UploadCtrl">
+    <div>
       <div layout="column" layout-padding layout-align="center center">
         <div
           layout="column"

@@ -9,18 +9,16 @@
 describe("createProject tests", function () {
   var ctrl, scope;
   // inject the module containing the stuff we want to test
+  // TODO: how to handle the dependency on ui-router - this controller causes state changes!
   beforeEach(module('services'));
   beforeEach(module('controllers'));
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
     // create the controller with mocks for all of the services it requires
     ctrl = $controller('', {$scope: scope});
-    // optionally create and compile an element if it's necessary for this test (i.e. if the controller works together with a directive)
-    // element = angular.element('<div></div>');
-    // $compile(element)(scope);
   }));
 
-  it('should ', inject(function ($controller, $rootScope) {
+  it('should be able to  ', inject(function ($controller, $rootScope) {
     // expect(scope.prop).toBe(ans);
   }));
 
