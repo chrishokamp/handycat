@@ -10,12 +10,12 @@ describe("createProject tests", function () {
   var ctrl, scope;
   // inject the module containing the stuff we want to test
   // TODO: how to handle the dependency on ui-router - this controller causes state changes!
-  beforeEach(module('services'));
+  beforeEach(module('ngMaterial'));
   beforeEach(module('controllers'));
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    // create the controller with mocks for all of the services it requires
-    ctrl = $controller('', {$scope: scope});
+    // create the controller with mocks for all of the non-core services that it requires
+    ctrl = $controller('CreateProjectCtrl', {$scope: scope, $state: {}, XliffParser: {}, Projects: {}});
   }));
 
   it('should be able to  ', inject(function ($controller, $rootScope) {

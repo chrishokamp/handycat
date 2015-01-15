@@ -45,6 +45,9 @@ module.exports = function() {
         'app/bower_components/angular-snap/angular-snap.js',
         'app/bower_components/hammerjs/hammer.js',
         'app/bower_components/angular-material/angular-material.js',
+         // for now, we have to include the material design css as well(?)
+         // see: https://github.com/angular/material/issues/1026
+        'app/bower_components/angular-material/angular-material.css',
 
         'app/scripts/lib/angular-ui-ace/ui-ace.js',
         'app/scripts/lib/german_snowball_stemmer.js',
@@ -111,6 +114,8 @@ module.exports = function() {
 
       // extra for testing
       'app/bower_components/angular-mocks/angular-mocks.js'
+
+
 
 //      'node_modules/chai/chai.js',
 //      'test/lib/chai-should.js',

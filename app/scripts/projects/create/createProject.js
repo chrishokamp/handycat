@@ -1,6 +1,6 @@
 angular.module('controllers')
-.controller('CreateProjectCtrl', ['XliffParser', 'Projects', '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast', 'fileReader',
-    function(XliffParser, Projects, $state, $log, $scope, $http, $mdDialog, $mdToast, fileReader) {
+.controller('CreateProjectCtrl', ['XliffParser', 'Projects', '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast',
+    function(XliffParser, Projects, $state, $log, $scope, $http, $mdDialog, $mdToast) {
 
       // set the default title
       $scope.name = 'Project Name';
