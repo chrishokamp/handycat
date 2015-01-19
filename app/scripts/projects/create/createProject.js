@@ -1,6 +1,6 @@
 angular.module('controllers')
-.controller('CreateProjectCtrl', ['XliffParser', 'Projects', '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast',
-    function(XliffParser, Projects, $state, $log, $scope, $http, $mdDialog, $mdToast) {
+.controller('CreateProjectCtrl', ['XliffParser', 'fileReader', 'Projects', '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast',
+    function(XliffParser, fileReader, Projects, $state, $log, $scope, $http, $mdDialog, $mdToast) {
 
       // set the default title
       $scope.name = 'Project Name';
@@ -105,31 +105,79 @@ angular.module('controllers')
       );
 
 // TODO: get file type (assume xlf for now)
-// TODO: this code depends upon $scope.pending.document being available in the parent scope
+// TODO: this code depends upon $scope.pending.document being available
 // TODO: refactor this component into a directive
       // this depends on ngFileUpload
       $scope.onFileSelect = function ($files) {
-        $log.log("inside file select");
         $scope.fileAdded = true;
 
         // show the user what the selected files are
-        // assume this is a single file for now
         $scope.selectedFiles = $files;
 
-        // parse the file immediately when it is selected
+        // assume this is a single file for now
+        var selectedFile = $files[0];
+
+        // get the file extension
+        var filetype = getFiletype(selectedFile);
+        if (filetype === 'xlf' || filetype === 'xliff') {
+          createFromXliffFile(selectedFile);
+        } else {
+          createFromTextFile(selectedFile);
+        }
+      };
+
+      var getFiletype = function(file) {
+        return file.name.split('.').pop();
+      }
+
+      var createFromXliffFile = function(file) {
+        // parse the file then set $scope.pending.document to the parsed XLIFF string
         var xliffPromise = XliffParser.readFile($scope.selectedFiles[0]);
         xliffPromise.then(
           function(documentObj) {
             $scope.pending.document = documentObj.DOM;
           }
         );
-      };
+      }
 
-// TODO: implement fileProgress from the xliffParser
-      $scope.$on("fileProgress", function(e, progress) {
-        $scope.progress = progress.loaded / progress.total;
-      });
+      // TODO: user MUST specify source and target langs for this to work
+      // TODO: we force XLIFF 1.2 because 2.0 isn't supported yet
+      // TODO: chain these promises
+      var createFromTextFile = function(file) {
+        // parse the text file with the webservice, then set $scope.pending.document to the parsed XLIFF string
+        var readerProm = fileReader.readAsText(file);
 
+        readerProm.then(
+          function(rawText) {
+            var documentProm = $http({
+              url   : 'http://localhost:8080/create-xliff/1.2',
+              method: "GET",
+              params: {
+                sourceLang: 'en-US',
+                targetLang: 'de-DE',
+                sourceText: rawText
+              }
+            });
+            documentProm.then(
+              function (res) {
+                var xliffPromise = XliffParser.parseXML(res.data);
+                xliffPromise.then(
+                  function (documentObj) {
+                    $scope.pending.document = documentObj.DOM;
+                  }
+                );
+              }, function (err) {
+                $log.error('createProject: error parsing text file');
+                throw 'Error Parsing Text file into XLIFF with webservice';
+              }
+            );
+          },
+          function(err) {
+            $log.error('Error reading local text file');
+          }
+        );
+
+      }
 
     }]);
 

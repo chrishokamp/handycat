@@ -2,23 +2,41 @@ var restify = require('restify');
 var xliffCreator = require('./node_modules/node-xliff/xliffCreator');
 
 var server = restify.createServer({
-  name: 'myapp',
-  version: '1.0.0'
+  name: 'xliff-creator-server',
+  version: '0.0.1'
 });
+// deal with slashes at the end
+server.pre(restify.pre.sanitizePath());
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.CORS());
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
-server.get('/echo/:name', function (req, res, next) {
-  // req.params
+server.get('/create-xliff/:spec', function (req, res, next) {
+  var spec, sourceLang, targetLang, xliff;
 
-  var sourceLang = 'en-US';
-  var targetLang = 'de-DE';
-  var sourceText = 'This is sentence one. This is sentence two.';
+  if (req.params.spec) {
+    spec = req.params.spec;
+  }
 
-  var xliff = xliffCreator.createXlf1FromSourceText(sourceLang, targetLang, xliffCreator.parsers.splitSentences(sourceText));
+  req.params.sourceLang ? sourceLang = req.params.sourceLang : sourceLang = 'unknown';
+  req.params.targetLang ? targetLang = req.params.targetLang : targetLang = 'unknown';
 
+  if (!req.params.sourceText) {
+    next(new Error('No sourceText on request'));
+    return;
+  }
+
+  var sourceText = req.params.sourceText;
+  console.log('sourceText: ' + sourceText.split('\n'));
+
+  if (spec && spec === '1.2') {
+    xliff = xliffCreator.createXlf1FromSourceText(sourceLang, targetLang, xliffCreator.parsers.splitLines(sourceText));
+  } else {
+    xliff = xliffCreator.createXlf2FromSourceText(sourceLang, targetLang, xliffCreator.parsers.splitLines(sourceText));
+  }
+
+  console.log('XLIFF: ' + xliff);
   res.send(xliff);
   return next();
 });
@@ -26,3 +44,4 @@ server.get('/echo/:name', function (req, res, next) {
 server.listen(8080, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
+

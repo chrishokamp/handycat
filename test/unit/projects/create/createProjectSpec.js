@@ -22,4 +22,14 @@ describe("createProject tests", function () {
     // expect(scope.prop).toBe(ans);
   }));
 
+  describe('Uploading text files', function () {
+    // TODO: Mock the httpbackend request
+    it('should be able to use a webservice to create xliff strings from text files', function() {
+
+
+    });
+
+  });
+
+
 });

@@ -1,0 +1,15 @@
+{
+  "name": "xliff_creator_webservice",
+  "version": "0.0.1",
+  "description": "create xliff files from text",
+  "main": "web.js",
+  "scripts": {
+    "test": "jasmine-node tests/"
+  },
+  "author": "chrishokamp",
+  "license": "ISC",
+  "dependencies": {
+    "restify": "^2.8.4",
+    "node-xliff": "https://github.com/chrishokamp/node-xliff/archive/7bdc55dfa6440494050e4c5620af7c8f39742140.tar.gz"
+  }
+}
