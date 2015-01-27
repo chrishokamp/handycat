@@ -20,10 +20,11 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
     allWords: [],
 // TODO: add top level keys using language codes
     glossary: {},
-    getMatches: function(phrase, callback, fromLang, toLang) {
+    getMatches: function(phrase, callback, fromLang, toLang, maxsize) {
       $log.log('Inside Glossary service, getting matches for: ' + phrase);
       // ask the node server for matches from the glosbe API
       var self = this;
+      // simple cache
       if (self.glossary[phrase]) {
         callback(self.glossary[phrase]);
       } else {
@@ -43,16 +44,16 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
             var phrases = res;
             $log.log("Glossary result: " + res);
 
-            // Limit the glossary to 4 results for now
-            // TODO(ximo) make this an option
-            phrases = phrases.slice(0, 3);
+            // Limit the glossary to 4 results for now according to the maxsize param
+            if (maxsize === undefined) maxsize = 5;
+            phrases = phrases.slice(0, maxsize);
 
             // cache the result
             self.glossary[phrase] = phrases;
             callback(phrases);
           })
           .error(function(err) {
-            $log.log('Error in concordancer: ' + err.message);
+            $log.error('Error in concordancer: ' + err.message);
             callback(null);
           })
       }
