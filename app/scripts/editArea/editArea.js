@@ -104,13 +104,9 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       $scope.$broadcast('toggleShowInvisibleChars', value);
     };
 
-    // used as a callback for the glossary
-    $scope.queryGlossary = function(query) {
-      if (glossaryMatches) {
-        // the toolbar should be listening for this
-        $rootScope.$broadcast('update-glossary-area', glossaryMatches);
-      }
-    };
+    // this is a stub used as an interface -- a child directive may provide an implementation of queryGlossary
+    // if there is no implementation, then this function does nothing
+    $scope.queryGlossary = function() {}
 
     // this fires once the view content has completely loaded
     $rootScope.$on('repeat-finished', function (event) {

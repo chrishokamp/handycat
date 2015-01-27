@@ -1,15 +1,16 @@
 angular.module('directives').directive('toolbar',
   ['$log', '$timeout', '$rootScope', 'TranslationMemory', 'Glossary',
     function($log, $timeout, $rootScope, TranslationMemory, Glossary) {
-  // this directive shares scope with the current active segment area
-  // the toolbar communicates with the segment area to perform queries and populate new data
   return {
     restrict: 'E',
     templateUrl: 'scripts/directives/toolbar.html',
     scope: {
       activeSegment: '=',
       segments: '=',
-      // this directive will provide an implementation of queryGlossary to the parent scope
+      sourceLang: '@',
+      targetLang: '@',
+      // the directive provides an implementation of queryGlossary to the parent scope
+      // other components may hit that function on the parent, causing a query to fire
       queryGlossary: '='
     },
     // try to execute this directive last, so that the parent $scope variables are initialized
