@@ -22,7 +22,7 @@ var app = express();
 // Connect to database
 var db = require('./server/db/mongo').db;
 
-// Bootstrap models - Chris - let's you avoid adding each model explicitly
+// Bootstrap models - this approach lets you avoid adding each model explicitly
 var modelsPath = path.join(__dirname, '/server/models');
 fs.readdirSync(modelsPath).forEach(function (file) {
   require(modelsPath + '/' + file);
@@ -34,7 +34,7 @@ var pass = require('./server/config/pass');
 var env = process.env.NODE_ENV || 'development';
 //var env = 'production';
 
-if ('development' == env) {
+if ('development' === env) {
    // configure stuff here
   app.use(express.static(path.join(__dirname, '.tmp')));
   app.use(express.static(path.join(__dirname, 'app')));
@@ -42,7 +42,7 @@ if ('development' == env) {
   app.set('views', __dirname + '/app/views');
 }
 
-if ('production' == env) {
+if ('production' === env) {
 //  app.use(express.favicon(path.join(__dirname, 'dist', 'favicon.ico')));
   app.use(express.static(path.join(__dirname, 'dist')));
   app.set('views', __dirname + '/dist/views');
@@ -93,8 +93,11 @@ app.use('/users/:userId/tm', function(req, res, next) {
   next();
 });
 
-//Bootstrap routes - remember that routes must be added after application middleware
-require('./server/config/routes')(app);
+app.use('/tm', function(req, res, next) {
+  // invoked for any request starting with /users/:userId/tm
+  console.log('Inside web.js - test TM middleware')
+  next();
+});
 
 // TODO: move these routes to a separate file and bootstrap
 
@@ -132,16 +135,15 @@ app.get('/wikipedia/:lang', function(req, res){
 
 // add a route to query glosbe as a glossary
 // glosbe says that you can get around limits by using jsonp
-// add a route to query media wiki
+// TODO: WORKING - the glossary route should be an interface to all of the user's glossaries
+// routes which implement the glossary API should be specified in the config
 app.get('/glossary', function(req, res){
-  console.log('i just got a GET request to /glossary');
   // @params
   // fromlang
   // tolang
   // query
-  // TODO: understand why the parsing of the params sometimes doesn't work
-  var fromLang=req.query.from;
-  var toLang=req.query.dest;
+  var fromLang=req.query.sourceLang;
+  var toLang=req.query.targetLang;
   if (fromLang === undefined)
     fromLang='eng';
   if (toLang === undefined)
@@ -151,47 +153,51 @@ app.get('/glossary', function(req, res){
   var to = '&dest=' + toLang;
   var phrase = '&phrase=' + encodeURIComponent(req.query.phrase);
   var format = '&format=json'
-  console.log('the req phrase param is: ' + req.query.phrase);
   var options = {
     host: 'glosbe.com',
 //    path: '/gapi/tm?' + from + to + phrase;
     path: '/gapi/translate?' + from + to + phrase + format,
-    method: 'GET'
+    method: 'GET',
+    // set protocol to https - glosbe requires this
+    port: 443
 // EXAMPLE:
-// http://glosbe.com/gapi/tm?from=eng&dest=deu&format=json&phrase="the company grew"&pretty=true
+// https://glosbe.com/gapi/tm?from=eng&dest=deu&format=json&phrase="the company grew"&pretty=true
   };
   getJSON.getJSON(options,
     function(result) {
-      //var searchResults = result.query.search;
-      // TODO: make sure every item is unique (this might be done on their side)
-      var matches = result.tuc.map(function (glossaryObj) {
-        // parse the results here
-        var p = glossaryObj.phrase;
-        return p;
+      var matches = result.tuc.map(
+        function (glossaryObj) {
+          // parse the results here
+          var p = glossaryObj.phrase;
+          return p;
+        }
+      )
+      .filter(function(match) {
+        if (match !== undefined) {
+          return true;
+        }
+      });
+
+      // make sure there aren't any duplicates
+      var unique = {};
+      matches.forEach(function(match) {
+        unique[match.text] = 1;
       })
-        .filter(function(match) {
-          if (match !== undefined) {
-            return true;
-          }
-        });
 
-      var searchResults = matches;
-      console.log('the result from the glosbe API: ');
-      console.log(matches);
-
-      //console.log(JSON.stringify(searchResults, null, 3));
-      res.setHeader('Content-Type', 'application/json');
-//      res.setHeader('Content-Type', 'application/json');
-      res.send(searchResults);
+      matches = matches.filter(function(i) {
+        return unique[i.text];
+      })
+      res.json(matches);
     });
 
 });
 
+// This is for the entity linker demo
+// TODO: move this to a plugin
 //var DbEntities = require('./server/db/queryEntities');
 var DbEntities = require('./server/db/queryEntities');
 // MONGO DB ENTITY STORE ROUTES
 app.get('/surface-forms/:lang/:entity', function(req, res){
-  console.log('i just got a GET request to /surface');
   DbEntities.findSurfaceFormByEntityName(req, res);
 //  res.setHeader('Content-Type', 'application/json');
 //  res.send(searchResults);
@@ -215,8 +221,12 @@ app.post('/logger/:sessionId', function(req, res){
 //  res.send({ "logged": true });
 });
 
+//Bootstrap routes - remember that routes must be added after application middleware
+require('./server/config/routes')(app);
+
 //app.listen(process.env.PORT || 5002);
-http.createServer(app).listen(process.env.PORT || 5002);
+var server = http.createServer(app).listen(process.env.PORT || 5002);
+console.log('Express server listening on port: ' + server.address().port);
 
 // For https -- note that you need a certificate for this to work
 //var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');

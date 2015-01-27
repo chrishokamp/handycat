@@ -105,7 +105,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     };
 
     // used as a callback for the glossary
-    var updateGlossaryArea = function(glossaryMatches) {
+    $scope.queryGlossary = function(query) {
       if (glossaryMatches) {
         // the toolbar should be listening for this
         $rootScope.$broadcast('update-glossary-area', glossaryMatches);

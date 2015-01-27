@@ -148,3 +148,28 @@ angular.module('services')
 
     // END COPIED TEXT
 
+// cut and pasted from glossary.js
+// TODO: move this to a separate autocomplete service
+// en --> de index for Autocomplete
+//  $http.get(glossaryFile)
+//    .success(function(data) {
+//      var lines = data.match(/[^\r\n]+/g);
+//      var dictionary = _.map(lines, function(line) {
+//        var units = line.split('\t');
+//        var translations = units[2].split(', ');
+//        return {source: units[0], pos: units[1], targets: translations};
+//      });
+//      // now add every target word to the autocomplete
+//      _.each(dictionary, function(unit){
+//        _.each(unit.targets, function(targetWord) {
+//          Glossary.allWords.push(targetWord);
+//        });
+//      });
+//
+//      $log.log("dictionary object");
+//      $log.log(dictionary);
+//      $log.log("allWords");
+//      $log.log(Glossary.allWords);
+//
+//    });
+

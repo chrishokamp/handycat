@@ -130,13 +130,6 @@ var App = window.App = angular.module('editorComponentsApp',
 	delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }])
 
-  // see: https://github.com/angular-ui/bootstrap/blob/master/src/tooltip/tooltip.js
-//.config(['$tooltipProvider', function( $tooltipProvider ) {
-    .config(['$tooltipProvider', function( $tooltipProvider ) {
-   // place tooltips left instead of top by default
-//   $tooltipProvider.options( { placement: 'left' } );
-   // $tooltipProvider.options( { trigger: 'click' } );
-
 //  App.provider('baseUrl', function() {
 //    return {
 //      $get: function() {
@@ -146,5 +139,4 @@ var App = window.App = angular.module('editorComponentsApp',
 //      }
 //    }
 //  });
-}]);
 

@@ -3,16 +3,13 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
 
   //development
   // the ectaco german dictionary
-  var glossaryFile = 'data/glossary.small.tsv';
+  //var glossaryFile = 'data/glossary.small.tsv';
 //  var glossaryFile = 'data/ectaco-en-pos-de.tsv';
 
   // the glossary server - make sure the node server is running from server/
-//  var glossaryUrl = http://0.0.0.0:900
+  //var baseUrl = 'http://localhost:5002';
   var urlPrefix = '/glossary';
   var glossaryUrl = baseUrl + urlPrefix;
-  // working -- interface with the glosbe translate API
-  // check whether CORS is ok
-//   http://glosbe.com/gapi/tm?from=eng&dest=deuk&format=json&phrase="the company grew"&pretty=true
 
   // Note: a glossary is for LOOKUP, not autocomplete
   var Glossary = {
@@ -28,7 +25,7 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
       if (self.glossary[phrase]) {
         callback(self.glossary[phrase]);
       } else {
-
+        // TODO: make this api fixed - change 'dest' to 'targetLang' and 'from' to 'sourceLang'
         $http.get(glossaryUrl, {
           params: {
             phrase: phrase,
@@ -45,45 +42,20 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
             $log.log("Glossary result: " + res);
 
             // Limit the glossary to 4 results for now according to the maxsize param
-            if (maxsize === undefined) maxsize = 5;
-            phrases = phrases.slice(0, maxsize);
+            //if (maxsize === undefined) maxsize = 5;
+            //phrases = phrases.slice(0, maxsize);
 
             // cache the result
             self.glossary[phrase] = phrases;
             callback(phrases);
           })
           .error(function(err) {
-            $log.error('Error in concordancer: ' + err.message);
+            $log.error('Error in glossary ' + err);
             callback(null);
           })
       }
     }
   };
 
-// TODO: move this to a separate autocomplete service
-  // en --> de index for Autocomplete
-//  $http.get(glossaryFile)
-//    .success(function(data) {
-//      var lines = data.match(/[^\r\n]+/g);
-//      var dictionary = _.map(lines, function(line) {
-//        var units = line.split('\t');
-//        var translations = units[2].split(', ');
-//        return {source: units[0], pos: units[1], targets: translations};
-//      });
-//      // now add every target word to the autocomplete
-//      _.each(dictionary, function(unit){
-//        _.each(unit.targets, function(targetWord) {
-//          Glossary.allWords.push(targetWord);
-//        });
-//      });
-//
-//      $log.log("dictionary object");
-//      $log.log(dictionary);
-//      $log.log("allWords");
-//      $log.log(Glossary.allWords);
-//
-//    });
-
   return Glossary;
-
 }]);

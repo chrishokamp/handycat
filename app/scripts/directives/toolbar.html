@@ -20,15 +20,19 @@
         </tab>
         <tab heading="Glossary">
             <input type="text" ng-model="glossary.glossaryQuery" placeholder="Enter a search query..." class="query-box"/>
-            <button ng-click="queryGlossary(glossary.glossaryQuery)" class="glossary-search btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+            <button ng-click="queryGlossary(glossary.glossaryQuery, fromLang, toLang)"
+                    class="glossary-search btn btn-success"
+              >
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
             <div class="search-result"
                  ng-repeat="glossaryMatch in glossaryMatches"
                  ng-click="insertText(glossaryMatch)"
                  ng-show="glossaryMatches"
                     >{{glossaryMatch}}</div>
 
-            <div ng-hide="glossaryMatches !== undefined"><p>Error: Unable to access the glossary service.</p></div>
-            <div ng-show="glossaryMatches.length === 0"><p>No matches found for term: <b>{{ glossary.glossaryQuery }}</b></p></div>
+            <!--<div ng-hide="glossaryMatches !== undefined"><p>Error: Unable to access the glossary service.</p></div>-->
+            <!--<div ng-show="glossaryMatches.length === 0"><p>No matches found for term: <b>{{ glossary.glossaryQuery }}</b></p></div>-->
         </tab>
         <tab heading="Concordance" ng-click="">
             <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />

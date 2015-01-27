@@ -14,7 +14,7 @@
 
   <div ng-init="loadProject()">
 
-    <!-- TODO: remove the HUD toolbar, put the controls for the toolbar elsewhere -->
+    <!-- TODO: remove the HUD toolbar, put the controls for the toolbar at the top -->
     <div class="navbar-fixed-bottom"> <hud-toolbar></hud-toolbar></div>
 
     <!-- translation area -->
@@ -24,7 +24,12 @@
 
         <!--TOOLBAR-->
         <!-- singleton directive containing the toolbar -->
-        <toolbar class="widget-toolbar" active-segment="activeSegment" segments="document.segments" ng-show="visible.toolbar"></toolbar>
+        <toolbar class="widget-toolbar"
+                 active-segment="activeSegment"
+                 segments="document.segments"
+                 query-glossary="queryGlossary"
+                 ng-show="visible.toolbar"
+        ></toolbar>
         <!--END TOOLBAR-->
 
         <!-- repeat for each segment -->

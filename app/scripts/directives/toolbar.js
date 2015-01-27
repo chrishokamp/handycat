@@ -1,4 +1,6 @@
-angular.module('directives').directive('toolbar', ['$log', '$timeout', '$rootScope', 'TranslationMemory', function($log, $timeout, $rootScope, TranslationMemory) {
+angular.module('directives').directive('toolbar',
+  ['$log', '$timeout', '$rootScope', 'TranslationMemory', 'Glossary',
+    function($log, $timeout, $rootScope, TranslationMemory, Glossary) {
   // this directive shares scope with the current active segment area
   // the toolbar communicates with the segment area to perform queries and populate new data
   return {
@@ -6,13 +8,14 @@ angular.module('directives').directive('toolbar', ['$log', '$timeout', '$rootSco
     templateUrl: 'scripts/directives/toolbar.html',
     scope: {
       activeSegment: '=',
-      segments: '='
+      segments: '=',
+      // this directive will provide an implementation of queryGlossary to the parent scope
+      queryGlossary: '='
     },
     // try to execute this directive last, so that the parent $scope variables are initialized
-    priority: 1,
+    //priority: 1,
     link: function($scope, el, attrs){
      $timeout(function(){
-       // TODO: assign the model to watch in the markup (don't hard-code $scope.activeSegment)
       $scope.$watch(
         function () {
           return $scope.activeSegment;
@@ -22,15 +25,12 @@ angular.module('directives').directive('toolbar', ['$log', '$timeout', '$rootSco
             index = 0;
           }
           // TODO: reinitialize all of the toolbar fields when the active segment changes
-          $log.log('toolbar: ACTIVE SEGMENT CHANGED');
-          $log.log(index);
           var above = $('#segment-' + index);
           $(above).after(el);
-          $log.log('TOOLBAR - current $scope.activeSegment is: ' + $scope.activeSegment);
+
           // make the calls for this toolbar location -- check the TM, etc...
           // TODO: this breaks on the last index
           var currentSourceText = $scope.segments[index].source;
-          $log.log('currentSourceText: ' + currentSourceText);
 
           // TODO: query all of the user's available translation resources
           // TODO: put this logic into the segment, not inside the toolbar
@@ -52,15 +52,22 @@ angular.module('directives').directive('toolbar', ['$log', '$timeout', '$rootSco
         });
       }
 
-      // Events for interacting with the toolbar
-      $scope.$on('update-glossary-area', function(evt, data) {
-        $log.log('toolbar: update-glossary-area');
-        $log.log(data);
 
-        $scope.glossaryMatches = data.map(function(item) {
-          return item.text;
-        });
-      })
+      // now we'll give the parent scope a function that other places in the app can hit
+      $scope.queryGlossary = function(word, fromLang, toLang) {
+        // the maximum number of results
+        var maxsize = 20;
+        $log.log('toolbar: querying the glossary service');
+
+        var glossaryCallback = function (data) {
+          $log.log('data is:');
+          $log.log(data);
+          $scope.glossaryMatches = data.map(function (item) {
+            return item.text;
+          });
+        }
+        Glossary.getMatches(word, glossaryCallback, fromLang, toLang, 20);
+      };
 
       // TODO: when would the TM be updated by an action outside of the TM component?
       $scope.$on('update-tm-area', function(evt, data) {

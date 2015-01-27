@@ -4,10 +4,11 @@ angular.module('directives')
     return {
       scope: {
         sourceSentence: '=',
-        annotatedSentence: '='
+        queryGlossary: '='
       },
       restrict: 'E',
       link: function(scope,el,attrs){
+        // tokenize the source text
         var tokenStrings = tokenizer.tokenize(scope.sourceSentence);
 
         // give each token an id, and also move to dot notation
@@ -56,14 +57,13 @@ angular.module('directives')
           $log.log('target text is: ' + surfaceForm);
           $scope.$emit('find-surface-forms', { 'sf': surfaceForm });
         }
+
+        // working -- call a function on the parent (the queryGlossary function passed into this component
         $scope.askGlossary = function(word) {
           $log.log('ask glossary fired');
           var fromLang = 'eng';
           var toLang = 'deu';
-          $scope.$parent.queryGlossary(word, fromLang, toLang);
-          $scope.$parent.toggleToolbar(false);
-          $scope.$parent.glossary.glossaryQuery = word;
-
+          $scope.queryGlossary(word, fromLang, toLang);
         }
 
       }

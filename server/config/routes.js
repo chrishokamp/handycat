@@ -79,7 +79,9 @@ module.exports = function(app) {
     res.render(requestedView);
   });
 
+  // make sure the cookie with user_info is always available
   app.get('/*', function(req, res) {
+    console.log('get some');
     if(req.user) {
       res.cookie('user', JSON.stringify(req.user.user_info));
     }
