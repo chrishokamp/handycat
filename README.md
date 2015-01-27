@@ -66,5 +66,6 @@ The command was previously `grunt serve`, but this was changed so that both the 
 
 * The command `grunt build` will build the client application into dist/
 
+### Language Codes
+Some parts of the application rely upon the language tags in the XLIFF being in a format that we understand. HandyCAT adheres to the [XLIFF 2.0 requirements](http://docs.oasis-open.org/xliff/xliff-core/v2.0/os/xliff-core-v2.0-os.html#srclang) for the `srcLang` (required) and `trgLang` (optional) attributes, and assumes that language codes are in a format [like this](http://tools.ietf.org/html/bcp47#appendix-A).
 
-## TODOs and Notes
