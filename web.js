@@ -142,12 +142,24 @@ app.get('/glossary', function(req, res){
   // fromlang
   // tolang
   // query
+
+  // TODO: add a full language code mapping/conversion utility
+  // TODO: this mapping will need to be done for every utility that does not conform to BCP 47: http://tools.ietf.org/html/bcp47#appendix-A
+  var langCodeMapping = {
+    'en-US': 'eng',
+    'de-DE': 'deu'
+  };
+
   var fromLang=req.query.sourceLang;
   var toLang=req.query.targetLang;
+
+  // default language codes - TODO: testing only
   if (fromLang === undefined)
     fromLang='eng';
   if (toLang === undefined)
     toLang='deu';
+  if (langCodeMapping[toLang]) toLang = langCodeMapping[toLang];
+  if (langCodeMapping[fromLang]) fromLang = langCodeMapping[fromLang];
   // note the & is missing from the 'from' param
   var from = 'from=' + fromLang;
   var to = '&dest=' + toLang;

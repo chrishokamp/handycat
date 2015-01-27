@@ -29,8 +29,8 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
         $http.get(glossaryUrl, {
           params: {
             phrase: phrase,
-            from: fromLang,
-            dest: toLang,
+            sourceLang: fromLang,
+            targetLang: toLang,
 //            origin: 'http://0.0.0.0:9000'
           }
         })
