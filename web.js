@@ -101,7 +101,7 @@ app.use('/tm', function(req, res, next) {
 });
 
 // TODO: move these routes to a separate file and bootstrap
-
+// CONCORDANCER -- using wikipedia (via wikimedia API)
 // add a route to query media wiki
 app.param('lang', /^\w{2}$/);
 app.get('/wikipedia/:lang', function(req, res){
@@ -127,18 +127,20 @@ app.get('/wikipedia/:lang', function(req, res){
   getJSON.getJSON(options,
 	function(result) {
 		var searchResults = result.query.search;
-		//console.log(JSON.stringify(searchResults, null, 3));
-   		res.setHeader('Content-Type', 'application/json');
-   		res.send(searchResults);
+ 		res.json(searchResults);
 	});
 
 });
 
+// express-redis-cache middleware
+//var cache = require('express-redis-cache')();
+// TODO: WORKING - the glossary route should be an interface to all of the user's glossaries
 // add a route to query glosbe as a glossary
 // glosbe says that you can get around limits by using jsonp
-// TODO: WORKING - the glossary route should be an interface to all of the user's glossaries
 // routes which implement the glossary API should be specified in the config
-app.get('/glossary', function(req, res){
+app.get('/glossary',
+  //cache.route(),
+  function(req, res){
   // @params
   // fromlang
   // tolang

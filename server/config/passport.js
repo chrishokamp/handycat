@@ -45,4 +45,5 @@ passport.use(new LocalStrategy({
   }
 ));
 
+// export the configured passport instance
 module.exports = passport;

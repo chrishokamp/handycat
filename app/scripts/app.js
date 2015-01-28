@@ -113,12 +113,14 @@ var App = window.App = angular.module('editorComponentsApp',
       // if no currentUser and on a page that requires authorization then try to update it
       // will trigger 401s if user does not have a valid session
       if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) == -1 )) {
+        $log.error('No current user')
         Auth.currentUser();
       }
   });
 
   // On catching 401 errors, redirect to the login page.
   $rootScope.$on('event:auth-loginRequired', function() {
+    $log.error('App heard 401 -- redirecting to /login');
     $location.path('/login');
     return false;
   });
