@@ -21,7 +21,7 @@ describe('toolbar directive tests', function () {
 
   beforeEach(module('services'));
   beforeEach(module('directives'));
-  beforeEach(module('scripts/directives/toolbar.html'));
+  beforeEach(module('scripts/toolbar/toolbar.html'));
   beforeEach(function() {
     // mock the TranslationMemory service
     module(function($provide) {

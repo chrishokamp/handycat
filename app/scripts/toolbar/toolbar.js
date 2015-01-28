@@ -3,7 +3,7 @@ angular.module('directives').directive('toolbar',
     function($log, $timeout, $rootScope, TranslationMemory, Glossary) {
   return {
     restrict: 'E',
-    templateUrl: 'scripts/directives/toolbar.html',
+    templateUrl: 'scripts/toolbar/toolbar.html',
     scope: {
       activeSegment: '=',
       segments: '=',

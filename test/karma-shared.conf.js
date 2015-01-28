@@ -82,7 +82,7 @@ module.exports = function() {
         'app/scripts/directives/logger.js',
         'app/scripts/directives/endRepeat.js',
         'app/scripts/editArea/segmentArea/targetArea/staticTarget.js',
-        'app/scripts/directives/toolbar.js',
+        'app/scripts/toolbar/toolbar.js',
         'app/scripts/editArea/toolbar/hud-toolbar.js',
         'app/scripts/editArea/segmentArea/sourceArea/sourceArea.js',
         'app/scripts/editArea/segmentArea/targetArea/AceCtrl.js',
