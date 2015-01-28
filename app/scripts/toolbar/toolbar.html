@@ -20,7 +20,12 @@
             >
               <span class="glyphicon glyphicon-search"></span>
             </md-button>
-            <div>{{sourceLang}} --> {{targetLang}}</div>
+            <md-button>{{sourceLang}}</md-button>
+            <md-button>
+              <i class="ion-arrow-right-c"></i>
+            </md-button>
+
+            <md-button>{{targetLang}}</md-button>
           </div>
           <div class="search-result"
              ng-repeat="glossaryMatch in glossaryMatches"
