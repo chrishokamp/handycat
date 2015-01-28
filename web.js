@@ -60,8 +60,6 @@ if ('production' === env) {
     client: redis
   });
   console.log('NODE_ENV: ' + process.env.NODE_ENV);
-  console.log('rtg obj:');
-  console.log(rtg);
 }
 
 app.engine('html', require('ejs').renderFile);
@@ -122,12 +120,10 @@ app.use('/tm', function(req, res, next) {
 // add a route to query media wiki
 app.param('lang', /^\w{2}$/);
 app.get('/wikipedia/:lang', function(req, res){
-  console.log('i just got a GET request to /wikipedia/:lang');
   // the search parameter name is 'srsearch'
   var lang = req.params.lang.toString().trim();
-  console.log('the req param is: ' + lang);
-  console.log('the req query param is: ' + req.query.srsearch);
-  // Question: put in quotes to search literally
+
+  // Question: put in quotes to search literally?
   var searchQuery = encodeURIComponent(req.query.srsearch);
   var query = '&srsearch=' + searchQuery;
 
@@ -157,6 +153,8 @@ app.get('/wikipedia/:lang', function(req, res){
 
 //app.get('/glossary/segment/:phrase',
 
+
+// TODO: glosbe returns html on error -- handle that case
 app.get('/glossary/word/:word',
   cache.route(),
   function(req, res){

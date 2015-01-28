@@ -8,7 +8,7 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
 
   // the glossary server - make sure the node server is running from server/
   //var baseUrl = 'http://localhost:5002';
-  var urlPrefix = '/glossary';
+  var urlPrefix = '/glossary/word/';
   var glossaryUrl = baseUrl + urlPrefix;
 
   // Note: a glossary is for LOOKUP, not autocomplete
@@ -17,29 +17,25 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
     allWords: [],
 // TODO: add top level keys using language codes
     glossary: {},
-    getMatches: function(phrase, callback, fromLang, toLang, maxsize) {
-      $log.log('Inside Glossary service, getting matches for: ' + phrase);
       // ask the node server for matches from the glosbe API
+    getMatches: function(phrase, callback, fromLang, toLang, maxsize) {
       var self = this;
+
       // simple cache
       if (self.glossary[phrase]) {
         callback(self.glossary[phrase]);
       } else {
         // TODO: make this api fixed - change 'dest' to 'targetLang' and 'from' to 'sourceLang'
-        $http.get(glossaryUrl, {
+        var queryUrl = glossaryUrl + phrase;
+        $http.get(queryUrl, {
           params: {
-            phrase: phrase,
             sourceLang: fromLang,
-            targetLang: toLang,
+            targetLang: toLang
 //            origin: 'http://0.0.0.0:9000'
           }
         })
           .success(function(res) {
-            $log.log('results for: ' + phrase);
-            $log.log(res);
-
             var phrases = res;
-            $log.log("Glossary result: " + res);
 
             // Limit the glossary to 4 results for now according to the maxsize param
             //if (maxsize === undefined) maxsize = 5;

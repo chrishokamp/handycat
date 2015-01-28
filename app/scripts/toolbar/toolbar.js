@@ -55,7 +55,7 @@ angular.module('directives').directive('toolbar',
 
 
       // now we'll give the parent scope a function that other places in the app can hit
-      $scope.queryGlossary = function(word, fromLang, toLang) {
+      $scope.queryGlossary = function(word) {
         // set the search field in the input area
         $scope.glossaryQuery = word;
         // this makes sure the glossary is showing when it gets queried
@@ -63,22 +63,17 @@ angular.module('directives').directive('toolbar',
 
         // the maximum number of results
         var maxsize = 20;
-        $log.log('toolbar: querying the glossary service');
 
         var glossaryCallback = function (data) {
-          $log.log('data is:');
-          $log.log(data);
           $scope.glossaryMatches = data.map(function (item) {
             return item.text;
           });
         }
-        Glossary.getMatches(word, glossaryCallback, fromLang, toLang, 20);
+        Glossary.getMatches(word, glossaryCallback, $scope.sourceLang, $scope.targetLang, 20);
       };
 
       // TODO: when would the TM be updated by an action outside of the TM component?
       $scope.$on('update-tm-area', function(evt, data) {
-        $log.log('toolbar: update-tm-area');
-        $log.log(data);
 
         // TODO: datastructure for TM matches -- isomorphic to TBX specification
 //        $scope.tmMatches = data.map(function(item) {
