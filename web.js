@@ -8,7 +8,7 @@ var express = require('express'),
    session = require('express-session'),
    errorHandler = require('express-error-handler'),
    methodOverride = require('method-override'),
-   passport = require('passport'),
+   //passport = require('passport'),
    path = require('path'),
    fs = require('fs'),
    mongoStore = require('connect-mongo')(session),
@@ -28,7 +28,6 @@ fs.readdirSync(modelsPath).forEach(function (file) {
   require(modelsPath + '/' + file);
 });
 
-var pass = require('./server/config/pass');
 
 // App Configuration
 var env = process.env.NODE_ENV || 'development';
@@ -76,7 +75,9 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
-
+// configure passport serializeUser and deserializeUser
+// note that this method of setting up passport returns a _modified_ and _configured_ version of passport
+var passport = require('./server/config/passport');
 // use passport session
 app.use(passport.initialize());
 app.use(passport.session());
