@@ -33,18 +33,30 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 var env = process.env.NODE_ENV || 'development';
 //var env = 'production';
 
+// express-redis-cache middleware
+// configure the cache based upon where we are
 if ('development' === env) {
    // configure stuff here
   app.use(express.static(path.join(__dirname, '.tmp')));
   app.use(express.static(path.join(__dirname, 'app')));
   app.use(errorHandler());
   app.set('views', __dirname + '/app/views');
+
+  // setup the local redis cache
+  var cache = require('express-redis-cache')();
 }
 
 if ('production' === env) {
+
 //  app.use(express.favicon(path.join(__dirname, 'dist', 'favicon.ico')));
   app.use(express.static(path.join(__dirname, 'dist')));
   app.set('views', __dirname + '/dist/views');
+
+  // setup the REDISTOGO connection on heroku
+  var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+  var cache = require('express-redis-cache')({
+    host: rtg.hostname, port: rtg.port
+  });
 }
 
 app.engine('html', require('ejs').renderFile);
@@ -132,14 +144,13 @@ app.get('/wikipedia/:lang', function(req, res){
 
 });
 
-// express-redis-cache middleware
-//var cache = require('express-redis-cache')();
+
 // TODO: WORKING - the glossary route should be an interface to all of the user's glossaries
 // add a route to query glosbe as a glossary
 // glosbe says that you can get around limits by using jsonp
 // routes which implement the glossary API should be specified in the config
 app.get('/glossary',
-  //cache.route(),
+  cache.route(),
   function(req, res){
   // @params
   // fromlang
