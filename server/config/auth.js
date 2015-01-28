@@ -1,4 +1,4 @@
-var debug = require('debug')('auth');
+//var debug = require('debug')('auth');
 
 /**
  *  Route middleware to ensure user is authenticated.
@@ -11,9 +11,9 @@ exports.ensureAuthenticated = function ensureAuthenticated(req, res, next) {
 // WORKING - ensure that the authenticated user has access to the data they are requesting
 exports.user = {
   hasAuthorization: function(req, res, next) {
-    debug('AUTH USER');
-    debug(req.sessionID);
-    debug(req.session.passport);
+    //debug('AUTH USER');
+    //debug(req.sessionID);
+    //debug(req.session.passport);
     //debug(passport.deserializeUser(req.sessionID));
     //if (req.project.creator._id.toString() !== req.user._id.toString()) {
     //  return res.status(403).end();
@@ -31,10 +31,10 @@ exports.user = {
 // TODO: by default, a user should only see their own projects
 exports.project = {
   hasAuthorization: function(req, res, next) {
-    debug('PROJECT AUTH');
-    debug(req.project.creator._id.toString());
+    //debug('PROJECT AUTH');
+    //debug(req.project.creator._id.toString());
     if (req.project.creator._id.toString() !== req.session.passport.user.toString()) {
-      debug('USER: ' + req.project.creator._id.toString() + ' NOT AUTHORIZED');
+      //debug('USER: ' + req.project.creator._id.toString() + ' NOT AUTHORIZED');
       return res.status(403).end();
     }
     next();

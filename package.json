@@ -6,6 +6,7 @@
     "connect-mongo": "*",
     "cookie-parser": "*",
     "cors": "*",
+    "debug": "^2.1.1",
     "ejs": "~0.8.4",
     "express": "*",
     "express-error-handler": "*",
@@ -18,6 +19,7 @@
     "mongoose": "*",
     "passport": "*",
     "passport-local": "*",
+    "redis": "^0.12.1",
     "underscore": "~1.5.2"
   },
   "devDependencies": {

@@ -47,16 +47,21 @@ if ('development' === env) {
 }
 
 if ('production' === env) {
-
 //  app.use(express.favicon(path.join(__dirname, 'dist', 'favicon.ico')));
   app.use(express.static(path.join(__dirname, 'dist')));
   app.set('views', __dirname + '/dist/views');
 
-  // setup the REDISTOGO connection on heroku
+  // setup the REDISTOGO connection on heroku - from https://devcenter.heroku.com/articles/nodejs-support
   var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+  var redis = require("redis").createClient(rtg.port, rtg.hostname);
+  redis.auth(rtg.auth.split(":")[1]);
+
   var cache = require('express-redis-cache')({
-    host: rtg.hostname, port: rtg.port
+    client: redis
   });
+  console.log('NODE_ENV: ' + process.env.NODE_ENV);
+  console.log('rtg obj:');
+  console.log(rtg);
 }
 
 app.engine('html', require('ejs').renderFile);
