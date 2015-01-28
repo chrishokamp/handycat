@@ -30,6 +30,7 @@
                  query-glossary="queryGlossary"
                  source-lang="{{document.sourceLang}}"
                  target-lang="{{document.targetLang}}"
+                 toolbar-showing="visible.toolbar"
                  ng-show="visible.toolbar"
         ></toolbar>
         <!--END TOOLBAR-->
@@ -83,7 +84,10 @@
                 </div>
                 <div ng-hide="segment.state === 'translated'">
                   <div class="source">
-                    <source-area source-sentence="segment.source"></source-area>
+                    <source-area
+                      source-sentence="segment.source"
+                      query-glossary="queryGlossary"
+                    ></source-area>
                   </div>
                 </div>
               </div>
@@ -106,7 +110,7 @@
                 ng-show="isActive.active"
                 layout="row"
                 layout-align="end center"
-                class="segment-controls"
+                clasy="segment-controls"
               >
                   <div>
                     <md-button

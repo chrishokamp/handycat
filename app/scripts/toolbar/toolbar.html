@@ -2,6 +2,35 @@
 <!-- render and populate its fields dynamically -->
 <div class="widget-area row">
     <tabset class="widget-wrapper col-xs-12">
+      <tab heading="Glossary">
+        <div layout="column"
+             layout-margin
+          >
+          <div layout="row"
+               layout-margin
+            >
+            <input type="text"
+                   class="query-box"
+                   flex
+                   ng-model="glossaryQuery"
+                   placeholder="Enter a search query..."
+            />
+            <md-button ng-click="queryGlossary(glossaryQuery, sourceLang, targetLang)"
+                    class="glossary-search btn btn-success"
+            >
+              <span class="glyphicon glyphicon-search"></span>
+            </md-button>
+            <div>{{sourceLang}} --> {{targetLang}}</div>
+          </div>
+          <div class="search-result"
+             ng-repeat="glossaryMatch in glossaryMatches"
+             ng-click="insertText(glossaryMatch)"
+             ng-show="glossaryMatches"
+          >{{glossaryMatch}}</div>
+        </div>
+        <!--<div ng-hide="glossaryMatches !== undefined"><p>Error: Unable to access the glossary service.</p></div>-->
+        <!--<div ng-show="glossaryMatches.length === 0"><p>No matches found for term: <b>{{ glossary.glossaryQuery }}</b></p></div>-->
+      </tab>
         <tab heading="TM">
             <div class="search-result"
                  ng-repeat="tmMatch in tmMatches"
@@ -17,23 +46,6 @@
             <div class="row" ng-show="!tmMatches || tmMatches.length === 0">
                 <p class="col-xs-12">No TM match for: {{currentSourceText}}</p>
             </div>
-        </tab>
-        <tab heading="Glossary">
-            <input type="text" ng-model="glossary.glossaryQuery" placeholder="Enter a search query..." class="query-box"/>
-            <button ng-click="queryGlossary(glossary.glossaryQuery, sourceLang, targetLang)"
-                    class="glossary-search btn btn-success"
-            >
-                <span class="glyphicon glyphicon-search"></span>
-            </button>
-          <div>SourceLang: {{sourceLang}} TargetLang: {{targetLang}}</div>
-            <div class="search-result"
-                 ng-repeat="glossaryMatch in glossaryMatches"
-                 ng-click="insertText(glossaryMatch)"
-                 ng-show="glossaryMatches"
-                    >{{glossaryMatch}}</div>
-
-            <!--<div ng-hide="glossaryMatches !== undefined"><p>Error: Unable to access the glossary service.</p></div>-->
-            <!--<div ng-show="glossaryMatches.length === 0"><p>No matches found for term: <b>{{ glossary.glossaryQuery }}</b></p></div>-->
         </tab>
         <tab heading="Concordance" ng-click="">
             <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />

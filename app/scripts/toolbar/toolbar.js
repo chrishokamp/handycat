@@ -11,7 +11,8 @@ angular.module('directives').directive('toolbar',
       targetLang: '@',
       // the directive provides an implementation of queryGlossary to the parent scope
       // other components may hit that function on the parent, causing a query to fire
-      queryGlossary: '='
+      queryGlossary: '=',
+      toolbarShowing: '='
     },
     // try to execute this directive last, so that the parent $scope variables are initialized
     //priority: 1,
@@ -34,7 +35,6 @@ angular.module('directives').directive('toolbar',
           var currentSourceText = $scope.segments[index].source;
 
           // TODO: query all of the user's available translation resources
-          // TODO: put this logic into the segment, not inside the toolbar
           queryTM(currentSourceText);
           $scope.currentSourceText = currentSourceText;
         }
@@ -56,6 +56,11 @@ angular.module('directives').directive('toolbar',
 
       // now we'll give the parent scope a function that other places in the app can hit
       $scope.queryGlossary = function(word, fromLang, toLang) {
+        // set the search field in the input area
+        $scope.glossaryQuery = word;
+        // this makes sure the glossary is showing when it gets queried
+        $scope.toolbarShowing = true;
+
         // the maximum number of results
         var maxsize = 20;
         $log.log('toolbar: querying the glossary service');
