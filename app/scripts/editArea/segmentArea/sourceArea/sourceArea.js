@@ -49,9 +49,6 @@ angular.module('directives')
 
       },
       controller: function($scope) {
-        $scope.getLinkedData = function() {
-          return '<ul><li>test</li><li>test</li><li>test</li></ul>';
-        }
         $scope.setSurfaceForms = function(e) {
           var surfaceForm = $(e.target).text();
           $log.log('target text is: ' + surfaceForm);
@@ -61,9 +58,7 @@ angular.module('directives')
         // working -- call a function on the parent (the queryGlossary function passed into this component
         $scope.askGlossary = function(word) {
           $log.log('ask glossary fired');
-          var fromLang = 'eng';
-          var toLang = 'deu';
-          $scope.queryGlossary(word, fromLang, toLang);
+          $scope.queryGlossary(word);
         }
 
       }

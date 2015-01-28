@@ -100,7 +100,6 @@ module.exports = function() {
         'app/scripts/projects/projects.js',
         'app/scripts/editArea/segmentArea/segmentArea.js',
         'app/scripts/editArea/editArea.js',
-        'app/scripts/glossary/Glossary.js',
         'app/scripts/settings/UserSettings.js',
         'app/scripts/languagePair/langPair.js',
 
