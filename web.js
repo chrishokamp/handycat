@@ -154,15 +154,14 @@ app.get('/wikipedia/:lang', function(req, res){
 // add a route to query glosbe as a glossary
 // glosbe says that you can get around limits by using jsonp
 // routes which implement the glossary API should be specified in the config
-app.get('/glossary',
+
+//app.get('/glossary/segment/:phrase',
+
+app.get('/glossary/word/:word',
   cache.route(),
   function(req, res){
-  // @params
-  // fromlang
-  // tolang
-  // query
 
-  // TODO: add a full language code mapping/conversion utility
+  // TODO: add a full language code mapping/conversion utility that covers most lang-code conventions
   // TODO: this mapping will need to be done for every utility that does not conform to BCP 47: http://tools.ietf.org/html/bcp47#appendix-A
   var langCodeMapping = {
     'en-US': 'eng',
@@ -171,18 +170,16 @@ app.get('/glossary',
 
   var fromLang=req.query.sourceLang;
   var toLang=req.query.targetLang;
+  var queryString = req.params.word.toString().trim();
 
-  // default language codes - TODO: testing only
-  if (fromLang === undefined)
-    fromLang='eng';
-  if (toLang === undefined)
-    toLang='deu';
   if (langCodeMapping[toLang]) toLang = langCodeMapping[toLang];
   if (langCodeMapping[fromLang]) fromLang = langCodeMapping[fromLang];
+
   // note the & is missing from the 'from' param
   var from = 'from=' + fromLang;
   var to = '&dest=' + toLang;
-  var phrase = '&phrase=' + encodeURIComponent(req.query.phrase);
+    //var lang = req.params.lang.toString().trim();
+  var phrase = '&phrase=' + encodeURIComponent(queryString);
   var format = '&format=json'
   var options = {
     host: 'glosbe.com',
