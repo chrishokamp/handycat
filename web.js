@@ -15,7 +15,8 @@ var express = require('express'),
 	 params = require('express-params'),
 	 cors = require('cors'),
 	 getJSON = require('./server/getJSON'),
-   config = require('./server/config/config')
+   config = require('./server/config/config'),
+   _ = require('lodash');
 
 var app = express();
 
@@ -151,46 +152,38 @@ app.get('/wikipedia/:lang', function(req, res){
 // glosbe says that you can get around limits by using jsonp
 // routes which implement the glossary API should be specified in the config
 
-//app.get('/glossary/segment/:phrase',
-
-
 // TODO: glosbe returns html on error -- handle that case
-app.get('/glossary/word/:word',
-  cache.route(),
-  function(req, res){
+var q = require('q');
+var queryGlosbe = function (fromLang, toLang, queryString) {
 
+  var deferred = q.defer();
   // TODO: add a full language code mapping/conversion utility that covers most lang-code conventions
   // TODO: this mapping will need to be done for every utility that does not conform to BCP 47: http://tools.ietf.org/html/bcp47#appendix-A
   var langCodeMapping = {
     'en-US': 'eng',
     'de-DE': 'deu'
   };
-
-  var fromLang=req.query.sourceLang;
-  var toLang=req.query.targetLang;
-  var queryString = req.params.word.toString().trim();
-
   if (langCodeMapping[toLang]) toLang = langCodeMapping[toLang];
   if (langCodeMapping[fromLang]) fromLang = langCodeMapping[fromLang];
 
   // note the & is missing from the 'from' param
   var from = 'from=' + fromLang;
   var to = '&dest=' + toLang;
-    //var lang = req.params.lang.toString().trim();
   var phrase = '&phrase=' + encodeURIComponent(queryString);
   var format = '&format=json'
   var options = {
-    host: 'glosbe.com',
+    host  : 'glosbe.com',
 //    path: '/gapi/tm?' + from + to + phrase;
-    path: '/gapi/translate?' + from + to + phrase + format,
+    path  : '/gapi/translate?' + from + to + phrase + format,
     method: 'GET',
     // set protocol to https - glosbe requires this
-    port: 443
+    port  : 443
 // EXAMPLE:
 // https://glosbe.com/gapi/tm?from=eng&dest=deu&format=json&phrase="the company grew"&pretty=true
   };
+  // TODO: use the requests library for this
   getJSON.getJSON(options,
-    function(result) {
+    function (result) {
       var matches = result.tuc.map(
         function (glossaryObj) {
           // parse the results here
@@ -198,25 +191,67 @@ app.get('/glossary/word/:word',
           return p;
         }
       )
-      .filter(function(match) {
-        if (match !== undefined) {
-          return true;
-        }
-      });
+        .filter(function (match) {
+          if (match !== undefined) {
+            return true;
+          }
+        });
 
       // make sure there aren't any duplicates
       var unique = {};
-      matches.forEach(function(match) {
+      matches.forEach(function (match) {
         unique[match.text] = 1;
       })
 
-      matches = matches.filter(function(i) {
+      matches = matches.filter(function (i) {
         return unique[i.text];
       })
-      res.json(matches);
+      deferred.resolve(matches);
     });
+  return deferred.promise;
+}
 
-});
+// take the request, and get the params to pass to the glossary function
+var askGlossary = function(req,res) {
+  var fromLang = req.query.sourceLang;
+  var toLang = req.query.targetLang;
+  var queryString = req.params.word.toString().trim();
+  var glossaryPromise = queryGlosbe(fromLang, toLang, queryString);
+  glossaryPromise.then(
+    function(matches) {
+      res.json(matches);
+    }
+  );
+}
+
+var natural = require('natural');
+var tokenizer = new natural.WordTokenizer();
+var glossaryWordList = function(req,res) {
+  var sourceLang = 'en-US';
+  var targetLang = 'de-DE';
+  // tokenize the sentence, and query the glossary for everything that's not punctuation
+  var phrase = req.params.phrase.toString().trim()
+  var tokens = tokenizer.tokenize(phrase);
+  console.log(tokens);
+
+
+  // call queryGlosbe for every token
+  // wait till every promise resolves
+  var allQueries = tokens.map(function(token) {
+    return queryGlosbe(sourceLang, targetLang, token);
+  });
+  q.all(allQueries).then(
+    function(allResults) {
+      res.json(_.flatten(allResults));
+    }
+  );
+
+}
+
+app.get('/glossary/segment/:phrase', cache.route(), glossaryWordList);
+app.get('/glossary/word/:word', cache.route(), askGlossary);
+
+
 
 // This is for the entity linker demo
 // TODO: move this to a plugin
