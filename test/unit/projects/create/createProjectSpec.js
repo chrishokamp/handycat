@@ -11,6 +11,7 @@ describe("createProject tests", function () {
   // inject the module containing the stuff we want to test
   // TODO: how to handle the dependency on ui-router - this controller causes state changes!
   beforeEach(module('ngMaterial'));
+  beforeEach(module('services'));
   beforeEach(module('controllers'));
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();

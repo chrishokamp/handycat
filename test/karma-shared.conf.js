@@ -16,7 +16,7 @@ module.exports = function() {
 
     // generate js files from html templates
     preprocessors: {
-      'app/scripts/directives/*.html': 'ng-html2js'
+      'app/scripts/**/*.html': 'ng-html2js'
     },
     ngHtml2JsPreprocessor: {
         // strip app from the file path
@@ -107,7 +107,7 @@ module.exports = function() {
         'app/scripts/app.js',
 
       // templates
-      'app/scripts/directives/toolbar.html',
+      'app/scripts/toolbar/toolbar.html',
 
         'app/scripts/cat.templates.js',
 

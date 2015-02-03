@@ -12,8 +12,8 @@
 //  $scope.tmMatches
 //    $scope.glossaryMatches
 
-// Events:  $scope.$on('update-tm-area', function(evt, data) {
-
+// TODO: refactor to provide a mocked document object
+// TODO: factor out the element building for each test
 
 describe('toolbar directive tests', function () {
 
