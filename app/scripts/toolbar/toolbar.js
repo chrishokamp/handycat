@@ -60,9 +60,6 @@ angular.module('directives').directive('toolbar',
         // this makes sure the glossary is showing when it gets queried
         $scope.toolbarShowing = true;
 
-        // the maximum number of results
-        var maxsize = 20;
-
         var glossaryCallback = function (data) {
           $scope.glossaryMatches = data.map(function (item) {
             return item.text;
@@ -91,11 +88,12 @@ angular.module('directives').directive('toolbar',
                 concordanceObjs.forEach(function(concordanceObj, idx) {
                   // note that we need to use .data on the alignmentObjs because these are objects from $http
                   angular.extend(concordanceObj, alignmentObjs[idx].data);
-                })
-                //$log.log('final aligned concordance objs');
-                //$log.log(concordanceObjs);
+                });
 
-               // now render (add <spans>) the diff between each pair, and put it into the concordancer
+                // now render (add <spans>) the diff between each pair
+                // show the text, provenance and matchscores in the concordancer
+                $scope.concordanceMatches = concordanceObjs;
+
               });
             }, function(err) {
               $log.error('error retrieving concordances for query: ' + queryStr + ' and lang: ' + lang);

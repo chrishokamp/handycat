@@ -55,6 +55,7 @@
       <!--WORKING - move to standalone directive-->
         <tab heading="Concordance" ng-click="">
             <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />
+          <!--TODO: select language component (like the glossary)-->
                 <button ng-click="queryConcordancer(concordanceQuery, 'en')"
                     class="glossary-search btn btn-success">
                 <span class="glyphicon glyphicon-search"></span></button>
@@ -65,11 +66,11 @@
                         ng-model="queryLang">{{document.targetLang}}</button>
             </div>
             <div class="search-result"
-                 ng-repeat="concordanceMatch in concordanceMatches" ng-bind-html="concordanceMatch"
-                 ng-hide="concordancerError"
-                    ></div>
+                 ng-repeat="concordanceMatch in concordanceMatches"
+            >
+              {{concordanceMatch.segment}}
+            </div>
 
-            <div ng-show="concordancerError"><p>Error: Unable to access the concordance service.</p></div>
         </tab>
     </tabset>
 </div>
