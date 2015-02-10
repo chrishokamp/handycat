@@ -1,6 +1,6 @@
 angular.module('directives').directive('toolbar',
-  ['$log', '$timeout', '$rootScope', 'TranslationMemory', 'Glossary',
-    function($log, $timeout, $rootScope, TranslationMemory, Glossary) {
+  ['$log', '$timeout', '$rootScope', 'TranslationMemory', 'Glossary', 'concordancer', '$q',
+    function($log, $timeout, $rootScope, TranslationMemory, Glossary, concordancer, $q) {
   return {
     restrict: 'E',
     templateUrl: 'scripts/toolbar/toolbar.html',
@@ -53,8 +53,7 @@ angular.module('directives').directive('toolbar',
         });
       }
 
-
-      // now we'll give the parent scope a function that other places in the app can hit
+      // now we'll give the parent scope a function that other places in the app can hit to interface with this component
       $scope.queryGlossary = function(word) {
         // set the search field in the input area
         $scope.glossaryQuery = word;
@@ -72,6 +71,43 @@ angular.module('directives').directive('toolbar',
         Glossary.getMatches(word, glossaryCallback, $scope.sourceLang, $scope.targetLang, 20);
       };
 
+
+      // TODO: move this into the concordancer directive
+      $scope.queryConcordancer = function(queryStr, lang) {
+        $log.log('query Conc');
+        //{_id: "54cf93c91f1357df172dc3cf"lang: "en"score: 1, segment: "this is a test."}
+        // the concordancer is really for multi-word phrases
+        if (queryStr.length > 2) {
+          concordancer.getConcordances(queryStr, lang).then(
+            function(results) {
+              var concordanceObjs = results.data;
+              var alignmentProms = concordanceObjs.map(function(concordanceObj) {
+                // get the alignment for each obj
+                return concordancer.getLevenshtalignment(queryStr, concordanceObj.segment);
+              });
+
+             $q.all(alignmentProms).then(function(alignmentObjs) {
+                // forEach concordanceObj, extend it with the alignmentObj
+                concordanceObjs.forEach(function(concordanceObj, idx) {
+                  // note that we need to use .data on the alignmentObjs because these are objects from $http
+                  angular.extend(concordanceObj, alignmentObjs[idx].data);
+                })
+                //$log.log('final aligned concordance objs');
+                //$log.log(concordanceObjs);
+
+               // now render (add <spans>) the diff between each pair, and put it into the concordancer
+              });
+            }, function(err) {
+              $log.error('error retrieving concordances for query: ' + queryStr + ' and lang: ' + lang);
+            }
+
+          )
+        }
+
+
+
+      }
+
       // TODO: when would the TM be updated by an action outside of the TM component?
       $scope.$on('update-tm-area', function(evt, data) {
 
@@ -83,5 +119,5 @@ angular.module('directives').directive('toolbar',
       })
     }
   }
-}]);
+    }]);
 

@@ -103,7 +103,13 @@ module.exports = function() {
         'app/scripts/settings/UserSettings.js',
         'app/scripts/languagePair/langPair.js',
 
-      // application entry point
+        // concordancer component
+        'app/scripts/concordancer/concordancer.js',
+
+        // configuration module (config for deployment context)
+        'app/scripts/config/config.js',
+
+      // application entry point (shouldn't be needed unless the test uses the application module)
         'app/scripts/app.js',
 
       // templates

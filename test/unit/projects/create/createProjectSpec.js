@@ -9,7 +9,8 @@
 describe("createProject tests", function () {
   var ctrl, scope;
   // inject the module containing the stuff we want to test
-  // TODO: how to handle the dependency on ui-router - this controller causes state changes!
+  // TODO: how to handle the dependency on ui-router? - this controller causes state changes!
+  //       - mock the state change function?
   beforeEach(module('ngMaterial'));
   beforeEach(module('services'));
   beforeEach(module('controllers'));

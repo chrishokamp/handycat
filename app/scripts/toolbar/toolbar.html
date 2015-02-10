@@ -52,9 +52,10 @@
                 <p class="col-xs-12">No TM match for: {{currentSourceText}}</p>
             </div>
         </tab>
+      <!--WORKING - move to standalone directive-->
         <tab heading="Concordance" ng-click="">
             <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />
-            <button ng-click="queryConcordancer(concordanceQuery, queryLang)"
+                <button ng-click="queryConcordancer(concordanceQuery, 'en')"
                     class="glossary-search btn btn-success">
                 <span class="glyphicon glyphicon-search"></span></button>
             <div class="btn-group">

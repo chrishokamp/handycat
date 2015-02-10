@@ -1,1 +1,1 @@
-angular.module('directives', ['services']);
+angular.module('directives', ['services', 'concordancer']);

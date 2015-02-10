@@ -20,13 +20,9 @@ angular.module('services')
             rememberMe: user.rememberMe
           }, function(user) {
             // init. a new User resource on the root scope
-            $log.log(user);
-            $log.log(user._id);
             User.get({
               userId: user._id
             }, function(userResource) {
-              $log.log('current user: ');
-              $log.log(userResource);
               $rootScope.currentUser = userResource;
 //              $cookieStore.put('user', user);
               return cb();
@@ -62,17 +58,14 @@ angular.module('services')
         currentUser: function() {
           Session.get(function(user) {
             // init. a new User resource on the root scope
-            $log.log(user);
             User.get({
               userId: user._id
             }, function(userResource) {
-              $log.log('current user: ');
-              $log.log(userResource);
               $rootScope.currentUser = userResource;
 //              return cb();
             });
           }, function(err) {
-              $log.log('Error retrieving User from server');
+              $log.error('Error retrieving User from server');
 //            return cb(err.data);
           });
 
@@ -112,7 +105,6 @@ angular.module('services')
         // - Question: should the TM be mediated by the server or not?
         // - Answer: yes, because we want a consistent API to all TMs, no matter where they are
         setTMCredentials: function (userId, tausUsername, tausPassword, callback) {
-          $log.log('Setting TM credentials');
           // WORKING - post credentials to '/users/tausdata'
 //      var encoded = Base64.encode(username + ':' + password);
 //      $cookieStore.put('authdata', encoded);
@@ -125,7 +117,6 @@ angular.module('services')
               tausPassword: tausPassword
             }, function(user) {
 //              $rootScope.currentUser = user;
-              console.log('taus data was updated');
               return cb();
             }, function(err) {
               return cb(err.data);
