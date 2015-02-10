@@ -106,30 +106,42 @@ var App = window.App = angular.module('editorComponentsApp',
 //.constant('baseUrl', 'http://panaceadcu.dh.bytemark.co.uk:5002')
 
 
-// check window.location to see where we are, and set the baseUrl accordingly
-.run(['$location', '$rootScope', 'Auth', '$log', function($location, $rootScope, Auth, $log) {
-  //watching the value of the currentUser variable.
-    $rootScope.$watch('currentUser', function(currentUser) {
-      // if no currentUser and on a page that requires authorization then try to update it
-      // will trigger 401s if user does not have a valid session
-      if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) == -1 )) {
-        $log.error('No current user')
-        Auth.currentUser();
-      }
-  });
-
-  // On catching 401 errors, redirect to the login page.
-  $rootScope.$on('event:auth-loginRequired', function() {
-    $log.error('App heard 401 -- redirecting to /login');
-    $location.path('/login');
-    return false;
-  });
-}])
-
 // Allow CORS
-.config(['$httpProvider', function($httpProvider) {
-	$httpProvider.defaults.useXDomain = true;
-	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  }])
+
+// control the $log service for dev convenience
+.config(['$provide', function($provide) {
+// decorates the $log instance to disable logging
+  $provide.decorator('$log', ['$delegate',
+    function($delegate) {
+      var $log, enabled = true;
+      var disabledMethods = [];
+
+      $log = {
+        debugEnabled: function(flag) {
+          enabled = !!flag;
+        },
+        disable: function(methodNames) {
+          disabledMethods = methodNames;
+        }
+
+      };
+
+      // methods implemented by Angular's $log service
+      ['log', 'warn', 'info', 'error'].forEach(function(methodName) {
+        $log[methodName] = function() {
+          if (!enabled || disabledMethods.indexOf(methodName) >= 0) return;
+
+          var logger = $delegate;
+          logger[methodName].apply(logger, arguments);
+        }
+      });
+      return $log;
+    }
+  ]);
 }])
 
 //  App.provider('baseUrl', function() {
@@ -141,4 +153,28 @@ var App = window.App = angular.module('editorComponentsApp',
 //      }
 //    }
 //  });
+
+// check window.location to see where we are, and set the baseUrl accordingly
+  .run(['$location', '$rootScope', 'Auth', '$log', function($location, $rootScope, Auth, $log) {
+    //watching the value of the currentUser variable.
+    $rootScope.$watch('currentUser', function(currentUser) {
+      // if no currentUser and on a page that requires authorization then try to update it
+      // will trigger 401s if user does not have a valid session
+      if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) == -1 )) {
+        $log.error('No current user')
+        Auth.currentUser();
+      }
+    });
+
+    // On catching 401 errors, redirect to the login page.
+    $rootScope.$on('event:auth-loginRequired', function() {
+      $log.error('App heard 401 -- redirecting to /login');
+      $location.path('/login');
+      return false;
+    });
+
+    // configure the logger (see the $decorator above)
+    $log.debugEnabled(true);
+    $log.disable(['warn']);
+  }])
 
