@@ -1,39 +1,23 @@
 // styles for the widget area (holds the TM, concordancer, etc...)
 .widget-area {
     height: 200px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     md-tabs-ink-bar {
       color: deeppink !important;
       background: deeppink !important;
     }
-
 }
 
+/* to highlight matches from the concordancer */
+.searchmatch {
+  font-weight: bold;
+}
 
-
-
-
-.tab-pane {
-  background-color: white;
-  min-height: 70px;
-  input {
-    width: 60%;
-  }
-  button {
-    margin-left: 6px;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-  .search-result {
-    &:hover {
-      background-color: coral;
-    }
-    padding: 10px;
-  }
-
-  .query-box {
-    padding-left: 10px;
-  }
+/* glossary search button */
+.glossary-search {
+  font-size: 20px;
+  border-radius: 50% !important;
+  margin: 4px;
 }
 
 .lang-select {

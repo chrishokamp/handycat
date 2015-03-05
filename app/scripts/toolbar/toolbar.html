@@ -28,11 +28,15 @@
 
             <md-button>{{targetLang}}</md-button>
           </div>
-          <div layout="column" class="search-result"
-             ng-repeat="glossaryMatch in glossaryMatches"
-             ng-click="insertText(glossaryMatch)"
-             ng-show="glossaryMatches"
-          >{{glossaryMatch}}</div>
+          <!--the double layout-margin here is to keep results consistent with the query row-->
+          <div layout="column" layout-margin>
+            <div layout="row" layout-margin
+                 class="glossary-search-result"
+                 ng-repeat="glossaryMatch in glossaryMatches"
+                 ng-click="insertText(glossaryMatch)"
+                 ng-show="glossaryMatches"
+              >{{glossaryMatch}}</div>
+          </div>
         </div>
       </md-tab>
         <md-tab label="TM">

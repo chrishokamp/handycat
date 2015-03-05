@@ -208,12 +208,6 @@ body {
 //  background-color: beige;
 }
 
-// TODO: this is problematic with bootstrap's grid system
-.col-centered{
-  float: none;
-  margin: 0 auto;
-}
-
 .file-input {
   margin-top: 20px;
 }
@@ -233,18 +227,6 @@ body {
 /* tabs */
 ul.nav-tabs > li {
   font-size: small;
-}
-
-/* to highlight matches from the concordancer */
-.searchmatch {
-  font-weight: bold;
-}
-
-/* glossary search button */
-.glossary-search {
-  font-size: 20px;
-  border-radius: 50% !important;
-  margin: 4px;
 }
 
 

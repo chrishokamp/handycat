@@ -177,4 +177,9 @@ var App = window.App = angular.module('editorComponentsApp',
     $log.debugEnabled(true);
     $log.disable(['warn']);
   }])
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('light-blue')
+      .accentPalette('orange');
+  });
 
