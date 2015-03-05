@@ -159,9 +159,12 @@ var queryGlosbe = function (fromLang, toLang, queryString) {
   var deferred = q.defer();
   // TODO: add a full language code mapping/conversion utility that covers most lang-code conventions
   // TODO: this mapping will need to be done for every utility that does not conform to BCP 47: http://tools.ietf.org/html/bcp47#appendix-A
+  // TODO: let each field be a regex to make the mapping shorter and more flexible
   var langCodeMapping = {
     'en-US': 'eng',
-    'de-DE': 'deu'
+    'en-us': 'eng',
+    'de-DE': 'deu',
+    'de': 'deu'
   };
   if (langCodeMapping[toLang]) toLang = langCodeMapping[toLang];
   if (langCodeMapping[fromLang]) fromLang = langCodeMapping[fromLang];
