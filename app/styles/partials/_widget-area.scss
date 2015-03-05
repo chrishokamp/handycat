@@ -1,8 +1,15 @@
 // styles for the widget area (holds the TM, concordancer, etc...)
 .widget-area {
     height: 200px;
-    border: 1px solid black;
+    border: 1px solid grey;
+    md-tabs-ink-bar {
+      color: deeppink !important;
+      background: deeppink !important;
+    }
+
 }
+
+
 
 
 

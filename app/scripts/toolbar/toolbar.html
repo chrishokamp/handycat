@@ -28,7 +28,7 @@
 
             <md-button>{{targetLang}}</md-button>
           </div>
-          <div class="search-result"
+          <div layout="column" class="search-result"
              ng-repeat="glossaryMatch in glossaryMatches"
              ng-click="insertText(glossaryMatch)"
              ng-show="glossaryMatches"
