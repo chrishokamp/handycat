@@ -1,13 +1,7 @@
 // styles for the widget area (holds the TM, concordancer, etc...)
 .widget-area {
-  .tab-content {
     height: 200px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
-  .widget-wrapper {
-    padding: 0;
-  }
+    border: 1px solid black;
 }
 
 
