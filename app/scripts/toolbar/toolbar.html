@@ -2,78 +2,104 @@
 <!-- render and populate its fields dynamically -->
 <!--WORKING - move to md-tabs-->
 <div class="widget-area" layout="column" md-content>
-    <md-tabs>
-      <md-tab label="Glossary">
-        <div layout="column"
+  <md-tabs>
+    <md-tab label="Glossary">
+      <div layout="column"
+           layout-margin
+        >
+        <div layout="row"
              layout-margin
           >
-          <div layout="row"
-               layout-margin
-            >
-            <input type="text"
-                   class="query-box"
-                   flex
-                   ng-model="glossaryQuery"
-                   placeholder="Enter a search query..."
+          <input type="text"
+                 class="query-box"
+                 flex
+                 ng-model="glossaryQuery"
+                 placeholder="Enter a search query..."
             />
-            <md-button ng-click="queryGlossary(glossaryQuery)"
-                    class="glossary-search btn btn-success"
+          <md-button ng-click="queryGlossary(glossaryQuery)"
+                     class="glossary-search"
             >
-              <span class="glyphicon glyphicon-search"></span>
-            </md-button>
-            <md-button>{{sourceLang}}</md-button>
-            <md-button>
-              <i class="ion-arrow-right-c"></i>
-            </md-button>
+            <span class="glyphicon glyphicon-search"></span>
+          </md-button>
+          <md-button>{{sourceLang}}</md-button>
+          <md-button>
+            <i class="ion-arrow-right-c"></i>
+          </md-button>
 
-            <md-button>{{targetLang}}</md-button>
-          </div>
-          <!--the double layout-margin here is to keep results consistent with the query row-->
-          <div layout="column" layout-margin>
-            <div layout="row" layout-margin
-                 class="glossary-search-result"
-                 ng-repeat="glossaryMatch in glossaryMatches"
-                 ng-click="insertText(glossaryMatch)"
-                 ng-show="glossaryMatches"
-              >{{glossaryMatch}}</div>
-          </div>
+          <md-button>{{targetLang}}</md-button>
         </div>
-      </md-tab>
-        <md-tab label="TM">
-            <div
-                 ng-repeat="tmMatch in tmMatches"
-                 ng-click="insertText(tmMatch)"
-                 ng-show="tmMatches.length > 0"
+        <!--the double layout-margin here is to keep results consistent with the query row-->
+        <div layout="column" layout-margin>
+          <div layout="row" layout-margin
+               class="glossary-search-result"
+               ng-repeat="glossaryMatch in glossaryMatches"
+               ng-click="insertText(glossaryMatch)"
+               ng-show="glossaryMatches"
+            >{{glossaryMatch}}</div>
+        </div>
+      </div>
+    </md-tab>
+    <md-tab label="TM">
+      <div class="tm-wrapper"
+           layout="column"
+           layout-padding
+      >
+
+      <md-button ng-click="queryTM(currentSourceText)">Query TM</md-button>
+      <div layout="row" layout-margin
+        ng-repeat="tmMatch in tmMatches"
+        ng-click="insertText(tmMatch)"
+        ng-show="tmMatches.length > 0"
+      >
+          <div flex>{{tmMatch.source}}</div>
+          <div flex>{{tmMatch.target}}</div>
+          <div>{{tmMatch.provider.name}}</div>
+      </div>
+      <div ng-show="!tmMatches || tmMatches.length === 0">
+        <p>No TM match for: {{currentSourceText}}</p>
+      </div>
+        </div>
+    </md-tab>
+    <!--WORKING - move to standalone directive-->
+    <md-tab label="Concordance">
+      <div layout="column"
+           layout-margin
+        >
+        <div layout="row"
+             layout-margin
+          >
+          <input type="text"
+                 class="query-box"
+                 flex
+                 ng-model="concordanceQuery"
+                 placeholder="Enter a search query..."
+            />
+          <md-button ng-click="queryConcordancer(concordanceQuery, 'en')"
+                     class="glossary-search"
             >
-                <div ng-show="tmMatches.length > 0">
-                    <div>{{tmMatch.source}}</div>
-                    <div>{{tmMatch.target}}</div>
-                    <div>{{tmMatch.provider.name}}</div>
-                </div>
-            </div>
-            <div ng-show="!tmMatches || tmMatches.length === 0">
-                <p>No TM match for: {{currentSourceText}}</p>
-            </div>
-        </md-tab>
-      <!--WORKING - move to standalone directive-->
-        <md-tab label="Concordance">
-            <input type="text" ng-model="concordanceQuery" placeholder="Enter a search query..." class="query-box" />
-          <!--TODO: select language component (like the glossary)-->
-                <button ng-click="queryConcordancer(concordanceQuery, 'en')"
-                    class="glossary-search btn btn-success">
-                <span class="glyphicon glyphicon-search"></span></button>
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary lang-select" btn-radio="'{{document.sourceLang}}'"
-                        ng-model="queryLang">{{document.sourceLang}}</button>
-                <button type="button" class="btn btn-primary lang-select" btn-radio="'{{document.targetLang}}'"
-                        ng-model="queryLang">{{document.targetLang}}</button>
-            </div>
-            <div class="search-result"
-                 ng-repeat="concordanceMatch in concordanceMatches"
-            >
-              {{concordanceMatch.segment}}
-            </div>
-        </md-tab>
-    </md-tabs>
+            <span class="glyphicon glyphicon-search"></span>
+          </md-button>
+          <!---->
+          <!--<div class="btn-group">-->
+          <!--<button type="button" class="btn btn-primary lang-select" btn-radio="'{{document.sourceLang}}'"-->
+          <!--ng-model="queryLang">{{document.sourceLang}}</button>-->
+          <!--<button type="button" class="btn btn-primary lang-select" btn-radio="'{{document.targetLang}}'"-->
+          <!--ng-model="queryLang">{{document.targetLang}}</button>-->
+          <!--</div>-->
+          <md-button>{{sourceLang}}</md-button>
+          <md-button>
+            <i class="ion-arrow-right-c"></i>
+          </md-button>
+          <md-button>{{targetLang}}</md-button>
+        </div>
+
+        <div class="search-result"
+             ng-repeat="concordanceMatch in concordanceMatches"
+          >
+          {{concordanceMatch.segment}}
+        </div>
+      </div>
+    </md-tab>
+  </md-tabs>
 </div>
 
