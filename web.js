@@ -252,7 +252,6 @@ app.get('/glossary/segment/:phrase', cache.route(), glossaryWordList);
 app.get('/glossary/word/:word', cache.route(), askGlossary);
 
 
-
 // This is for the entity linker demo
 // TODO: move this to a plugin
 //var DbEntities = require('./server/db/queryEntities');
