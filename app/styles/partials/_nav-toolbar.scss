@@ -1,12 +1,15 @@
+$toolbar-color: #03A9F4;
+
+
 nav {
- background-color: #259b24 !important;
+ background-color: $toolbar-color !important;
  a {
   color: #ffffff !important;
  }
 }
 
 .top-toolbar {
-  background-color: #259b24;
+  background-color: $toolbar-color;
 }
 
 .menu-item.menu-title {

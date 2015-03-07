@@ -1,3 +1,5 @@
+$finished-segment-background-color: #727272;
+
 .segment-muted-text {
   color: #708090;
   font-size: small;
@@ -29,7 +31,8 @@
 }
 
 .segment-finished {
-  background-color: #90ee90;
+  background-color: $finished-segment-background-color;
+  opacity: 0.5;
   height: 200px;
   padding: 10px;
   overflow: hidden;
