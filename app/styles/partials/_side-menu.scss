@@ -1,21 +1,25 @@
+$side-menu-background-color: #212121;
+$side-menu-text-color: #FFFFFF;
+
 .snap-drawer {
-  background-color: #87cefa;
+  background-color: $side-menu-background-color;
+  color: $side-menu-text-color;
 }
 
 .menu-item.menu-title {
+  color: #888;
   font-size: 26px;
+  padding-left: 16px;
+  text-align: left;
   text-transform: uppercase;
 }
 
 .menu-item {
-  color: #888;
-  text-align: left;
-  padding-left: 16px;
   background: none;
   border-width: 0;
   cursor: pointer;
   display: block;
-  color: #333;
+  color: $side-menu-text-color;
   font-size: large;
   line-height: 40px;
   max-height: 40px;
