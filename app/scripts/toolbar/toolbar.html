@@ -94,8 +94,9 @@
 
         <div class="search-result"
              ng-repeat="concordanceMatch in concordanceMatches"
+             ng-bind-html="concordanceMatch.diffMarkup"
           >
-          {{concordanceMatch.segment}}
+          <!--{{concordanceMatch.diffMarkup}}-->
         </div>
       </div>
     </md-tab>

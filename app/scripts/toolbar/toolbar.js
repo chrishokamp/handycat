@@ -1,6 +1,6 @@
 angular.module('directives').directive('toolbar',
-  ['$log', '$timeout', '$rootScope', 'TranslationMemory', 'Glossary', 'concordancer', '$q',
-    function($log, $timeout, $rootScope, TranslationMemory, Glossary, concordancer, $q) {
+  ['$log', '$timeout', '$rootScope', 'TranslationMemory', 'Glossary', 'concordancer', '$q', '$sce',
+    function($log, $timeout, $rootScope, TranslationMemory, Glossary, concordancer, $q, $sce) {
   return {
     restrict: 'E',
     templateUrl: 'scripts/toolbar/toolbar.html',
@@ -33,6 +33,7 @@ angular.module('directives').directive('toolbar',
 
           // make the calls for this toolbar location -- check the TM, etc...
           // TODO: this breaks on the last index
+          // TODO: BUG HERE - the data may not be available on the scope yet!!
           var currentSourceText = $scope.segments[index].source;
 
           // TODO: query all of the user's available translation resources
@@ -45,8 +46,6 @@ angular.module('directives').directive('toolbar',
       $scope.queryTM = function(query) {
         var queryObj = { 'userId': $rootScope.currentUser._id, 'sourceLang': $scope.sourceLang, 'targetLang': $scope.targetLang, query: query};
         TranslationMemory.get(queryObj, function(tmResponse) {
-          $log.log('Toolbar: TM responded, result is: ');
-          $log.log(tmResponse);
           // TODO: actually return a list of matches, don't create a list here
           //$scope.tmMatches = tmResponse.segment;
           $scope.tmMatches = [tmResponse];
@@ -72,7 +71,6 @@ angular.module('directives').directive('toolbar',
 
       // TODO: move this into the concordancer directive
       $scope.queryConcordancer = function(queryStr, lang) {
-        $log.log('query Conc');
         //{_id: "54cf93c91f1357df172dc3cf"lang: "en"score: 1, segment: "this is a test."}
         // the concordancer is really for multi-word phrases
         if (queryStr.length > 2) {
@@ -93,7 +91,20 @@ angular.module('directives').directive('toolbar',
 
                 // now render (add <spans>) the diff between each pair
                 // show the text, provenance and matchscores in the concordancer
-                $scope.concordanceMatches = concordanceObjs;
+               var matchesWithMarkup = concordanceObjs.map(function(obj) {
+                 var segmentChars = obj['segment'].split('');
+                 var diff = obj['str2_diff'];
+                 diff.forEach(function(diffIndex) {
+                   // indexes start with 1
+                   segmentChars[diffIndex-1] = '<i>' + segmentChars[diffIndex-1] + '</i>';
+                 });
+
+                 var markup = segmentChars.join('');
+                 obj['diffMarkup'] = $sce.trustAsHtml(markup);
+                 return obj;
+               });
+
+              $scope.concordanceMatches = matchesWithMarkup;
 
               });
             }, function(err) {
@@ -102,8 +113,6 @@ angular.module('directives').directive('toolbar',
 
           )
         }
-
-
 
       }
 
