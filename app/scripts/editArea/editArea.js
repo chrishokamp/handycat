@@ -5,7 +5,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
     // global user options (may be accessed or changed from child controllers)
     $scope.visible = {
-      toolbar: true,
+      toolbar: false,
       projectLoading: true
     };
 
@@ -116,35 +116,19 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       // TODO: initialize the session metadata from the session metadata on the server
       // TODO: activeSegment is here so that the toolbar knows where it should go
       $scope.activeSegment = 0;
-
-      //var segmentId = $stateParams.segmentId;
-      //if (segmentId) {
-      //  var anchorElem = document.getElementById('segment-' + segmentId);
-      //  if (anchorElem) {
-      //    var top = anchorElem.offsetTop;
-      //    $("body").animate({scrollTop: top-60}, "slow");
-      //  }
-      //}
     });
 
     // listen for a segment change, and reset $scope.activeSegment accordingly
     $scope.$on('changeSegment', function(evt, data) {
-      $log.log('HEARD ACTIVE SEGMENT');
+      // activeSegment is an int id
       $scope.activeSegment = data.currentSegment
+      var anchorElem = $('#segment-' + data.currentSegment);
+      // this is a hack because $el.offset is returning the wrong values
+      var segmentHeight = 256;
+      var top = segmentHeight * $scope.activeSegment;
+      // scroll the ui to the currentSegment
+      $("md-content").animate({scrollTop: top-20}, "slow");
     })
-
-    // if the state changes during the session without a reload
-    //$rootScope.$on('$stateChangeStart',
-    //  function(event, toState, toParams, fromState, fromParams){
-    //    var segmentId = toParams.segmentId;
-    //    if (toState.name.match(/edit\.segment/) && segmentId) {
-    //      var anchorElem = document.getElementById('segment-' + segmentId);
-    //      if (anchorElem) {
-    //        var top = anchorElem.offsetTop;
-    //        $("body").animate({scrollTop: top-60}, "slow");
-    //      }
-    //    }
-    //  });
 
     // DEV UTILS
     $scope.showXLIFF = false;
