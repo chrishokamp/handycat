@@ -155,27 +155,32 @@ var App = window.App = angular.module('editorComponentsApp',
 //  });
 
 // check window.location to see where we are, and set the baseUrl accordingly
-  .run(['$location', '$rootScope', 'Auth', '$log', function($location, $rootScope, Auth, $log) {
-    //watching the value of the currentUser variable.
-    $rootScope.$watch('currentUser', function(currentUser) {
-      // if no currentUser and on a page that requires authorization then try to update it
-      // will trigger 401s if user does not have a valid session
-      if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) == -1 )) {
-        $log.error('No current user')
-        Auth.currentUser();
-      }
-    });
+  .run(['$location', '$rootScope', 'Auth', '$state', '$stateParams', '$log',
+    function($location, $rootScope, Auth, $state, $stateParams, $log) {
+      //watching the value of the currentUser variable.
+      $rootScope.$watch('currentUser', function(currentUser) {
+        // if no currentUser and on a page that requires authorization then try to update it
+        // will trigger 401s if user does not have a valid session
+        if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) == -1 )) {
+          $log.error('No current user')
+          Auth.currentUser();
+        }
+      });
 
-    // On catching 401 errors, redirect to the login page.
-    $rootScope.$on('event:auth-loginRequired', function() {
-      $log.error('App heard 401 -- redirecting to /login');
-      $location.path('/login');
-      return false;
-    });
+      // On catching 401 errors, redirect to the login page.
+      $rootScope.$on('event:auth-loginRequired', function() {
+        $log.error('App heard 401 -- redirecting to /login');
+        $location.path('/login');
+        return false;
+      });
 
-    // configure the logger (see the $decorator above)
-    $log.debugEnabled(true);
-    $log.disable(['warn']);
+      // expose state information on the rootScope
+      $rootScope.$state = $state;
+      $rootScope.$stateParams = $stateParams;
+
+      // configure the logger (see the $decorator above)
+      $log.debugEnabled(true);
+      $log.disable(['warn']);
   }])
   .config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')

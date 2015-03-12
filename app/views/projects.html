@@ -14,14 +14,16 @@
           <md-button snap-close class="menu-item" ui-sref="projects.list">Projects</md-button>
         </md-item-content>
       </md-item>
-      <md-divider></md-divider>
+    </md-list>
+    <md-divider></md-divider>
       <md-item>
         <md-item-content>
           <h3 class="menu-item">Actions</h3>
           <md-divider></md-divider>
         </md-item-content>
       </md-item>
-      <!--WORKING HERE-->
+   <!-- only show this section if the user is translating -->
+    <md-list ng-show="$state.current.name === 'projects.translate'">
       <md-item>
         <md-item-content>
           <md-button class="menu-item" ng-click="saveJSON()">Output JSON Log</md-button>
@@ -33,13 +35,15 @@
           <md-button class="menu-item" ng-click="saveXLIFF()">Download document</md-button>
         </md-item-content>
       </md-item>
+    </md-list>
       <md-divider></md-divider>
       <md-item>
         <md-item-content>
           <md-button class="menu-item" ng-click="logout()">Logout</md-button>
         </md-item-content>
       </md-item>
-      <md-divider></md-divider>
+    </md-list>
+    <md-divider></md-divider>
     </md-list>
     <md-button class="menu-item" snap-close>Close Menu</md-button>
 

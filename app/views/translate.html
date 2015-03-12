@@ -41,11 +41,11 @@
              layout="column"
              layout-fill
              ng-class="{pending: !(getSegmentState(id.index) === 'translated'), completed: getSegmentState(id.index) === 'translated'}"
-             id="segment-{{id.index}}"
              ng-controller="SegmentAreaCtrl"
              ng-repeat="seg in segments"
              end-repeat
              ng-init="segment = seg; init($index); id.index = $index;"
+             id="segment-{{$index}}"
           >
           <!-- just an anchor to let us find this place in the DOM -->
           <a id="anchor-{{$index}}"></a>
