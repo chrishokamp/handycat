@@ -7,13 +7,10 @@ $white: white;
 .cover-all {
   background-color: $white;
   position: absolute;
-  height:200px;
   z-index: 1000;
-//  width: 96%;
+  width: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-//  margin-left: -10px;
-  //  overflow: scroll;
 }
 // Animations
 .ng-hide-add, .ng-hide-remove {

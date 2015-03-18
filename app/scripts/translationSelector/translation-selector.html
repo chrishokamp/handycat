@@ -1,9 +1,17 @@
 <div layout="column">
+  <!--WORKING - add control buttons for query resources-->
+  <!--WORKING - add modal for user to view their available resources-->
+  <!--WORKING - add message if no resources are available-->
+  <div layout="row" layout-align="center center" layout-padding>
+    <md-button ng-show="selectorOptions.length == 0">Get Translations</md-button>
+  </div>
+
   <div
     ng-repeat="selectorOption in selectorOptions"
     layout="column"
     flex
     layout-padding
+    layout-fill
   >
     <!--the translation item controls showing and hiding its own provenance info-->
     <translation-item item="selectorOption" on-select="onSelect"></translation-item>

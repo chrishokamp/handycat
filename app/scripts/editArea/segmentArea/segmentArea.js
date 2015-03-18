@@ -15,6 +15,9 @@ angular.module('controllers')
       AceEditor: true
     }
 
+    // WORKING - dynamically populate this area for each segment
+    // user must click to populate
+    // Also look at how to log which options the user selects
     $scope.sampleOptions = [
       {'segment': 'Zweifellos gibt es geheime Schwarzmarktgruppen im Internet, die große Mühe geben, von Strafverfolgung versteckt zu bleiben',
         'created': 'January 26, 2014',
