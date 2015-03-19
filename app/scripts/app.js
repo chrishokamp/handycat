@@ -16,6 +16,7 @@ var App = window.App = angular.module('editorComponentsApp',
         'http-auth-interceptor',
         'snap',
         'ngMaterial',
+        'handycatConfig'
         //'summaryMenu'
         //'filters',
         //'ngTouch'

@@ -1,4 +1,4 @@
-angular.module('concordancer', ['config']);
+angular.module('concordancer', ['handycatConfig']);
 
 angular.module('concordancer')
 .factory('concordancer', ['concordancerURL', 'levenshtalignerURL', '$http', function(concordancerURL, levenshtalignerURL, $http) {

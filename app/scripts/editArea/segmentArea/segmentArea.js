@@ -36,6 +36,15 @@ angular.module('controllers')
       },
     ];
 
+    $scope.$watch(
+      function() {
+        return $scope.widgets.activeComponent
+      },
+      function(val) {
+        $log.log('translation selector watch got passed: ' + val);
+        $log.log($scope.widgets.activeComponent);
+    });
+
     // WORKING - this should be part of the 'translationSelector' component
     // create buttons for the user's translation resources -- we know what resources they have from $scope.currentUser
     // buttons appear when the translation is ready, onClick the value gets put into the editor or translation component
@@ -88,6 +97,7 @@ angular.module('controllers')
 
     // this function lets children update the segment model value
     // TODO: a problem with this approach is that the user cannot go back to the previous value in the editor (cannot undo)
+    // TODO: to fix the undo issue, maintain an undo stack of the previous values of the target segment
     $scope.setTargetValue = function(newValue) {
       $scope.segment.target = newValue;
     }

@@ -1,6 +1,6 @@
 angular.module('controllers')
-.controller('CreateProjectCtrl', ['XliffParser', 'fileReader', 'Projects', '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast',
-    function(XliffParser, fileReader, Projects, $state, $log, $scope, $http, $mdDialog, $mdToast) {
+.controller('CreateProjectCtrl', ['XliffParser', 'fileReader', 'Projects', 'xliffCreatorUrl', '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast',
+    function(XliffParser, fileReader, Projects, xliffCreatorUrl, $state, $log, $scope, $http, $mdDialog, $mdToast) {
 
       // set the default title
       $scope.name = 'Project Name';
@@ -104,7 +104,6 @@ angular.module('controllers')
         }
       );
 
-// TODO: get file type (assume xlf for now)
 // TODO: this code depends upon $scope.pending.document being available
 // TODO: refactor this component into a directive
       // this depends on ngFileUpload
@@ -150,7 +149,7 @@ angular.module('controllers')
         readerProm.then(
           function(rawText) {
             var documentProm = $http({
-              url   : 'http://localhost:8080/create-xliff/1.2',
+              url   : xliffCreatorUrl,
               method: "GET",
               params: {
                 sourceLang: 'en-US',
@@ -168,7 +167,8 @@ angular.module('controllers')
                 );
               }, function (err) {
                 $log.error('createProject: error parsing text file');
-                throw 'Error Parsing Text file into XLIFF with webservice';
+                // show modal
+                $scope.showErrorToast('There was an error converting your text file to XLIFF 1.2');
               }
             );
           },

@@ -1,7 +1,10 @@
 // this module sets up the environment for HandyCAT
 // the values that you must provide here depend upon which components you are using
 
-var handyCATconfig = angular.module('config', []);
+var handyCATconfig = angular.module('handycatConfig', []);
+
+var xliffCreatorUrl = 'http://localhost:8080/create-xliff/1.2'
+handyCATconfig.constant('xliffCreatorUrl', xliffCreatorUrl);
 
 // the concordancer URL
 var concordancerURL = 'http://127.0.0.1:8899/concordancer';
