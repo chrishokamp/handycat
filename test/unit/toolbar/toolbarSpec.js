@@ -102,13 +102,17 @@ describe('toolbar directive tests', function () {
   describe('initial state and model changes', function () {
 
     it('should be closed by default', function () {
-      var element = prepareInputEl('<toolbar class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
+      $scope.segments = [];
+      $scope.queryGlossary = angular.noop();
+      $scope.toolbarShowing = false;
+      var element = prepareInputEl('<toolbar active-segment="0" segments="" source-lang="en" target-lang="de" query-glossary="queryGlossary" class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
       expect(element).toBeClosed();
     });
 
     it('should open when it is supposed to', function () {
-      var element = prepareInputEl('<toolbar class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
+      var element = prepareInputEl('<toolbar active-segment="0" segments="" source-lang="en" target-lang="de" query-glossary="queryGlossary" class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
       $scope.visible = { 'toolbar': true };
+
       $scope.$digest();
       expect(element).toBeOpen();
     });
@@ -119,7 +123,7 @@ describe('toolbar directive tests', function () {
 
     it('should keep track of the active segment property of its parent', function() {
       $scope = $rootScope.$new();
-      var element = prepareInputEl('<toolbar class="info-toolbar" active-segment="activeSegment" ng-show="visible.toolbar"></toolbar>');
+      var element = prepareInputEl('<toolbar active-segment="1" segments="" source-lang="en" target-lang="de" query-glossary="queryGlossary" class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
 
       $rootScope.activeSegment = 1;
       $rootScope.$digest();
@@ -131,7 +135,7 @@ describe('toolbar directive tests', function () {
 
     it('should keep track of the array of segment objects on the parent scope', function() {
       $scope = $rootScope.$new();
-      var element = prepareInputEl('<toolbar class="info-toolbar" active-segment="activeSegment" segments="document.segments" ng-show="visible.toolbar"></toolbar>');
+      var element = prepareInputEl('<toolbar active-segment="activeSegment" segments="document.segments" source-lang="en" target-lang="de" query-glossary="queryGlossary" class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
       var testSegment = { source: 'a source sentence', target: 'a target sentence', sourceDOM: 'DOMstub',targetDOM: 'DOMstub'};
 
       $rootScope.document = { segments: [testSegment]};

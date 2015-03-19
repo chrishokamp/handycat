@@ -18,14 +18,17 @@ describe("Unit: Testing the SegmentAreaCtrl", function() {
     });
   });
 
-  it('should exist', inject(function($controller, $rootScope) {
-    console.log('Testing that SegmentAreaCtrl exists...');
-    expect(ctrl).toBeDefined();
-  }));
+  describe("SegmentAreaCtrl: intialization and basic functionality", function() {
+    it('should exist', inject(function ($controller, $rootScope) {
+      console.log('Testing that SegmentAreaCtrl exists...');
+      expect(ctrl).toBeDefined();
+    }));
 
-  // the segment should not be on the scope yet
-  it('should not have a segment on the scope yet', function() {
-    expect(scope.segment).toBe(undefined);
+    // the segment should not be on the scope yet
+    it('should not have a segment on the scope yet', function () {
+      expect(scope.segment).toBe(undefined);
+    });
+
   });
 
   describe('handling input from translation resources', function () {
