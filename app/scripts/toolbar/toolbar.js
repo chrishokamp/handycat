@@ -23,6 +23,8 @@ angular.module('directives').directive('toolbar',
           return $scope.activeSegment;
         },
         function(index) {
+          // if the job is completed, do nothing
+          if (index === -1) return;
           if (index === undefined) {
             index = 0;
           }
@@ -32,7 +34,6 @@ angular.module('directives').directive('toolbar',
           $(above).after(el);
 
           // make the calls for this toolbar location -- check the TM, etc...
-          // TODO: this breaks on the last index
           // TODO: BUG HERE - the data may not be available on the scope yet!!
           var currentSourceText = $scope.segments[index].source;
 

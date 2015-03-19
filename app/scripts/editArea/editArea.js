@@ -1,6 +1,6 @@
 angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal',
-  '$log', 'SegmentOrder', 'editSession', '$rootScope', 'Wikipedia', '$timeout', 'Projects', 'XliffParser', '$stateParams', '$q',
-  function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, editSession, $rootScope, Wikipedia, $timeout,
+  '$log', 'SegmentOrder', 'editSession', '$mdBottomSheet', '$rootScope', 'Wikipedia', '$timeout', 'Projects', 'XliffParser', '$stateParams', '$q',
+  function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, editSession, $mdBottomSheet, $rootScope, Wikipedia, $timeout,
            Projects, XliffParser, $stateParams, $q) {
 
     // global user options (may be accessed or changed from child controllers)
@@ -118,8 +118,42 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       $scope.activeSegment = 0;
     });
 
+    var GridBottomSheetCtrl = function($scope, $mdBottomSheet) {
+      $scope.bottomItems = [
+        { name: 'Hangout', icon: 'hangout' },
+        { name: 'Mail', icon: 'mail' },
+        { name: 'Message', icon: 'message' },
+        { name: 'Copy', icon: 'copy' },
+        { name: 'Facebook', icon: 'facebook' },
+        { name: 'Twitter', icon: 'twitter' },
+      ];
+      $scope.listItemClick = function($index) {
+        var clickedItem = $scope.items[$index];
+        $mdBottomSheet.hide(clickedItem);
+      };
+    }
+    //// WORKING: show the bottom sheet when the job finishes
+    $scope.showGridBottomSheet = function($event) {
+      $scope.alert = '';
+      $mdBottomSheet.show({
+        templateUrl: 'scripts/editArea/grid-bottom-sheet.html',
+        controller: GridBottomSheetCtrl,
+        targetEvent: $event
+      }).then(function(clickedItem) {
+        $scope.alert = clickedItem.name + ' clicked!';
+      });
+    };
+
     // listen for a segment change, and reset $scope.activeSegment accordingly
     $scope.$on('changeSegment', function(evt, data) {
+
+
+      // WORKING: show the bottom sheet when the job finishes
+      if (data.currentSegment === -1) {
+        $scope.showGridBottomSheet();
+        return
+      }
+
       // activeSegment is an int id
       $scope.activeSegment = data.currentSegment
       var anchorElem = $('#segment-' + data.currentSegment);
