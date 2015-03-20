@@ -120,12 +120,11 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
     var GridBottomSheetCtrl = function($scope, $mdBottomSheet) {
       $scope.bottomItems = [
-        { name: 'Hangout', icon: 'hangout' },
-        { name: 'Mail', icon: 'mail' },
-        { name: 'Message', icon: 'message' },
-        { name: 'Copy', icon: 'copy' },
-        { name: 'Facebook', icon: 'facebook' },
-        { name: 'Twitter', icon: 'twitter' },
+        { name: 'Xliff', icon: 'ion-ios7-cloud-download' },
+        { name: 'Text', icon: 'ion-ios7-cloud-download-outline' },
+        { name: 'Projects', icon: 'ion-ios7-arrow-back' },
+        //{ name: 'Mail', icon: 'mail' },
+        //{ name: 'Message', icon: 'message' },
       ];
       $scope.listItemClick = function($index) {
         var clickedItem = $scope.items[$index];

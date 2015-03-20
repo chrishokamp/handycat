@@ -1,9 +1,12 @@
-<md-bottom-sheet class="md-grid">
+<md-bottom-sheet layout="column" class="md-grid">
+  <div flex layout="row" layout-align="center center">
+    <h5>Translation Complete!</h5>
+  </div>
   <md-list>
     <md-item ng-repeat="item in bottomItems">
       <md-button class="md-grid-item-content" aria-label="{{item.name}}" ng-click="listItemClick($index)">
         <div class="md-icon-container">
-          <md-inline-grid-icon icon="{{item.icon}}"></md-inline-grid-icon>
+          <md-inline-grid-icon><i class="{{item.icon}}"></i></md-inline-grid-icon>
         </div>
         <p class="md-grid-text"> {{ item.name }} </p>
       </md-button>
