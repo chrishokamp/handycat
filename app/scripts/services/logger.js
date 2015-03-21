@@ -5,6 +5,7 @@
 // segments: [ {id: <id>, source: <source>, hyp: <hypothesis>, final: <post-edited revision> } ]
 // This service currently serves as the XLIFF2JSON converter
 angular.module('services')
+  // TODO: Move this to config
 .constant('loggerUrl', 'http://panaceadcu.dh.bytemark.co.uk:5001')
 .factory('Logger', ['$rootScope', '$log', function($rootScope, $log) {
 

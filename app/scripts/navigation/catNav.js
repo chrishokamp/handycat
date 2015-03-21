@@ -11,19 +11,12 @@ angular.module('directives').directive('catNav', ['Logger', 'Auth', '$location',
           Logger.exportJSON();
         }
 
-        // based on http://updates.html5rocks.com/2011/08/Saving-generated-files-on-the-client-side
-        // and http://stackoverflow.com/a/15031019
-        $scope.saveXLIFF = function() {
-//          var bb = new Blob([new XMLSerializer().serializeToString( Document.DOM )], {type: "application/xml"});
-          $log.log('NOT IMPLEMENTED');
-//          saveAs(bb, "document.xliff");
-        };
-
         $scope.saveJSON = function() {
           $log.log("saving JSON");
           $log.log(Logger.exportJSON());
-          var bb = new Blob([Logger.exportJSON()], {type: "application/json"});
-          saveAs(bb, "edit-log.json");
+          var blob = new Blob([Logger.exportJSON()], {type: "application/json"});
+          // saveAs is provided in the global scope by file-saver
+          saveAs(blob, "edit-log.json");
         };
 
         $scope.logout = function() {

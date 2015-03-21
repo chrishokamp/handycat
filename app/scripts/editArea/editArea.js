@@ -12,7 +12,6 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     var docDeferred = $q.defer();
     var docPromise = docDeferred.promise;
     docPromise.then(function() {
-      $log.log('Content area: then resolved');
       $scope.language = $scope.document.targetLang;
       $scope.numSegments = $scope.document.segments.length;
       $scope.segments = $scope.document.segments;
@@ -27,6 +26,9 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
         XliffParser.parseXML(projectResource.content).then(
           function(documentObj) {
             $scope.document = documentObj;
+            $log.log('document on scope');
+            $log.log(documentObj);
+            $log.log($scope.document);
             docDeferred.resolve();
 
             // The segment exchange format (in document.segments) is:
@@ -118,38 +120,53 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       $scope.activeSegment = 0;
     });
 
-    var GridBottomSheetCtrl = function($scope, $mdBottomSheet) {
-      $scope.bottomItems = [
-        { name: 'Xliff', icon: 'ion-ios7-cloud-download' },
-        { name: 'Text', icon: 'ion-ios7-cloud-download-outline' },
-        { name: 'Projects', icon: 'ion-ios7-arrow-back' },
-        //{ name: 'Mail', icon: 'mail' },
-        //{ name: 'Message', icon: 'message' },
-      ];
-      $scope.listItemClick = function($index) {
-        var clickedItem = $scope.items[$index];
-        $mdBottomSheet.hide(clickedItem);
-      };
+    // this is a hack to let the bottom sheet see $scope.document
+    var GridBottomSheetCtrlFactory = function(documentObj) {
+      $log.log('init grid bottom sheet');
+      return function($scope, $mdBottomSheet) {
+        $scope.document = documentObj;
+
+        // based on http://updates.html5rocks.com/2011/08/Saving-generated-files-on-the-client-side
+        // and http://stackoverflow.com/a/15031019
+        $scope.saveXliff = function () {
+          var blob = new Blob([new XMLSerializer().serializeToString(documentObj)], {type: "application/xml"});
+          // saveAs is provided in the global scope by file-saver
+          saveAs(blob, "document.xliff");
+        };
+
+        $scope.bottomItems = [
+          {name: 'Xliff', icon: 'ion-ios7-cloud-download', action: $scope.saveXliff},
+          {name: 'Text', icon: 'ion-ios7-cloud-download-outline'},
+          {name: 'Projects', icon: 'ion-ios7-arrow-back'},
+        ];
+
+
+        // remember that this is available
+        //$mdBottomSheet.hide(clickedItem);
+      }
+
     }
+
+
     //// WORKING: show the bottom sheet when the job finishes
-    $scope.showGridBottomSheet = function($event) {
-      $scope.alert = '';
+    $scope.showGridBottomSheet = function(documentObj) {
       $mdBottomSheet.show({
         templateUrl: 'scripts/editArea/grid-bottom-sheet.html',
-        controller: GridBottomSheetCtrl,
-        targetEvent: $event
-      }).then(function(clickedItem) {
-        $scope.alert = clickedItem.name + ' clicked!';
-      });
+        controller: GridBottomSheetCtrlFactory(documentObj)
+        //targetEvent: $event
+      })
+        // .then is available once the sheet closes
+        //.then(function(clickedItem) {
+        //saveXliff();
+      //});
     };
 
     // listen for a segment change, and reset $scope.activeSegment accordingly
     $scope.$on('changeSegment', function(evt, data) {
 
-
       // WORKING: show the bottom sheet when the job finishes
       if (data.currentSegment === -1) {
-        $scope.showGridBottomSheet();
+        $scope.showGridBottomSheet($scope.document.DOM);
         return
       }
 

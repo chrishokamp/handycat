@@ -157,8 +157,6 @@ angular.module('controllers')
     // what is the data model for a TM object { sourceLang: <sourceLang>, targetLang: <targetLang>, source: <source>, target: <target>, createdBy: <creator>, date: <date> }
     // a new TM object is (at least) two nodes, the source segment and the target segment, both containing fields for creator, date created
     var graphTMUrl = 'http://localhost:8899/tm';
-    $log.log('Scope document');
-    $log.log($scope.document);
     var newTMNodes = [
         {'lang': $scope.document.sourceLang, 'segment': $scope.segment.source },
         {'lang': $scope.document.targetLang, 'segment': $scope.segment.target },

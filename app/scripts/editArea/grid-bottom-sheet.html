@@ -4,7 +4,7 @@
   </div>
   <md-list>
     <md-item ng-repeat="item in bottomItems">
-      <md-button class="md-grid-item-content" aria-label="{{item.name}}" ng-click="listItemClick($index)">
+      <md-button class="md-grid-item-content" aria-label="{{item.name}}" ng-click="item.action()">
         <div class="md-icon-container">
           <md-inline-grid-icon><i class="{{item.icon}}"></i></md-inline-grid-icon>
         </div>
