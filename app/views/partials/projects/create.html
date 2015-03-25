@@ -41,6 +41,17 @@
             <!--</md-button>-->
           </label>
         </div>
+        <h4 class="md-warn">OR</h4>
+        <md-button class="md-primary" ng-click="showAdvanced($event)">
+          Custom Dialog
+        </md-button>
+        <md-button ng-click="showTextArea = !showTextArea">Paste in some text</md-button>
+        <div ng-show="showTextArea" layout="column" layout-align="center center" layout-padding>
+          <md-input-container flex>
+            <label>Paste some text</label>
+            <textarea ng-model="input.rawText" columns="1" md-maxlength="3000"></textarea>
+          </md-input-container>
+        </div>
       </div>
 
       <div layout="column" layout-align="center center">

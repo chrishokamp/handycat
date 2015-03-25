@@ -179,5 +179,32 @@ angular.module('controllers')
 
       }
 
-    }]);
 
+//.controller('AppCtrl', function($scope, $mdDialog) {
+  $scope.alert = '';
+  $scope.showAdvanced = function(ev) {
+    $mdDialog.show({
+      controller: DialogController,
+      templateUrl: 'scripts/projects/create/raw-text-dialog.tmpl.html',
+      targetEvent: ev
+    })
+      .then(function(answer) {
+        $scope.alert = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.alert = 'You cancelled the dialog.';
+      });
+  };
+//});
+function DialogController($scope, $mdDialog) {
+  $scope.hide = function () {
+    $mdDialog.hide();
+  };
+  $scope.cancel = function () {
+    $mdDialog.cancel();
+  };
+  $scope.answer = function (answer) {
+    $mdDialog.hide(answer);
+  };
+}
+
+}]);
