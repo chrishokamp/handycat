@@ -4,7 +4,7 @@ This is the main repo for the prototype web-based CAT tool developed at CNGL.
 
 #Build Instructions     
 
-The frontend is build entirely with javascript, using the [Angular](http://angularjs.org/) framework.     
+The frontend is built entirely with javascript, using the [Angular](http://angularjs.org/) framework.     
 
 To set up your development environment, it's strongly recommended that you use the development stack consisting of:      
 
@@ -22,8 +22,8 @@ To set up your development environment, it's strongly recommended that you use t
 2. clone the repo `git clone USERNAME@github.com:CNGL-repo/editor_components.git`  
 3. install grunt `npm install -g grunt`
 3. install grun-cli `npm install -g grunt-cli`
-3. install boew `npm install -g bower`
-3. run `$ npm install` from the top directiory(`editor_components/`)
+3. install bower `npm install -g bower`
+3. run `$ npm install` from the top directory(`editor_components/`)
 4. run `$ bower install` from the top directory(`editor_components/`)
 4. build bootstrap ui -
   ```
