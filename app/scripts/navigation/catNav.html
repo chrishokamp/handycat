@@ -4,5 +4,16 @@
 
     <!-- fill up the space between left and right area -->
     <span flex></span>
+    <!-- show the toolbar -->
+    <md-button
+            ng-click="visible.toolbar=!visible.toolbar"
+            tooltip="show the toolbar"
+            tooltip-placement="bottom"
+            ng-class="{selected: visible.toolbar}"
+            class="btn navbar-btn btn-primary"
+      >
+      <span class="glyphicon glyphicon-wrench"></span>
+    </md-button>
+    <!-- show the help -->
   </div>
 </md-toolbar>

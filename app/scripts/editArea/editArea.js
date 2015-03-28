@@ -8,6 +8,8 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       toolbar: false,
       projectLoading: true
     };
+    // let the root scope see this (so we can access editArea $scope from the navigation toolbar
+    $rootScope.visible = $scope.visible;
 
     var docDeferred = $q.defer();
     var docPromise = docDeferred.promise;
