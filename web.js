@@ -176,7 +176,6 @@ var queryGlosbe = function (fromLang, toLang, queryString) {
   var format = '&format=json'
   var options = {
     host  : 'glosbe.com',
-//    path: '/gapi/tm?' + from + to + phrase;
     path  : '/gapi/translate?' + from + to + phrase + format,
     method: 'GET',
     // set protocol to https - glosbe requires this

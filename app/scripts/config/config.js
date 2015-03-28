@@ -10,6 +10,10 @@ handyCATconfig.constant('xliffCreatorUrl', xliffCreatorUrl);
 var concordancerURL = 'http://127.0.0.1:8899/concordancer';
 handyCATconfig.constant('concordancerURL', concordancerURL);
 
+// the Translation Memory (graphTM) URL
+var graphTMUrl = 'http://localhost:8899/tm';
+handyCATconfig.constant('graphTMUrl', graphTMUrl);
+
 // the levenshtaligner URL
 var levenshtalignerURL = 'http://127.0.0.1:5000/levenshtalign';
 handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);

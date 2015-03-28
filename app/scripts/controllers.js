@@ -1,4 +1,4 @@
-angular.module('controllers', []);
+angular.module('controllers', ['handycatConfig']);
 
 angular.module('controllers')
 .controller('StatsController', ['$scope', 'editSession', function($scope, session) {

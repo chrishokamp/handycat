@@ -44,18 +44,29 @@
            layout-padding
       >
 
-      <md-button ng-click="queryTM(currentSourceText)">Query TM</md-button>
+      <input type="text"
+             class="query-box"
+             flex
+             ng-model="tmQuery"
+             placeholder="{{tmQuery}}"
+      />
+      <md-button ng-click="queryTM(tmQuery)">Query TM</md-button>
       <div layout="row" layout-margin
-        ng-repeat="tmMatch in tmMatches"
+        ng-repeat="sourceMatch in tmMatches | orderBy:'-score'"
         ng-click="insertText(tmMatch)"
+
         ng-show="tmMatches.length > 0"
       >
-          <div flex>{{tmMatch.source}}</div>
-          <div flex>{{tmMatch.target}}</div>
-          <div>{{tmMatch.provider.name}}</div>
+
+        <div layout="row" layout-margin
+             ng-repeat="targetMatch in sourceMatch.translations"
+             ng-click="insertText(targetMatch.segment)"
+          >
+          <div flex>{{targetMatch.segment}}</div>
+        </div>
       </div>
       <div ng-show="!tmMatches || tmMatches.length === 0">
-        <p>No TM match for: {{currentSourceText}}</p>
+        <p>No TM match for: {{tmQuery}}</p>
       </div>
         </div>
     </md-tab>

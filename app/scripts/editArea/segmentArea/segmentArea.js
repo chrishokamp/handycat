@@ -2,10 +2,12 @@
 // this is a source + target pair
 angular.module('controllers')
 .controller('SegmentAreaCtrl', [
-  '$rootScope', '$scope', 'TranslationMemory', 'Wikipedia', 'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'editSession',
-   'Logger', 'Projects', 'XliffParser', '$http',
-  function($rootScope, $scope, TranslationMemory, Wikipedia, Glossary, $log, ruleMap, copyPunctuation, Session, Logger,
-           Projects, XliffParser, $http) {
+  '$rootScope', '$scope', 'TranslationMemory', 'Wikipedia',
+  'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'editSession',
+  'Logger', 'Projects', 'XliffParser', 'graphTMUrl', '$http',
+  function($rootScope, $scope, TranslationMemory, Wikipedia,
+           Glossary, $log, ruleMap, copyPunctuation, Session,
+           Logger, Projects, XliffParser, graphTMUrl, $http) {
 
 
     // this object tells us which translation widgets are available to the user
@@ -156,7 +158,6 @@ angular.module('controllers')
     // update the user's translation resources (update the TM)
     // what is the data model for a TM object { sourceLang: <sourceLang>, targetLang: <targetLang>, source: <source>, target: <target>, createdBy: <creator>, date: <date> }
     // a new TM object is (at least) two nodes, the source segment and the target segment, both containing fields for creator, date created
-    var graphTMUrl = 'http://localhost:8899/tm';
     var newTMNodes = [
         {'lang': $scope.document.sourceLang, 'segment': $scope.segment.source },
         {'lang': $scope.document.targetLang, 'segment': $scope.segment.target },
@@ -174,7 +175,7 @@ angular.module('controllers')
         $log.log('translation memory updated, the new nodes: ');
         $log.log(res);
       }, function (err) {
-        $log.log('Error updating the translation memory');
+        $log.error('Error updating the translation memory');
       })
 
   }; // end segmentFinished
