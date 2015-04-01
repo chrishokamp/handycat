@@ -1,0 +1,22 @@
+<md-dialog aria-label="Create From Raw Text">
+  <md-content class="sticky-container">
+    <md-subheader class="md-sticky-no-effect">Create From Raw Text</md-subheader>
+    <div class="dialog-content">
+      <div layout="column" layout-align="center center" layout-padding>
+        <md-input-container flex>
+          <label>Paste source text with one line per segment</label>
+          <textarea ng-model="rawText" columns="1" md-maxlength="3000"></textarea>
+        </md-input-container>
+      </div>
+    </div>
+  </md-content>
+  <div class="md-actions" layout="row">
+    <span flex></span>
+    <md-button ng-click="cancel()">
+      Cancel
+    </md-button>
+    <md-button ng-click="createFromText(rawText)" class="md-primary">
+      Create
+    </md-button>
+  </div>
+</md-dialog>

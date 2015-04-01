@@ -9,18 +9,6 @@
   <md-content layout="column" layout-align="center center">
     <h3>Create a New Translation Project</h3>
     <md-divider></md-divider>
-
-    <!--TODO: remove this section in favor of toast messages-->
-    <!--<div class="alert alert-danger slide-in" ng-show="parser.parsingError && !fileAdded">-->
-    <!--Error: The uploaded file is not a valid XLIFF file.-->
-    <!--</div>-->
-
-    <form role="form">
-      <div layout="column" layout-align="center start" layout-padding class="form-group">
-        <input flex type="text" class="form-control" id="projectName" ng-model="name" />
-      </div>
-    </form>
-    <md-divider></md-divider>
     <div>
       <div layout="column" layout-padding layout-align="center center">
         <div
@@ -33,38 +21,36 @@
             <div><span class="drop-message drop-text">Drag in an XLIFF or a text file</span></div>
             <div><span class="glyphicon glyphicon-plus drop-text"></span></div>
         </div>
-        <h4 class="md-warn">OR</h4>
         <div>
           <label>Choose a File
-            <!--<md-button>-->
             <input class="file-input btn btn-primary" type="file" ng-file-select="onFileSelect($files)" />
-            <!--</md-button>-->
           </label>
         </div>
-        <h4 class="md-warn">OR</h4>
         <md-button class="md-primary" ng-click="showAdvanced($event)">
-          Custom Dialog
+          Create a project from raw text
         </md-button>
-        <md-button ng-click="showTextArea = !showTextArea">Paste in some text</md-button>
-        <div ng-show="showTextArea" layout="column" layout-align="center center" layout-padding>
-          <md-input-container flex>
-            <label>Paste some text</label>
-            <textarea ng-model="input.rawText" columns="1" md-maxlength="3000"></textarea>
-          </md-input-container>
-        </div>
       </div>
 
+      <form role="form">
+        <div layout="column" layout-align="center start" layout-padding class="form-group">
+          <input flex type="text" placeholder="Enter a project name" class="form-control" id="projectName" ng-model="name" />
+        </div>
+      </form>
       <div layout="column" layout-align="center center">
           <div
-            layout="row"
+            layout="column"
             layout-align="center center"
             layout-padding
             ng-repeat="f in selectedFiles"
           >
-            <div flex>{{f.name}} - size: {{f.size}}B - type: {{f.type}}</div>
+            <!--<div flex>{{f.name}} - size: {{f.size}}B - type: {{f.type}}</div>-->
+            <div ng-show="name" flex>Project Name: {{name}}</div>
+            <div ng-show="!name" flex>Please give your project a name</div>
+
             <div><i ng-show="documentLoading" class="icon ion-loading-c"></i></div>
             <div>
               <md-button
+                ng-disabled="!name || !pending.document"
                 ng-click="create(); fileAdded = false;"
                 class="md-primary"
                 >

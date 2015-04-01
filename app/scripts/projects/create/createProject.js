@@ -3,7 +3,7 @@ angular.module('controllers')
     function(XliffParser, fileReader, Projects, xliffCreatorUrl, $state, $log, $scope, $http, $mdDialog, $mdToast) {
 
       // set the default title
-      $scope.name = 'Project Name';
+      $scope.name = undefined;
       $scope.pending = {
         document: undefined
       }
@@ -24,6 +24,9 @@ angular.module('controllers')
       // is the XLIFF already parsed? - there should be a validation check to make sure this is a valid XLIFF
       // the XLIFF parser must reject its promise if there is a parsing error
       $scope.create = function() {
+        if (!$scope.name || $scope.name.length === 0) {
+          $scope.showErrorToast('Please give your project a name!');
+        }
         if ($scope.pending.document) {
           var project = newProject(projectName, $scope.pending.document);
           project.$save(function(response) {
@@ -106,7 +109,7 @@ angular.module('controllers')
 
 // TODO: this code depends upon $scope.pending.document being available
 // TODO: refactor this component into a directive
-      // this depends on ngFileUpload
+      // this depends on ngFileUpload (selectedFiles is used by ngFileUpload)
       $scope.onFileSelect = function ($files) {
         $scope.fileAdded = true;
 
@@ -147,63 +150,66 @@ angular.module('controllers')
         var readerProm = fileReader.readAsText(file);
 
         readerProm.then(
-          function(rawText) {
-            var documentProm = $http({
-              url   : xliffCreatorUrl,
-              method: "GET",
-              params: {
-                sourceLang: 'en-US',
-                targetLang: 'de-DE',
-                sourceText: rawText
-              }
-            });
-            documentProm.then(
-              function (res) {
-                var xliffPromise = XliffParser.parseXML(res.data);
-                xliffPromise.then(
-                  function (documentObj) {
-                    $scope.pending.document = documentObj.DOM;
-                  }
-                );
-              }, function (err) {
-                $log.error('createProject: error parsing text file');
-                // show modal
-                $scope.showErrorToast('There was an error converting your text file to XLIFF 1.2');
-              }
-            );
-          },
+          createFromRawText(rawText),
           function(err) {
             $log.error('Error reading local text file');
           }
         );
-
       }
 
+      var createFromRawText = function(rawText) {
+        var documentProm = $http({
+          url   : xliffCreatorUrl,
+          method: "GET",
+          params: {
+            sourceLang: 'en-US',
+            targetLang: 'de-DE',
+            sourceText: rawText
+          }
+        });
+        documentProm.then(
+          function (res) {
+            var xliffPromise = XliffParser.parseXML(res.data);
+            xliffPromise.then(
+              function (documentObj) {
+                $scope.pending.document = documentObj.DOM;
+                // TODO: this is a hack, since we actually aren't dealing with a file here
+                $scope.selectedFiles = ['dummyFile'];
+              },
+              function(err) {
+                $log.error('There was an error parsing the raw text into XLIFF');
+                $scope.showErrorToast('There was an error converting your text to XLIFF 1.2');
+              }
+            );
+          }, function (err) {
+            $log.error('createProject: error parsing text');
+            // show modal
+            $scope.showErrorToast('There was an error converting your text to XLIFF 1.2');
+          }
+        );
+      }
 
 //.controller('AppCtrl', function($scope, $mdDialog) {
   $scope.alert = '';
-  $scope.showAdvanced = function(ev) {
+  $scope.showAdvanced = function(evt) {
     $mdDialog.show({
       controller: DialogController,
-      templateUrl: 'scripts/projects/create/raw-text-dialog.tmpl.html',
-      targetEvent: ev
+      templateUrl: 'views/partials/projects/raw-text-dialog.tmpl.html',
+      targetEvent: evt
     })
-      .then(function(answer) {
-        $scope.alert = 'You said the information was "' + answer + '".';
+      .then(function(rawText) {
+        createFromRawText(rawText);
       }, function() {
-        $scope.alert = 'You cancelled the dialog.';
+        $log.log('inner dialog cancelled');
       });
   };
 //});
 function DialogController($scope, $mdDialog) {
-  $scope.hide = function () {
-    $mdDialog.hide();
-  };
   $scope.cancel = function () {
     $mdDialog.cancel();
   };
-  $scope.answer = function (answer) {
-    $mdDialog.hide(answer);
+  $scope.createFromText = function (rawText) {
+    $mdDialog.hide(rawText);
   };
 }
 
