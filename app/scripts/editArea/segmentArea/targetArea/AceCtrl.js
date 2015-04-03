@@ -286,26 +286,5 @@ angular.module('controllers').controller('AceCtrl',
 
   };  // end AceLoaded
 
-// TODO: maintain the current TM matches based on the selected token in the source side
-  $scope.minPhraseLen = 15;
-  var tmQueried = false;
-  $scope.augmentTM = function(minPhraseLen) {
-    if (!tmQueried) {
-      // Working - take every other item
-      var toks = tokenizer.tokenize($scope.segment.source);
-
-      var subphrases = tokenizer.subphrases(toks,minPhraseLen);
-      //$log.log("the subphrases: " + JSON.stringify(subphrases));
-      // populate the TM with the segments from this AceCtrl instance
-      TranslationMemory.populateTM(subphrases);
-      tmQueried = true;
-    } else {
-      $log.log("TM already loaded for seg: " + $scope.segment.source);
-    }
-  };
-
-  // applying deltas
-  //the applyDeltas(Object deltas) API takes an array of deltas. Changing my sample code above to editor.getSession().getDocument().applyDeltas([currentDelta]) plays back properly.
-
 }]);
 
