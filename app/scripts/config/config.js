@@ -18,5 +18,6 @@ handyCATconfig.constant('graphTMUrl', graphTMUrl);
 var levenshtalignerURL = 'http://127.0.0.1:5000/levenshtalign';
 handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
 
-//'http://localhost:8899/concordancer?lang=en&query=this is a test'
-//http://127.0.0.1:5000/levenshtalign/<str1>/<str2>'
+// the lm autocompleter URL
+var lmAutocompleterURL = 'http://127.0.0.1:5010/lm-autocomplete';
+handyCATconfig.constant('lmAutocompleterURL', lmAutocompleterURL);

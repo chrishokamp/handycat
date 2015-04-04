@@ -1,5 +1,5 @@
 angular.module('services')
-.factory('autocompleters', ['$http', '$log', function($http, $log) {
+.factory('autocompleters', ['$http', '$log', 'lmAutocompleterURL', function($http, $log, lmAutocompleterURL) {
 
     // Working:
     // the server returns base URLs to endpoints that implement our autocomplete API
@@ -13,9 +13,9 @@ angular.module('services')
     // target lang
     // domain
     // TODO: there should be a selection dialog where the user can choose which autocompleters they want to use
+    // the autocompleter selection service should be injected into this service
     // a user's autocompleters grow over time
     // as they select segments, we log: { source: source-text, target_prefix: target-text, completion: <selected unit from autocomplete> }
-
 
     var testUrl = 'http://localhost:8000/';
     var testSource = 'delicious sandwich';
@@ -26,13 +26,16 @@ angular.module('services')
 
     // TODO: constrain completions by source sentence (and source language!)
     // TODO: each segment should init an autocomplete function which returns an ace autocomplete function where the server call is correctly parameterized
+
+    // Working -- change into a completer factory
+    // we need to be able to provide the right data at call time
     var testAutocomplete = {
       getCompletions: function(editor, session, pos, prefix, callback) {
         if (prefix.length === 0) {
           callback(null, []);
           return
         }
-        $http.get(testUrl,
+        $http.get(lmAutocompleterURL,
           {
             params: {
               prefix: prefix,
@@ -40,18 +43,19 @@ angular.module('services')
             }
           }
         )
-          .success(
+        .success(
           function (completions) {
             callback(null, completions.map(function (ea) {
               $log.log("inside autocomplete callback, item from completer is: ");
               $log.log(ea);
               return {name: ea.completion, value: ea.completion, score: 1, meta: "test autocompleter"}
             }));
-          })
+        })
       }
     }
 
-    autocompleteManager.autocompleters.push(testAutocomplete);
+    // WORKING -- we need to change the autocompletion API completely
+    //autocompleteManager.autocompleters.push(testAutocomplete);
 
     // old code
     var tmCompleter = {

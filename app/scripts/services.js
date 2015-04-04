@@ -1,4 +1,4 @@
-angular.module('services', []);
+angular.module('services', ['handycatConfig']);
 
 // TODO: this should be set in the config - it's here now for testability
 angular.module('services')

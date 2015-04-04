@@ -1,24 +1,52 @@
-angular.module('controllers').controller('TypeaheadCtrl', ['$scope', '$interval', '$log',  function($scope, $interval, $log) {
-  $scope.selected = 'Ala';
-  $scope.$watch(function() { return $scope.selected}, function(val) { $log.log('$scope.selected is: ' + val);})
-  $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-//  $scope.$viewValue = 'ala';
-  $interval(
-    function() {
-      $log.log($scope.selected);
-    }, 750
-  )
+angular.module('handycat.typeaheads', []);
 
-//   $scope.getLocation = function(val) {
-//    return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
-//      params: {
-//        address: val,
-//        sensor: false
-//      }
-//    }).then(function(response){
-//      return response.data.results.map(function(item){
-//        return item.formatted_address;
-//      });
-//    });
-//  };
+// an input area with one or more typeahead datasets enabled
+
+angular.module('handycat.typeaheads')
+  .directive('typeaheadEditor', ['$log', '$timeout', function($log, $timeout) {
+    return {
+      scope: {
+
+      },
+      templateUrl: 'scripts/typeahead/typeahead.html',
+      link: function($scope, el, attrs) {
+        el.find('#atwho-input').atwho({
+          at: '',
+          suffix: ''
+        })
+        // controllers are named by their 'at' trigger
+        $log.log(el.find('#atwho-input').data('atwho').controllers[""].setting.callbacks.filter);
+
+        var remoteFilter = function(query, callback) {
+          $log.log('remoteFilter');
+          console.log('remote')
+          callback(['this', 'is', 'a', 'test']);
+        }
+
+        var testFilter = function(query, data, searchKey) {
+          console.log('filter')
+          $log.log('filter called with:');
+          $log.log('query');
+          $log.log(query);
+          $log.log('data');
+          $log.log(data);
+          $log.log('searchKey');
+          $log.log(searchKey);
+          return []
+        }
+
+        el.find('#atwho-input').data('atwho').controllers[""].setting.callbacks.filter = testFilter;
+        el.find('#atwho-input').data('atwho').controllers[""].setting.callbacks.remoteFilter = remoteFilter;
+          //.set_context_for('').Controller);
+        //el.atwho().Controller);
+        //$.atwho.Controller.filter = testFilter;
+
+
+        //  .atwho({
+        //  at: ":",
+        //  data: ["+1", "-1", "smile"]
+        //});
+      }
+    }
+
 }]);

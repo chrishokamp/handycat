@@ -16,7 +16,8 @@ var App = window.App = angular.module('editorComponentsApp',
         'http-auth-interceptor',
         'snap',
         'ngMaterial',
-        'handycatConfig'
+        'handycatConfig',
+        'handycat.typeaheads'
         //'summaryMenu'
         //'filters',
         //'ngTouch'
@@ -89,6 +90,12 @@ var App = window.App = angular.module('editorComponentsApp',
       url: '/signup',
       templateUrl: '/views/signup.html',
       controller: 'SignupCtrl'
+    })
+    // WORKING ON LM TYPEAHEAD
+    .state('/typeahead', {
+      url: '/typeahead',
+      templateUrl: '/views/typeahead.html',
+      //controller: 'SignupCtrl'
     })
 
   $urlRouterProvider
