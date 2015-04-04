@@ -11,7 +11,6 @@ class LanguageModelAutocompleter:
     """
 
     def __init__(self, language_models=[], server_port_range_start=6090):
-        # TODO: phrase tables need to tell us both language directions!
         # TODO: there's only one language model for each lang, but there may be multiple phrase tables
         # phrase table keys are tuples of lang codes
         # language_models are [{'lang_code': <lang_code>, 'srilm_lm_file': <srilm_lm_file>,
@@ -37,8 +36,9 @@ class LanguageModelAutocompleter:
             server_data['process'].kill()
 
     def _start_ngram_server(self, lang_code, lm_file, port):
+        print('init lm')
         start_server_command = self.start_server_template.format(port, lm_file)
-        server_process = popen_obj = subprocess.Popen(start_server_command.split())
+        server_process = subprocess.Popen(start_server_command.split())
         return {'process': server_process, 'port': port}
 
     def _generate_completion_candidates(self, source_lang, target_lang, source_tokens=[]):
@@ -55,7 +55,7 @@ class LanguageModelAutocompleter:
         return target_candidates
 
     # generate ranked completions given the source segment and the current target prefix
-    def get_ranked_completions(self, source_lang, target_lang, source_tokens=[], target_prefix=[]):
+    def get_ranked_completions(self, source_lang, target_lang, source_tokens=[], target_prefix=[], metric='logprob'):
         cands = self._generate_completion_candidates(source_lang, target_lang, source_tokens)
         lm_server = self.language_model_servers[target_lang]
         # with tempfile.NamedTemporaryFile(mode='w') as options_file:
@@ -71,27 +71,40 @@ class LanguageModelAutocompleter:
                 call_server_command.split(), stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE).communicate()
 
-        ordered_logprobs = self._parse_srilm_output(lm_client_output)
+        ordered_logprobs = self._parse_srilm_output(lm_client_output, metric=metric)
         assert len(ordered_logprobs) == len(cands), "we must have a probability for every candidate"
         sorted_completions = sorted(zip(cands, ordered_logprobs), key=lambda u: u[1], reverse=True)
         return sorted_completions
 
     @staticmethod
-    def _parse_srilm_output(srilm_output):
+    def _parse_srilm_output(srilm_output, metric='logprob'):
+        """
+
+        :param srilm_output:
+        :param metric: 'logprob' | 'ppl1'
+        logprob includes p('<\s>' | w1..wn)
+        ppl1 does not include the end of sentence tag probability
+        :return:
+        """
+        assert metric == 'logprob' or metric == 'ppl1', 'the lm scoring metric must be \'logprob\' or \'ppl1\''
         # SRILM prints one blank line at the end of the file, ignore it
         output_lines = srilm_output.split('\n')[:-1]
 
         # each result is separated by one blank line
         # iterate until a blank line, then get the previous index
-        # the logprob is the fourth unit in the whitespace-delimeted last line
-        # the ppl1 (ppl without sentence ending is the last unit in the whitespace-delimeted last line
         ordered_logprobs = []
         for i, l in enumerate(output_lines):
             if re.match("^$", l):
                 completion_scores = output_lines[i-1].split()
-                logprob = float(completion_scores[3])
-                ppl = float(completion_scores[-1])
-                ordered_logprobs.append(logprob)
+                if metric == 'ppl1':
+                    # the ppl1 (ppl without sentence ending is the last unit in the whitespace-delimeted last line
+                    # higher ppl is worse, so lets make scores negative so we can sort the same way as with logprobs
+                    ppl1 = -float(completion_scores[-1])
+                    ordered_logprobs.append(ppl1)
+                else:
+                    # the logprob is the fourth unit in the whitespace-delimeted last line
+                    logprob = float(completion_scores[3])
+                    ordered_logprobs.append(logprob)
         return ordered_logprobs
 
 
