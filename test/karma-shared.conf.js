@@ -48,6 +48,8 @@ module.exports = function() {
          // for now, we have to include the material design css as well(?)
          // see: https://github.com/angular/material/issues/1026
         'app/bower_components/angular-material/angular-material.css',
+        'app/bower_components/Caret.js/dist/jquery.caret.js',
+        'app/bower_components/At.js/dist/js/jquery.atwho.js',
 
         'app/scripts/lib/angular-ui-ace/ui-ace.js',
         'app/scripts/lib/german_snowball_stemmer.js',
@@ -103,6 +105,9 @@ module.exports = function() {
         'app/scripts/settings/UserSettings.js',
         'app/scripts/languagePair/langPair.js',
 
+        // the typeahead component
+        'app/scripts/typeahead/typeahead.js',
+
         // concordancer component
         'app/scripts/concordancer/concordancer.js',
 
@@ -114,8 +119,9 @@ module.exports = function() {
 
       // templates
       'app/scripts/toolbar/toolbar.html',
+      'app/scripts/typeahead/typeahead.html',
 
-        'app/scripts/cat.templates.js',
+      'app/scripts/cat.templates.js',
 
       // extra for testing
       'app/bower_components/angular-mocks/angular-mocks.js'

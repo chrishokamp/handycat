@@ -6,7 +6,10 @@
   </style>
   <p>TYPEAHEAD DIRECTIVE</p>
   <!--NOTE: it's important NOT to leave whitespace between the textarea tags-->
-  <textarea id="atwho-input"
-            class="nodebox-typeahead"
-            placeholder="find a template..."></textarea>
+  <textarea
+            class="nodebox-typeahead atwho-input"
+            placeholder="find a template..."
+            ng-model="targetSegment"
+  ></textarea>
+  <div>{{targetSegment}}</div>
 </div>

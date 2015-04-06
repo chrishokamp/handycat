@@ -19,5 +19,5 @@ var levenshtalignerURL = 'http://127.0.0.1:5000/levenshtalign';
 handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
 
 // the lm autocompleter URL
-var lmAutocompleterURL = 'http://127.0.0.1:5010/lm-autocomplete';
+var lmAutocompleterURL = 'http://localhost:8010/lm_autocomplete';
 handyCATconfig.constant('lmAutocompleterURL', lmAutocompleterURL);

@@ -1,4 +1,4 @@
-describe("hello-protractor", function () {
+describe("index page tests", function () {
   var ptor = protractor.getInstance();
 
   describe("index", function () {

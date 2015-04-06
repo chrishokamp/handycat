@@ -1,6 +1,4 @@
-// TODO: switch to toolbarSpec
-// model test after the ui-bootstrap tests
-
+// TODO: see the build your own angular directive tests
 // External things that the toolbar relies on:
 // Services: 'editSession', 'TranslationMemory', '$log', '$timeout', '$rootScope'
 // parent $scope variables:
@@ -12,27 +10,20 @@
 //  $scope.tmMatches
 //    $scope.glossaryMatches
 
-// TODO: refactor to provide a mocked document object
-// TODO: factor out the element building for each test
-
-describe('toolbar directive tests', function () {
+describe('typeaheadEditor directive tests: ', function () {
 
   var $scope, $rootScope, $compile;
 
   beforeEach(module('handycatConfig'));
-  beforeEach(module('services'));
-  beforeEach(module('directives'));
-  beforeEach(module('scripts/toolbar/toolbar.html'));
+  beforeEach(module('scripts/typeahead/typeahead.html'));
+  beforeEach(module('handycat.typeaheads'));
   beforeEach(function() {
-    // mock the TranslationMemory service
-    module(function($provide) {
-      $provide.value('TranslationMemory', {});
-    });
+
   });
 
   beforeEach(module(function($compileProvider) {
 
-      // TODO: Working: only necessary when directive relies on ngModel
+    // TODO: Working: only necessary when directive relies on ngModel
     $compileProvider.directive('formatter', function () {
       return {
         require: 'ngModel',
@@ -44,20 +35,22 @@ describe('toolbar directive tests', function () {
       };
     });
   }));
+
   beforeEach(inject(function (_$rootScope_, _$compile_, _$document_, _$timeout_, $sniffer) {
     $scope = _$rootScope_;
     $rootScope = _$rootScope_;
     // set test data on the toolbar's scope
 //    $scope.source = ['foo', 'bar', 'baz'];
     $compile = _$compile_;
-    $document = _$document_;
-    $timeout = _$timeout_;
+    //$document = _$document_;
+    //$timeout = _$timeout_;
 
   }));
 
   //utility functions
   var prepareInputEl = function (inputTpl) {
     var el = $compile(angular.element(inputTpl))($scope);
+    document.body.appendChild(el[0]);
     $scope.$digest();
     return el;
   };
@@ -70,6 +63,7 @@ describe('toolbar directive tests', function () {
   };
 
   //custom matchers
+  // TODO: check if the typeahead area is opened or closed
   beforeEach(function () {
     jasmine.addMatchers({
       toBeClosed: function () {
@@ -99,28 +93,28 @@ describe('toolbar directive tests', function () {
   });
 
 
-  //coarse grained, "integration" tests
-  describe('initial state and model changes', function () {
+  describe('typeahead component tests', function () {
 
-    it('should be closed by default', function () {
-      $scope.segments = [];
-      $scope.queryGlossary = angular.noop();
-      $scope.toolbarShowing = false;
-      var element = prepareInputEl('<toolbar active-segment="0" segments="" source-lang="en" target-lang="de" query-glossary="queryGlossary" class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
-      expect(element).toBeClosed();
+    it('should render its databound value', function () {
+      $scope.startValue = "This is a prefix";
+      var element = prepareInputEl('<typeahead-editor target-segment="startValue"></typeahead-editor>');
+      expect(element.isolateScope().targetSegment).toEqual($scope.startValue);
+      expect(element.find('textarea').val()).toEqual($scope.startValue);
     });
 
-    it('should open when it is supposed to', function () {
-      var element = prepareInputEl('<toolbar active-segment="0" segments="" source-lang="en" target-lang="de" query-glossary="queryGlossary" class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
-      $scope.visible = { 'toolbar': true };
 
-      $scope.$digest();
-      expect(element).toBeOpen();
-    });
+
+    //xit('should open when it is supposed to', function () {
+    //  var element = prepareInputEl('<toolbar active-segment="0" segments="" source-lang="en" target-lang="de" query-glossary="queryGlossary" class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
+    //  $scope.visible = { 'toolbar': true };
+    //
+    //  $scope.$digest();
+    //  expect(element).toBeOpen();
+    //});
 
   });
 
-  describe('linking with parent scope', function () {
+  xdescribe('linking with parent scope', function () {
 
     it('should keep track of the active segment property of its parent', function() {
       $scope = $rootScope.$new();
@@ -152,12 +146,5 @@ describe('toolbar directive tests', function () {
     });
 
   });
-
-
-
-
-  // toolbar core functionality
-  // should be able to transclude its widgets
-  // specify widgets in markup
 
 });

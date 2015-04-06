@@ -1,9 +1,10 @@
 from flask import Flask, jsonify, request
-from flask.ext.cors import cross_origin
+from flask.ext.cors import CORS
 from lm_autocomplete.language_model_autocompleter import LanguageModelAutocompleter
 from nltk.tokenize import wordpunct_tokenize
 
 app = Flask(__name__)
+CORS(app, allow_headers='Content-Type')
 tokenizer = wordpunct_tokenize
 
 # TODO: what is the correct way to namespace global objects in Flask?
@@ -41,8 +42,8 @@ lm_autocompleter = LanguageModelAutocompleter(language_models=language_models)
 
 # working - get the lm autocompletions
 
+# @cross_origin()
 @app.route('/lm_autocomplete', methods=['GET'])
-@cross_origin()
 def lm_interface():
     # TODO: required args: source_lang, target_lang, source_tokens
     # TODO: target_prefix is not required -- if it's empty, we'll assume that we're at the beginning of the sentence
@@ -55,8 +56,12 @@ def lm_interface():
     source_segment_raw = request.args.get('source_segment', '').decode('utf8')
     source_segment = tokenizer(source_segment_raw.strip())
 
-    ranked_completions = lm_autocompleter.get_ranked_completions('de', 'en', source_tokens=source_segment,
-                                                                 target_prefix=target_prefix, metric='ppl1')
+    if len(target_prefix) >= 1:
+        ranked_completions = lm_autocompleter.get_ranked_completions('de', 'en',
+                                                                     source_tokens=source_segment,
+                                                                     target_prefix=target_prefix, metric='ppl1')
+    else:
+        ranked_completions = []
     # ranked_completions = get_lm_completions(target_lang, current_prefix=current_prefix)
 
     return jsonify({'ranked_completions': ranked_completions})

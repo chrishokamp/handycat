@@ -2,7 +2,7 @@ describe('concordancer service specs', function () {
 
   var $httpBackend, concordancerBackendHandler, $q;
 
-  beforeEach(module('config', function ($provide) {
+  beforeEach(module('handycatConfig', function ($provide) {
     // mock the config concordancerURL and levenshtalignerURL
     $provide.constant('concordancerURL', 'http://concordancer');
     $provide.constant('levenshtalignerURL', 'http://levenshtalign')
