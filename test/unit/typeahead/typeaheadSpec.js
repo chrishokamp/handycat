@@ -92,17 +92,26 @@ describe('typeaheadEditor directive tests: ', function () {
     $scope.$destroy();
   });
 
-
   describe('typeahead component tests', function () {
 
     it('should render its databound value', function () {
       $scope.startValue = "This is a prefix";
-      var element = prepareInputEl('<typeahead-editor target-segment="startValue"></typeahead-editor>');
-      expect(element.isolateScope().targetSegment).toEqual($scope.startValue);
+      $scope.sourceSegment = 'Dies ist ein Prefix.';
+      $scope.targetLang = 'en';
+      $scope.sourceLang = 'de';
+      var element = prepareInputEl('<typeahead-editor target-segment="startValue" source-segment="sourceSegment" source-lang="{{sourceLang}}" target-lang="{{targetLang}}"></typeahead-editor>');
+
+      var $isolateScope = element.isolateScope();
+      expect($isolateScope.targetSegment).toEqual($scope.startValue);
+      expect($isolateScope.targetLang).toEqual($scope.targetLang);
+      expect($isolateScope.sourceLang).toEqual($scope.sourceLang);
       expect(element.find('textarea').val()).toEqual($scope.startValue);
+
+      // test 2-way databinding
+      $scope.startValue = "This is a new prefix";
+      $scope.$digest();
+      expect(element.isolateScope().targetSegment).toEqual($scope.startValue);
     });
-
-
 
     //xit('should open when it is supposed to', function () {
     //  var element = prepareInputEl('<toolbar active-segment="0" segments="" source-lang="en" target-lang="de" query-glossary="queryGlossary" class="info-toolbar" ng-show="visible.toolbar"></toolbar>');

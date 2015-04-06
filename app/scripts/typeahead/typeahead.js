@@ -6,7 +6,10 @@ angular.module('handycat.typeaheads')
   .directive('typeaheadEditor', ['$log', '$http', function($log, $http) {
     return {
       scope: {
-        'targetSegment': '='
+        'targetSegment': '=',
+        'sourceSegment': '=',
+        'targetLang': '@',
+        'sourceLang': '@'
 
       },
       templateUrl: 'scripts/typeahead/typeahead.html',
@@ -32,8 +35,8 @@ angular.module('handycat.typeaheads')
           $http.get(lmAutocompleterURL,
             {
               params: {
-                target_prefix: $scope.targetText,
-                source_segment: testSourceSegment,
+                target_prefix: $scope.targetSegment,
+                source_segment: $scope.sourceSegment,
                 // TODO: add correct langs
                 target_lang: '',
                 source_lang: ''
@@ -50,23 +53,10 @@ angular.module('handycat.typeaheads')
               });
               cachedResponse = completions;
               callback(completions);
-              //callback(['this', 'is', 'a', 'test']);
             });
-
-          //var d = new Date();
-          ////var dateString = d.toString();
-          //callback([dateString]);
         }
 
         var testFilter = function(query, data, searchKey) {
-          console.log('filter')
-          $log.log('filter called with:');
-          $log.log('query');
-          $log.log(query);
-          $log.log('data');
-          $log.log(data);
-          $log.log('searchKey');
-          $log.log(searchKey);
           return []
         }
 
