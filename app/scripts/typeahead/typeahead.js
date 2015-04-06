@@ -31,15 +31,17 @@ angular.module('handycat.typeaheads')
 
           var testSourceSegment = "Dies ist falsch.";
           $log.log('remoteFilter');
-          $log.log('targetText: ' + $scope.targetText);
+          $log.log('targetSegment: ' + $scope.targetSegment);
+          if ($scope.targetSegment === undefined) {
+            $scope.targetSegment = '';
+          }
           $http.get(lmAutocompleterURL,
             {
               params: {
                 target_prefix: $scope.targetSegment,
                 source_segment: $scope.sourceSegment,
-                // TODO: add correct langs
-                target_lang: '',
-                source_lang: ''
+                target_lang: $scope.targetLang,
+                source_lang: $scope.sourceLang
               }
             }
           )
@@ -50,6 +52,12 @@ angular.module('handycat.typeaheads')
               var completions = completionData['ranked_completions'].map(function(i) {
                 // return only the completion, not the score
                 return i[0];
+              }).filter(function(item) {
+                // filter completions to be at least 2 chars lon
+                if (item.length >= 2) {
+                  return true;
+                }
+                return false;
               });
               cachedResponse = completions;
               callback(completions);

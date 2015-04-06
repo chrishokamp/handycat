@@ -1,8 +1,13 @@
+<div ng-init="testSource = 'Dies ist nicht ein Test'">
+ <input ng-model="testSource" placeholder="enter source sen" />
+
 <typeahead-editor
-  target-segment="test"
+  target-segment="testTarget"
+  source-segment="testSource"
+  source-lang="de"
+  target-lang="en"
 >
 </typeahead-editor>
-{{test}}
-{{sourceSegment}}
-{{targetLang}}
-{{sourceLang}}
+{{testTarget}}
+{{testSource}}
+  </div>

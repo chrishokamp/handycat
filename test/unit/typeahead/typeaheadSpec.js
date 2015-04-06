@@ -1,14 +1,4 @@
 // TODO: see the build your own angular directive tests
-// External things that the toolbar relies on:
-// Services: 'editSession', 'TranslationMemory', '$log', '$timeout', '$rootScope'
-// parent $scope variables:
-// $scope.activeSegment
-// $scope.document.segments[index].source;
-// $scope.currentSourceText
-
-// Internal variables it updates:
-//  $scope.tmMatches
-//    $scope.glossaryMatches
 
 describe('typeaheadEditor directive tests: ', function () {
 

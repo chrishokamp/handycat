@@ -37,8 +37,8 @@ language_models = [
     }
 ]
 
-lm_autocompleter = LanguageModelAutocompleter(language_models=language_models)
-# WORKING - END copied from notebook
+lm_autocompleter = LanguageModelAutocompleter(language_models=language_models, server_port_range_start=7090)
+# WORKING - END copied from notebook`
 
 # working - get the lm autocompletions
 
