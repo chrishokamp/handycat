@@ -266,7 +266,7 @@ angular.module('controllers').controller('AceCtrl',
           "action": "insert-text",
           "newValue": newValue,
           "previousValue": previousValue,
-          "segmentId": $scope.index
+          "segmentId": $scope.id.index
         };
 
         //editSession.logAction(logAction);
@@ -280,6 +280,9 @@ angular.module('controllers').controller('AceCtrl',
       name: 'Finish current segment',
       bindKey: {win: 'Ctrl-Enter', mac:'Ctrl-Enter'},
       exec: function(editor, line) {
+        $log.log('ace ctrl scope');
+        $log.log($scope);
+        $log.log($scope.$index);
         $scope.$parent.segmentFinished($scope.$index);
       }
     }]);

@@ -4,10 +4,10 @@ angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'TranslationMemory', 'Wikipedia',
   'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'editSession',
-  'Logger', 'Projects', 'XliffParser', 'graphTMUrl', '$http',
+  'Logger', 'Projects', 'XliffParser', 'graphTMUrl', 'hotkeys', '$http',
   function($rootScope, $scope, TranslationMemory, Wikipedia,
            Glossary, $log, ruleMap, copyPunctuation, Session,
-           Logger, Projects, XliffParser, graphTMUrl, $http) {
+           Logger, Projects, XliffParser, graphTMUrl, hotkeys, $http) {
 
 
     // this object tells us which translation widgets are available to the user
@@ -16,6 +16,21 @@ angular.module('controllers')
       translationSelector: false,
       AceEditor: true
     }
+
+    // these hotkeys are only available when the segment is active
+    // they get deleted when the segment is not active
+    var hotkeyConfigs = [{
+      combo      : 'ctrl+enter',
+      description: 'Finish a segment and move to the next one',
+      allowIn    : ['INPUT', 'SELECT', 'TEXTAREA'],
+      callback   : function () {
+        if ($scope.isActive.active) {
+          $log.log('hotkey callback');
+          $log.log('index: ' + $scope.id.index);
+          $scope.segmentFinished($scope.id.index);
+        }
+      }
+    }];
 
     // WORKING - dynamically populate this area for each segment
     // user must click to populate
@@ -137,6 +152,16 @@ angular.module('controllers')
     $log.log("SEGMENT FINISHED - segId is: " + segId);
     $scope.setSegmentState('translated');
     $scope.isActive.active = false;
+    // del the keyboard shortcuts
+
+    // configure the keyboard shortcuts
+    // You can pass it an object.  This hotkey will not be unbound unless manually removed
+    // using the hotkeys.del('ctrl+enter') method
+    hotkeyConfigs.forEach(
+      function(hotkeyConfig) {
+        hotkeys.del(hotkeyConfig.combo);
+      }
+    )
     // Update the current segment in the XLIFF DOM
     // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
     // Right now, we depend on $scope.segment.targetDOM.textContent and $scope.segment.target being manually synced
@@ -145,9 +170,7 @@ angular.module('controllers')
     // TODO: the rest of this function should be on the EditAreaCtrl because it is not specific to this segment
     // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
     // - this line is CRITICAL - tells the UI to move to the next segment
-    // TODO: WORKING - fix segment ordering logic NOW!
     Session.focusNextSegment(segId, $scope.segments);
-
 
     // Update the project on the server by syncing with the document model
     $scope.projectResource.content = XliffParser.getDOMString($scope.document.DOM);
@@ -184,7 +207,7 @@ angular.module('controllers')
   $scope.activate = function($index) {
     $log.log('activate: ' + $index);
     $scope.reopen($index);
-  }
+  };
   // Re-opens a finished segment. Undoes what segmentFinished() did
   // TODO: we should only show the 'SAVE' (checkmark) button once the user has actually edited something (they shouldn't need to click 'check' again)
   // TODO: in reopen, the editing components have already been created, so we need to avoid doing that again to be more efficient
@@ -213,7 +236,13 @@ angular.module('controllers')
       //$("body").animate({scrollTop: top - navBarHeight}, "slow");
 
       // set this flag to true for the view
-      $scope.isActive = { active:true };
+      $scope.isActive = {active: true};
+      // configure the keyboard shortcuts for the active segment
+      // You can pass it an object.  This hotkey will not be unbound unless manually removed
+      // using the hotkeys.del() method
+      hotkeyConfigs.forEach(function (hotkeyConfig) {
+        hotkeys.add(hotkeyConfig);
+      });
     }
   });
 
