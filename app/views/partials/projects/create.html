@@ -63,7 +63,7 @@
 
       <h3>Or click one of these testing files:
         <a ng-repeat='testfile in sampleFiles'
-           ng-click="createFromURL(testfile.url)">
+           ng-click="createFromURL(testfile.url, testfile.name)">
           {{testfile.name}}
         </a>
       </h3>

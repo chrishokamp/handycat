@@ -64,13 +64,13 @@ angular.module('handycat.typeaheads')
             });
         }
 
-        var testFilter = function(query, data, searchKey) {
+        var dummyFilter = function(query, data, searchKey) {
           return []
         }
 
         // controllers are named by their 'at' trigger (whatever string it is)
         // Override the default 'filter' and 'remoteFilter' functions
-        $inputTextarea.data('atwho').controllers[""].setting.callbacks.filter = testFilter;
+        $inputTextarea.data('atwho').controllers[""].setting.callbacks.filter = dummyFilter;
         $inputTextarea.data('atwho').controllers[""].setting.callbacks.remoteFilter = remoteFilter;
 
         // you can add multiple triggers

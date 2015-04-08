@@ -1,13 +1,24 @@
 <div ng-init="testSource = 'Dies ist nicht ein Test'">
- <input ng-model="testSource" placeholder="enter source sen" />
+  <style>
+    .test-container {
+      width: 500px;
+      height: 300px;
+      background-color: sandybrown;
+    }
 
-<typeahead-editor
-  target-segment="testTarget"
-  source-segment="testSource"
-  source-lang="de"
-  target-lang="en"
->
-</typeahead-editor>
-{{testTarget}}
-{{testSource}}
+  </style>
+
+
+  <input ng-model="testSource" placeholder="enter source sen" />
+  <div class="test-container">
+    <typeahead-editor
+      target-segment="testTarget"
+      source-segment="testSource"
+      source-lang="de"
+      target-lang="en"
+      >
+    </typeahead-editor>
+    {{testTarget}}
+    {{testSource}}
   </div>
+</div>

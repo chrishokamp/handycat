@@ -62,7 +62,7 @@ angular.module('controllers')
 
       // This is primarily for the built-in demos
       // user specifies the URL of an XLIFF file, we grab it, parse it, then save it on the server
-      $scope.createFromURL = function(xliffFileUrl) {
+      $scope.createFromURL = function(xliffFileUrl, projectName) {
         $log.log('create from URL fired: ' + xliffFileUrl);
         $http.get(xliffFileUrl)
           .success(
@@ -70,6 +70,9 @@ angular.module('controllers')
             XliffParser.parseXML(data).then(
               function (docObj) {
                 var pendingDocument = docObj.DOM;
+                if ($scope.name === "" || $scope.name === undefined) {
+                  $scope.name = projectName;
+                }
                 var project = newProject($scope.name, pendingDocument)
                 $scope.name = "";
 
