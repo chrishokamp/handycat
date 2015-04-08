@@ -21,3 +21,10 @@ handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
 // the lm autocompleter URL
 var lmAutocompleterURL = 'http://localhost:8010/lm_autocomplete';
 handyCATconfig.constant('lmAutocompleterURL', lmAutocompleterURL);
+
+// the languages that HandyCAT supports
+var supportedLangs = [
+  'en-US',
+  'de-DE'
+]
+handyCATconfig.constant('supportedLangs', supportedLangs);

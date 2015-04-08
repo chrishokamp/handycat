@@ -1,12 +1,16 @@
 angular.module('controllers')
-.controller('CreateProjectCtrl', ['XliffParser', 'fileReader', 'Projects', 'xliffCreatorUrl', '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast',
-    function(XliffParser, fileReader, Projects, xliffCreatorUrl, $state, $log, $scope, $http, $mdDialog, $mdToast) {
+.controller('CreateProjectCtrl', ['XliffParser', 'fileReader', 'Projects', 'xliffCreatorUrl', 'supportedLangs',
+    '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast',
+    function(XliffParser, fileReader, Projects, xliffCreatorUrl, supportedLangs,
+             $state, $log, $scope, $http, $mdDialog, $mdToast) {
 
       // set the default title
       $scope.name = undefined;
       $scope.pending = {
         document: undefined
       }
+      // Languages that we support
+      $scope.supportedLangs = supportedLangs;
 
       // add the hard-coded sample files
       $scope.sampleFiles = [
@@ -158,12 +162,13 @@ angular.module('controllers')
             $log.error('Error reading local text file');
           }
         );
-      }
+      };
 
       var createFromRawText = function(rawText) {
         var documentProm = $http({
           url   : xliffCreatorUrl,
           method: "GET",
+          // WORKING - user must specify source and target langs
           params: {
             sourceLang: 'en-US',
             targetLang: 'de-DE',
