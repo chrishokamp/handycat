@@ -131,14 +131,23 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
         // based on http://updates.html5rocks.com/2011/08/Saving-generated-files-on-the-client-side
         // and http://stackoverflow.com/a/15031019
         $scope.saveXliff = function () {
-          var blob = new Blob([new XMLSerializer().serializeToString(documentObj)], {type: "application/xml"});
+          var blob = new Blob([new XMLSerializer().serializeToString(documentObj.DOM)], {type: "application/xml"});
           // saveAs is provided in the global scope by file-saver
           saveAs(blob, "document.xliff");
         };
 
+        $scope.saveTarget = function () {
+          var targetSegments = $scope.document.segments.map(function(segment) {
+            return segment.target;
+          }).join("\n");
+          var outputBlob = new Blob([targetSegments], {type: "text/text"});
+          // saveAs is provided in the global scope by file-saver
+          saveAs(outputBlob, "target-segments.txt");
+        };
+
         $scope.bottomItems = [
           {name: 'Xliff', icon: 'ion-ios7-cloud-download', action: $scope.saveXliff},
-          {name: 'Text', icon: 'ion-ios7-cloud-download-outline'},
+          {name: 'Text', icon: 'ion-ios7-cloud-download-outline', action: $scope.saveTarget},
           {name: 'Projects', icon: 'ion-ios7-arrow-back'},
         ];
 
@@ -159,7 +168,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       })
         // .then is available once the sheet closes
         //.then(function(clickedItem) {
-        //saveXliff();
+
       //});
     };
 
@@ -168,7 +177,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
       // WORKING: show the bottom sheet when the job finishes
       if (data.currentSegment === -1) {
-        $scope.showGridBottomSheet($scope.document.DOM);
+        $scope.showGridBottomSheet($scope.document);
         return
       }
 

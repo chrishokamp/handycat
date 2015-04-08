@@ -8,7 +8,7 @@ $typeahead-color: #FFFFFF;
   box-sizing: border-box;
 }
 
-.typeahead-editor textarea {
+.typeahead-editor > textarea {
   //  make sure we fill our parent
   resize: none;
   width: 100%;
