@@ -60,6 +60,7 @@
               >
                 <md-radio-button value="AceEditor"  aria-label="Editor">Editor</md-radio-button>
                 <md-radio-button value="translationSelector" aria-label="Translation Selector">Translation Selector</md-radio-button>
+                <md-radio-button value="lmAutocomplete" aria-label="Typeahead Editor">Typeahead Editor</md-radio-button>
               </md-radio-group>
 
               <!--<span ng-show="translationsPending">retrieving translations<i class="ion-loading-c"></i></span>-->
@@ -98,7 +99,9 @@
                   <div ng-show="segment.state === 'translated'" class="segment-finished">
                     <p>{{segment.target}}</p>
                   </div>
+
                   <static-target text="{{segment.target}}"></static-target>
+
                 </md-content>
               </div>
 

@@ -29,12 +29,7 @@ describe('typeaheadEditor directive tests: ', function () {
   beforeEach(inject(function (_$rootScope_, _$compile_, _$document_, _$timeout_, $sniffer) {
     $scope = _$rootScope_;
     $rootScope = _$rootScope_;
-    // set test data on the toolbar's scope
-//    $scope.source = ['foo', 'bar', 'baz'];
     $compile = _$compile_;
-    //$document = _$document_;
-    //$timeout = _$timeout_;
-
   }));
 
   //utility functions
@@ -102,14 +97,6 @@ describe('typeaheadEditor directive tests: ', function () {
       $scope.$digest();
       expect(element.isolateScope().targetSegment).toEqual($scope.startValue);
     });
-
-    //xit('should open when it is supposed to', function () {
-    //  var element = prepareInputEl('<toolbar active-segment="0" segments="" source-lang="en" target-lang="de" query-glossary="queryGlossary" class="info-toolbar" ng-show="visible.toolbar"></toolbar>');
-    //  $scope.visible = { 'toolbar': true };
-    //
-    //  $scope.$digest();
-    //  expect(element).toBeOpen();
-    //});
 
   });
 

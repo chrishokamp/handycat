@@ -5,6 +5,15 @@
     <!-- the editing panel and controls -->
     <!--WORKING - add other target-area components here-->
     <div flex ng-show="getSegmentState($index) === 'initial'" ng-click="activate($index)">
+      <!--ALL TARGET AREA COMPONENTS BELONG HERE-->
+      <typeahead-editor ng-show="widgets.activeComponent === 'lmAutocomplete'"
+                        target-segment="segment.target"
+                        source-segment="segment.source"
+                        source-lang="{{document.sourceLang}}"
+                        target-lang="{{document.targetLang}}"
+                        class="cssSlideUp cover-all"
+        ></typeahead-editor>
+
       <!--the translation resource selection component-->
       <!-- when opened, it animates to cover its container component-->
       <div ng-show="widgets.activeComponent === 'translationSelector'" class="cssSlideUp cover-all">
