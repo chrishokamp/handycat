@@ -50,10 +50,10 @@ def lm_interface():
     source_lang = request.args.get('source_lang', '')
     target_lang = request.args.get('target_lang', '')
     # if target_lang in lm_autocompleter.language_model_servers:
-    target_prefix_raw = request.args.get('target_prefix', '').decode('utf8')
+    target_prefix_raw = request.args.get('target_prefix', '')
     # TODO: use the wordpunce tokenizer obj
     target_prefix = tokenizer(target_prefix_raw.strip())
-    source_segment_raw = request.args.get('source_segment', '').decode('utf8')
+    source_segment_raw = request.args.get('source_segment', '')
     source_segment = tokenizer(source_segment_raw.strip())
 
     if len(target_prefix) >= 1:

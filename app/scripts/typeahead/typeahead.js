@@ -1,9 +1,9 @@
-angular.module('handycat.typeaheads', []);
+angular.module('handycat.typeaheads', ['handycatConfig']);
 
 // an input area with one or more typeahead datasets enabled
 
 angular.module('handycat.typeaheads')
-  .directive('typeaheadEditor', ['$log', '$http', function($log, $http) {
+  .directive('typeaheadEditor', ['$log', '$http', 'lmAutocompleterURL', function($log, $http, lmAutocompleterURL) {
     return {
       scope: {
         'targetSegment': '=',
