@@ -12,6 +12,11 @@
 @import "partials/typeahead";
 @import "partials/translation-selector";
 
+@font-face {
+  font-family: clearsans;
+  src: url(fonts/ClearSans-Thin.woff);
+}
+
 * {
   -webkit-border-radius: 0 !important;
   -moz-border-radius: 0 !important;
@@ -20,7 +25,8 @@
 
 body {
 //  font-family:source-code-pro, Courier, Monaco, Menlo, "Ubuntu Mono", Consolas, monospace;
-  font-family:Menlo, monospace;
+//  font-family:Menlo, monospace;
+  font-family: clearsans, monospace;
   font-size: 18px;
 
   // minimum supported widths
