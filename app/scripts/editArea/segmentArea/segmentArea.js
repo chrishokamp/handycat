@@ -12,7 +12,7 @@ angular.module('controllers')
 
     // this object tells us which translation widgets are available to the user
     $scope.widgets = {
-      activeComponent: 'AceEditor',
+      activeComponent: 'lmAutocomplete',
       translationSelector: false,
       AceEditor: true
     }

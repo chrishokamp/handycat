@@ -58,9 +58,9 @@
                 layout="row"
                 ng-model="widgets.activeComponent"
               >
-                <md-radio-button value="AceEditor"  aria-label="Editor">Editor</md-radio-button>
-                <md-radio-button value="translationSelector" aria-label="Translation Selector">Translation Selector</md-radio-button>
                 <md-radio-button value="lmAutocomplete" aria-label="Typeahead Editor">Typeahead Editor</md-radio-button>
+                <md-radio-button value="translationSelector" aria-label="Translation Selector">Translation Selector</md-radio-button>
+                <!--<md-radio-button value="AceEditor"  aria-label="Editor">Editor</md-radio-button>-->
               </md-radio-group>
 
               <!--<span ng-show="translationsPending">retrieving translations<i class="ion-loading-c"></i></span>-->
@@ -77,17 +77,15 @@
           <div ng-class="{activeshadow: activeSegment === id.index}" layout="row" layout-padding class="bottom-margin">
             <div flex layout="column">
               <div class="bottom-margin content-card">
-                <div ng-show="segment.state === 'translated'" class="segment-finished">
-                  <p>{{segment.source}}</p>
-                </div>
-                <div ng-hide="segment.state === 'translated'">
-                  <div class="source">
+                  <div ng-show="segment.state === 'translated'" class="segment-finished">
+                    <p>{{segment.source}}</p>
+                  </div>
+                  <div ng-hide="segment.state === 'translated'">
                     <source-area
                       source-sentence="segment.source"
                       query-glossary="queryGlossary"
-                    ></source-area>
+                      ></source-area>
                   </div>
-                </div>
               </div>
             </div>
 
@@ -95,14 +93,12 @@
                  layout="column"
             >
               <div class="bottom-margin content-card" ng-click="activate(id.index)">
-                <md-content>
                   <div ng-show="segment.state === 'translated'" class="segment-finished">
                     <p>{{segment.target}}</p>
                   </div>
 
                   <static-target text="{{segment.target}}"></static-target>
 
-                </md-content>
               </div>
 
               <!--  the segment-level controls for the target panel -->

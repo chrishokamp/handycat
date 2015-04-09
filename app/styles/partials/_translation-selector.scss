@@ -3,15 +3,6 @@ $indigo500: #3F51B5;
 $indigo300: #7986CB;
 $white: white;
 
-
-.cover-all {
-  background-color: $white;
-  position: absolute;
-  z-index: 1000;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
 // Animations
 .ng-hide-add, .ng-hide-remove {
   /* ensure visibility during the transition */
@@ -20,9 +11,10 @@ $white: white;
 .cssSlideUp {
   transition: .75s ease all;
   height: 200px;
+  width: 100%;
 }
 .cssSlideUp.ng-hide {
-  height:0;
+  height: 0;
 }
 
 // todo: move these to the project list partial
