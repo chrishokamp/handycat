@@ -19,6 +19,7 @@ angular.module('controllers')
 
     // these hotkeys are only available when the segment is active
     // they get deleted when the segment is not active
+
     var hotkeyConfigs = [{
       combo      : 'ctrl+enter',
       description: 'Finish a segment and move to the next one',

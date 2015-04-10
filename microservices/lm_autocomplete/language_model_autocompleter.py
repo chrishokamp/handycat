@@ -42,22 +42,28 @@ class LanguageModelAutocompleter:
         server_process = subprocess.Popen(start_server_command.split())
         return {'process': server_process, 'port': port}
 
-    def _generate_completion_candidates(self, source_lang, target_lang, source_tokens=[]):
+    def _generate_completion_candidates(self, source_lang, target_lang, source_tokens=[], add_oovs=False):
         """
         use the source phrases to generate completion candidates for the language model
         :return: list
         """
         source_phrases = extract_phrases(source_tokens)
-        nested_target_candidates = [self.language_model_servers[target_lang]['phrase_tables'][(source_lang, target_lang)]
-                                 .get_target_phrases(source_phrase)
-                             for source_phrase in source_phrases]
+        target_candidate_map = {tuple(source_phrase): self.language_model_servers[target_lang]['phrase_tables'][(source_lang, target_lang)]
+                                .get_target_phrases(source_phrase)
+                                for source_phrase in source_phrases}
         # flatten and extract just the target phrase from the phrase table object
-        target_candidates = [c['target'] for l in nested_target_candidates for c in l]
+        target_candidates = []
+        for source_phrase, candidates in target_candidate_map.items():
+            if add_oovs:
+                if len(candidates) == 0 and len(source_phrase) <= 2:
+                    target_candidates.append(' '.join(source_phrase))
+            target_candidates.extend([c['target'] for c in candidates])
+        # target_candidates = [c['target'] for l in nested_target_candidates for c in l]
         return target_candidates
 
     # generate ranked completions given the source segment and the current target prefix
-    def get_ranked_completions(self, source_lang, target_lang, source_tokens=[], target_prefix=[], metric='logprob'):
-        cands = self._generate_completion_candidates(source_lang, target_lang, source_tokens)
+    def get_ranked_completions(self, source_lang, target_lang, source_tokens=[], target_prefix=[], metric='logprob', add_oovs=False):
+        cands = self._generate_completion_candidates(source_lang, target_lang, source_tokens=source_tokens, add_oovs=add_oovs)
         lm_server = self.language_model_servers[target_lang]
         # with tempfile.NamedTemporaryFile(mode='w') as options_file:
         dump_file = tempfile.NamedTemporaryFile(delete=False)

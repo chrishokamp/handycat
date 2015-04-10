@@ -11,9 +11,26 @@
             tooltip="show the toolbar"
             tooltip-placement="bottom"
             ng-class="{selected: visible.toolbar}"
-            class="btn navbar-btn btn-primary"
+    >
+      <i class="ion-wrench"></i>
+    </md-button>
+    <md-button
+      ng-click="showGridBottomSheet()"
+      ng-show="$state.current.name === 'projects.translate'"
+      tooltip="show the translation project options"
+      tooltip-placement="bottom"
+      ng-class="{selected: visible.toolbar}"
+    >
+      <i class="ion-android-download"></i>
+    </md-button>
+    <md-button
+      ng-click="showCheatSheet()"
+      ng-show="$state.current.name === 'projects.translate'"
+      tooltip="show the translation project options"
+      tooltip-placement="bottom"
+      ng-class="{selected: visible.toolbar}"
       >
-      <span class="glyphicon glyphicon-wrench"></span>
+      <i class="ion-android-download"></i>
     </md-button>
     <!-- show the help -->
   </div>

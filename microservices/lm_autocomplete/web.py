@@ -39,11 +39,7 @@ language_models = [
 ]
 
 lm_autocompleter = LanguageModelAutocompleter(language_models=language_models, server_port_range_start=7090)
-# WORKING - END copied from notebook`
 
-# working - get the lm autocompletions
-
-# @cross_origin()
 @app.route('/lm_autocomplete', methods=['GET'])
 def lm_interface():
     # TODO: required args: source_lang, target_lang, source_tokens
@@ -57,10 +53,12 @@ def lm_interface():
     source_segment_raw = request.args.get('source_segment', '')
     source_segment = tokenizer(source_segment_raw.strip())
 
+    # TODO: parameterize source and target langs
     if len(target_prefix) >= 1:
         ranked_completions = lm_autocompleter.get_ranked_completions('de', 'en',
                                                                      source_tokens=source_segment,
-                                                                     target_prefix=target_prefix, metric='ppl1')
+                                                                     target_prefix=target_prefix,
+                                                                     metric='ppl1', add_oovs=True)
     else:
         ranked_completions = []
     # ranked_completions = get_lm_completions(target_lang, current_prefix=current_prefix)

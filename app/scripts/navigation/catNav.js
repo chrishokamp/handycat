@@ -1,5 +1,5 @@
-angular.module('directives').directive('catNav', ['Logger', 'Auth', '$location', '$rootScope', '$log',
-  function(Logger, Auth, $location, $rootScope, $log) {
+angular.module('directives').directive('catNav', ['Logger', 'Auth', '$location', '$rootScope', '$log', 'hotkeys',
+  function(Logger, Auth, $location, $rootScope, $log, hotkeys) {
     return {
       restrict: 'E',
       replace: 'true',
@@ -11,6 +11,11 @@ angular.module('directives').directive('catNav', ['Logger', 'Auth', '$location',
           Logger.exportJSON();
         }
 
+        $scope.showCheatSheet = function() {
+          hotkeys.toggleCheatSheet();
+        }
+
+        // TODO: move this to the grid bottom sheet in editArea
         $scope.saveJSON = function() {
           $log.log("saving JSON");
           $log.log(Logger.exportJSON());

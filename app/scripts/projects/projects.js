@@ -1,7 +1,8 @@
 // TODO: there should be one ProjectCtrl for each project, and a separate ProjectListCtrl to handle the list of projects
 // TODO: right now the ProjectCtrl handles both 'Projects' and 'Project'
 angular.module('controllers')
-.controller('ProjectCtrl', ['$scope', 'Projects', 'XliffParser', '$stateParams', '$state', '$log', '$mdSidenav', function($scope, Projects, XliffParser, $stateParams, $state, $log, $mdSidenav) {
+.controller('ProjectCtrl', ['$scope', 'Projects', 'XliffParser', '$stateParams',
+    function($scope, Projects, XliffParser, $stateParams) {
 
     // Chris: this is called when the project-list template is initialized
     $scope.find = function() {

@@ -151,19 +151,17 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
           {name: 'Projects', icon: 'ion-ios7-arrow-back'},
         ];
 
-
         // remember that this is available
         //$mdBottomSheet.hide(clickedItem);
       }
-
     }
 
 
-    //// WORKING: show the bottom sheet when the job finishes
-    $scope.showGridBottomSheet = function(documentObj) {
+    $scope.showGridBottomSheet = function() {
+      var currentDoc = $scope.document;
       $mdBottomSheet.show({
         templateUrl: 'scripts/editArea/grid-bottom-sheet.html',
-        controller: GridBottomSheetCtrlFactory(documentObj)
+        controller: GridBottomSheetCtrlFactory(currentDoc)
         //targetEvent: $event
       })
         // .then is available once the sheet closes
@@ -172,12 +170,15 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       //});
     };
 
+    // let the root scope see this (so we can access editArea $scope from the navigation toolbar
+    $rootScope.showGridBottomSheet = $scope.showGridBottomSheet;
+
     // listen for a segment change, and reset $scope.activeSegment accordingly
     $scope.$on('changeSegment', function(evt, data) {
 
       // WORKING: show the bottom sheet when the job finishes
       if (data.currentSegment === -1) {
-        $scope.showGridBottomSheet($scope.document);
+        $scope.showGridBottomSheet();
         return
       }
 
