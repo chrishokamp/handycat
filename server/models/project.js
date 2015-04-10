@@ -3,10 +3,19 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
+// project and associated metadata
 var ProjectSchema = new Schema({
   name: {
     type: String,
     index: true,
+    required: true
+  },
+  sourcelang: {
+    type: String,
+    required: true
+  },
+  targetlang: {
+    type: String,
     required: true
   },
   // the xml content of the xliff file

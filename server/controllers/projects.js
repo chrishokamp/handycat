@@ -75,8 +75,8 @@ exports.show = function(req, res) {
 // TODO: this should be specific to each user, but users don't currently store which projects they own
 exports.all = function(req, res) {
   var userId = mongoose.Types.ObjectId(req.user._id);
-  debug('USER: ');
-  debug(userId);
+  //debug('USER: ');
+  //debug(userId);
   Project.find({creator: {_id: userId}}).sort('-created').populate('creator', 'username').exec(function(err, projects) {
     if (err) {
       res.json(500, err);

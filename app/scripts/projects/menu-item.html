@@ -1,14 +1,19 @@
-<div layout="column">
-  <!--<md-divider></md-divider>-->
-  <hr/>
-  <div layout="row">
+<div layout="column" class="project-list-menu-item">
+  <!--TODO: remove the project-list-menu-item class from this element - styling should be external to the directive -->
     <div layout="row" flex layout-align="begin center" layout-padding>
-      <h5 class="text-capitalize text-muted">
-        Project name:&nbsp
-      </h5>
-      <h4>{{projectName}}</h4>
+      <div>
+          <span>Name: {{projectName}}</span>
+      </div>
+      <div flex></div>
+      <div layout="column">
+        <div class="text-muted">
+          <span>Source Language: {{projectSourceLang}}</span>
+        </div>
+        <div class="text-muted">
+          <span>Target Language: {{projectTargetLang}}</span>
+        </div>
+      </div>
     </div>
-  </div>
   <div layout="column" layout-padding>
     <div layout="row">
       <div flex layout="column">
@@ -33,14 +38,14 @@
       </div>
     </div>
   </div>
-</div>
-<div layout="row">
-  <md-button class='project-translate-button' ui-sref="projects.translate({projectId: projectId})" flex>Translate</md-button>
-  <!--<div class="row" ng-repeat="project in projects" ng-class-even="'blue'" ng-class-odd="'grey'">-->
-  <!--<div class="btn col-xs-10 project-title" ui-sref="projects.translate({projectId: project._id})">-->
-  <!--{{project.name}}-->
-  <!--</div>-->
-  <!--<div class="btn col-xs-1" ui-sref="projects.edit({projectId: project._id})">-->
-  <!--<span class="ion-edit project-icon"></span>-->
+    <div layout="row">
+      <md-button class='project-translate-button' ui-sref="projects.translate({projectId: projectId})" flex>Translate</md-button>
+      <!--<div class="row" ng-repeat="project in projects" ng-class-even="'blue'" ng-class-odd="'grey'">-->
+      <!--<div class="btn col-xs-10 project-title" ui-sref="projects.translate({projectId: project._id})">-->
+      <!--{{project.name}}-->
+      <!--</div>-->
+      <!--<div class="btn col-xs-1" ui-sref="projects.edit({projectId: project._id})">-->
+      <!--<span class="ion-edit project-icon"></span>-->
 
+    </div>
 </div>

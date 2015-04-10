@@ -52,7 +52,7 @@ span.drop-text {
   md-button {
     font-size: $icon-size !important;
   }
-  :hover {
+  &:hover {
     background-color: red !important;
   }
 }
@@ -60,4 +60,18 @@ span.drop-text {
 //project list
 .project-view-button, .project-translate-button {
   border: 1px solid #000000;
+}
+.project-list-menu-item {
+  border-top: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
+  margin-bottom: 10px;
+  transition: box-shadow 0.5s;
+  &:hover {
+    border-top: 1px solid orange;
+    border-left: 1px solid orange;
+    border-right: 1px solid orange;
+    box-shadow: 6px 6px 4px lightgrey;
+  }
+
 }

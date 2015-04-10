@@ -3,6 +3,8 @@ angular.module('directives')
   return {
     scope: {
       projectName: '=',
+      projectSourceLang: '=',
+      projectTargetLang: '=',
       projectCreated: '=',
       projectState: '=',
       projectCreator: '=',

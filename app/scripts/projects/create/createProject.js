@@ -25,6 +25,15 @@ angular.module('controllers')
         }
       });
 
+      var newProject = function (name, pendingDocument, sourceLang, targetLang) {
+        var newProject = new Projects({
+          name: $scope.name,
+          content: XliffParser.getDOMString(pendingDocument),
+          sourcelang: sourceLang,
+          targetlang: targetLang
+        })
+        return newProject;
+      }
       // is the XLIFF already parsed? - there should be a validation check to make sure this is a valid XLIFF
       // the XLIFF parser must reject its promise if there is a parsing error
       $scope.create = function() {
@@ -74,10 +83,15 @@ angular.module('controllers')
             XliffParser.parseXML(data).then(
               function (docObj) {
                 var pendingDocument = docObj.DOM;
+                var sourceLang = docObj.sourceLang;
+                var targetLang = docObj.targetLang;
+                // make sure the $scope is in sync with the XLIFF document
+                $scope.sourceLang = sourceLang;
+                $scope.targetLang = targetLang;
                 if ($scope.name === "" || $scope.name === undefined) {
                   $scope.name = projectName;
                 }
-                var project = newProject($scope.name, pendingDocument)
+                var project = newProject($scope.name, pendingDocument, sourceLang, targetLang);
                 $scope.name = "";
 
                 project.$save(function (response) {
@@ -92,13 +106,6 @@ angular.module('controllers')
           });
       }
 
-      var newProject = function (name, pendingDocument) {
-        var newProject = new Projects({
-          name: $scope.name,
-          content: XliffParser.getDOMString(pendingDocument)
-        })
-        return newProject;
-      }
 
       // does the browser support drag n drop? - assume yes
       $scope.fileAdded = false;
@@ -145,6 +152,8 @@ angular.module('controllers')
         xliffPromise.then(
           function(documentObj) {
             $scope.pending.document = documentObj.DOM;
+            $scope.sourceLang = documentObj.sourceLang;
+            $scope.targetLang = documentObj.targetLang;
           }
         );
       }
@@ -165,13 +174,17 @@ angular.module('controllers')
       };
 
       var createFromRawText = function(rawText) {
+        if (!$scope.sourceLang || !$scope.targetLang) {
+          $scope.showErrorToast("Please specify the source and target languages");
+          return
+        }
         var documentProm = $http({
           url   : xliffCreatorUrl,
           method: "GET",
           // WORKING - user must specify source and target langs
           params: {
-            sourceLang: 'en-US',
-            targetLang: 'de-DE',
+            sourceLang: $scope.sourceLang,
+            targetLang: $scope.targetLang,
             sourceText: rawText
           }
         });
