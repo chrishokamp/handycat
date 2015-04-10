@@ -7,6 +7,7 @@
     <!-- show the toolbar -->
     <md-button
             ng-click="visible.toolbar=!visible.toolbar"
+            ng-show="$state.current.name === 'projects.translate'"
             tooltip="show the toolbar"
             tooltip-placement="bottom"
             ng-class="{selected: visible.toolbar}"

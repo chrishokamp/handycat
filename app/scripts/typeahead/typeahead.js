@@ -18,7 +18,7 @@ angular.module('handycat.typeaheads')
 
         $inputTextarea.atwho({
           at: '',
-          suffix: ' '
+          suffix: ""
         })
 
         var cachedResponse = [];

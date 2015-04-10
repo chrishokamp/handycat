@@ -2,6 +2,7 @@ import codecs
 import subprocess
 import tempfile
 import re
+import os
 
 from lm_autocomplete import extract_phrases
 
@@ -59,7 +60,10 @@ class LanguageModelAutocompleter:
         cands = self._generate_completion_candidates(source_lang, target_lang, source_tokens)
         lm_server = self.language_model_servers[target_lang]
         # with tempfile.NamedTemporaryFile(mode='w') as options_file:
-        with codecs.open('cands.tmp', 'w', encoding='utf8') as options_file:
+        dump_file = tempfile.NamedTemporaryFile(delete=False)
+        print('tmp filename is: ' + dump_file.name)
+        # with codecs.open('cands.tmp', 'w', encoding='utf8') as options_file:
+        with codecs.open(dump_file.name, 'w', encoding='utf8') as options_file:
             for candidate in cands:
                 completion = target_prefix + [candidate]
                 # remember that the lm is assumed to be _lowercase_
@@ -70,6 +74,7 @@ class LanguageModelAutocompleter:
             lm_client_output, lm_client_error = subprocess.Popen(
                 call_server_command.split(), stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE).communicate()
+        os.remove(dump_file.name)
 
         ordered_logprobs = self._parse_srilm_output(lm_client_output, metric=metric)
         assert len(ordered_logprobs) == len(cands), "we must have a probability for every candidate"
