@@ -12,10 +12,11 @@ def init_sorted_list():
 
 class InMemoryPhraseTable(PhraseTable):
 
-    def __init__(self, phrase_objects, cutoff=None):
+    def __init__(self, phrase_objects, cutoff=None, max_source_len=None):
         self.phrase_table = defaultdict(init_sorted_list)
         self._populate_pt(phrase_objects)
         self.cutoff = cutoff
+        self.max_source_len = max_source_len
 
     def __contains__(self, item):
         return item in self.phrase_table
@@ -24,12 +25,12 @@ class InMemoryPhraseTable(PhraseTable):
         for phrase_obj in phrase_objects:
             self.phrase_table[phrase_obj['source']].add(phrase_obj)
 
-    def get_target_phrases(self, source_tokens, max_source_len=None):
+    def get_target_phrases(self, source_tokens):
         assert type(source_tokens) is list, 'the query to the InMemoryPhraseTable must be a list of tokens'
 
         # provide the ability to constrain source phrase length
-        if max_source_len is not None:
-            if len(source_tokens) > max_source_len:
+        if self.max_source_len is not None:
+            if len(source_tokens) > self.max_source_len:
                 return []
 
         # the list-->string mapping is specific to this phrase table implementation

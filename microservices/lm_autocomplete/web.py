@@ -18,8 +18,9 @@ phrase_table_file = '/home/chris/projects/maxent_decoder/phrase_table/filtered_p
 parser = MosesTriplePipeParser()
 phrase_objects = parser.parse(phrase_table_file)
 
-pt_cutoff = 4
-de_en_phrase_table = InMemoryPhraseTable(phrase_objects, cutoff=pt_cutoff)
+pt_cutoff = 5
+max_source_len = 3
+de_en_phrase_table = InMemoryPhraseTable(phrase_objects, cutoff=pt_cutoff, max_source_len=max_source_len)
 
 # WORKING - test usage of the lm autocomplete lib
 from lm_autocomplete.language_model_autocompleter import LanguageModelAutocompleter

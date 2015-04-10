@@ -39,9 +39,10 @@ angular.module('controllers')
       $scope.create = function() {
         if (!$scope.name || $scope.name.length === 0) {
           $scope.showErrorToast('Please give your project a name!');
+          return
         }
         if ($scope.pending.document) {
-          var project = newProject(projectName, $scope.pending.document);
+          var project = newProject(projectName, $scope.pending.document, $scope.sourceLang, $scope.targetLang);
           project.$save(function(response) {
             $state.go('projects.list');
           });
