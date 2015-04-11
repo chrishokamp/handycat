@@ -6,23 +6,23 @@
     </md-button>
   </div>
 
-  <md-content layout="column" layout-align="center center">
-    <h3>Create a New Translation Project</h3>
+  <md-content layout="column" layout-align="start center">
+    <div class="text-muted">Create a New Translation Project</div>
     <md-divider></md-divider>
     <div>
       <div layout="column" layout-padding layout-align="center center">
         <div
+          layout-fill
           layout="column"
           layout-align="center center"
           class="drop-box"
           ng-file-drop="onFileSelect($files);"
           ng-file-drop-available="dropSupported=true"
           >
-            <div><span class="drop-message drop-text">Drag in an XLIFF or a text file</span></div>
-            <div><span class="glyphicon glyphicon-plus drop-text"></span></div>
-        </div>
-        <div>
-            <input class="file-input btn btn-primary" type="file" ng-file-select="onFileSelect($files)" />
+          <div><span class="drop-message">Drag in an XLIFF or a text file</span></div>
+          <div class="file-upload-glyph glyphicon glyphicon-plus">
+            <input type="file" ng-file-select="onFileSelect($files)" />
+          </div>
         </div>
         <md-button class="md-primary" ng-click="showAdvanced($event)">
           Create a project from raw text

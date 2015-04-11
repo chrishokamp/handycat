@@ -9,8 +9,6 @@ tokenizer = wordpunct_tokenize
 
 # TODO: what is the correct way to namespace global objects in Flask?
 #available_lms = yaml.load config
-#lm_autocompleter
-# WORKING - copied from notebook
 from lm_autocomplete.phrase_table.parsers.moses_triple_pipe_parser import MosesTriplePipeParser
 from lm_autocomplete.phrase_table.in_memory_phrase_table import InMemoryPhraseTable
 

@@ -7,8 +7,6 @@ angular.module('controllers')
     // Chris: this is called when the project-list template is initialized
     $scope.find = function() {
       Projects.query(function(projects) {
-        $log.log('PROJECTS');
-        $log.log(projects);
         $scope.projects = projects;
       });
     };
@@ -23,7 +21,6 @@ angular.module('controllers')
 
     // TODO: show confirmation modal
     $scope.remove = function(project) {
-      $log.log('Remove project');
       project.$remove();
 
       for (var i in $scope.projects) {
