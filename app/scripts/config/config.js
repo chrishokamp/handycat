@@ -28,3 +28,7 @@ var supportedLangs = [
   'de-DE'
 ]
 handyCATconfig.constant('supportedLangs', supportedLangs);
+
+var vocablistURL = 'http://localhost:9000/vocablist';
+handyCATconfig.constant('vocablistURL', vocablistURL);
+

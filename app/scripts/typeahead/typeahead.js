@@ -3,7 +3,8 @@ angular.module('handycat.typeaheads', ['handycatConfig']);
 // an input area with one or more typeahead datasets enabled
 
 angular.module('handycat.typeaheads')
-  .directive('typeaheadEditor', ['$log', '$http', 'lmAutocompleterURL', function($log, $http, lmAutocompleterURL) {
+  .directive('typeaheadEditor', ['$log', '$http', 'lmAutocompleterURL', 'vocabularyAutocompleter',
+    function($log, $http, lmAutocompleterURL, vocabularyAutocompleter) {
     return {
       scope: {
         'targetSegment': '=',
@@ -25,12 +26,13 @@ angular.module('handycat.typeaheads')
 
         var cachedResponse = [];
         var remoteFilter = function(query, callback) {
-          // hack - if the query is not empty (if this is not a space character), return the cached response
+          // hack - if the query is not empty (if this is not a space character)
+          //  return the cached response with the local autocomplete results for the prefix
           if (query !== '') {
-            callback(cachedResponse);
+            callback(cachedResponse.concat(
+              trieVocabCompleter(query)));
             return
           }
-
           $log.log('remoteFilter');
           $log.log('targetSegment: ' + $scope.targetSegment);
           if ($scope.targetSegment === undefined) {
@@ -47,6 +49,7 @@ angular.module('handycat.typeaheads')
             }
           )
           .success(
+            // working -- when matches are empty, hit the local trie
             function (completionData) {
               var completions = completionData['ranked_completions'].map(function(i) {
                 // return only the completion, not the score
@@ -67,14 +70,34 @@ angular.module('handycat.typeaheads')
                   }
                   return true;
                 });
+
               cachedResponse = completions;
               callback(completions);
             });
         }
 
+        //var results = auto.search('ap')
         var dummyFilter = function(query, data, searchKey) {
           return []
         }
+
+        // until the completer resolves
+        var trieVocabCompleter = function() {
+          return [];
+        }
+
+        vocabularyAutocompleter.then(
+          function(autocompleter) {
+            // TODO: fix the trigger so that this works inside words
+            trieVocabCompleter = function(query) {
+              $log.log('autocompleter');
+              $log.log(autocompleter.search('ap'));
+              return autocompleter.search('ap').map(function(item) {
+                return item.value;
+              });
+            }
+          }
+        );
 
         // controllers are named by their 'at' trigger (whatever string it is)
         // Override the default 'filter' and 'remoteFilter' functions

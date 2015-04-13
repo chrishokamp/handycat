@@ -253,6 +253,16 @@ var glossaryWordList = function(req,res) {
 app.get('/glossary/segment/:phrase', cache.route(), glossaryWordList);
 app.get('/glossary/word/:word', cache.route(), askGlossary);
 
+// WORKING - prototype the vocab list server
+app.get('/vocablist', function(req, res){
+  //var sessionId = req.param('sessionId');
+  //console.log('posting to /logger/:sessionId with id ' + sessionId);
+  //console.log(sessionId);
+  var fakeRes = ['fruit', 'app', 'apple', 'banana'];
+  console.log('returning vocab:');
+  console.log(fakeRes);
+  res.send(['fruit', 'app', 'apple', 'banana']);
+});
 
 // This is for the entity linker demo
 // TODO: move this to a plugin

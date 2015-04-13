@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask.ext.cors import CORS
-from lm_autocomplete.language_model_autocompleter import LanguageModelAutocompleter
+from lm_autocomplete.srilm_language_model_autocompleter import SrilmLanguageModelAutocompleter
+from lm_autocomplete.prefix_language_model_autocompleter import PrefixLanguageModelAutocompleter
 from nltk.tokenize import wordpunct_tokenize
 
 app = Flask(__name__)
@@ -21,22 +22,34 @@ max_source_len = 3
 de_en_phrase_table = InMemoryPhraseTable(phrase_objects, cutoff=pt_cutoff, max_source_len=max_source_len)
 
 # WORKING - test usage of the lm autocomplete lib
-from lm_autocomplete.language_model_autocompleter import LanguageModelAutocompleter
+from lm_autocomplete.prefix_language_model_autocompleter import PrefixLanguageModelAutocompleter
 
 # language_models are [{'lang_code': <lang_code>, 'srilm_lm_file': <srilm_lm_file>,
 # 'phrase_tables': {(source_lang, target_lang): phrase_table}]
 
+# TODO: we have multiple types of lms
+# To init lm servers via configuration, we need to name the lm types
 language_models = [
+    # {
+    #     'lang_code': 'en',
+    #     'srilm_lm_file': '/home/chris/projects/maxent_decoder/lm/europarl.srilm.gz',
+    #     'phrase_tables': {
+    #         ('de', 'en'): de_en_phrase_table
+    #     }
+    # },
     {
         'lang_code': 'en',
-        'srilm_lm_file': '/home/chris/projects/maxent_decoder/lm/europarl.srilm.gz',
+        'order': 3,
+        'pickled_lm_lookup_table': '/home/chris/projects/gigaword/proto/europarl.test.ngram_scores.cpkl',
         'phrase_tables': {
             ('de', 'en'): de_en_phrase_table
         }
     }
 ]
 
-lm_autocompleter = LanguageModelAutocompleter(language_models=language_models, server_port_range_start=7090)
+# the query parameters to the prefix lm tell us how to construct the query
+# lm_autocompleter = SrilmLanguageModelAutocompleter(language_models=language_models, server_port_range_start=7090)
+lm_autocompleter = PrefixLanguageModelAutocompleter(language_models=language_models)
 
 @app.route('/lm_autocomplete', methods=['GET'])
 def lm_interface():
@@ -46,12 +59,13 @@ def lm_interface():
     target_lang = request.args.get('target_lang', '')
     # if target_lang in lm_autocompleter.language_model_servers:
     target_prefix_raw = request.args.get('target_prefix', '')
-    # TODO: use the wordpunce tokenizer obj
-    target_prefix = tokenizer(target_prefix_raw.strip())
+    # TODO: use the wordpunce tokenizer obj with language param (if available)
+    target_prefix = tokenizer(target_prefix_raw.strip().lower())
     source_segment_raw = request.args.get('source_segment', '')
-    source_segment = tokenizer(source_segment_raw.strip())
+    source_segment = tokenizer(source_segment_raw.strip().lower())
 
     # TODO: parameterize source and target langs
+    # TODO: the API to the various autocompleters must be consistent -- 'metric' doesn't always make sense
     if len(target_prefix) >= 1:
         ranked_completions = lm_autocompleter.get_ranked_completions('de', 'en',
                                                                      source_tokens=source_segment,
@@ -59,7 +73,6 @@ def lm_interface():
                                                                      metric='ppl1', add_oovs=True)
     else:
         ranked_completions = []
-    # ranked_completions = get_lm_completions(target_lang, current_prefix=current_prefix)
 
     return jsonify({'ranked_completions': ranked_completions})
 

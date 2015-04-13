@@ -12,6 +12,7 @@ $white: white;
   transition: .75s ease all;
   height: 200px;
   width: 100%;
+  overflow-y: scroll;
 }
 .cssSlideUp.ng-hide {
   height: 0;

@@ -18,7 +18,9 @@ var App = window.App = angular.module('editorComponentsApp',
         'ngMaterial',
         'cfp.hotkeys',
         'handycatConfig',
-        'handycat.typeaheads'
+        'handycat.typeaheads',
+        'handycat.trieAutocomplete'
+
         //'summaryMenu'
         //'filters',
         //'ngTouch'
