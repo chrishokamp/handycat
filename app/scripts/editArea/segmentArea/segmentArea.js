@@ -36,32 +36,65 @@ angular.module('controllers')
     // WORKING - dynamically populate this area for each segment
     // user must click to populate
     // Also look at how to log which options the user selects
-    $scope.sampleOptions = [
-      {'segment': 'Zweifellos gibt es geheime Schwarzmarktgruppen im Internet, die große Mühe geben, von Strafverfolgung versteckt zu bleiben',
-        'created': 'January 26, 2014',
-        'quality': 0.95,
-        'provider': 'Chris Hokamp'
-      },
-      {'segment': 'Zweifellos gibt es geheimere Schwarzmarkt-Gruppen im Internet, die große Mühe geben, Strafverfolgung verborgen bleiben.',
-        'created': 'August 26, 2013',
-        'quality': 0.8,
-        'provider': 'Microsoft Translator'
-      },
-      {'segment': 'Zweifellos gibt es geheimnisSchwarzMarktGruppen im Internet, die große Mühe geben, bleiben von Strafverfolgungs versteckt.',
-        'created': 'October 5, 2013',
-        'quality': 0.6,
-        'provider': 'Google Translate'
-      },
-    ];
+    // WORKING -- for any configuration, we have a set of translation providers
+    // if the APIs of the translation providers are the same, we can query them all at once
+    // querying the set of translation providers should be done on the backend, because we will
+    // also want to get the quality estimate of each candidate from a separate module
+    //$scope.sampleOptions = [
+    //  {'segment': 'Zweifellos gibt es geheime Schwarzmarktgruppen im Internet, die große Mühe geben, von Strafverfolgung versteckt zu bleiben',
+    //    'created': 'January 26, 2014',
+    //    'quality': 0.95,
+    //    'provider': 'Chris Hokamp'
+    //  },
+    //  {'segment': 'Zweifellos gibt es geheimere Schwarzmarkt-Gruppen im Internet, die große Mühe geben, Strafverfolgung verborgen bleiben.',
+    //    'created': 'August 26, 2013',
+    //    'quality': 0.8,
+    //    'provider': 'Microsoft Translator'
+    //  },
+    //  {'segment': 'Zweifellos gibt es geheimnisSchwarzMarktGruppen im Internet, die große Mühe geben, bleiben von Strafverfolgungs versteckt.',
+    //    'created': 'October 5, 2013',
+    //    'quality': 0.6,
+    //    'provider': 'Google Translate'
+    //  },
+    //];
 
     $scope.$watch(
       function() {
         return $scope.widgets.activeComponent
       },
       function(val) {
-        $log.log('translation selector watch got passed: ' + val);
         $log.log($scope.widgets.activeComponent);
     });
+
+    $scope.$watch(
+      function() {
+        return $scope.isActive.active;
+      },
+      function(isActive) {
+        if (isActive) {
+          // query the user's translation resources for the translations for this segment
+          $log.log('scope activated');
+          var d = new Date().toString();
+          $scope.translationOptions = [
+            {'segment': d + ' gibt es geheime Schwarzmarktgruppen im Internet, die große Mühe geben, von Strafverfolgung versteckt zu bleiben',
+              'created': 'January 26, 2014',
+              'quality': 0.95,
+              'provider': 'Chris Hokamp'
+            },
+            {'segment': 'Zweifellos gibt es geheimere Schwarzmarkt-Gruppen im Internet, die große Mühe geben, Strafverfolgung verborgen bleiben.',
+              'created': 'August 26, 2013',
+              'quality': 0.8,
+              'provider': 'Microsoft Translator'
+            },
+            {'segment': 'Zweifellos gibt es geheimnisSchwarzMarktGruppen im Internet, die große Mühe geben, bleiben von Strafverfolgungs versteckt.',
+              'created': 'October 5, 2013',
+              'quality': 0.6,
+              'provider': 'Google Translate'
+            },
+          ];
+        }
+      }
+    )
 
     // WORKING - this should be part of the 'translationSelector' component
     // create buttons for the user's translation resources -- we know what resources they have from $scope.currentUser
@@ -75,6 +108,7 @@ angular.module('controllers')
     ];
 
 
+    // TODO: call this with smart caching when the segment gets activated
     $scope.testQuery = function(sourceQuery) {
       $scope.translationsPending = true;
       var transProm = $http({
@@ -158,11 +192,12 @@ angular.module('controllers')
     // configure the keyboard shortcuts
     // You can pass it an object.  This hotkey will not be unbound unless manually removed
     // using the hotkeys.del('ctrl+enter') method
+
     hotkeyConfigs.forEach(
       function(hotkeyConfig) {
         hotkeys.del(hotkeyConfig.combo);
       }
-    )
+    );
     // Update the current segment in the XLIFF DOM
     // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
     // Right now, we depend on $scope.segment.targetDOM.textContent and $scope.segment.target being manually synced
@@ -209,6 +244,7 @@ angular.module('controllers')
     $log.log('activate: ' + $index);
     $scope.reopen($index);
   };
+
   // Re-opens a finished segment. Undoes what segmentFinished() did
   // TODO: we should only show the 'SAVE' (checkmark) button once the user has actually edited something (they shouldn't need to click 'check' again)
   // TODO: in reopen, the editing components have already been created, so we need to avoid doing that again to be more efficient
@@ -221,6 +257,7 @@ angular.module('controllers')
   // the change segment event is fired from changeSegment in the editSession service
   // this event is fired by editSession service
   $scope.$on('changeSegment', function(e,data) {
+    // if this is the segment we activated
     if (data.currentSegment === $scope.id.index) {
       $log.log('segment: ' + $scope.id.index + ' --- heard changeSegment');
 
@@ -230,12 +267,6 @@ angular.module('controllers')
       // make sure the segment state is reverted to 'initial'
       $scope.setSegmentState('initial');
 
-      // smooth scroll
-      //var top = document.getElementById('segment-' + $scope.id.index).offsetTop;
-      // scroll and add space for the navbar
-      //var navBarHeight = 100;
-      //$("body").animate({scrollTop: top - navBarHeight}, "slow");
-
       // set this flag to true for the view
       $scope.isActive = {active: true};
       // configure the keyboard shortcuts for the active segment
@@ -244,6 +275,15 @@ angular.module('controllers')
       hotkeyConfigs.forEach(function (hotkeyConfig) {
         hotkeys.add(hotkeyConfig);
       });
+    } else if ($scope.isActive.active) {
+      // make sure this segment is deactivated
+      $scope.isActive = {active: false};
+
+      hotkeyConfigs.forEach(
+        function(hotkeyConfig) {
+          hotkeys.del(hotkeyConfig.combo);
+        }
+      );
     }
   });
 

@@ -3,6 +3,7 @@ angular.module('directives')
   return {
     scope: {
       onSelect: '=',
+      // a function which will return available translations
       selectorOptions: '='
     },
     templateUrl: 'scripts/translationSelector/translation-selector.html',
