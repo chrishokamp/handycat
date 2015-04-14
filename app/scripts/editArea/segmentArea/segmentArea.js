@@ -14,7 +14,8 @@ angular.module('controllers')
     $scope.widgets = {
       activeComponent: 'lmAutocomplete',
       translationSelector: false,
-      AceEditor: true
+      AceEditor: true,
+      defaultComponent: 'lmAutocomplete'
     }
 
     // these hotkeys are only available when the segment is active
@@ -152,6 +153,8 @@ angular.module('controllers')
     // TODO: to fix the undo issue, maintain an undo stack of the previous values of the target segment
     $scope.setTargetValue = function(newValue) {
       $scope.segment.target = newValue;
+      // assume the user wants to go back to the default component
+      $scope.widgets.activeComponent = $scope.widgets.defaultComponent;
     }
 
     // the id gets reset in the template
