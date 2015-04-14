@@ -132,15 +132,12 @@ angular.module('directives').directive('toolbar',
 
       }
 
-      // TODO: when would the TM be updated by an action outside of the TM component?
-      $scope.$on('update-tm-area', function(evt, data) {
+      $scope.setTargetSegment = function(newSegment) {
+        $log.log('updated target segment');
+        // we'll use this if we need to set the target segment to something else
+        $scope.segments[$scope.index].target = newSegment;
+      }
 
-        // TODO: datastructure for TM matches -- isomorphic to TBX specification
-//        $scope.tmMatches = data.map(function(item) {
-//          return item.text;
-//        });
-        $scope.tmMatches = data
-      })
     }
   }
     }]);

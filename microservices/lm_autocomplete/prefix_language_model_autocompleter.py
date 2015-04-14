@@ -65,9 +65,9 @@ class PrefixLanguageModelAutocompleter:
 
         # FILTERING: this code is if we want to filter using the phrase table
         # trim the target prefix to the last lm_order-1 tokens
-        # all_possible_completions = OrderedDict(lm_lookup_table[tuple(target_prefix[-self.order-1:])])
 
         if filter is True:
+            all_possible_completions = OrderedDict(lm_lookup_table[tuple(target_prefix[-self.order-1:])])
             matched_completions = []
             for candidate in cands:
                 if candidate in all_possible_completions:

@@ -38,6 +38,8 @@
         </div>
       </div>
     </md-tab>
+    <!--TODO: show the matches for each source match in coherent sublists-->
+    <!--TODO: show the alignment between match and source -->
     <md-tab label="TM">
       <div class="tm-wrapper"
            layout="column"
@@ -51,22 +53,25 @@
              placeholder="{{tmQuery}}"
       />
       <md-button ng-click="queryTM(tmQuery)">Query TM</md-button>
-      <div layout="row" layout-margin
+      <div layout="column" layout-margin>
+      <div layout="column" layout-margin
         ng-repeat="sourceMatch in tmMatches | orderBy:'-score'"
-        ng-click="insertText(tmMatch)"
-
         ng-show="tmMatches.length > 0"
       >
-
-        <div layout="row" layout-margin
+        <div layout="row"
+             layout-margin
+             layout-align="center center"
              ng-repeat="targetMatch in sourceMatch.translations"
-             ng-click="insertText(targetMatch.segment)"
+             ng-click="setTargetSegment(targetMatch.segment)"
           >
+          <div>{{$index}}: </div>
           <div flex>{{targetMatch.segment}}</div>
         </div>
+        <hr/>
       </div>
-      <div ng-show="!tmMatches || tmMatches.length === 0">
+        <div ng-show="!tmMatches || tmMatches.length === 0">
         <p>No TM match for: {{tmQuery}}</p>
+      </div>
       </div>
         </div>
     </md-tab>

@@ -30,26 +30,26 @@ from lm_autocomplete.prefix_language_model_autocompleter import PrefixLanguageMo
 # TODO: we have multiple types of lms
 # To init lm servers via configuration, we need to name the lm types
 language_models = [
-    # {
-    #     'lang_code': 'en',
-    #     'srilm_lm_file': '/home/chris/projects/maxent_decoder/lm/europarl.srilm.gz',
-    #     'phrase_tables': {
-    #         ('de', 'en'): de_en_phrase_table
-    #     }
-    # },
     {
         'lang_code': 'en',
-        'order': 3,
-        'pickled_lm_lookup_table': '/home/chris/projects/gigaword/proto/europarl.test.ngram_scores.cpkl',
+        'srilm_lm_file': '/home/chris/projects/maxent_decoder/lm/europarl.srilm.gz',
         'phrase_tables': {
             ('de', 'en'): de_en_phrase_table
         }
-    }
+    },
+    # {
+    #     'lang_code': 'en',
+    #     'order': 3,
+    #     'pickled_lm_lookup_table': '/home/chris/projects/gigaword/proto/europarl.test.ngram_scores.cpkl',
+    #     'phrase_tables': {
+    #         ('de', 'en'): de_en_phrase_table
+    #     }
+    # }
 ]
 
 # the query parameters to the prefix lm tell us how to construct the query
-# lm_autocompleter = SrilmLanguageModelAutocompleter(language_models=language_models, server_port_range_start=7090)
-lm_autocompleter = PrefixLanguageModelAutocompleter(language_models=language_models)
+lm_autocompleter = SrilmLanguageModelAutocompleter(language_models=language_models, server_port_range_start=7090)
+# lm_autocompleter = PrefixLanguageModelAutocompleter(language_models=language_models)
 
 @app.route('/lm_autocomplete', methods=['GET'])
 def lm_interface():
@@ -60,9 +60,13 @@ def lm_interface():
     # if target_lang in lm_autocompleter.language_model_servers:
     target_prefix_raw = request.args.get('target_prefix', '')
     # TODO: use the wordpunce tokenizer obj with language param (if available)
+    # we should
     target_prefix = tokenizer(target_prefix_raw.strip().lower())
     source_segment_raw = request.args.get('source_segment', '')
-    source_segment = tokenizer(source_segment_raw.strip().lower())
+    # TODO: sometimes the capital letters help us -- i.e. when it's a proper noun
+    # for the capitalized tokens, we should have capitalized and uncapitalized versions
+    # or do this in the phrase table?
+    source_segment = tokenizer(source_segment_raw.strip())
 
     # TODO: parameterize source and target langs
     # TODO: the API to the various autocompleters must be consistent -- 'metric' doesn't always make sense
