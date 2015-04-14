@@ -59,7 +59,7 @@ class PrefixLanguageModelAutocompleter:
         return target_candidates
 
     # generate ranked completions given the source segment and the current target prefix
-    def get_ranked_completions(self, source_lang, target_lang, source_tokens=[], target_prefix=[], metric='logprob', add_oovs=False):
+    def get_ranked_completions(self, source_lang, target_lang, source_tokens=[], target_prefix=[], metric='logprob', add_oovs=False, filter=False):
         cands = self._generate_completion_candidates(source_lang, target_lang, source_tokens=source_tokens, add_oovs=add_oovs)
         lm_lookup_table = self.language_model_completers[target_lang]
 
@@ -67,24 +67,18 @@ class PrefixLanguageModelAutocompleter:
         # trim the target prefix to the last lm_order-1 tokens
         # all_possible_completions = OrderedDict(lm_lookup_table[tuple(target_prefix[-self.order-1:])])
 
-        # matched_completions = []
-        # for candidate in cands:
-        #     if candidate in all_possible_completions:
-        #         # append (cand, score)
-        #         matched_completions.append((candidate, all_possible_completions[candidate]))
+        if filter is True:
+            matched_completions = []
+            for candidate in cands:
+                if candidate in all_possible_completions:
+                    # append (cand, score)
+                    matched_completions.append((candidate, all_possible_completions[candidate]))
 
-        # sorted_completions = sorted(matched_completions, key=lambda u: u[1], reverse=True)
-        # END PHRASE TABLE FILTERING
+            sorted_completions = sorted(matched_completions, key=lambda u: u[1], reverse=True)
+            # END PHRASE TABLE FILTERING
+        else:
+            sorted_completions = list(lm_lookup_table[tuple(target_prefix[-self.order+1:])])
 
-        print('query prefix')
-        print(target_prefix[-self.order-1:])
-
-        # WORKING - backoff
-        # 10 bigrams
-        # 10 unigrams
-
-        # --> local trie of the whole vocab when the matches are empty
-        sorted_completions = list(lm_lookup_table[tuple(target_prefix[-self.order+1:])])
         return sorted_completions
 
 
