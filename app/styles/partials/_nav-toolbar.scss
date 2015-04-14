@@ -1,6 +1,5 @@
 $toolbar-color: #03A9F4;
 
-
 nav {
  background-color: $toolbar-color !important;
  a {
@@ -10,5 +9,20 @@ nav {
 
 .top-toolbar {
   background-color: $toolbar-color;
+}
+
+.handycat-toolbar-button {
+  // we need important here to override md styles
+  font-size: 22px !important;
+  margin-left: 8px;
+  margin-right: 8px;
+  i {
+//    color: #212121;
+    color: white;
+  }
+}
+
+.handycat-toolbar-padder {
+  margin-right: 6%;
 }
 
