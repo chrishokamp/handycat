@@ -20,7 +20,6 @@ angular.module('controllers')
 
     // these hotkeys are only available when the segment is active
     // they get deleted when the segment is not active
-
     var hotkeyConfigs = [{
       combo      : 'ctrl+enter',
       description: 'Finish a segment and move to the next one',
@@ -34,31 +33,6 @@ angular.module('controllers')
       }
     }];
 
-    // WORKING - dynamically populate this area for each segment
-    // user must click to populate
-    // Also look at how to log which options the user selects
-    // WORKING -- for any configuration, we have a set of translation providers
-    // if the APIs of the translation providers are the same, we can query them all at once
-    // querying the set of translation providers should be done on the backend, because we will
-    // also want to get the quality estimate of each candidate from a separate module
-    //$scope.sampleOptions = [
-    //  {'segment': 'Zweifellos gibt es geheime Schwarzmarktgruppen im Internet, die große Mühe geben, von Strafverfolgung versteckt zu bleiben',
-    //    'created': 'January 26, 2014',
-    //    'quality': 0.95,
-    //    'provider': 'Chris Hokamp'
-    //  },
-    //  {'segment': 'Zweifellos gibt es geheimere Schwarzmarkt-Gruppen im Internet, die große Mühe geben, Strafverfolgung verborgen bleiben.',
-    //    'created': 'August 26, 2013',
-    //    'quality': 0.8,
-    //    'provider': 'Microsoft Translator'
-    //  },
-    //  {'segment': 'Zweifellos gibt es geheimnisSchwarzMarktGruppen im Internet, die große Mühe geben, bleiben von Strafverfolgungs versteckt.',
-    //    'created': 'October 5, 2013',
-    //    'quality': 0.6,
-    //    'provider': 'Google Translate'
-    //  },
-    //];
-
     $scope.$watch(
       function() {
         return $scope.widgets.activeComponent
@@ -67,14 +41,22 @@ angular.module('controllers')
         $log.log($scope.widgets.activeComponent);
     });
 
+    // WORKING - dynamically populate the translation options for each segment
+    // user must click to populate
+    // Also look at how to log which options the user selects
+    // WORKING -- for any configuration, we have a set of translation providers
+    // if the APIs of the translation providers are the same, we can query them all at once
+    // querying the set of translation providers should be done on the backend, because we will
+    // also want to get the quality estimate of each candidate from a separate module
     $scope.$watch(
       function() {
         return $scope.isActive.active;
       },
       function(isActive) {
         if (isActive) {
+          // call the backend to get results from the user's translation resources
+          // check the (local) cache to see if we've already queried for this segment
           // query the user's translation resources for the translations for this segment
-          $log.log('scope activated');
           var d = new Date().toString();
           $scope.translationOptions = [
             {'segment': d + ' gibt es geheime Schwarzmarktgruppen im Internet, die große Mühe geben, von Strafverfolgung versteckt zu bleiben',

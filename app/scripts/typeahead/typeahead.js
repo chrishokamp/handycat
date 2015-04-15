@@ -33,8 +33,6 @@ angular.module('handycat.typeaheads')
               trieVocabCompleter(query)));
             return
           }
-          $log.log('remoteFilter');
-          $log.log('targetSegment: ' + $scope.targetSegment);
           if ($scope.targetSegment === undefined) {
             $scope.targetSegment = '';
           }
@@ -104,7 +102,7 @@ angular.module('handycat.typeaheads')
         $inputTextarea.data('atwho').controllers[""].setting.callbacks.filter = dummyFilter;
         $inputTextarea.data('atwho').controllers[""].setting.callbacks.remoteFilter = remoteFilter;
 
-        // you can add multiple triggers
+        // you can add multiple triggers for different typeahead functionalities
         //  .atwho({
         //  at: ":",
         //  data: ["+1", "-1", "smile"]

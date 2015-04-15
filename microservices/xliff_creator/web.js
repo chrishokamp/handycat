@@ -28,7 +28,6 @@ server.get('/create-xliff/:spec', function (req, res, next) {
   }
 
   var sourceText = req.params.sourceText;
-  console.log('sourceText: ' + sourceText.split('\n'));
 
   if (spec && spec === '1.2') {
     xliff = xliffCreator.createXlf1FromSourceText(sourceLang, targetLang, xliffCreator.parsers.splitLines(sourceText));
@@ -36,7 +35,6 @@ server.get('/create-xliff/:spec', function (req, res, next) {
     xliff = xliffCreator.createXlf2FromSourceText(sourceLang, targetLang, xliffCreator.parsers.splitLines(sourceText));
   }
 
-  console.log('XLIFF: ' + xliff);
   res.send(xliff);
   return next();
 });
