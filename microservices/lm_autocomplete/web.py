@@ -39,7 +39,7 @@ language_models = [
         'lang_code': 'es',
         'srilm_lm_file': '/home/chris/projects/angular/editor_components/microservices/lm_autocomplete/test_data/text_for_lm/nc.spanish.srilm.lm',
         'phrase_tables': {
-            ('de', 'en'): en_es_phrase_table
+            ('en', 'es'): en_es_phrase_table
         }
     },
     # {
@@ -66,10 +66,13 @@ lm_autocompleter = SrilmLanguageModelAutocompleter(language_models=language_mode
 
 @app.route('/lm_autocomplete', methods=['GET'])
 def lm_interface():
-    # TODO: required args: source_lang, target_lang, source_tokens
     # TODO: target_prefix is not required -- if it's empty, we'll assume that we're at the beginning of the sentence
     source_lang = request.args.get('source_lang', '')
     target_lang = request.args.get('target_lang', '')
+    # if this is lang+region style ISO code, filter to just lang
+    source_lang = source_lang.split('-')[0]
+    target_lang = target_lang.split('-')[0]
+
     # if target_lang in lm_autocompleter.language_model_servers:
     target_prefix_raw = request.args.get('target_prefix', '')
     # TODO: use the wordpunce tokenizer obj with language param (if available)
@@ -84,10 +87,10 @@ def lm_interface():
     # TODO: parameterize source and target langs
     # TODO: the API to the various autocompleters must be consistent -- 'metric' doesn't always make sense
     if len(target_prefix) >= 1:
-        ranked_completions = lm_autocompleter.get_ranked_completions('de', 'en',
+        ranked_completions = lm_autocompleter.get_ranked_completions(source_lang, target_lang,
                                                                      source_tokens=source_segment,
                                                                      target_prefix=target_prefix,
-                                                                     metric='ppl1', add_oovs=True)
+                                                                     metric='logprob', add_oovs=True)
     else:
         ranked_completions = []
 

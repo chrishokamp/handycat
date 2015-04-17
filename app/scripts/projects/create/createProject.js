@@ -167,7 +167,9 @@ angular.module('controllers')
         var readerProm = fileReader.readAsText(file);
 
         readerProm.then(
-          createFromRawText(rawText),
+          function(rawText) {
+            createFromRawText(rawText);
+          },
           function(err) {
             $log.error('Error reading local text file');
           }

@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "restify": "^2.8.4",
-    "node-xliff": "https://github.com/chrishokamp/node-xliff/archive/7bdc55dfa6440494050e4c5620af7c8f39742140.tar.gz"
+    "node-xliff": "chrishokamp/node-xliff"
   }
 }

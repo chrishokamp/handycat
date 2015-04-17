@@ -110,6 +110,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
     // this is a stub used as an interface -- a child directive may provide an implementation of queryGlossary
     // if there is no implementation, then this function does nothing
+    // currently this is used by the toolbar to interface with the sourceArea
     $scope.queryGlossary = function() {}
 
     // this fires once the view content has completely loaded

@@ -29,17 +29,16 @@ class MosesTriplePipeParser(PhraseTableParser):
             for entry in lists_of_units:
                 f_phrase = entry.popleft()
                 e_phrase = entry.popleft()
+                features = entry.popleft()
+
                 # currently unused -- need to pop so that they don't get added to the db row
-                counts = entry.pop()
-                alignment = entry.pop()
+                # counts = entry.pop()
+                # alignment = entry.pop()
                 # end unused
 
                 # split each field on whitespace except target -- there should be a name for every field
-                flattened = []
-                for section in entry:
-                    section = section
-                    flattened = flattened + re.split('\s+', section)
-                phrase_tuple = (f_phrase, e_phrase) + tuple([float(f) for f in flattened]) #TODO: hack
+                flattened = re.split('\s+', features)
+                phrase_tuple = (f_phrase, e_phrase) + tuple([float(f) for f in flattened])
                 assert len(self.phrase_object_keys) == len(phrase_tuple), 'the lens of keys and phrase_tuple must match'
                 phrase_obj = {k:v for k,v in zip(self.phrase_object_keys, phrase_tuple)}
                 # tokenize source and target, then rejoin, just so we don't get any weird stuff

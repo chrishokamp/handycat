@@ -23,6 +23,7 @@
     "passport-local": "*",
     "q": "^1.1.2",
     "redis": "^0.12.1",
+    "request": "^2.55.0",
     "underscore": "~1.5.2"
   },
   "devDependencies": {

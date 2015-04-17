@@ -151,11 +151,11 @@ module.exports = function (grunt) {
         }
       }
     },
-        open: {
-            server: {
-                url: 'http://localhost:<%= connect.options.port %>'
-            }
-        },
+    open: {
+      server: {
+        url: 'http://localhost:<%= connect.options.port %>'
+      }
+    },
     clean: {
       dist: {
         files: [{
@@ -174,6 +174,14 @@ module.exports = function (grunt) {
             'heroku/*',
             '!heroku/.git*',
             '!heroku/Procfile'
+          ]
+        }]
+      },
+      handycat_builds: {
+        files: [{
+          dot: true,
+          src: [
+            'handycat_builds/*',
           ]
         }]
       },
@@ -403,6 +411,39 @@ module.exports = function (grunt) {
           ]
         }]
       },
+      handycat_builds: {
+        // the frontend application
+        files: [{
+          expand: true,
+          dot: true,
+          dest: 'handycat_builds',
+          src: [
+            '<%= yeoman.dist %>/**',
+          ]
+        },
+        // the main express server
+        {
+          expand: true,
+          dest: 'handycat_builds',
+          src: [
+            'package.json',
+            'web.js',
+            'server/**/*'
+          ]
+        },
+        // the microservices
+        {
+          expand: true,
+          dest: 'handycat_builds',
+          src: [
+            // TODO: not .pyc
+            // TODO: maintain file structure
+            // TODO: each microservice should specify its deps in a requirements.txt
+            'microservices/lm_autocomplete/**/*.py',
+          ]
+        },
+      ]
+      },
       styles: {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
@@ -463,14 +504,14 @@ module.exports = function (grunt) {
       }
     },
     ngmin: {
-         dist: {
-             files: [{
-                 expand: true,
-                 cwd: '<%= yeoman.dist %>/scripts',
-                 src: '*.js',
-                 dest: '<%= yeoman.dist %>/scripts'
-             }]
-         }
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.dist %>/scripts',
+          src: '*.js',
+          dest: '<%= yeoman.dist %>/scripts'
+        }]
+      }
     },
     uglify: {
       files: [{
@@ -557,7 +598,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'concat',
-    'copy',
+    'copy:dist',
     'cdnify',
     'ngmin',
     'cssmin',
@@ -589,6 +630,12 @@ module.exports = function (grunt) {
     'build',
     'clean:heroku',
     'copy:heroku'
+  ]);
+
+  grunt.registerTask('handycat_builds', [
+    'build',
+    'clean:handycat_builds',
+    'copy:handycat_builds'
   ]);
 
   //installation-related

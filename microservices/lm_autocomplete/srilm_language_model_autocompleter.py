@@ -82,9 +82,16 @@ class SrilmLanguageModelAutocompleter:
                 stderr=subprocess.PIPE).communicate()
         os.remove(dump_file.name)
 
-        ordered_logprobs = self._parse_srilm_output(lm_client_output, metric=metric)
-        assert len(ordered_logprobs) == len(cands), "we must have a probability for every candidate"
-        sorted_completions = sorted(zip(cands, ordered_logprobs), key=lambda u: u[1], reverse=True)
+        # each entry is: (score, num_oovs)
+        ordered_logprobs_and_zeroprobs = self._parse_srilm_output(lm_client_output, metric=metric)
+        assert len(ordered_logprobs_and_zeroprobs) == len(cands), "we must have a probability for every candidate"
+        # sort by length (longest first)
+        length_sorted = sorted(zip(cands, ordered_logprobs_and_zeroprobs), key=lambda u: len(u[0]), reverse=True)
+        # first sort by score descending
+        score_sorted = sorted(length_sorted, key=lambda u: u[1][0], reverse=True)
+        # now sort by num oovs ascending
+        sorted_completions = sorted(score_sorted, key=lambda u: u[1][1], reverse=False)
+        print(sorted_completions)
         return sorted_completions
 
     @staticmethod
@@ -97,8 +104,12 @@ class SrilmLanguageModelAutocompleter:
         ppl1 does not include the end of sentence tag probability
         :return:
         """
+
+        # WORKING -- get num zeroprobs and do a secondary sort ascending on that field
+        print('srilm output')
+        print(srilm_output)
         assert metric == 'logprob' or metric == 'ppl1', 'the lm scoring metric must be \'logprob\' or \'ppl1\''
-        # SRILM prints one blank line at the end of the file, ignore it
+        # SRILM prints one blank line and an info snippet at the end of the file, ignore it
         output_lines = srilm_output.split('\n')[:-1]
 
         # each result is separated by one blank line
@@ -107,15 +118,18 @@ class SrilmLanguageModelAutocompleter:
         for i, l in enumerate(output_lines):
             if re.match("^$", l):
                 completion_scores = output_lines[i-1].split()
+                # the number of oovs in the segment -- first field, last line before the blank line
+                num_zeroprobs = output_lines[i-1].split()[0]
+                print('num_zeroprobs: ' + num_zeroprobs)
                 if metric == 'ppl1':
                     # the ppl1 (ppl without sentence ending is the last unit in the whitespace-delimeted last line
                     # higher ppl is worse, so lets make scores negative so we can sort the same way as with logprobs
                     ppl1 = -float(completion_scores[-1])
-                    ordered_logprobs.append(ppl1)
+                    ordered_logprobs.append((ppl1, num_zeroprobs))
                 else:
                     # the logprob is the fourth unit in the whitespace-delimeted last line
                     logprob = float(completion_scores[3])
-                    ordered_logprobs.append(logprob)
+                    ordered_logprobs.append((logprob, num_zeroprobs))
         return ordered_logprobs
 
 

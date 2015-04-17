@@ -38,7 +38,7 @@ class PrefixLanguageModelAutocompleter:
             self.language_model_completers[lm_lang] = lm_lookup_table
             self._phrase_tables = language_model_data['phrase_tables']
 
-    # TODO: move to LM autocompleter ABC
+    # TODO: move to LM autocompleter ABC as superclass for all LM autocompleters
     def _generate_completion_candidates(self, source_lang, target_lang, source_tokens=[], add_oovs=False, max_source_phrase_len=2):
         """
         use the source phrases to generate completion candidates for the language model
