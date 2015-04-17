@@ -164,6 +164,8 @@ var queryGlosbe = function (fromLang, toLang, queryString) {
     'en-US': 'eng',
     'en-us': 'eng',
     'de-DE': 'deu',
+    'es-ES': 'spa',
+    'es': 'spa',
     'de': 'deu'
   };
   if (langCodeMapping[toLang]) toLang = langCodeMapping[toLang];
