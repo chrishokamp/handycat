@@ -20,7 +20,7 @@ angular.module('directives')
                       + tok +
                  '</span>';
         });
-        var annotatedSentence = '<div class="annotated-source">' + tokenSpans.join(' ') + '</div>';
+        var annotatedSentence = '<div class="annotated-source">' + tokenSpans.join('') + '</div>';
 
         var compiledHTML = $compile(annotatedSentence)(scope);
         el.append(compiledHTML);
