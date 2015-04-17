@@ -4,16 +4,19 @@ from lm_autocomplete.phrase_table import PhraseTable
 from collections import defaultdict
 from blist import sortedlist
 
+# TODO: add gzip support
+
 # each key will have its phrases sorted (ascending) by the 'ef' key
 # TODO: the sort key is currently hard-coded
 def init_sorted_list():
-    return sortedlist([], lambda i: i['ef'])
+    return sortedlist([], lambda i: -i['ef'])
 
 
 class InMemoryPhraseTable(PhraseTable):
 
-    def __init__(self, phrase_objects, cutoff=None, max_source_len=None):
+    def __init__(self, phrase_objects, cutoff=None, max_source_len=None, max_entries=None):
         self.phrase_table = defaultdict(init_sorted_list)
+        self.max_entries = max_entries
         self._populate_pt(phrase_objects)
         self.cutoff = cutoff
         self.max_source_len = max_source_len
@@ -24,9 +27,18 @@ class InMemoryPhraseTable(PhraseTable):
     def _populate_pt(self, phrase_objects):
         for phrase_obj in phrase_objects:
             self.phrase_table[phrase_obj['source']].add(phrase_obj)
+            # prune if necessary
+            if self.max_entries is not None:
+                if len(self.phrase_table[phrase_obj['source']]) > self.max_entries:
+                    self.phrase_table[phrase_obj['source']] = self.phrase_table[phrase_obj['source']][:self.max_entries]
 
     def get_target_phrases(self, source_tokens):
         assert type(source_tokens) is list, 'the query to the InMemoryPhraseTable must be a list of tokens'
+
+        # provide the ability to constrain source phrase length
+        if self.max_source_len is not None:
+            if len(source_tokens) > self.max_source_len:
+                return []
 
         # provide the ability to constrain source phrase length
         if self.max_source_len is not None:
@@ -39,7 +51,6 @@ class InMemoryPhraseTable(PhraseTable):
 
         phrase_objs = self.phrase_table[source_phrase]
         if self.cutoff is not None:
-            # the fields are sorted ascending, so take the end
-            phrase_objs = phrase_objs[-self.cutoff:]
+            phrase_objs = phrase_objs[:self.cutoff]
         return phrase_objs
 

@@ -13,13 +13,17 @@ tokenizer = wordpunct_tokenize
 from lm_autocomplete.phrase_table.parsers.moses_triple_pipe_parser import MosesTriplePipeParser
 from lm_autocomplete.phrase_table.in_memory_phrase_table import InMemoryPhraseTable
 
-phrase_table_file = '/home/chris/projects/maxent_decoder/phrase_table/filtered_phrase_table'
+# TODO: read phrase_table location from configuration
+# phrase_table_file = '/home/chris/projects/maxent_decoder/phrase_table/filtered_phrase_table'
+# phrase_table_file = '/home/chris/projects/angular/editor_components/microservices/lm_autocomplete/test_data/phrase_tables/wmt-phrase-table.en-es.filtered'
+phrase_table_file = '/home/chris/projects/angular/editor_components/microservices/lm_autocomplete/test_data/phrase_tables/wmt-phrase-table.en-es.input-filtered'
 parser = MosesTriplePipeParser()
 phrase_objects = parser.parse(phrase_table_file)
 
 pt_cutoff = 5
 max_source_len = 3
-de_en_phrase_table = InMemoryPhraseTable(phrase_objects, cutoff=pt_cutoff, max_source_len=max_source_len)
+en_es_phrase_table = InMemoryPhraseTable(phrase_objects, cutoff=pt_cutoff, max_source_len=max_source_len, max_entries=5)
+# de_en_phrase_table = InMemoryPhraseTable(phrase_objects, cutoff=pt_cutoff, max_source_len=max_source_len, max_entries=5)
 
 # WORKING - test usage of the lm autocomplete lib
 from lm_autocomplete.prefix_language_model_autocompleter import PrefixLanguageModelAutocompleter
@@ -27,16 +31,25 @@ from lm_autocomplete.prefix_language_model_autocompleter import PrefixLanguageMo
 # language_models are [{'lang_code': <lang_code>, 'srilm_lm_file': <srilm_lm_file>,
 # 'phrase_tables': {(source_lang, target_lang): phrase_table}]
 
+# TODO: read this from configuration
 # TODO: we have multiple types of lms
 # To init lm servers via configuration, we need to name the lm types
 language_models = [
     {
-        'lang_code': 'en',
-        'srilm_lm_file': '/home/chris/projects/maxent_decoder/lm/europarl.srilm.gz',
+        'lang_code': 'es',
+        'srilm_lm_file': '/home/chris/projects/angular/editor_components/microservices/lm_autocomplete/test_data/text_for_lm/nc.spanish.srilm.lm',
         'phrase_tables': {
-            ('de', 'en'): de_en_phrase_table
+            ('de', 'en'): en_es_phrase_table
         }
     },
+    # {
+    #     'lang_code': 'en',
+    #     'srilm_lm_file': '/home/chris/projects/maxent_decoder/lm/europarl.srilm.gz',
+    #     'phrase_tables': {
+    #         ('de', 'en'): de_en_phrase_table
+    #     }
+    # },
+    # A simple prefix lm
     # {
     #     'lang_code': 'en',
     #     'order': 3,
