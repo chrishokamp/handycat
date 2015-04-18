@@ -39,6 +39,7 @@
              layout-fill
              ng-class="{pending: !(getSegmentState(id.index) === 'translated'), completed: getSegmentState(id.index) === 'translated'}"
              ng-controller="SegmentAreaCtrl"
+             ng-click="activate(id.index)"
              ng-repeat="seg in segments"
              end-repeat
              ng-init="segment = seg; init($index); id.index = $index;"
@@ -92,7 +93,7 @@
             <div flex
                  layout="column"
             >
-              <div class="bottom-margin content-card" ng-click="activate(id.index)">
+              <div class="bottom-margin content-card">
                   <div ng-show="segment.state === 'translated'" class="segment-finished">
                     <p>{{segment.target}}</p>
                   </div>

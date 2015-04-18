@@ -226,8 +226,11 @@ angular.module('controllers')
 
   // this is called when the user clicks anywhere in the segment area
   $scope.activate = function($index) {
-    $log.log('activate: ' + $index);
-    $scope.reopen($index);
+    // if the segment isn't already active
+    if (!$scope.isActive.active) {
+      $log.log('activate: ' + $index);
+      $scope.reopen($index);
+    }
   };
 
   // Re-opens a finished segment. Undoes what segmentFinished() did
