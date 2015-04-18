@@ -7,31 +7,54 @@ angular.module('directives')
         queryGlossary: '='
       },
       restrict: 'E',
-      link: function(scope,el,attrs){
+      link: function(scope,$el,attrs){
         // tokenize the source text
         var tokenStrings = tokenizer.tokenize(scope.sourceSentence);
 
         // give each token an id, and also move to dot notation
         // watch out for the crazy regex in the next line! - used to escape single quotes
+
+        // WORKING -- wrap known spans with the select-text directive
+        // uses the angular-select-text directive
         var tokenSpans =  _.map(tokenStrings, function(tok, index) {
           var tokNorm = tok.replace(/'/g, "\\'").replace('"', '');
-          return '<span class="source-token"' +
+          return '<span class="source-token" select-text ' +
                       'ng-click="askGlossary(\''+ tokNorm + '\')">'
                       + tok +
                  '</span>';
         });
+
         var annotatedSentence = '<div class="annotated-source">' + tokenSpans.join('') + '</div>';
 
         var compiledHTML = $compile(annotatedSentence)(scope);
-        el.append(compiledHTML);
+        $el.append(compiledHTML);
+
+        var getSelectedText = function() {
+          var text = "";
+          if (window.getSelection) {
+            text = window.getSelection().toString();
+          } else if (document.selection && document.slection.type != "Control") {
+            text = document.selection.createRange().text;
+          }
+          return text;
+        }
+
+        $el.on('mouseup', function(e) {
+          var selectedText = getSelectedText();
+          $log.log('selected text');
+          $log.log(selectedText);
+          // Working -- how to check if this is a word or phrase (not just part of one)
+        });
 
         // update source with new data
+        // this is currently used for linking source named entities
         scope.$on('update-source', function(e, data) {
           $log.log('update source fired');
           $log.log('event data');
           $log.log(data);
 
           // iterate over text and add markup to entity ranges, then $compile
+          // WORKING -- try the angular-set-text directive
           var text = scope.sourceSentence;
           var alreadyMarked = [];
           angular.forEach(data.entityData, function(resObj) {
@@ -45,7 +68,7 @@ angular.module('directives')
           });
           text = '<div>' + text + '</div>';
           var compiledHTML = $compile(text)(scope);
-          el.html(compiledHTML);
+          $el.html(compiledHTML);
 
         })
 
@@ -54,13 +77,13 @@ angular.module('directives')
       controller: function($scope) {
         $scope.setSurfaceForms = function(e) {
           var surfaceForm = $(e.target).text();
-          $log.log('target text is: ' + surfaceForm);
           $scope.$emit('find-surface-forms', { 'sf': surfaceForm });
         }
 
+
+
         // working -- call a function on the parent (the queryGlossary function passed into this component
         $scope.askGlossary = function(word) {
-          $log.log('ask glossary fired');
           $scope.queryGlossary(word);
         }
 

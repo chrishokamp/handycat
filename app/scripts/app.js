@@ -17,6 +17,7 @@ var App = window.App = angular.module('editorComponentsApp',
         'snap',
         'ngMaterial',
         'cfp.hotkeys',
+        'angular-select-text',
         'handycatConfig',
         'handycat.typeaheads',
         'handycat.trieAutocomplete'
