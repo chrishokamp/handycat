@@ -1,7 +1,7 @@
 import codecs
 import re
 from collections import deque
-from interactive_decoding.phrase_table.parsers import PhraseTableParser
+from lm_autocomplete.phrase_table.parsers import PhraseTableParser
 from nltk.tokenize import wordpunct_tokenize
 
 
