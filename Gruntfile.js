@@ -364,7 +364,8 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
 //                        'angular/**/*.html',
-            //'styles/**/*',
+            'styles/fonts/**/*',
+            'styles/img/**/*',
             'views/**/*',
             'data/**/*',
             'bower_components/sass-bootstrap/fonts/**/*',
@@ -606,7 +607,8 @@ module.exports = function (grunt) {
     'cdnify',
     'ngmin',
     'cssmin',
-    'uglify:dist',
+    // TODO: we need uglify to work
+    //'uglify:dist',
     'rev',
     'usemin',
     'ngtemplates'
@@ -639,6 +641,7 @@ module.exports = function (grunt) {
   grunt.registerTask('handycat_builds', [
     'build',
     'clean:handycat_builds',
+    'copy:dist',
     'copy:handycat_builds'
   ]);
 

@@ -52,17 +52,22 @@ if ('production' === env) {
   app.use(express.static(path.join(__dirname, 'dist')));
   app.set('views', __dirname + '/dist/views');
 
+  // TODO: if we are on heroku
   // setup the REDISTOGO connection on heroku - from https://devcenter.heroku.com/articles/nodejs-support
-  var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-  var redis = require("redis").createClient(rtg.port, rtg.hostname);
-  redis.auth(rtg.auth.split(":")[1]);
+  //var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+  //var redis = require("redis").createClient(rtg.port, rtg.hostname);
+  //redis.auth(rtg.auth.split(":")[1]);
 
-  var cache = require('express-redis-cache')({
-    client: redis
-  });
-  console.log('NODE_ENV: ' + process.env.NODE_ENV);
+  //var cache = require('express-redis-cache')({
+  //  client: redis
+  //});
+  //console.log('NODE_ENV: ' + process.env.NODE_ENV);
+
+  // TODO: if we are not on heroku
+  // setup the local redis cache
+  var cache = require('express-redis-cache')();
+
 }
-
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
