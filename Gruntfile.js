@@ -422,6 +422,7 @@ module.exports = function (grunt) {
           ]
         },
         // the main express server
+        // TODO: this is currently copying node_modules inside server/
         {
           expand: true,
           dest: 'handycat_builds',
@@ -440,6 +441,9 @@ module.exports = function (grunt) {
             // TODO: maintain file structure
             // TODO: each microservice should specify its deps in a requirements.txt
             'microservices/lm_autocomplete/**/*.py',
+            // TODO: right now we copy the test_data just for convenience
+            'microservices/lm_autocomplete/test_data/**/*.lm',
+            'microservices/lm_autocomplete/test_data/**/*input-filtered',
           ]
         },
       ]
