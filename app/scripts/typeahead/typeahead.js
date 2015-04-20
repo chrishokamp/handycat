@@ -3,8 +3,8 @@ angular.module('handycat.typeaheads', ['handycatConfig']);
 // an input area with one or more typeahead datasets enabled
 
 angular.module('handycat.typeaheads')
-  .directive('typeaheadEditor', ['$log', '$http', 'lmAutocompleterURL', 'vocabularyAutocompleter',
-    function($log, $http, lmAutocompleterURL, vocabularyAutocompleter) {
+  .directive('typeaheadEditor', ['$log', '$http', 'autocompleterURLs', 'vocabularyAutocompleter',
+    function($log, $http, autocompleterURLs, vocabularyAutocompleter) {
     return {
       scope: {
         'targetSegment': '=',
@@ -53,7 +53,7 @@ angular.module('handycat.typeaheads')
 
           var cursorPos = getCursorPosition();
           var queryPrefix = $scope.targetSegment.substring(0, cursorPos);
-          $http.get(lmAutocompleterURL,
+          $http.get(autocompleterURLs.lmAutocompleterURL,
             {
               params: {
                 target_prefix: queryPrefix,

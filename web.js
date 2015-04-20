@@ -314,7 +314,7 @@ app.post('/logger/:sessionId', function(req, res){
 // lm_autocompleter
 var request = require('request');
 var url = require('url');
-app.get('/lm_autocomplete', function(req,res) {
+app.get('/lm_autocomplete/constrained', function(req,res) {
   var url_parts = url.parse(req.url, true);
   var query_hash = url_parts.query;
 

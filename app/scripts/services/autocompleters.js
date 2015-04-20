@@ -1,5 +1,5 @@
 angular.module('services')
-.factory('autocompleters', ['$http', '$log', 'lmAutocompleterURL', function($http, $log, lmAutocompleterURL) {
+.factory('autocompleters', ['$http', '$log', 'autocompleterURLs', function($http, $log, autocompleterURLs) {
 
     // Working:
     // the server returns base URLs to endpoints that implement our autocomplete API
@@ -35,7 +35,7 @@ angular.module('services')
           callback(null, []);
           return
         }
-        $http.get(lmAutocompleterURL,
+        $http.get(autocompleterURLs.lmAutocompleterURL,
           {
             params: {
               prefix: prefix,

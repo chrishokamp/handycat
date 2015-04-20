@@ -1,7 +1,8 @@
 angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal',
-  '$log', 'SegmentOrder', 'editSession', '$mdBottomSheet', '$rootScope', 'Wikipedia', '$timeout', 'Projects', 'XliffParser', '$stateParams', '$q',
+  '$log', 'SegmentOrder', 'editSession', '$mdBottomSheet', '$rootScope', 'Wikipedia', '$timeout', 'Projects',
+  'XliffParser', 'autocompleterURLs', '$stateParams', '$q',
   function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, editSession, $mdBottomSheet, $rootScope, Wikipedia, $timeout,
-           Projects, XliffParser, $stateParams, $q) {
+           Projects, XliffParser, autocompleterURLs, $stateParams, $q) {
 
     // global user options (may be accessed or changed from child controllers)
     $scope.visible = {
@@ -35,7 +36,18 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
             $log.log('$scope.document loaded and parsed');
             $log.log('widget configuration: ');
             $log.log(projectResource.configuration);
-            $scope.widgetConfiguration = projectResource.configuration;
+            //$scope.widgetConfiguration = projectResource.configuration;
+            // configure the lm autocompleter URL based on the project config
+
+            // TODO: make sure that we can log which autocompleter we're using
+            if (projectResource.configuration) {
+              if (projectResource.configuration.target.widgets.constrainedLMAutocomplete === true) {
+                autocompleterURLs.lmAutocompleterURL = autocompleterURLs.constrainedLMAutocompleterURL;
+              } else {
+                autocompleterURLs.lmAutocompleterURL = autocompleterURLs.defaultLMAutocompleterURL;
+              }
+            }
+
             $scope.visible.projectLoading = false;
           },
           function(err) {

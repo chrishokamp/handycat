@@ -26,9 +26,22 @@ handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
 
 // the lm autocompleter URL
 //var lmAutocompleterURL = baseURL + ':8010/lm_autocomplete';
+// the two autocompleter types that we currently support
 
-var lmAutocompleterURL = 'lm_autocomplete';
-handyCATconfig.constant('lmAutocompleterURL', lmAutocompleterURL);
+//var lmAutocompleterURL = 'lm_autocomplete/constrained';
+var lmAutocompleterURL = 'lm_autocomplete/constrained';
+var levenshtalignerURL = 'http://127.0.0.1:5000/levenshtalign';
+handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
+
+var constrainedAutocompleterURL = 'lm_autocomplete/constrained';
+var defaultAutocompleterURL = 'lm_autocomplete/default';
+handyCATconfig.service('autocompleterURLs', function() {
+  // this may get overwritten in the app
+  this.lmAutocompleterURL = constrainedAutocompleterURL;
+  // these will be set as needed by injectors
+  this.constrainedLMAutocompleterURL = constrainedAutocompleterURL;
+  this.defaultLMAutocompleterURL = defaultAutocompleterURL;
+});
 
 // the languages that HandyCAT supports
 var supportedLangs = [

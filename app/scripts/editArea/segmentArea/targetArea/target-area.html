@@ -4,9 +4,7 @@
     <div flex ng-show="getSegmentState($index) === 'initial'" ng-click="activate($index)">
       <!--ALL TARGET AREA COMPONENTS BELONG HERE-->
 
-      <!--show this if project has widgetConfiguration.target.widgets.constrainedLMAutocomplete === true-->
       <div class="cssSlideUp"
-           ng-if="widgetConfiguration.target.widgets.constrainedLMAutocomplete === false"
            ng-show="widgets.activeComponent === 'lmAutocomplete'"
         >
         <typeahead-editor
