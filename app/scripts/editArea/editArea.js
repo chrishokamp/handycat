@@ -183,6 +183,12 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
         return
       }
 
+      // if this segment is already active
+      if ($scope.activeSegment === data.currentSegment) {
+        // do nothing
+        return;
+      }
+
       // activeSegment is an int id
       $scope.activeSegment = data.currentSegment
       var anchorElem = $('#segment-' + data.currentSegment);

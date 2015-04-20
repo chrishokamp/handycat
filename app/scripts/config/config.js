@@ -16,7 +16,8 @@ var concordancerURL = 'http://127.0.0.1:8899/concordancer';
 handyCATconfig.constant('concordancerURL', concordancerURL);
 
 // the Translation Memory (graphTM) URL
-var graphTMUrl = 'http://localhost:8899/tm';
+//var graphTMUrl = 'http://localhost:8899/tm';
+var graphTMUrl = 'tm';
 handyCATconfig.constant('graphTMUrl', graphTMUrl);
 
 // the levenshtaligner URL

@@ -1,6 +1,6 @@
 angular.module('directives').directive('toolbar',
-  ['$log', '$timeout', '$rootScope', 'TranslationMemory', 'Glossary', 'concordancer', '$q', '$sce', '$http',
-    function($log, $timeout, $rootScope, TranslationMemory, Glossary, concordancer, $q, $sce, $http) {
+  ['$log', '$timeout', '$rootScope', 'Glossary', 'concordancer', '$q', '$sce', '$http',
+    function($log, $timeout, $rootScope, Glossary, concordancer, $q, $sce, $http) {
   return {
     restrict: 'E',
     templateUrl: 'scripts/toolbar/toolbar.html',
@@ -39,9 +39,11 @@ angular.module('directives').directive('toolbar',
 
           // TODO: query all of the user's available translation resources
           $scope.currentSourceText = currentSourceText;
+
+          // TODO: bug in proxying TM -- commented
           // set a separate variable for the TM query so that the user can change it if they want to
-          $scope.tmQuery = currentSourceText;
-          $scope.queryTM($scope.tmQuery);
+          //$scope.tmQuery = currentSourceText;
+          //$scope.queryTM($scope.tmQuery);
         }
       )},0);
 

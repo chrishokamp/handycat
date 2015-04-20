@@ -29,17 +29,17 @@
                  target-lang="{{document.targetLang}}"
                  toolbar-showing="visible.toolbar"
                  ng-show="visible.toolbar"
-        ></toolbar>
+          ></toolbar>
         <!--END TOOLBAR-->
 
         <!-- repeat for each segment -->
         <!-- WORKING - the segment area is a container for widgets which provide styling, interactivity, and behavior on source and target sentences -->
+        <!--ng-click="activate(id.index)"-->
         <div class="segment"
              layout="column"
              layout-fill
              ng-class="{pending: !(getSegmentState(id.index) === 'translated'), completed: getSegmentState(id.index) === 'translated'}"
              ng-controller="SegmentAreaCtrl"
-             ng-click="activate(id.index)"
              ng-repeat="seg in segments"
              end-repeat
              ng-init="segment = seg; init($index); id.index = $index;"
@@ -59,47 +59,48 @@
               <md-radio-group
                 layout="row"
                 ng-model="widgets.activeComponent"
-              >
+                >
                 <md-radio-button value="lmAutocomplete" aria-label="Typeahead Editor">Typeahead Editor</md-radio-button>
                 <!--<md-radio-button value="translationSelector" aria-label="Translation Selector">Translation Selector</md-radio-button>-->
                 <!--<md-radio-button value="AceEditor"  aria-label="Editor">Editor</md-radio-button>-->
               </md-radio-group>
 
               <!--<span ng-show="translationsPending">retrieving translations<i class="ion-loading-c"></i></span>-->
-                <!--<span-->
-                  <!--ng-repeat="resource in translationResources"-->
-                  <!-->
-                  <!--<md-button ng-click="shared.setText(resource.target)">{{resource.provider}}</md-button>-->
-                <!--</span>-->
+              <!--<span-->
+              <!--ng-repeat="resource in translationResources"-->
+              <!-->
+              <!--<md-button ng-click="shared.setText(resource.target)">{{resource.provider}}</md-button>-->
+              <!--</span>-->
             </div>
             <!--END TRANSLATION COMPONENT SELECTOR-->
           </div>
 
           <!-- the source and target rows -->
+
           <div ng-class="{activeshadow: activeSegment === id.index}" layout="row" layout-padding class="bottom-margin">
             <div flex layout="column">
-              <div class="bottom-margin content-card">
-                  <div ng-show="segment.state === 'translated'" class="segment-finished">
-                    <p>{{segment.source}}</p>
-                  </div>
-                  <div ng-hide="segment.state === 'translated'">
-                    <source-area
-                      source-sentence="segment.source"
-                      query-glossary="queryGlossary"
-                      ></source-area>
-                  </div>
+              <div class="bottom-margin content-card" ng-click="activate(id.index)">
+                <div ng-show="segment.state === 'translated'" class="segment-finished">
+                  <p>{{segment.source}}</p>
+                </div>
+                <div ng-hide="segment.state === 'translated'">
+                  <source-area
+                    source-sentence="segment.source"
+                    query-glossary="queryGlossary"
+                    ></source-area>
+                </div>
               </div>
             </div>
 
             <div flex
                  layout="column"
-            >
-              <div class="bottom-margin content-card">
-                  <div ng-show="segment.state === 'translated'" class="segment-finished">
-                    <p>{{segment.target}}</p>
-                  </div>
+              >
+              <div class="bottom-margin content-card" ng-click="activate(id.index)">
+                <div ng-show="segment.state === 'translated'" class="segment-finished">
+                  <p>{{segment.target}}</p>
+                </div>
 
-                  <static-target text="{{segment.target}}"></static-target>
+                <static-target text="{{segment.target}}"></static-target>
 
               </div>
 
@@ -108,25 +109,26 @@
                 ng-show="isActive.active"
                 layout="row"
                 layout-align="end center"
-                clasy="segment-controls"
-              >
-                  <div>
-                    <md-button
-                      ng-click="segmentFinished(id.index)"
-                      ng-disabled="getSegmentState(id.index) === 'translated'"
-                      >
-                      <span class="glyphicon glyphicon-ok-sign"></span>
-                    </md-button>
-                  </div>
-                  <!--<div>-->
-                  <!--<md-button ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-remove"></span></md-button>-->
-                  <!--</div>-->
-                  <!--<div>-->
-                  <!--<md-button ng-click="clearEditor()" tooltip="undo" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-undo"></span></md-button>-->
-                  <!--</div>-->
-                  <!--<div>-->
-                  <!--<md-button ng-click="clearEditor()" tooltip="redo" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-undo"></span></md-button>-->
-                  <!--</div>-->
+                class="segment-controls"
+                >
+
+                <div>
+                  <md-button
+                    ng-click="segmentFinished(id.index)"
+                    ng-disabled="getSegmentState(id.index) === 'translated'"
+                    >
+                    <span class="glyphicon glyphicon-ok-sign"></span>
+                  </md-button>
+                </div>
+                <!--<div>-->
+                <!--<md-button ng-click="clearEditor()" tooltip="reject MT output" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-remove"></span></md-button>-->
+                <!--</div>-->
+                <!--<div>-->
+                <!--<md-button ng-click="clearEditor()" tooltip="undo" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-undo"></span></md-button>-->
+                <!--</div>-->
+                <!--<div>-->
+                <!--<md-button ng-click="clearEditor()" tooltip="redo" tooltip-placement="bottom" ng-disabled="segmentState.completed"><span class="glyphicon glyphicon-undo"></span></md-button>-->
+                <!--</div>-->
               </div>
             </div>
           </div>

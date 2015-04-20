@@ -97,6 +97,8 @@ angular.module('services')
 
         // stats
         // stores all the actions performed by the user in order
+        // WORKING -- create a flexible API for logging
+        // use decorators in a separate module to allow transparent logging on components
         log:[],
 
         updateStat: function(stat, segment, data) {

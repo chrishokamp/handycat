@@ -333,7 +333,33 @@ app.get('/vocablist/:lang', function(req,res) {
   request(newurl).pipe(res);
 });
 
+// graph tm
+//var graphTMUrl = 'http://localhost:8899/tm';
+//app.get('/tm', function(req,res) {
+//  var url_parts = url.parse(req.url, true);
+//  var query_hash = url_parts.query;
+//
+//  // TODO: read the microservice locations from config
+//  var newurl = 'http://localhost:8899/tm';
+//  request({url: newurl, qs: query_hash}).pipe(res);
+//});
+//app.post('/tm', function(req,res) {
+//  var newurl = 'http://localhost:8899/tm';
+//  console.log(req.body);
+//
+//  request({url: newurl, json: req.body}, function(err, remoteResponse, remoteBody) {
+//  if (err) { return res.status(500).end('Error'); }
+//    console.log(remoteResponse);
+//  //res.writeHead(...); // copy all headers from remoteResponse
+//  res.end(remoteBody);
+//});
+
+  // TODO: read the microservice locations from config
+  //var newurl = 'http://localhost:8899/tm';
+  //request({url: newurl, qs: query_hash}).pipe(res);
+//});
 // End microservice proxies
+
 
 //Bootstrap routes - remember that routes must be added after application middleware
 require('./server/config/routes')(app);

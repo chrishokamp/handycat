@@ -202,25 +202,26 @@ angular.module('controllers')
     // update the user's translation resources (update the TM)
     // what is the data model for a TM object { sourceLang: <sourceLang>, targetLang: <targetLang>, source: <source>, target: <target>, createdBy: <creator>, date: <date> }
     // a new TM object is (at least) two nodes, the source segment and the target segment, both containing fields for creator, date created
-    var newTMNodes = [
-        {'lang': $scope.document.sourceLang, 'segment': $scope.segment.source },
-        {'lang': $scope.document.targetLang, 'segment': $scope.segment.target },
-      ];
-
-    var transProm = $http({
-      url: graphTMUrl,
-      method: "POST",
-      data: {
-        'nodes': newTMNodes
-      }
-    });
-    transProm.then(
-      function (res) {
-        $log.log('translation memory updated, the new nodes: ');
-        $log.log(res);
-      }, function (err) {
-        $log.error('Error updating the translation memory');
-      })
+    // TODO: commented because there was an error proxying to the TM
+    //var newTMNodes = [
+    //    {'lang': $scope.document.sourceLang, 'segment': $scope.segment.source },
+    //    {'lang': $scope.document.targetLang, 'segment': $scope.segment.target },
+    //  ];
+    //
+    //var transProm = $http({
+    //  url: graphTMUrl,
+    //  method: "POST",
+    //  data: {
+    //    'nodes': newTMNodes
+    //  }
+    //});
+    //transProm.then(
+    //  function (res) {
+    //    $log.log('translation memory updated, the new nodes: ');
+    //    $log.log(res);
+    //  }, function (err) {
+    //    $log.error('Error updating the translation memory');
+    //  })
 
   }; // end segmentFinished
 
@@ -249,7 +250,7 @@ angular.module('controllers')
     if (data.currentSegment === $scope.id.index) {
       $log.log('segment: ' + $scope.id.index + ' --- heard changeSegment');
 
-      // tell the staticTarget directive to create the editor element
+      // tell the staticTarget directive to create the editing components
       $scope.$broadcast('activate');
 
       // make sure the segment state is reverted to 'initial'

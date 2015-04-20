@@ -9,7 +9,8 @@ var https = require("https");
 exports.getJSON = function(options, onResult, res)
 {
     console.log("rest::getJSON");
-  // TODO: trying to pass error back to client
+    // error placeholder
+    var err = null;
 
     var prot = options.port == 443 ? https : http;
 	var req = prot.request(options, function(jsonRes)
