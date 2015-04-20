@@ -17,6 +17,7 @@ from lm_autocomplete.phrase_table.in_memory_phrase_table import InMemoryPhraseTa
 # phrase_table_file = '/home/chris/projects/maxent_decoder/phrase_table/filtered_phrase_table'
 # phrase_table_file = '/home/chris/projects/angular/editor_components/microservices/lm_autocomplete/test_data/phrase_tables/wmt-phrase-table.en-es.filtered'
 phrase_table_file = '/home/chris/projects/angular/editor_components/microservices/lm_autocomplete/test_data/phrase_tables/wmt-phrase-table.en-es.input-filtered'
+# /home/ubuntu/handycat_builds/microservices
 parser = MosesTriplePipeParser()
 phrase_objects = parser.parse(phrase_table_file)
 
@@ -38,6 +39,7 @@ language_models = [
     {
         'lang_code': 'es',
         'srilm_lm_file': '/home/chris/projects/angular/editor_components/microservices/lm_autocomplete/test_data/text_for_lm/nc.spanish.srilm.lm',
+        # /home/ubuntu/handycat_builds/microservices
         'phrase_tables': {
             ('en', 'es'): en_es_phrase_table
         }

@@ -14,9 +14,12 @@ angular.module('handycat.trieAutocomplete')
 // here results will be an array of key-value pairs
 //    console.dir(results)
 
+    //TODO: parameterize this, call and resolve the service (return new promise), when a project gets opened
+    var targetLang = 'es';
     var autocompleteDeferred = $q.defer();
     // grab the vocabulary from a url
-    $http.get(vocablistURL)
+    // TODO: the language code is hard-coded
+    $http.get(vocablistURL + '/' + targetLang)
       .then(
         function(res) {
           var vocabList = res.data;

@@ -1,15 +1,15 @@
-# build handycat
-grunt handycat_builds
-tar kczf handycat_test_build.20.4.15.tar.gz handycat_builds 
-scp -r -i /home/chris/amazon_aws/aws-handycat.pem handycat_test_build.20.4.15.tar.gz ubuntu@ec2-52-28-61-16.eu-central-1.compute.amazonaws.com:~
+# build handycat -- LOCAL
+#grunt handycat_builds
+#tar kczf handycat_test_build.20.4.15.tar.gz handycat_builds 
+#scp -r -i /home/chris/amazon_aws/aws-handycat.pem handycat_test_build.20.4.15.tar.gz ubuntu@ec2-52-28-61-16.eu-central-1.compute.amazonaws.com:~
 
 # untar on remote
 tar xzf handycat_test_build*.tar.gz
 
 # clone/copy the handycat (pre-built) distribution
 # TODO: This is done from the LOCAL MACHINE -- do this before the setup script
-HANDYCAT_BUILD_DIR=/home/chris/projects/angular/editor_components/handycat_builds
-scp -r -i /home/chris/amazon_aws/aws-handycat.pem -r $HANDYCAT_BUILD_DIR ubuntu@ec2-52-28-61-16.eu-central-1.compute.amazonaws.com:~
+#HANDYCAT_BUILD_DIR=/home/chris/projects/angular/editor_components/handycat_builds
+#scp -r -i /home/chris/amazon_aws/aws-handycat.pem -r $HANDYCAT_BUILD_DIR ubuntu@ec2-52-28-61-16.eu-central-1.compute.amazonaws.com:~
 # OR -- tar the build dir from grunt
 #tar kcf handycat_builds
 #scp -r -i /home/chris/amazon_aws/aws-handycat.pem handcat_test_build.19.4.14.tar ubuntu@ec2-52-28-61-16.eu-central-1.compute.amazonaws.com:~
@@ -44,7 +44,6 @@ pip install -r python_library_requirements.txt
 # install node and npm
 ./install_node_and_npm.sh
 
-
 # run npm install for the express backend - TODO: or package deps in the build??
 #cd to handycat_builds install location
 npm install
@@ -61,7 +60,17 @@ scp -r -i /home/chris/amazon_aws/aws-handycat.pem -r  ubuntu@ec2-52-28-61-16.eu-
 
 # TODO: seperate local config listing the location of all data, scp over to the server
 
-# run npm install for all node microservices
+# WORKING -- run npm install for all node microservices
+for dir in `ls $YOUR_TOP_LEVEL_FOLDER`;
+do
+  for subdir in `ls $YOUR_TOP_LEVEL_FOLDER/$dir`;
+    do
+      # check if dir has a package.json
+      # if it does, do `npm install`
+      $(PLAY AS MUCH AS YOU WANT);
+    done
+done
+
 
 # install pm2, 
 
@@ -85,6 +94,9 @@ HANDYCAT_MICROSERVICE_HOME=
 # start the lm autocomplete service
 python web.py
 
+
+# make sure any previous servers are dead
+killall -9 node
 
 # running node
 # reroute 5002 to 80 (so we can avoid using sudo)

@@ -42,9 +42,10 @@ angular.module('handycat.typeaheads')
           // hack - if the query is not empty (if this is not a space character)
           //  return the cached response with the local autocomplete results for the prefix
           if (query !== '') {
+            $log.log('query is: ' + query);
             callback(cachedResponse.concat(
               trieVocabCompleter(query)));
-            return
+            return;
           }
           if ($scope.targetSegment === undefined) {
             $scope.targetSegment = '';
@@ -106,8 +107,8 @@ angular.module('handycat.typeaheads')
             // TODO: fix the trigger so that this works inside words
             trieVocabCompleter = function(query) {
               $log.log('autocompleter');
-              $log.log(autocompleter.search('ap'));
-              return autocompleter.search('ap').map(function(item) {
+              $log.log(autocompleter.search(query));
+              return autocompleter.search(query).map(function(item) {
                 return item.value;
               });
             }

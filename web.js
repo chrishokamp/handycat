@@ -278,16 +278,6 @@ var glossaryWordList = function(req,res) {
 app.get('/glossary/segment/:phrase', cache.route(), glossaryWordList);
 app.get('/glossary/word/:word', cache.route(), askGlossary);
 
-// WORKING - prototype the vocab list server
-app.get('/vocablist', function(req, res){
-  //var sessionId = req.param('sessionId');
-  //console.log('posting to /logger/:sessionId with id ' + sessionId);
-  //console.log(sessionId);
-  var fakeRes = ['fruit', 'app', 'apple', 'banana'];
-  console.log('returning vocab:');
-  console.log(fakeRes);
-  res.send(['fruit', 'app', 'apple', 'banana']);
-});
 
 // This is for the entity linker demo
 // TODO: move this to a plugin
@@ -324,17 +314,26 @@ app.post('/logger/:sessionId', function(req, res){
 var request = require('request');
 var url = require('url');
 app.get('/lm_autocomplete', function(req,res) {
-  console.log('autocomplete');
   var url_parts = url.parse(req.url, true);
   var query_hash = url_parts.query;
-  console.log('query part:');
-  console.log(query_hash);
 
   // TODO: read the microservice locations from config
   var newurl = 'http://localhost:8010/lm_autocomplete';
   request({url: newurl, qs: query_hash}).pipe(res);
 });
 
+// vocablist
+// proxy to the vocab list server/:langn
+app.get('/vocablist/:lang', function(req,res) {
+  var lang = req.params.lang.toString().trim();
+  console.log('lang: ' + lang);
+  // TODO: read the microservice locations from config
+  // TODO: why doesn't localhost work with restify?
+  var newurl = 'http://0.0.0.0:8082/vocablist/' + lang;
+  request(newurl).pipe(res);
+});
+
+// End microservice proxies
 
 //Bootstrap routes - remember that routes must be added after application middleware
 require('./server/config/routes')(app);
