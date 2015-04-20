@@ -1,0 +1,7 @@
+nltk  
+flask
+flask-cors  
+blist
+
+
+    
