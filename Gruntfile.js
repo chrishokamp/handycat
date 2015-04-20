@@ -446,6 +446,7 @@ module.exports = function (grunt) {
             'microservices/lm_autocomplete/test_data/**/*.lm',
             'microservices/lm_autocomplete/test_data/**/*input-filtered',
             'microservices/xliff_creator/**/*',
+            'microservices/vocabulary_server/**/*.{js,json}',
           ]
         },
       ]

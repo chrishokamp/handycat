@@ -1,5 +1,5 @@
 // Working - provide the ectaco dictionary from this service
-angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', function($http,baseUrl,$log) {
+angular.module('services').factory('Glossary', [ '$http', 'glossaryURL', '$log', function($http, glossaryURL, $log) {
 
   //development
   // the ectaco german dictionary
@@ -7,9 +7,7 @@ angular.module('services').factory('Glossary', [ '$http', 'baseUrl', '$log', fun
 //  var glossaryFile = 'data/ectaco-en-pos-de.tsv';
 
   // the glossary server - make sure the node server is running from server/
-  //var baseUrl = 'http://localhost:5002';
-  var urlPrefix = '/glossary/word/';
-  var glossaryUrl = baseUrl + urlPrefix;
+  var glossaryUrl = glossaryURL + '/word/';
 
   // Note: a glossary is for LOOKUP, not autocomplete
   var Glossary = {

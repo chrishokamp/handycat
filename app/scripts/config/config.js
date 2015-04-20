@@ -26,7 +26,6 @@ handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
 // the lm autocompleter URL
 //var lmAutocompleterURL = baseURL + ':8010/lm_autocomplete';
 
-// TODO: proxy through express
 var lmAutocompleterURL = 'lm_autocomplete';
 handyCATconfig.constant('lmAutocompleterURL', lmAutocompleterURL);
 
@@ -40,4 +39,10 @@ handyCATconfig.constant('supportedLangs', supportedLangs);
 
 var vocablistURL = 'vocablist';
 handyCATconfig.constant('vocablistURL', vocablistURL);
+
+var wikipediaURL = 'wikipedia';
+handyCATconfig.constant('wikipediaURL', wikipediaURL);
+
+var glossaryURL = 'glossary';
+handyCATconfig.constant('glossaryURL', glossaryURL);
 

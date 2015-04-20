@@ -2,12 +2,11 @@
 // a sample query
 // http://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch="indubitably"&srprop=snippet
 
-angular.module('services').factory('Wikipedia', ['$http', '$rootScope', 'baseUrl', '$log', '$sce',
-  function($http, $rootScope, baseUrl, $log, $sce) {
+angular.module('services').factory('Wikipedia', ['$http', '$rootScope', '$log', '$sce', 'wikipediaURL',
+  function($http, $rootScope, $log, $sce, wikipediaURL) {
 
   // the query url: 'http://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=snippet';
-  var urlPrefix = '/wikipedia';
-  var concordanceUrl = baseUrl + urlPrefix;
+  var concordanceUrl = wikipediaURL;
 
   var maxResults = 4;
 

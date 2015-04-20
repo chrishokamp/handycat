@@ -44,6 +44,9 @@ pip install -r python_library_requirements.txt
 # install node and npm
 ./install_node_and_npm.sh
 
+# install any global node deps
+npm install -g forever
+
 # run npm install for the express backend - TODO: or package deps in the build??
 #cd to handycat_builds install location
 npm install
@@ -102,3 +105,4 @@ killall -9 node
 # reroute 5002 to 80 (so we can avoid using sudo)
 sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 5002
 
+forever start -a -l ~/logs/forever.log -o ~/logs/out.log -e ~/logs/err.log --sourceDir ~/handycat_builds/ web.js

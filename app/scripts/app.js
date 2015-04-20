@@ -110,14 +110,6 @@ var App = window.App = angular.module('editorComponentsApp',
 //  $locationProvider.html5Mode(true);
 })
 
-// heroku
-//.constant('baseUrl', 'http://protected-crag-2517.herokuapp.com/glossary');
-
-
-// panacea
-//.constant('baseUrl', 'http://panaceadcu.dh.bytemark.co.uk:5002')
-
-
 // Allow CORS
   .config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
@@ -156,17 +148,7 @@ var App = window.App = angular.module('editorComponentsApp',
   ]);
 }])
 
-//  App.provider('baseUrl', function() {
-//    return {
-//      $get: function() {
-//        $log.log('inside config, $location.absUrl: ' + $location.absUrl());
-//        $log.log('inside config, $location.host: ' + $location.host());
-//        return 'http://protected-crag-2517.herokuapp.com/glossary';
-//      }
-//    }
-//  });
-
-// check window.location to see where we are, and set the baseUrl accordingly
+// check window.location to see where we are
   .run(['$location', '$rootScope', 'Auth', '$state', '$stateParams', '$log',
     function($location, $rootScope, Auth, $state, $stateParams, $log) {
       //watching the value of the currentUser variable.

@@ -54,13 +54,14 @@
             <!--TRANSLATION COMPONENT SELECTOR-->
             <!-- WORKING - the button group lets the user select which component is currently showing -->
             <!-- WORKING - components are directives which are databound to the segment object (or its properties)-->
+            <!--WORKING - hard coding here, and in target-area is confusing, these components should only be specified in one place-->
             <div flex class="translation-buttons" ng-show="isActive.active">
               <md-radio-group
                 layout="row"
                 ng-model="widgets.activeComponent"
               >
                 <md-radio-button value="lmAutocomplete" aria-label="Typeahead Editor">Typeahead Editor</md-radio-button>
-                <md-radio-button value="translationSelector" aria-label="Translation Selector">Translation Selector</md-radio-button>
+                <!--<md-radio-button value="translationSelector" aria-label="Translation Selector">Translation Selector</md-radio-button>-->
                 <!--<md-radio-button value="AceEditor"  aria-label="Editor">Editor</md-radio-button>-->
               </md-radio-group>
 
