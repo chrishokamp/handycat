@@ -25,12 +25,17 @@ angular.module('controllers')
         }
       });
 
+      // WORKING -- add widget configuration to the project
+      var widgetConfig = {'target': {'widgets': {'constrainedLMAutocomplete': true}}};
+      //var widgetConfig = {'target': {'widgets': {'defaultLMAutocomplete': true}}};
+
       var newProject = function (name, pendingDocument, sourceLang, targetLang) {
         var newProject = new Projects({
           name: $scope.name,
           content: XliffParser.getDOMString(pendingDocument),
           sourcelang: sourceLang,
-          targetlang: targetLang
+          targetlang: targetLang,
+          configuration: widgetConfig
         })
         return newProject;
       }

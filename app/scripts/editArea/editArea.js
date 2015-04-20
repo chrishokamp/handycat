@@ -28,14 +28,14 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
         XliffParser.parseXML(projectResource.content).then(
           function(documentObj) {
             $scope.document = documentObj;
-            $log.log('document on scope');
-            $log.log(documentObj);
-            $log.log($scope.document);
             docDeferred.resolve();
 
             // The segment exchange format (in document.segments) is:
 //          var segPair = { source: sourceText, target: targetText, sourceDOM: seg[0],targetDOM: seg[1]};
             $log.log('$scope.document loaded and parsed');
+            $log.log('widget configuration: ');
+            $log.log(projectResource.configuration);
+            $scope.widgetConfiguration = projectResource.configuration;
             $scope.visible.projectLoading = false;
           },
           function(err) {

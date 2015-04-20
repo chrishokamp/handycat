@@ -23,6 +23,10 @@ var ProjectSchema = new Schema({
     type: String,
     default: ''
   },
+  // The UI configuration for this project
+  // What widgets are available, what data resources are accessible?
+  // the mixed type lets you put anything in this field
+  configuration: Schema.Types.Mixed,
   // the state of the project - TODO: add metadata about the user's position in the  and performance
   // TODO: the state of the project can be determined programatically from the XLIFF's contents, this is the correct way to check
   state: {
