@@ -318,6 +318,24 @@ app.post('/logger/:sessionId', function(req, res){
 //  res.send({ "logged": true });
 });
 
+// WORKING -- proxy microservice routes
+
+// lm_autocompleter
+var request = require('request');
+var url = require('url');
+app.get('/lm_autocomplete', function(req,res) {
+  console.log('autocomplete');
+  var url_parts = url.parse(req.url, true);
+  var query_hash = url_parts.query;
+  console.log('query part:');
+  console.log(query_hash);
+
+  // TODO: read the microservice locations from config
+  var newurl = 'http://localhost:8010/lm_autocomplete';
+  request({url: newurl, qs: query_hash}).pipe(res);
+});
+
+
 //Bootstrap routes - remember that routes must be added after application middleware
 require('./server/config/routes')(app);
 
