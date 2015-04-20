@@ -1,0 +1,14 @@
+{
+  "name": "vocablist_webservice",
+  "version": "0.0.1",
+  "description": "serve json vocablists given language keys",
+  "main": "web.js",
+  "scripts": {
+    "test": "jasmine-node tests/"
+  },
+  "author": "chrishokamp",
+  "license": "ISC",
+  "dependencies": {
+    "restify": "^2.8.4"
+  }
+}
