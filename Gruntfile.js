@@ -445,6 +445,7 @@ module.exports = function (grunt) {
             // TODO: right now we copy the test_data just for convenience
             'microservices/lm_autocomplete/test_data/**/*.lm',
             'microservices/lm_autocomplete/test_data/**/*input-filtered',
+            'microservices/xliff_creator/**/*',
           ]
         },
       ]

@@ -144,13 +144,18 @@ app.get('/wikipedia/:lang', function(req, res){
     method: 'GET'
   };
   getJSON.getJSON(options,
-	function(result) {
-		var searchResults = result.query.search;
- 		res.json(searchResults);
-	});
+    function(err, result) {
+      if (err) {
+        res.status(404)
+        res.send();
+      }
+      var searchResults = result.query.search;
+      res.json(searchResults);
+    },
+    res
+  );
 
 });
-
 
 // TODO: WORKING - the glossary route should be an interface to all of the user's glossaries
 // add a route to query glosbe as a glossary
@@ -159,7 +164,10 @@ app.get('/wikipedia/:lang', function(req, res){
 
 // TODO: glosbe returns html on error -- handle that case
 var q = require('q');
-var queryGlosbe = function (fromLang, toLang, queryString) {
+var queryGlosbe = function (fromLang, toLang, queryString, res) {
+  console.log('res');
+  console.log(res);
+  console.log('query glosbe with: ' + queryString);
 
   var deferred = q.defer();
   // TODO: add a full language code mapping/conversion utility that covers most lang-code conventions
@@ -192,7 +200,11 @@ var queryGlosbe = function (fromLang, toLang, queryString) {
   };
   // TODO: use the requests library for this
   getJSON.getJSON(options,
-    function (result) {
+    function (err, result) {
+      if (err) {
+        deferred.reject(err);
+        return;
+      }
       var matches = result.tuc.map(
         function (glossaryObj) {
           // parse the results here
@@ -216,7 +228,9 @@ var queryGlosbe = function (fromLang, toLang, queryString) {
         return unique[i.text];
       })
       deferred.resolve(matches);
-    });
+    },
+    res
+  );
   return deferred.promise;
 }
 
@@ -225,7 +239,7 @@ var askGlossary = function(req,res) {
   var fromLang = req.query.sourceLang;
   var toLang = req.query.targetLang;
   var queryString = req.params.word.toString().trim();
-  var glossaryPromise = queryGlosbe(fromLang, toLang, queryString);
+  var glossaryPromise = queryGlosbe(fromLang, toLang, queryString, res);
   glossaryPromise.then(
     function(matches) {
       res.json(matches);
@@ -243,15 +257,19 @@ var glossaryWordList = function(req,res) {
   var tokens = tokenizer.tokenize(phrase);
   console.log(tokens);
 
-
   // call queryGlosbe for every token
   // wait till every promise resolves
   var allQueries = tokens.map(function(token) {
-    return queryGlosbe(sourceLang, targetLang, token);
+    return queryGlosbe(sourceLang, targetLang, token, res);
   });
+  // TODO: this isn't handling errors correctly
   q.all(allQueries).then(
     function(allResults) {
       res.json(_.flatten(allResults));
+    },
+    function(err) {
+      res.status(404);
+      res.json('error');
     }
   );
 

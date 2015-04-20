@@ -5,6 +5,9 @@
 
 var handyCATconfig = angular.module('handycatConfig', []);
 
+// TODO: -- this is a quick hack
+var baseURL = 'h'
+
 var xliffCreatorUrl = 'http://localhost:8080/create-xliff/1.2'
 handyCATconfig.constant('xliffCreatorUrl', xliffCreatorUrl);
 
