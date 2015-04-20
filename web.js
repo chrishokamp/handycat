@@ -165,9 +165,10 @@ app.get('/wikipedia/:lang', function(req, res){
 // TODO: glosbe returns html on error -- handle that case
 var q = require('q');
 var queryGlosbe = function (fromLang, toLang, queryString, res) {
-  console.log('res');
-  console.log(res);
-  console.log('query glosbe with: ' + queryString);
+  // lowercase query
+  queryString = queryString.toLowerCase();
+
+  console.log('query glosbe with (lowercased): ' + queryString);
 
   var deferred = q.defer();
   // TODO: add a full language code mapping/conversion utility that covers most lang-code conventions

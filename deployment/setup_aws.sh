@@ -16,6 +16,7 @@
 # TODO: not tested
 #ubuntu@ip-172-31-1-100:~/handycat_builds/microservices$ echo "export PYTHONPATH=`pwd`:\$PYTHONPATH" >> ~/.bashrc
 #ubuntu@ip-172-31-1-100:~/handycat_builds/microservices$ source ~/.bashrc
+echo 'export NODE_ENV=production' >> ~/.bashrc
 
 sudo apt-get update
 

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('services')
-  .factory('Auth', ['$location', '$rootScope', 'Session', 'User', '$cookieStore', '$http', 'Base64', '$log',
-    function Auth($location, $rootScope, Session, User, $cookieStore, $http, Base64, $log) {
+  .factory('Auth', ['$rootScope', 'Session', 'User', '$cookieStore', '$http', 'Base64', '$log',
+    function Auth($rootScope, Session, User, $cookieStore, $http, Base64, $log) {
       $rootScope.currentUser = $cookieStore.get('user') || null;
       $cookieStore.remove('user');
 
