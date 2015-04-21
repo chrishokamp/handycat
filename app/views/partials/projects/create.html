@@ -78,12 +78,16 @@
       <!--</div>-->
       <!--<md-divider></md-divider>-->
 
-      <div>Choose A Testing File</div>
-        <a ng-repeat='testfile in sampleFiles'
-           ng-click="createFromURL(testfile.url, testfile.name, testfile.configuration)">
-          {{$index}}: {{testfile.name}}
-        </a>
-      </div>
+    <div>Choose A Testing File</div>
+
+    <div ng-repeat='testfile in sampleFiles'>
+      <a
+         ng-click="createFromURL(testfile.url, testfile.name, testfile.configuration)">
+        {{$index}}: {{testfile.name}}
+      </a>
+      <md-divider></md-divider>
+    </div>
+    </div>
     </div><!-- end upload area -->
   </md-content>
 </md-dialog>
