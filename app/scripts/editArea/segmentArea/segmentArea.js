@@ -4,11 +4,10 @@ angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'TranslationMemory', 'Wikipedia',
   'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'editSession',
-  'Logger', 'Projects', 'XliffParser', 'graphTMUrl', 'hotkeys', '$http',
+  'Logger', 'Projects', 'XliffParser', 'graphTMUrl', 'hotkeys', 'editSession', '$http',
   function($rootScope, $scope, TranslationMemory, Wikipedia,
            Glossary, $log, ruleMap, copyPunctuation, Session,
-           Logger, Projects, XliffParser, graphTMUrl, hotkeys, $http) {
-
+           Logger, Projects, XliffParser, graphTMUrl, hotkeys, editSession, $http) {
 
     // this object tells us which translation widgets are available to the user
     $scope.widgets = {
@@ -172,17 +171,36 @@ angular.module('controllers')
     $log.log("SEGMENT FINISHED - segId is: " + segId);
     $scope.setSegmentState('translated');
     $scope.isActive.active = false;
-    // del the keyboard shortcuts
 
-    // configure the keyboard shortcuts
-    // You can pass it an object.  This hotkey will not be unbound unless manually removed
-    // using the hotkeys.del('ctrl+enter') method
-
+    // del the keyboard shortcuts on this segment
     hotkeyConfigs.forEach(
       function(hotkeyConfig) {
         hotkeys.del(hotkeyConfig.combo);
       }
     );
+
+    // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
+    var timestamp = new Date().getTime();
+    var logData = {
+      'segmentId': segId,
+      'time': timestamp,
+      'user': {
+        '_id': $scope.currentUser.userId,
+        'name': $scope.currentUser.username
+      },
+      'project': {
+        'name': $scope.projectResource.name,
+        '_id' : $scope.projectResource._id
+      },
+      'action': 'segment-complete',
+      'data': {
+        'segmentId': segId,
+        'previousValue': $scope.segment.targetDOM.textContent,
+        'newValue': $scope.segment.target
+      }
+    }
+    editSession.updateStat(logData);
+
     // Update the current segment in the XLIFF DOM
     // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
     // Right now, we depend on $scope.segment.targetDOM.textContent and $scope.segment.target being manually synced
@@ -231,12 +249,34 @@ angular.module('controllers')
     if (!$scope.isActive.active) {
       $log.log('activate: ' + $index);
       $scope.reopen($index);
+
+      // log the activation
+      // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
+      var timestamp = new Date().getTime();
+      var logData = {
+        'segmentId': $index,
+        'time': timestamp,
+        'user': {
+          '_id': $scope.currentUser.userId,
+          'name': $scope.currentUser.username
+        },
+        'project': {
+          'name': $scope.projectResource.name,
+          '_id' : $scope.projectResource._id
+        },
+        'action': 'segment-complete',
+        'data': {
+          'segmentId': segId,
+          'currentValue': $scope.segment.target
+        }
+      }
+      editSession.updateStat(logData);
+
     }
   };
 
   // Re-opens a finished segment. Undoes what segmentFinished() did
   // TODO: we should only show the 'SAVE' (checkmark) button once the user has actually edited something (they shouldn't need to click 'check' again)
-  // TODO: in reopen, the editing components have already been created, so we need to avoid doing that again to be more efficient
   $scope.reopen = function(idx) {
     $log.log('REOPEN');
     Session.setSegment(idx);

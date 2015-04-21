@@ -1,17 +1,13 @@
 // This service should only be for logging -- anything specific to editing a particular XLIFF should be on the EditArea/ContentArea Controllers
 
 angular.module('services')
-.factory('editSession', ['loggerUrl', 'SegmentOrder', '$http', '$rootScope', '$log',
-    function(loggerUrl, SegmentOrder, $http, $rootScope, $log) {
+.factory('editSession', ['loggerURL', 'SegmentOrder', '$http', '$rootScope', '$log',
+    function(loggerURL, SegmentOrder, $http, $rootScope, $log) {
 // see http://stackoverflow.com/questions/22537311/angular-ui-router-login-authentication
 // shows how to do authentication with ui-router
-      var logUrl = loggerUrl + '/logger';
+      var logUrl = loggerURL;
 
       return {
-        userId: 0,
-        sessionId: undefined,
-        sessionIdShort: undefined,
-        sessionPromise: undefined,
 
         // TODO: this function was previously called from the XliffParser
         // TODO: we want to be able to replay every action taken by the user
@@ -101,18 +97,19 @@ angular.module('services')
         // use decorators in a separate module to allow transparent logging on components
         log:[],
 
-        updateStat: function(stat, segment, data) {
+        updateStat: function(data) {
           var self = this;
           // 'stat' is the action name
-          var newAction = {
-            'action': stat,
-            'segmentId': segment,
-            'data': data
-          };
+          var newAction = data;
           self.log.push(newAction);
-          this.logAction(newAction);
           $log.log('update stat');
           $log.log(newAction);
+          $http.post(logUrl, {"logAction": newAction}).then(
+            function(res) {
+              $log.log('LOG ACTION: ');
+              $log.log(res.data);
+            }
+          )
         }
       }
 

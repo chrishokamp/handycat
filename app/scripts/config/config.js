@@ -60,3 +60,5 @@ handyCATconfig.constant('wikipediaURL', wikipediaURL);
 var glossaryURL = 'glossary';
 handyCATconfig.constant('glossaryURL', glossaryURL);
 
+var loggerURL = 'logger';
+handyCATconfig.constant('loggerURL', loggerURL);

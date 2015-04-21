@@ -71,9 +71,6 @@ if ('production' === env) {
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-// TODO: logging isn't working currently
-//app.use(logger('dev'));
-
 app.use(cors());
 
 // bodyParser should be above methodOverride
@@ -293,21 +290,21 @@ app.get('/surface-forms/:lang/:entity', function(req, res){
 
 // Note that this route must be first, since /logger/:sessionId also matches
 var ActionLogger = require('./server/logger/actionLogger');
-app.post('/logger/start', function(req, res){
-  console.log('posting to /logger/start');
-  ActionLogger.startSession(req, res);
+app.post('/logger', function(req, res){
+  console.log('posting to /logger');
+  ActionLogger.logAction(req, res);
 });
 
 // working -- how to manage which users can write to which logs? - see express passport & openID
-var ActionLogger = require('./server/logger/actionLogger');
-app.post('/logger/:sessionId', function(req, res){
-  var sessionId = req.param('sessionId');
-  console.log('posting to /logger/:sessionId with id ' + sessionId);
-  console.log(sessionId);
-  ActionLogger.addEntryToSession(sessionId, req, res);
+//var ActionLogger = require('./server/logger/actionLogger');
+//app.post('/logger/:sessionId', function(req, res){
+//  var sessionId = req.param('sessionId');
+//  console.log('posting to /logger/:sessionId with id ' + sessionId);
+//  console.log(sessionId);
+//  ActionLogger.addEntryToSession(sessionId, req, res);
 //  res.setHeader('Content-Type', 'application/json');
 //  res.send({ "logged": true });
-});
+//});
 
 // WORKING -- proxy microservice routes
 
