@@ -59,6 +59,8 @@ angular.module('handycat.typeaheads')
 
           var cursorPos = getCursorPosition();
           var queryPrefix = $scope.targetSegment.substring(0, cursorPos);
+          $log.log('queryPrefix: ');
+          $log.log(queryPrefix);
           $http.get(autocompleterURLs.lmAutocompleterURL,
             {
               params: {
