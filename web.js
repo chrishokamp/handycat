@@ -321,7 +321,8 @@ app.get('/lm_autocomplete/constrained', function(req,res) {
   var query_hash = url_parts.query;
 
   // TODO: read the microservice locations from config
-  var newurl = 'http://localhost:8010/lm_autocomplete';
+  //var newurl = 'http://localhost:8010/lm_autocomplete';
+  var newurl = 'http://127.0.0.1:8010/lm_autocomplete';
   request({url: newurl, qs: query_hash}).pipe(res);
 });
 

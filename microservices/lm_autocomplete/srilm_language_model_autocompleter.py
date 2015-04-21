@@ -58,7 +58,11 @@ class SrilmLanguageModelAutocompleter:
                 if len(candidates) == 0 and len(source_phrase) <= max_source_phrase_len:
                     target_candidates.append(' '.join(source_phrase))
             target_candidates.extend([c['target'] for c in candidates])
-        # target_candidates = [c['target'] for l in nested_target_candidates for c in l]
+
+        # remove any duplicates
+        target_candidates = list(set(target_candidates))
+        # hack -- filter out anything too short
+        target_candidates = [t for t in target_candidates if len(t) > 5]
         return target_candidates
 
     # generate ranked completions given the source segment and the current target prefix
@@ -86,13 +90,14 @@ class SrilmLanguageModelAutocompleter:
         ordered_logprobs_and_zeroprobs = self._parse_srilm_output(lm_client_output, metric=metric)
         assert len(ordered_logprobs_and_zeroprobs) == len(cands), "we must have a probability for every candidate"
         # sort by length (longest first)
-        length_sorted = sorted(zip(cands, ordered_logprobs_and_zeroprobs), key=lambda u: len(u[0]), reverse=True)
         # first sort by score descending
-        score_sorted = sorted(length_sorted, key=lambda u: u[1][0], reverse=True)
+        score_sorted = sorted(zip(cands, ordered_logprobs_and_zeroprobs), key=lambda u: u[1][0], reverse=True)
+        # length_sorted = sorted(score_sorted, key=lambda u: len(u[0]), reverse=True)
+
         # now sort by num oovs ascending
         sorted_completions = sorted(score_sorted, key=lambda u: u[1][1], reverse=False)
         print(sorted_completions)
-        return sorted_completions
+        return(sorted_completions)
 
     @staticmethod
     def _parse_srilm_output(srilm_output, metric='logprob'):
