@@ -195,7 +195,8 @@ angular.module('controllers')
       'data': {
         'segmentId': segId,
         'previousValue': $scope.segment.targetDOM.textContent,
-        'newValue': $scope.segment.target
+        'newValue': $scope.segment.target,
+        'configuration': $scope.projectResource.configuration
       }
     }
     editSession.updateStat(logData);
@@ -262,10 +263,11 @@ angular.module('controllers')
           'name': $scope.projectResource.name,
           '_id' : $scope.projectResource._id
         },
-        'action': 'segment-complete',
+        'action': 'activate-segment',
         'data': {
           'segmentId': $index,
-          'currentValue': $scope.segment.target
+          'currentValue': $scope.segment.target,
+          'configuration': $scope.projectResource.configuration
         }
       }
       editSession.updateStat(logData);
