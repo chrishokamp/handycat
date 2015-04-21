@@ -14,7 +14,9 @@ angular.module('controllers')
 
       // add the hard-coded sample files
       $scope.sampleFiles = [
-      // WORKING -- add widget configuration to the project
+        {name: 'en-es-sample_project', url: 'data/malaga_experiments/en-es_sample_project.xlf',
+          configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+        },
         {name: 'en-es-sentences_1', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
           configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
         },
