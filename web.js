@@ -310,6 +310,11 @@ app.post('/logger', function(req, res){
 
 // lm_autocompleter
 var request = require('request');
+// baseline -- return empty list
+app.get('/lm_autocomplete/default', function(req,res) {
+  res.json({'ranked_completions': []});
+});
+
 var url = require('url');
 app.get('/lm_autocomplete/constrained', function(req,res) {
   var url_parts = url.parse(req.url, true);

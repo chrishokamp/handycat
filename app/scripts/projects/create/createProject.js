@@ -14,8 +14,21 @@ angular.module('controllers')
 
       // add the hard-coded sample files
       $scope.sampleFiles = [
-        {name: 'en-de-test1', url: 'data/PEARL_TS1.xlf'},
-        {name: 'en-de-test2', url: 'data/PEARL_TS2.xlf'}
+      // WORKING -- add widget configuration to the project
+        {name: 'en-es-sentences_1', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
+          configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+        },
+        {name: 'en-es-sentences_2', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+          configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+        },
+        {name: 'en-es-sentences_3', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
+          configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+        },
+        {name: 'en-es-sentences_4', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+          configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+        },
+        //{name: 'en-de-test1', url: 'data/PEARL_TS1.xlf'},
+        //{name: 'en-de-test2', url: 'data/PEARL_TS2.xlf'}
       ];
 
       // make sure the create modal closes if we change states
@@ -25,17 +38,14 @@ angular.module('controllers')
         }
       });
 
-      // WORKING -- add widget configuration to the project
-      var widgetConfig = {'target': {'widgets': {'constrainedLMAutocomplete': true}}};
-      //var widgetConfig = {'target': {'widgets': {'defaultLMAutocomplete': true}}};
 
-      var newProject = function (name, pendingDocument, sourceLang, targetLang) {
+      var newProject = function (name, pendingDocument, sourceLang, targetLang, configuration) {
         var newProject = new Projects({
           name: $scope.name,
           content: XliffParser.getDOMString(pendingDocument),
           sourcelang: sourceLang,
           targetlang: targetLang,
-          configuration: widgetConfig
+          configuration: configuration
         })
         return newProject;
       }
@@ -81,7 +91,7 @@ angular.module('controllers')
 
       // This is primarily for the built-in demos
       // user specifies the URL of an XLIFF file, we grab it, parse it, then save it on the server
-      $scope.createFromURL = function(xliffFileUrl, projectName) {
+      $scope.createFromURL = function(xliffFileUrl, projectName, configuration) {
         $log.log('create from URL fired: ' + xliffFileUrl);
         $http.get(xliffFileUrl)
           .success(
@@ -97,7 +107,7 @@ angular.module('controllers')
                 if ($scope.name === "" || $scope.name === undefined) {
                   $scope.name = projectName;
                 }
-                var project = newProject($scope.name, pendingDocument, sourceLang, targetLang);
+                var project = newProject($scope.name, pendingDocument, sourceLang, targetLang, configuration);
                 $scope.name = "";
 
                 project.$save(function (response) {

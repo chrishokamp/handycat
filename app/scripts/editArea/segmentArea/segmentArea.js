@@ -182,7 +182,6 @@ angular.module('controllers')
     // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
     var timestamp = new Date().getTime();
     var logData = {
-      'segmentId': segId,
       'time': timestamp,
       'user': {
         '_id': $scope.currentUser.userId,
@@ -254,7 +253,6 @@ angular.module('controllers')
       // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
       var timestamp = new Date().getTime();
       var logData = {
-        'segmentId': $index,
         'time': timestamp,
         'user': {
           '_id': $scope.currentUser.userId,
@@ -266,7 +264,7 @@ angular.module('controllers')
         },
         'action': 'segment-complete',
         'data': {
-          'segmentId': segId,
+          'segmentId': $index,
           'currentValue': $scope.segment.target
         }
       }
