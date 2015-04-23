@@ -298,6 +298,31 @@ angular.module('controllers')
 
       // set this flag to true for the view
       $scope.isActive = {active: true};
+      // log the activation
+
+      // log the activation
+      // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
+      var timestamp = new Date().getTime();
+      var logData = {
+        'time': timestamp,
+        'user': {
+          '_id': $scope.currentUser.userId,
+          'name': $scope.currentUser.username
+        },
+        'project': {
+          'name': $scope.projectResource.name,
+          '_id' : $scope.projectResource._id
+        },
+        'action': 'change-segment',
+        'data': {
+          'segmentId': $scope.id.index,
+          'currentValue': $scope.segment.target,
+          'configuration': $scope.projectResource.configuration
+        }
+      }
+      editSession.updateStat(logData);
+      // END experiment
+
       // configure the keyboard shortcuts for the active segment
       // You can pass it an object.  This hotkey will not be unbound unless manually removed
       // using the hotkeys.del() method
