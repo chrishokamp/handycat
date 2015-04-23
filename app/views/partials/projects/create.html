@@ -84,16 +84,18 @@
       </div>
       <md-divider></md-divider>
 
+    <!--WORKING -- separate into 4 groups-->
     <div>Choose A Testing File</div>
+    <div ng-repeat='testGroup in testGroups'>
+      <h3>{{testGroup.name}}</h3>
+      <div ng-repeat='testfile in testGroup.sampleFiles'>
+        <a
+          ng-click="createFromURL(testfile.url, testfile.name, testfile.configuration)">
+          {{$index}}: {{testfile.name}}
+        </a>
+        <md-divider></md-divider>
 
-    <div ng-repeat='testfile in sampleFiles'>
-      <a
-         ng-click="createFromURL(testfile.url, testfile.name, testfile.configuration)">
-        {{$index}}: {{testfile.name}}
-      </a>
-      <md-divider></md-divider>
-    </div>
-    </div>
+      </div>
     </div><!-- end upload area -->
   </md-content>
 </md-dialog>
