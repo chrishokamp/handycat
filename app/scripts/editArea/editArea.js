@@ -137,7 +137,6 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
     // this is a hack to let the bottom sheet see $scope.document
     var GridBottomSheetCtrlFactory = function(documentObj) {
-      $log.log('init grid bottom sheet');
       return function($scope, $mdBottomSheet) {
         $scope.document = documentObj;
 

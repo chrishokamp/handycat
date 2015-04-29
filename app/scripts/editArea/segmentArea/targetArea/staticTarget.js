@@ -31,7 +31,7 @@ angular.module('directives').directive('staticTarget', ['editSession', '$compile
 
       $scope.$on('activate', function() {
         if (!$scope.subComponents.componentsExist) {
-          $log.log('the activate event fired');
+          $log.log('the activate event fired, creating components for segment');
           var newHtml = '<div ng-include="\'scripts/editArea/segmentArea/targetArea/target-area.html\'"></div>';
           var compiledHtml = $compile(newHtml)($scope);
           el.replaceWith(compiledHtml);

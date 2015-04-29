@@ -247,7 +247,7 @@ angular.module('controllers')
     // if the segment isn't already active
     if (!$scope.isActive.active) {
       $log.log('activate: ' + $index);
-      $scope.reopen($index);
+      Session.setSegment(idx);
 
       // log the activation
       // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
@@ -273,17 +273,13 @@ angular.module('controllers')
     }
   };
 
-  // Re-opens a finished segment. Undoes what segmentFinished() did
-  // TODO: we should only show the 'SAVE' (checkmark) button once the user has actually edited something (they shouldn't need to click 'check' again)
-  $scope.reopen = function(idx) {
-    $log.log('REOPEN');
-    Session.setSegment(idx);
-  };
-
   // when the changeSegment event fires, each SegmentAreaCtrl scope responds
   // the change segment event is fired from changeSegment in the editSession service
   // this event is fired by editSession service
   $scope.$on('changeSegment', function(e,data) {
+    // if i'm not active, make sure i'm off
+
+
     // if this is the segment we activated
     if (data.currentSegment === $scope.id.index) {
       $log.log('segment: ' + $scope.id.index + ' --- heard changeSegment');
@@ -297,8 +293,7 @@ angular.module('controllers')
       // set this flag to true for the view
       $scope.isActive = {active: true};
       // configure the keyboard shortcuts for the active segment
-      // You can pass it an object.  This hotkey will not be unbound unless manually removed
-      // using the hotkeys.del() method
+      // hotkeys should be unbound manually using the hotkeys.del() method
       hotkeyConfigs.forEach(function (hotkeyConfig) {
         hotkeys.add(hotkeyConfig);
       });

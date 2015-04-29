@@ -1,8 +1,8 @@
 // this is an iterface to the ace editor, but the API it exposes should be easily adaptable to other text editing components
 angular.module('controllers').controller('AceCtrl',
-  ['$scope', 'tokenizer', 'editSession', '$q', '$filter', '$http', 'autocompleters',
+  ['$scope', 'tokenizer', '$q', '$filter', '$http', 'autocompleters',
    '$timeout', '$log',
-   function($scope, tokenizer, editSession, $q, $filter, $http, autocompleters, $timeout, $log) {
+   function($scope, tokenizer, $q, $filter, $http, autocompleters, $timeout, $log) {
 
   // require some stuff from the ace object
   var aceRange = ace.require('ace/range').Range;
@@ -269,7 +269,6 @@ angular.module('controllers').controller('AceCtrl',
           "segmentId": $scope.id.index
         };
 
-        //editSession.logAction(logAction);
         previousValue = newValue;
       }
     });
