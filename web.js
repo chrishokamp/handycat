@@ -322,7 +322,15 @@ app.get('/lm_autocomplete/constrained', function(req,res) {
 
   // TODO: read the microservice locations from config
   var newurl = 'http://localhost:8010/lm_autocomplete';
-  request({url: newurl, qs: query_hash}).pipe(res);
+  request({url: newurl, qs: query_hash},
+    function(error, response, body){
+      if (error.code === 'ECONNREFUSED'){
+        console.error('Refused connection to: ' +  newurl);
+      } else {
+        throw error;
+      }
+    }
+  ).pipe(res);
 });
 
 // vocablist
@@ -333,34 +341,52 @@ app.get('/vocablist/:lang', function(req,res) {
   // TODO: read the microservice locations from config
   // TODO: why doesn't localhost work with restify?
   var newurl = 'http://0.0.0.0:8082/vocablist/' + lang;
-  request(newurl).pipe(res);
+  request(newurl,
+    function(error, response, body){
+      if (error.code === 'ECONNREFUSED'){
+        console.error('Refused connection to: ' + newurl);
+      } else {
+        throw error;
+      }
+    }
+  ).pipe(res);
 });
 
 // graph tm
-//var graphTMUrl = 'http://localhost:8899/tm';
-//app.get('/tm', function(req,res) {
-//  var url_parts = url.parse(req.url, true);
-//  var query_hash = url_parts.query;
-//
-//  // TODO: read the microservice locations from config
-//  var newurl = 'http://localhost:8899/tm';
-//  request({url: newurl, qs: query_hash}).pipe(res);
-//});
-//app.post('/tm', function(req,res) {
-//  var newurl = 'http://localhost:8899/tm';
-//  console.log(req.body);
-//
-//  request({url: newurl, json: req.body}, function(err, remoteResponse, remoteBody) {
-//  if (err) { return res.status(500).end('Error'); }
-//    console.log(remoteResponse);
-//  //res.writeHead(...); // copy all headers from remoteResponse
-//  res.end(remoteBody);
-//});
+var graphTMUrl = 'http://localhost:8899/tm';
+app.get('/tm', function(req,res) {
+  var url_parts = url.parse(req.url, true);
+  var query_hash = url_parts.query;
 
   // TODO: read the microservice locations from config
-  //var newurl = 'http://localhost:8899/tm';
-  //request({url: newurl, qs: query_hash}).pipe(res);
-//});
+  var newurl = 'http://localhost:8899/tm';
+  request({url: newurl, qs: query_hash},
+    function(error, response, body){
+      if (error.code === 'ECONNREFUSED'){
+        console.error('Refused connection');
+      } else {
+        throw error;
+      }
+    }
+  ).pipe(res);
+});
+app.post('/tm', function(req,res) {
+  var newurl = 'http://localhost:8899/tm';
+  console.log(req.body);
+
+  request({url: newurl, json: req.body},
+    function(err, remoteResponse, remoteBody) {
+      if (error.code === 'ECONNREFUSED'){
+        console.error('Refused connection');
+      } else {
+        throw error;
+      }
+      console.log(remoteResponse);
+      //res.writeHead(...); // copy all headers from remoteResponse
+      res.end(remoteBody);
+    });
+});
+
 // End microservice proxies
 
 
