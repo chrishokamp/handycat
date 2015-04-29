@@ -25,20 +25,10 @@ angular.module('controllers')
       allowIn    : ['INPUT', 'SELECT', 'TEXTAREA'],
       callback   : function () {
         if ($scope.isActive.active) {
-          $log.log('hotkey callback');
-          $log.log('index: ' + $scope.id.index);
           $scope.segmentFinished($scope.id.index);
         }
       }
     }];
-
-    $scope.$watch(
-      function() {
-        return $scope.widgets.activeComponent
-      },
-      function(val) {
-        $log.log($scope.widgets.activeComponent);
-    });
 
     // WORKING - dynamically populate the translation options for each segment
     // user must click to populate
@@ -74,6 +64,9 @@ angular.module('controllers')
               'provider': 'Google Translate'
             },
           ];
+        } else {
+          // remove all the keyboard shortcuts
+
         }
       }
     )
@@ -100,12 +93,10 @@ angular.module('controllers')
       });
       transProm.then(
         function (res) {
-          $log.log('promise resolved:');
-          $log.log(res);
           $scope.translationResources.push({'provider': 'HandyCAT', 'target': res.data.target})
           $scope.translationsPending = false;
         }, function (err) {
-          $log.log('Error retrieving translation');
+          $log.error('Error retrieving translation');
           $scope.translationsPending = false;
         })
     }
@@ -162,7 +153,6 @@ angular.module('controllers')
     }
 
   $scope.clearEditor = function() {
-   $log.log('clear editor fired on the segment control');
    $scope.$broadcast('clear-editor');
   };
 
@@ -170,14 +160,6 @@ angular.module('controllers')
     segId = Number(segId);
     $log.log("SEGMENT FINISHED - segId is: " + segId);
     $scope.setSegmentState('translated');
-    $scope.isActive.active = false;
-
-    // del the keyboard shortcuts on this segment
-    hotkeyConfigs.forEach(
-      function(hotkeyConfig) {
-        hotkeys.del(hotkeyConfig.combo);
-      }
-    );
 
     // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
     var timestamp = new Date().getTime();
@@ -244,34 +226,12 @@ angular.module('controllers')
   }; // end segmentFinished
 
   // this is called when the user clicks anywhere in the segment area
+  // TODO: all of the logic here is shared with changeSegment
   $scope.activate = function($index) {
     // if the segment isn't already active
     if (!$scope.isActive.active) {
-      $log.log('activate: ' + $index);
-      Session.setSegment(idx);
-
-      // log the activation
-      // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
-      var timestamp = new Date().getTime();
-      var logData = {
-        'time': timestamp,
-        'user': {
-          '_id': $scope.currentUser.userId,
-          'name': $scope.currentUser.username
-        },
-        'project': {
-          'name': $scope.projectResource.name,
-          '_id' : $scope.projectResource._id
-        },
-        'action': 'activate-segment',
-        'data': {
-          'segmentId': $index,
-          'currentValue': $scope.segment.target,
-          'configuration': $scope.projectResource.configuration
-        }
-      }
-      editSession.updateStat(logData);
-
+      // this will fire the changeSegment event, which this segment will hear
+      Session.setSegment($index);
     }
   };
 
@@ -279,11 +239,8 @@ angular.module('controllers')
   // the change segment event is fired from changeSegment in the editSession service
   // this event is fired by editSession service
   $scope.$on('changeSegment', function(e,data) {
-    // if i'm not active, make sure i'm off
-
-
     // if this is the segment we activated
-    if (data.currentSegment === $scope.id.index) {
+    if (data.currentSegment === $scope.id.index && !$scope.isActive.active) {
       $log.log('segment: ' + $scope.id.index + ' --- heard changeSegment');
 
       // tell the staticTarget directive to create the editing components
@@ -294,7 +251,6 @@ angular.module('controllers')
 
       // set this flag to true for the view
       $scope.isActive = {active: true};
-      // log the activation
 
       // log the activation
       // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
@@ -321,19 +277,25 @@ angular.module('controllers')
 
       // configure the keyboard shortcuts for the active segment
       // hotkeys should be unbound manually using the hotkeys.del() method
-      hotkeyConfigs.forEach(function (hotkeyConfig) {
-        hotkeys.add(hotkeyConfig);
-      });
-    } else if ($scope.isActive.active) {
-      // make sure this segment is deactivated
-      $scope.isActive = {active: false};
 
+      // del the hotkey combos we're about to re-add
       hotkeyConfigs.forEach(
         function(hotkeyConfig) {
           hotkeys.del(hotkeyConfig.combo);
         }
       );
+
+      hotkeyConfigs.forEach(function (hotkeyConfig) {
+        $log.log(hotkeyConfig);
+        hotkeys.add(hotkeyConfig);
+      });
     }
+    // make sure this segment is deactivated
+    // TODO: log that this segment is no longer active -- add a 'deactivate' event
+    else {
+      $scope.isActive = {active: false};
+    }
+    //
   });
 
     // working - utils for autocompletion

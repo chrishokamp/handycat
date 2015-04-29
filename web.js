@@ -324,7 +324,7 @@ app.get('/lm_autocomplete/constrained', function(req,res) {
   var newurl = 'http://localhost:8010/lm_autocomplete';
   request({url: newurl, qs: query_hash},
     function(error, response, body){
-      if (error.code === 'ECONNREFUSED'){
+      if (error && error.code === 'ECONNREFUSED'){
         console.error('Refused connection to: ' +  newurl);
       } else {
         throw error;
@@ -343,7 +343,7 @@ app.get('/vocablist/:lang', function(req,res) {
   var newurl = 'http://0.0.0.0:8082/vocablist/' + lang;
   request(newurl,
     function(error, response, body){
-      if (error.code === 'ECONNREFUSED'){
+      if (error && error.code === 'ECONNREFUSED'){
         console.error('Refused connection to: ' + newurl);
       } else {
         throw error;
@@ -362,7 +362,7 @@ app.get('/tm', function(req,res) {
   var newurl = 'http://localhost:8899/tm';
   request({url: newurl, qs: query_hash},
     function(error, response, body){
-      if (error.code === 'ECONNREFUSED'){
+      if (error && error.code === 'ECONNREFUSED'){
         console.error('Refused connection');
       } else {
         throw error;
@@ -376,7 +376,7 @@ app.post('/tm', function(req,res) {
 
   request({url: newurl, json: req.body},
     function(err, remoteResponse, remoteBody) {
-      if (error.code === 'ECONNREFUSED'){
+      if (error && error.code === 'ECONNREFUSED'){
         console.error('Refused connection');
       } else {
         throw error;
