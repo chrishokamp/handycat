@@ -195,7 +195,8 @@ angular.module('controllers')
       'data': {
         'segmentId': segId,
         'previousValue': $scope.segment.targetDOM.textContent,
-        'newValue': $scope.segment.target
+        'newValue': $scope.segment.target,
+        'configuration': $scope.projectResource.configuration
       }
     }
     editSession.updateStat(logData);
@@ -262,10 +263,11 @@ angular.module('controllers')
           'name': $scope.projectResource.name,
           '_id' : $scope.projectResource._id
         },
-        'action': 'segment-complete',
+        'action': 'activate-segment',
         'data': {
           'segmentId': $index,
-          'currentValue': $scope.segment.target
+          'currentValue': $scope.segment.target,
+          'configuration': $scope.projectResource.configuration
         }
       }
       editSession.updateStat(logData);
@@ -292,6 +294,31 @@ angular.module('controllers')
 
       // set this flag to true for the view
       $scope.isActive = {active: true};
+      // log the activation
+
+      // log the activation
+      // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
+      var timestamp = new Date().getTime();
+      var logData = {
+        'time': timestamp,
+        'user': {
+          '_id': $scope.currentUser.userId,
+          'name': $scope.currentUser.username
+        },
+        'project': {
+          'name': $scope.projectResource.name,
+          '_id' : $scope.projectResource._id
+        },
+        'action': 'change-segment',
+        'data': {
+          'segmentId': $scope.id.index,
+          'currentValue': $scope.segment.target,
+          'configuration': $scope.projectResource.configuration
+        }
+      }
+      editSession.updateStat(logData);
+      // END experiment
+
       // configure the keyboard shortcuts for the active segment
       // hotkeys should be unbound manually using the hotkeys.del() method
       hotkeyConfigs.forEach(function (hotkeyConfig) {

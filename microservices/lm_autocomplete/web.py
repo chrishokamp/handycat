@@ -16,14 +16,15 @@ from lm_autocomplete.phrase_table.in_memory_phrase_table import InMemoryPhraseTa
 # TODO: read phrase_table location from configuration
 # phrase_table_file = '/home/chris/projects/maxent_decoder/phrase_table/filtered_phrase_table'
 # phrase_table_file = '/home/chris/projects/angular/editor_components/microservices/lm_autocomplete/test_data/phrase_tables/wmt-phrase-table.en-es.filtered'
-phrase_table_file = '/home/chris/projects/angular/editor_components/microservices/lm_autocomplete/test_data/phrase_tables/wmt-phrase-table.en-es.input-filtered'
+# phrase_table_file = '/home/chris/projects/angular/editor_components/microservices/lm_autocomplete/test_data/phrase_tables/wmt-phrase-table.en-es.input-filtered'
+phrase_table_file = '/home/chris/projects/angular/editor_components/microservices/lm_autocomplete/test_data/phrase_tables/phrase-table.en-es.1.filtered'
 # /home/ubuntu/handycat_builds/microservices
 parser = MosesTriplePipeParser()
 phrase_objects = parser.parse(phrase_table_file)
 
-pt_cutoff = 5
-max_source_len = 3
-en_es_phrase_table = InMemoryPhraseTable(phrase_objects, cutoff=pt_cutoff, max_source_len=max_source_len, max_entries=5)
+pt_cutoff = 10
+max_source_len = 5
+en_es_phrase_table = InMemoryPhraseTable(phrase_objects, cutoff=pt_cutoff, max_source_len=max_source_len, max_entries=10)
 # de_en_phrase_table = InMemoryPhraseTable(phrase_objects, cutoff=pt_cutoff, max_source_len=max_source_len, max_entries=5)
 
 # WORKING - test usage of the lm autocomplete lib
@@ -92,7 +93,7 @@ def lm_interface():
         ranked_completions = lm_autocompleter.get_ranked_completions(source_lang, target_lang,
                                                                      source_tokens=source_segment,
                                                                      target_prefix=target_prefix,
-                                                                     metric='logprob', add_oovs=True)
+                                                                     metric='ppl1', add_oovs=True)
     else:
         ranked_completions = []
 

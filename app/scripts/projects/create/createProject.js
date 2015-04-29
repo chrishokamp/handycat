@@ -12,19 +12,57 @@ angular.module('controllers')
       // Languages that we support
       $scope.supportedLangs = supportedLangs;
 
-      // add the hard-coded sample files
+      // add the groups and the hard-coded sample files
+      $scope.testGroups = [
+        {
+          name: 'Group One',
+          sampleFiles: [
+            {name: 'en-es-sentences_1', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
+              configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+            },
+            {name: 'en-es-sentences_4', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+              configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+            },
+          ]
+        },
+        {
+          name: 'Group Two',
+          sampleFiles: [
+            {name: 'en-es-sentences_2', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+              configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+            },
+            {name: 'en-es-sentences_3', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
+              configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+            }
+          ]
+        },
+        {
+          name: 'Group Three',
+          sampleFiles: [
+            {name: 'en-es-sentences_5', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
+              configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+            },
+            {name: 'en-es-sentences_6', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+              configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+            }
+          ]
+        },
+        {
+          name: 'Group Four',
+          sampleFiles: [
+            {name: 'en-es-sentences_7', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+              configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+            },
+            {name: 'en-es-sentences_8', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
+              configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+            }
+
+          ]
+        }
+      ]
+
       $scope.sampleFiles = [
-      // WORKING -- add widget configuration to the project
-        {name: 'en-es-sentences_1', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
-          configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-        },
-        {name: 'en-es-sentences_2', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
-          configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-        },
-        {name: 'en-es-sentences_3', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
-          configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
-        },
-        {name: 'en-es-sentences_4', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+        {name: 'en-es-sample_project', url: 'data/malaga_experiments/en-es_sample_project.xlf',
           configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
         },
         //{name: 'en-de-test1', url: 'data/PEARL_TS1.xlf'},
