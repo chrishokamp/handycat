@@ -35,29 +35,6 @@ angular.module('controllers')
               configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
             }
           ]
-        },
-        {
-          name: 'Group Three',
-          sampleFiles: [
-            {name: 'en-es-sentences_5', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
-              configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
-            },
-            {name: 'en-es-sentences_6', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
-              configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-            }
-          ]
-        },
-        {
-          name: 'Group Four',
-          sampleFiles: [
-            {name: 'en-es-sentences_7', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
-              configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
-            },
-            {name: 'en-es-sentences_8', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
-              configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-            }
-
-          ]
         }
       ]
 
