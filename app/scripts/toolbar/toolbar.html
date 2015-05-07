@@ -33,9 +33,13 @@
                class="glossary-search-result"
                ng-repeat="glossaryMatch in glossaryMatches"
                ng-click="insertText(glossaryMatch)"
-               ng-show="glossaryMatches"
+               ng-show="glossaryMatches.length > 0"
             >{{glossaryMatch}}</div>
         </div>
+        <div layout="row" layout-margin
+             ng-hide="glossaryMatches.length > 0"
+          >No matches found for {{glossaryQuery}}</div>
+      </div>
       </div>
     </md-tab>
     <!--TODO: show the matches for each source match in coherent sublists-->

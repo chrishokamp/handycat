@@ -240,6 +240,8 @@ var askGlossary = function(req,res) {
   var glossaryPromise = queryGlosbe(fromLang, toLang, queryString, res);
   glossaryPromise.then(
     function(matches) {
+      console.log('from glosbe:');
+      console.log(matches);
       res.json(matches);
     }
   );
@@ -326,8 +328,6 @@ app.get('/lm_autocomplete/constrained', function(req,res) {
     function(error, response, body){
       if (error && error.code === 'ECONNREFUSED'){
         console.error('Refused connection to: ' +  newurl);
-      } else {
-        throw error;
       }
     }
   ).pipe(res);
@@ -345,8 +345,6 @@ app.get('/vocablist/:lang', function(req,res) {
     function(error, response, body){
       if (error && error.code === 'ECONNREFUSED'){
         console.error('Refused connection to: ' + newurl);
-      } else {
-        throw error;
       }
     }
   ).pipe(res);
@@ -364,25 +362,20 @@ app.get('/tm', function(req,res) {
     function(error, response, body){
       if (error && error.code === 'ECONNREFUSED'){
         console.error('Refused connection');
-      } else {
-        throw error;
       }
     }
   ).pipe(res);
 });
 app.post('/tm', function(req,res) {
   var newurl = 'http://localhost:8899/tm';
+  console.log('tm req body');
   console.log(req.body);
 
   request({url: newurl, json: req.body},
     function(err, remoteResponse, remoteBody) {
       if (error && error.code === 'ECONNREFUSED'){
         console.error('Refused connection');
-      } else {
-        throw error;
       }
-      console.log(remoteResponse);
-      //res.writeHead(...); // copy all headers from remoteResponse
       res.end(remoteBody);
     });
 });

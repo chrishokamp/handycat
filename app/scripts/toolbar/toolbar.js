@@ -79,9 +79,11 @@ angular.module('directives').directive('toolbar',
         $scope.toolbarShowing = true;
 
         var glossaryCallback = function (data) {
-          $scope.glossaryMatches = data.map(function (item) {
-            return item.text;
-          });
+          if (data) {
+            $scope.glossaryMatches = data.map(function (item) {
+              return item.text;
+            });
+          }
         }
         Glossary.getMatches(word, glossaryCallback, $scope.sourceLang, $scope.targetLang, 20);
       };

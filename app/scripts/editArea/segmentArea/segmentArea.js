@@ -291,7 +291,8 @@ angular.module('controllers')
       });
     }
     // make sure this segment is deactivated
-    // TODO: log that this segment is no longer active -- add a 'deactivate' event
+    // TODO: if the segment was previously active,
+    // log that this segment is no longer active -- add a 'deactivate' event
     else {
       $scope.isActive = {active: false};
     }
