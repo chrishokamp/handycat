@@ -10,6 +10,7 @@ angular.module('controllers')
            Logger, Projects, XliffParser, graphTMUrl, hotkeys, editSession, $http) {
 
     // this object tells us which translation widgets are available to the user
+    // These are currently target-side widgets only
     $scope.widgets = {
       activeComponent: 'lmAutocomplete',
       translationSelector: false,
@@ -43,6 +44,12 @@ angular.module('controllers')
       },
       function(isActive) {
         if (isActive) {
+          // tell the child components that we're active
+          $log.log('SEGMENT ACTIVE');
+          $scope.$broadcast('segment-active');
+
+          // TODO: this is specific to the translation selector component, move it there
+
           // call the backend to get results from the user's translation resources
           // check the (local) cache to see if we've already queried for this segment
           // query the user's translation resources for the translations for this segment
@@ -64,9 +71,6 @@ angular.module('controllers')
               'provider': 'Google Translate'
             },
           ];
-        } else {
-          // remove all the keyboard shortcuts
-
         }
       }
     )

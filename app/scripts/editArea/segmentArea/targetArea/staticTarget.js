@@ -1,4 +1,5 @@
 // this directive dynamically adds the complex targetArea only when it is needed
+// this directive shares scope with the segmentArea
 angular.module('directives').directive('staticTarget', ['editSession', '$compile', '$log', function(session, $compile, $log) {
   return {
     restrict: 'E',
@@ -8,6 +9,11 @@ angular.module('directives').directive('staticTarget', ['editSession', '$compile
       $scope.subComponents = {
         componentsExist: false
       };
+
+      // TEST
+      $scope.$on('segment-active', function() {
+        $log.log('staticTarget heard segment active');
+      });
       // make the height the same as the source (max of source+target heights)
 
       // TODO: adding this component is slow

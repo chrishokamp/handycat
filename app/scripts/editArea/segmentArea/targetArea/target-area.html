@@ -1,4 +1,4 @@
-<div layout="column" ng-controller="AceCtrl" class="target-area" >
+<div layout="column" class="target-area" >
     <!--segment-finished-->
     <!-- the editing panel and controls -->
     <div flex ng-show="getSegmentState($index) === 'initial'" ng-click="activate($index)">
@@ -12,6 +12,8 @@
           source-segment="segment.source"
           source-lang="{{document.sourceLang}}"
           target-lang="{{document.targetLang}}"
+          active-component="widgets.activeComponent"
+          is-active="isActive.active"
           ></typeahead-editor>
       </div>
 
