@@ -388,7 +388,7 @@ require('./server/config/routes')(app);
 
 //app.listen(process.env.PORT || 5002);
 var server = http.createServer(app).listen(process.env.PORT || 5002);
-console.log('Express server listening on port: ' + server.address().port);
+//console.log('Express server listening on port: ' + server.address().port);
 
 // For https -- note that you need a certificate for this to work
 //var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
