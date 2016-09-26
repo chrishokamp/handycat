@@ -19,15 +19,12 @@
 
       <!--the translation resource selection component-->
       <!--WORKING - commented for lm autocomplete experiments-->
-      <!--<div ng-show="widgets.activeComponent === 'translationSelector'"-->
-        <!--class="cssSlideUp"-->
-      <!-->
-        <!--<translation-selector-->
-          <!--on-select="setTargetValue"-->
-          <!--selector-options="translationOptions"> -->
-
-          <!--</translation-selector>-->
-      <!--</div>-->
+      <div ng-show="widgets.activeComponent === 'translationSelector'" class="cssSlideUp">
+        <translation-selector
+          on-select="setTargetValue"
+          selector-options="translationOptions">
+       </translation-selector>
+      </div>
 
       <!--WORKING - commented for lm autocomplete experiments-->
       <!--<div ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>-->
