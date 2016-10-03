@@ -16,12 +16,12 @@ To set up your development environment, it's strongly recommended that you use t
 
 1. Install node and npm if you don't already have them.
 
-```
-# if you do it this way, you may need to use `sudo` for `npm -g ...` commands
-sudo apt-get install nodejs
-sudo apt-get install npm
-sudo ln -s /usr/bin/nodejs /usr/bin/node
-```
+  ```
+  # if you do it this way, you may need to use `sudo` for `npm -g ...` commands
+  $ sudo apt-get install nodejs
+  $ sudo apt-get install npm
+  $ sudo ln -s /usr/bin/nodejs /usr/bin/node
+  ```
 
 2. clone (or fork) the repo, for example: `git clone https://github.com/chrishokamp/handycat.git`
 3. install grunt `npm install -g grunt`
@@ -39,36 +39,36 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 6. [install mongodb](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 
 7. install redis
-```
-sudo add-apt-repository ppa:chris-lea/redis-server
-sudo apt-get update
-sudo apt-get install redis-server
-```
+  ```
+  $ sudo add-apt-repository ppa:chris-lea/redis-server
+  $ sudo apt-get update
+  $ sudo apt-get install redis-server
+  ```
 
 8. install the XLIFF creator and vocabulary server microservices
 
 First, install `pm2` because it makes things easy
-```
-npm install -g pm2`
-```
+  ```
+  $ npm install -g pm2
+  ```
 
 Now install the microservice dependencies:
 
-```
-cd microservices/vocabulary_server
-npm install
-
-cd ../xliff_creator
-npm install
-```
+  ```
+  $ cd microservices/vocabulary_server
+  $ npm install
+  
+  $ cd ../xliff_creator
+  $ npm install
+  ```
 
 
 9. to use the *autoreload* and *watch changes* functionalities, you'll need ruby and compass.   
   * [install Ruby](https://www.ruby-lang.org/en/installation/), then do:
-   ```
-   sudo gem install compass
-   sudo gem install sass
-   ```  
+  ```
+  $ sudo gem install compass
+  $ sudo gem install sass
+  ```  
   <!--* make sure that your ruby installation's bin/ folder is on your `$PATH`-->
  
  
@@ -79,16 +79,16 @@ Finally, once you've done all that, you're ready to start developing!
 1. start mongodb `mongod --fork --logpath=mongod.log --smallfiles`
 
 2. start the microservices
-```
-cd handycat/
-pm2 start microservices/vocabulary_server/web.js
-pm2 start microservices/xliff_creator/web.js
-```
+  ```
+  $ cd handycat/
+  $ pm2 start microservices/vocabulary_server/web.js
+  $ pm2 start microservices/xliff_creator/web.js
+  ```
 
 3. start HandyCAT with live reload
-```
-grunt express-server
-```
+  ```
+  $ grunt express-server
+  ```
 
 `grunt express-server` will fire up a server which watches all of the files in the repo, and automagically reloads whenever you change something. 
 
