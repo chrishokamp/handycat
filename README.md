@@ -45,7 +45,25 @@ sudo apt-get update
 sudo apt-get install redis-server
 ```
 
-7. to use the *autoreload* and *watch changes* functionalities, you'll need ruby and compass.   
+8. install the XLIFF creator and vocabulary server microservices
+
+First, install `pm2` because it makes things easy
+```
+npm install -g pm2`
+```
+
+Now install the microservice dependencies:
+
+```
+cd microservices/vocabulary_server
+npm install
+
+cd ../xliff_creator
+npm install
+```
+
+
+9. to use the *autoreload* and *watch changes* functionalities, you'll need ruby and compass.   
   * [install Ruby](https://www.ruby-lang.org/en/installation/), then do:
    ```
    sudo gem install compass
@@ -60,7 +78,19 @@ Finally, once you've done all that, you're ready to start developing!
 
 1. start mongodb `mongod --fork --logpath=mongod.log --smallfiles`
 
-you should be able to run `grunt express-server`, and fire up a server which watches all of the files in the repo, and automagically reloads whenever you change something. 
+2. start the microservices
+```
+cd handycat/
+pm2 start microservices/vocabulary_server/web.js
+pm2 start microservices/xliff_creator/web.js
+```
+
+3. start HandyCAT with live reload
+```
+grunt express-server
+```
+
+`grunt express-server` will fire up a server which watches all of the files in the repo, and automagically reloads whenever you change something. 
 
 Note: the command was previously `grunt serve`, but this was changed so that both the server and the UI reload automagically.
 
@@ -77,20 +107,12 @@ Note: the command was previously `grunt serve`, but this was changed so that bot
 Depending which parts of HandyCAT you want to use, you may need to start one or more of the microservices for the
 application to work.
 
-* to start the server to the glossary and concordancer endpoints, do:     
-    ```
-    cd server/     
-    node web.js
-    ```
-
-### Using Grunt
-* if you're getting an error in the grunt build process, do `grunt <your_command> --force --verbose` and look through the output to see what might be causing the problem.
-
 ## Testing
 
 # Building and Deploying
 
 * The command `grunt build` will build the client application into dist/
+
 * deployment scripts TODO: writeme
 
 ### Language Codes

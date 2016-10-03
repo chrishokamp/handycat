@@ -29,7 +29,7 @@ handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
 // the two autocompleter types that we currently support
 
 //var lmAutocompleterURL = 'lm_autocomplete/constrained';
-var lmAutocompleterURL = 'lm_autocomplete/constrained';
+var lmAutocompleterURL = 'lm_autocomplete/default';
 var levenshtalignerURL = 'http://127.0.0.1:5000/levenshtalign';
 handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
 
