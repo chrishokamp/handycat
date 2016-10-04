@@ -102,10 +102,10 @@ Note: the command was previously `grunt serve`, but this was changed so that bot
 * the project uses [sass](http://sass-lang.com/) and makes use of mixins and css variables in the app/styles/ directory
 * you need at least sass 3.3 -- do `sass -v` to check your version, `gem install sass` to install/update
 
-## Running the microservices
+## Microservices   
 
-Depending which parts of HandyCAT you want to use, you may need to start one or more of the microservices for the
-application to work.
+In order to implement new features in HandyCAT, you may need to implement new backend services as well. These should 
+go in the `microservices/` directory.
 
 ## Testing
 
