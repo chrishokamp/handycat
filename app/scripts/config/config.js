@@ -56,7 +56,7 @@ handyCATconfig.constant('supportedLangs', supportedLangs);
 var vocablistURL = 'vocablist';
 handyCATconfig.constant('vocablistURL', vocablistURL);
 
-
+// TODO: deprecate
 var wikipediaURL = 'wikipedia';
 handyCATconfig.constant('wikipediaURL', wikipediaURL);
 

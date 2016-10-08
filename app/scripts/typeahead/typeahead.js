@@ -30,7 +30,7 @@ angular.module('handycat.typeaheads')
         var $inputTextarea = el.find('.atwho-input');
 
         // we need to be able to get the caret postion in the input
-        // TODO: this is probably not IE compatible
+        // Note: this is probably not IE compatible
         var getCursorPosition = function() {
           // get the raw element from jquery
           var input = $inputTextarea.get(0);
@@ -84,7 +84,7 @@ angular.module('handycat.typeaheads')
               })
                 // TODO: move filter functions to the backend?
                 .filter(function(item) {
-                  // filter completions to be at least 2 chars lon
+                  // filter completions to be at least 2 chars long
                   if (item.length >= 2) {
                     return true;
                   }
@@ -145,6 +145,12 @@ angular.module('handycat.typeaheads')
             }
           }
         )
+
+        $scope.$on('clear-editor', function (event, args) {
+          $log.log('clearEditor fired')
+          $scope.targetSegment = '';
+          $inputTextarea.focus();
+        })
 
       }
     }
