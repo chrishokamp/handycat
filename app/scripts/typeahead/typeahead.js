@@ -1,4 +1,5 @@
 angular.module('handycat.typeaheads', ['handycatConfig']);
+console.log('LOAD LOAD')
 
 // an input area with one or more typeahead datasets enabled
 

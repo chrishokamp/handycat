@@ -2,8 +2,12 @@
     <!--segment-finished-->
     <!-- the editing panel and controls -->
     <div flex ng-show="getSegmentState($index) === 'initial'" ng-click="activate($index)">
-      <!--ALL TARGET AREA COMPONENTS BELONG HERE-->
 
+      <!--ALL TARGET AREA COMPONENTS BELONG HERE-->
+      <!--The component that is currently active is controlled by widgets.activeComponent on the parent scope-->
+
+
+      <!-- TYPEAHEAD -->
       <div class="cssSlideUp"
            ng-show="widgets.activeComponent === 'lmAutocomplete'"
         >
@@ -17,10 +21,21 @@
           ></typeahead-editor>
       </div>
 
+        <!-- Post Editor -->
+        <div class="cssSlideUp"
+           ng-show="widgets.activeComponent === 'postEditor'"
+        >
+            <post-editor
+                target-sentence="segment.target"
+            ></post-editor>
+      </div>
+
+      <!-- Translation Resource selector -->
       <!--the translation resource selection component-->
       <!--WORKING - we need a simpler component which simply populates the targetArea with the output of the user's default translation resource-->
       <!--Note: this component gets its options from the parent scope (translationOptions in the segmentArea-->
-      <div ng-show="widgets.activeComponent === 'translationSelector'" class="cssSlideUp">
+      <div class="cssSlideUp"
+           ng-show="widgets.activeComponent === 'translationSelector'" >
         <translation-selector
           on-select="setTargetValue"
           selector-options="translationOptions">

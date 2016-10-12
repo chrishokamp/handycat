@@ -20,6 +20,7 @@ var App = window.App = angular.module('editorComponentsApp',
         'angular-select-text',
         'handycatConfig',
         'handycat.typeaheads',
+        'handycat.posteditors',
         'handycat.trieAutocomplete'
 
         //'summaryMenu'

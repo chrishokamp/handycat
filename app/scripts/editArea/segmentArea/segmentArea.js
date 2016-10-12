@@ -11,10 +11,12 @@ angular.module('controllers')
 
     // this object tells us which translation widgets are available to the user
     // These are currently target-side widgets only
+    // TODO: set which components are available via configuration, don't hardcode
     $scope.widgets = {
       activeComponent: 'lmAutocomplete',
       translationSelector: false,
-      AceEditor: true,
+      postEditor: true,
+      AceEditor: false,
       defaultComponent: 'lmAutocomplete'
     }
 
