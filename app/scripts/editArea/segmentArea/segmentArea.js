@@ -11,10 +11,12 @@ angular.module('controllers')
 
     // this object tells us which translation widgets are available to the user
     // These are currently target-side widgets only
+    // TODO: set which components are available via configuration, don't hardcode
     $scope.widgets = {
       activeComponent: 'lmAutocomplete',
       translationSelector: false,
-      AceEditor: true,
+      postEditor: true,
+      AceEditor: false,
       defaultComponent: 'lmAutocomplete'
     }
 
@@ -31,7 +33,8 @@ angular.module('controllers')
       }
     }];
 
-    // WORKING - dynamically populate the translation options for each segment
+    // WORKING - dynamically populate the translation options for each segment by calling the URLs that are configured for user's
+    // translation resources
     // user must click to populate
     // Also look at how to log which options the user selects
     // WORKING -- for any configuration, we have a set of translation providers
@@ -49,6 +52,7 @@ angular.module('controllers')
           $scope.$broadcast('segment-active');
 
           // TODO: this is specific to the translation selector component, move it there
+          // WORKING: get the translation options from a translation resource on the server f(source) --> target
 
           // call the backend to get results from the user's translation resources
           // check the (local) cache to see if we've already queried for this segment
@@ -156,9 +160,9 @@ angular.module('controllers')
       }
     }
 
-  $scope.clearEditor = function() {
-   $scope.$broadcast('clear-editor');
-  };
+    $scope.clearEditor = function() {
+      $scope.$broadcast('clear-editor');
+    };
 
   $scope.segmentFinished = function(segId) {
     segId = Number(segId);
@@ -203,6 +207,7 @@ angular.module('controllers')
       $log.log('Project updated');
     });
 
+    // Translation Memory and Online Retraining for Translation Resources
     // update the user's translation resources (update the TM)
     // what is the data model for a TM object { sourceLang: <sourceLang>, targetLang: <targetLang>, source: <source>, target: <target>, createdBy: <creator>, date: <date> }
     // a new TM object is (at least) two nodes, the source segment and the target segment, both containing fields for creator, date created
