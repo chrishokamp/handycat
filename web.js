@@ -318,22 +318,25 @@ app.get('/lm_autocomplete/default', function(req,res) {
   res.json({'ranked_completions': []});
 });
 
-// WORKING: call the IMT system -- proxy through express server to NIMT
 // WORKING: add language parameter to this endpoint
 app.get('/imt/neural_imt', function(req,res) {
-  //var url_parts = url.parse(req.url, true);
-  //var source_segment = url_parts.source_sentence;
-  //var target_prefix = url_parts.target_prefix;
   console.log('IMT ENDPOINT');
   console.log(req.query);
-  //console.log(target_prefix);
-  //res.json({'ranked_completions': []});
-  // TODO: set content-type to JSON
+  var lang_code_mapping = {
+    'en-EN': 'en',
+    'fr-FR': 'fr',
+    'de-DE': 'de',
+    'pt-PT': 'pt',
+    'pt-BR': 'pt'
+  }
+  // TODO: error when lang_code is not found -- otherwise this can fail silently
   nimtUrl = 'http://localhost:5000/nimt';
   var options = {
     uri: nimtUrl,
     method: 'POST',
     json: {
+      "source_lang": lang_code_mapping[req.query.source_lang],
+      "target_lang": lang_code_mapping[req.query.target_lang],
       "source_sentence": req.query.source_segment,
       "target_prefix": req.query.target_prefix
     }

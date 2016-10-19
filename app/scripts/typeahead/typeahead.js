@@ -57,9 +57,8 @@ angular.module('handycat.typeaheads')
           //$log.log('remoteFilter -- cursor position is: ' + getCursorPosition());
           // hack - if the query is not empty (if this is not a space character)
           //  return the cached response with the local autocomplete results for the prefix
-          //$("body").css("cursor", "progress");
 
-          $('body').addClass('waiting');
+          //$('body').addClass('waiting');
           if ($scope.isActive === false) {
             return;
           }
@@ -93,7 +92,7 @@ angular.module('handycat.typeaheads')
             // when matches are empty, hit the local trie
             function (completionData) {
               // TODO: also reset cursor on failure of request, or set a timeout, even if req hasn't returned
-              $('body').removeClass('waiting');
+              //$('body').removeClass('waiting');
               //debugger;
               // WORKING here -- incorporate IMT
               var completions = completionData['ranked_completions']
