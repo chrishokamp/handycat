@@ -6,6 +6,7 @@
     </md-button>
   </div>
 
+  <!--TODO: show filename when a new file is dropped-->
   <md-content layout="column" layout-align="start center">
     <div class="text-muted">Create a New Translation Project</div>
     <md-divider></md-divider>
@@ -35,14 +36,14 @@
         <!--TODO: return the supported languages from the server-->
         <md-select placeholder="source language" ng-model="sourceLang">
           <md-option
-            ng-repeat="lang in supportedLangs"
+            ng-repeat="lang in supportedLangs.source"
             value="{{lang}}">
             {{lang}}
           </md-option>
         </md-select>
         <md-select placeholder="target language" ng-model="targetLang">
           <md-option
-            ng-repeat="lang in supportedLangs"
+            ng-repeat="lang in supportedLangs.target"
             value="{{lang}}">
             {{lang}}
           </md-option>

@@ -17,3 +17,6 @@ $typeahead-color: #FFFFFF;
 //  box-sizing: border-box;
 }
 
+body.waiting * {
+  cursor: progress !important;
+}

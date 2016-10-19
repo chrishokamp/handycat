@@ -48,10 +48,21 @@ angular.module('handycat.typeaheads')
         })
 
         var cachedResponse = [];
+
+        // TODO: there are problems when requests fire while other requests
+        // TODO: are pending -- we need to debouce pending requests
+        // TODO: when segment is complete, no more requests are allowed
+        // TODO: simplest case -- turn flag on and off when request is pending, disable text input when request is pending
         var remoteFilter = function(query, callback) {
           //$log.log('remoteFilter -- cursor position is: ' + getCursorPosition());
           // hack - if the query is not empty (if this is not a space character)
           //  return the cached response with the local autocomplete results for the prefix
+          //$("body").css("cursor", "progress");
+
+          $('body').addClass('waiting');
+          if ($scope.isActive === false) {
+            return;
+          }
           if (query !== '') {
             //$log.log('query is: ' + query);
             callback(cachedResponse.concat(
@@ -66,7 +77,9 @@ angular.module('handycat.typeaheads')
           var queryPrefix = $scope.targetSegment.substring(0, cursorPos);
           $log.log('queryPrefix: ');
           $log.log(queryPrefix);
-          $http.get(autocompleterURLs.lmAutocompleterURL,
+          // WORKING: here we query the remote autocompleter server
+          //$http.get(autocompleterURLs.lmAutocompleterURL,
+          $http.get(autocompleterURLs.imtAutocompleterURL,
             {
               params: {
                 target_prefix: queryPrefix,
@@ -77,31 +90,39 @@ angular.module('handycat.typeaheads')
             }
           )
           .success(
-            // working -- when matches are empty, hit the local trie
+            // when matches are empty, hit the local trie
             function (completionData) {
-              var completions = completionData['ranked_completions'].map(function(i) {
-                // return only the completion, not the score
-                return i[0];
-              })
+              // TODO: also reset cursor on failure of request, or set a timeout, even if req hasn't returned
+              $('body').removeClass('waiting');
+              //debugger;
+              // WORKING here -- incorporate IMT
+              var completions = completionData['ranked_completions']
+              // WORKING here -- LM autocompleter code below
+              //  var completions = completionData['ranked_completions'].map(function(i) {
+              //  // return only the completion, not the score
+              //  return i[0];
+              //})
                 // TODO: move filter functions to the backend?
-                .filter(function(item) {
-                  // filter completions to be at least 2 chars long
-                  if (item.length >= 2) {
-                    return true;
-                  }
-                  return false;
-                })
-                .filter(function(item) {
-                  // filter out options which end in punctuation
-                  // TODO: this isn't always valid
-                  if (item.match(startingPunctuationRegex) || item.match(endingPunctuationRegex)) {
-                    return false;
-                  }
-                  return true;
-                });
+                //.filter(function(item) {
+                //  // filter completions to be at least 2 chars long
+                //  if (item.length >= 2) {
+                //    return true;
+                //  }
+                //  return false;
+                //})
+                //.filter(function(item) {
+                //  // filter out options which end in punctuation
+                //  // TODO: this isn't always valid
+                //  if (item.match(startingPunctuationRegex) || item.match(endingPunctuationRegex)) {
+                //    return false;
+                //  }
+                //  return true;
+                //});
+              if ($scope.isActive === true) {
+                cachedResponse = completions;
+                callback(completions);
 
-              cachedResponse = completions;
-              callback(completions);
+              }
             });
         }
 
@@ -115,14 +136,14 @@ angular.module('handycat.typeaheads')
           return [];
         }
 
-        vocabularyAutocompleter.then(
-          function(autocompleter) {
-            // TODO: fix the trigger so that this works inside words
-            trieVocabCompleter = function(query) {
-              //$log.log('autocompleter');
-              //$log.log(autocompleter.search(query));
-              return autocompleter.search(query).map(function(item) {
-                return item.value;
+        vocabularyAutocompleter($scope.targetLang).then(
+            function(autocompleter) {
+              // TODO: fix the trigger so that this works inside words
+              trieVocabCompleter = function(query) {
+                //$log.log('autocompleter');
+                //$log.log(autocompleter.search(query));
+                return autocompleter.search(query).map(function(item) {
+                  return item.value;
               });
             }
           }

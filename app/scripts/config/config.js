@@ -30,27 +30,33 @@ handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
 
 //var lmAutocompleterURL = 'lm_autocomplete/constrained';
 var lmAutocompleterURL = 'lm_autocomplete/default';
-var levenshtalignerURL = 'http://127.0.0.1:5000/levenshtalign';
-handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
-
 var constrainedAutocompleterURL = 'lm_autocomplete/constrained';
 var defaultAutocompleterURL = 'lm_autocomplete/default';
-var imtAutocompleterURL = 'imt_autocomplete';
+//var imtAutocompleterURL = 'imt_autocomplete';
+var imtAutocompleterURL = 'imt/neural_imt';
+
 handyCATconfig.service('autocompleterURLs', function() {
   // this may get overwritten in the app
   this.lmAutocompleterURL = constrainedAutocompleterURL;
   // these will be set as needed by injectors
   this.constrainedLMAutocompleterURL = constrainedAutocompleterURL;
   this.defaultLMAutocompleterURL = defaultAutocompleterURL;
-  this.imtAutocompleterURL = defaultAutocompleterURL;
+  this.imtAutocompleterURL = imtAutocompleterURL;
 });
 
 // the languages that HandyCAT supports
-var supportedLangs = [
-  'es-ES',
-  'en-US',
-  'de-DE'
-]
+// TODO: this has to be diff
+var supportedLangs = {
+  source: [
+    'en-EN'
+  ],
+  target: [
+    'es-ES',
+    'en-US',
+    'fr-FR',
+    'de-DE'
+  ]
+}
 handyCATconfig.constant('supportedLangs', supportedLangs);
 
 var vocablistURL = 'vocablist';
