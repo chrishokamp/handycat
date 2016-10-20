@@ -3,7 +3,9 @@ var restify = require('restify');
 // configure the locations of each language dataset
 var vocabularyLists = {
   'es': require('./vocabulary_datasets/lists/spanish.vocabulary.list.json'),
-  'de': require('./vocabulary_datasets/lists/german.vocabulary.list.json')
+  'de': require('./vocabulary_datasets/lists/german.vocabulary.list.json'),
+  'fr': require('./vocabulary_datasets/lists/french.vocabulary.list.json'),
+  'pt': require('./vocabulary_datasets/lists/portuguese.vocabulary.list.json')
 }
 
 var server = restify.createServer({

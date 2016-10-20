@@ -338,7 +338,8 @@ app.get('/imt/neural_imt', function(req,res) {
       "source_lang": lang_code_mapping[req.query.source_lang],
       "target_lang": lang_code_mapping[req.query.target_lang],
       "source_sentence": req.query.source_segment,
-      "target_prefix": req.query.target_prefix
+      "target_prefix": req.query.target_prefix,
+      "request_time": req.query.request_time
     }
   };
 

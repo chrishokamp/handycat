@@ -52,9 +52,9 @@ var supportedLangs = {
   ],
   target: [
     'es-ES',
-    'en-US',
     'fr-FR',
-    'de-DE'
+    'de-DE',
+    'pt-PT'
   ]
 }
 handyCATconfig.constant('supportedLangs', supportedLangs);

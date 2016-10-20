@@ -53,6 +53,8 @@ angular.module('handycat.typeaheads')
         // TODO: are pending -- we need to debouce pending requests
         // TODO: when segment is complete, no more requests are allowed
         // TODO: simplest case -- turn flag on and off when request is pending, disable text input when request is pending
+        var lastRequest = 0;
+
         var remoteFilter = function(query, callback) {
           //$log.log('remoteFilter -- cursor position is: ' + getCursorPosition());
           // hack - if the query is not empty (if this is not a space character)
@@ -72,6 +74,11 @@ angular.module('handycat.typeaheads')
             $scope.targetSegment = '';
           }
 
+          // set the timestamp for the current request
+          var reqTimestamp = Date.now();
+          // global state here
+          lastRequest = reqTimestamp;
+
           var cursorPos = getCursorPosition();
           var queryPrefix = $scope.targetSegment.substring(0, cursorPos);
           $log.log('queryPrefix: ');
@@ -84,7 +91,8 @@ angular.module('handycat.typeaheads')
                 target_prefix: queryPrefix,
                 source_segment: $scope.sourceSegment,
                 target_lang: $scope.targetLang,
-                source_lang: $scope.sourceLang
+                source_lang: $scope.sourceLang,
+                request_time: reqTimestamp
               }
             }
           )
@@ -93,8 +101,8 @@ angular.module('handycat.typeaheads')
             function (completionData) {
               // TODO: also reset cursor on failure of request, or set a timeout, even if req hasn't returned
               //$('body').removeClass('waiting');
-              //debugger;
-              // WORKING here -- incorporate IMT
+              // WORKING here -- timestamp request, keep state here to only show the most recent request
+
               var completions = completionData['ranked_completions']
               // WORKING here -- LM autocompleter code below
               //  var completions = completionData['ranked_completions'].map(function(i) {
@@ -118,8 +126,14 @@ angular.module('handycat.typeaheads')
                 //  return true;
                 //});
               if ($scope.isActive === true) {
+                // TODO: append to cache, don't overwrite
                 cachedResponse = completions;
-                callback(completions);
+
+                $log.log(completionData)
+                $log.log(lastRequest)
+                if (parseInt(completionData['request_time']) === lastRequest) {
+                  callback(completions);
+                }
 
               }
             });
