@@ -5,7 +5,8 @@ var vocabularyLists = {
   'es': require('./vocabulary_datasets/lists/spanish.vocabulary.list.json'),
   'de': require('./vocabulary_datasets/lists/german.vocabulary.list.json'),
   'fr': require('./vocabulary_datasets/lists/french.vocabulary.list.json'),
-  'pt': require('./vocabulary_datasets/lists/portuguese.vocabulary.list.json')
+  'pt': require('./vocabulary_datasets/lists/portuguese.vocabulary.list.json'),
+  'ga': require('./vocabulary_datasets/lists/irish.vocabulary.list.json')
 }
 
 var server = restify.createServer({

@@ -275,8 +275,9 @@ var glossaryWordList = function(req,res) {
 
 }
 
-app.get('/glossary/segment/:phrase', cache.route(), glossaryWordList);
-app.get('/glossary/word/:word', cache.route(), askGlossary);
+// TODO: glossary is disabled for now until errors are properly handled
+//app.get('/glossary/segment/:phrase', cache.route(), glossaryWordList);
+//app.get('/glossary/word/:word', cache.route(), askGlossary);
 
 
 // This is for the entity linker demo
@@ -327,7 +328,8 @@ app.get('/imt/neural_imt', function(req,res) {
     'fr-FR': 'fr',
     'de-DE': 'de',
     'pt-PT': 'pt',
-    'pt-BR': 'pt'
+    'pt-BR': 'pt',
+    'ga-IE': 'ga'
   }
   // TODO: error when lang_code is not found -- otherwise this can fail silently
   nimtUrl = 'http://localhost:5000/nimt';

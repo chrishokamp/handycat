@@ -53,7 +53,8 @@ angular.module('handycat.typeaheads')
         // TODO: are pending -- we need to debouce pending requests
         // TODO: when segment is complete, no more requests are allowed
         // TODO: simplest case -- turn flag on and off when request is pending, disable text input when request is pending
-        var lastRequest = 0;
+        var lastRequestTime = 0;
+        var prevQueryPrefix = undefined;
 
         var remoteFilter = function(query, callback) {
           //$log.log('remoteFilter -- cursor position is: ' + getCursorPosition());
@@ -77,13 +78,19 @@ angular.module('handycat.typeaheads')
           // set the timestamp for the current request
           var reqTimestamp = Date.now();
           // global state here
-          lastRequest = reqTimestamp;
+          lastRequestTime = reqTimestamp;
 
           var cursorPos = getCursorPosition();
-          var queryPrefix = $scope.targetSegment.substring(0, cursorPos);
+          var queryPrefix = $scope.targetSegment.substring(0, cursorPos).trim();
+          if (queryPrefix === prevQueryPrefix) {
+            return;
+          }
+          prevQueryPrefix = queryPrefix;
+
           $log.log('queryPrefix: ');
           $log.log(queryPrefix);
-          // WORKING: here we query the remote autocompleter server
+
+          // here we query the remote autocompleter server
           //$http.get(autocompleterURLs.lmAutocompleterURL,
           $http.get(autocompleterURLs.imtAutocompleterURL,
             {
@@ -130,8 +137,8 @@ angular.module('handycat.typeaheads')
                 cachedResponse = completions;
 
                 $log.log(completionData)
-                $log.log(lastRequest)
-                if (parseInt(completionData['request_time']) === lastRequest) {
+                $log.log(lastRequestTime)
+                if (parseInt(completionData['request_time']) === lastRequestTime) {
                   callback(completions);
                 }
 
@@ -139,7 +146,6 @@ angular.module('handycat.typeaheads')
             });
         }
 
-        //var results = auto.search('ap')
         var dummyFilter = function(query, data, searchKey) {
           return []
         }

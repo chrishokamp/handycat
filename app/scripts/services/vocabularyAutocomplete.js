@@ -8,10 +8,10 @@ angular.module('handycat.trieAutocomplete')
 .factory('vocabularyAutocompleter', ['vocablistURL', '$q', '$http', '$log', function(vocablistURL, $q, $http, $log) {
 
     var Autocomplete = require('triecomplete')
-    var vocabAutocompleter = new Autocomplete()
 
     // vocabulary loads when a new document gets opened
     function getAutocompleter(targetLang) {
+      var vocabAutocompleter = new Autocomplete()
       targetLang = targetLang.split('-')[0]
       var autocompleteDeferred = $q.defer();
 

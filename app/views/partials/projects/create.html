@@ -8,51 +8,56 @@
 
   <!--TODO: show filename when a new file is dropped-->
   <md-content layout="column" layout-align="start center">
+    <!--<div-->
+            <!--layout="column"-->
+            <!--layout-align="center center">-->
     <div class="text-muted">Create a New Translation Project</div>
     <md-divider></md-divider>
-      <div
-        layout="column"
-        layout-align="center center">
 
         <!--TODO: return the supported languages from the server-->
-        <md-select placeholder="source language" ng-model="sourceLang">
-          <md-option
+        <!--<md-select placeholder="source language" ng-model="sourceLang">-->
+        <md-radio-group ng-model="sourceLang">
+          <p>Source Language: <span class="radioValue">{{ sourceLang }}</span> </p>
+          <md-radio-button
             ng-repeat="lang in supportedLangs.source"
+            style="font-size: 12px;"
             value="{{lang}}">
             {{lang}}
-          </md-option>
-        </md-select>
-        <md-select placeholder="target language" ng-model="targetLang">
-          <md-option
+          </md-radio-button>
+        </md-radio-group>
+        <!--<md-select placeholder="target language" ng-model="targetLang">-->
+        <md-radio-group ng-model="targetLang">
+          <p>Target Language: <span class="radioValue">{{ targetLang }}</span> </p>
+          <md-radio-button
             ng-repeat="lang in supportedLangs.target"
+            style="font-size: 12px;"
             value="{{lang}}">
             {{lang}}
-          </md-option>
-        </md-select>
+          </md-radio-button>
+        </md-radio-group>
 
         <form role="form">
           <div layout="column" layout-align="center start" layout-padding class="form-group">
             <input flex type="text" placeholder="Enter a project name" class="form-control" id="projectName" ng-model="name" />
           </div>
         </form>
-      </div>
 
       <div layout="column" layout-padding layout-align="center center">
         <md-button class="md-primary" ng-click="showAdvanced($event)" ng-disabled="sourceLang === undefined || targetLang === undefined">
           Create a project from raw text
         </md-button>
-        <div
-                layout-fill
-                layout="column"
-                layout-align="center center"
-                class="drop-box"
-                ng-file-drop="onFileSelect($files);"
-                ng-file-drop-available="dropSupported=true">
-          <div><span class="drop-message">Drag in an XLIFF or a text file</span></div>
-          <div class="file-upload-glyph glyphicon glyphicon-plus">
-            <input type="file" ng-file-select="onFileSelect($files)" />
-          </div>
-        </div>
+        <!--<div-->
+                <!--layout-fill-->
+                <!--layout="column"-->
+                <!--layout-align="center center"-->
+                <!--class="drop-box"-->
+                <!--ng-file-drop="onFileSelect($files);"-->
+                <!--ng-file-drop-available="dropSupported=true">-->
+          <!--<div><span class="drop-message">Drag in an XLIFF or a text file</span></div>-->
+          <!--<div class="file-upload-glyph glyphicon glyphicon-plus">-->
+            <!--<input type="file" ng-file-select="onFileSelect($files)" />-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
 
       <div layout="column" layout-align="center center">
@@ -61,7 +66,6 @@
           layout-align="center center"
           layout-padding
           ng-repeat="f in selectedFiles">
-          <!--<div flex>{{f.name}} - size: {{f.size}}B - type: {{f.type}}</div>-->
           <div ng-show="name" flex>Project Name: {{name}}</div>
           <div ng-show="!name" flex>Please give your project a name</div>
 

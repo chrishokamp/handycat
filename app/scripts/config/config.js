@@ -51,8 +51,9 @@ var supportedLangs = {
     'en-EN'
   ],
   target: [
-    'es-ES',
+    //'es-ES',
     'fr-FR',
+    'ga-IE',
     'de-DE',
     'pt-PT'
   ]
