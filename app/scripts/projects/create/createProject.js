@@ -208,8 +208,9 @@ angular.module('controllers')
 
       var createFromRawText = function(rawText) {
         // WORKING: HACK WHILE SELECTOR IS BROKEN
-        $scope.sourceLang = 'en-EN';
-        $scope.targetLang = 'fr-FR';
+        //$scope.sourceLang = 'en-EN';
+        //$scope.targetLang = 'fr-FR';
+        //$scope.targetLang = 'pt-PT';
         if (!$scope.sourceLang || !$scope.targetLang) {
           $scope.showErrorToast("Please specify the source and target languages");
           return

@@ -10,25 +10,6 @@
   <md-content layout="column" layout-align="start center">
     <div class="text-muted">Create a New Translation Project</div>
     <md-divider></md-divider>
-    <div>
-      <div layout="column" layout-padding layout-align="center center">
-        <div
-          layout-fill
-          layout="column"
-          layout-align="center center"
-          class="drop-box"
-          ng-file-drop="onFileSelect($files);"
-          ng-file-drop-available="dropSupported=true">
-          <div><span class="drop-message">Drag in an XLIFF or a text file</span></div>
-          <div class="file-upload-glyph glyphicon glyphicon-plus">
-            <input type="file" ng-file-select="onFileSelect($files)" />
-          </div>
-        </div>
-        <md-button class="md-primary" ng-click="showAdvanced($event)">
-          Create a project from raw text
-        </md-button>
-      </div>
-
       <div
         layout="column"
         layout-align="center center">
@@ -56,6 +37,24 @@
         </form>
       </div>
 
+      <div layout="column" layout-padding layout-align="center center">
+        <md-button class="md-primary" ng-click="showAdvanced($event)" ng-disabled="sourceLang === undefined || targetLang === undefined">
+          Create a project from raw text
+        </md-button>
+        <div
+                layout-fill
+                layout="column"
+                layout-align="center center"
+                class="drop-box"
+                ng-file-drop="onFileSelect($files);"
+                ng-file-drop-available="dropSupported=true">
+          <div><span class="drop-message">Drag in an XLIFF or a text file</span></div>
+          <div class="file-upload-glyph glyphicon glyphicon-plus">
+            <input type="file" ng-file-select="onFileSelect($files)" />
+          </div>
+        </div>
+      </div>
+
       <div layout="column" layout-align="center center">
         <div
           layout="column"
@@ -79,18 +78,17 @@
       </div>
       <md-divider></md-divider>
 
-        <div>Or Choose A Sample File</div>
-        <div ng-repeat='testGroup in testGroups'>
-          <div ng-repeat='testfile in testGroup.sampleFiles'>
-            <a
-              ng-click="createFromURL(testfile.url, testfile.name, testfile.configuration)">
-              {{$index}}: {{testfile.name}}
-            </a>
-            <md-divider></md-divider>
+        <!--<div>Or Choose A Sample File</div>-->
+        <!--<div ng-repeat='testGroup in testGroups'>-->
+          <!--<div ng-repeat='testfile in testGroup.sampleFiles'>-->
+            <!--<a-->
+              <!--ng-click="createFromURL(testfile.url, testfile.name, testfile.configuration)">-->
+              <!--{{$index}}: {{testfile.name}}-->
+            <!--</a>-->
+            <!--<md-divider></md-divider>-->
 
-          </div>
-        </div>
-    </div><!-- end upload area -->
+          <!--</div>-->
+        <!--</div>-->
   </md-content>
 </md-dialog>
 
