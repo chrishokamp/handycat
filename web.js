@@ -311,6 +311,32 @@ app.post('/logger', function(req, res){
 
 // Note that we need to proxy microservice routes
 
+// proxy the Xliff Creator
+var xliffCreatorUrl = 'http://localhost:8080/create-xliff/1.2'
+app.get('/create-xliff', function(req,res) {
+  var sourceLang = req.query.sourceLang;
+  var targetLang = req.query.targetLang;
+  var sourceText = req.query.sourceText;
+
+  var options = {
+    url: xliffCreatorUrl,
+    method: 'GET',
+    qs: {
+          sourceLang: sourceLang,
+          targetLang: targetLang,
+          sourceText: sourceText
+    }
+  };
+
+  request(options, function (error, response, body) {
+    if (error){
+      console.error('Got error from XLIFF creator: ' + error.code);
+    }
+  }).pipe(res);
+});
+
+
+
 // lm_autocompleter
 var request = require('request');
 
@@ -319,7 +345,6 @@ app.get('/lm_autocomplete/default', function(req,res) {
   res.json({'ranked_completions': []});
 });
 
-// WORKING: add language parameter to this endpoint
 app.get('/imt/neural_imt', function(req,res) {
   console.log('IMT ENDPOINT');
   console.log(req.query);

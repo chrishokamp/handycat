@@ -8,8 +8,6 @@ var handyCATconfig = angular.module('handycatConfig', []);
 // TODO: -- this is a quick hack
 var baseURL = 'http://localhost'
 
-var xliffCreatorUrl = 'http://localhost:8080/create-xliff/1.2'
-handyCATconfig.constant('xliffCreatorUrl', xliffCreatorUrl);
 
 // the concordancer URL
 var concordancerURL = 'http://127.0.0.1:8899/concordancer';
@@ -23,6 +21,9 @@ handyCATconfig.constant('graphTMUrl', graphTMUrl);
 // the levenshtaligner URL
 var levenshtalignerURL = 'http://127.0.0.1:5000/levenshtalign';
 handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
+
+var xliffCreatorUrl = 'create-xliff/'
+handyCATconfig.constant('xliffCreatorUrl', xliffCreatorUrl);
 
 // the lm autocompleter URL
 //var lmAutocompleterURL = baseURL + ':8010/lm_autocomplete';
