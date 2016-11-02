@@ -58,7 +58,6 @@ Now install the microservice dependencies:
   ```
   $ cd microservices/vocabulary_server
   $ npm install
-  
   $ cd ../xliff_creator
   $ npm install
   ```
