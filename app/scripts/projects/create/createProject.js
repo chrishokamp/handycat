@@ -1,7 +1,8 @@
 angular.module('controllers')
-.controller('CreateProjectCtrl', ['XliffParser', 'fileReader', 'Projects', 'xliffCreatorUrl', 'supportedLangs',
+.controller('CreateProjectCtrl', ['XliffParser', 'fileReader', 'Projects', 'xliffCreatorUrl',
+    'supportedLangs', 'experimentGroups',
     '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast',
-    function(XliffParser, fileReader, Projects, xliffCreatorUrl, supportedLangs,
+    function(XliffParser, fileReader, Projects, xliffCreatorUrl, supportedLangs, experimentGroups,
              $state, $log, $scope, $http, $mdDialog, $mdToast) {
 
       // set the default title
@@ -13,37 +14,12 @@ angular.module('controllers')
       $scope.supportedLangs = supportedLangs;
 
       // add the groups and the hard-coded sample files
-      $scope.testGroups = [
-        {
-          name: 'Group One',
-          sampleFiles: [
-            {name: 'en-es-sentences_1', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
-              configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-            },
-            {name: 'en-es-sentences_4', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
-              configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
-            },
-          ]
-        },
-        {
-          name: 'Group Two',
-          sampleFiles: [
-            {name: 'en-es-sentences_2', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
-              configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-            },
-            {name: 'en-es-sentences_3', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
-              configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
-            }
-          ]
-        }
-      ]
+      $scope.testGroups = experimentGroups;
 
       $scope.sampleFiles = [
         {name: 'en-es-sample_project', url: 'data/malaga_experiments/en-es_sample_project.xlf',
           configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
         },
-        //{name: 'en-de-test1', url: 'data/PEARL_TS1.xlf'},
-        //{name: 'en-de-test2', url: 'data/PEARL_TS2.xlf'}
       ];
 
       // make sure the create modal closes if we change states

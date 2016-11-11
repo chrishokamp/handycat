@@ -73,3 +73,35 @@ handyCATconfig.constant('glossaryURL', glossaryURL);
 
 var loggerURL = 'logger';
 handyCATconfig.constant('loggerURL', loggerURL);
+
+// allow experiment configuration via handyCAT config
+var experimentGroups = [
+  {
+    name: 'Group One',
+    sampleFiles: [
+      //{name: 'en-es-sentences_1', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
+      //  configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      //},
+      {name: 'felix_porto_matecat', url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
+        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      },
+      {name: 'en-es-sentences_4', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+        configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+      },
+    ]
+  },
+  {
+    name: 'Group Two',
+    sampleFiles: [
+      {name: 'en-es-sentences_2', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      },
+      {name: 'en-es-sentences_3', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
+        configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+      }
+    ]
+  }
+]
+
+handyCATconfig.constant('experimentGroups', experimentGroups)
+
