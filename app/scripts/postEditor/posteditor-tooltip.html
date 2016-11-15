@@ -1,8 +1,9 @@
 <div ng-show="showTooltip" class="post-editor-menu">
+    <!--TODO: data-model to show which actions are available given context-->
     <md-list>
         <md-list-item ng-click="deleteEvent()"><i class="ion-ios7-close-outline"></i> Delete</md-list-item>
         <md-divider></md-divider>
-        <md-list-item><i class="ion-plus-round"></i> Insert</md-list-item>
+        <md-list-item ng-click="insertEvent()"><i class="ion-plus-round"></i> Insert</md-list-item>
         <md-divider></md-divider>
         <md-list-item><i class="ion-arrow-move"></i> Move</md-list-item>
         <md-divider></md-divider>

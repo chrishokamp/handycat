@@ -137,20 +137,43 @@ angular.module('handycat.posteditors')
         });
 
 
-        // WORKING: implement insert
         scope.$on('replace-event', function(e) {
           console.log('HEARD REPLACE');
           // clear text and make contenteditable
           $el.find('.tooltip-span').attr('contentEditable',true).text(' ');
-          $el.find('.tooltip-span').first().attr('contentEditable',true).focus();
+          $el.find('.tooltip-span').first().focus();
           scope.showTooltip = false;
-          // TODO: press escape to drop out of insert mode
-          // TODO: set "inserting" state on scope
+
           scope.state.action = 'replacing';
+        });
+
+        // WORKING: implement insert
+        scope.$on('insert-event', function(e) {
+          console.log('HEARD INSERT');
+          var tooltipElement = $el.find('.tooltip-span').first().attr('contentEditable',true).text('  ').focus()[0];
+          //var tooltipElement = $el.find('.tooltip-span').text('  ')[0];
+          // now select the new text in the element
+          var selection = window.getSelection();
+          var range = document.createRange();
+          range.selectNodeContents(tooltipElement);
+          selection.removeAllRanges();
+          selection.addRange(range);
+
+          // create a range and put cursor at second index
+          range = document.createRange();
+          selection = window.getSelection();
+          range.setStart(tooltipElement.childNodes[0], 1);
+          range.collapse(true);
+          selection.removeAllRanges();
+          selection.addRange(range);
+
+          scope.showTooltip = false;
+          scope.state.action = 'inserting';
         });
 
         var updateTargetSegment = function() {
           var newTargetSegment = $el.find('.post-editor').first().text();
+          // TODO postprocess new segments - remove exra spaces etc...
           scope.targetSegment = newTargetSegment;
           $el.find('.post-editor').first().text(scope.targetSegment);
         }
@@ -159,15 +182,16 @@ angular.module('handycat.posteditors')
         // keybindings
         //To unbind you can also use a namespace on the event,
          $(document).on('keyup.posteditor_escape', function(e) {
+           var currentState = scope.state.action;
            if (e.which == 27) {
              console.log('ESCAPE WAS PRESSED')
-             if (scope.state.action === 'replacing') {
+             scope.showTooltip = false;
+             if (currentState === 'replacing' || currentState === 'inserting') {
                $el.find('.tooltip-span').contents().unwrap();
                scope.state.action === 'default';
                updateTargetSegment();
              }
            }
-
          });
 
         // TODO: unbind when component goes out of focus, rebind when it comes back in

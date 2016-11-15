@@ -39,6 +39,11 @@ angular.module('handycat.posteditors')
           $scope.$emit('delete-event')
         }
 
+        $scope.insertEvent = function() {
+          console.log('Emit insert');
+          $scope.$emit('insert-event')
+        }
+
         $scope.replaceEvent = function() {
           console.log('Emit replace');
           $scope.$emit('replace-event')
