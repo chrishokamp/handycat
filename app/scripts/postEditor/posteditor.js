@@ -45,18 +45,22 @@ angular.module('handycat.posteditors')
         }
 
         var addTooltipToSelected = function() {
-          var sel, range;
+          var sel, range, text;
 
           // use the range API to replace and move text
           // single tooltip directive, move that around as needed and fire events from it
           // wrap selected text in span, place directive below that span
           if (window.getSelection) {
             sel = window.getSelection()
-            var text = "";
+            text = "";
             if (window.getSelection) {
               text = window.getSelection().toString();
             } else if (document.selection && document.selection.type != "Control") {
               text = document.selection.createRange().text;
+            }
+            if (text.length === 0) {
+              scope.showTooltip = false;
+              return;
             }
 
             if (text.length >= 1) {
@@ -69,8 +73,8 @@ angular.module('handycat.posteditors')
                 range.deleteContents();
                 range.insertNode(document.createTextNode(' ' + textInSpan+ ' '));
                 // TODO: logic to insert left or right spaces (or just do this as postprocessing?)
-                updateTargetSegment();
                 scope.state.action = 'default';
+                updateTargetSegment();
 
               } else {
                 var a = document.createElement("span");
@@ -87,6 +91,7 @@ angular.module('handycat.posteditors')
                 // WORKING: so that the tooltip will know what to move or delete
                 // WORKING: tooltip should directly modify the target segment
                 // tell the tooltip to move
+                scope.showTooltip = true;
                 scope.$broadcast('position-tooltip');
               }
 
@@ -162,9 +167,13 @@ angular.module('handycat.posteditors')
           // make sure the tooltip span is gone
           $el.find('.tooltip-span').remove();
           var newTargetSegment = $el.find('.post-editor').first().text();
+          //remove any extra whitespace
+          newTargetSegment = newTargetSegment.replace(/\s+/g,' ');
           // TODO postprocess new segments - remove exra spaces etc...
           scope.targetSegment = newTargetSegment;
           $el.find('.post-editor').first().text(scope.targetSegment);
+          scope.state.action = 'default';
+          scope.$digest();
         }
 
 
@@ -174,12 +183,13 @@ angular.module('handycat.posteditors')
            var currentState = scope.state.action;
            if (e.which == 27) {
              console.log('ESCAPE WAS PRESSED')
-             scope.showTooltip = false;
+             $el.find('.tooltip-span').contents().unwrap();
              if (currentState === 'replacing' || currentState === 'inserting') {
-               $el.find('.tooltip-span').contents().unwrap();
                updateTargetSegment();
              }
+             scope.showTooltip = false;
              scope.state.action === 'default';
+             scope.$digest();
            }
          });
 

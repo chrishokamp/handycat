@@ -1,14 +1,28 @@
+post-editor > div {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
 .post-editor-menu {
-  //display: none;
   position: absolute;
   background: pink;
-  //text-wrap: css
   float: left;
   white-space: nowrap;
 }
 .tooltip-span {
   color: blue;
   white-space: pre !important;
+}
+
+.postedit-mode-sheet {
+  position: absolute;
+  color: red;
+  //background: red;
+  height: 20px;
+  bottom: 0;
+  width: 100%;
+  z-index: 5000;
 }
 
 $posteditor-color: #FFFFFF;

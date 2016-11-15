@@ -28,8 +28,6 @@ angular.module('handycat.posteditors')
             left: (pos.left) + "px",
             //display: "block"
           });
-          scope.showTooltip = true;
-
         });
 
       },
@@ -52,10 +50,6 @@ angular.module('handycat.posteditors')
         $scope.moveEvent = function() {
           console.log('Emit move');
           $scope.$emit('move-event')
-        }
-
-        $scope.toggleTooltip = function() {
-          $scope.showTooltip = !$scope.showTooltip;
         }
       }
     };
