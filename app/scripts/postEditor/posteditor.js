@@ -45,39 +45,13 @@ angular.module('handycat.posteditors')
         }
 
         var addTooltipToSelected = function() {
+          var sel, range;
 
-          // delete previous spans we created
-          //$el.find('span').contents().unwrap();
-
-          // WORKING: use the range API to replace and move text
-          // WORKING: single tooltip directive, move that around as needed and fire events from it
-          // WORKING: wrap selected text in span, place directive below that span
-          var el = $el.find('.post-editor').first()[0];
+          // use the range API to replace and move text
+          // single tooltip directive, move that around as needed and fire events from it
+          // wrap selected text in span, place directive below that span
           if (window.getSelection) {
-            var sel = window.getSelection()
-            if (sel.rangeCount) {
-              // Get the selected range
-              var range = sel.getRangeAt(0);
-
-              // Check that the selection is wholly contained within the div text
-              if (range.commonAncestorContainer == el.firstChild) {
-                // Create a range that spans the content from the start of the div
-                // to the start of the selection
-                var precedingRange = document.createRange();
-                precedingRange.setStartBefore(el.firstChild);
-                precedingRange.setEnd(range.startContainer, range.startOffset);
-
-                // Get the text preceding the selection and do a crude estimate
-                // of the number of words by splitting on white space
-                var textPrecedingSelection = precedingRange.toString();
-                var wordIndex = textPrecedingSelection.split(/\s+/).length;
-                //alert("Word index: " + wordIndex);
-                console.log("Word index: " + wordIndex);
-              }
-            }
-          }
-          if (window.getSelection) {
-            var sel = window.getSelection()
+            sel = window.getSelection()
             var text = "";
             if (window.getSelection) {
               text = window.getSelection().toString();
@@ -87,34 +61,39 @@ angular.module('handycat.posteditors')
 
             if (text.length >= 1) {
               console.log('Selected text: ' + text);
-              //var a = document.createElement("posteditor-tooltip");
-              var a = document.createElement("span");
+              //if we're in move mode
+              if (scope.state.action === 'moving') {
+                var textInSpan = $el.find('.tooltip-span').text();
 
-              a.setAttribute('class', 'tooltip-span');
+                range = sel.getRangeAt(0);
+                range.deleteContents();
+                range.insertNode(document.createTextNode(' ' + textInSpan+ ' '));
+                // TODO: logic to insert left or right spaces (or just do this as postprocessing?)
+                updateTargetSegment();
+                scope.state.action = 'default';
 
-              $compile(a)(scope);
-              var range = sel.getRangeAt(0).cloneRange();
-              sel.removeAllRanges();
-              range.surroundContents(a);
-              sel.addRange(range);
+              } else {
+                var a = document.createElement("span");
 
-              // WORKING: we can also send the current range in the broadcast event
-              // WORKING: so that the tooltip will know what to move or delete
-              // WORKING: tooltip should directly modify the target segment
-              // tell the tooltip to move
-              scope.$broadcast('position-tooltip');
+                a.setAttribute('class', 'tooltip-span');
+
+                $compile(a)(scope);
+                range = sel.getRangeAt(0).cloneRange();
+                sel.removeAllRanges();
+                range.surroundContents(a);
+                sel.addRange(range);
+
+                // WORKING: we can also send the current range in the broadcast event
+                // WORKING: so that the tooltip will know what to move or delete
+                // WORKING: tooltip should directly modify the target segment
+                // tell the tooltip to move
+                scope.$broadcast('position-tooltip');
+              }
 
             }
           }
         }
 
-        // don't allow other tooltips to fire when one is already focused
-        $('.source-token').focus(function(e) {
-          $(".source-token").not(this).css('pointer-events', "none")
-        });
-        $('.source-token').focusout(function(e) {
-          $(".source-token").css('pointer-events', "auto")
-        });
 
         // TODO: this should really be a range
         scope.selectedText = '';
@@ -136,7 +115,7 @@ angular.module('handycat.posteditors')
           updateTargetSegment();
         });
 
-
+        // TODO: add overlay to indicate which mode the component is currently in
         scope.$on('replace-event', function(e) {
           console.log('HEARD REPLACE');
           // clear text and make contenteditable
@@ -147,7 +126,6 @@ angular.module('handycat.posteditors')
           scope.state.action = 'replacing';
         });
 
-        // WORKING: implement insert
         scope.$on('insert-event', function(e) {
           console.log('HEARD INSERT');
           var tooltipElement = $el.find('.tooltip-span').first().attr('contentEditable',true).text('  ').focus()[0];
@@ -171,7 +149,18 @@ angular.module('handycat.posteditors')
           scope.state.action = 'inserting';
         });
 
+        // WORKING: implement move
+        //if we select while component is in move mode, replace selection with text from our span
+        scope.$on('move-event', function(e) {
+          console.log('HEARD MOVE');
+          // just set move mode, we're waiting for user to select something else
+          scope.showTooltip = false;
+          scope.state.action = 'moving';
+        });
+
         var updateTargetSegment = function() {
+          // make sure the tooltip span is gone
+          $el.find('.tooltip-span').remove();
           var newTargetSegment = $el.find('.post-editor').first().text();
           // TODO postprocess new segments - remove exra spaces etc...
           scope.targetSegment = newTargetSegment;
@@ -188,9 +177,9 @@ angular.module('handycat.posteditors')
              scope.showTooltip = false;
              if (currentState === 'replacing' || currentState === 'inserting') {
                $el.find('.tooltip-span').contents().unwrap();
-               scope.state.action === 'default';
                updateTargetSegment();
              }
+             scope.state.action === 'default';
            }
          });
 
@@ -227,6 +216,13 @@ angular.module('handycat.posteditors')
         //})
 
 
+        // don't allow other tooltips to fire when one is already focused
+        //$('.source-token').focus(function(e) {
+        //  $(".source-token").not(this).css('pointer-events', "none")
+        //});
+        //$('.source-token').focusout(function(e) {
+        //  $(".source-token").css('pointer-events', "auto")
+        //});
       },
       controller: function($scope) {
         //$scope.setSurfaceForms = function(e) {

@@ -49,6 +49,11 @@ angular.module('handycat.posteditors')
           $scope.$emit('replace-event')
         }
 
+        $scope.moveEvent = function() {
+          console.log('Emit move');
+          $scope.$emit('move-event')
+        }
+
         $scope.toggleTooltip = function() {
           $scope.showTooltip = !$scope.showTooltip;
         }
