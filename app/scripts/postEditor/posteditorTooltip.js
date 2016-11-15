@@ -3,7 +3,9 @@ angular.module('handycat.posteditors')
     // take the text inside the element, tokenize it, and wrap in spans that we can interact with
     return {
       scope: {
-        selectedText: '@',
+        targetSegment: '=',
+        showTooltip: '='
+        //selectedText: '@',
         //transclude: true
         //onRemove: '&'
       },
@@ -11,32 +13,40 @@ angular.module('handycat.posteditors')
       templateUrl: 'scripts/postEditor/posteditor-tooltip.html',
       link: function(scope, $el, attrs){
         // WORKING: depending upon what user does with tooltip, take action
-        console.log('POST EDITOR TOOLTIP');
-        var $innerSpan = $el.find('span').first()
-        var pos = $innerSpan.position();
-        var width = $innerSpan.outerWidth();
-        $('.post-editor-menu').css({
-          position: "absolute",
-          top: pos.top + 24 + "px",
-          //left: (pos.left + width) + "px"
-          left: (pos.left) + "px",
-          display: "block"
+        // WORKING: position only after span has been created (use event)
+        // WORKING: pass in position with event args?
+        scope.$on('position-tooltip', function(e) {
+          console.log('POSITION TOOLTIP');
+          var $innerSpan = $('.tooltip-span');
+          var pos = $innerSpan.position();
+          var width = $innerSpan.outerWidth();
+          console.log(pos);
+          $el.css({
+            position: "absolute",
+            top: pos.top + 24 + "px",
+            //left: (pos.left + width) + "px"
+            left: (pos.left) + "px",
+            //display: "block"
+          });
+          scope.showTooltip = true;
+
         });
 
       },
       controller: function($scope) {
-        $scope.showTooltip = false;
-        $timeout(function() {
-          $scope.showTooltip = true;
-        },0);
+        $scope.deleteEvent = function() {
+          console.log('Emit deleted');
+          $scope.$emit('delete-event')
+        }
+
+        $scope.replaceEvent = function() {
+          console.log('Emit replace');
+          $scope.$emit('replace-event')
+        }
 
         $scope.toggleTooltip = function() {
           $scope.showTooltip = !$scope.showTooltip;
         }
-        $scope.userState = '';
-        $scope.actionStates = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
-            'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
-            'WY').split(' ').map(function (state) { return { abbrev: state }; });
       }
     };
 }]);

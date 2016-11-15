@@ -11,6 +11,11 @@ angular.module('handycat.posteditors')
       restrict: 'E',
       link: function(scope, $el, attrs){
 
+        scope.state = {
+          'action': 'default',
+          'undoStack': []
+        }
+
         // tokenize the target text
         //var tokenStrings = tokenizer.tokenize(scope.targetSentence);
 
@@ -29,41 +34,6 @@ angular.module('handycat.posteditors')
 
         // note that any html tricks will need to be repeated every time
 
-
-
-        // wrap known spans with the post-editor directive
-        // uses the angular-select-text directive
-        //var tokenSpans =  _.map(tokenStrings, function(tok, index) {
-        //  // watch out for the crazy regex in the next line! - used to escape single quotes
-        //  var tokNorm = tok.replace(/'/g, "\\'").replace('"', '');
-        //  return '<span class="source-token" select-text ' +
-        //              'ng-click="askGlossary(\''+ tokNorm + '\')">'
-        //              + tok +
-        //         '<md-tooltip class="post-editor-menu">' +
-        //           '<md-list>' +
-        //             '<md-list-item><i class="ion-ios7-close-outline"></i> Delete</md-list-item>' +
-        //             '<md-divider></md-divider>' +
-        //             '<md-list-item><i class="ion-plus-round"></i> Insert</md-list-item>' +
-        //             '<md-divider></md-divider>' +
-        //             '<md-list-item><i class="ion-arrow-move"></i> Move</md-list-item>' +
-        //             '<md-divider></md-divider>' +
-        //             '<md-list-item><i class="ion-loop"></i> Replace</md-list-item>' +
-        //             '<md-divider></md-divider>' +
-        //           '</md-list>' +
-        //         '<md-tooltip>' +
-        //         '</span>';
-        //});
-        //
-        //var annotatedSentence = '<div class="annotated-source">' + tokenSpans.join('') + '</div>';
-        //
-        //var compiledHTML = $compile(annotatedSentence)(scope);
-
-        // TODO: will we need to recompile every time we change something?
-        //$el.append(compiledHTML);
-
-        // TODO: add temporary class around selected text, show tooltip over that
-        // TODO: dynamically add the tooltip directive at the highlighted text(?)
-        //window.getSelection().deleteFromDocument();
         var getSelectedText = function() {
           var text = "";
           if (window.getSelection) {
@@ -76,10 +46,36 @@ angular.module('handycat.posteditors')
 
         var addTooltipToSelected = function() {
 
-          $(".post-editor-menu").remove();
-          $("posteditor-tooltip").contents().unwrap();
-          $el.find('span').contents().unwrap();
+          // delete previous spans we created
+          //$el.find('span').contents().unwrap();
 
+          // WORKING: use the range API to replace and move text
+          // WORKING: single tooltip directive, move that around as needed and fire events from it
+          // WORKING: wrap selected text in span, place directive below that span
+          var el = $el.find('.post-editor').first()[0];
+          if (window.getSelection) {
+            var sel = window.getSelection()
+            if (sel.rangeCount) {
+              // Get the selected range
+              var range = sel.getRangeAt(0);
+
+              // Check that the selection is wholly contained within the div text
+              if (range.commonAncestorContainer == el.firstChild) {
+                // Create a range that spans the content from the start of the div
+                // to the start of the selection
+                var precedingRange = document.createRange();
+                precedingRange.setStartBefore(el.firstChild);
+                precedingRange.setEnd(range.startContainer, range.startOffset);
+
+                // Get the text preceding the selection and do a crude estimate
+                // of the number of words by splitting on white space
+                var textPrecedingSelection = precedingRange.toString();
+                var wordIndex = textPrecedingSelection.split(/\s+/).length;
+                //alert("Word index: " + wordIndex);
+                console.log("Word index: " + wordIndex);
+              }
+            }
+          }
           if (window.getSelection) {
             var sel = window.getSelection()
             var text = "";
@@ -91,16 +87,22 @@ angular.module('handycat.posteditors')
 
             if (text.length >= 1) {
               console.log('Selected text: ' + text);
-              var a = document.createElement("posteditor-tooltip");
+              //var a = document.createElement("posteditor-tooltip");
+              var a = document.createElement("span");
 
-              //scope.annotatedText = text;
-              a.setAttribute('selected-text', text);
+              a.setAttribute('class', 'tooltip-span');
 
               $compile(a)(scope);
               var range = sel.getRangeAt(0).cloneRange();
               sel.removeAllRanges();
               range.surroundContents(a);
               sel.addRange(range);
+
+              // WORKING: we can also send the current range in the broadcast event
+              // WORKING: so that the tooltip will know what to move or delete
+              // WORKING: tooltip should directly modify the target segment
+              // tell the tooltip to move
+              scope.$broadcast('position-tooltip');
 
             }
           }
@@ -125,6 +127,54 @@ angular.module('handycat.posteditors')
             addTooltipToSelected();
           }
         });
+
+        scope.$on('delete-event', function(e) {
+          console.log('HEARD DELETE');
+          // delete this span, update targetSegment model
+          $el.find('.tooltip-span').remove();
+          scope.showTooltip = false;
+          updateTargetSegment();
+        });
+
+
+        // WORKING: implement insert
+        scope.$on('replace-event', function(e) {
+          console.log('HEARD REPLACE');
+          // clear text and make contenteditable
+          $el.find('.tooltip-span').attr('contentEditable',true).text(' ');
+          $el.find('.tooltip-span').first().attr('contentEditable',true).focus();
+          scope.showTooltip = false;
+          // TODO: press escape to drop out of insert mode
+          // TODO: set "inserting" state on scope
+          scope.state.action = 'replacing';
+        });
+
+        var updateTargetSegment = function() {
+          var newTargetSegment = $el.find('.post-editor').first().text();
+          scope.targetSegment = newTargetSegment;
+          $el.find('.post-editor').first().text(scope.targetSegment);
+        }
+
+
+        // keybindings
+        //To unbind you can also use a namespace on the event,
+         $(document).on('keyup.posteditor_escape', function(e) {
+           if (e.which == 27) {
+             console.log('ESCAPE WAS PRESSED')
+             if (scope.state.action === 'replacing') {
+               $el.find('.tooltip-span').contents().unwrap();
+               scope.state.action === 'default';
+               updateTargetSegment();
+             }
+           }
+
+         });
+
+        // TODO: unbind when component goes out of focus, rebind when it comes back in
+           //...) and $(document).unbind('keyup.unique_name') – Lachlan McD. May 13 '13 at 3:32
+
+
+
 
         // update source with new data
         // this is currently used for linking source named entities
@@ -159,6 +209,7 @@ angular.module('handycat.posteditors')
         //  var surfaceForm = $(e.target).text();
         //  $scope.$emit('find-surface-forms', { 'sf': surfaceForm });
         //}
+
 
         // working -- call a function on the parent (the queryGlossary function passed into this component
         $scope.askGlossary = function(word) {

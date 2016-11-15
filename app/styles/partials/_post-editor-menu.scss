@@ -1,7 +1,13 @@
 .post-editor-menu {
-  display: none;
+  //display: none;
   position: absolute;
   background: pink;
+  //text-wrap: css
+  float: left;
+  white-space: nowrap;
+}
+.tooltip-span {
+  color: blue;
 }
 
 $posteditor-color: #FFFFFF;

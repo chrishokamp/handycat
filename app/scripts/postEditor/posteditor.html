@@ -1,4 +1,4 @@
-<div class="post-editor">
+<div>
     <!--NOTE: it's important NOT to leave whitespace between the textarea tags-->
   <!--<textarea-->
           <!--class="post-editor"-->
@@ -7,6 +7,9 @@
           <!--</textarea>-->
     <div
           class="post-editor"
-    ><posteditor-tooltip></posteditor-tooltip>{{targetSegment}}
+    >{{targetSegment}}
     </div>
+    <posteditor-tooltip show-tooltip="showTooltip"
+                        target-segment="targetSegment"></posteditor-tooltip>
 </div>
+

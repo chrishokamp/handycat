@@ -13,11 +13,11 @@ angular.module('controllers')
     // These are currently target-side widgets only
     // TODO: set which components are available via configuration, don't hardcode
     $scope.widgets = {
-      activeComponent: 'lmAutocomplete',
+      activeComponent: 'postEditor',
+      defaultComponent: 'postEditor',
       translationSelector: false,
       postEditor: true,
       AceEditor: false,
-      defaultComponent: 'lmAutocomplete'
     }
 
     // these hotkeys are only available when the segment is active
