@@ -308,14 +308,4 @@ angular.module('controllers')
     //
   });
 
-    // working - utils for autocompletion
-    // TODO: use the autocompleters service to resolve the autocompleters for the user
-    // GET /autocompleters --
-    // params that let us know what autocompleters the user has:
-    // source lang
-    // target lang
-    // domain
-    // TODO: there should be a selection dialog where the user can choose which autocompleters they want to use
-    // a user's autocompleters grow over time
-    // as they select segments, we log: { source: source-text, target_prefix: target-text, completion: <selected unit from autocomplete> }
 }]);

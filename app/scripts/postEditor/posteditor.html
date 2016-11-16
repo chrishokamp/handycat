@@ -1,15 +1,12 @@
 <div>
-    <!--NOTE: it's important NOT to leave whitespace between the textarea tags-->
-  <!--<textarea-->
-          <!--class="post-editor"-->
-          <!--placeholder="translate the segment..."-->
-          <!--ng-model="targetSegment"-->
-          <!--</textarea>-->
     <div
           class="post-editor"
     >{{targetSegment}}
     </div>
-    <div class="postedit-mode-sheet">{{state.action}}</div>
+    <div ng-show="state.action !== 'default'"
+         class="postedit-mode-sheet"
+    >{{state.action}}
+    </div>
     <posteditor-tooltip show-tooltip="showTooltip"
                         target-segment="targetSegment"></posteditor-tooltip>
 </div>

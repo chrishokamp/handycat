@@ -6,6 +6,7 @@ angular.module('handycat.posteditors')
     return {
       scope: {
         targetSegment: '=',
+        isActive: '='
       },
       templateUrl: 'scripts/postEditor/posteditor.html',
       restrict: 'E',
@@ -178,8 +179,7 @@ angular.module('handycat.posteditors')
 
 
         // keybindings
-        //To unbind you can also use a namespace on the event,
-         $(document).on('keyup.posteditor_escape', function(e) {
+         var handleEscape = function(e) {
            var currentState = scope.state.action;
            if (e.which == 27) {
              console.log('ESCAPE WAS PRESSED')
@@ -191,10 +191,23 @@ angular.module('handycat.posteditors')
              scope.state.action === 'default';
              scope.$digest();
            }
-         });
+         }
+
+        // use a namespace on the event to bind the escape keypress to this element
+        scope.$watch(function() {
+          return scope.isActive;
+        }, function(isActive) {
+          if (isActive) {
+            $(document).on('keyup.posteditor_escape', handleEscape)
+          } else {
+            $(document).unbind('keyup.posteditor_escape')
+          }
+        })
+
 
         // TODO: unbind when component goes out of focus, rebind when it comes back in
-           //...) and $(document).unbind('keyup.unique_name') – Lachlan McD. May 13 '13 at 3:32
+
+           //...) and  – Lachlan McD. May 13 '13 at 3:32
 
 
 

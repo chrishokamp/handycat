@@ -5,8 +5,10 @@ post-editor > div {
 }
 
 .post-editor-menu {
+  border: 1px solid;
+  padding: 2px;
   position: absolute;
-  background: pink;
+  background: white;
   float: left;
   white-space: nowrap;
 }
@@ -18,7 +20,6 @@ post-editor > div {
 .postedit-mode-sheet {
   position: absolute;
   color: red;
-  //background: red;
   height: 20px;
   bottom: 0;
   width: 100%;

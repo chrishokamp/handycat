@@ -5,9 +5,6 @@ angular.module('handycat.posteditors')
       scope: {
         targetSegment: '=',
         showTooltip: '='
-        //selectedText: '@',
-        //transclude: true
-        //onRemove: '&'
       },
       restrict: 'E',
       templateUrl: 'scripts/postEditor/posteditor-tooltip.html',
@@ -16,17 +13,13 @@ angular.module('handycat.posteditors')
         // WORKING: position only after span has been created (use event)
         // WORKING: pass in position with event args?
         scope.$on('position-tooltip', function(e) {
-          console.log('POSITION TOOLTIP');
           var $innerSpan = $('.tooltip-span');
           var pos = $innerSpan.position();
-          var width = $innerSpan.outerWidth();
-          console.log(pos);
+          //var width = $innerSpan.outerWidth();
           $el.css({
             position: "absolute",
             top: pos.top + 24 + "px",
-            //left: (pos.left + width) + "px"
             left: (pos.left) + "px",
-            //display: "block"
           });
         });
 
