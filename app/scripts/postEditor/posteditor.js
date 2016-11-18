@@ -1,20 +1,21 @@
 angular.module('handycat.posteditors', ['handycatConfig']);
 
 angular.module('handycat.posteditors')
-.directive('postEditor', ['$log', 'tokenizer', '$compile', function($log, tokenizer,$compile) {
+.directive('postEditor', ['$log', 'tokenizer', '$compile', '$timeout', function($log, tokenizer, $compile, $timeout) {
     // take the text inside the element, tokenize it, and wrap in spans that we can interact with
     return {
       scope: {
         targetSegment: '=',
-        isActive: '='
+        isActive: '=',
+        logAction: '&'
       },
       templateUrl: 'scripts/postEditor/posteditor.html',
       restrict: 'E',
-      link: function(scope, $el, attrs){
+      link: function(scope, $el, attrs) {
 
         scope.state = {
-          'action': 'default',
-          'undoStack': []
+          'action'   : 'default',
+          'undoStack': [scope.targetSegment]
         }
 
         // tokenize the target text
@@ -35,7 +36,7 @@ angular.module('handycat.posteditors')
 
         // note that any html tricks will need to be repeated every time
 
-        var getSelectedText = function() {
+        var getSelectedText = function () {
           var text = "";
           if (window.getSelection) {
             text = window.getSelection().toString();
@@ -45,7 +46,7 @@ angular.module('handycat.posteditors')
           return text;
         }
 
-        var addTooltipToSelected = function() {
+        var addTooltipToSelected = function () {
           var sel, range, text;
 
           // use the range API to replace and move text
@@ -72,7 +73,7 @@ angular.module('handycat.posteditors')
 
                 range = sel.getRangeAt(0);
                 range.deleteContents();
-                range.insertNode(document.createTextNode(' ' + textInSpan+ ' '));
+                range.insertNode(document.createTextNode(' ' + textInSpan + ' '));
                 // TODO: logic to insert left or right spaces (or just do this as postprocessing?)
                 scope.state.action = 'default';
                 updateTargetSegment();
@@ -101,9 +102,8 @@ angular.module('handycat.posteditors')
         }
 
 
-        // TODO: this should really be a range
         scope.selectedText = '';
-        $el.on('mouseup', function(e) {
+        $el.on('mouseup', function (e) {
           var selectedText = getSelectedText();
           if (selectedText !== scope.selectedText) {
             scope.selectedText = selectedText;
@@ -113,28 +113,28 @@ angular.module('handycat.posteditors')
           }
         });
 
-        scope.$on('delete-event', function(e) {
+        scope.$on('delete-event', function (e) {
           console.log('HEARD DELETE');
+          scope.logAction('test', {'test': 'test'});
           // delete this span, update targetSegment model
           $el.find('.tooltip-span').remove();
           scope.showTooltip = false;
           updateTargetSegment();
         });
 
-        // TODO: add overlay to indicate which mode the component is currently in
-        scope.$on('replace-event', function(e) {
+        scope.$on('replace-event', function (e) {
           console.log('HEARD REPLACE');
           // clear text and make contenteditable
-          $el.find('.tooltip-span').attr('contentEditable',true).text(' ');
+          $el.find('.tooltip-span').attr('contentEditable', true).text(' ');
           $el.find('.tooltip-span').first().focus();
           scope.showTooltip = false;
 
           scope.state.action = 'replacing';
         });
 
-        scope.$on('insert-event', function(e) {
+        scope.$on('insert-event', function (e) {
           console.log('HEARD INSERT');
-          var tooltipElement = $el.find('.tooltip-span').first().attr('contentEditable',true).text('  ').focus()[0];
+          var tooltipElement = $el.find('.tooltip-span').first().attr('contentEditable', true).text('  ').focus()[0];
           //var tooltipElement = $el.find('.tooltip-span').text('  ')[0];
           // now select the new text in the element
           var selection = window.getSelection();
@@ -155,28 +155,54 @@ angular.module('handycat.posteditors')
           scope.state.action = 'inserting';
         });
 
-        // WORKING: implement move
         //if we select while component is in move mode, replace selection with text from our span
-        scope.$on('move-event', function(e) {
+        scope.$on('move-event', function (e) {
           console.log('HEARD MOVE');
           // just set move mode, we're waiting for user to select something else
           scope.showTooltip = false;
           scope.state.action = 'moving';
         });
 
-        var updateTargetSegment = function() {
-          // make sure the tooltip span is gone
-          $el.find('.tooltip-span').remove();
-          var newTargetSegment = $el.find('.post-editor').first().text();
-          //remove any extra whitespace
-          newTargetSegment = newTargetSegment.replace(/\s+/g,' ');
-          // TODO postprocess new segments - remove exra spaces etc...
-          scope.targetSegment = newTargetSegment;
-          $el.find('.post-editor').first().text(scope.targetSegment);
-          scope.state.action = 'default';
-          scope.$digest();
+        scope.$on('undo-change', function() {
+          console.log('Heard UNDO');
+          resetTargetSegment();
+        });
+
+        scope.$on('clear-editor', function() {
+          updateTargetSegment('Modify this text to translate...');
+        });
+
+        // called when user clicks undo
+        var resetTargetSegment = function() {
+          var previousSegment;
+          if (scope.state.undoStack.length > 0) {
+            previousSegment = scope.state.undoStack.pop();
+            updateTargetSegment(previousSegment);
+          }
         }
 
+
+        var updateTargetSegment = function(newValue) {
+          var newTargetSegment;
+          // make sure the tooltip span is gone
+          $el.find('.tooltip-span').remove();
+          if (!newValue) {
+            newTargetSegment = $el.find('.post-editor').first().text();
+            // remove any extra whitespace
+            newTargetSegment = newTargetSegment.replace(/\s+/g,' ');
+          } else {
+            newTargetSegment = newValue;
+          }
+          // push the old value to the undo stack
+          scope.state.undoStack.push(scope.targetSegment);
+          scope.targetSegment = newTargetSegment;
+          $el.find('.post-editor').first().text(scope.targetSegment);
+          $timeout(
+            function() {
+              scope.state.action = 'default';
+            },0)
+
+        }
 
         // keybindings
          var handleEscape = function(e) {
@@ -208,9 +234,6 @@ angular.module('handycat.posteditors')
         // TODO: unbind when component goes out of focus, rebind when it comes back in
 
            //...) and  – Lachlan McD. May 13 '13 at 3:32
-
-
-
 
         // update source with new data
         // this is currently used for linking source named entities

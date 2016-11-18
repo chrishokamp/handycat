@@ -6,7 +6,6 @@
       <!--ALL TARGET AREA COMPONENTS BELONG HERE-->
       <!--The component that is currently active is controlled by widgets.activeComponent on the parent scope-->
 
-
       <!-- TYPEAHEAD -->
       <div class="cssSlideUp"
            ng-show="widgets.activeComponent === 'lmAutocomplete'"
@@ -43,12 +42,9 @@
        </translation-selector>
       </div>
 
-      <!--WORKING - commented for lm autocomplete experiments-->
+      <!-- commented for lm autocomplete experiments-->
       <!--<div ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>-->
 
     </div>
-
 </div>
 
-<!-- the enhanced typeahead component -->
-<!--<div ng-model="selected" place-after="ace_cursor" typeahead-trigger-function='currentWordPrefix()' typeahead-on-select='overwritePrefix($item)' flex-typeahead="state for state in getLocation($viewValue) | limitTo:8" typeahead-loading="true"></div>-->

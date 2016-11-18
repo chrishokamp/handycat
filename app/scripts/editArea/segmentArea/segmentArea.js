@@ -164,32 +164,24 @@ angular.module('controllers')
       $scope.$broadcast('clear-editor');
     };
 
+    $scope.undoChange = function() {
+      $scope.$broadcast('undo-change');
+    };
+
   $scope.segmentFinished = function(segId) {
     segId = Number(segId);
     $log.log("SEGMENT FINISHED - segId is: " + segId);
     $scope.setSegmentState('translated');
 
-    // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
-    var timestamp = new Date().getTime();
-    var logData = {
-      'time': timestamp,
-      'user': {
-        '_id': $scope.currentUser.userId,
-        'name': $scope.currentUser.username
-      },
-      'project': {
-        'name': $scope.projectResource.name,
-        '_id' : $scope.projectResource._id
-      },
-      'action': 'segment-complete',
-      'data': {
-        'segmentId': segId,
-        'previousValue': $scope.segment.targetDOM.textContent,
-        'newValue': $scope.segment.target,
-        'configuration': $scope.projectResource.configuration
-      }
+    // log the segment's original value, and its new value, along with any other relevant data
+    var action = 'segment-complete';
+    var logInfo = {
+      'segmentId': segId,
+      'previousValue': $scope.segment.targetDOM.textContent,
+      'newValue': $scope.segment.target,
+      'configuration': $scope.projectResource.configuration
     }
-    editSession.updateStat(logData);
+    logAction(action, logInfo);
 
     // Update the current segment in the XLIFF DOM
     // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
@@ -262,30 +254,13 @@ angular.module('controllers')
       $scope.isActive = {active: true};
 
       // log the activation
-      // EXPERIMENT: log the segment's original value, and its new value, along with any other relevant data
-      var timestamp = new Date().getTime();
-      var logData = {
-        'time': timestamp,
-        'user': {
-          '_id': $scope.currentUser.userId,
-          'name': $scope.currentUser.username
-        },
-        'project': {
-          'name': $scope.projectResource.name,
-          '_id' : $scope.projectResource._id
-        },
-        'action': 'change-segment',
-        'data': {
-          'segmentId': $scope.id.index,
-          'currentValue': $scope.segment.target,
-          'configuration': $scope.projectResource.configuration
-        }
+      var action = 'change-segment';
+      var logInfo = {
+        'segmentId': $scope.id.index,
+        'currentValue': $scope.segment.target,
+        'configuration': $scope.projectResource.configuration
       }
-      editSession.updateStat(logData);
-      // END experiment
-
-      // configure the keyboard shortcuts for the active segment
-      // hotkeys should be unbound manually using the hotkeys.del() method
+      logAction(action, logInfo);
 
       // del the hotkey combos we're about to re-add
       hotkeyConfigs.forEach(
@@ -294,6 +269,8 @@ angular.module('controllers')
         }
       );
 
+      // configure the keyboard shortcuts for the active segment
+      // hotkeys should be unbound manually using the hotkeys.del() method
       hotkeyConfigs.forEach(function (hotkeyConfig) {
         $log.log(hotkeyConfig);
         hotkeys.add(hotkeyConfig);
@@ -305,7 +282,25 @@ angular.module('controllers')
     else {
       $scope.isActive = {active: false};
     }
-    //
+
   });
+
+  var logAction = function(action, data) {
+    var timestamp = new Date().getTime();
+    var logData = {
+      'time': timestamp,
+      'user': {
+        '_id': $scope.currentUser.userId,
+        'name': $scope.currentUser.username
+      },
+      'project': {
+        'name': $scope.projectResource.name,
+        '_id' : $scope.projectResource._id
+      },
+      'action': action,
+      'data': data
+    }
+    editSession.updateStat(logData)
+  }
 
 }]);

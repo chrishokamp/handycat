@@ -16,9 +16,7 @@ angular.module('directives').directive('staticTarget', ['editSession', '$compile
       });
       // make the height the same as the source (max of source+target heights)
 
-      // TODO: adding this component is slow
-      // TODO: either we need to load it beforehand (i.e. one segment early), or we need to find the bottleneck (it's probably loading the ace editor)
-      // TODO: naively listening for click on this element causes it to be reloaded every time -- first check if the segment is active
+      // this is loads the available interactive components dynamically when user clicks on the target area
       el.on('click', function() {
         $log.log('targetText was clicked...');
         // init the components if they don't exist

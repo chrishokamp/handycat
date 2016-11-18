@@ -124,12 +124,20 @@
                   </md-button>
                 </div>
                 <!--the buttons below here don't work yet-->
+                <!--<div>-->
+                  <!--<md-button-->
+                          <!--ng-click="clearEditor()"-->
+                          <!--ng-disabled="getSegmentState(id.index) === 'translated'"-->
+                  <!-->
+                    <!--<span class="glyphicon glyphicon-remove"></span>-->
+                  <!--</md-button>-->
+                <!--</div>-->
                 <div>
                   <md-button
-                          ng-click="clearEditor()"
+                          ng-click="undoChange()"
                           ng-disabled="getSegmentState(id.index) === 'translated'"
-                  >
-                    <span class="glyphicon glyphicon-remove"></span>
+                          >
+                    <span class="glyphicon glyphicon-chevron-left"></span>
                   </md-button>
                 </div>
                 <div>
@@ -137,7 +145,7 @@
                           ng-click="clearEditor()"
                           ng-disabled="getSegmentState(id.index) === 'translated'"
                           >
-                    <span class="glyphicon glyphicon-undo"></span>
+                    <span class="glyphicon glyphicon-remove"></span>
                   </md-button>
                 </div>
               </div>

@@ -11,9 +11,16 @@ post-editor > div {
   background: white;
   float: left;
   white-space: nowrap;
+
+  .post-editor-action {
+    &:hover {
+      background-color: lightgray !important;
+    }
+  }
 }
 .tooltip-span {
-  color: blue;
+  color: white;
+  background-color: black;
   white-space: pre !important;
 }
 

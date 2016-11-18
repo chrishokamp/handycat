@@ -17,7 +17,7 @@ angular.module('services')
           this.sessionId= undefined;
           this.sessionIdShort= undefined;
           this.sessionPromise= undefined;
-          // TODO: initialize this from the server
+          // TODO: initialize the current segment from the server
           this.setSegment(0);
           var self = this;
           // the user is logged in, initialize a new session, and get back the unique session id
