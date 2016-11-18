@@ -79,15 +79,24 @@ var experimentGroups = [
   {
     name: 'Group One',
     sampleFiles: [
+      {name: 'Mobile Phone Instructions', url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
+        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      },
+      {name: 'Marketing Questionnaire', url: 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
+        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      },
+      {name: 'Product Catalog - Office Supplies', url: 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
+        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      },
+      {name: 'User Manual: Industrial Equipment', url: 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
+        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      },
       //{name: 'en-es-sentences_1', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
       //  configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
       //},
-      {name: 'felix_porto_matecat', url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
-        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-      },
-      {name: 'en-es-sentences_4', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
-        configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
-      },
+      //{name: 'en-es-sentences_4', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+      //  configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+      //},
     ]
   },
   {
