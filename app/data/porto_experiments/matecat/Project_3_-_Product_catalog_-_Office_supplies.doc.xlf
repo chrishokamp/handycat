@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" xmlns:okp="okapi-framework:xliff-extensions" its:version="2.0" version="1.2"><file datatype="x-docx" filter="com.matecat.filters.basefilters.DefaultFilter" original="Project_3_-_Product_catalog_-_Office_supplies.doc" source-language="en-us" target-language="pt-PT" tool-id="matecat-converter 1.2.1"><header><reference><internal-file form="base64">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</internal-file></reference></header><body/></file><file datatype="x-rkm" filter="com.matecat.filters.basefilters.DefaultFilter" original="manifest.rkm" source-language="en-us" target-language="pt-PT" tool-id="matecat-converter 1.2.1"><header><reference><internal-file form="base64">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCEtLT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09LS0+CjwhLS1QTEVBU0UsIERPIE5PVCBSRU5BTUUsIE1PVkUsIE1PRElGWSBPUiBBTFRFUiBJTiBBTlkgV0FZIFRISVMgRklMRS0tPgo8IS0tPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0tLT4KPG1hbmlmZXN0IHZlcnNpb249IjIiIGxpYlZlcnNpb249IjEuMi4xIiBwcm9qZWN0SWQ9Ik5CNkMzQUM0NCIgcGFja2FnZUlkPSJiOTNiMTZmNC1jYjgzLTQyMjQtOGY2MS1hMzU2MzM0ZWExMTEiIHNvdXJjZT0iZW4tdXMiIHRhcmdldD0icHQtcHQiIG9yaWdpbmFsU3ViRGlyPSJvcmlnaW5hbCIgc2tlbGV0b25TdWJEaXI9InNrZWxldG9uIiBzb3VyY2VTdWJEaXI9IndvcmsiIHRhcmdldFN1YkRpcj0id29yayIgbWVyZ2VTdWJEaXI9ImRvbmUiIHRtU3ViRGlyPSIiIGRhdGU9IjIwMTYtMTEtMDEgMjA6MzI6NDMrMDEwMCIgdXNlQXBwcm92ZWRPbmx5PSIwIiB1cGRhdGVBcHByb3ZlZEZsYWc9IjAiPgo8Y3JlYXRvclBhcmFtZXRlcnM+PC9jcmVhdG9yUGFyYW1ldGVycz4KPGRvYyB4bWw6c3BhY2U9InByZXNlcnZlIiBkb2NJZD0iMSIgZXh0cmFjdGlvblR5cGU9InhsaWZmIiByZWxhdGl2ZUlucHV0UGF0aD0iUHJvamVjdF8zXy1fUHJvZHVjdF9jYXRhbG9nXy1fT2ZmaWNlX3N1cHBsaWVzLmRvY3giIGZpbHRlcklkPSJva2Zfb3BlbnhtbCIgaW5wdXRFbmNvZGluZz0iVVRGLTgiIHJlbGF0aXZlVGFyZ2V0UGF0aD0iUHJvamVjdF8zXy1fUHJvZHVjdF9jYXRhbG9nXy1fT2ZmaWNlX3N1cHBsaWVzLm91dC5kb2N4IiB0YXJnZXRFbmNvZGluZz0iVVRGLTgiIHNlbGVjdGVkPSIxIj5JM1l4Q21KUWNtVm1aWEpsYm1ObFZISmhibk5zWVhSbFJHOWpVSEp2Y0dWeWRHbGxjeTVpUFdaaGJITmxDbUpRY21WbVpYSmxibU5sVkhKaGJuTnNZWFJsUTI5dGJXVnVkSE11WWoxbVlXeHpaUXBpVUhKbFptVnlaVzVqWlZSeVlXNXpiR0YwWlZCdmQyVnljRzlwYm5ST2IzUmxjeTVpUFhSeWRXVUtZbEJ5WldabGNtVnVZMlZVY21GdWMyeGhkR1ZRYjNkbGNuQnZhVzUwVFdGemRHVnljeTVpUFdaaGJITmxDbUpRY21WbVpYSmxibU5sVkhKaGJuTnNZWFJsVjI5eVpFaGxZV1JsY25OR2IyOTBaWEp6TG1JOWRISjFaUXBpVUhKbFptVnlaVzVqWlZSeVlXNXpiR0YwWlZkdmNtUklhV1JrWlc0dVlqMW1ZV3h6WlFwaVVISmxabVZ5Wlc1alpWUnlZVzV6YkdGMFpWZHZjbVJGZUdOc2RXUmxSM0poY0docFkwMWxkR0ZFWVhSaExtSTlkSEoxWlFwaVVISmxabVZ5Wlc1alpWUnlZVzV6YkdGMFpVVjRZMlZzUlhoamJIVmtaVU52Ykc5eWN5NWlQV1poYkhObENtSlFjbVZtWlhKbGJtTmxWSEpoYm5Oc1lYUmxSWGhqWld4RmVHTnNkV1JsUTI5c2RXMXVjeTVpUFdaaGJITmxDbUpRY21WbVpYSmxibU5sVkhKaGJuTnNZWFJsUlhoalpXeFRhR1ZsZEU1aGJXVnpMbUk5Wm1Gc2MyVUtZbEJ5WldabGNtVnVZMlZCWkdSTWFXNWxVMlZ3WVhKaGRHOXlRWE5EYUdGeVlXTjBaWEl1WWoxMGNuVmxDbUpRY21WbVpYSmxibU5sVW1Wd2JHRmpaVTV2UW5KbFlXdEllWEJvWlc1VVlXY3VZajEwY25WbENtSlFjbVZtWlhKbGJtTmxTV2R1YjNKbFUyOW1kRWg1Y0dobGJsUmhaeTVpUFhSeWRXVUtZbEJ5WldabGNtVnVZMlZCWkdSVVlXSkJjME5vWVhKaFkzUmxjaTVpUFhSeWRXVUtZbEJ5WldabGNtVnVZMlZCWjJkeVpYTnphWFpsUTJ4bFlXNTFjQzVpUFhSeWRXVUtZbEJ5WldabGNtVnVZMlZCZFhSdmJXRjBhV05oYkd4NVFXTmpaWEIwVW1WMmFYTnBiMjV6TG1JOVptRnNjMlVLWWxCeVpXWmxjbVZ1WTJWVWNtRnVjMnhoZEdWRmVHTmxiRWhwWkdSbGJpNWlQV1poYkhObENtOTFkSEIxZEZObFoyMWxiblJoZEdsdmJsUjVjR1V1YVQwekNuUnpSWGhqWld4RmVHTnNkV1JsWkVOdmJHOXljeTVwUFRBS2RITkZlR05sYkVWNFkyeDFaR1ZrUTI5c2RXMXVjeTVwUFRBS2RITkZlR05zZFdSbFYyOXlaRk4wZVd4bGN5NXBQVEE9PC9kb2M+CjwvbWFuaWZlc3Q+</internal-file></reference></header><body/></file>
+<file datatype="x-undefined" original="word/styles.xml" source-language="en-us" target-language="pt-PT">
+<body>
+</body>
+</file>
+<file datatype="x-undefined" original="word/document.xml" source-language="en-us" target-language="pt-PT">
+<body>
+<trans-unit id="NFDBB2FA9-tu1" xml:space="preserve">
+<source xml:lang="en-us">PC and plastic surface cleaning wipes</source>
+<seg-source><mrk mid="0" mtype="seg">PC and plastic surface cleaning wipes</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">toalhetes de limpeza de PC e de superfície de plástico</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu2" xml:space="preserve">
+<source xml:lang="en-us">Individually packed for extra convenience</source>
+<seg-source><mrk mid="0" mtype="seg">Individually packed for extra convenience</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Embalado individualmente para maior comodidade</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu3" xml:space="preserve">
+<source xml:lang="en-us">Duo detachable tearaway packaging</source>
+<seg-source><mrk mid="0" mtype="seg">Duo detachable tearaway packaging</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">embalagem tearaway destacável Duo</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu4" xml:space="preserve">
+<source xml:lang="en-us">Anti-static coating after cleaning</source>
+<seg-source><mrk mid="0" mtype="seg">Anti-static coating after cleaning</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">revestimento anti-estático após a limpeza</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu5" xml:space="preserve">
+<source xml:lang="en-us">Each pack contains 20 pairs</source>
+<seg-source><mrk mid="0" mtype="seg">Each pack contains 20 pairs</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Cada embalagem contém 20 pares</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu6" xml:space="preserve">
+<source xml:lang="en-us">Wet and Dry Surface Cleaning Wipes</source>
+<seg-source><mrk mid="0" mtype="seg">Wet and Dry Surface Cleaning Wipes</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Wet and Dry superfície toalhetes de limpeza</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu7" xml:space="preserve">
+<source xml:lang="en-us">Keep your desk, laptop and keyboard surfaces clean of dirt and dust with the &lt;tag&gt; Wet and Dry Surface Cleaning Wipes.</source>
+<seg-source><mrk mid="0" mtype="seg">Keep your desk, laptop and keyboard surfaces clean of dirt and dust with the &lt;tag&gt; Wet and Dry Surface Cleaning Wipes.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Mantenha as suas superfícies de mesa, laptop e teclado limpo de sujeira e poeira com as &lt;tag&gt; molhadas e superfície seca toalhetes de limpeza.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu8" xml:space="preserve">
+<source xml:lang="en-us">The &lt;tag&gt; Anti-Static Cleaning Cloths are ideal for fast cleaning of telephone sets, keyboards and other hard surfaces.</source>
+<seg-source><mrk mid="0" mtype="seg">The &lt;tag&gt; Anti-Static Cleaning Cloths are ideal for fast cleaning of telephone sets, keyboards and other hard surfaces.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">A &lt;tag&gt; Anti-estático panos de limpeza são ideais para limpeza rápida dos aparelhos telefónicos, teclados e outras superfícies duras.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu9" xml:space="preserve">
+<source xml:lang="en-us">With its anti-static properties the wipes ensures that dust does not immediately settle again after cleaning.</source>
+<seg-source><mrk mid="0" mtype="seg">With its anti-static properties the wipes ensures that dust does not immediately settle again after cleaning.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Com suas propriedades anti-estáticas os toalhetes garante que a poeira não resolve volte imediatamente após a limpeza.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu10" xml:space="preserve">
+<source xml:lang="en-us">The easy-to-use wipes are individually packed which makes it easier to carry around in your bag, case or pocket, and prevents the wipes from drying out if left unused over time.</source>
+<seg-source><mrk mid="0" mtype="seg">The easy-to-use wipes are individually packed which makes it easier to carry around in your bag, case or pocket, and prevents the wipes from drying out if left unused over time.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Os toalhetes de fácil utilização são embalados individualmente, o que torna mais fácil de transportar no seu saco, caso ou bolso, e impede que os toalhetes de secar se não forem utilizadas ao longo do tempo.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu11" xml:space="preserve">
+<source xml:lang="en-us">Each package contains 5 pre-moist wipes.</source>
+<seg-source><mrk mid="0" mtype="seg">Each package contains 5 pre-moist wipes.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Cada pacote contém 5 toalhetes pré-húmidas.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu12" xml:space="preserve">
+<source xml:lang="en-us">Individually packed pairs for added convenience</source>
+<seg-source><mrk mid="0" mtype="seg">Individually packed pairs for added convenience</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">pares embalados individualmente para maior comodidade</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu13" xml:space="preserve">
+<source xml:lang="en-us">Designed for cleaning telephone sets, keyboards and other hard surfaces</source>
+<seg-source><mrk mid="0" mtype="seg">Designed for cleaning telephone sets, keyboards and other hard surfaces</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Projetado para aparelhos telefónicos de limpeza, teclados e outras superfícies duras</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu14" xml:space="preserve">
+<source xml:lang="en-us">Pre-moist wipes</source>
+<seg-source><mrk mid="0" mtype="seg">Pre-moist wipes</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">toalhetes pré-húmidas</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu15" xml:space="preserve">
+<source xml:lang="en-us">Wipes are 100% recyclable</source>
+<seg-source><mrk mid="0" mtype="seg">Wipes are 100% recyclable</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Wipes são 100% recicláveis</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu16" xml:space="preserve">
+<source xml:lang="en-us">5 wipes per pack</source>
+<seg-source><mrk mid="0" mtype="seg">5 wipes per pack</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">5 toalhetes por pacote</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu17" xml:space="preserve">
+<source xml:lang="en-us">Anti-Static Cleaning Cloth for Telephones, Keyboards and Hard Surfaces</source>
+<seg-source><mrk mid="0" mtype="seg">Anti-Static Cleaning Cloth for Telephones, Keyboards and Hard Surfaces</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Pano antiestático de limpeza para telefones, teclados e Hard Surfaces</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu18" xml:space="preserve">
+<source xml:lang="en-us">Thoroughly clean telephone sets, keyboards and other hard surfaces with the &lt;tag&gt; Anti-Static Cleaning Cloths.</source>
+<seg-source><mrk mid="0" mtype="seg">Thoroughly clean telephone sets, keyboards and other hard surfaces with the &lt;tag&gt; Anti-Static Cleaning Cloths.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">conjuntos completamente limpas de telefone, teclados e outras superfícies duras com a &lt;tag&gt; Anti-estático panos de limpeza.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu19" xml:space="preserve">
+<source xml:lang="en-us">This premium quality &lt;tag&gt; transport and bundling tape comprises a very powerful synthetic rubber adhesive that will bond well to all types of smooth or uneven surfaces including steel, plastic and cardboard.</source>
+<seg-source><mrk mid="0" mtype="seg">This premium quality &lt;tag&gt; transport and bundling tape comprises a very powerful synthetic rubber adhesive that will bond well to all types of smooth or uneven surfaces including steel, plastic and cardboard.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esta qualidade superior &lt;tag&gt; transporte e agregação de fita compreende um adesivo de borracha sintética muito poderosa que irá ligar bem a todos os tipos de superfícies lisas ou irregulares, incluindo aço, plástico e papelão.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu20" xml:space="preserve">
+<source xml:lang="en-us">This very reliable and high performing fibreglass packaging tape features glass filaments laminated onto polyester film.</source>
+<seg-source><mrk mid="0" mtype="seg">This very reliable and high performing fibreglass packaging tape features glass filaments laminated onto polyester film.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Este desempenho fita de embalagem de fibra de vidro muito confiável e de alta possui filamentos de vidro laminado em película de poliéster.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu21" xml:space="preserve">
+<source xml:lang="en-us">Used primarily to seal heavy duty cartons, securely fasten pallets or to bundle loose items together, &lt;tag&gt;  tape is a durable, multipurpose and secure solution that is tear resistant.</source>
+<seg-source><mrk mid="0" mtype="seg">Used primarily to seal heavy duty cartons, securely fasten pallets or to bundle loose items together, &lt;tag&gt;  tape is a durable, multipurpose and secure solution that is tear resistant.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Usado principalmente para selar embalagens pesados, prenda paletes ou para agrupar os itens soltos juntos, &lt;tag&gt; fita é uma solução durável, polivalente e seguro que é resistente ao desgaste.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu22" xml:space="preserve">
+<source xml:lang="en-us">It is also ideal for transport securing, fastening components and end-tabbing metal bands and coils.</source>
+<seg-source><mrk mid="0" mtype="seg">It is also ideal for transport securing, fastening components and end-tabbing metal bands and coils.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Também é ideal para proteger o transporte, componentes de fixação e bandas de metal-tabulações finais e bobinas.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu23" xml:space="preserve">
+<source xml:lang="en-us">Each transparent roll of tape measures 19 mm x 50 m.</source>
+<seg-source><mrk mid="0" mtype="seg">Each transparent roll of tape measures 19 mm x 50 m.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Cada rolo de fita adesiva transparente mede 19 mm x 50 m.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu24" xml:space="preserve">
+<source xml:lang="en-us">Used for sealing heavy duty cartons, fastening pallets or bundling of heavy items</source>
+<seg-source><mrk mid="0" mtype="seg">Used for sealing heavy duty cartons, fastening pallets or bundling of heavy items</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Usado para selar embalagens pesados, paletes de fixação ou a agregação de itens pesados</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu25" xml:space="preserve">
+<source xml:lang="en-us">Durable, tear-resistant fibreglass backing material</source>
+<seg-source><mrk mid="0" mtype="seg">Durable, tear-resistant fibreglass backing material</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">, Material de fibra de vidro revestimento protetor resistente ao desgaste durável</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu26" xml:space="preserve">
+<source xml:lang="en-us">Very high tensile strength</source>
+<seg-source><mrk mid="0" mtype="seg">Very high tensile strength</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Muito alta resistência à tracção</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu27" xml:space="preserve">
+<source xml:lang="en-us">Very low elongation</source>
+<seg-source><mrk mid="0" mtype="seg">Very low elongation</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Alongamento muito baixo</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu28" xml:space="preserve">
+<source xml:lang="en-us">High-quality synthetic rubber adhesive</source>
+<seg-source><mrk mid="0" mtype="seg">High-quality synthetic rubber adhesive</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">adesivo de borracha sintética de alta qualidade</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu29" xml:space="preserve">
+<source xml:lang="en-us">Use the heavy duty &lt;tag&gt; 04590 Monofilament Tape to securely seal boxes, fasten pallets or bundle loose items with its tear-resistance and high tensile strength.</source>
+<seg-source><mrk mid="0" mtype="seg">Use the heavy duty &lt;tag&gt; 04590 Monofilament Tape to securely seal boxes, fasten pallets or bundle loose items with its tear-resistance and high tensile strength.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Use o serviço pesado Tape &lt;tag&gt; 04.590 monofilamento para selar firmemente caixas, paletes prender ou agrupar os itens soltos com a sua lágrima-resistência e alta resistência à tração.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu30" xml:space="preserve">
+<source xml:lang="en-us">The &lt;tag&gt; Pack 'n Go hand dispenser is easy to use and is ideal for the casual packager.</source>
+<seg-source><mrk mid="0" mtype="seg">The &lt;tag&gt; Pack 'n Go hand dispenser is easy to use and is ideal for the casual packager.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">A &lt;tag&gt; Pack 'n dispensador de mão Go é fácil de usar e é ideal para o empacotador casual.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu31" xml:space="preserve">
+<source xml:lang="en-us">Its sturdy metal frame and sharp cutter is complemented with a flexible tape-pressing wiper and a moulded plastic hand grip.</source>
+<seg-source><mrk mid="0" mtype="seg">Its sturdy metal frame and sharp cutter is complemented with a flexible tape-pressing wiper and a moulded plastic hand grip.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Sua armação de metal resistente e cortador afiado é complementada com um limpador de pára-pressionando fita flexível e um aperto de mão de plástico moldado.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu32" xml:space="preserve">
+<source xml:lang="en-us">Easy to hold with the ergonomically designed grip, this &lt;tag&gt; hand dispenser is an ideal accompaniment for securely sealing shipping cartons and general packages.</source>
+<seg-source><mrk mid="0" mtype="seg">Easy to hold with the ergonomically designed grip, this &lt;tag&gt; hand dispenser is an ideal accompaniment for securely sealing shipping cartons and general packages.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Fácil de segurar com o aperto ergonomicamente projetado, este distribuidor &lt;tag&gt; mão é um acompanhamento ideal para a vedação segura caixas de transporte e pacotes gerais.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu33" xml:space="preserve">
+<source xml:lang="en-us">Each dispenser is able to accept tape rolls to a maximum width of 50 mm and maximum length of 66 m.</source>
+<seg-source><mrk mid="0" mtype="seg">Each dispenser is able to accept tape rolls to a maximum width of 50 mm and maximum length of 66 m.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Cada embalagem é capaz de aceitar rolos de fita para uma largura máxima de 50 mm e comprimento máximo de 66 m.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu34" xml:space="preserve">
+<source xml:lang="en-us">Tape dispenser for packing</source>
+<seg-source><mrk mid="0" mtype="seg">Tape dispenser for packing</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">dispensador de fita para a embalagem</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu35" xml:space="preserve">
+<source xml:lang="en-us">Seal shipping cartons and general packages quicker and easier</source>
+<seg-source><mrk mid="0" mtype="seg">Seal shipping cartons and general packages quicker and easier</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">caixas de transporte Seal e pacotes gerais mais rápidas e mais fáceis</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu36" xml:space="preserve">
+<source xml:lang="en-us">Solid metal frame</source>
+<seg-source><mrk mid="0" mtype="seg">Solid metal frame</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">estrutura de metal sólido</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu37" xml:space="preserve">
+<source xml:lang="en-us">Ergonomically designed hand grip</source>
+<seg-source><mrk mid="0" mtype="seg">Ergonomically designed hand grip</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">aperto de mão ergonomicamente projetado</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu38" xml:space="preserve">
+<source xml:lang="en-us">Sharp cutter with replaceable blade</source>
+<seg-source><mrk mid="0" mtype="seg">Sharp cutter with replaceable blade</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">cortador afiado com lâmina substituível</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu39" xml:space="preserve">
+<source xml:lang="en-us">Rubber roller and flexible tape-pressing wiper makes it easy to use</source>
+<seg-source><mrk mid="0" mtype="seg">Rubber roller and flexible tape-pressing wiper makes it easy to use</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">rolo de borracha e limpador de prensagem fita flexível faz com que seja fácil de usar</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu40" xml:space="preserve">
+<source xml:lang="en-us">Featuring an easy-to-use grip and solid metal frame, the &lt;tag&gt; Pack 'n Go Hand Tape Dispenser is the ideal accompaniment for all your tape packaging needs.</source>
+<seg-source><mrk mid="0" mtype="seg">Featuring an easy-to-use grip and solid metal frame, the &lt;tag&gt; Pack 'n Go Hand Tape Dispenser is the ideal accompaniment for all your tape packaging needs.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Apresentando um aperto fácil de usar e estrutura de metal sólida, o &lt;tag&gt; Pack 'n Go Mão Tape Dispenser é o acompanhamento ideal para todas as suas necessidades de embalagem de fita.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu41" xml:space="preserve">
+<source xml:lang="en-us">Pack 'n Go Hand Tape Dispenser Blue 171 x 68 x 115 mm</source>
+<seg-source><mrk mid="0" mtype="seg">Pack 'n Go Hand Tape Dispenser Blue 171 x 68 x 115 mm</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Pack 'n Go Mão Tape Dispenser azul 171 x 68 x 115 mm</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu42" xml:space="preserve">
+<source xml:lang="en-us">Featuring an easy-to-use grip and solid metal frame, the &lt;tag&gt; Pack 'n Go Hand Tape Dispenser is the ideal accompaniment for all your tape packaging needs.</source>
+<seg-source><mrk mid="0" mtype="seg">Featuring an easy-to-use grip and solid metal frame, the &lt;tag&gt; Pack 'n Go Hand Tape Dispenser is the ideal accompaniment for all your tape packaging needs.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Apresentando um aperto fácil de usar e estrutura de metal sólida, o &lt;tag&gt; Pack 'n Go Mão Tape Dispenser é o acompanhamento ideal para todas as suas necessidades de embalagem de fita.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu43" xml:space="preserve">
+<source xml:lang="en-us">The &lt;tag&gt; hand dispenser features an easy-to-use grip, fully adjustable tension control and a rubber roller for easy application of all standard packaging tapes.</source>
+<seg-source><mrk mid="0" mtype="seg">The &lt;tag&gt; hand dispenser features an easy-to-use grip, fully adjustable tension control and a rubber roller for easy application of all standard packaging tapes.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">O distribuidor &lt;tag&gt; mão apresenta um aperto fácil de usar, controle de tensão totalmente ajustável e um rolo de borracha para facilitar a aplicação de todas as fitas de embalagem padrão.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu44" xml:space="preserve">
+<source xml:lang="en-us">It also comes with 2 rolls of polypropylene packaging tape to make one handy and economical package.</source>
+<seg-source><mrk mid="0" mtype="seg">It also comes with 2 rolls of polypropylene packaging tape to make one handy and economical package.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Ele também vem com 2 rolos de fita de embalagem de polipropileno para fazer um pacote acessível e econômica.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu45" xml:space="preserve">
+<source xml:lang="en-us">The dispenser's sturdy metal frame and sharp cutter with plastic cover to protect you from injuries is complemented with a flexible tape pressing wiper and a moulded plastic hand grip.</source>
+<seg-source><mrk mid="0" mtype="seg">The dispenser's sturdy metal frame and sharp cutter with plastic cover to protect you from injuries is complemented with a flexible tape pressing wiper and a moulded plastic hand grip.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">armação de metal resistente do dispensador e cortador afiado com tampa de plástico para protegê-lo de lesões é complementado com uma fita pressionando limpador flexível e um aperto de mão de plástico moldado.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu46" xml:space="preserve">
+<source xml:lang="en-us">Easy to hold, this combination of &lt;tag&gt; hand dispenser and tape rolls is a durable and low-cost solution for general packaging needs.</source>
+<seg-source><mrk mid="0" mtype="seg">Easy to hold, this combination of &lt;tag&gt; hand dispenser and tape rolls is a durable and low-cost solution for general packaging needs.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Fácil de segurar, essa combinação de rolos &lt;tag&gt; dispensador de mão e de fita é uma solução durável e de baixo custo para as necessidades gerais de embalagem.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu47" xml:space="preserve">
+<source xml:lang="en-us">The dispenser is able to accept tape rolls to a maximum width of 50 mm and maximum length of 60 m.</source>
+<seg-source><mrk mid="0" mtype="seg">The dispenser is able to accept tape rolls to a maximum width of 50 mm and maximum length of 60 m.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">O distribuidor é capaz de aceitar rolos de fita para uma largura máxima de 50 mm e comprimento máximo de 60 m.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu48" xml:space="preserve">
+<source xml:lang="en-us">Easily adjustable tension control</source>
+<seg-source><mrk mid="0" mtype="seg">Easily adjustable tension control</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">controle de tensão facilmente ajustável</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu49" xml:space="preserve">
+<source xml:lang="en-us">Sharp cutter</source>
+<seg-source><mrk mid="0" mtype="seg">Sharp cutter</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">cortador afiado</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu50" xml:space="preserve">
+<source xml:lang="en-us">Rubber roller and flexible tape-pressing wiper makes it easy to use</source>
+<seg-source><mrk mid="0" mtype="seg">Rubber roller and flexible tape-pressing wiper makes it easy to use</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">rolo de borracha e limpador de prensagem fita flexível faz com que seja fácil de usar</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu51" xml:space="preserve">
+<source xml:lang="en-us">A pack contains 2 rolls of polypropylene packaging tape plus 1 hand dispenser</source>
+<seg-source><mrk mid="0" mtype="seg">A pack contains 2 rolls of polypropylene packaging tape plus 1 hand dispenser</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">A embalagem contém 2 rolos de fita de embalagem de polipropileno e 1 distribuidor de mão</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu52" xml:space="preserve">
+<source xml:lang="en-us">Packaging Tape Promo Pack Including Hand Tape Dispenser Blue and Red + PP Packaging Tape Brown 2 Rolls 50 mm x 60 m</source>
+<seg-source><mrk mid="0" mtype="seg">Packaging Tape Promo Pack Including Hand Tape Dispenser Blue and Red + PP Packaging Tape Brown 2 Rolls 50 mm x 60 m</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Packaging Tape Promo Pack incluindo a fita mão Dispenser Azul e Vermelho   PP embalagem fita Brown 2 Rolls 50 mm x 60 m</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu53" xml:space="preserve">
+<source xml:lang="en-us">Featuring a &lt;tag&gt; Hand Tape Dispenser and 2 packaging tape rolls, this &lt;tag&gt; Promo Pack is the ideal solution for all your tape packaging needs.</source>
+<seg-source><mrk mid="0" mtype="seg">Featuring a &lt;tag&gt; Hand Tape Dispenser and 2 packaging tape rolls, this &lt;tag&gt; Promo Pack is the ideal solution for all your tape packaging needs.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Apresentando um &lt;tag&gt; Mão Dispenser Tape e 2 rolos de fita de embalagem, este &lt;tag&gt; Promo Pack é a solução ideal para todas as suas necessidades de embalagem de fita.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu54" xml:space="preserve">
+<source xml:lang="en-us">This transparent plastic bag is great for business, personal, or school use; keep all sorts of items wrapped up neatly so that they don't get lost, damaged or misplaced.</source>
+<seg-source><mrk mid="0" mtype="seg">This transparent plastic bag is great for business, personal, or school use; keep all sorts of items wrapped up neatly so that they don't get lost, damaged or misplaced.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Este saco de plástico transparente é grande para o negócio, ou uso escolar pessoal; manter todos os tipos de itens embalados ordenadamente para que eles não ficam perdidos, danificados ou extraviados.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu55" xml:space="preserve">
+<source xml:lang="en-us">The bag is suitable for all kinds of items, from tools to documents to food items.</source>
+<seg-source><mrk mid="0" mtype="seg">The bag is suitable for all kinds of items, from tools to documents to food items.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">O saco é adequado para todos os tipos de itens, desde as ferramentas aos documentos para itens alimentares.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu56" xml:space="preserve">
+<source xml:lang="en-us">These &lt;tag&gt; Grip Seal Polythene bags are reusable, making them extremely cost-effective.</source>
+<seg-source><mrk mid="0" mtype="seg">These &lt;tag&gt; Grip Seal Polythene bags are reusable, making them extremely cost-effective.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Estes &lt;tag&gt; aperto Seal sacos de polietileno são reutilizáveis, tornando-os extremamente rentável.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu57" xml:space="preserve">
+<source xml:lang="en-us">They are furthermore easy to use, since the bags' channel closes and seals with ease.</source>
+<seg-source><mrk mid="0" mtype="seg">They are furthermore easy to use, since the bags' channel closes and seals with ease.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Eles são, além disso, fácil de usar, uma vez que canal dos sacos é fechada e vedada com facilidade.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu58" xml:space="preserve">
+<source xml:lang="en-us">In addition, each bag features a useful labelling strip, for easy identification of its contents.</source>
+<seg-source><mrk mid="0" mtype="seg">In addition, each bag features a useful labelling strip, for easy identification of its contents.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Além disso, cada saco apresenta uma tira de marcação úteis, para facilitar a identificação do seu conteúdo.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu59" xml:space="preserve">
+<source xml:lang="en-us">The bags come with a 5 mm hole at the top, which allows you to hang the bags where required.</source>
+<seg-source><mrk mid="0" mtype="seg">The bags come with a 5 mm hole at the top, which allows you to hang the bags where required.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">As bolsas vêm com um buraco de 5 mm na parte superior, que lhe permite pendurar os sacos onde necessário.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu60" xml:space="preserve">
+<source xml:lang="en-us">Resealable plastic wallets</source>
+<seg-source><mrk mid="0" mtype="seg">Resealable plastic wallets</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">carteiras de plástico hermeticamente fechado</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu61" xml:space="preserve">
+<source xml:lang="en-us">Keeps items from getting lost, damaged or misplaced</source>
+<seg-source><mrk mid="0" mtype="seg">Keeps items from getting lost, damaged or misplaced</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Mantém itens de ficar perdido, danificado ou extraviado</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu62" xml:space="preserve">
+<source xml:lang="en-us">Suitable for a wide range of items</source>
+<seg-source><mrk mid="0" mtype="seg">Suitable for a wide range of items</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Adequado para uma ampla gama de itens</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu63" xml:space="preserve">
+<source xml:lang="en-us">Can be used in workplace, school or home</source>
+<seg-source><mrk mid="0" mtype="seg">Can be used in workplace, school or home</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Pode ser usado em local de trabalho, escola ou em casa</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu64" xml:space="preserve">
+<source xml:lang="en-us">Readily visible contents</source>
+<seg-source><mrk mid="0" mtype="seg">Readily visible contents</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">conteúdos facilmente visível</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu65" xml:space="preserve">
+<source xml:lang="en-us">Reusable for cost savings</source>
+<seg-source><mrk mid="0" mtype="seg">Reusable for cost savings</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Reutilizável para redução de custos</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu66" xml:space="preserve">
+<source xml:lang="en-us">6 mm hole at top of bag for hanging</source>
+<seg-source><mrk mid="0" mtype="seg">6 mm hole at top of bag for hanging</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Orifício de 6 mm na parte superior do saco para pendurar</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu67" xml:space="preserve">
+<source xml:lang="en-us">Easy to use</source>
+<seg-source><mrk mid="0" mtype="seg">Easy to use</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Fácil de utilizar</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu68" xml:space="preserve">
+<source xml:lang="en-us">White printed label panel for writing on</source>
+<seg-source><mrk mid="0" mtype="seg">White printed label panel for writing on</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Painel branco rótulo impresso para escrever sobre</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu69" xml:space="preserve">
+<source xml:lang="en-us">Total thickness:</source>
+<seg-source><mrk mid="0" mtype="seg">Total thickness:</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Espessura total</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu70" xml:space="preserve">
+<source xml:lang="en-us">Packaged quantity:</source>
+<seg-source><mrk mid="0" mtype="seg">Packaged quantity:</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Quantidade embalada:</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu71" xml:space="preserve">
+<source xml:lang="en-us">Label Permanent Multipurpose White Angular 99.1 x 67.7 mm 100 Sheets</source>
+<seg-source><mrk mid="0" mtype="seg">Label Permanent Multipurpose White Angular 99.1 x 67.7 mm 100 Sheets</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Rotular Multipurpose Permanente Branco angular 99,1 x 67,7 mm 100 folhas</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu72" xml:space="preserve">
+<source xml:lang="en-us">&lt;tag&gt; Multipurpose Labels are high-quality permanent labels that are ideal for easy organising and labelling.</source>
+<seg-source><mrk mid="0" mtype="seg">&lt;tag&gt; Multipurpose Labels are high-quality permanent labels that are ideal for easy organising and labelling.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">&lt;Tag&gt; Etiquetas Multipurpose são rótulos permanentes de alta qualidade que são ideais para facilitar a organização e rotulagem.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu73" xml:space="preserve">
+<source xml:lang="en-us">These multipurpose labels by &lt;tag&gt; can be used for labelling envelopes and letters, parcels or packages.</source>
+<seg-source><mrk mid="0" mtype="seg">These multipurpose labels by &lt;tag&gt; can be used for labelling envelopes and letters, parcels or packages.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esses rótulos polivalentes por &lt;tag&gt; pode ser usado para envelopes de rotulagem e cartas, encomendas ou pacotes.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu74" xml:space="preserve">
+<source xml:lang="en-us">Additionally, these adhesive labels feature angular corners and are ideal for general identification purposes at the office or at home.</source>
+<seg-source><mrk mid="0" mtype="seg">Additionally, these adhesive labels feature angular corners and are ideal for general identification purposes at the office or at home.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Além disso, essas etiquetas adesivas apresentam cantos angulares e são ideais para fins gerais de identificação no escritório ou em casa.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu75" xml:space="preserve">
+<source xml:lang="en-us">A pack contains 100 sheets of 210 x 287mm sized labels, giving you 100 labels in total per pack.</source>
+<seg-source><mrk mid="0" mtype="seg">A pack contains 100 sheets of 210 x 287mm sized labels, giving you 100 labels in total per pack.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">A embalagem contém 100 folhas de 210 x 287 milímetros etiquetas de tamanho, dando-lhe 100 rótulos no total por pacote.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu76" xml:space="preserve">
+<source xml:lang="en-us">Layouts compatible with all leading software packages</source>
+<seg-source><mrk mid="0" mtype="seg">Layouts compatible with all leading software packages</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Layouts compatíveis com todos os pacotes de software líderes</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu77" xml:space="preserve">
+<source xml:lang="en-us">Can be used in a wide range of printers and copiers</source>
+<seg-source><mrk mid="0" mtype="seg">Can be used in a wide range of printers and copiers</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Pode ser usado em uma ampla gama de copiadoras e impressoras</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu78" xml:space="preserve">
+<source xml:lang="en-us">Ideal for labelling larger items</source>
+<seg-source><mrk mid="0" mtype="seg">Ideal for labelling larger items</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Ideal para etiquetar itens maiores</mrk></target>
+</trans-unit>
+</body>
+</file>
+<file datatype="x-undefined" original="word/settings.xml" source-language="en-us" target-language="pt-PT">
+<body>
+</body>
+</file>
+</xliff>

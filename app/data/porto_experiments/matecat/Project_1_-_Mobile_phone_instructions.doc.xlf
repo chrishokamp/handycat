@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" xmlns:okp="okapi-framework:xliff-extensions" its:version="2.0" version="1.2"><file datatype="x-docx" filter="com.matecat.filters.basefilters.DefaultFilter" original="Project_1_-_Mobile_phone_instructions.doc" source-language="en-us" target-language="pt-PT" tool-id="matecat-converter 1.2.1"><header><reference><internal-file form="base64">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</internal-file></reference></header><body/></file><file datatype="x-rkm" filter="com.matecat.filters.basefilters.DefaultFilter" original="manifest.rkm" source-language="en-us" target-language="pt-PT" tool-id="matecat-converter 1.2.1"><header><reference><internal-file form="base64">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCEtLT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09LS0+CjwhLS1QTEVBU0UsIERPIE5PVCBSRU5BTUUsIE1PVkUsIE1PRElGWSBPUiBBTFRFUiBJTiBBTlkgV0FZIFRISVMgRklMRS0tPgo8IS0tPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0tLT4KPG1hbmlmZXN0IHZlcnNpb249IjIiIGxpYlZlcnNpb249IjEuMi4xIiBwcm9qZWN0SWQ9Ik5CNkMzQUM0NCIgcGFja2FnZUlkPSI1ZTIxMzYxZi1mMGQ5LTQ1Y2ItODA5Zi1mMmQ3ODAyZTU5ZGUiIHNvdXJjZT0iZW4tdXMiIHRhcmdldD0icHQtcHQiIG9yaWdpbmFsU3ViRGlyPSJvcmlnaW5hbCIgc2tlbGV0b25TdWJEaXI9InNrZWxldG9uIiBzb3VyY2VTdWJEaXI9IndvcmsiIHRhcmdldFN1YkRpcj0id29yayIgbWVyZ2VTdWJEaXI9ImRvbmUiIHRtU3ViRGlyPSIiIGRhdGU9IjIwMTYtMTEtMDEgMjA6MzI6NDMrMDEwMCIgdXNlQXBwcm92ZWRPbmx5PSIwIiB1cGRhdGVBcHByb3ZlZEZsYWc9IjAiPgo8Y3JlYXRvclBhcmFtZXRlcnM+PC9jcmVhdG9yUGFyYW1ldGVycz4KPGRvYyB4bWw6c3BhY2U9InByZXNlcnZlIiBkb2NJZD0iMSIgZXh0cmFjdGlvblR5cGU9InhsaWZmIiByZWxhdGl2ZUlucHV0UGF0aD0iUHJvamVjdF8xXy1fTW9iaWxlX3Bob25lX2luc3RydWN0aW9ucy5kb2N4IiBmaWx0ZXJJZD0ib2tmX29wZW54bWwiIGlucHV0RW5jb2Rpbmc9IlVURi04IiByZWxhdGl2ZVRhcmdldFBhdGg9IlByb2plY3RfMV8tX01vYmlsZV9waG9uZV9pbnN0cnVjdGlvbnMub3V0LmRvY3giIHRhcmdldEVuY29kaW5nPSJVVEYtOCIgc2VsZWN0ZWQ9IjEiPkkzWXhDbUpRY21WbVpYSmxibU5sVkhKaGJuTnNZWFJsUkc5alVISnZjR1Z5ZEdsbGN5NWlQV1poYkhObENtSlFjbVZtWlhKbGJtTmxWSEpoYm5Oc1lYUmxRMjl0YldWdWRITXVZajFtWVd4elpRcGlVSEpsWm1WeVpXNWpaVlJ5WVc1emJHRjBaVkJ2ZDJWeWNHOXBiblJPYjNSbGN5NWlQWFJ5ZFdVS1lsQnlaV1psY21WdVkyVlVjbUZ1YzJ4aGRHVlFiM2RsY25CdmFXNTBUV0Z6ZEdWeWN5NWlQV1poYkhObENtSlFjbVZtWlhKbGJtTmxWSEpoYm5Oc1lYUmxWMjl5WkVobFlXUmxjbk5HYjI5MFpYSnpMbUk5ZEhKMVpRcGlVSEpsWm1WeVpXNWpaVlJ5WVc1emJHRjBaVmR2Y21SSWFXUmtaVzR1WWoxbVlXeHpaUXBpVUhKbFptVnlaVzVqWlZSeVlXNXpiR0YwWlZkdmNtUkZlR05zZFdSbFIzSmhjR2hwWTAxbGRHRkVZWFJoTG1JOWRISjFaUXBpVUhKbFptVnlaVzVqWlZSeVlXNXpiR0YwWlVWNFkyVnNSWGhqYkhWa1pVTnZiRzl5Y3k1aVBXWmhiSE5sQ21KUWNtVm1aWEpsYm1ObFZISmhibk5zWVhSbFJYaGpaV3hGZUdOc2RXUmxRMjlzZFcxdWN5NWlQV1poYkhObENtSlFjbVZtWlhKbGJtTmxWSEpoYm5Oc1lYUmxSWGhqWld4VGFHVmxkRTVoYldWekxtSTlabUZzYzJVS1lsQnlaV1psY21WdVkyVkJaR1JNYVc1bFUyVndZWEpoZEc5eVFYTkRhR0Z5WVdOMFpYSXVZajEwY25WbENtSlFjbVZtWlhKbGJtTmxVbVZ3YkdGalpVNXZRbkpsWVd0SWVYQm9aVzVVWVdjdVlqMTBjblZsQ21KUWNtVm1aWEpsYm1ObFNXZHViM0psVTI5bWRFaDVjR2hsYmxSaFp5NWlQWFJ5ZFdVS1lsQnlaV1psY21WdVkyVkJaR1JVWVdKQmMwTm9ZWEpoWTNSbGNpNWlQWFJ5ZFdVS1lsQnlaV1psY21WdVkyVkJaMmR5WlhOemFYWmxRMnhsWVc1MWNDNWlQWFJ5ZFdVS1lsQnlaV1psY21WdVkyVkJkWFJ2YldGMGFXTmhiR3g1UVdOalpYQjBVbVYyYVhOcGIyNXpMbUk5Wm1Gc2MyVUtZbEJ5WldabGNtVnVZMlZVY21GdWMyeGhkR1ZGZUdObGJFaHBaR1JsYmk1aVBXWmhiSE5sQ205MWRIQjFkRk5sWjIxbGJuUmhkR2x2YmxSNWNHVXVhVDB6Q25SelJYaGpaV3hGZUdOc2RXUmxaRU52Ykc5eWN5NXBQVEFLZEhORmVHTmxiRVY0WTJ4MVpHVmtRMjlzZFcxdWN5NXBQVEFLZEhORmVHTnNkV1JsVjI5eVpGTjBlV3hsY3k1cFBUQT08L2RvYz4KPC9tYW5pZmVzdD4=</internal-file></reference></header><body/></file>
+<file datatype="x-undefined" original="word/styles.xml" source-language="en-us" target-language="pt-PT">
+<body>
+</body>
+</file>
+<file datatype="x-undefined" original="word/document.xml" source-language="en-us" target-language="pt-PT">
+<body>
+<trans-unit id="NFDBB2FA9-tu1" xml:space="preserve">
+<source xml:lang="en-us">You can use the keypad to enter alphanumeric characters and symbols.</source>
+<seg-source><mrk mid="0" mtype="seg">You can use the keypad to enter alphanumeric characters and symbols.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Você pode usar o teclado para digitar caracteres alfanuméricos e símbolos.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu2" xml:space="preserve">
+<source xml:lang="en-us">For example, you can add entries to the contacts, write messages or schedule events on the calendar.</source>
+<seg-source><mrk mid="0" mtype="seg">For example, you can add entries to the contacts, write messages or schedule events on the calendar.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por exemplo, você pode adicionar entradas para os contatos, escrever mensagens ou agendar eventos no calendário.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu3" xml:space="preserve">
+<source xml:lang="en-us">You can scroll through this list and select the character you want.</source>
+<seg-source><mrk mid="0" mtype="seg">You can scroll through this list and select the character you want.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Você pode percorrer esta lista e selecione o caractere desejado.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu4" xml:space="preserve">
+<source xml:lang="en-us">Stop when you see an "h" on the screen.</source>
+<seg-source><mrk mid="0" mtype="seg">Stop when you see an "h" on the screen.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Pare quando você vê um "h" na tela.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu5" xml:space="preserve">
+<source xml:lang="en-us">After entering the first letter, you can directly press another key (except Send) to enter the next letter.</source>
+<seg-source><mrk mid="0" mtype="seg">After entering the first letter, you can directly press another key (except Send) to enter the next letter.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Depois de inserir a primeira letra, você pode pressionar diretamente outra tecla (exceto Enviar) para inserir a próxima letra.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu6" xml:space="preserve">
+<source xml:lang="en-us">If the next desired letter is on the same key as the current one, wait until the cursor appears to the right of the current letter and then you can enter the next one.</source>
+<seg-source><mrk mid="0" mtype="seg">If the next desired letter is on the same key as the current one, wait until the cursor appears to the right of the current letter and then you can enter the next one.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Se a próxima letra desejada estiver na mesma tecla que a actual, aguarde até que o cursor aparece à direita da letra atual e, em seguida, você pode digitar o próximo.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu7" xml:space="preserve">
+<source xml:lang="en-us">You can access the Settings screen by selecting Settings from the main menu.</source>
+<seg-source><mrk mid="0" mtype="seg">You can access the Settings screen by selecting Settings from the main menu.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">|||UNTRANSLATED_CONTENT_START|||You can access the Settings screen by selecting Settings from the main menu.|||UNTRANSLATED_CONTENT_END|||</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu8" xml:space="preserve">
+<source xml:lang="en-us">Phone settings</source>
+<seg-source><mrk mid="0" mtype="seg">Phone settings</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Configurações de Telefone...</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu9" xml:space="preserve">
+<source xml:lang="en-us">You can change the settings of the phone.</source>
+<seg-source><mrk mid="0" mtype="seg">You can change the settings of the phone.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Você pode alterar as configurações do telefone.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu10" xml:space="preserve">
+<source xml:lang="en-us">Date and Time: To set the system date and time format of the phone.</source>
+<seg-source><mrk mid="0" mtype="seg">Date and Time: To set the system date and time format of the phone.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Data e hora: Para definir a data do sistema e formato da hora do telefone.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu11" xml:space="preserve">
+<source xml:lang="en-us">Profiles: To select different profiles for the phone to suit different environmental situations.</source>
+<seg-source><mrk mid="0" mtype="seg">Profiles: To select different profiles for the phone to suit different environmental situations.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Perfis: Para selecionar diferentes perfis para o telefone para atender às situações ambientais diferentes.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu12" xml:space="preserve">
+<source xml:lang="en-us">Phone language: To set the phone language.</source>
+<seg-source><mrk mid="0" mtype="seg">Phone language: To set the phone language.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Idioma do telefone: Para definir o idioma do telefone.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu13" xml:space="preserve">
+<source xml:lang="en-us">This option is used to set the phone language to be the same as that used in your SIM card.</source>
+<seg-source><mrk mid="0" mtype="seg">This option is used to set the phone language to be the same as that used in your SIM card.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esta opção é usada para definir o idioma do telefone a ser o mesmo que o utilizado no seu cartão SIM.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu14" xml:space="preserve">
+<source xml:lang="en-us">You can also select Phone settings / Profiles to set the sounds for the phone.</source>
+<seg-source><mrk mid="0" mtype="seg">You can also select Phone settings / Profiles to set the sounds for the phone.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Você também pode selecionar Configurações do telefone / perfis para definir os sons para o telefone.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu15" xml:space="preserve">
+<source xml:lang="en-us">Keypad lock period: You can set the keypad lock period.</source>
+<seg-source><mrk mid="0" mtype="seg">Keypad lock period: You can set the keypad lock period.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">período de bloqueio do teclado: Você pode definir o período de bloqueio do teclado.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu16" xml:space="preserve">
+<source xml:lang="en-us">If there is no operation on the phone within a preset period of time, the keypad is locked automatically.</source>
+<seg-source><mrk mid="0" mtype="seg">If there is no operation on the phone within a preset period of time, the keypad is locked automatically.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Se não houver nenhuma operação no telefone dentro de um período de tempo predefinido, o teclado é bloqueado automaticamente.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu17" xml:space="preserve">
+<source xml:lang="en-us">You can press left function key and right function key in turn to unlock the keypad.</source>
+<seg-source><mrk mid="0" mtype="seg">You can press left function key and right function key in turn to unlock the keypad.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Você pode pressionar esquerda tecla de função e a tecla de função direita, por sua vez para desbloquear o teclado.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu18" xml:space="preserve">
+<source xml:lang="en-us">Shortcuts: To assign the frequently used functions to the scroll keys as shortcut keys.</source>
+<seg-source><mrk mid="0" mtype="seg">Shortcuts: To assign the frequently used functions to the scroll keys as shortcut keys.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Atalhos: Para atribuir as funções utilizadas com frequência às teclas de deslocação como teclas de atalho.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu19" xml:space="preserve">
+<source xml:lang="en-us">Auto On and OFF: To set your phone to power on or off automatically.</source>
+<seg-source><mrk mid="0" mtype="seg">Auto On and OFF: To set your phone to power on or off automatically.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Auto On e OFF: Para configurar o telefone para ligar ou desligar automaticamente.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu20" xml:space="preserve">
+<source xml:lang="en-us">In the standby mode, you can press and hold to switch the current profile to the silent profile.</source>
+<seg-source><mrk mid="0" mtype="seg">In the standby mode, you can press and hold to switch the current profile to the silent profile.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">No modo de espera, você pode pressionar e segurar para mudar o perfil atual para o perfil silencioso.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu21" xml:space="preserve">
+<source xml:lang="en-us">If the current profile is offline, you cannot use this function.</source>
+<seg-source><mrk mid="0" mtype="seg">If the current profile is offline, you cannot use this function.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Se o perfil atual está offline, você não pode usar esta função.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu22" xml:space="preserve">
+<source xml:lang="en-us">Display settings</source>
+<seg-source><mrk mid="0" mtype="seg">Display settings</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Configurações de exibição</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu23" xml:space="preserve">
+<source xml:lang="en-us">Then you can change the call barring password.</source>
+<seg-source><mrk mid="0" mtype="seg">Then you can change the call barring password.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Em seguida, você pode alterar o barramento de chamadas.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu24" xml:space="preserve">
+<source xml:lang="en-us">The old call barring password is provided by your network operator if it is the first time for you to change the password.</source>
+<seg-source><mrk mid="0" mtype="seg">The old call barring password is provided by your network operator if it is the first time for you to change the password.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">A senha de restrição de chamadas de idade é fornecido pelo operador de rede se é a primeira vez para você mudar a senha.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu25" xml:space="preserve">
+<source xml:lang="en-us">Call waiting</source>
+<seg-source><mrk mid="0" mtype="seg">Call waiting</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Chamada em espera</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu26" xml:space="preserve">
+<source xml:lang="en-us">This option is used to enable or disable the call waiting function.</source>
+<seg-source><mrk mid="0" mtype="seg">This option is used to enable or disable the call waiting function.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esta opção é usada para ativar ou desativar a função de chamada em espera.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu27" xml:space="preserve">
+<source xml:lang="en-us">The call waiting function is network-dependent.</source>
+<seg-source><mrk mid="0" mtype="seg">The call waiting function is network-dependent.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">A função de chamada em espera é dependente da rede.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu28" xml:space="preserve">
+<source xml:lang="en-us">For more information, contact your local Vodafone customer care center.</source>
+<seg-source><mrk mid="0" mtype="seg">For more information, contact your local Vodafone customer care center.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Para mais informações, contacte o centro de atendimento ao cliente da Vodafone local.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu29" xml:space="preserve">
+<source xml:lang="en-us">Save unknown number</source>
+<seg-source><mrk mid="0" mtype="seg">Save unknown number</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Guardar número desconhecido</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu30" xml:space="preserve">
+<source xml:lang="en-us">This function is used to prompt whether to save the number after a call ends.</source>
+<seg-source><mrk mid="0" mtype="seg">This function is used to prompt whether to save the number after a call ends.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esta função é usada para perguntar se pretende guardar o número depois de uma chamada termina.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu31" xml:space="preserve">
+<source xml:lang="en-us">Auto redial</source>
+<seg-source><mrk mid="0" mtype="seg">Auto redial</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Perguntas freqüentes sobre rediscagem automática</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu32" xml:space="preserve">
+<source xml:lang="en-us">This function is used to auto redial the dialed number if the dialing failed.</source>
+<seg-source><mrk mid="0" mtype="seg">This function is used to auto redial the dialed number if the dialing failed.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esta função é usada para auto remarcar o número marcado caso a marcação falhou.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu33" xml:space="preserve">
+<source xml:lang="en-us">Answer mode</source>
+<seg-source><mrk mid="0" mtype="seg">Answer mode</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Resposta</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu34" xml:space="preserve">
+<source xml:lang="en-us">It is used to set the mode for answering an incoming call.</source>
+<seg-source><mrk mid="0" mtype="seg">It is used to set the mode for answering an incoming call.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Ele é usado para definir o modo de atendimento de uma chamada recebida.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu35" xml:space="preserve">
+<source xml:lang="en-us">Three options are available: Any key, Send key and Slide up.</source>
+<seg-source><mrk mid="0" mtype="seg">Three options are available: Any key, Send key and Slide up.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Estão disponíveis três opções: Qualquer tecla, Tecla de envio e Deslize para cima.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu36" xml:space="preserve">
+<source xml:lang="en-us">Auto Answer</source>
+<seg-source><mrk mid="0" mtype="seg">Auto Answer</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Atendimento  Automático</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu37" xml:space="preserve">
+<source xml:lang="en-us">This option is used to select auto answering for incoming calls.</source>
+<seg-source><mrk mid="0" mtype="seg">This option is used to select auto answering for incoming calls.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esta opção é usada para selecionar auto atendimento para as chamadas recebidas.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu38" xml:space="preserve">
+<source xml:lang="en-us">Four options are available:  Immediate answer, Text message, Recorded voice and Disable.</source>
+<seg-source><mrk mid="0" mtype="seg">Four options are available:  Immediate answer, Text message, Recorded voice and Disable.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Estão disponíveis quatro opções: resposta imediata, mensagem de texto, voz gravada e Desativar.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu39" xml:space="preserve">
+<source xml:lang="en-us">Caller ID</source>
+<seg-source><mrk mid="0" mtype="seg">Caller ID</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Identificação do Chamador</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu40" xml:space="preserve">
+<source xml:lang="en-us">This options allows you to select whether to display your phone number on the phone of the party who you called.</source>
+<seg-source><mrk mid="0" mtype="seg">This options allows you to select whether to display your phone number on the phone of the party who you called.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esta opção permite que você selecione se deseja exibir seu número de telefone no telefone do partido que o chamou.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu41" xml:space="preserve">
+<source xml:lang="en-us">If select Auto, whether your phone number will be shown on the called phone depends on the network.</source>
+<seg-source><mrk mid="0" mtype="seg">If select Auto, whether your phone number will be shown on the called phone depends on the network.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Se seleccionar Auto, se o seu número de telefone será mostrado no telefone chamado depende da rede.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu42" xml:space="preserve">
+<source xml:lang="en-us">Select line</source>
+<seg-source><mrk mid="0" mtype="seg">Select line</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">linha de seleção de pastilha</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu43" xml:space="preserve">
+<source xml:lang="en-us">This option is used to set the call line for your phone.</source>
+<seg-source><mrk mid="0" mtype="seg">This option is used to set the call line for your phone.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esta opção é usada para definir a linha de chamada do seu telefone.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu44" xml:space="preserve">
+<source xml:lang="en-us">Two options are available: Line 1 and Line 2.</source>
+<seg-source><mrk mid="0" mtype="seg">Two options are available: Line 1 and Line 2.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Duas opções estão disponíveis: Linha 1 e Linha 2.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu45" xml:space="preserve">
+<source xml:lang="en-us">My number</source>
+<seg-source><mrk mid="0" mtype="seg">My number</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">número</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu46" xml:space="preserve">
+<source xml:lang="en-us">This function can be used to save your own phone numbers on the SIM card.</source>
+<seg-source><mrk mid="0" mtype="seg">This function can be used to save your own phone numbers on the SIM card.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esta função pode ser usada para guardar os seus próprios números de telefone no cartão SIM.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu47" xml:space="preserve">
+<source xml:lang="en-us">Video call</source>
+<seg-source><mrk mid="0" mtype="seg">Video call</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Chamadas com vídeo</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu48" xml:space="preserve">
+<source xml:lang="en-us">You can change the settings for the Video Call function.</source>
+<seg-source><mrk mid="0" mtype="seg">You can change the settings for the Video Call function.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Pode alterar as definições para a função de chamada de vídeo.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu49" xml:space="preserve">
+<source xml:lang="en-us">Picture mode: To set the picture mode during a video call.</source>
+<seg-source><mrk mid="0" mtype="seg">Picture mode: To set the picture mode during a video call.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">modo de imagem: Para definir o modo de imagem durante uma chamada de vídeo.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu50" xml:space="preserve">
+<source xml:lang="en-us">Image quality: To set the image quality for video.</source>
+<seg-source><mrk mid="0" mtype="seg">Image quality: To set the image quality for video.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">A qualidade de imagem: Para definir a qualidade de imagem para o vídeo.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu51" xml:space="preserve">
+<source xml:lang="en-us">Switch Camera off: To open or close the video channel during a video call.</source>
+<seg-source><mrk mid="0" mtype="seg">Switch Camera off: To open or close the video channel during a video call.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Desligar a câmera: Para abrir ou fechar o canal de vídeo durante uma chamada de vídeo.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu52" xml:space="preserve">
+<source xml:lang="en-us">Audio off: To open or close the audio channel during a video call.</source>
+<seg-source><mrk mid="0" mtype="seg">Audio off: To open or close the audio channel during a video call.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Áudio off: Para abrir ou fechar o canal de áudio durante uma chamada de vídeo.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu53" xml:space="preserve">
+<source xml:lang="en-us">Auto voice call: To enable the auto voice call function.</source>
+<seg-source><mrk mid="0" mtype="seg">Auto voice call: To enable the auto voice call function.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Auto chamada de voz: Para ativar a função de chamada de voz automática.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu54" xml:space="preserve">
+<source xml:lang="en-us">The phone auto makes a voice call, when the other party's phone does not support the video call service.</source>
+<seg-source><mrk mid="0" mtype="seg">The phone auto makes a voice call, when the other party's phone does not support the video call service.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">O telefone auto faz uma chamada de voz, quando o telefone da outra parte não suporta o serviço de chamada de vídeo.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu55" xml:space="preserve">
+<source xml:lang="en-us">Send image: To select a file and send it to the other party when you hold a video call.</source>
+<seg-source><mrk mid="0" mtype="seg">Send image: To select a file and send it to the other party when you hold a video call.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Enviar imagem: Para selecionar um arquivo e enviá-lo à outra parte quando você mantém uma chamada de vídeo.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu56" xml:space="preserve">
+<source xml:lang="en-us">Auto answer: To auto answer an incoming video call.</source>
+<seg-source><mrk mid="0" mtype="seg">Auto answer: To auto answer an incoming video call.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Resposta automática: para auto atender uma chamada de vídeo.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu57" xml:space="preserve">
+<source xml:lang="en-us">You can enable or disable this function.</source>
+<seg-source><mrk mid="0" mtype="seg">You can enable or disable this function.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Você pode ativar ou desativar esta função.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu58" xml:space="preserve">
+<source xml:lang="en-us">Contact settings</source>
+<seg-source><mrk mid="0" mtype="seg">Contact settings</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Configurações de Contato</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu59" xml:space="preserve">
+<source xml:lang="en-us">This option is used to set the default contact list displayed in the contact screen, to sort the contacts on the Contacts screen.</source>
+<seg-source><mrk mid="0" mtype="seg">This option is used to set the default contact list displayed in the contact screen, to sort the contacts on the Contacts screen.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esta opção é usada para definir a lista de contatos padrão exibida na tela de contato, para classificar os contatos na tela Contatos.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu60" xml:space="preserve">
+<source xml:lang="en-us">The data connection function provides several data communication functions.</source>
+<seg-source><mrk mid="0" mtype="seg">The data connection function provides several data communication functions.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">A função de ligação de dados fornece várias funções de comunicação de dados.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu61" xml:space="preserve">
+<source xml:lang="en-us">You can synchronize data between your phone and a PC through a USB cable or Bluetooth.</source>
+<seg-source><mrk mid="0" mtype="seg">You can synchronize data between your phone and a PC through a USB cable or Bluetooth.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Você pode sincronizar dados entre o telefone e um PC através de um cabo USB ou Bluetooth.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu62" xml:space="preserve">
+<source xml:lang="en-us">Your PC can use the built-in modem of your phone to access the Internet.</source>
+<seg-source><mrk mid="0" mtype="seg">Your PC can use the built-in modem of your phone to access the Internet.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Seu PC pode usar o modem embutido do telefone para acessar a Internet.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu63" xml:space="preserve">
+<source xml:lang="en-us">For detailed information, refer to "Connections" on page &lt;tag&gt;.</source>
+<seg-source><mrk mid="0" mtype="seg">For detailed information, refer to "Connections" on page &lt;tag&gt;.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Para obter informações detalhadas, consulte "Ligações" na página &lt;tag&gt;.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu64" xml:space="preserve">
+<source xml:lang="en-us">Device management</source>
+<seg-source><mrk mid="0" mtype="seg">Device management</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Gerenciamento de Dispositivos</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu65" xml:space="preserve">
+<source xml:lang="en-us">Four options are available: Mode, Select network, Cell information, and Operator list.</source>
+<seg-source><mrk mid="0" mtype="seg">Four options are available: Mode, Select network, Cell information, and Operator list.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Estão disponíveis quatro opções: Modo, Seleccionar rede, Informação de célula e Lista de operadores.</mrk></target>
+</trans-unit>
+</body>
+</file>
+<file datatype="x-undefined" original="word/settings.xml" source-language="en-us" target-language="pt-PT">
+<body>
+</body>
+</file>
+</xliff>

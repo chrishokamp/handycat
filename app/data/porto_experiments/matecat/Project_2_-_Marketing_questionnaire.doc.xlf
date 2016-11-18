@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" xmlns:okp="okapi-framework:xliff-extensions" its:version="2.0" version="1.2"><file datatype="x-docx" filter="com.matecat.filters.basefilters.DefaultFilter" original="Project_2_-_Marketing_questionnaire.doc" source-language="en-us" target-language="pt-PT" tool-id="matecat-converter 1.2.1"><header><reference><internal-file form="base64">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</internal-file></reference></header><body/></file><file datatype="x-rkm" filter="com.matecat.filters.basefilters.DefaultFilter" original="manifest.rkm" source-language="en-us" target-language="pt-PT" tool-id="matecat-converter 1.2.1"><header><reference><internal-file form="base64">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCEtLT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09LS0+CjwhLS1QTEVBU0UsIERPIE5PVCBSRU5BTUUsIE1PVkUsIE1PRElGWSBPUiBBTFRFUiBJTiBBTlkgV0FZIFRISVMgRklMRS0tPgo8IS0tPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0tLT4KPG1hbmlmZXN0IHZlcnNpb249IjIiIGxpYlZlcnNpb249IjEuMi4xIiBwcm9qZWN0SWQ9Ik5CNkMzQUM0NCIgcGFja2FnZUlkPSJkYzdmZjgyMy03YjZmLTRmNmQtOWYxYi1mOGIyYjY3N2EzYWMiIHNvdXJjZT0iZW4tdXMiIHRhcmdldD0icHQtcHQiIG9yaWdpbmFsU3ViRGlyPSJvcmlnaW5hbCIgc2tlbGV0b25TdWJEaXI9InNrZWxldG9uIiBzb3VyY2VTdWJEaXI9IndvcmsiIHRhcmdldFN1YkRpcj0id29yayIgbWVyZ2VTdWJEaXI9ImRvbmUiIHRtU3ViRGlyPSIiIGRhdGU9IjIwMTYtMTEtMDEgMjA6MzA6NTcrMDEwMCIgdXNlQXBwcm92ZWRPbmx5PSIwIiB1cGRhdGVBcHByb3ZlZEZsYWc9IjAiPgo8Y3JlYXRvclBhcmFtZXRlcnM+PC9jcmVhdG9yUGFyYW1ldGVycz4KPGRvYyB4bWw6c3BhY2U9InByZXNlcnZlIiBkb2NJZD0iMSIgZXh0cmFjdGlvblR5cGU9InhsaWZmIiByZWxhdGl2ZUlucHV0UGF0aD0iUHJvamVjdF8yXy1fTWFya2V0aW5nX3F1ZXN0aW9ubmFpcmUuZG9jeCIgZmlsdGVySWQ9Im9rZl9vcGVueG1sIiBpbnB1dEVuY29kaW5nPSJVVEYtOCIgcmVsYXRpdmVUYXJnZXRQYXRoPSJQcm9qZWN0XzJfLV9NYXJrZXRpbmdfcXVlc3Rpb25uYWlyZS5vdXQuZG9jeCIgdGFyZ2V0RW5jb2Rpbmc9IlVURi04IiBzZWxlY3RlZD0iMSI+STNZeENtSlFjbVZtWlhKbGJtTmxWSEpoYm5Oc1lYUmxSRzlqVUhKdmNHVnlkR2xsY3k1aVBXWmhiSE5sQ21KUWNtVm1aWEpsYm1ObFZISmhibk5zWVhSbFEyOXRiV1Z1ZEhNdVlqMW1ZV3h6WlFwaVVISmxabVZ5Wlc1alpWUnlZVzV6YkdGMFpWQnZkMlZ5Y0c5cGJuUk9iM1JsY3k1aVBYUnlkV1VLWWxCeVpXWmxjbVZ1WTJWVWNtRnVjMnhoZEdWUWIzZGxjbkJ2YVc1MFRXRnpkR1Z5Y3k1aVBXWmhiSE5sQ21KUWNtVm1aWEpsYm1ObFZISmhibk5zWVhSbFYyOXlaRWhsWVdSbGNuTkdiMjkwWlhKekxtSTlkSEoxWlFwaVVISmxabVZ5Wlc1alpWUnlZVzV6YkdGMFpWZHZjbVJJYVdSa1pXNHVZajFtWVd4elpRcGlVSEpsWm1WeVpXNWpaVlJ5WVc1emJHRjBaVmR2Y21SRmVHTnNkV1JsUjNKaGNHaHBZMDFsZEdGRVlYUmhMbUk5ZEhKMVpRcGlVSEpsWm1WeVpXNWpaVlJ5WVc1emJHRjBaVVY0WTJWc1JYaGpiSFZrWlVOdmJHOXljeTVpUFdaaGJITmxDbUpRY21WbVpYSmxibU5sVkhKaGJuTnNZWFJsUlhoalpXeEZlR05zZFdSbFEyOXNkVzF1Y3k1aVBXWmhiSE5sQ21KUWNtVm1aWEpsYm1ObFZISmhibk5zWVhSbFJYaGpaV3hUYUdWbGRFNWhiV1Z6TG1JOVptRnNjMlVLWWxCeVpXWmxjbVZ1WTJWQlpHUk1hVzVsVTJWd1lYSmhkRzl5UVhORGFHRnlZV04wWlhJdVlqMTBjblZsQ21KUWNtVm1aWEpsYm1ObFVtVndiR0ZqWlU1dlFuSmxZV3RJZVhCb1pXNVVZV2N1WWoxMGNuVmxDbUpRY21WbVpYSmxibU5sU1dkdWIzSmxVMjltZEVoNWNHaGxibFJoWnk1aVBYUnlkV1VLWWxCeVpXWmxjbVZ1WTJWQlpHUlVZV0pCYzBOb1lYSmhZM1JsY2k1aVBYUnlkV1VLWWxCeVpXWmxjbVZ1WTJWQloyZHlaWE56YVhabFEyeGxZVzUxY0M1aVBYUnlkV1VLWWxCeVpXWmxjbVZ1WTJWQmRYUnZiV0YwYVdOaGJHeDVRV05qWlhCMFVtVjJhWE5wYjI1ekxtSTlabUZzYzJVS1lsQnlaV1psY21WdVkyVlVjbUZ1YzJ4aGRHVkZlR05sYkVocFpHUmxiaTVpUFdaaGJITmxDbTkxZEhCMWRGTmxaMjFsYm5SaGRHbHZibFI1Y0dVdWFUMHpDblJ6UlhoalpXeEZlR05zZFdSbFpFTnZiRzl5Y3k1cFBUQUtkSE5GZUdObGJFVjRZMngxWkdWa1EyOXNkVzF1Y3k1cFBUQUtkSE5GZUdOc2RXUmxWMjl5WkZOMGVXeGxjeTVwUFRBPTwvZG9jPgo8L21hbmlmZXN0Pg==</internal-file></reference></header><body/></file>
+<file datatype="x-undefined" original="word/styles.xml" source-language="en-us" target-language="pt-PT">
+<body>
+</body>
+</file>
+<file datatype="x-undefined" original="word/document.xml" source-language="en-us" target-language="pt-PT">
+<body>
+<trans-unit id="NFDBB2FA9-tu1" xml:space="preserve">
+<source xml:lang="en-us">Which of the following types of devices do you OWN AND USE?</source>
+<seg-source><mrk mid="0" mtype="seg">Which of the following types of devices do you OWN AND USE?</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Qual dos seguintes tipos de dispositivos possui ou usa?</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu2" xml:space="preserve">
+<source xml:lang="en-us">Please select all that apply</source>
+<seg-source><mrk mid="0" mtype="seg">Please select all that apply</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Selecione todas as opções que se aplicam</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu3" xml:space="preserve">
+<source xml:lang="en-us">And which of the following types of devices do you currently USE TO ACCESS THE INTERNET at home, work, or elsewhere (including devices you do not personally own, at work or in a public place e.g. library or internet café)?</source>
+<seg-source><mrk mid="0" mtype="seg">And which of the following types of devices do you currently USE TO ACCESS THE INTERNET at home, work, or elsewhere (including devices you do not personally own, at work or in a public place e.g. library or internet café)?</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">E qual dos seguintes tipos de dispositivos que você usa atualmente para acessar a Internet em casa, no trabalho ou em outros lugares (incluindo os dispositivos que você não possui, pessoalmente, no trabalho ou em um ou seja, bibliotecas lugar público ou internet café)?</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu4" xml:space="preserve">
+<source xml:lang="en-us">We would now like to ask you about your spending habits.</source>
+<seg-source><mrk mid="0" mtype="seg">We would now like to ask you about your spending habits.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Gostaríamos agora de lhe perguntar sobre seus hábitos.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu5" xml:space="preserve">
+<source xml:lang="en-us">Please be assured that all information provided will be anonymous and used solely for the purposes of this research and no personally identifiable information will be made available to third parties.</source>
+<seg-source><mrk mid="0" mtype="seg">Please be assured that all information provided will be anonymous and used solely for the purposes of this research and no personally identifiable information will be made available to third parties.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Tenha certeza de que todas as informações fornecidas serão anônimas e utilizados exclusivamente para os fins desta pesquisa e nenhuma informação pessoal será disponibilizada a terceiros.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu6" xml:space="preserve">
+<source xml:lang="en-us">This is the insert marker used for the Q6 question</source>
+<seg-source><mrk mid="0" mtype="seg">This is the insert marker used for the Q6 question</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Este é o marcador de inserção utilizados para a questão Q6</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu7" xml:space="preserve">
+<source xml:lang="en-us">Please remember to enter your answers in thousands of &lt;tag&gt;. For example, if your total spend is 12 111 &lt;tag&gt;, please type '12' in the box.</source>
+<seg-source><mrk mid="0" mtype="seg">Please remember to enter your answers in thousands of &lt;tag&gt;. </mrk><mrk mid="1" mtype="seg">For example, if your total spend is 12 111 &lt;tag&gt;, please type '12' in the box.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por favor, lembre-se de inserir as respostas em milhares de &lt;tag&gt;. </mrk><mrk mid="1" mtype="seg">Por exemplo, se o seu gasto total é de 12 111 &lt;tag&gt;, por favor, escreva '12' na caixa.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu8" xml:space="preserve">
+<source xml:lang="en-us">This is the insert marker used for the Q6 question</source>
+<seg-source><mrk mid="0" mtype="seg">This is the insert marker used for the Q6 question</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Este é o marcador de inserção utilizados para a questão Q6</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu9" xml:space="preserve">
+<source xml:lang="en-us">Please type in your total spend to the nearest one thousand (1,000) &lt;tag&gt;.</source>
+<seg-source><mrk mid="0" mtype="seg">Please type in your total spend to the nearest one thousand (1,000) &lt;tag&gt;.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por favor, digite o seu gasto total para a mais próxima mil (1.000) &lt;tag&gt;.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu10" xml:space="preserve">
+<source xml:lang="en-us">Please type in the closest full number to your total spend in &lt;tag&gt;.</source>
+<seg-source><mrk mid="0" mtype="seg">Please type in the closest full number to your total spend in &lt;tag&gt;.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por favor, digite o número total mais próximo do seu gasto total em &lt;tag&gt;.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu11" xml:space="preserve">
+<source xml:lang="en-us">For example, if your total spend is 12.99, please type in 13.</source>
+<seg-source><mrk mid="0" mtype="seg">For example, if your total spend is 12.99, please type in 13.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por exemplo, se seu gasto total é de 12,99, por favor digite 13.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu12" xml:space="preserve">
+<source xml:lang="en-us">Thinking about each of the categories below, please estimate your total spend in each category over the past 12 months:</source>
+<seg-source><mrk mid="0" mtype="seg">Thinking about each of the categories below, please estimate your total spend in each category over the past 12 months:</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Pensando em cada uma das categorias abaixo, por favor, estimar o seu gasto total em cada categoria ao longo dos últimos 12 meses:</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu13" xml:space="preserve">
+<source xml:lang="en-us">A) For purchases made online.</source>
+<seg-source><mrk mid="0" mtype="seg">A) For purchases made online.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">A) Para compras feitas online.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu14" xml:space="preserve">
+<source xml:lang="en-us">B) For purchases made offline.</source>
+<seg-source><mrk mid="0" mtype="seg">B) For purchases made offline.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">B) Para compras feitas offline.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu15" xml:space="preserve">
+<source xml:lang="en-us">This includes food, clothing and other items but excludes rent or mortgage payments, utility bills (gas, electric, council tax) and large one off payments (e.g. buying a new car).</source>
+<seg-source><mrk mid="0" mtype="seg">This includes food, clothing and other items but excludes rent or mortgage payments, utility bills (gas, electric, council tax) and large one off payments (e.g. buying a new car).</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Isso inclui alimentos, roupas e outros itens, mas exclui aluguel ou hipoteca pagamentos, contas de serviços públicos (gás, energia elétrica, imposto municipal) e grandes um off pagamentos (por exemplo, a compra de um carro novo).</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu16" xml:space="preserve">
+<source xml:lang="en-us">If you're unsure, please provide your best guess.</source>
+<seg-source><mrk mid="0" mtype="seg">If you're unsure, please provide your best guess.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Se não tiver certeza, por favor fornecer o seu melhor palpite.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu17" xml:space="preserve">
+<source xml:lang="en-us">If you don't have any spending for the following categories, enter nothing or 0.</source>
+<seg-source><mrk mid="0" mtype="seg">If you don't have any spending for the following categories, enter nothing or 0.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Se você não tem qualquer despesa para as seguintes categorias, digite nada, ou 0.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu18" xml:space="preserve">
+<source xml:lang="en-us">By online we mean any purchase made on the internet via a desktop / laptop / notebook / Smartphone or Tablet.</source>
+<seg-source><mrk mid="0" mtype="seg">By online we mean any purchase made on the internet via a desktop / laptop / notebook / Smartphone or Tablet.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por on-line que qualquer compra feita na internet através de um desktop / laptop / notebook / Smartphone ou Tablet.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu19" xml:space="preserve">
+<source xml:lang="en-us">By offline we mean any purchase made in a physical store.</source>
+<seg-source><mrk mid="0" mtype="seg">By offline we mean any purchase made in a physical store.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por desligada queremos dizer qualquer compra feita em uma loja física.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu20" xml:space="preserve">
+<source xml:lang="en-us">Please provide an answer.</source>
+<seg-source><mrk mid="0" mtype="seg">Please provide an answer.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por favor, forneça uma resposta.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu21" xml:space="preserve">
+<source xml:lang="en-us">The spending across all devices should be equal to the total amount shown</source>
+<seg-source><mrk mid="0" mtype="seg">The spending across all devices should be equal to the total amount shown</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Os gastos em todos os dispositivos deve ser igual ao valor total mostrado</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu22" xml:space="preserve">
+<source xml:lang="en-us">You indicated that your total annual online spend in the last 12 months is as follows.</source>
+<seg-source><mrk mid="0" mtype="seg">You indicated that your total annual online spend in the last 12 months is as follows.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Você indicou que seus gastos on-line total anual nos últimos 12 meses é a seguinte.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu23" xml:space="preserve">
+<source xml:lang="en-us">How does this split by device?</source>
+<seg-source><mrk mid="0" mtype="seg">How does this split by device?</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Como é que esta divisão por dispositivo?</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu24" xml:space="preserve">
+<source xml:lang="en-us">Total online spend in the last 12 months</source>
+<seg-source><mrk mid="0" mtype="seg">Total online spend in the last 12 months</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">gastos online total nos últimos 12 meses</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu25" xml:space="preserve">
+<source xml:lang="en-us">Spend on purchases made via a desktop / laptop / notebook</source>
+<seg-source><mrk mid="0" mtype="seg">Spend on purchases made via a desktop / laptop / notebook</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Gastar em compras feitas através de um desktop / laptop / notebook</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu26" xml:space="preserve">
+<source xml:lang="en-us">Spend on purchases made via a Smartphone</source>
+<seg-source><mrk mid="0" mtype="seg">Spend on purchases made via a Smartphone</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Gastar em compras feitas através de um Smartphone</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu27" xml:space="preserve">
+<source xml:lang="en-us">Spend on purchases made via a Tablet</source>
+<seg-source><mrk mid="0" mtype="seg">Spend on purchases made via a Tablet</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Gastar em compras feitas através de um Tablet</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu28" xml:space="preserve">
+<source xml:lang="en-us">Spend on purchases made via other devices (e.g. Games consoles, Smart TVs)</source>
+<seg-source><mrk mid="0" mtype="seg">Spend on purchases made via other devices (e.g. Games consoles, Smart TVs)</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Gastar em compras feitas através de outros dispositivos (por exemplo, consolas de jogos, Smart TVs)</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu29" xml:space="preserve">
+<source xml:lang="en-us">The total should be equal to 100%</source>
+<seg-source><mrk mid="0" mtype="seg">The total should be equal to 100%</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">O total deve ser igual a 100%</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu30" xml:space="preserve">
+<source xml:lang="en-us">Of all the money you spend online currently, approximately what proportion do you spend in each of the following ways?</source>
+<seg-source><mrk mid="0" mtype="seg">Of all the money you spend online currently, approximately what proportion do you spend in each of the following ways?</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">De todo o dinheiro que você gasta on-line atualmente, aproximadamente qual a proporção que você gasta em cada uma das seguintes maneiras?</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu31" xml:space="preserve">
+<source xml:lang="en-us">Please provide your best guess if you are not sure</source>
+<seg-source><mrk mid="0" mtype="seg">Please provide your best guess if you are not sure</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por favor, forneça o seu melhor palpite se você não tem certeza</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu32" xml:space="preserve">
+<source xml:lang="en-us">Please enter the percentage (%) of your current spending that falls into each category</source>
+<seg-source><mrk mid="0" mtype="seg">Please enter the percentage (%) of your current spending that falls into each category</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por favor, indique a percentagem (%) de seus gastos corrente que cai em cada categoria</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu33" xml:space="preserve">
+<source xml:lang="en-us">On dedicated shopping websites via an internet browser</source>
+<seg-source><mrk mid="0" mtype="seg">On dedicated shopping websites via an internet browser</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Em sites de compras dedicados através de um navegador de internet</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu34" xml:space="preserve">
+<source xml:lang="en-us">Through a dedicated shopping App on a smartphone or tablet</source>
+<seg-source><mrk mid="0" mtype="seg">Through a dedicated shopping App on a smartphone or tablet</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Através de um dedicado App compras em um smartphone ou tablet</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu35" xml:space="preserve">
+<source xml:lang="en-us">Through social media sites (e.g. buyable pins on Pinterest, In-tweet purchases on Twitter, WeChat purchases etc.)</source>
+<seg-source><mrk mid="0" mtype="seg">Through social media sites (e.g. buyable pins on Pinterest, In-tweet purchases on Twitter, WeChat purchases etc.)</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Através de sites de mídia social (por exemplo, pinos compráveis ​​no Pinterest, compras In-tweet no Twitter, WeChat compras etc.)</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu36" xml:space="preserve">
+<source xml:lang="en-us">Other</source>
+<seg-source><mrk mid="0" mtype="seg">Other</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Outros</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu37" xml:space="preserve">
+<source xml:lang="en-us">Total amount entered</source>
+<seg-source><mrk mid="0" mtype="seg">Total amount entered</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">montante total inscrito</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu38" xml:space="preserve">
+<source xml:lang="en-us">Please enter your spending in all categories requested.</source>
+<seg-source><mrk mid="0" mtype="seg">Please enter your spending in all categories requested.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por favor, indique os seus gastos em todas as categorias solicitadas.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu39" xml:space="preserve">
+<source xml:lang="en-us">The amount allocated in the columns 3 and 4 should be equal to 100.</source>
+<seg-source><mrk mid="0" mtype="seg">The amount allocated in the columns 3 and 4 should be equal to 100.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">O montante atribuído nas colunas 3 e 4 deve ser igual a 100.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu40" xml:space="preserve">
+<source xml:lang="en-us">ONLINE % of spend - last 12 months</source>
+<seg-source><mrk mid="0" mtype="seg">ONLINE % of spend - last 12 months</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">% ONLINE de gastos - últimos 12 meses</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu41" xml:space="preserve">
+<source xml:lang="en-us">OFFLINE % of spend – last 12 months</source>
+<seg-source><mrk mid="0" mtype="seg">OFFLINE % of spend – last 12 months</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">% OFFLINE dos gastos - últimos 12 meses</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu42" xml:space="preserve">
+<source xml:lang="en-us">ONLINE % of spend – next 12 months</source>
+<seg-source><mrk mid="0" mtype="seg">ONLINE % of spend – next 12 months</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">% ONLINE de gastos - próximos 12 meses</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu43" xml:space="preserve">
+<source xml:lang="en-us">OFFLINE % of spend – next 12 months</source>
+<seg-source><mrk mid="0" mtype="seg">OFFLINE % of spend – next 12 months</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">% OFFLINE dos gastos - próximos 12 meses</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu44" xml:space="preserve">
+<source xml:lang="en-us">How do you think the overall amount of your online spending will change over the next 12 months?</source>
+<seg-source><mrk mid="0" mtype="seg">How do you think the overall amount of your online spending will change over the next 12 months?</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Como você acha que a quantidade total de seus gastos on-line irá mudar ao longo dos próximos 12 meses?</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu45" xml:space="preserve">
+<source xml:lang="en-us">My online spending will increase</source>
+<seg-source><mrk mid="0" mtype="seg">My online spending will increase</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Meu gastos on-line vai aumentar</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu46" xml:space="preserve">
+<source xml:lang="en-us">My online spending will stay the same</source>
+<seg-source><mrk mid="0" mtype="seg">My online spending will stay the same</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Meu gastos on-line vai ficar na mesma</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu47" xml:space="preserve">
+<source xml:lang="en-us">My online spending will decrease</source>
+<seg-source><mrk mid="0" mtype="seg">My online spending will decrease</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Meu gastos online diminuirá</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu48" xml:space="preserve">
+<source xml:lang="en-us">Don't know</source>
+<seg-source><mrk mid="0" mtype="seg">Don't know</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Não sei</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu49" xml:space="preserve">
+<source xml:lang="en-us">online spending will increase</source>
+<seg-source><mrk mid="0" mtype="seg">online spending will increase</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">gastos on-line vai aumentar</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu50" xml:space="preserve">
+<source xml:lang="en-us">online spending will decrease</source>
+<seg-source><mrk mid="0" mtype="seg">online spending will decrease</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">gastos online diminuirá</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu51" xml:space="preserve">
+<source xml:lang="en-us">Why do you think that your overall &lt;tag&gt; over the next 12 months?</source>
+<seg-source><mrk mid="0" mtype="seg">Why do you think that your overall &lt;tag&gt; over the next 12 months?</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por que você acha que o seu total &lt;tag&gt; ao longo dos próximos 12 meses?</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu52" xml:space="preserve">
+<source xml:lang="en-us">Please select all that apply</source>
+<seg-source><mrk mid="0" mtype="seg">Please select all that apply</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Selecione todas as opções que se aplicam</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu53" xml:space="preserve">
+<source xml:lang="en-us">Change in my disposable income</source>
+<seg-source><mrk mid="0" mtype="seg">Change in my disposable income</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Alterar no meu rendimento disponível</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu54" xml:space="preserve">
+<source xml:lang="en-us">Changes in the economy</source>
+<seg-source><mrk mid="0" mtype="seg">Changes in the economy</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Mudanças na economia</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu55" xml:space="preserve">
+<source xml:lang="en-us">Changes in currency and exchange rates</source>
+<seg-source><mrk mid="0" mtype="seg">Changes in currency and exchange rates</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Mudanças nas taxas de câmbio e de câmbio</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu56" xml:space="preserve">
+<source xml:lang="en-us">Convenience of shopping online</source>
+<seg-source><mrk mid="0" mtype="seg">Convenience of shopping online</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Conveniência das compras on-line</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu57" xml:space="preserve">
+<source xml:lang="en-us">Plan to save more money</source>
+<seg-source><mrk mid="0" mtype="seg">Plan to save more money</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Plano para economizar mais dinheiro</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu58" xml:space="preserve">
+<source xml:lang="en-us">Expect shipping to become faster</source>
+<seg-source><mrk mid="0" mtype="seg">Expect shipping to become faster</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esperar o transporte para se tornar mais rápido</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu59" xml:space="preserve">
+<source xml:lang="en-us">Expect shipping to become cheaper</source>
+<seg-source><mrk mid="0" mtype="seg">Expect shipping to become cheaper</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Esperar o transporte para se tornar mais barato</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu60" xml:space="preserve">
+<source xml:lang="en-us">Other (please specify)</source>
+<seg-source><mrk mid="0" mtype="seg">Other (please specify)</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Outro (favor especificar)</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu61" xml:space="preserve">
+<source xml:lang="en-us">No particular reason</source>
+<seg-source><mrk mid="0" mtype="seg">No particular reason</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Nenhuma razão em particular</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu62" xml:space="preserve">
+<source xml:lang="en-us">The spending across all devices should be equal to 100%</source>
+<seg-source><mrk mid="0" mtype="seg">The spending across all devices should be equal to 100%</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Os gastos em todos os dispositivos deve ser igual a 100%</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu63" xml:space="preserve">
+<source xml:lang="en-us">Based on your answers to previous questions, your proportion of on-line spend by device over the last 12 months is as follows.</source>
+<seg-source><mrk mid="0" mtype="seg">Based on your answers to previous questions, your proportion of on-line spend by device over the last 12 months is as follows.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Com base em suas respostas às perguntas anteriores, a sua proporção de gastos on-line pelo dispositivo ao longo dos últimos 12 meses é a seguinte.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu64" xml:space="preserve">
+<source xml:lang="en-us">Thinking about the next 12 months, do you expect your proportion of spend by device to increase, decrease or stay the same?</source>
+<seg-source><mrk mid="0" mtype="seg">Thinking about the next 12 months, do you expect your proportion of spend by device to increase, decrease or stay the same?</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Pensando nos próximos 12 meses, você espera que o seu proporção de gasto por dispositivo para aumentar, diminuir ou permanecer o mesmo?</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu65" xml:space="preserve">
+<source xml:lang="en-us">Please allocate your proportion of desktop / laptop / notebook, Smartphone, Tablet and other device spend for the next 12 months.</source>
+<seg-source><mrk mid="0" mtype="seg">Please allocate your proportion of desktop / laptop / notebook, Smartphone, Tablet and other device spend for the next 12 months.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por favor, alocar o seu proporção de desktop / laptop / notebook, smartphone, tablet e outros gastos dispositivo para os próximos 12 meses.</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu66" xml:space="preserve">
+<source xml:lang="en-us">Last 12 months</source>
+<seg-source><mrk mid="0" mtype="seg">Last 12 months</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Últimos 12 meses</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu67" xml:space="preserve">
+<source xml:lang="en-us">Next 12 months</source>
+<seg-source><mrk mid="0" mtype="seg">Next 12 months</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Próximos 12 meses</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu68" xml:space="preserve">
+<source xml:lang="en-us">Spend on purchases made via other devices (e.g. Games consoles, Smart TVs)</source>
+<seg-source><mrk mid="0" mtype="seg">Spend on purchases made via other devices (e.g. Games consoles, Smart TVs)</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Gastar em compras feitas através de outros dispositivos (por exemplo, consolas de jogos, Smart TVs)</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu69" xml:space="preserve">
+<source xml:lang="en-us">Regardless of the amount of your future online spend, how frequently do you think you will purchase online in the next 12 months?</source>
+<seg-source><mrk mid="0" mtype="seg">Regardless of the amount of your future online spend, how frequently do you think you will purchase online in the next 12 months?</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Independentemente da quantidade de seu futuro gastos on-line, com que frequência você acha que você vai comprar on-line nos próximos 12 meses?</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu70" xml:space="preserve">
+<source xml:lang="en-us">Will purchase LESS frequently online than in the last 12 months</source>
+<seg-source><mrk mid="0" mtype="seg">Will purchase LESS frequently online than in the last 12 months</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Vai comprar menos frequência on-line do que nos últimos 12 meses</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu71" xml:space="preserve">
+<source xml:lang="en-us">Will purchase with the SAME frequency online as in the last 12 months</source>
+<seg-source><mrk mid="0" mtype="seg">Will purchase with the SAME frequency online as in the last 12 months</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Vai comprar com a frequência SAME on-line como nos últimos 12 meses</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu72" xml:space="preserve">
+<source xml:lang="en-us">Will purchase MORE frequently online than in the last 12 months</source>
+<seg-source><mrk mid="0" mtype="seg">Will purchase MORE frequently online than in the last 12 months</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Vai comprar mais frequentemente em linha do que nos últimos 12 meses</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu73" xml:space="preserve">
+<source xml:lang="en-us">Not sure</source>
+<seg-source><mrk mid="0" mtype="seg">Not sure</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Não sei</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu74" xml:space="preserve">
+<source xml:lang="en-us">And how do you think your overall spending will change in the next 12 months vs. past 12 months, regardless of category or whether you spend online or offline?</source>
+<seg-source><mrk mid="0" mtype="seg">And how do you think your overall spending will change in the next 12 months vs. past 12 months, regardless of category or whether you spend online or offline?</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">E como você acha que a sua despesa global vai mudar nos próximos 12 meses versus 12 meses passados, independentemente da categoria ou se você gasta on-line ou off-line?</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu75" xml:space="preserve">
+<source xml:lang="en-us">Lower by</source>
+<seg-source><mrk mid="0" mtype="seg">Lower by</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Baixos</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu76" xml:space="preserve">
+<source xml:lang="en-us">Same</source>
+<seg-source><mrk mid="0" mtype="seg">Same</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Igual</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu77" xml:space="preserve">
+<source xml:lang="en-us">Higher by</source>
+<seg-source><mrk mid="0" mtype="seg">Higher by</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">superior até</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu78" xml:space="preserve">
+<source xml:lang="en-us">Thinking about shopping online, which of the following countries or regions' websites have you purchased from in the past 12 months?</source>
+<seg-source><mrk mid="0" mtype="seg">Thinking about shopping online, which of the following countries or regions' websites have you purchased from in the past 12 months?</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Pensando em compras on-line, qual dos seguintes países ou sites das regiões tenham adquirido a partir dos últimos 12 meses?</mrk></target>
+</trans-unit>
+<trans-unit id="NFDBB2FA9-tu79" xml:space="preserve">
+<source xml:lang="en-us">Please select all that apply and include your home country if applicable.</source>
+<seg-source><mrk mid="0" mtype="seg">Please select all that apply and include your home country if applicable.</mrk></seg-source>
+<target xml:lang="pt-pt"><mrk mid="0" mtype="seg">Por favor, selecione todos que se apliquem e incluir o seu país de origem se for o caso.</mrk></target>
+</trans-unit>
+</body>
+</file>
+<file datatype="x-undefined" original="word/settings.xml" source-language="en-us" target-language="pt-PT">
+<body>
+</body>
+</file>
+</xliff>
