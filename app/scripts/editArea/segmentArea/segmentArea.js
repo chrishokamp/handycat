@@ -12,11 +12,13 @@ angular.module('controllers')
     // this object tells us which translation widgets are available to the user
     // These are currently target-side widgets only
     // TODO: set which components are available via configuration, don't hardcode
+    // TODO: set which components is the default via the configuration
     $scope.widgets = {
-      activeComponent: 'postEditor',
-      defaultComponent: 'postEditor',
+      activeComponent: 'qeScore',
+      defaultComponent: 'qeScore',
       translationSelector: false,
       postEditor: true,
+      qeScore: true,
       AceEditor: false,
     }
 

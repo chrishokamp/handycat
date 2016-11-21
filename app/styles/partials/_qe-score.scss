@@ -1,0 +1,55 @@
+$qescore-color: #FFFFFF;
+
+qe-score > div {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.qe-score {
+  //  make sure we fill our parent
+  width: 100%;
+  height: 100%;
+  background-color: $qescore-color;
+  //  box-sizing: border-box;
+}
+
+
+//.post-editor-menu {
+//  border: 1px solid;
+//  padding: 2px;
+//  position: absolute;
+//  background: white;
+//  float: left;
+//  white-space: nowrap;
+//
+//  .post-editor-action {
+//    &:hover {
+//      background-color: lightgray !important;
+//    }
+//  }
+//}
+//.tooltip-span {
+//  color: white;
+//  background-color: black;
+//  white-space: pre !important;
+//}
+//
+//.postedit-mode-sheet {
+//  position: absolute;
+//  color: red;
+//  height: 20px;
+//  bottom: 0;
+//  width: 100%;
+//  z-index: 5000;
+//}
+
+//.post-editor > textarea {
+//  //  make sure we fill our parent
+//  resize: none;
+//  width: 100%;
+//  height: 100%;
+//  background-color: $posteditor-color;
+//  //  box-sizing: border-box;
+//}
+

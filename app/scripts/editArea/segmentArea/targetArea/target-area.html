@@ -20,14 +20,25 @@
           ></typeahead-editor>
       </div>
 
-        <!-- Post Editor -->
-        <div class="cssSlideUp"
-           ng-show="widgets.activeComponent === 'postEditor'"
-        >
-            <post-editor
-                target-segment="segment.target"
-                is-active="isActive.active"
-            ></post-editor>
+      <!-- Post Editor -->
+      <div class="cssSlideUp"
+         ng-show="widgets.activeComponent === 'postEditor'"
+      >
+          <post-editor
+              target-segment="segment.target"
+              is-active="isActive.active"
+          ></post-editor>
+      </div>
+
+      <!--WORKING: implement the QE score component-->
+      <!--QE score is an overlay on the target area until user closes it, then the editing component is activated  -->
+      <div class="cssSlideUp"
+           ng-show="widgets.activeComponent === 'qeScore'">
+          <qe-score></qe-score>
+          <!--<qe-score-->
+                  <!--target-segment="segment.target"-->
+                  <!--is-active="isActive.active"-->
+          <!--</qe-score>-->
       </div>
 
       <!-- Translation Resource selector -->
