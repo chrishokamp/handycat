@@ -179,7 +179,7 @@ angular.module('handycat.typeaheads')
           function() {
             return $scope.isActive;
           }, function(isActive) {
-            if (isActive && $scope.activeComponent === 'lmAutocomplete') {
+            if (isActive && $scope.activeComponent === 'typeaheadEditor') {
               $log.log('focus textArea');
               $inputTextarea.focus();
             }

@@ -60,9 +60,11 @@
                 layout="row"
                 ng-model="widgets.activeComponent"
               >
-                <md-radio-button value="lmAutocomplete" aria-label="Typeahead Editor">Typeahead Editor</md-radio-button>
-                <md-radio-button value="postEditor" aria-label="Post Editor">Post Editor</md-radio-button>
-                <md-radio-button value="qeScore" aria-label="QE Score">QE Score</md-radio-button>
+                <md-radio-button ng-repeat="widget in widgets.components"
+                                 value="{{widget.directiveName}}"
+                                 aria-label="{{widget.textName}}">{{widget.textName}}</md-radio-button>
+                <!--<md-radio-button value="postEditor" aria-label="Post Editor">Post Editor</md-radio-button>-->
+                <!--<md-radio-button value="qeScore" aria-label="QE Score">QE Score</md-radio-button>-->
 
                 <!--<md-radio-button value="translationSelector" aria-label="Translation Selector">Translation Selector</md-radio-button>-->
                 <!--TODO: ace editor doesn't work right now-->

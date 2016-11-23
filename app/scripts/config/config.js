@@ -77,11 +77,19 @@ handyCATconfig.constant('widgetConfiguration',
   {
     'target': {
       activeComponent: 'qeScore',
-      defaultComponent: 'lmAutocomplete',
-      translationSelector: false,
-      postEditor: true,
-      qeScore: true,
-      AceEditor: false
+      defaultComponent: 'typeaheadEditor',
+      // TODO: remove the key-based component syntax above
+      // a list of the available components
+      components: [
+        {
+          'directiveName': 'typeaheadEditor',
+          'textName': 'Autocomplete'
+        },
+        {
+          'directiveName': 'qeScore',
+          'textName': 'QE Score'
+        },
+      ]
     }
   })
 

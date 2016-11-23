@@ -13,7 +13,8 @@ angular.module('controllers')
 
     // this object tells us which translation widgets are available to the user
     // These are currently target-side widgets only, which are set via configuration
-    $scope.widgets = widgetConfiguration.target;
+    // we copy the config because the scope will actively modify this object as user edits
+    $scope.widgets = $.extend(true, {}, widgetConfiguration.target);
 
     // these hotkeys are only available when the segment is active
     // they get deleted when the segment is not active
