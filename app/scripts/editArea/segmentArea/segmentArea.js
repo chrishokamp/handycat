@@ -47,9 +47,8 @@ angular.module('controllers')
       }
     ];
 
-
-    // TODO: this should be set from the document model _if_ it is available
-    // TODO: if score is not available, any component that relies on it cannot display, or shows error
+    // TODO: this should be set for each segment from the document model _if_ it is available
+    // TODO: if score is not available for a segment, any component that relies on it cannot display, or shows error
     $timeout(function() {
         $scope.segment.qeScore = Math.floor(Math.random() * (100)) + '%';
     }, 0);
