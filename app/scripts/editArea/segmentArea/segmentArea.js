@@ -4,10 +4,10 @@ angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'TranslationMemory', 'Wikipedia',
   'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'editSession',
-  'Logger', 'Projects', 'XliffParser', 'graphTMUrl', 'hotkeys', 'editSession', '$http',
+  'Logger', 'Projects', 'XliffParser', 'graphTMUrl', 'hotkeys', 'editSession', '$http', '$timeout',
   function($rootScope, $scope, TranslationMemory, Wikipedia,
            Glossary, $log, ruleMap, copyPunctuation, Session,
-           Logger, Projects, XliffParser, graphTMUrl, hotkeys, editSession, $http) {
+           Logger, Projects, XliffParser, graphTMUrl, hotkeys, editSession, $http, $timeout) {
 
     // this object tells us which translation widgets are available to the user
     // These are currently target-side widgets only
@@ -15,7 +15,7 @@ angular.module('controllers')
     // TODO: set which components is the default via the configuration
     $scope.widgets = {
       activeComponent: 'qeScore',
-      defaultComponent: 'qeScore',
+      defaultComponent: 'lmAutocomplete',
       translationSelector: false,
       postEditor: true,
       qeScore: true,
@@ -24,18 +24,44 @@ angular.module('controllers')
 
     // these hotkeys are only available when the segment is active
     // they get deleted when the segment is not active
-    var hotkeyConfigs = [{
-      combo      : 'ctrl+enter',
-      description: 'Finish a segment and move to the next one',
-      allowIn    : ['INPUT', 'SELECT', 'TEXTAREA'],
-      callback   : function () {
-        if ($scope.isActive.active) {
-          $scope.segmentFinished($scope.id.index);
+    var hotkeyConfigs = [,
+      {
+        combo      : 'ctrl+enter',
+        description: 'Finish a segment and move to the next one',
+        allowIn    : ['INPUT', 'SELECT', 'TEXTAREA'],
+        callback   : function () {
+          if ($scope.isActive.active) {
+            $scope.segmentFinished($scope.id.index);
+          }
+        }
+      },
+      {
+        combo      : 'enter',
+        description: 'Close overlay component and begin editing',
+        allowIn    : ['DIV', 'INPUT', 'SELECT', 'TEXTAREA'],
+        callback   : function () {
+          if ($scope.isActive.active) {
+            // switch to the default component
+            $scope.widgets.activeComponent = $scope.widgets.defaultComponent;
+            // this is a hack to focus the component so user can begin typing directly
+            // Note: this relies upon the default component being a textarea
+            $timeout(function() {
+                $('#segment-' + $scope.id.index).find('textarea').first().focus();
+            },0);
+          }
         }
       }
-    }];
+    ];
 
-    // WORKING - dynamically populate the translation options for each segment by calling the URLs that are configured for user's
+
+    // TODO: this should be set from the document model _if_ it is available
+    // TODO: if score is not available, any component that relies on it cannot display, or shows error
+    $timeout(function() {
+        $scope.segment.qeScore = Math.floor(Math.random() * (100)) + '%';
+    }, 0);
+
+
+    // TODO - dynamically populate the translation options for each segment by calling the URLs that are configured for user's
     // translation resources
     // user must click to populate
     // Also look at how to log which options the user selects
@@ -59,24 +85,24 @@ angular.module('controllers')
           // call the backend to get results from the user's translation resources
           // check the (local) cache to see if we've already queried for this segment
           // query the user's translation resources for the translations for this segment
-          var d = new Date().toString();
-          $scope.translationOptions = [
-            {'segment': d + ' gibt es geheime Schwarzmarktgruppen im Internet, die große Mühe geben, von Strafverfolgung versteckt zu bleiben',
-              'created': 'January 26, 2014',
-              'quality': 0.95,
-              'provider': 'Chris Hokamp'
-            },
-            {'segment': 'Zweifellos gibt es geheimere Schwarzmarkt-Gruppen im Internet, die große Mühe geben, Strafverfolgung verborgen bleiben.',
-              'created': 'August 26, 2013',
-              'quality': 0.8,
-              'provider': 'Microsoft Translator'
-            },
-            {'segment': 'Zweifellos gibt es geheimnisSchwarzMarktGruppen im Internet, die große Mühe geben, bleiben von Strafverfolgungs versteckt.',
-              'created': 'October 5, 2013',
-              'quality': 0.6,
-              'provider': 'Google Translate'
-            },
-          ];
+          //var d = new Date().toString();
+          //$scope.translationOptions = [
+          //  {'segment': d + ' gibt es geheime Schwarzmarktgruppen im Internet, die große Mühe geben, von Strafverfolgung versteckt zu bleiben',
+          //    'created': 'January 26, 2014',
+          //    'quality': 0.95,
+          //    'provider': 'Chris Hokamp'
+          //  },
+          //  {'segment': 'Zweifellos gibt es geheimere Schwarzmarkt-Gruppen im Internet, die große Mühe geben, Strafverfolgung verborgen bleiben.',
+          //    'created': 'August 26, 2013',
+          //    'quality': 0.8,
+          //    'provider': 'Microsoft Translator'
+          //  },
+          //  {'segment': 'Zweifellos gibt es geheimnisSchwarzMarktGruppen im Internet, die große Mühe geben, bleiben von Strafverfolgungs versteckt.',
+          //    'created': 'October 5, 2013',
+          //    'quality': 0.6,
+          //    'provider': 'Google Translate'
+          //  },
+          //];
         }
       }
     )
@@ -273,7 +299,7 @@ angular.module('controllers')
 
       // configure the keyboard shortcuts for the active segment
       // hotkeys should be unbound manually using the hotkeys.del() method
-      hotkeyConfigs.forEach(function (hotkeyConfig) {
+      hotkeyConfigs.forEach(function(hotkeyConfig) {
         $log.log(hotkeyConfig);
         hotkeys.add(hotkeyConfig);
       });

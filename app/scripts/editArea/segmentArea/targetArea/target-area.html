@@ -34,7 +34,9 @@
       <!--QE score is an overlay on the target area until user closes it, then the editing component is activated  -->
       <div class="cssSlideUp"
            ng-show="widgets.activeComponent === 'qeScore'">
-          <qe-score></qe-score>
+          <qe-score
+                  numerical-qe-score="{{segment.qeScore}}"
+          ></qe-score>
           <!--<qe-score-->
                   <!--target-segment="segment.target"-->
                   <!--is-active="isActive.active"-->
