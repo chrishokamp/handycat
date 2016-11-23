@@ -4,23 +4,16 @@ angular.module('controllers')
 .controller('SegmentAreaCtrl', [
   '$rootScope', '$scope', 'TranslationMemory', 'Wikipedia',
   'Glossary', '$log', 'ruleMap', 'copyPunctuation', 'editSession',
-  'Logger', 'Projects', 'XliffParser', 'graphTMUrl', 'hotkeys', 'editSession', '$http', '$timeout',
+  'Logger', 'Projects', 'XliffParser', 'graphTMUrl', 'hotkeys',
+  'editSession', 'widgetConfiguration', '$http', '$timeout',
   function($rootScope, $scope, TranslationMemory, Wikipedia,
            Glossary, $log, ruleMap, copyPunctuation, Session,
-           Logger, Projects, XliffParser, graphTMUrl, hotkeys, editSession, $http, $timeout) {
+           Logger, Projects, XliffParser, graphTMUrl, hotkeys, editSession,
+           widgetConfiguration, $http, $timeout) {
 
     // this object tells us which translation widgets are available to the user
-    // These are currently target-side widgets only
-    // TODO: set which components are available via configuration, don't hardcode
-    // TODO: set which components is the default via the configuration
-    $scope.widgets = {
-      activeComponent: 'qeScore',
-      defaultComponent: 'lmAutocomplete',
-      translationSelector: false,
-      postEditor: true,
-      qeScore: true,
-      AceEditor: false,
-    }
+    // These are currently target-side widgets only, which are set via configuration
+    $scope.widgets = widgetConfiguration.target;
 
     // these hotkeys are only available when the segment is active
     // they get deleted when the segment is not active

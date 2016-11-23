@@ -46,7 +46,6 @@ handyCATconfig.service('autocompleterURLs', function() {
 });
 
 // the languages that HandyCAT supports
-// TODO: this has to be diff
 var supportedLangs = {
   source: [
     'en-EN'
@@ -73,6 +72,18 @@ handyCATconfig.constant('glossaryURL', glossaryURL);
 
 var loggerURL = 'logger';
 handyCATconfig.constant('loggerURL', loggerURL);
+
+handyCATconfig.constant('widgetConfiguration',
+  {
+    'target': {
+      activeComponent: 'qeScore',
+      defaultComponent: 'lmAutocomplete',
+      translationSelector: false,
+      postEditor: true,
+      qeScore: true,
+      AceEditor: false
+    }
+  })
 
 // allow experiment configuration via handyCAT config
 var experimentGroups = [
