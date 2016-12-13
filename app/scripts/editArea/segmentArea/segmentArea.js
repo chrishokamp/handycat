@@ -323,5 +323,6 @@ angular.module('controllers')
     }
     editSession.updateStat(logData)
   }
+  $scope.logAction = logAction;
 
 }]);

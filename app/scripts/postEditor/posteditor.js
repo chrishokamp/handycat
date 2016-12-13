@@ -114,12 +114,22 @@ angular.module('handycat.posteditors')
         });
 
         scope.$on('delete-event', function (e) {
-          console.log('HEARD DELETE');
-          scope.logAction('test', {'test': 'test'});
           // delete this span, update targetSegment model
           $el.find('.tooltip-span').remove();
           scope.showTooltip = false;
-          updateTargetSegment();
+          var oldNewTarget = updateTargetSegment();
+          var origTarget = oldNewTarget[0];
+          var newTarget = oldNewTarget[1];
+          // log this action
+          scope.logAction(
+            {
+              action: 'postEditor.delete',
+              data  : {
+                'originalTarget': origTarget,
+                'newTarget'     : newTarget
+              }
+            }
+          );
         });
 
         scope.$on('replace-event', function (e) {
@@ -181,9 +191,10 @@ angular.module('handycat.posteditors')
           }
         }
 
-
         var updateTargetSegment = function(newValue) {
-          var newTargetSegment;
+          var origTargetSegment, newTargetSegment;
+
+          origTargetSegment = scope.targetSegment;
           // make sure the tooltip span is gone
           $el.find('.tooltip-span').remove();
           if (!newValue) {
@@ -202,6 +213,7 @@ angular.module('handycat.posteditors')
               scope.state.action = 'default';
             },0)
 
+          return [origTargetSegment, newTargetSegment]
         }
 
         // keybindings

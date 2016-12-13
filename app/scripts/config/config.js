@@ -86,6 +86,10 @@ handyCATconfig.constant('widgetConfiguration',
           'textName': 'Autocomplete'
         },
         {
+          'directiveName': 'postEditor',
+          'textName': 'postEditor'
+        },
+        {
           'directiveName': 'qeScore',
           'textName': 'QE Score'
         },
