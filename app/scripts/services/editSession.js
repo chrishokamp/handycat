@@ -42,36 +42,6 @@ angular.module('services')
             }
           )
         },
-        logAction: function(logAction) {
-          var self = this;
-
-          var writeLogs = false;
-          // make sure that sessionId is already set
-          if (writeLogs) {
-            self.sessionPromise.then( function(r) {
-              if (self.sessionId == undefined)
-                $log.error('no id set!');
-
-              var date = new Date().getTime();
-              var sessionId = self.sessionId;
-              $log.log('sessionId: ' + sessionId);
-
-              // TODO: add date
-              var sessionData = {
-                "userId": this.userId,
-                "sessionId": sessionId,
-                "timestamp": date
-              };
-              angular.extend(logAction, sessionData);
-              $http.post(logUrl + '/session/' + sessionId, { "logData": logAction }).then(
-                function(res) {
-                  $log.log('log server response: ' + res.data);
-                }
-              )
-            });
-          }
-        },
-
         // Functions controlling movement through the document
         // TODO: handle these completely within segmentOrder, no need for editSession here
         // order of segments
@@ -91,8 +61,7 @@ angular.module('services')
         },
 
         // stats
-        // stores all the actions performed by the user in order
-        // WORKING -- create a flexible API for logging
+        // stores all the logged actions in order
         // use decorators in a separate module to allow transparent logging on components
         log:[],
 
@@ -101,8 +70,6 @@ angular.module('services')
           // 'stat' is the action name
           var newAction = data;
           self.log.push(newAction);
-          $log.log('update stat');
-          $log.log(newAction);
           $http.post(logUrl, {"logAction": newAction}).then(
             function(res) {
               $log.log('Log server response: ' + res.data);
