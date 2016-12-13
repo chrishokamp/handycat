@@ -74,9 +74,21 @@ angular.module('handycat.posteditors')
                 range = sel.getRangeAt(0);
                 range.deleteContents();
                 range.insertNode(document.createTextNode(' ' + textInSpan + ' '));
-                // TODO: logic to insert left or right spaces (or just do this as postprocessing?)
                 scope.state.action = 'default';
-                updateTargetSegment();
+
+                var oldNewTarget = updateTargetSegment();
+                var origTarget = oldNewTarget[0];
+                var newTarget = oldNewTarget[1];
+                // log this action
+                scope.logAction(
+                  {
+                    action: 'postEditor.move',
+                    data  : {
+                      'originalTarget': origTarget,
+                      'newTarget'     : newTarget
+                    }
+                  }
+                );
 
               } else {
                 var a = document.createElement("span");
@@ -223,7 +235,20 @@ angular.module('handycat.posteditors')
              console.log('ESCAPE WAS PRESSED')
              $el.find('.tooltip-span').contents().unwrap();
              if (currentState === 'replacing' || currentState === 'inserting') {
-               updateTargetSegment();
+               var oldNewTarget = updateTargetSegment();
+               var origTarget = oldNewTarget[0];
+               var newTarget = oldNewTarget[1];
+               // log this action
+               var action = currentState === 'replacing' ? 'replace' : 'insert';
+               scope.logAction(
+                 {
+                   action: 'postEditor.' + action,
+                   data  : {
+                     'originalTarget': origTarget,
+                     'newTarget'     : newTarget
+                   }
+                 }
+               );
              }
              scope.showTooltip = false;
              scope.state.action === 'default';
@@ -232,6 +257,7 @@ angular.module('handycat.posteditors')
          }
 
         // use a namespace on the event to bind the escape keypress to this element
+        // unbind when component goes out of focus, rebind when it comes back in
         scope.$watch(function() {
           return scope.isActive;
         }, function(isActive) {
@@ -242,57 +268,8 @@ angular.module('handycat.posteditors')
           }
         })
 
-
-        // TODO: unbind when component goes out of focus, rebind when it comes back in
-
-           //...) and  – Lachlan McD. May 13 '13 at 3:32
-
-        // update source with new data
-        // this is currently used for linking source named entities
-        //scope.$on('update-source', function(e, data) {
-        //  $log.log('update source fired');
-        //  $log.log('event data');
-        //  $log.log(data);
-
-          // iterate over text and add markup to entity ranges, then $compile
-          // WORKING -- try the angular-set-text directive
-        //  var text = scope.targetSentence;
-        //  var alreadyMarked = [];
-        //  angular.forEach(data.entityData, function(resObj) {
-        //    var surfaceForm = resObj['@surfaceForm'];
-        //    // test
-        //    if (!(_.contains(alreadyMarked, surfaceForm))) {
-        //      var re = new RegExp('(' + surfaceForm + ')', "g");
-        //      text = text.replace(re, '<span style="text-decoration: underline;" ng-click="setSurfaceForms($event);>$1</span>');
-        //    }
-        //    alreadyMarked.push(surfaceForm);
-        //  });
-        //  text = '<div>' + text + '</div>';
-        //  var compiledHTML = $compile(text)(scope);
-        //  $el.html(compiledHTML);
-        //
-        //})
-
-
-        // don't allow other tooltips to fire when one is already focused
-        //$('.source-token').focus(function(e) {
-        //  $(".source-token").not(this).css('pointer-events', "none")
-        //});
-        //$('.source-token').focusout(function(e) {
-        //  $(".source-token").css('pointer-events', "auto")
-        //});
       },
       controller: function($scope) {
-        //$scope.setSurfaceForms = function(e) {
-        //  var surfaceForm = $(e.target).text();
-        //  $scope.$emit('find-surface-forms', { 'sf': surfaceForm });
-        //}
-
-
-        // working -- call a function on the parent (the queryGlossary function passed into this component
-        $scope.askGlossary = function(word) {
-          $scope.queryGlossary(word);
-        }
 
       }
     };

@@ -65,8 +65,7 @@ angular.module('services')
               angular.extend(logAction, sessionData);
               $http.post(logUrl + '/session/' + sessionId, { "logData": logAction }).then(
                 function(res) {
-                  $log.log('LOG ACTION: ');
-                  $log.log(res.data);
+                  $log.log('log server response: ' + res.data);
                 }
               )
             });
@@ -106,8 +105,7 @@ angular.module('services')
           $log.log(newAction);
           $http.post(logUrl, {"logAction": newAction}).then(
             function(res) {
-              $log.log('LOG ACTION: ');
-              $log.log(res.data);
+              $log.log('Log server response: ' + res.data);
             }
           )
         }

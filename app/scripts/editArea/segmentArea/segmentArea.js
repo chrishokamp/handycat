@@ -322,6 +322,9 @@ angular.module('controllers')
       'data': data
     }
     editSession.updateStat(logData)
+    console.log('Logged action: ' + logData.action);
+    console.log(logData);
+    Logger.addEvent($scope.projectResource.name, $scope.id.index, logData);
   }
   $scope.logAction = logAction;
 

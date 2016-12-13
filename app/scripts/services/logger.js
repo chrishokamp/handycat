@@ -23,31 +23,26 @@ angular.module('services')
     // txt - line by line
     // txt with ||| separator
 
-    // to initialize the logger when a new XLIFF document loads
-    // TODO: refactor to take the log information as args
-//    $rootScope.$on('document-loaded', function(e) {
-//      // note that Documents.targetSegments is duplicated here
-//      angular.forEach(_.zip(Document.sourceSegments, Document.targetSegments, Document.targetSegments),
-//        function(tuple) {
-//          // the final field should be empty before the user starts editingr
-//          Log.initSegment(tuple[0], tuple[1], tuple[2]);
-//        }
-//      );
-//    });
-
+    //TODO: add header with user information to the log
     var Log = {
-      segments: [],
-      initSegment: function (source, hyp, final) {
-        this.segments.push( { source: source, hypothesis: hyp, final: final })
-      }
+      document: {}
     }
 
     // a function to let the user download json
     return {
-      Log: Log,
+      log: Log,
+      addEvent: function(documentId, segmentId, logData) {
+        if (!(documentId in this.log.document)) {
+          this.log.document[documentId] = {segments: {}}
+        }
+        if (!(segmentId in this.log.document[documentId].segments)) {
+          this.log.document[documentId].segments[segmentId] = [];
+        }
+        this.log.document[documentId].segments[segmentId].push(logData);
+      },
       exportJSON: function () {
         // pretty stringify with indent = 2
-        var out = JSON.stringify(this.Log.segments, undefined, 2);
+        var out = JSON.stringify(this.log, undefined, 2);
         return out;
       }
     }
