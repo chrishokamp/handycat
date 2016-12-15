@@ -148,10 +148,9 @@ angular.module('controllers')
       });
     }
 
-
     // this function lets children update the segment model value
-    // TODO: a problem with this approach is that the user cannot go back to the previous value in the editor (cannot undo)
-    // TODO: to fix the undo issue, maintain an undo stack of the previous values of the target segment
+    // Note: a problem with this approach is that the user cannot go back to the previous value in the editor (cannot undo)
+    // Note: a fix for the undo issue, would be to maintain an undo stack of the previous values of the target segment
     $scope.setTargetValue = function(newValue) {
       $scope.segment.target = newValue;
       // assume the user wants to go back to the default component
@@ -189,143 +188,142 @@ angular.module('controllers')
       $scope.$broadcast('undo-change');
     };
 
-  $scope.segmentFinished = function(segId) {
-    segId = Number(segId);
-    $log.log("SEGMENT FINISHED - segId is: " + segId);
-    $scope.setSegmentState('translated');
+    $scope.segmentFinished = function(segId) {
+      segId = Number(segId);
+      $log.log("SEGMENT FINISHED - segId is: " + segId);
+      $scope.setSegmentState('translated');
 
-    // log the segment's original value, and its new value, along with any other relevant data
-    var action = 'segment-complete';
-    var logInfo = {
-      'segmentId': segId,
-      'previousValue': $scope.segment.targetDOM.textContent,
-      'newValue': $scope.segment.target,
-      'configuration': $scope.projectResource.configuration
-    }
-    logAction(action, logInfo);
-
-    // Update the current segment in the XLIFF DOM
-    // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
-    // Right now, we depend on $scope.segment.targetDOM.textContent and $scope.segment.target being manually synced
-    $scope.segment.targetDOM.textContent = $scope.segment.target;
-
-    // TODO: the rest of this function should be on the EditAreaCtrl because it is not specific to this segment
-    // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
-    // - this line is CRITICAL - tells the UI to move to the next segment
-    Session.focusNextSegment(segId, $scope.segments);
-
-    // Update the project on the server by syncing with the document model
-    $scope.projectResource.content = XliffParser.getDOMString($scope.document.DOM);
-    $scope.projectResource.$update(function() {
-      $log.log('Project updated');
-    });
-
-    // Translation Memory and Online Retraining for Translation Resources
-    // update the user's translation resources (update the TM)
-    // what is the data model for a TM object { sourceLang: <sourceLang>, targetLang: <targetLang>, source: <source>, target: <target>, createdBy: <creator>, date: <date> }
-    // a new TM object is (at least) two nodes, the source segment and the target segment, both containing fields for creator, date created
-    // TODO: commented because there was an error proxying to the TM
-    //var newTMNodes = [
-    //    {'lang': $scope.document.sourceLang, 'segment': $scope.segment.source },
-    //    {'lang': $scope.document.targetLang, 'segment': $scope.segment.target },
-    //  ];
-    //
-    //var transProm = $http({
-    //  url: graphTMUrl,
-    //  method: "POST",
-    //  data: {
-    //    'nodes': newTMNodes
-    //  }
-    //});
-    //transProm.then(
-    //  function (res) {
-    //    $log.log('translation memory updated, the new nodes: ');
-    //    $log.log(res);
-    //  }, function (err) {
-    //    $log.error('Error updating the translation memory');
-    //  })
-
-  }; // end segmentFinished
-
-  // this is called when the user clicks anywhere in the segment area
-  // TODO: all of the logic here is shared with changeSegment
-  $scope.activate = function($index) {
-    // if the segment isn't already active
-    if (!$scope.isActive.active) {
-      // this will fire the changeSegment event, which this segment will hear
-      Session.setSegment($index);
-    }
-  };
-
-  // when the changeSegment event fires, each SegmentAreaCtrl scope responds
-  // the change segment event is fired from changeSegment in the editSession service
-  // this event is fired by editSession service
-  $scope.$on('changeSegment', function(e,data) {
-    // if this is the segment we activated
-    if (data.currentSegment === $scope.id.index && !$scope.isActive.active) {
-      $log.log('segment: ' + $scope.id.index + ' --- heard changeSegment');
-
-      // tell the staticTarget directive to create the editing components
-      $scope.$broadcast('activate');
-
-      // make sure the segment state is reverted to 'initial'
-      $scope.setSegmentState('initial');
-
-      // set this flag to true for the view
-      $scope.isActive = {active: true};
-
-      // log the activation
-      var action = 'change-segment';
+      // log the segment's original value, and its new value, along with any other relevant data
+      var action = 'segment-complete';
       var logInfo = {
-        'segmentId': $scope.id.index,
-        'currentValue': $scope.segment.target,
+        'segmentId': segId,
+        'previousValue': $scope.segment.targetDOM.textContent,
+        'newValue': $scope.segment.target,
         'configuration': $scope.projectResource.configuration
       }
       logAction(action, logInfo);
 
-      // del the hotkey combos we're about to re-add
-      hotkeyConfigs.forEach(
-        function(hotkeyConfig) {
-          hotkeys.del(hotkeyConfig.combo);
-        }
-      );
+      // Update the current segment in the XLIFF DOM
+      // Note: the application critically relies on the targetDOM being a link into the DOM object of the XLIFF
+      // Right now, we depend on $scope.segment.targetDOM.textContent and $scope.segment.target being manually synced
+      $scope.segment.targetDOM.textContent = $scope.segment.target;
 
-      // configure the keyboard shortcuts for the active segment
-      // hotkeys should be unbound manually using the hotkeys.del() method
-      hotkeyConfigs.forEach(function(hotkeyConfig) {
-        $log.log(hotkeyConfig);
-        hotkeys.add(hotkeyConfig);
+      // TODO: the rest of this function should be on the EditAreaCtrl because it is not specific to this segment
+      // pass in the current segment as the argument -- let the segmentOrder service do the logic to determine what the next segment should be
+      // - this line is CRITICAL - tells the UI to move to the next segment
+      Session.focusNextSegment(segId, $scope.segments);
+
+      // Update the project on the server by syncing with the document model
+      $scope.projectResource.content = XliffParser.getDOMString($scope.document.DOM);
+      $scope.projectResource.$update(function() {
+        $log.log('Project updated');
       });
-    }
-    // make sure this segment is deactivated
-    // TODO: if the segment was previously active,
-    // log that this segment is no longer active -- add a 'deactivate' event
-    else {
-      $scope.isActive = {active: false};
-    }
 
-  });
+      // TODO: commented because of error proxying to the TM
+      // Translation Memory and Online Retraining for Translation Resources
+      // update the user's translation resources (update the TM)
+      // data model for a TM object: { sourceLang: <sourceLang>, targetLang: <targetLang>, source: <source>, target: <target>, createdBy: <creator>, date: <date> }
+      // a new TM object is (at least) two nodes, the source segment and the target segment, both containing fields for creator, date created
+      //var newTMNodes = [
+      //    {'lang': $scope.document.sourceLang, 'segment': $scope.segment.source },
+      //    {'lang': $scope.document.targetLang, 'segment': $scope.segment.target },
+      //  ];
+      //
+      //var transProm = $http({
+      //  url: graphTMUrl,
+      //  method: "POST",
+      //  data: {
+      //    'nodes': newTMNodes
+      //  }
+      //});
+      //transProm.then(
+      //  function (res) {
+      //    $log.log('translation memory updated, the new nodes: ');
+      //    $log.log(res);
+      //  }, function (err) {
+      //    $log.error('Error updating the translation memory');
+      //  })
 
-  var logAction = function(action, data) {
-    var timestamp = new Date().getTime();
-    var logData = {
-      'time': timestamp,
-      'user': {
-        '_id': $scope.currentUser.userId,
-        'name': $scope.currentUser.username
-      },
-      'project': {
-        'name': $scope.projectResource.name,
-        '_id' : $scope.projectResource._id
-      },
-      'action': action,
-      'data': data
+    }; // end segmentFinished
+
+    // this is called when the user clicks anywhere in the segment area
+    // TODO: all of the logic here is shared with changeSegment
+    $scope.activate = function($index) {
+      // if the segment isn't already active
+      if (!$scope.isActive.active) {
+        // this will fire the changeSegment event, which this segment will hear
+        Session.setSegment($index);
+      }
+    };
+
+    // when the changeSegment event fires, each SegmentAreaCtrl scope responds
+    // the change segment event is fired from changeSegment in the editSession service
+    // this event is fired by editSession service
+    $scope.$on('changeSegment', function(e,data) {
+      // if this is the segment we activated
+      if (data.currentSegment === $scope.id.index && !$scope.isActive.active) {
+        $log.log('segment: ' + $scope.id.index + ' --- heard changeSegment');
+
+        // tell the staticTarget directive to create the editing components
+        $scope.$broadcast('activate');
+
+        // make sure the segment state is reverted to 'initial'
+        $scope.setSegmentState('initial');
+
+        // set this flag to true for the view
+        $scope.isActive = {active: true};
+
+        // log the activation
+        var action = 'change-segment';
+        var logInfo = {
+          'segmentId': $scope.id.index,
+          'currentValue': $scope.segment.target,
+          'configuration': $scope.projectResource.configuration
+        }
+        logAction(action, logInfo);
+
+        // del the hotkey combos we're about to re-add
+        hotkeyConfigs.forEach(
+          function(hotkeyConfig) {
+            hotkeys.del(hotkeyConfig.combo);
+          }
+        );
+
+        // configure the keyboard shortcuts for the active segment
+        // hotkeys should be unbound manually using the hotkeys.del() method
+        hotkeyConfigs.forEach(function(hotkeyConfig) {
+          $log.log(hotkeyConfig);
+          hotkeys.add(hotkeyConfig);
+        });
+      }
+      // make sure this segment is deactivated
+      // TODO: if the segment was previously active,
+      // log that this segment is no longer active -- add a 'deactivate' event
+      else {
+        $scope.isActive = {active: false};
+      }
+    });
+
+    var logAction = function(action, data) {
+      var timestamp = new Date().getTime();
+      var logData = {
+        'time': timestamp,
+        'user': {
+          '_id': $scope.currentUser.userId,
+          'name': $scope.currentUser.username
+        },
+        'project': {
+          'name': $scope.projectResource.name,
+          '_id' : $scope.projectResource._id
+        },
+        'action': action,
+        'data': data
+      }
+      editSession.updateStat(logData)
+      console.log('Logged action: ' + logData.action);
+      console.log(logData);
+      Logger.addEvent($scope.projectResource.name, $scope.id.index, logData);
     }
-    editSession.updateStat(logData)
-    console.log('Logged action: ' + logData.action);
-    console.log(logData);
-    Logger.addEvent($scope.projectResource.name, $scope.id.index, logData);
-  }
-  $scope.logAction = logAction;
+    $scope.logAction = logAction;
 
 }]);
