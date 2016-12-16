@@ -75,6 +75,10 @@ handyCATconfig.constant('loggerURL', loggerURL);
 
 handyCATconfig.constant('widgetConfiguration',
   {
+    'segmentControls': {
+      'targetComponentSelector': true,
+      'qeScore': false,
+    },
     'target': {
       activeComponent: 'qeScore',
       defaultComponent: 'typeaheadEditor',
