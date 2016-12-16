@@ -15,6 +15,7 @@ angular.module('controllers')
     // These are currently target-side widgets only, which are set via configuration
     // we copy the config because the scope will actively modify this object as user edits
     $scope.widgets = $.extend(true, {}, widgetConfiguration.target);
+    $scope.segmentControls = $.extend(true, {'targetComponentSelector': false}, widgetConfiguration.segmentControls);
 
     // these hotkeys are only available when the segment is active
     // they get deleted when the segment is not active

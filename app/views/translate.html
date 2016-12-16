@@ -46,16 +46,16 @@
           >
           <!-- just an anchor to let us find this place in the DOM -->
           <a id="anchor-{{$index}}"></a>
-          <!-- the segment info row -->
+          <!-- segment info row -->
           <div layout="row" class="segment-muted-text">
             <div flex>Segment Index: {{$index}}</div>
 
             <!--TRANSLATION COMPONENT SELECTOR-->
             <!-- the button group lets the user select which component is currently showing -->
-            <!-- WORKING - components are directives which are databound to the segment object (or its properties)-->
-            <!--WORKING - hard coding here, and in target-area is confusing, these components should only be specified in one place-->
-            <!--WORKING - remove this hard-coded configuration- do everything via config -->
-            <div flex class="translation-buttons" ng-show="isActive.active">
+            <!-- components are directives which are databound to the segment object (or its properties)-->
+            <div ng-show="segmentControls.targetComponentSelector"
+                 flex class="translation-buttons"
+                 ng-show="isActive.active">
               <md-radio-group
                 layout="row"
                 ng-model="widgets.activeComponent"
@@ -63,26 +63,20 @@
                 <md-radio-button ng-repeat="widget in widgets.components"
                                  value="{{widget.directiveName}}"
                                  aria-label="{{widget.textName}}">{{widget.textName}}</md-radio-button>
-                <!--<md-radio-button value="postEditor" aria-label="Post Editor">Post Editor</md-radio-button>-->
-                <!--<md-radio-button value="qeScore" aria-label="QE Score">QE Score</md-radio-button>-->
-
-                <!--<md-radio-button value="translationSelector" aria-label="Translation Selector">Translation Selector</md-radio-button>-->
-                <!--TODO: ace editor doesn't work right now-->
-                <!--<md-radio-button value="AceEditor"  aria-label="Editor">Editor</md-radio-button>-->
               </md-radio-group>
 
-              <!--<span ng-show="translationsPending">retrieving translations<i class="ion-loading-c"></i></span>-->
-              <!--<span-->
-              <!--ng-repeat="resource in translationResources"-->
-              <!-->
-              <!--<md-button ng-click="shared.setText(resource.target)">{{resource.provider}}</md-button>-->
-              <!--</span>-->
             </div>
             <!--END TRANSLATION COMPONENT SELECTOR-->
           </div>
+          <!--END segment info row-->
+          <!--Working: add row for additional widgets like qe score  -->
+          <div layout="row" layout-align="center center">
+            <!--<div ng-show="segmentControls.qeScore">{{seg.qualityScore}}</div>-->
+            <div class="qe-score-box"
+                 ng-show="segmentControls.qeScore">QE SCORE</div>
+          </div>
 
           <!-- the source and target rows -->
-
           <div ng-class="{activeshadow: activeSegment === id.index}" layout="row" layout-padding class="bottom-margin">
             <div flex layout="column">
               <div class="bottom-margin content-card" ng-click="activate(id.index)">
