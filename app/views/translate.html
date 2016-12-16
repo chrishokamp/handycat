@@ -93,7 +93,7 @@
 
           >
             <!--this box can mask the row-->
-            <div class="translation-content-row-mask" ng-hide="qeScoreAccepted"></div>
+            <div class="translation-content-row-mask" ng-show="segmentControls.qeScore && !qeScoreAccepted"></div>
 
             <div flex layout="column">
               <div class="bottom-margin content-card" ng-click="activate(id.index)">
