@@ -48,8 +48,20 @@ angular.module('controllers')
       }
     ];
 
+    // QE Scores
+
     // TODO: this should be set for each segment from the document model _if_ it is available
     // TODO: if score is not available for a segment, any component that relies on it cannot display, or shows error
+    $scope.qeScoreAccepted = false;
+    // TODO: whether this is available depends upon configuration
+    $scope.maskTranslationContent = true;
+    $scope.acceptQeScore =  function() {
+      $scope.qeScoreAccepted = true;
+      $scope.maskTranslationContent = false;
+      console.log('QE Score accepted');
+
+    }
+
     $timeout(function() {
         $scope.segment.qeScore = Math.floor(Math.random() * (100)) + '%';
     }, 0);

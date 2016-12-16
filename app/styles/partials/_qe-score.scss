@@ -1,4 +1,4 @@
-$qescore-color: #778899;
+$qescore-color: #73B0FF;
 
 qe-score > div {
   position: relative;
@@ -19,11 +19,29 @@ qe-score > div {
 }
 
 .qe-score-box {
-  border: 2px solid #73B0FF;;
-  padding: 4px;
+  width: 100px;
+  font-size: 36px;
+  font-weight: bold;
+  border: 3px solid $qescore-color;
+  //padding: 4px;
+  //padding-right: 8px;
+  //padding-left: 8px;
+  text-align: center;
 }
 
+.animatebackground {
+  animation-delay: 1s;
+  animation: pulsecolor 2.5s;
+}
 
+@keyframes pulsecolor {
+  0% {
+    background-color: $qescore-color;
+  }
+  100% {
+    background-color: white;
+  }
+}
 
 //.post-editor-menu {
 //  border: 1px solid;

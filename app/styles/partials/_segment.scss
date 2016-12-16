@@ -21,6 +21,36 @@ $finished-segment-background-color: transparent;
   width: 100%;
   height: 100%;
   background-color: white;
+  z-index: 1000;
+}
+
+.translation-content-row {
+  position: relative;
+  .translation-content-row-mask {
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    background-color: white;
+    opacity: 0.5;
+    transition: 0s linear all;
+    .ng-hide-remove {
+      opacity: 0;
+      display: block !important;
+      transition: 0.5s linear all;
+      .ng-hide-remove-active {
+        opacity: 0.5;
+      }
+    }
+    .ng-hide-add {
+      opacity: .5;
+      display: block !important;
+      transition: 0.5s linear all;
+      .ng-hide-add-active {
+        opacity: 0;
+      }
+    }
+  }
 }
 
 
