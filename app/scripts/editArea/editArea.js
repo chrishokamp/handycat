@@ -205,10 +205,12 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       var anchorElem = $('#segment-' + data.currentSegment);
       // this is a hack because $el.offset is returning the wrong values
       var segmentHeight = 256;
+      var segmentHeight = anchorElem.outerHeight(true)
       var top = segmentHeight * $scope.activeSegment;
+
       // scroll the ui to the currentSegment
-      $("md-content").animate({scrollTop: top-20}, "slow");
-    })
+      $("md-content").animate({scrollTop: top}, "slow");
+    });
 
     // DEV UTILS
     $scope.showXLIFF = false;

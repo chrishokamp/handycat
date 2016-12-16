@@ -12,7 +12,17 @@ $finished-segment-background-color: transparent;
 
 .segment {
   padding-top: 8px;
+  position: relative;
+
 }
+
+.segment-area-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
 
 .content-card {
   min-height: 200px;

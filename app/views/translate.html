@@ -46,6 +46,10 @@
           >
           <!-- just an anchor to let us find this place in the DOM -->
           <a id="anchor-{{$index}}"></a>
+          <!--this box can cover the segment to mask it-->
+          <div ng-show="segmentControls.qeScore && activeSegment !== id.index"
+               class="segment-area-mask"></div>
+
           <!-- segment info row -->
           <div layout="row" class="segment-muted-text">
             <div flex>Segment Index: {{$index}}</div>
@@ -69,7 +73,8 @@
             <!--END TRANSLATION COMPONENT SELECTOR-->
           </div>
           <!--END segment info row-->
-          <!--Working: add row for additional widgets like qe score  -->
+
+          <!--row for additional widgets like qe score  -->
           <div layout="row" layout-align="center center">
             <!--<div ng-show="segmentControls.qeScore">{{seg.qualityScore}}</div>-->
             <div class="qe-score-box"
@@ -77,7 +82,11 @@
           </div>
 
           <!-- the source and target rows -->
-          <div ng-class="{activeshadow: activeSegment === id.index}" layout="row" layout-padding class="bottom-margin">
+          <div
+                  ng-class="{activeshadow: activeSegment === id.index}"
+                  layout="row"
+                  layout-padding
+                  class="bottom-margin">
             <div flex layout="column">
               <div class="bottom-margin content-card" ng-click="activate(id.index)">
                 <div ng-show="segment.state === 'translated'" class="segment-finished">
