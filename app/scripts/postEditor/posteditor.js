@@ -242,24 +242,18 @@ angular.module('handycat.posteditors')
           var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
           // var re = '/(\s+)/g';
           var allTokens = posteditorText.match(re);
-          debugger;
           var posteditorHtml = allTokens.map(function (m) {
             return '<span class="post-editor-whitespace">' + m + '</span>';
           });
-          // debugger;
-          // $el.html($el.text().replace(/(\s+)/g, '<span class="post-editor-word">$1</span>'));
           $el.find('.post-editor').first().html(posteditorHtml);
-            // posteditorText.replace(/(\s+)/g, '<span class="post-editor-whitespace">$1</span>'));
-            // .replace(/([\s]+)/g, '<span class="post-editor-whitespace">$1</span>'));
 
           // bind to each span
           $el.find('span.post-editor-word').hover(
             function() { $(this).css('background-color','pink'); },
             function() { $(this).css('background-color', 'transparent'); }
-            // function() { $('#word').text(''); $(this).css('background-color',''); }
           );
 
-          // WORKING: select text in span on click
+          // select text in span on click
           $el.find('span.post-editor-whitespace').hover(
             function() {
               var origWidth = $(this).width();
@@ -271,11 +265,10 @@ angular.module('handycat.posteditors')
               $(this).css('background-color', 'transparent')
                 // .animate({'width': this['origWidth']}, 200)
             }
-            // function() { $('#word').text(''); $(this).css('background-color',''); }
           ).click(function (){
+            // remove this span
             var range, selection;
 
-            console.log('FIRE');
             if (window.getSelection && document.createRange) {
               selection = window.getSelection();
               range = document.createRange();
@@ -288,7 +281,6 @@ angular.module('handycat.posteditors')
               range.select();
             }
           });
-
 
           $timeout(
             function() {
