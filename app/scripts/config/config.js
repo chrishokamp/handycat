@@ -80,10 +80,11 @@ handyCATconfig.constant('widgetConfiguration',
       'qeScore': false,
     },
     'target': {
-      activeComponent: 'qeScore',
-      defaultComponent: 'typeaheadEditor',
-      // TODO: remove the key-based component syntax above
+      activeComponent: 'postEditor',
+      defaultComponent: 'postEditor',
       // a list of the available components
+      // TODO: raw textarea component (no typeahead)
+      // TODO: key which indicates whether the component is available
       components: [
         {
           'directiveName': 'typeaheadEditor',

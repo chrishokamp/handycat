@@ -49,6 +49,17 @@ angular.module('handycat.posteditors')
         var addTooltipToSelected = function () {
           var sel, range, text;
 
+          // WORKING: remove all token helper spans when tooltip displays, add them back when it hides
+          // var b = document.getElementsByClassName('post-editor-whitespace');
+          // while(b.length) {
+          //   var parent = b[ 0 ].parentNode;
+          //   while( b[ 0 ].firstChild ) {
+          //     parent.insertBefore(  b[ 0 ].firstChild, b[ 0 ] );
+          //   }
+          //   parent.removeChild( b[ 0 ] );
+          // }
+
+
           // use the range API to replace and move text
           // single tooltip directive, move that around as needed and fire events from it
           // wrap selected text in span, place directive below that span
@@ -101,9 +112,7 @@ angular.module('handycat.posteditors')
                 range.surroundContents(a);
                 sel.addRange(range);
 
-                // WORKING: we can also send the current range in the broadcast event
-                // WORKING: so that the tooltip will know what to move or delete
-                // WORKING: tooltip should directly modify the target segment
+                // Note: we could also send the current range in the broadcast event
                 // tell the tooltip to move
                 scope.showTooltip = true;
                 scope.$broadcast('position-tooltip');
@@ -113,16 +122,20 @@ angular.module('handycat.posteditors')
           }
         }
 
-
         scope.selectedText = '';
         $el.on('mouseup', function (e) {
+          console.log('mouseup');
+          // WORKING: remove helper spans, just select the text inside
+
+          $timeout(function() {
           var selectedText = getSelectedText();
-          if (selectedText !== scope.selectedText) {
+          // if (selectedText !== scope.selectedText) {
             scope.selectedText = selectedText;
             $log.log('selected text');
             $log.log(selectedText);
             addTooltipToSelected();
-          }
+          },0);
+          // }
         });
 
         scope.$on('delete-event', function (e) {
@@ -213,13 +226,70 @@ angular.module('handycat.posteditors')
             newTargetSegment = $el.find('.post-editor').first().text();
             // remove any extra whitespace
             newTargetSegment = newTargetSegment.replace(/\s+/g,' ');
+            // remove whitespace at beginning and end
+            newTargetSegment = newTargetSegment.replace(/^\s+/,'');
+            newTargetSegment = newTargetSegment.replace(/\s+$/,'');
           } else {
             newTargetSegment = newValue;
           }
           // push the old value to the undo stack
           scope.state.undoStack.push(scope.targetSegment);
           scope.targetSegment = newTargetSegment;
-          $el.find('.post-editor').first().text(scope.targetSegment);
+
+          // set the component text to the targetSegment, adding some space so user can move to the beginning or end
+          $el.find('.post-editor').first().text('    ' + scope.targetSegment + '    ');
+          var posteditorText = '    ' + scope.targetSegment + '    ';
+          var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
+          // var re = '/(\s+)/g';
+          var allTokens = posteditorText.match(re);
+          debugger;
+          var posteditorHtml = allTokens.map(function (m) {
+            return '<span class="post-editor-whitespace">' + m + '</span>';
+          });
+          // debugger;
+          // $el.html($el.text().replace(/(\s+)/g, '<span class="post-editor-word">$1</span>'));
+          $el.find('.post-editor').first().html(posteditorHtml);
+            // posteditorText.replace(/(\s+)/g, '<span class="post-editor-whitespace">$1</span>'));
+            // .replace(/([\s]+)/g, '<span class="post-editor-whitespace">$1</span>'));
+
+          // bind to each span
+          $el.find('span.post-editor-word').hover(
+            function() { $(this).css('background-color','pink'); },
+            function() { $(this).css('background-color', 'transparent'); }
+            // function() { $('#word').text(''); $(this).css('background-color',''); }
+          );
+
+          // WORKING: select text in span on click
+          $el.find('span.post-editor-whitespace').hover(
+            function() {
+              var origWidth = $(this).width();
+              this['origWidth'] = origWidth;
+              $(this).css('background-color','#87cefa')
+                // .animate({'width': '+=10'}, 200)
+            },
+            function() {
+              $(this).css('background-color', 'transparent')
+                // .animate({'width': this['origWidth']}, 200)
+            }
+            // function() { $('#word').text(''); $(this).css('background-color',''); }
+          ).click(function (){
+            var range, selection;
+
+            console.log('FIRE');
+            if (window.getSelection && document.createRange) {
+              selection = window.getSelection();
+              range = document.createRange();
+              range.selectNodeContents(this);
+              selection.removeAllRanges();
+              selection.addRange(range);
+            } else if (document.selection && document.body.createTextRange) {
+              range = document.body.createTextRange();
+              range.moveToElementText(this);
+              range.select();
+            }
+          });
+
+
           $timeout(
             function() {
               scope.state.action = 'default';
@@ -255,6 +325,12 @@ angular.module('handycat.posteditors')
              scope.$digest();
            }
          }
+
+        $timeout(function() {
+          updateTargetSegment();
+        }, 0);
+
+
 
         // use a namespace on the event to bind the escape keypress to this element
         // unbind when component goes out of focus, rebind when it comes back in
