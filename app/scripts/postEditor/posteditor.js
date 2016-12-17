@@ -318,12 +318,17 @@ angular.module('handycat.posteditors')
            }
          }
 
-        $timeout(function() {
-          updateTargetSegment();
-        }, 0);
+        var handleUndo = function(e) {
+          if (e.keyCode == 90 && e.ctrlKey) {
+            console.log('Ctrl-Z');
+            resetTargetSegment();
+          }
+          scope.showTooltip = false;
+          scope.state.action === 'default';
+          scope.$digest();
+        }
 
-
-
+        // Working: add ctrl+Z to trigger undo
         // use a namespace on the event to bind the escape keypress to this element
         // unbind when component goes out of focus, rebind when it comes back in
         scope.$watch(function() {
@@ -331,10 +336,16 @@ angular.module('handycat.posteditors')
         }, function(isActive) {
           if (isActive) {
             $(document).on('keyup.posteditor_escape', handleEscape)
+            $(document).on('keyup.posteditor_undo', handleUndo)
           } else {
             $(document).unbind('keyup.posteditor_escape')
+            $(document).unbind('keyup.posteditor_undo')
           }
         })
+
+        $timeout(function() {
+          updateTargetSegment();
+        }, 0);
 
       },
       controller: function($scope) {
