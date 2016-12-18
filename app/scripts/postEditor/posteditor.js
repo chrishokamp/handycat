@@ -229,11 +229,13 @@ angular.module('handycat.posteditors')
             // remove whitespace at beginning and end
             newTargetSegment = newTargetSegment.replace(/^\s+/,'');
             newTargetSegment = newTargetSegment.replace(/\s+$/,'');
+
+            // push the old value to the undo stack if the user is not undoing something
+            scope.state.undoStack.push(scope.targetSegment);
           } else {
             newTargetSegment = newValue;
           }
-          // push the old value to the undo stack
-          scope.state.undoStack.push(scope.targetSegment);
+
           scope.targetSegment = newTargetSegment;
 
           // set the component text to the targetSegment, adding some space so user can move to the beginning or end
