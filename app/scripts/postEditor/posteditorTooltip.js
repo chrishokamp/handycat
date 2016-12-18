@@ -9,17 +9,29 @@ angular.module('handycat.posteditors')
       restrict: 'E',
       templateUrl: 'scripts/postEditor/posteditor-tooltip.html',
       link: function(scope, $el, attrs){
-        // WORKING: depending upon what user does with tooltip, take action
-        // WORKING: position only after span has been created (use event)
-        // WORKING: pass in position with event args?
+
+        // depending upon what user does with tooltip, take action
+        // position only after span has been created (use event)
         scope.$on('position-tooltip', function(e) {
+          // Note: this is currently hard-coded
+          var tooltipWidth = 90;
           var $innerSpan = $('.tooltip-span');
           var pos = $innerSpan.position();
-          //var width = $innerSpan.outerWidth();
+
+          // check if we're going outside the target area, if so, offset the tooltip
+          var $targetArea = $innerSpan.closest('.post-editor-wrapper');
+          var targetAreaLeft = $targetArea.position().left;
+          var topRightCorner = targetAreaLeft + $targetArea.width();
+          var toolTipRightCorner = targetAreaLeft + pos.left + tooltipWidth;
+          var cornerDiff = topRightCorner - toolTipRightCorner;
+          var tooltipOffset = 0;
+          if (cornerDiff < 0) {
+            tooltipOffset = cornerDiff;
+          }
           $el.css({
             position: "absolute",
             top: pos.top + 24 + "px",
-            left: (pos.left) + "px",
+            left: (pos.left + tooltipOffset) + "px",
           });
         });
 
