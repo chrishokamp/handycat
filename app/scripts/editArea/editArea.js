@@ -1,8 +1,8 @@
 angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal',
   '$log', 'SegmentOrder', 'editSession', '$mdBottomSheet', '$rootScope', 'Wikipedia', '$timeout', 'Projects',
-  'XliffParser', 'autocompleterURLs', '$stateParams', '$q',
+  'XliffParser', 'autocompleterURLs', 'Logger', '$stateParams', '$q',
   function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, editSession, $mdBottomSheet, $rootScope, Wikipedia, $timeout,
-           Projects, XliffParser, autocompleterURLs, $stateParams, $q) {
+           Projects, XliffParser, autocompleterURLs, Logger, $stateParams, $q) {
 
     // global user options (may be accessed or changed from child controllers)
     $scope.visible = {
@@ -157,7 +157,17 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
           saveAs(outputBlob, "target-segments.txt");
         };
 
+        // TODO: move this to the grid bottom sheet in editArea
+        $scope.saveJSON = function() {
+          $log.log("saving JSON");
+          $log.log(Logger.exportJSON());
+          var blob = new Blob([Logger.exportJSON()], {type: "application/json"});
+          // saveAs is provided in the global scope by file-saver
+          saveAs(blob, "edit-log.json");
+        };
+
         $scope.bottomItems = [
+          {name: 'Log', icon: 'ion-ios7-cloud-download', action: $scope.saveJSON},
           {name: 'Xliff', icon: 'ion-ios7-cloud-download', action: $scope.saveXliff},
           {name: 'Text', icon: 'ion-ios7-cloud-download-outline', action: $scope.saveTarget},
           {name: 'Projects', icon: 'ion-ios7-arrow-back'},
