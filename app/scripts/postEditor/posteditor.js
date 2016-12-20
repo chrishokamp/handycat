@@ -160,7 +160,7 @@ angular.module('handycat.posteditors')
         scope.$on('replace-event', function (e) {
           console.log('HEARD REPLACE');
           // clear text and make contenteditable
-          $el.find('.tooltip-span').attr('contentEditable', true).text(' ');
+          $el.find('.tooltip-span').attr('contentEditable', true);
           $el.find('.tooltip-span').first().focus();
           scope.showTooltip = false;
 
