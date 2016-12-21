@@ -1,8 +1,8 @@
 angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal',
   '$log', 'SegmentOrder', 'editSession', '$mdBottomSheet', '$rootScope', 'Wikipedia', '$timeout', 'Projects',
-  'XliffParser', 'autocompleterURLs', 'Logger', '$stateParams', '$q',
+  'XliffParser', 'autocompleterURLs', 'Logger', 'widgetConfiguration', '$stateParams', '$q',
   function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, editSession, $mdBottomSheet, $rootScope, Wikipedia, $timeout,
-           Projects, XliffParser, autocompleterURLs, Logger, $stateParams, $q) {
+           Projects, XliffParser, autocompleterURLs, Logger, widgetConfiguration, $stateParams, $q) {
 
     // global user options (may be accessed or changed from child controllers)
     $scope.visible = {
@@ -34,18 +34,26 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
             // The segment exchange format (in document.segments) is:
 //          var segPair = { source: sourceText, target: targetText, sourceDOM: seg[0],targetDOM: seg[1]};
             $log.log('$scope.document loaded and parsed');
-            $log.log('widget configuration: ');
+            $log.log('Project: local widget configuration: ');
             $log.log(projectResource.configuration);
-            //$scope.widgetConfiguration = projectResource.configuration;
-            // configure the lm autocompleter URL based on the project config
+
+            // TODO: target widget config can be modified via the project resource config
+            // TODO: the current method of merging global and local configs overwrites the global config, this could cause unexpected behavior
 
             // TODO: make sure that we can log which autocompleter we're using
             if (projectResource.configuration) {
-              if (projectResource.configuration.target.widgets.constrainedLMAutocomplete === true) {
-                autocompleterURLs.lmAutocompleterURL = autocompleterURLs.constrainedLMAutocompleterURL;
-              } else {
-                autocompleterURLs.lmAutocompleterURL = autocompleterURLs.defaultLMAutocompleterURL;
-              }
+              // $.extend(true, widgetConfiguration, projectResource.configuration);
+              widgetConfiguration.target.components = projectResource.configuration.target.components;
+
+              // legacy
+              // configure the lm autocompleter URL based on the project config
+              // if (projectResource.configuration.target.widgets.constrainedLMAutocomplete === true) {
+              //   autocompleterURLs.lmAutocompleterURL = autocompleterURLs.constrainedLMAutocompleterURL;
+              // } else {
+              //   autocompleterURLs.lmAutocompleterURL = autocompleterURLs.defaultLMAutocompleterURL;
+              // }
+
+              autocompleterURLs.lmAutocompleterURL = autocompleterURLs.defaultLMAutocompleterURL;
             }
 
             $scope.visible.projectLoading = false;
