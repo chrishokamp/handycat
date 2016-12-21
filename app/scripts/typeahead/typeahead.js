@@ -169,10 +169,7 @@ angular.module('handycat.typeaheads')
         // default autocompletion from file
         vocabularyAutocompleter($scope.targetLang).then(
             function(autocompleter) {
-              // TODO: fix the trigger so that this works inside words
               trieVocabCompleter = function(query) {
-                //$log.log('autocompleter');
-                //$log.log(autocompleter.search(query));
                 return autocompleter.search(query).map(function(item) {
                   if (!(item.value === query)) {
                     return item.value;
@@ -188,8 +185,7 @@ angular.module('handycat.typeaheads')
         $inputTextarea.data('atwho').controllers[""].setting.callbacks.remoteFilter = remoteFilter;
 
         // when i become active, focus me
-        // TODO: change this to a function which the segment area calls to activate a widget
-        // If the function gets called with my id -- i.e. 'lmAutocomplete', then activate me
+        // If the function gets called with the component id -- i.e. 'typeaheadEditor', focus me
         $scope.$watch(
           function() {
             return $scope.isActive;
@@ -211,5 +207,4 @@ angular.module('handycat.typeaheads')
     }
 }])
   //.controller('typeaheadCtrl', function() {
-// TODO: normalize punctuation here
   //});
