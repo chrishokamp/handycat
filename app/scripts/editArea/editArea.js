@@ -20,6 +20,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       $scope.segments = $scope.document.segments;
     });
 
+
     // This is the init function that sets up an edit session
     $scope.loadProject = function () {
       Projects.get({
@@ -41,20 +42,26 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
             // TODO: the current method of merging global and local configs overwrites the global config, this could cause unexpected behavior
 
             // TODO: make sure that we can log which autocompleter we're using
-            if (projectResource.configuration) {
-              // $.extend(true, widgetConfiguration, projectResource.configuration);
-              widgetConfiguration.target.components = projectResource.configuration.target.components;
+            try {
+              if (projectResource.configuration.target) {
+                // $.extend(true, widgetConfiguration, projectResource.configuration);
+                widgetConfiguration.target = projectResource.configuration.target;
 
-              // legacy
-              // configure the lm autocompleter URL based on the project config
-              // if (projectResource.configuration.target.widgets.constrainedLMAutocomplete === true) {
-              //   autocompleterURLs.lmAutocompleterURL = autocompleterURLs.constrainedLMAutocompleterURL;
-              // } else {
-              //   autocompleterURLs.lmAutocompleterURL = autocompleterURLs.defaultLMAutocompleterURL;
-              // }
+                // legacy
+                // configure the lm autocompleter URL based on the project config
+                // if (projectResource.configuration.target.widgets.constrainedLMAutocomplete === true) {
+                //   autocompleterURLs.lmAutocompleterURL = autocompleterURLs.constrainedLMAutocompleterURL;
+                // } else {
+                //   autocompleterURLs.lmAutocompleterURL = autocompleterURLs.defaultLMAutocompleterURL;
+                // }
 
-              autocompleterURLs.lmAutocompleterURL = autocompleterURLs.defaultLMAutocompleterURL;
+                // legacy
+                autocompleterURLs.lmAutocompleterURL = autocompleterURLs.defaultLMAutocompleterURL;
+              }
+            } catch(err) {
+              console.error('project doesnt have key `projectResource.configuration.target`');
             }
+
 
             $scope.visible.projectLoading = false;
           },

@@ -7,10 +7,10 @@
   </div>
 
   <!--TODO: show filename when a new file is dropped-->
-  <md-content layout="column" layout-align="start center">
-    <!--<div-->
-            <!--layout="column"-->
-            <!--layout-align="center center">-->
+  <md-content>
+    <div
+            layout="column"
+            layout-align="center center">
     <div class="text-muted">Create a New Translation Project</div>
     <md-divider></md-divider>
 
@@ -82,18 +82,22 @@
       </div>
       <md-divider></md-divider>
 
-        <!--WORKING: add the Porto Xliff URLs here if possible-->
-        <div>Or Choose A Sample File</div>
-        <div ng-repeat='testGroup in testGroups'>
-          <div ng-repeat='testfile in testGroup.sampleFiles'>
-            <a
-              ng-click="createFromURL(testfile.url, testfile.name, testfile.configuration)">
-              {{$index}}: {{testfile.name}}
-            </a>
-            <md-divider></md-divider>
+      <div>Or Choose A Sample File</div>
+      <div ng-repeat='testGroup in testGroups'
+           layout="column"
+           layout-align="center center"
+      >
+        <h3>{{testGroup.name}}</h3>
+        <div ng-repeat='testfile in testGroup.sampleFiles'>
+          <a
+            ng-click="createFromURL(testfile.url, testfile.name, testfile.configuration)">
+            {{$index}}: {{testfile.name}}
+          </a>
 
-          </div>
         </div>
+        <md-divider></md-divider>
+      </div>
+    </div>
   </md-content>
 </md-dialog>
 

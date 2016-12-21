@@ -44,7 +44,7 @@ angular.module('handycat.typeaheads')
           suffix: ""
         })
 
-        // WORKING: cachedResponses is an object
+        // local cache
         var autocompleteCache = {
           cache: {},
           setCache: function(key, value) {
@@ -76,6 +76,9 @@ angular.module('handycat.typeaheads')
               trieVocabCompleter(query)));
             return;
           }
+
+          // if we're here, we're not inside a word
+
           if ($scope.targetSegment === undefined) {
             $scope.targetSegment = '';
           }
@@ -96,27 +99,31 @@ angular.module('handycat.typeaheads')
           $log.log(queryPrefix);
 
           // here we query the remote autocompleter server
-          //$http.get(autocompleterURLs.lmAutocompleterURL,
-          $http.get(autocompleterURLs.imtAutocompleterURL,
-            {
-              params: {
-                target_prefix: queryPrefix,
-                source_segment: $scope.sourceSegment,
-                target_lang: $scope.targetLang,
-                source_lang: $scope.sourceLang,
-                request_time: reqTimestamp
+          // WORKING: configuration may not include any remote autocomplete services
+          if (autocompleterURLs.useRemoteAutocompleter) {
+
+            //$http.get(autocompleterURLs.lmAutocompleterURL,
+            // $http.get(autocompleterURLs.imtAutocompleterURL,
+            $http.get(autocompleterURLs.useRemoteAutocompleter,
+              {
+                params: {
+                  target_prefix : queryPrefix,
+                  source_segment: $scope.sourceSegment,
+                  target_lang   : $scope.targetLang,
+                  source_lang   : $scope.sourceLang,
+                  request_time  : reqTimestamp
+                }
               }
-            }
-          )
-          .success(
-            // when matches are empty, hit the local trie
-            function (completionData) {
-              var completions = completionData['ranked_completions']
-              // LM autocompleter code below
-              //  var completions = completionData['ranked_completions'].map(function(i) {
-              //  // return only the completion, not the score
-              //  return i[0];
-              //})
+            )
+            .success(
+              // when matches are empty, hit the local trie
+              function (completionData) {
+                var completions = completionData['ranked_completions']
+                // LM autocompleter code below
+                //  var completions = completionData['ranked_completions'].map(function(i) {
+                //  // return only the completion, not the score
+                //  return i[0];
+                //})
                 // TODO: move filter functions to the backend?
                 //.filter(function(item) {
                 //  // filter completions to be at least 2 chars long
@@ -133,16 +140,21 @@ angular.module('handycat.typeaheads')
                 //  }
                 //  return true;
                 //});
-              if ($scope.isActive === true) {
-                autocompleteCache.setCache(query, completions);
-                $log.log(completionData)
-                $log.log(lastRequestTime)
-                if (parseInt(completionData['request_time']) === lastRequestTime) {
-                  callback(completions);
-                }
+                if ($scope.isActive === true) {
+                  autocompleteCache.setCache(query, completions);
+                  $log.log(completionData)
+                  $log.log(lastRequestTime)
+                  if (parseInt(completionData['request_time']) === lastRequestTime) {
+                    callback(completions);
+                  }
 
+                }
               }
-            });
+            );
+          } else {
+            callback([])
+          }
+
         }
 
         var dummyFilter = function(query, data, searchKey) {
@@ -154,6 +166,7 @@ angular.module('handycat.typeaheads')
           return [];
         }
 
+        // default autocompletion from file
         vocabularyAutocompleter($scope.targetLang).then(
             function(autocompleter) {
               // TODO: fix the trigger so that this works inside words
@@ -161,7 +174,9 @@ angular.module('handycat.typeaheads')
                 //$log.log('autocompleter');
                 //$log.log(autocompleter.search(query));
                 return autocompleter.search(query).map(function(item) {
-                  return item.value;
+                  if (!(item.value === query)) {
+                    return item.value;
+                  }
               });
             }
           }

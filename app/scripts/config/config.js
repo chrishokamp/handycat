@@ -25,7 +25,7 @@ handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
 var xliffCreatorUrl = 'create-xliff/'
 handyCATconfig.constant('xliffCreatorUrl', xliffCreatorUrl);
 
-// the lm autocompleter URL
+// autocompleter URLs
 //var lmAutocompleterURL = baseURL + ':8010/lm_autocomplete';
 // the two autocompleter types that we currently support
 
@@ -37,6 +37,10 @@ var defaultAutocompleterURL = 'lm_autocomplete/default';
 var imtAutocompleterURL = 'imt/neural_imt';
 
 handyCATconfig.service('autocompleterURLs', function() {
+  // controls whether we will use a remote autocompleter at all
+  // if this is a url, we'll hit it to get suggestions
+  this.useRemoteAutocompleter = false;
+
   // this may get overwritten in the app
   this.lmAutocompleterURL = constrainedAutocompleterURL;
   // these will be set as needed by injectors
@@ -73,6 +77,7 @@ handyCATconfig.constant('glossaryURL', glossaryURL);
 var loggerURL = 'logger';
 handyCATconfig.constant('loggerURL', loggerURL);
 
+// this is the default configuration -- projects can override this config
 handyCATconfig.constant('widgetConfiguration',
   {
     'segmentControls': {
@@ -80,8 +85,8 @@ handyCATconfig.constant('widgetConfiguration',
       'qeScore': false,
     },
     'target': {
-      activeComponent: 'postEditor',
-      defaultComponent: 'postEditor',
+      activeComponent: 'typeaheadEditor',
+      defaultComponent: 'typeaheadEditor',
       // a list of the available components
       // TODO: raw textarea component (no typeahead)
       // TODO: key which indicates whether the component is available
@@ -94,10 +99,10 @@ handyCATconfig.constant('widgetConfiguration',
           'directiveName': 'postEditor',
           'textName': 'postEditor'
         },
-        {
-          'directiveName': 'qeScore',
-          'textName': 'QE Score'
-        },
+        // {
+        //   'directiveName': 'qeScore',
+        //   'textName': 'QE Score'
+        // },
       ]
     }
   })
@@ -107,8 +112,37 @@ var experimentGroups = [
   {
     name: 'Group One',
     sampleFiles: [
-      {name: 'Mobile Phone Instructions', url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
-        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      {
+        name: 'Mobile Phone Instructions - Post Editor',
+        url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
+        configuration: {
+          target :{
+            activeComponent: 'postEditor',
+            defaultComponent: 'postEditor',
+            components: [
+              {
+                directiveName: 'postEditor',
+                textName: 'Post Editor'
+              }
+            ]
+          }
+        },
+      },
+      {
+        name: 'Mobile Phone Instructions - Autocomplete',
+        url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
+        configuration: {
+          target :{
+            activeComponent: 'typeaheadEditor',
+            defaultComponent: 'typeaheadEditor',
+            components: [
+              {
+                directiveName: 'typeaheadEditor',
+                textName: 'Autocomplete'
+              }
+            ]
+          }
+        },
       },
       {name: 'Marketing Questionnaire', url: 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
         configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
@@ -128,16 +162,52 @@ var experimentGroups = [
     ]
   },
   {
-    name: 'Group Two',
+    name: 'Group N',
     sampleFiles: [
-      {name: 'en-es-sentences_2', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+      {
+        name: 'Mobile Phone Instructions',
+        url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
+        configuration: {
+          target :{
+            components: [
+              {
+                directiveName: 'postEditor',
+                textName: 'postEditor'
+                // directiveName: 'typeaheadEditor',
+                // textName: 'typeaheadEditor'
+              }
+            ]
+          }
+        },
+      },
+      {name: 'Marketing Questionnaire', url: 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
         configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
       },
-      {name: 'en-es-sentences_3', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
-        configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
-      }
+      {name: 'Product Catalog - Office Supplies', url: 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
+        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      },
+      {name: 'User Manual: Industrial Equipment', url: 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
+        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      },
+      //{name: 'en-es-sentences_1', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
+      //  configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      //},
+      //{name: 'en-es-sentences_4', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+      //  configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+      //},
     ]
-  }
+  },
+  // {
+  //   name: 'Group Two',
+  //   sampleFiles: [
+  //     {name: 'en-es-sentences_2', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+  //       configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+  //     },
+  //     {name: 'en-es-sentences_3', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
+  //       configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
+  //     }
+  //   ]
+  // }
 ]
 
 handyCATconfig.constant('experimentGroups', experimentGroups)
