@@ -1,9 +1,12 @@
 angular.module('controllers')
 .controller('CreateProjectCtrl', ['XliffParser', 'fileReader', 'Projects', 'xliffCreatorUrl',
-    'supportedLangs', 'experimentGroups',
+    'supportedLangs', 'projectCreationConfiguration', 'experimentGroups',
     '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast',
-    function(XliffParser, fileReader, Projects, xliffCreatorUrl, supportedLangs, experimentGroups,
+    function(XliffParser, fileReader, Projects, xliffCreatorUrl, supportedLangs,
+             projectCreationConfiguration, experimentGroups,
              $state, $log, $scope, $http, $mdDialog, $mdToast) {
+
+      $scope.projectCreationConfig = projectCreationConfiguration;
 
       // set the default title
       $scope.name = undefined;
@@ -15,12 +18,6 @@ angular.module('controllers')
 
       // add the groups and the hard-coded sample files
       $scope.testGroups = experimentGroups;
-
-      $scope.sampleFiles = [
-        {name: 'en-es-sample_project', url: 'data/malaga_experiments/en-es_sample_project.xlf',
-          configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
-        },
-      ];
 
       // make sure the create modal closes if we change states
       $scope.$on('$stateChangeStart', function(ev, to, toParams, from, fromParams) {

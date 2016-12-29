@@ -25,6 +25,25 @@
   border-radius: 0 !important;
 }
 
+// WORKING: DCU experiments -- disable pointer events outside active area
+//html {
+//  overflow: scroll;
+//  overflow-x: hidden;
+//  pointer-events: none;
+//}
+//::-webkit-scrollbar {
+//  width: 0px;  /* remove scrollbar space */
+//  background: transparent;  /* optional: just make scrollbar invisible */
+//}
+///* optional: show position indicator in red */
+//::-webkit-scrollbar-thumb {
+//  background: #FF0000;
+//}
+
+//div {
+//  pointer-events: auto;
+//}
+
 body {
 //  font-family:source-code-pro, Courier, Monaco, Menlo, "Ubuntu Mono", Consolas, monospace;
 //  font-family:Menlo, monospace;

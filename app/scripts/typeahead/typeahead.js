@@ -99,11 +99,9 @@ angular.module('handycat.typeaheads')
           $log.log(queryPrefix);
 
           // here we query the remote autocompleter server
-          // WORKING: configuration may not include any remote autocomplete services
+          // Note: configuration may not include any remote autocomplete services
           if (autocompleterURLs.useRemoteAutocompleter) {
 
-            //$http.get(autocompleterURLs.lmAutocompleterURL,
-            // $http.get(autocompleterURLs.imtAutocompleterURL,
             $http.get(autocompleterURLs.useRemoteAutocompleter,
               {
                 params: {

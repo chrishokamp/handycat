@@ -77,7 +77,15 @@ handyCATconfig.constant('glossaryURL', glossaryURL);
 var loggerURL = 'logger';
 handyCATconfig.constant('loggerURL', loggerURL);
 
-// this is the default configuration -- projects can override this config
+// TODO: raw textarea component (no typeahead)
+// this is the default global configuration -- projects can override this config
+handyCATconfig.constant('projectCreationConfiguration',
+  {
+    showFileCreation: false,
+    showRawTextCreation: false,
+    showExperiment: true
+  });
+
 handyCATconfig.constant('widgetConfiguration',
   {
     'segmentControls': {
@@ -88,8 +96,6 @@ handyCATconfig.constant('widgetConfiguration',
       activeComponent: 'typeaheadEditor',
       defaultComponent: 'typeaheadEditor',
       // a list of the available components
-      // TODO: raw textarea component (no typeahead)
-      // TODO: key which indicates whether the component is available
       components: [
         {
           'directiveName': 'typeaheadEditor',
@@ -110,104 +116,294 @@ handyCATconfig.constant('widgetConfiguration',
 // allow experiment configuration via handyCAT config
 var experimentGroups = [
   {
-    name: 'Group One',
+    name       : 'Demo',
     sampleFiles: [
       {
-        name: 'Mobile Phone Instructions - Post Editor',
-        url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
+        name         : 'Session 0 - Project 0 - Post Editor',
+        internalName : 'Mobile Phone Instructions - Post Editor',
+        url          : 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
         configuration: {
-          target :{
-            activeComponent: 'postEditor',
+          target: {
+            activeComponent : 'postEditor',
             defaultComponent: 'postEditor',
-            components: [
+            components      : [
               {
                 directiveName: 'postEditor',
-                textName: 'Post Editor'
+                textName     : 'Post Editor'
               }
             ]
           }
         },
       },
       {
-        name: 'Mobile Phone Instructions - Autocomplete',
-        url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
+        name         : 'Session 0 - Project 0 - Autocomplete',
+        internalName : 'Mobile Phone Instructions - Autocomplete',
+        url          : 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
         configuration: {
-          target :{
-            activeComponent: 'typeaheadEditor',
+          target: {
+            activeComponent : 'typeaheadEditor',
             defaultComponent: 'typeaheadEditor',
-            components: [
+            components      : [
               {
                 directiveName: 'typeaheadEditor',
-                textName: 'Autocomplete'
+                textName     : 'Autocomplete'
               }
             ]
           }
         },
-      },
-      {name: 'Marketing Questionnaire', url: 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
-        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-      },
-      {name: 'Product Catalog - Office Supplies', url: 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
-        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-      },
-      {name: 'User Manual: Industrial Equipment', url: 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
-        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-      },
-      //{name: 'en-es-sentences_1', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
-      //  configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-      //},
-      //{name: 'en-es-sentences_4', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
-      //  configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
-      //},
+      }
     ]
   },
   {
-    name: 'Group N',
+    name       : 'Group 1',
     sampleFiles: [
       {
-        name: 'Mobile Phone Instructions',
-        url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
+        name         : 'Group 1 - Session 1',
+        internalName : 'Marketing Questionnaire - Autocomplete',
+        url          : 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
         configuration: {
-          target :{
-            components: [
+          target: {
+            activeComponent : 'typeaheadEditor',
+            defaultComponent: 'typeaheadEditor',
+            components      : [
               {
-                directiveName: 'postEditor',
-                textName: 'postEditor'
-                // directiveName: 'typeaheadEditor',
-                // textName: 'typeaheadEditor'
+                directiveName: 'typeaheadEditor',
+                textName     : 'Autocomplete'
               }
             ]
           }
         },
       },
-      {name: 'Marketing Questionnaire', url: 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
-        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      {
+        name         : 'Group 1 - Session 2',
+        internalName : 'Product Catalog - Office Supplies - postEditor',
+        url          : 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
+        configuration: {
+          target: {
+            activeComponent : 'postEditor',
+            defaultComponent: 'postEditor',
+            components      : [
+              {
+                directiveName: 'postEditor',
+                textName     : 'Post Editor'
+              }
+            ]
+          }
+        },
       },
-      {name: 'Product Catalog - Office Supplies', url: 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
-        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+      {
+        name         : 'Group 1 - Session 3',
+        internalName : 'User Manual - Industrial Equipment - Autocomplete',
+        url          : 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
+        configuration: {
+          target: {
+            activeComponent : 'typeaheadEditor',
+            defaultComponent: 'typeaheadEditor',
+            components      : [
+              {
+                directiveName: 'typeaheadEditor',
+                textName     : 'Autocomplete'
+              }
+            ]
+          }
+        },
       },
-      {name: 'User Manual: Industrial Equipment', url: 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
-        configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-      },
-      //{name: 'en-es-sentences_1', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
-      //  configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-      //},
-      //{name: 'en-es-sentences_4', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
-      //  configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
-      //},
+      {
+        name         : 'Group 1 - Session 4',
+        internalName : '',
+        url          : 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
+        configuration: {
+          target: {
+            activeComponent : 'postEditor',
+            defaultComponent: 'postEditor',
+            components      : [
+              {
+                directiveName: 'postEditor',
+                textName     : 'Post Editor'
+              }
+            ]
+          }
+        }
+      }
     ]
   },
+  {
+    name       : 'Group 2',
+    sampleFiles: [
+      {
+        name         : 'Group 2 - Session 1',
+        internalName : 'Product Catalog - Office Supplies - Autocomplete',
+        url          : 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
+        configuration: {
+          target: {
+            activeComponent : 'typeaheadEditor',
+            defaultComponent: 'typeaheadEditor',
+            components      : [
+              {
+                directiveName: 'typeaheadEditor',
+                textName     : 'Autocomplete'
+              }
+            ]
+          }
+        },
+      },
+      {
+        name         : 'Group 2 - Session 2',
+        internalName : 'User Manual - Industrial Equipment - Post Editor',
+        url          : 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
+        configuration: {
+          target: {
+            activeComponent : 'postEditor',
+            defaultComponent: 'postEditor',
+            components      : [
+              {
+                directiveName: 'postEditor',
+                textName     : 'Post Editor'
+              }
+            ]
+          }
+        }
+      },
+      {
+        name         : 'Group 2 - Session 3',
+        internalName : 'Marketing Questionnaire - Autocomplete',
+        url          : 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
+        configuration: {
+          target: {
+            activeComponent : 'typeaheadEditor',
+            defaultComponent: 'typeaheadEditor',
+            components      : [
+              {
+                directiveName: 'typeaheadEditor',
+                textName     : 'Autocomplete'
+              }
+            ]
+          }
+        },
+      },
+      {
+        name         : 'Group 2 - Session 4',
+        internalName : 'Marketing Questionnaire - Post Editor',
+        url          : 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
+        configuration: {
+          target: {
+            activeComponent : 'postEditor',
+            defaultComponent: 'postEditor',
+            components      : [
+              {
+                directiveName: 'postEditor',
+                textName     : 'Post Editor'
+              }
+            ]
+          }
+        },
+      }
+    ]
+  },
+  {
+    name       : 'Group 3',
+    sampleFiles: [
+      {
+        name         : 'Group 3 - Session 1',
+        internalName : 'User Manual - Industrial Equipment - Autocomplete',
+        url          : 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
+        configuration: {
+          target: {
+            activeComponent : 'typeaheadEditor',
+            defaultComponent: 'typeaheadEditor',
+            components      : [
+              {
+                directiveName: 'typeaheadEditor',
+                textName     : 'Autocomplete'
+              }
+            ]
+          }
+        }
+      },
+      {
+        name         : 'Group 3 - Session 2',
+        internalName : 'Marketing Questionnaire - Post Editor',
+        url          : 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
+        configuration: {
+          target: {
+            activeComponent : 'postEditor',
+            defaultComponent: 'postEditor',
+            components      : [
+              {
+                directiveName: 'postEditor',
+                textName     : 'Post Editor'
+              }
+            ]
+          }
+        },
+      },
+      {
+        name         : 'Group 3 - Session 3',
+        internalName : 'Product Catalog - Office Supplies - Autocomplete',
+        url          : 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
+        configuration: {
+          target: {
+            activeComponent : 'typeaheadEditor',
+            defaultComponent: 'typeaheadEditor',
+            components      : [
+              {
+                directiveName: 'typeaheadEditor',
+                textName     : 'Autocomplete'
+              }
+            ]
+          }
+        },
+      },
+      {
+        name         : 'Group 3 - Session 4',
+        internalName : 'Product Catalog - Office Supplies - Post Editor',
+        url          : 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
+        configuration: {
+          target: {
+            activeComponent : 'postEditor',
+            defaultComponent: 'postEditor',
+            components      : [
+              {
+                directiveName: 'postEditor',
+                textName     : 'Post Editor'
+              }
+            ]
+          }
+        },
+      },
+    ]
+  }
+  // TODO: add a separate constant for sample files
   // {
-  //   name: 'Group Two',
+  //   name: 'Group N',
   //   sampleFiles: [
-  //     {name: 'en-es-sentences_2', url: 'data/malaga_experiments/en-es_sentences_2.xlf',
+  //     {
+  //       name: 'Mobile Phone Instructions',
+  //       url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
+  //       configuration: {
+  //         target :{
+  //           components: [
+  //             {
+  //               directiveName: 'postEditor',
+  //               textName: 'postEditor'
+  //               // directiveName: 'typeaheadEditor',
+  //               // textName: 'typeaheadEditor'
+  //             }
+  //           ]
+  //         }
+  //       },
+  //     },
+  //     {name: 'Marketing Questionnaire', url: 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
   //       configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
   //     },
-  //     {name: 'en-es-sentences_3', url: 'data/malaga_experiments/en-es_sentences_1.xlf',
-  //       configuration: {'target': {'widgets': {'defaultLMAutocomplete': true}}}
-  //     }
+  //     {name: 'Product Catalog - Office Supplies', url: 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
+  //       configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+  //     },
+  //     {name: 'User Manual: Industrial Equipment', url: 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
+  //       configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
+  //     },
   //   ]
-  // }
+  // },
 ]
 
 handyCATconfig.constant('experimentGroups', experimentGroups)

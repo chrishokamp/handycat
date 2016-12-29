@@ -13,90 +13,96 @@
             layout-align="center center">
     <div class="text-muted">Create a New Translation Project</div>
     <md-divider></md-divider>
+      <div ng-show="projectCreationConfig.showRawTextCreation || projectCreationConfig.showFileCreation">
+          <!--TODO: return the supported languages from the server-->
+          <!--<md-select placeholder="source language" ng-model="sourceLang">-->
+          <md-radio-group ng-model="sourceLang">
+            <p>Source Language: <span class="radioValue">{{ sourceLang }}</span> </p>
+            <md-radio-button
+              ng-repeat="lang in supportedLangs.source"
+              style="font-size: 12px;"
+              value="{{lang}}">
+              {{lang}}
+            </md-radio-button>
+          </md-radio-group>
+          <!--<md-select placeholder="target language" ng-model="targetLang">-->
+          <md-radio-group ng-model="targetLang">
+            <p>Target Language: <span class="radioValue">{{ targetLang }}</span> </p>
+            <md-radio-button
+              ng-repeat="lang in supportedLangs.target"
+              style="font-size: 12px;"
+              value="{{lang}}">
+              {{lang}}
+            </md-radio-button>
+          </md-radio-group>
 
-        <!--TODO: return the supported languages from the server-->
-        <!--<md-select placeholder="source language" ng-model="sourceLang">-->
-        <md-radio-group ng-model="sourceLang">
-          <p>Source Language: <span class="radioValue">{{ sourceLang }}</span> </p>
-          <md-radio-button
-            ng-repeat="lang in supportedLangs.source"
-            style="font-size: 12px;"
-            value="{{lang}}">
-            {{lang}}
-          </md-radio-button>
-        </md-radio-group>
-        <!--<md-select placeholder="target language" ng-model="targetLang">-->
-        <md-radio-group ng-model="targetLang">
-          <p>Target Language: <span class="radioValue">{{ targetLang }}</span> </p>
-          <md-radio-button
-            ng-repeat="lang in supportedLangs.target"
-            style="font-size: 12px;"
-            value="{{lang}}">
-            {{lang}}
-          </md-radio-button>
-        </md-radio-group>
+          <form role="form">
+            <div layout="column" layout-align="center start" layout-padding class="form-group">
+              <input flex type="text" placeholder="Enter a project name" class="form-control" id="projectName" ng-model="name" />
+            </div>
+          </form>
 
-        <form role="form">
-          <div layout="column" layout-align="center start" layout-padding class="form-group">
-            <input flex type="text" placeholder="Enter a project name" class="form-control" id="projectName" ng-model="name" />
-          </div>
-        </form>
-
-      <div layout="column" layout-padding layout-align="center center">
-        <md-button class="md-primary" ng-click="showAdvanced($event)" ng-disabled="sourceLang === undefined || targetLang === undefined">
-          Create a project from raw text
-        </md-button>
-        <!--<div-->
-                <!--layout-fill-->
-                <!--layout="column"-->
-                <!--layout-align="center center"-->
-                <!--class="drop-box"-->
-                <!--ng-file-drop="onFileSelect($files);"-->
-                <!--ng-file-drop-available="dropSupported=true">-->
-          <!--<div><span class="drop-message">Drag in an XLIFF or a text file</span></div>-->
-          <!--<div class="file-upload-glyph glyphicon glyphicon-plus">-->
-            <!--<input type="file" ng-file-select="onFileSelect($files)" />-->
+        <div layout="column" layout-padding layout-align="center center">
+          <md-button class="md-primary" ng-click="showAdvanced($event)" ng-disabled="sourceLang === undefined || targetLang === undefined">
+            Create a project from raw text
+          </md-button>
+          <!--<div-->
+                  <!--layout-fill-->
+                  <!--layout="column"-->
+                  <!--layout-align="center center"-->
+                  <!--class="drop-box"-->
+                  <!--ng-file-drop="onFileSelect($files);"-->
+                  <!--ng-file-drop-available="dropSupported=true">-->
+            <!--<div><span class="drop-message">Drag in an XLIFF or a text file</span></div>-->
+            <!--<div class="file-upload-glyph glyphicon glyphicon-plus">-->
+              <!--<input type="file" ng-file-select="onFileSelect($files)" />-->
+            <!--</div>-->
           <!--</div>-->
-        <!--</div>-->
-      </div>
+        </div>
 
-      <div layout="column" layout-align="center center">
         <div
-          layout="column"
-          layout-align="center center"
-          layout-padding
-          ng-repeat="f in selectedFiles">
-          <div ng-show="name" flex>Project Name: {{name}}</div>
-          <div ng-show="!name" flex>Please give your project a name</div>
+             layout="column"
+             layout-align="center center">
+          <div
+            layout="column"
+            layout-align="center center"
+            layout-padding
+            ng-repeat="f in selectedFiles">
+            <div ng-show="name" flex>Project Name: {{name}}</div>
+            <div ng-show="!name" flex>Please give your project a name</div>
 
-          <div><i ng-show="documentLoading" class="icon ion-loading-c"></i></div>
-          <div>
-            <md-button
-              ng-disabled="!name || !pending.document"
-              ng-click="create(); fileAdded = false;"
-              class="md-primary">
-              Create Project
-            </md-button>
+            <div><i ng-show="documentLoading" class="icon ion-loading-c"></i></div>
+            <div>
+              <md-button
+                ng-disabled="!name || !pending.document"
+                ng-click="create(); fileAdded = false;"
+                class="md-primary">
+                Create Project
+              </md-button>
           </div>
         </div>
       </div>
       <md-divider></md-divider>
+    </div>
 
-      <div>Or Choose A Sample File</div>
-      <div ng-repeat='testGroup in testGroups'
-           layout="column"
-           layout-align="center center"
-      >
-        <h3>{{testGroup.name}}</h3>
-        <div ng-repeat='testfile in testGroup.sampleFiles'>
-          <a
-            ng-click="createFromURL(testfile.url, testfile.name, testfile.configuration)">
-            {{$index}}: {{testfile.name}}
-          </a>
+      <div ng-show="projectCreationConfig.showExperiment">
+        <!--<div>Or Choose A Sample File</div>-->
+        <div ng-repeat='testGroup in testGroups'
+             layout="column"
+             layout-align="center center"
+        >
+          <h3>{{testGroup.name}}</h3>
+          <div ng-repeat='testfile in testGroup.sampleFiles'>
+            <a
+              ng-click="createFromURL(testfile.url, testfile.name, testfile.configuration)">
+              {{$index}}: {{testfile.name}}
+            </a>
 
+          </div>
+          <md-divider></md-divider>
         </div>
-        <md-divider></md-divider>
       </div>
+
     </div>
   </md-content>
 </md-dialog>
