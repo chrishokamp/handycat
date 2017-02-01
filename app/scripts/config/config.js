@@ -25,6 +25,10 @@ handyCATconfig.constant('levenshtalignerURL', levenshtalignerURL);
 var xliffCreatorUrl = 'create-xliff/'
 handyCATconfig.constant('xliffCreatorUrl', xliffCreatorUrl);
 
+// to create XLIFFs from parallel source and target files
+var parallelXliffCreatorUrl = 'create-parallel-xliff/'
+handyCATconfig.constant('parallelXliffCreatorUrl', parallelXliffCreatorUrl);
+
 // autocompleter URLs
 //var lmAutocompleterURL = baseURL + ':8010/lm_autocomplete';
 // the two autocompleter types that we currently support
@@ -89,8 +93,8 @@ handyCATconfig.constant('projectCreationConfiguration',
 handyCATconfig.constant('widgetConfiguration',
   {
     'segmentControls': {
-      'targetComponentSelector': true,
-      'qeScore': false,
+      'targetComponentSelector': false,
+      'qeScore': true,
     },
     'target': {
       activeComponent: 'typeaheadEditor',
@@ -101,10 +105,10 @@ handyCATconfig.constant('widgetConfiguration',
           'directiveName': 'typeaheadEditor',
           'textName': 'Autocomplete'
         },
-        {
-          'directiveName': 'postEditor',
-          'textName': 'postEditor'
-        },
+        // {
+        //   'directiveName': 'postEditor',
+        //   'textName': 'postEditor'
+        // },
         // {
         //   'directiveName': 'qeScore',
         //   'textName': 'QE Score'
@@ -114,31 +118,15 @@ handyCATconfig.constant('widgetConfiguration',
   })
 
 // allow experiment configuration via handyCAT config
+// TODO: gen the grouping for each translator automagically
 var experimentGroups = [
   {
-    name       : 'Demo',
+    name       : 'Translator 1',
     sampleFiles: [
       {
-        name         : 'Session 0 - Project 0 - Post Editor',
-        internalName : 'Mobile Phone Instructions - Post Editor',
-        url          : 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
-        configuration: {
-          target: {
-            activeComponent : 'postEditor',
-            defaultComponent: 'postEditor',
-            components      : [
-              {
-                directiveName: 'postEditor',
-                textName     : 'Post Editor'
-              }
-            ]
-          }
-        },
-      },
-      {
-        name         : 'Session 0 - Project 0 - Autocomplete',
-        internalName : 'Mobile Phone Instructions - Autocomplete',
-        url          : 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
+        name         : 'Task 1',
+        internalName : 'PRJ0',
+        url          : 'data/qe_score_experiments/documents/PRJ0.xliff',
         configuration: {
           target: {
             activeComponent : 'typeaheadEditor',
@@ -146,21 +134,16 @@ var experimentGroups = [
             components      : [
               {
                 directiveName: 'typeaheadEditor',
-                textName     : 'Autocomplete'
+                textName     : 'Typeahead Editor'
               }
             ]
           }
         },
       }
-    ]
-  },
-  {
-    name       : 'Group 1',
-    sampleFiles: [
       {
-        name         : 'Group 1 - Session 1',
-        internalName : 'Marketing Questionnaire - Autocomplete',
-        url          : 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
+        name         : 'Task 1',
+        internalName : 'PRJ1',
+        url          : 'data/qe_score_experiments/documents/PRJ1.xliff',
         configuration: {
           target: {
             activeComponent : 'typeaheadEditor',
@@ -168,145 +151,16 @@ var experimentGroups = [
             components      : [
               {
                 directiveName: 'typeaheadEditor',
-                textName     : 'Autocomplete'
-              }
-            ]
-          }
-        },
-      },
-      {
-        name         : 'Group 1 - Session 2',
-        internalName : 'Product Catalog - Office Supplies - postEditor',
-        url          : 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
-        configuration: {
-          target: {
-            activeComponent : 'postEditor',
-            defaultComponent: 'postEditor',
-            components      : [
-              {
-                directiveName: 'postEditor',
-                textName     : 'Post Editor'
-              }
-            ]
-          }
-        },
-      },
-      {
-        name         : 'Group 1 - Session 3',
-        internalName : 'User Manual - Industrial Equipment - Autocomplete',
-        url          : 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
-        configuration: {
-          target: {
-            activeComponent : 'typeaheadEditor',
-            defaultComponent: 'typeaheadEditor',
-            components      : [
-              {
-                directiveName: 'typeaheadEditor',
-                textName     : 'Autocomplete'
-              }
-            ]
-          }
-        },
-      },
-      {
-        name         : 'Group 1 - Session 4',
-        internalName : '',
-        url          : 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
-        configuration: {
-          target: {
-            activeComponent : 'postEditor',
-            defaultComponent: 'postEditor',
-            components      : [
-              {
-                directiveName: 'postEditor',
-                textName     : 'Post Editor'
-              }
-            ]
-          }
-        }
-      }
-    ]
-  },
-  {
-    name       : 'Group 2',
-    sampleFiles: [
-      {
-        name         : 'Group 2 - Session 1',
-        internalName : 'Product Catalog - Office Supplies - Autocomplete',
-        url          : 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
-        configuration: {
-          target: {
-            activeComponent : 'typeaheadEditor',
-            defaultComponent: 'typeaheadEditor',
-            components      : [
-              {
-                directiveName: 'typeaheadEditor',
-                textName     : 'Autocomplete'
-              }
-            ]
-          }
-        },
-      },
-      {
-        name         : 'Group 2 - Session 2',
-        internalName : 'User Manual - Industrial Equipment - Post Editor',
-        url          : 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
-        configuration: {
-          target: {
-            activeComponent : 'postEditor',
-            defaultComponent: 'postEditor',
-            components      : [
-              {
-                directiveName: 'postEditor',
-                textName     : 'Post Editor'
-              }
-            ]
-          }
-        }
-      },
-      {
-        name         : 'Group 2 - Session 3',
-        internalName : 'Marketing Questionnaire - Autocomplete',
-        url          : 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
-        configuration: {
-          target: {
-            activeComponent : 'typeaheadEditor',
-            defaultComponent: 'typeaheadEditor',
-            components      : [
-              {
-                directiveName: 'typeaheadEditor',
-                textName     : 'Autocomplete'
-              }
-            ]
-          }
-        },
-      },
-      {
-        name         : 'Group 2 - Session 4',
-        internalName : 'Marketing Questionnaire - Post Editor',
-        url          : 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
-        configuration: {
-          target: {
-            activeComponent : 'postEditor',
-            defaultComponent: 'postEditor',
-            components      : [
-              {
-                directiveName: 'postEditor',
-                textName     : 'Post Editor'
+                textName     : 'Typeahead Editor'
               }
             ]
           }
         },
       }
-    ]
-  },
-  {
-    name       : 'Group 3',
-    sampleFiles: [
       {
-        name         : 'Group 3 - Session 1',
-        internalName : 'User Manual - Industrial Equipment - Autocomplete',
-        url          : 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
+        name         : 'Task 3',
+        internalName : 'PRJ2',
+        url          : 'data/qe_score_experiments/documents/PRJ2.xliff',
         configuration: {
           target: {
             activeComponent : 'typeaheadEditor',
@@ -314,33 +168,16 @@ var experimentGroups = [
             components      : [
               {
                 directiveName: 'typeaheadEditor',
-                textName     : 'Autocomplete'
-              }
-            ]
-          }
-        }
-      },
-      {
-        name         : 'Group 3 - Session 2',
-        internalName : 'Marketing Questionnaire - Post Editor',
-        url          : 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
-        configuration: {
-          target: {
-            activeComponent : 'postEditor',
-            defaultComponent: 'postEditor',
-            components      : [
-              {
-                directiveName: 'postEditor',
-                textName     : 'Post Editor'
+                textName     : 'Typeahead Editor'
               }
             ]
           }
         },
       },
       {
-        name         : 'Group 3 - Session 3',
-        internalName : 'Product Catalog - Office Supplies - Autocomplete',
-        url          : 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
+        name         : 'Task 4',
+        internalName : 'PRJ3',
+        url          : 'data/qe_score_experiments/documents/PRJ3.xliff',
         configuration: {
           target: {
             activeComponent : 'typeaheadEditor',
@@ -348,31 +185,15 @@ var experimentGroups = [
             components      : [
               {
                 directiveName: 'typeaheadEditor',
-                textName     : 'Autocomplete'
+                textName     : 'Typeahead Editor'
               }
             ]
           }
         },
-      },
-      {
-        name         : 'Group 3 - Session 4',
-        internalName : 'Product Catalog - Office Supplies - Post Editor',
-        url          : 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
-        configuration: {
-          target: {
-            activeComponent : 'postEditor',
-            defaultComponent: 'postEditor',
-            components      : [
-              {
-                directiveName: 'postEditor',
-                textName     : 'Post Editor'
-              }
-            ]
-          }
-        },
-      },
+      }
     ]
   }
+
   // TODO: add a separate constant for sample files
   // {
   //   name: 'Group N',
