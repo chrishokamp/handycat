@@ -139,7 +139,7 @@ var experimentGroups = [
             ]
           }
         },
-      }
+      },
       {
         name         : 'Task 1',
         internalName : 'PRJ1',
@@ -156,7 +156,7 @@ var experimentGroups = [
             ]
           }
         },
-      }
+      },
       {
         name         : 'Task 3',
         internalName : 'PRJ2',
