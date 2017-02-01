@@ -1,9 +1,9 @@
 angular.module('controllers')
 .controller('CreateProjectCtrl', ['XliffParser', 'fileReader', 'Projects', 'xliffCreatorUrl',
-    'supportedLangs', 'projectCreationConfiguration', 'experimentGroups',
+    'parallelXliffCreatorUrl', 'supportedLangs', 'projectCreationConfiguration', 'experimentGroups',
     '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast',
-    function(XliffParser, fileReader, Projects, xliffCreatorUrl, supportedLangs,
-             projectCreationConfiguration, experimentGroups,
+    function(XliffParser, fileReader, Projects, xliffCreatorUrl, parallelXliffCreatorUrl,
+             supportedLangs, projectCreationConfiguration, experimentGroups,
              $state, $log, $scope, $http, $mdDialog, $mdToast) {
 
       $scope.projectCreationConfig = projectCreationConfiguration;
@@ -162,9 +162,9 @@ angular.module('controllers')
         );
       }
 
-      // TODO: user MUST specify source and target langs for this to work
-      // TODO: we force XLIFF 1.2 because 2.0 isn't supported yet
-      // TODO: chain these promises
+      // Note: user MUST specify source and target langs for this to work
+      // Note: we force XLIFF 1.2 because 2.0 isn't supported yet
+      // Note: promises could be chained
       var createFromTextFile = function(file) {
         // parse the text file with the webservice, then set $scope.pending.document to the parsed XLIFF string
         var readerProm = fileReader.readAsText(file);
@@ -204,6 +204,75 @@ angular.module('controllers')
             xliffPromise.then(
               function (documentObj) {
                 $scope.pending.document = documentObj.DOM;
+                // TODO: this is a hack, since we actually aren't dealing with a file here
+                $scope.selectedFiles = ['dummyFile'];
+              },
+              function(err) {
+                $log.error('There was an error parsing the raw text into XLIFF');
+                $scope.showErrorToast('There was an error converting your text to XLIFF 1.2');
+              }
+            );
+          }, function (err) {
+            $log.error('createProject: error parsing text');
+            // show modal
+            $scope.showErrorToast('There was an error converting your text to XLIFF 1.2');
+          }
+        );
+      }
+
+      $scope.createFromParallelTextFiles = function(sourceFile, targetFile) {
+        // parse the text file with the webservice, then set $scope.pending.document to the parsed XLIFF string
+        console.log('source: ' + sourceFile);
+        console.log('target: ' + targetFile);
+
+        var sourceReaderProm = $http.get(sourceFile);
+        var targetReaderProm = $http.get(targetFile);
+
+        Promise.all([sourceReaderProm, targetReaderProm]).then(
+          function(responses) {
+            var rawSourceText = responses[0]['data']
+            var rawTargetText = responses[1]['data']
+            createFromParallelRawText(rawSourceText, rawTargetText);
+          },
+          function(err) {
+            $log.error('Error reading local text files for source and target');
+          }
+        );
+      };
+
+      // calls the XLIFF creator microservice to get an XLIFF
+      var createFromParallelRawText = function(rawSourceText, rawTargetText) {
+        // WORKING: HACK WHILE SELECTOR IS BROKEN
+        //$scope.sourceLang = 'en-EN';
+        //$scope.targetLang = 'fr-FR';
+        //$scope.targetLang = 'pt-PT';
+        // if (!$scope.sourceLang || !$scope.targetLang) {
+        //   $scope.showErrorToast("Please specify the source and target languages");
+        //   return
+        // }
+        var documentProm = $http({
+          url   : parallelXliffCreatorUrl,
+          method: "GET",
+          // WORKING - user must specify source and target langs
+          params: {
+            sourceLang: 'en',
+            targetLang: 'es',
+            sourceText: rawSourceText,
+            targetText: rawTargetText
+          }
+        });
+        documentProm.then(
+          function (res) {
+            var xliffPromise = XliffParser.parseXML(res.data);
+            xliffPromise.then(
+              function (documentObj) {
+                $scope.pending.document = documentObj.DOM;
+
+                // Hack: just download this file directly
+                var blob = new Blob([new XMLSerializer().serializeToString(documentObj.DOM)], {type: "application/xml"});
+                // saveAs is provided in the global scope by file-saver
+                saveAs(blob, "document.xliff");
+
                 // TODO: this is a hack, since we actually aren't dealing with a file here
                 $scope.selectedFiles = ['dummyFile'];
               },

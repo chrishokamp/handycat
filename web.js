@@ -335,6 +335,29 @@ app.get('/create-xliff', function(req,res) {
   }).pipe(res);
 });
 
+var parallelXliffCreatorUrl = 'http://localhost:8080/create-parallel-xliff/1.2'
+app.get('/create-parallel-xliff', function(req,res) {
+  var sourceLang = req.query.sourceLang;
+  var targetLang = req.query.targetLang;
+  var sourceText = req.query.sourceText;
+  var targetText = req.query.targetText;
+
+  var options = {
+    url: parallelXliffCreatorUrl,
+    method: 'GET',
+    qs: {
+      sourceLang: sourceLang,
+      targetLang: targetLang,
+      sourceText: sourceText,
+      targetText: targetText
+    }
+  };
+  request(options, function (error, response, body) {
+    if (error){
+      console.error('Got error from XLIFF creator: ' + error.code);
+    }
+  }).pipe(res);
+});
 
 
 // lm_autocompleter
