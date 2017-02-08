@@ -97,14 +97,18 @@ handyCATconfig.constant('widgetConfiguration',
       'qeScore': true,
     },
     'target': {
-      activeComponent: 'typeaheadEditor',
-      defaultComponent: 'typeaheadEditor',
+      activeComponent: 'plaintextEditor',
+      defaultComponent: 'plaintextEditor',
       // a list of the available components
       components: [
         {
-          'directiveName': 'typeaheadEditor',
-          'textName': 'Autocomplete'
+          'directiveName': 'plaintextEditor',
+          'textName': 'Text Editor'
         },
+        // {
+        //   'directiveName': 'typeaheadEditor',
+        //   'textName': 'Autocomplete'
+        // },
         // {
         //   'directiveName': 'postEditor',
         //   'textName': 'postEditor'
@@ -126,15 +130,15 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 1: task: 0 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -142,12 +146,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 1: task: 1 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -163,12 +166,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 1: task: 2 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -184,12 +186,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 1: task: 3 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -205,8 +206,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ3"
+          }
         }
       ]
     },
@@ -215,7 +215,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 2: task: 0 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -231,12 +231,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 2: task: 1 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -252,12 +251,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 2: task: 2 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -273,12 +271,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 2: task: 3 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -294,8 +291,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ0"
+          }
         }
       ]
     },
@@ -304,7 +300,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 3: task: 0 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -320,12 +316,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 3: task: 1 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -341,12 +336,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 3: task: 2 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -362,12 +356,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 3: task: 3 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -383,8 +376,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ1"
+          }
         }
       ]
     },
@@ -393,7 +385,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 4: task: 0 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -409,12 +401,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 4: task: 1 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -430,12 +421,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 4: task: 2 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -451,12 +441,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 4: task: 3 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -472,8 +461,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ2"
+          }
         }
       ]
     },
@@ -482,7 +470,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 5: task: 0 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -498,12 +486,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 5: task: 1 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -519,12 +506,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 5: task: 2 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -540,12 +526,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 5: task: 3 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -561,8 +546,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ0"
+          }
         }
       ]
     },
@@ -571,7 +555,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 6: task: 0 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -587,12 +571,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 6: task: 1 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -608,12 +591,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 6: task: 2 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -629,12 +611,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 6: task: 3 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -650,8 +631,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ3"
+          }
         }
       ]
     },
@@ -660,7 +640,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 7: task: 0 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -676,12 +656,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 7: task: 1 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -697,12 +676,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 7: task: 2 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -718,12 +696,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 7: task: 3 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -739,8 +716,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ0"
+          }
         }
       ]
     },
@@ -749,7 +725,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 8: task: 0 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -765,12 +741,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 8: task: 1 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -786,12 +761,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 8: task: 2 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -807,12 +781,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 8: task: 3 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -828,8 +801,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ1"
+          }
         }
       ]
     },
@@ -838,7 +810,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 9: task: 0 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -854,12 +826,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 9: task: 1 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -875,12 +846,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 9: task: 2 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -896,12 +866,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 9: task: 3 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -917,8 +886,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ2"
+          }
         }
       ]
     },
@@ -927,7 +895,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 10: task: 0 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -943,12 +911,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 10: task: 1 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -964,12 +931,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 10: task: 2 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -985,12 +951,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 10: task: 3 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -1006,8 +971,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ1"
+          }
         }
       ]
     },
@@ -1016,7 +980,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 11: task: 0 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -1032,12 +996,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 11: task: 1 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -1053,12 +1016,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 11: task: 2 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -1074,12 +1036,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 11: task: 3 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -1095,8 +1056,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ3"
+          }
         }
       ]
     },
@@ -1105,7 +1065,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 12: task: 0 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -1121,12 +1081,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 12: task: 1 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -1142,12 +1101,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 12: task: 2 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -1163,12 +1121,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 12: task: 3 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -1184,8 +1141,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ0"
+          }
         }
       ]
     },
@@ -1194,7 +1150,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 13: task: 0 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -1210,12 +1166,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 13: task: 1 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -1231,12 +1186,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 13: task: 2 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -1252,12 +1206,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 13: task: 3 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -1273,8 +1226,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ1"
+          }
         }
       ]
     },
@@ -1283,7 +1235,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 14: task: 0 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -1299,12 +1251,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 14: task: 1 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -1320,12 +1271,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 14: task: 2 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -1341,12 +1291,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 14: task: 3 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -1362,8 +1311,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ2"
+          }
         }
       ]
     },
@@ -1372,7 +1320,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 15: task: 0 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -1388,12 +1336,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 15: task: 1 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -1409,12 +1356,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 15: task: 2 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -1430,12 +1376,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 15: task: 3 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -1451,8 +1396,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ3"
+          }
         }
       ]
     },
@@ -1461,7 +1405,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 16: task: 0 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -1477,12 +1421,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 16: task: 1 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -1498,12 +1441,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 16: task: 2 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -1519,12 +1461,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 16: task: 3 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -1540,8 +1481,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ3"
+          }
         }
       ]
     },
@@ -1550,7 +1490,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 17: task: 0 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -1566,12 +1506,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 17: task: 1 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -1587,12 +1526,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 17: task: 2 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -1608,12 +1546,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 17: task: 3 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -1629,8 +1566,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ0"
+          }
         }
       ]
     },
@@ -1639,7 +1575,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 18: task: 0 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -1655,12 +1591,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 18: task: 1 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -1676,12 +1611,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 18: task: 2 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -1697,12 +1631,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 18: task: 3 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -1718,8 +1651,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ1"
+          }
         }
       ]
     },
@@ -1728,7 +1660,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 19: task: 0 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -1744,12 +1676,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 19: task: 1 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -1765,12 +1696,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ0"
+          }
         },
         {
           "name": "Translator 19: task: 2 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -1786,12 +1716,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 19: task: 3 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -1807,8 +1736,7 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ2"
+          }
         }
       ]
     },
@@ -1817,7 +1745,7 @@ var experimentGroups = [
       "sampleFiles": [
         {
           "name": "Translator 20: task: 0 project name: PRJ1",
-          "internalName": "",
+          "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
@@ -1833,12 +1761,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 0
             }
-          },
-          "internal_name": "PRJ1"
+          }
         },
         {
           "name": "Translator 20: task: 1 project name: PRJ2",
-          "internalName": "",
+          "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
@@ -1854,12 +1781,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 1
             }
-          },
-          "internal_name": "PRJ2"
+          }
         },
         {
           "name": "Translator 20: task: 2 project name: PRJ3",
-          "internalName": "",
+          "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
@@ -1875,12 +1801,11 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 2
             }
-          },
-          "internal_name": "PRJ3"
+          }
         },
         {
           "name": "Translator 20: task: 3 project name: PRJ0",
-          "internalName": "",
+          "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
@@ -1896,11 +1821,12 @@ var experimentGroups = [
             "qeScoreConfig": {
               "scoreIndex": 3
             }
-          },
-          "internal_name": "PRJ0"
+          }
         }
       ]
     }
   ]
+
+
 handyCATconfig.constant('experimentGroups', experimentGroups)
 
