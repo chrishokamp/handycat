@@ -6,6 +6,20 @@
       <!--ALL TARGET AREA COMPONENTS BELONG HERE-->
       <!--The component that is currently active is controlled by widgets.activeComponent on the parent scope-->
 
+      <!-- PLAINTEXT -->
+      <div class="cssSlideUp"
+           ng-show="widgets.activeComponent === 'plaintextEditor'"
+      >
+        <plaintext-editor
+                target-segment="segment.target"
+                source-segment="segment.source"
+                source-lang="{{document.sourceLang}}"
+                target-lang="{{document.targetLang}}"
+                active-component="widgets.activeComponent"
+                is-active="isActive.active"
+        ></plaintext-editor>
+      </div>
+
       <!-- TYPEAHEAD -->
       <div class="cssSlideUp"
            ng-show="widgets.activeComponent === 'typeaheadEditor'"
