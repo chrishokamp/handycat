@@ -29,7 +29,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
         $scope.projectResource = projectResource;
 
         // hack rootScope to expose the project resource to the rest of the app
-        // $rootScope.projectResource = projectResource;
+        $rootScope.projectResource = projectResource;
 
         XliffParser.parseXML(projectResource.content).then(
           function(documentObj) {

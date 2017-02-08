@@ -19,7 +19,7 @@ angular.module('controllers')
 
     // these hotkeys are only available when the segment is active
     // they get deleted when the segment is not active
-    var hotkeyConfigs = [,
+    var hotkeyConfigs = [
       {
         combo      : 'ctrl+enter',
         description: 'Finish a segment and move to the next one',
@@ -60,6 +60,8 @@ angular.module('controllers')
       $scope.maskTranslationContent = false;
       console.log('QE Score accepted');
 
+      logAction('qeScore.accept', {'segmentId': $scope.id.index});
+
     }
 
     // WORKING: use project-level config to index into the correct qe score for this segment
@@ -77,10 +79,11 @@ angular.module('controllers')
         $scope.segment.qeScoreIdx = qeScoreIdx;
 
         if (qeScoreIdx >= 0) {
-          $scope.segment.qeScore = $scope.configuration['tsvData'][parseInt($scope.id.index)][qeScoreIdx];
+          var qePercent = Math.round(100 * $scope.configuration['tsvData'][parseInt($scope.id.index)][qeScoreIdx]);
+          $scope.segment.qeScore = qePercent.toString() + '%';
         } else {
           // base case, qe score doesn't show
-          $scope.segment.qeScore = '0.00';
+          $scope.segment.qeScore = '00%';
           $scope.qeScoreAccepted = true;
           $scope.maskTranslationContent = false;
         }
@@ -311,7 +314,8 @@ angular.module('controllers')
         var logInfo = {
           'segmentId': $scope.id.index,
           'currentValue': $scope.segment.target,
-          'configuration': $scope.projectResource.configuration
+          // configuration commented for qeScore experiments
+          // 'configuration': $scope.projectResource.configuration
         }
         logAction(action, logInfo);
 
@@ -352,10 +356,11 @@ angular.module('controllers')
         'action': action,
         'data': data
       }
+
       editSession.updateStat(logData)
-      console.log('Logged action: ' + logData.action);
-      console.log(logData);
       Logger.addEvent($scope.projectResource.name, $scope.id.index, logData);
+      // console.log('Logged action: ' + logData.action);
+      // console.log(logData);
     }
     $scope.logAction = logAction;
 

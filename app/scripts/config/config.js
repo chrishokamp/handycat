@@ -154,11 +154,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -174,11 +174,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -194,11 +194,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -219,11 +219,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -239,11 +239,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -259,11 +259,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -279,11 +279,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -304,11 +304,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -324,11 +324,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -344,11 +344,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -364,11 +364,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -389,11 +389,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -409,11 +409,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -429,11 +429,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -449,11 +449,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -474,11 +474,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -494,11 +494,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -514,11 +514,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -534,11 +534,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -559,11 +559,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -579,11 +579,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -599,11 +599,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -619,11 +619,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -644,11 +644,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -664,11 +664,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -684,11 +684,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -704,11 +704,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -729,11 +729,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -749,11 +749,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -769,11 +769,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -789,11 +789,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -814,11 +814,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -834,11 +834,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -854,11 +854,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -874,11 +874,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -899,11 +899,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -919,11 +919,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -939,11 +939,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -959,11 +959,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -984,11 +984,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -1004,11 +1004,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -1024,11 +1024,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -1044,11 +1044,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -1069,11 +1069,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -1089,11 +1089,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -1109,11 +1109,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -1129,11 +1129,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -1154,11 +1154,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -1174,11 +1174,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -1194,11 +1194,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -1214,11 +1214,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -1239,11 +1239,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -1259,11 +1259,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -1279,11 +1279,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -1299,11 +1299,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -1324,11 +1324,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -1344,11 +1344,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -1364,11 +1364,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -1384,11 +1384,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -1409,11 +1409,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -1429,11 +1429,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -1449,11 +1449,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -1469,11 +1469,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -1494,11 +1494,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -1514,11 +1514,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -1534,11 +1534,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -1554,11 +1554,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -1579,11 +1579,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -1599,11 +1599,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -1619,11 +1619,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -1639,11 +1639,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -1664,11 +1664,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -1684,11 +1684,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -1704,11 +1704,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -1724,11 +1724,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -1749,11 +1749,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
@@ -1769,11 +1769,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
@@ -1789,11 +1789,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
@@ -1809,11 +1809,11 @@ var experimentGroups = [
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
             "target": {
-              "activeComponent": "typeaheadEditor",
-              "defaultComponent": "typeaheadEditor",
+              "activeComponent": "plaintextEditor",
+              "defaultComponent": "plaintextEditor",
               "components": {
-                "directiveName": "typeaheadEditor",
-                "textName": "typeaheadEditor"
+                "directiveName": "plaintextEditor",
+                "textName": "plaintextEditor"
               }
             },
             "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
@@ -1826,7 +1826,6 @@ var experimentGroups = [
       ]
     }
   ]
-
 
 handyCATconfig.constant('experimentGroups', experimentGroups)
 

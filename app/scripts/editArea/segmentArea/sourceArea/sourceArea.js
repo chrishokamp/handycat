@@ -16,10 +16,13 @@ angular.module('directives')
         var tokenSpans =  _.map(tokenStrings, function(tok, index) {
           // watch out for the crazy regex in the next line! - used to escape single quotes
           var tokNorm = tok.replace(/'/g, "\\'").replace('"', '');
-          return '<span class="source-token" select-text ' +
-                      'ng-click="askGlossary(\''+ tokNorm + '\')">'
-                      + tok +
-                 '</span>';
+
+          // Commented for QE score experiments
+          // return '<span class="source-token" select-text ' +
+          //             'ng-click="askGlossary(\''+ tokNorm + '\')">'
+          //             + tok +
+          //        '</span>';
+          return '<span class="source-token">' + tok + '</span>';
         });
 
         var annotatedSentence = '<div class="annotated-source">' + tokenSpans.join('') + '</div>';

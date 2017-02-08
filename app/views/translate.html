@@ -126,27 +126,29 @@
               <!--  the segment-level controls for the target panel -->
               <!--ng-show="isActive.active"-->
                 <!--WORKING: this for Carlos-->
-              <!--<div-->
-                      <!--ng-show="isActive.active"-->
-                      <!--layout="row"-->
-                      <!--layout-align="end center"-->
-                      <!--class="segment-controls"-->
-              <!--&gt;Ctrl+Enter to proceed</div>-->
               <div
-                ng-show="isActive.active"
-                layout="row"
-                layout-align="end center"
-                class="segment-controls"
-                >
+                      ng-show="isActive.active"
+                      layout="row"
+                      layout-align="end center"
+                      class="segment-controls"
+              >Press Ctrl+Enter to proceed</div>
 
-                <div>
-                  <md-button
-                    ng-click="segmentFinished(id.index)"
-                    ng-disabled="getSegmentState(id.index) === 'translated'"
-                    >
-                    <span class="glyphicon glyphicon-ok-sign"></span>
-                  </md-button>
-                </div>
+              <!--COMMENTED FOR QE SCORE EXPERIMENTS-->
+              <!--<div-->
+                <!--ng-show="isActive.active"-->
+                <!--layout="row"-->
+                <!--layout-align="end center"-->
+                <!--class="segment-controls"-->
+                <!--&gt;-->
+
+                <!--<div>-->
+                  <!--<md-button-->
+                    <!--ng-click="segmentFinished(id.index)"-->
+                    <!--ng-disabled="getSegmentState(id.index) === 'translated'"-->
+                    <!--&gt;-->
+                    <!--<span class="glyphicon glyphicon-ok-sign"></span>-->
+                  <!--</md-button>-->
+                <!--</div>-->
                 <!--the buttons below here don't work yet-->
                 <!--<div>-->
                   <!--<md-button-->
@@ -156,23 +158,23 @@
                     <!--<span class="glyphicon glyphicon-remove"></span>-->
                   <!--</md-button>-->
                 <!--</div>-->
-                <div>
-                  <md-button
-                          ng-click="undoChange()"
-                          ng-disabled="getSegmentState(id.index) === 'translated'"
-                          >
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                  </md-button>
-                </div>
-                <div>
-                  <md-button
-                          ng-click="clearEditor()"
-                          ng-disabled="getSegmentState(id.index) === 'translated'"
-                          >
-                    <span class="glyphicon glyphicon-remove"></span>
-                  </md-button>
-                </div>
-              </div>
+                <!--<div>-->
+                  <!--<md-button-->
+                          <!--ng-click="undoChange()"-->
+                          <!--ng-disabled="getSegmentState(id.index) === 'translated'"-->
+                          <!--&gt;-->
+                    <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+                  <!--</md-button>-->
+                <!--</div>-->
+                <!--<div>-->
+                  <!--<md-button-->
+                          <!--ng-click="clearEditor()"-->
+                          <!--ng-disabled="getSegmentState(id.index) === 'translated'"-->
+                          <!--&gt;-->
+                    <!--<span class="glyphicon glyphicon-remove"></span>-->
+                  <!--</md-button>-->
+                <!--</div>-->
+              <!--</div>-->
             </div>
           </div>
           <md-divider></md-divider>
