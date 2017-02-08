@@ -29,6 +29,20 @@ qe-score > div {
   text-align: center;
 }
 
+// Working: invisible version of qe score
+.hidescore {
+  width: 100px;
+  font-size: 36px;
+  font-weight: bold;
+  font-color: white;
+  opacity: 0;
+  border: 3px solid white;
+  //padding: 4px;
+  //padding-right: 8px;
+  //padding-left: 8px;
+  text-align: center;
+}
+
 .animatebackground {
   animation-delay: 1s;
   animation: pulsecolor 2.5s;

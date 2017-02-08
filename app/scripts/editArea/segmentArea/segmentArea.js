@@ -63,20 +63,28 @@ angular.module('controllers')
     }
 
     // WORKING: use project-level config to index into the correct qe score for this segment
-    // WORKING: use project-level config to index into the correct qe score for this segment
     if ($scope.segmentControls.qeScore) {
       $timeout(function() {
         // Random score
         // $scope.segment.qeScore = Math.floor(Math.random() * (100)) + '%';
         var qeScoreIdx = $scope.configuration['qeScoreConfig']['scoreIndex'];
+
         if (qeScoreIdx != undefined) {
+          qeScoreIdx = qeScoreIdx - 1;
+        } else {
+          qeScoreIdx = -1
+        }
+
+        if (qeScoreIdx >= 0) {
           $scope.segment.qeScore = $scope.configuration['tsvData'][parseInt($scope.id.index)][qeScoreIdx];
         } else {
-          $scope.segment.qeScore = undefined;
+          // base case, qe score doesn't show
+          $scope.segment.qeScore = '0.00';
+          $scope.qeScoreAccepted = true;
+          $scope.maskTranslationContent = false;
         }
       }, 0);
     }
-
 
     // TODO - dynamically populate the translation options for each segment by calling the URLs that are configured for user's
     // translation resources

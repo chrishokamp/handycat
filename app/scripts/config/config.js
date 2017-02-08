@@ -141,7 +141,7 @@ var experimentGroups = [
           tsvUrl: 'data/qe_score_experiments/documents/score_tsvs/QE0',
           tsvData: undefined,
           qeScoreConfig: {
-            scoreIndex: 0
+            scoreIndex: 1
           }
         },
       },
