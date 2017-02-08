@@ -27,8 +27,9 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
         projectId: $stateParams.projectId
       }, function(projectResource) {
         $scope.projectResource = projectResource;
-        // hack $state.current to expose the project resource to the rest of the app
-        $state.current.projectResource = projectResource;
+
+        // hack rootScope to expose the project resource to the rest of the app
+        // $rootScope.projectResource = projectResource;
 
         XliffParser.parseXML(projectResource.content).then(
           function(documentObj) {
@@ -185,15 +186,16 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
           saveAs(blob, "edit-log.json");
         };
 
+        // remember that this is available
+        //$mdBottomSheet.hide(clickedItem);
+
         $scope.bottomItems = [
           {name: 'Log', icon: 'ion-ios7-cloud-download', action: $scope.saveJSON},
           {name: 'Xliff', icon: 'ion-ios7-cloud-download', action: $scope.saveXliff},
           {name: 'Text', icon: 'ion-ios7-cloud-download-outline', action: $scope.saveTarget},
-          {name: 'Projects', icon: 'ion-ios7-arrow-back'},
+          {name: 'Projects', icon: 'ion-ios7-arrow-back', action: function() {$state.go('projects.list'); $mdBottomSheet.hide()}},
         ];
 
-        // remember that this is available
-        //$mdBottomSheet.hide(clickedItem);
       }
     }
 

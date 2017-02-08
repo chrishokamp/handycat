@@ -7,6 +7,14 @@ angular.module('directives').directive('catNav', ['Logger', 'Auth', '$location',
       link: function($scope,el){
         $log.log('inside cat tool navigation directive');
 
+        // $scope.$watch(function() {
+        //   return $rootScope.projectResource;
+        // }, function(projectResource) {
+        //   if (projectResource) {
+        //     $scope.projectName = projectResource.name;
+        //   }
+        // });
+
         $scope.outputLog = function () {
           Logger.exportJSON();
         }

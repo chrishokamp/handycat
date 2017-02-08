@@ -74,6 +74,7 @@ angular.module('controllers')
         } else {
           qeScoreIdx = -1
         }
+        $scope.segment.qeScoreIdx = qeScoreIdx;
 
         if (qeScoreIdx >= 0) {
           $scope.segment.qeScore = $scope.configuration['tsvData'][parseInt($scope.id.index)][qeScoreIdx];

@@ -77,7 +77,7 @@
           <!--row for additional widgets like qe score  -->
           <div layout="row" layout-align="center center">
             <div class="qe-score-box"
-                 ng-class="{animatebackground: isActive.active === true, hidescore: segment.qeScore < 0}"
+                 ng-class="{animatebackground: isActive.active === true, hidescore: segment.qeScoreIdx < 0}"
                  ng-show="segmentControls.qeScore"
                  ng-click="acceptQeScore()"
             >{{segment.qeScore}}</div>
@@ -177,6 +177,10 @@
           </div>
           <md-divider></md-divider>
         </div>
+
+        <!-- adds some whitespace here so that scrolling to the top will always work, even at the end of the project -->
+        <div class="bottom-whitespace"></div>
+
       </div>
     </div>
 
