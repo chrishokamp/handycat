@@ -137,6 +137,11 @@ var experimentGroups = [
                 textName     : 'Typeahead Editor'
               }
             ]
+          },
+          tsvUrl: 'data/qe_score_experiments/documents/score_tsvs/QE0',
+          tsvData: undefined,
+          qeScoreConfig: {
+            scoreIndex: 0
           }
         },
       },

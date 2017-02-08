@@ -1,10 +1,10 @@
 angular.module('controllers')
 .controller('CreateProjectCtrl', ['XliffParser', 'fileReader', 'Projects', 'xliffCreatorUrl',
     'parallelXliffCreatorUrl', 'supportedLangs', 'projectCreationConfiguration', 'experimentGroups',
-    '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast',
+    '$state', '$log', '$scope', '$http', '$mdDialog', '$mdToast', '$q',
     function(XliffParser, fileReader, Projects, xliffCreatorUrl, parallelXliffCreatorUrl,
              supportedLangs, projectCreationConfiguration, experimentGroups,
-             $state, $log, $scope, $http, $mdDialog, $mdToast) {
+             $state, $log, $scope, $http, $mdDialog, $mdToast, $q) {
 
       $scope.projectCreationConfig = projectCreationConfiguration;
 
@@ -95,13 +95,35 @@ angular.module('controllers')
                 if ($scope.name === "" || $scope.name === undefined) {
                   $scope.name = projectName;
                 }
-                var project = newProject($scope.name, pendingDocument, sourceLang, targetLang, configuration);
-                $scope.name = "";
 
-                project.$save(function (response) {
-                  // transition back to the project-list
-                  $state.go('projects.list');
-                });
+                // if there's additonal tsv data, add that data to the configuration asynchronously
+                if (configuration['tsvUrl'] != undefined) {
+                  var tsvPromise = grabAndParseTSV(configuration['tsvUrl'], configuration)
+
+                  // modify configuration in place
+                  // note hardcoding of the property where we place the data
+                  tsvPromise.then(
+                    function(dataRows) {
+                      configuration['tsvData'] = dataRows;
+                      var project = newProject($scope.name, pendingDocument, sourceLang, targetLang, configuration);
+
+                      $scope.name = "";
+
+                      project.$save(function (response) {
+                        // transition back to the project-list
+                        $state.go('projects.list');
+                      });
+                    }
+                  )
+                } else {
+                  var project = newProject($scope.name, pendingDocument, sourceLang, targetLang, configuration);
+                  $scope.name = "";
+
+                  project.$save(function (response) {
+                    // transition back to the project-list
+                    $state.go('projects.list');
+                  });
+                }
               });
           }).
           error(function() {
@@ -110,6 +132,34 @@ angular.module('controllers')
           });
       }
 
+      // WORKING: clients which use this object know how to find the score (i.e. they know the index of the score)
+      var grabAndParseTSV = function(tsvFileUrl, configuration, delimiter) {
+        var deferred = $q.defer();
+
+        if (delimiter === undefined) {
+          delimiter = " ";
+        }
+        $log.log('grabAndParseTSV fired: ' + tsvFileUrl);
+        $http.get(tsvFileUrl)
+          .success(
+            function (rawText) {
+              // parse tsv, return promise which resolves with rows as list of lists
+              // client is expected to know the column semantics, tsv should not contain column headers
+              var rows = rawText.trim().split('\n');
+              var dataRows = rows.map(function (r) {
+                return r.split(delimiter);
+              });
+
+              deferred.resolve(dataRows)
+
+            })
+          .error(function() {
+          // show toast to user letting them know that this is not a valid XLIFF
+          $scope.showErrorToast('Error: retrieving or parsing TSV file: ' + tsvFileUrl);
+        });
+
+        return deferred.promise;
+      }
 
       // does the browser support drag n drop? - assume yes
       $scope.fileAdded = false;

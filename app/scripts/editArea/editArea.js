@@ -37,6 +37,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
             $log.log('$scope.document loaded and parsed');
             $log.log('Project: local widget configuration: ');
             $log.log(projectResource.configuration);
+            $scope.configuration = projectResource.configuration;
 
             // TODO: target widget config can be modified via the project resource config
             // TODO: the current method of merging global and local configs overwrites the global config, this could cause unexpected behavior

@@ -50,10 +50,10 @@ angular.module('controllers')
 
     // QE Scores
 
+    // TODO: whether this is available depends upon configuration
     // TODO: this should be set for each segment from the document model _if_ it is available
     // TODO: if score is not available for a segment, any component that relies on it cannot display, or shows error
     $scope.qeScoreAccepted = false;
-    // TODO: whether this is available depends upon configuration
     $scope.maskTranslationContent = true;
     $scope.acceptQeScore =  function() {
       $scope.qeScoreAccepted = true;
@@ -62,9 +62,20 @@ angular.module('controllers')
 
     }
 
-    $timeout(function() {
-        $scope.segment.qeScore = Math.floor(Math.random() * (100)) + '%';
-    }, 0);
+    // WORKING: use project-level config to index into the correct qe score for this segment
+    // WORKING: use project-level config to index into the correct qe score for this segment
+    if ($scope.segmentControls.qeScore) {
+      $timeout(function() {
+        // Random score
+        // $scope.segment.qeScore = Math.floor(Math.random() * (100)) + '%';
+        var qeScoreIdx = $scope.configuration['qeScoreConfig']['scoreIndex'];
+        if (qeScoreIdx != undefined) {
+          $scope.segment.qeScore = $scope.configuration['tsvData'][parseInt($scope.id.index)][qeScoreIdx];
+        } else {
+          $scope.segment.qeScore = undefined;
+        }
+      }, 0);
+    }
 
 
     // TODO - dynamically populate the translation options for each segment by calling the URLs that are configured for user's

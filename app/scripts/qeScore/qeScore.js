@@ -7,6 +7,7 @@ angular.module('handycat.posteditors')
       templateUrl: 'scripts/qeScore/qeScore.html',
       restrict: 'E',
       link: function(scope, $el, attrs) {
+        // WORKING: component doesn't show if score is undefined(?)
 
       },
       controller: function($scope) {
