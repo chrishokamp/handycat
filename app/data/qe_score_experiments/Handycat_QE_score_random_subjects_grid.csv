@@ -1,0 +1,21 @@
+,doc_id_0,doc_id_1,doc_id_2,doc_id_3,score_0,score_1,score_2,score_3
+Translator 1,0,1,2,3,0,1,2,3
+Translator 2,1,2,3,0,1,2,3,0
+Translator 3,2,3,0,1,2,3,0,1
+Translator 4,3,0,1,2,3,0,1,2
+Translator 5,1,2,3,0,1,2,3,0
+Translator 6,0,1,2,3,1,2,3,0
+Translator 7,1,2,3,0,2,3,0,1
+Translator 8,2,3,0,1,3,0,1,2
+Translator 9,3,0,1,2,0,1,2,3
+Translator 10,2,3,0,1,3,0,1,2
+Translator 11,0,1,2,3,2,3,0,1
+Translator 12,1,2,3,0,3,0,1,2
+Translator 13,2,3,0,1,0,1,2,3
+Translator 14,3,0,1,2,1,2,3,0
+Translator 15,0,1,2,3,2,3,0,1
+Translator 16,0,1,2,3,3,0,1,2
+Translator 17,1,2,3,0,0,1,2,3
+Translator 18,2,3,0,1,1,2,3,0
+Translator 19,3,0,1,2,2,3,0,1
+Translator 20,1,2,3,0,0,1,2,3
