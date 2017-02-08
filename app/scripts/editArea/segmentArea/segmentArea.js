@@ -49,7 +49,27 @@ angular.module('controllers')
     ];
 
     // QE Scores
+    // log all keypresses
+    var handleKeypress = function(e) {
 
+      var pressedKey = String.fromCharCode(e.which);
+      console.log(pressedKey + ' WAS PRESSED')
+      logAction('plaintextEditor.keypress',
+        {
+          'key': pressedKey
+        }
+      );
+    }
+
+    $scope.$watch(function() {
+      return $scope.isActive.active;
+    }, function(isActive) {
+      if (isActive) {
+        $(document).on('keypress.qe_score', handleKeypress)
+      } else {
+        $(document).unbind('keypress.qe_score')
+      }
+    })
     // TODO: whether this is available depends upon configuration
     // TODO: this should be set for each segment from the document model _if_ it is available
     // TODO: if score is not available for a segment, any component that relies on it cannot display, or shows error
@@ -235,7 +255,8 @@ angular.module('controllers')
         'segmentId': segId,
         'previousValue': $scope.segment.targetDOM.textContent,
         'newValue': $scope.segment.target,
-        'configuration': $scope.projectResource.configuration
+        // commented configuration logging for qe score experiments
+        // 'configuration': $scope.projectResource.configuration
       }
       logAction(action, logInfo);
 
