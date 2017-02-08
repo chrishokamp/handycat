@@ -1,8 +1,8 @@
 angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal',
   '$log', 'SegmentOrder', 'editSession', '$mdBottomSheet', '$rootScope', 'Wikipedia', '$timeout', 'Projects',
-  'XliffParser', 'autocompleterURLs', 'Logger', 'widgetConfiguration', '$stateParams', '$q',
+  'XliffParser', 'autocompleterURLs', 'Logger', 'widgetConfiguration', '$state', '$stateParams', '$q',
   function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, editSession, $mdBottomSheet, $rootScope, Wikipedia, $timeout,
-           Projects, XliffParser, autocompleterURLs, Logger, widgetConfiguration, $stateParams, $q) {
+           Projects, XliffParser, autocompleterURLs, Logger, widgetConfiguration, $state, $stateParams, $q) {
 
     // global user options (may be accessed or changed from child controllers)
     $scope.visible = {
@@ -27,6 +27,9 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
         projectId: $stateParams.projectId
       }, function(projectResource) {
         $scope.projectResource = projectResource;
+        // hack $state.current to expose the project resource to the rest of the app
+        $state.current.projectResource = projectResource;
+
         XliffParser.parseXML(projectResource.content).then(
           function(documentObj) {
             $scope.document = documentObj;

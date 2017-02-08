@@ -75,8 +75,6 @@
           <!--END segment info row-->
 
           <!--row for additional widgets like qe score  -->
-          <!-- WORKING: qeScore shows nothing when there's no score-->
-          <!-- WORKING: use ng-if or ng-class to change the widget depending if the score index is undefined-->
           <div layout="row" layout-align="center center">
             <div class="qe-score-box"
                  ng-class="{animatebackground: isActive.active === true, hidescore: segment.qeScore < 0}"

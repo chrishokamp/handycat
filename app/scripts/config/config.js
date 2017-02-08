@@ -119,118 +119,1788 @@ handyCATconfig.constant('widgetConfiguration',
 
 // allow experiment configuration via handyCAT config
 // TODO: gen the grouping for each translator automagically
+
 var experimentGroups = [
-  {
-    name       : 'Translator 1',
-    sampleFiles: [
-      {
-        name         : 'Task 1',
-        internalName : 'PRJ0',
-        url          : 'data/qe_score_experiments/documents/PRJ0.xliff',
-        configuration: {
-          target: {
-            activeComponent : 'typeaheadEditor',
-            defaultComponent: 'typeaheadEditor',
-            components      : [
-              {
-                directiveName: 'typeaheadEditor',
-                textName     : 'Typeahead Editor'
+    {
+      "name": "Translator 1",
+      "sampleFiles": [
+        {
+          "name": "Translator 1: task: 0 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
               }
-            ]
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
           },
-          tsvUrl: 'data/qe_score_experiments/documents/score_tsvs/QE0',
-          tsvData: undefined,
-          qeScoreConfig: {
-            scoreIndex: 1
-          }
+          "internal_name": "PRJ0"
         },
-      },
-      {
-        name         : 'Task 1',
-        internalName : 'PRJ1',
-        url          : 'data/qe_score_experiments/documents/PRJ1.xliff',
-        configuration: {
-          target: {
-            activeComponent : 'typeaheadEditor',
-            defaultComponent: 'typeaheadEditor',
-            components      : [
-              {
-                directiveName: 'typeaheadEditor',
-                textName     : 'Typeahead Editor'
+        {
+          "name": "Translator 1: task: 1 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
               }
-            ]
-          }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ1"
         },
-      },
-      {
-        name         : 'Task 3',
-        internalName : 'PRJ2',
-        url          : 'data/qe_score_experiments/documents/PRJ2.xliff',
-        configuration: {
-          target: {
-            activeComponent : 'typeaheadEditor',
-            defaultComponent: 'typeaheadEditor',
-            components      : [
-              {
-                directiveName: 'typeaheadEditor',
-                textName     : 'Typeahead Editor'
+        {
+          "name": "Translator 1: task: 2 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
               }
-            ]
-          }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ2"
         },
-      },
-      {
-        name         : 'Task 4',
-        internalName : 'PRJ3',
-        url          : 'data/qe_score_experiments/documents/PRJ3.xliff',
-        configuration: {
-          target: {
-            activeComponent : 'typeaheadEditor',
-            defaultComponent: 'typeaheadEditor',
-            components      : [
-              {
-                directiveName: 'typeaheadEditor',
-                textName     : 'Typeahead Editor'
+        {
+          "name": "Translator 1: task: 3 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
               }
-            ]
-          }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ3"
+        }
+      ]
+    },
+    {
+      "name": "Translator 2",
+      "sampleFiles": [
+        {
+          "name": "Translator 2: task: 0 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ1"
         },
-      }
-    ]
-  }
-
-  // TODO: add a separate constant for sample files
-  // {
-  //   name: 'Group N',
-  //   sampleFiles: [
-  //     {
-  //       name: 'Mobile Phone Instructions',
-  //       url: 'data/porto_experiments/matecat/Project_1_-_Mobile_phone_instructions.doc.xlf',
-  //       configuration: {
-  //         target :{
-  //           components: [
-  //             {
-  //               directiveName: 'postEditor',
-  //               textName: 'postEditor'
-  //               // directiveName: 'typeaheadEditor',
-  //               // textName: 'typeaheadEditor'
-  //             }
-  //           ]
-  //         }
-  //       },
-  //     },
-  //     {name: 'Marketing Questionnaire', url: 'data/porto_experiments/matecat/Project_2_-_Marketing_questionnaire.doc.xlf',
-  //       configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-  //     },
-  //     {name: 'Product Catalog - Office Supplies', url: 'data/porto_experiments/matecat/Project_3_-_Product_catalog_-_Office_supplies.doc.xlf',
-  //       configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-  //     },
-  //     {name: 'User Manual: Industrial Equipment', url: 'data/porto_experiments/matecat/Project_4_-_User_manual_-_industrial_equipment.doc.xlf',
-  //       configuration: {'target': {'widgets': {'constrainedLMAutocomplete': true}}}
-  //     },
-  //   ]
-  // },
-]
-
+        {
+          "name": "Translator 2: task: 1 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 2: task: 2 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 2: task: 3 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ0"
+        }
+      ]
+    },
+    {
+      "name": "Translator 3",
+      "sampleFiles": [
+        {
+          "name": "Translator 3: task: 0 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 3: task: 1 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 3: task: 2 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 3: task: 3 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ1"
+        }
+      ]
+    },
+    {
+      "name": "Translator 4",
+      "sampleFiles": [
+        {
+          "name": "Translator 4: task: 0 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 4: task: 1 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 4: task: 2 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 4: task: 3 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ2"
+        }
+      ]
+    },
+    {
+      "name": "Translator 5",
+      "sampleFiles": [
+        {
+          "name": "Translator 5: task: 0 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 5: task: 1 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 5: task: 2 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 5: task: 3 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ0"
+        }
+      ]
+    },
+    {
+      "name": "Translator 6",
+      "sampleFiles": [
+        {
+          "name": "Translator 6: task: 0 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 6: task: 1 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 6: task: 2 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 6: task: 3 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ3"
+        }
+      ]
+    },
+    {
+      "name": "Translator 7",
+      "sampleFiles": [
+        {
+          "name": "Translator 7: task: 0 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 7: task: 1 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 7: task: 2 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 7: task: 3 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ0"
+        }
+      ]
+    },
+    {
+      "name": "Translator 8",
+      "sampleFiles": [
+        {
+          "name": "Translator 8: task: 0 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 8: task: 1 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 8: task: 2 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 8: task: 3 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ1"
+        }
+      ]
+    },
+    {
+      "name": "Translator 9",
+      "sampleFiles": [
+        {
+          "name": "Translator 9: task: 0 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 9: task: 1 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 9: task: 2 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 9: task: 3 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ2"
+        }
+      ]
+    },
+    {
+      "name": "Translator 10",
+      "sampleFiles": [
+        {
+          "name": "Translator 10: task: 0 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 10: task: 1 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 10: task: 2 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 10: task: 3 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ1"
+        }
+      ]
+    },
+    {
+      "name": "Translator 11",
+      "sampleFiles": [
+        {
+          "name": "Translator 11: task: 0 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 11: task: 1 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 11: task: 2 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 11: task: 3 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ3"
+        }
+      ]
+    },
+    {
+      "name": "Translator 12",
+      "sampleFiles": [
+        {
+          "name": "Translator 12: task: 0 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 12: task: 1 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 12: task: 2 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 12: task: 3 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ0"
+        }
+      ]
+    },
+    {
+      "name": "Translator 13",
+      "sampleFiles": [
+        {
+          "name": "Translator 13: task: 0 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 13: task: 1 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 13: task: 2 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 13: task: 3 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ1"
+        }
+      ]
+    },
+    {
+      "name": "Translator 14",
+      "sampleFiles": [
+        {
+          "name": "Translator 14: task: 0 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 14: task: 1 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 14: task: 2 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 14: task: 3 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ2"
+        }
+      ]
+    },
+    {
+      "name": "Translator 15",
+      "sampleFiles": [
+        {
+          "name": "Translator 15: task: 0 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 15: task: 1 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 15: task: 2 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 15: task: 3 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ3"
+        }
+      ]
+    },
+    {
+      "name": "Translator 16",
+      "sampleFiles": [
+        {
+          "name": "Translator 16: task: 0 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 16: task: 1 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 16: task: 2 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 16: task: 3 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ3"
+        }
+      ]
+    },
+    {
+      "name": "Translator 17",
+      "sampleFiles": [
+        {
+          "name": "Translator 17: task: 0 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 17: task: 1 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 17: task: 2 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 17: task: 3 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ0"
+        }
+      ]
+    },
+    {
+      "name": "Translator 18",
+      "sampleFiles": [
+        {
+          "name": "Translator 18: task: 0 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 18: task: 1 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 18: task: 2 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 18: task: 3 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ1"
+        }
+      ]
+    },
+    {
+      "name": "Translator 19",
+      "sampleFiles": [
+        {
+          "name": "Translator 19: task: 0 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 19: task: 1 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ0"
+        },
+        {
+          "name": "Translator 19: task: 2 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 19: task: 3 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ2"
+        }
+      ]
+    },
+    {
+      "name": "Translator 20",
+      "sampleFiles": [
+        {
+          "name": "Translator 20: task: 0 project name: PRJ1",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ1.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 0
+            }
+          },
+          "internal_name": "PRJ1"
+        },
+        {
+          "name": "Translator 20: task: 1 project name: PRJ2",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ2.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE1",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 1
+            }
+          },
+          "internal_name": "PRJ2"
+        },
+        {
+          "name": "Translator 20: task: 2 project name: PRJ3",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ3.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE2",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 2
+            }
+          },
+          "internal_name": "PRJ3"
+        },
+        {
+          "name": "Translator 20: task: 3 project name: PRJ0",
+          "internalName": "",
+          "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+          "configuration": {
+            "target": {
+              "activeComponent": "typeaheadEditor",
+              "defaultComponent": "typeaheadEditor",
+              "components": {
+                "directiveName": "typeaheadEditor",
+                "textName": "typeaheadEditor"
+              }
+            },
+            "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE3",
+            "tsvData": [],
+            "qeScoreConfig": {
+              "scoreIndex": 3
+            }
+          },
+          "internal_name": "PRJ0"
+        }
+      ]
+    }
+  ]
 handyCATconfig.constant('experimentGroups', experimentGroups)
 
