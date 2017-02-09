@@ -216,6 +216,22 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     // let the root scope see this (so we can access editArea $scope from the navigation toolbar
     $rootScope.showGridBottomSheet = $scope.showGridBottomSheet;
 
+    // expose scrolling to the active secgment on the root scope so that we can do global control stuff
+    var scrollToActiveSegment = function() {
+      var anchorElem = $('#segment-' + $scope.activeSegment);
+      // this is a hack because $el.offset is returning the wrong values
+      // TODO: 336? or larger -- $elem.outerHeight returns different values at different times?
+      // var segmentHeight = anchorElem.outerHeight(true)
+      var segmentHeight = 336;
+      var top = segmentHeight * $scope.activeSegment;
+
+      // scroll the ui to the currentSegment
+      $("md-content").animate({scrollTop: top}, "slow");
+    }
+
+    // expose scrolling to active segment on the $rootScope
+    $rootScope.scrollToActiveSegment = scrollToActiveSegment;
+
     // listen for a segment change, and reset $scope.activeSegment accordingly
     $scope.$on('changeSegment', function(evt, data) {
 
@@ -235,13 +251,14 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       $scope.activeSegment = data.currentSegment
       var anchorElem = $('#segment-' + data.currentSegment);
       // this is a hack because $el.offset is returning the wrong values
-      var segmentHeight = 256;
+      // var segmentHeight = 256;
       var segmentHeight = anchorElem.outerHeight(true)
       var top = segmentHeight * $scope.activeSegment;
 
       // scroll the ui to the currentSegment
       $("md-content").animate({scrollTop: top}, "slow");
     });
+
 
     // DEV UTILS
     $scope.showXLIFF = false;
