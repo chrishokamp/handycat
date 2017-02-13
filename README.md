@@ -110,9 +110,13 @@ go in the `microservices/` directory.
 
 # Building and Deploying
 
-* The command `grunt build` will build the client application into dist/
+* The command `grunt handycat_builds` will build the client application into `handycat_builds/`
+* To deploy the application to a public server, copy the `handycat_builds/` directory to your server,
+and change the environment to "production" by uncommenting [this line](https://github.com/chrishokamp/handycat/blob/master/web.js#L35)
+* if you need to change the port, one way is just to change the hardcoded port number [here](https://github.com/chrishokamp/handycat/blob/master/web.js#L451)
 
-* deployment scripts TODO: writeme
+
+
 
 ### Language Codes
 Some parts of the application rely upon the language tags in the XLIFF being in a format that we understand. HandyCAT adheres to the [XLIFF 2.0 requirements](http://docs.oasis-open.org/xliff/xliff-core/v2.0/os/xliff-core-v2.0-os.html#srclang) for the `srcLang` (required) and `trgLang` (optional) attributes, and assumes that language codes are in a format [like this](http://tools.ietf.org/html/bcp47#appendix-A).
