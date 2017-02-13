@@ -218,11 +218,12 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
     // expose scrolling to the active secgment on the root scope so that we can do global control stuff
     var scrollToActiveSegment = function() {
+      console.log('Scroll to segment: ' + $scope.activeSegment);
       var anchorElem = $('#segment-' + $scope.activeSegment);
       // this is a hack because $el.offset is returning the wrong values
       // TODO: 336? or larger -- $elem.outerHeight returns different values at different times?
       // var segmentHeight = anchorElem.outerHeight(true)
-      var segmentHeight = 336;
+      var segmentHeight = 320;
       var top = segmentHeight * $scope.activeSegment;
 
       // scroll the ui to the currentSegment
@@ -235,7 +236,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     // listen for a segment change, and reset $scope.activeSegment accordingly
     $scope.$on('changeSegment', function(evt, data) {
 
-      // WORKING: show the bottom sheet when the job finishes
+      // show the bottom sheet when the job finishes
       if (data.currentSegment === -1) {
         $scope.showGridBottomSheet();
         return
@@ -249,6 +250,8 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
       // activeSegment is an int id
       $scope.activeSegment = data.currentSegment
+
+      // autoscroll to the next segment
       var anchorElem = $('#segment-' + data.currentSegment);
       // this is a hack because $el.offset is returning the wrong values
       // var segmentHeight = 256;

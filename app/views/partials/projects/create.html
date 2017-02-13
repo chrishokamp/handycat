@@ -95,7 +95,8 @@
           <div ng-repeat='testfile in testGroup.sampleFiles'>
             <a
               ng-click="createFromURL(testfile.url, testfile.name, testfile.configuration)">
-              {{$index}}: {{testfile.name}}
+              <!--{{$index}}: {{testfile.name}}-->
+              {{testfile.name}}
             </a>
 
           </div>

@@ -1,8 +1,6 @@
 // this module sets up the environment for HandyCAT
 // the values that you must provide here depend upon which components you are using
 
-// WORKING -- proxy all of these URLs through the express server
-
 var handyCATconfig = angular.module('handycatConfig', []);
 
 // TODO: -- this is a quick hack
@@ -129,7 +127,7 @@ var experimentGroups = [
       "name": "Translator 1",
       "sampleFiles": [
         {
-          "name": "Translator 1: task: 0 project name: PRJ0",
+          "name": "Translator 1 | Task 1 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -149,7 +147,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 1: task: 1 project name: PRJ1",
+          "name": "Translator 1 | Task 2 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -169,7 +167,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 1: task: 2 project name: PRJ2",
+          "name": "Translator 1 | Task 3 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -189,7 +187,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 1: task: 3 project name: PRJ3",
+          "name": "Translator 1 | Task 4 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -214,7 +212,7 @@ var experimentGroups = [
       "name": "Translator 2",
       "sampleFiles": [
         {
-          "name": "Translator 2: task: 0 project name: PRJ1",
+          "name": "Translator 2 | Task 1 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -234,7 +232,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 2: task: 1 project name: PRJ2",
+          "name": "Translator 2 | Task 2 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -254,7 +252,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 2: task: 2 project name: PRJ3",
+          "name": "Translator 2 | Task 3 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -274,7 +272,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 2: task: 3 project name: PRJ0",
+          "name": "Translator 2 | Task 4 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -299,7 +297,7 @@ var experimentGroups = [
       "name": "Translator 3",
       "sampleFiles": [
         {
-          "name": "Translator 3: task: 0 project name: PRJ2",
+          "name": "Translator 3 | Task 1 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -319,7 +317,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 3: task: 1 project name: PRJ3",
+          "name": "Translator 3 | Task 2 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -339,7 +337,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 3: task: 2 project name: PRJ0",
+          "name": "Translator 3 | Task 3 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -359,7 +357,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 3: task: 3 project name: PRJ1",
+          "name": "Translator 3 | Task 4 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -384,7 +382,7 @@ var experimentGroups = [
       "name": "Translator 4",
       "sampleFiles": [
         {
-          "name": "Translator 4: task: 0 project name: PRJ3",
+          "name": "Translator 4 | Task 1 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -404,7 +402,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 4: task: 1 project name: PRJ0",
+          "name": "Translator 4 | Task 2 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -424,7 +422,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 4: task: 2 project name: PRJ1",
+          "name": "Translator 4 | Task 3 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -444,7 +442,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 4: task: 3 project name: PRJ2",
+          "name": "Translator 4 | Task 4 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -469,7 +467,7 @@ var experimentGroups = [
       "name": "Translator 5",
       "sampleFiles": [
         {
-          "name": "Translator 5: task: 0 project name: PRJ1",
+          "name": "Translator 5 | Task 1 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -489,7 +487,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 5: task: 1 project name: PRJ2",
+          "name": "Translator 5 | Task 2 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -509,7 +507,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 5: task: 2 project name: PRJ3",
+          "name": "Translator 5 | Task 3 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -529,7 +527,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 5: task: 3 project name: PRJ0",
+          "name": "Translator 5 | Task 4 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -554,7 +552,7 @@ var experimentGroups = [
       "name": "Translator 6",
       "sampleFiles": [
         {
-          "name": "Translator 6: task: 0 project name: PRJ0",
+          "name": "Translator 6 | Task 1 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -574,7 +572,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 6: task: 1 project name: PRJ1",
+          "name": "Translator 6 | Task 2 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -594,7 +592,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 6: task: 2 project name: PRJ2",
+          "name": "Translator 6 | Task 3 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -614,7 +612,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 6: task: 3 project name: PRJ3",
+          "name": "Translator 6 | Task 4 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -639,7 +637,7 @@ var experimentGroups = [
       "name": "Translator 7",
       "sampleFiles": [
         {
-          "name": "Translator 7: task: 0 project name: PRJ1",
+          "name": "Translator 7 | Task 1 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -659,7 +657,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 7: task: 1 project name: PRJ2",
+          "name": "Translator 7 | Task 2 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -679,7 +677,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 7: task: 2 project name: PRJ3",
+          "name": "Translator 7 | Task 3 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -699,7 +697,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 7: task: 3 project name: PRJ0",
+          "name": "Translator 7 | Task 4 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -724,7 +722,7 @@ var experimentGroups = [
       "name": "Translator 8",
       "sampleFiles": [
         {
-          "name": "Translator 8: task: 0 project name: PRJ2",
+          "name": "Translator 8 | Task 1 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -744,7 +742,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 8: task: 1 project name: PRJ3",
+          "name": "Translator 8 | Task 2 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -764,7 +762,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 8: task: 2 project name: PRJ0",
+          "name": "Translator 8 | Task 3 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -784,7 +782,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 8: task: 3 project name: PRJ1",
+          "name": "Translator 8 | Task 4 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -809,7 +807,7 @@ var experimentGroups = [
       "name": "Translator 9",
       "sampleFiles": [
         {
-          "name": "Translator 9: task: 0 project name: PRJ3",
+          "name": "Translator 9 | Task 1 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -829,7 +827,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 9: task: 1 project name: PRJ0",
+          "name": "Translator 9 | Task 2 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -849,7 +847,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 9: task: 2 project name: PRJ1",
+          "name": "Translator 9 | Task 3 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -869,7 +867,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 9: task: 3 project name: PRJ2",
+          "name": "Translator 9 | Task 4 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -894,7 +892,7 @@ var experimentGroups = [
       "name": "Translator 10",
       "sampleFiles": [
         {
-          "name": "Translator 10: task: 0 project name: PRJ2",
+          "name": "Translator 10 | Task 1 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -914,7 +912,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 10: task: 1 project name: PRJ3",
+          "name": "Translator 10 | Task 2 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -934,7 +932,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 10: task: 2 project name: PRJ0",
+          "name": "Translator 10 | Task 3 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -954,7 +952,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 10: task: 3 project name: PRJ1",
+          "name": "Translator 10 | Task 4 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -979,7 +977,7 @@ var experimentGroups = [
       "name": "Translator 11",
       "sampleFiles": [
         {
-          "name": "Translator 11: task: 0 project name: PRJ0",
+          "name": "Translator 11 | Task 1 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -999,7 +997,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 11: task: 1 project name: PRJ1",
+          "name": "Translator 11 | Task 2 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -1019,7 +1017,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 11: task: 2 project name: PRJ2",
+          "name": "Translator 11 | Task 3 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -1039,7 +1037,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 11: task: 3 project name: PRJ3",
+          "name": "Translator 11 | Task 4 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -1064,7 +1062,7 @@ var experimentGroups = [
       "name": "Translator 12",
       "sampleFiles": [
         {
-          "name": "Translator 12: task: 0 project name: PRJ1",
+          "name": "Translator 12 | Task 1 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -1084,7 +1082,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 12: task: 1 project name: PRJ2",
+          "name": "Translator 12 | Task 2 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -1104,7 +1102,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 12: task: 2 project name: PRJ3",
+          "name": "Translator 12 | Task 3 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -1124,7 +1122,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 12: task: 3 project name: PRJ0",
+          "name": "Translator 12 | Task 4 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -1149,7 +1147,7 @@ var experimentGroups = [
       "name": "Translator 13",
       "sampleFiles": [
         {
-          "name": "Translator 13: task: 0 project name: PRJ2",
+          "name": "Translator 13 | Task 1 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -1169,7 +1167,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 13: task: 1 project name: PRJ3",
+          "name": "Translator 13 | Task 2 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -1189,7 +1187,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 13: task: 2 project name: PRJ0",
+          "name": "Translator 13 | Task 3 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -1209,7 +1207,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 13: task: 3 project name: PRJ1",
+          "name": "Translator 13 | Task 4 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -1234,7 +1232,7 @@ var experimentGroups = [
       "name": "Translator 14",
       "sampleFiles": [
         {
-          "name": "Translator 14: task: 0 project name: PRJ3",
+          "name": "Translator 14 | Task 1 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -1254,7 +1252,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 14: task: 1 project name: PRJ0",
+          "name": "Translator 14 | Task 2 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -1274,7 +1272,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 14: task: 2 project name: PRJ1",
+          "name": "Translator 14 | Task 3 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -1294,7 +1292,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 14: task: 3 project name: PRJ2",
+          "name": "Translator 14 | Task 4 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -1319,7 +1317,7 @@ var experimentGroups = [
       "name": "Translator 15",
       "sampleFiles": [
         {
-          "name": "Translator 15: task: 0 project name: PRJ0",
+          "name": "Translator 15 | Task 1 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -1339,7 +1337,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 15: task: 1 project name: PRJ1",
+          "name": "Translator 15 | Task 2 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -1359,7 +1357,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 15: task: 2 project name: PRJ2",
+          "name": "Translator 15 | Task 3 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -1379,7 +1377,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 15: task: 3 project name: PRJ3",
+          "name": "Translator 15 | Task 4 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -1404,7 +1402,7 @@ var experimentGroups = [
       "name": "Translator 16",
       "sampleFiles": [
         {
-          "name": "Translator 16: task: 0 project name: PRJ0",
+          "name": "Translator 16 | Task 1 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -1424,7 +1422,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 16: task: 1 project name: PRJ1",
+          "name": "Translator 16 | Task 2 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -1444,7 +1442,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 16: task: 2 project name: PRJ2",
+          "name": "Translator 16 | Task 3 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -1464,7 +1462,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 16: task: 3 project name: PRJ3",
+          "name": "Translator 16 | Task 4 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -1489,7 +1487,7 @@ var experimentGroups = [
       "name": "Translator 17",
       "sampleFiles": [
         {
-          "name": "Translator 17: task: 0 project name: PRJ1",
+          "name": "Translator 17 | Task 1 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -1509,7 +1507,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 17: task: 1 project name: PRJ2",
+          "name": "Translator 17 | Task 2 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -1529,7 +1527,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 17: task: 2 project name: PRJ3",
+          "name": "Translator 17 | Task 3 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -1549,7 +1547,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 17: task: 3 project name: PRJ0",
+          "name": "Translator 17 | Task 4 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -1574,7 +1572,7 @@ var experimentGroups = [
       "name": "Translator 18",
       "sampleFiles": [
         {
-          "name": "Translator 18: task: 0 project name: PRJ2",
+          "name": "Translator 18 | Task 1 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -1594,7 +1592,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 18: task: 1 project name: PRJ3",
+          "name": "Translator 18 | Task 2 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -1614,7 +1612,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 18: task: 2 project name: PRJ0",
+          "name": "Translator 18 | Task 3 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -1634,7 +1632,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 18: task: 3 project name: PRJ1",
+          "name": "Translator 18 | Task 4 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -1659,7 +1657,7 @@ var experimentGroups = [
       "name": "Translator 19",
       "sampleFiles": [
         {
-          "name": "Translator 19: task: 0 project name: PRJ3",
+          "name": "Translator 19 | Task 1 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -1679,7 +1677,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 19: task: 1 project name: PRJ0",
+          "name": "Translator 19 | Task 2 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -1699,7 +1697,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 19: task: 2 project name: PRJ1",
+          "name": "Translator 19 | Task 3 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -1719,7 +1717,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 19: task: 3 project name: PRJ2",
+          "name": "Translator 19 | Task 4 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -1744,7 +1742,7 @@ var experimentGroups = [
       "name": "Translator 20",
       "sampleFiles": [
         {
-          "name": "Translator 20: task: 0 project name: PRJ1",
+          "name": "Translator 20 | Task 1 | PRJ1",
           "internalName": "PRJ1",
           "url": "data/qe_score_experiments/documents/PRJ1.xliff",
           "configuration": {
@@ -1764,7 +1762,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 20: task: 1 project name: PRJ2",
+          "name": "Translator 20 | Task 2 | PRJ2",
           "internalName": "PRJ2",
           "url": "data/qe_score_experiments/documents/PRJ2.xliff",
           "configuration": {
@@ -1784,7 +1782,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 20: task: 2 project name: PRJ3",
+          "name": "Translator 20 | Task 3 | PRJ3",
           "internalName": "PRJ3",
           "url": "data/qe_score_experiments/documents/PRJ3.xliff",
           "configuration": {
@@ -1804,7 +1802,7 @@ var experimentGroups = [
           }
         },
         {
-          "name": "Translator 20: task: 3 project name: PRJ0",
+          "name": "Translator 20 | Task 4 | PRJ0",
           "internalName": "PRJ0",
           "url": "data/qe_score_experiments/documents/PRJ0.xliff",
           "configuration": {
@@ -1826,6 +1824,5 @@ var experimentGroups = [
       ]
     }
   ]
-
 handyCATconfig.constant('experimentGroups', experimentGroups)
 
