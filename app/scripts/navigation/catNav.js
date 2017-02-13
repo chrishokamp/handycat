@@ -40,7 +40,7 @@ angular.module('directives').directive('catNav', ['Logger', 'Auth', '$location',
           });
         };
 
-        $scope.scrollToActiveSegment = $rootScope.scrollToActiveSegment;
+        // $scope.scrollToActiveSegment = $rootScope.scrollToActiveSegment;
 
       }
     }

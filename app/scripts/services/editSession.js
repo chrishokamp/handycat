@@ -54,9 +54,11 @@ angular.module('services')
           // TODO: if the segment is the same as the current one, we should do nothing!
           // TODO: only change when the segment is different
           $log.log('EditSession - trying to set next segment as: ' + segIndex);
-          if (segIndex != -1)
-            $log.log('editSession: $broadcasting changeSegment - next segment is: ' + segIndex);
-            $rootScope.$broadcast('changeSegment', {currentSegment: segIndex});
+
+          // if (segIndex != -1) {
+          $log.log('editSession: $broadcasting changeSegment - next segment is: ' + segIndex);
+          $rootScope.$broadcast('changeSegment', {currentSegment: segIndex});
+          // }
           return segIndex;
         },
 

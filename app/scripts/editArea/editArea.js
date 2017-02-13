@@ -152,7 +152,9 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       editSession.setSegment(0);
       // TODO: initialize the session metadata from the session metadata on the server
       // TODO: activeSegment is here so that the toolbar knows where it should go
-      $scope.activeSegment = 0;
+      if (!$scope.activeSegment) {
+        $scope.activeSegment = 0;
+      }
     });
 
     // this is a hack to let the bottom sheet see $scope.document
@@ -216,15 +218,25 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
     // let the root scope see this (so we can access editArea $scope from the navigation toolbar
     $rootScope.showGridBottomSheet = $scope.showGridBottomSheet;
 
+    $scope.scrolling = {
+      activeSegmentTop: undefined
+    }
+
     // expose scrolling to the active secgment on the root scope so that we can do global control stuff
     var scrollToActiveSegment = function() {
-      console.log('Scroll to segment: ' + $scope.activeSegment);
-      var anchorElem = $('#segment-' + $scope.activeSegment);
+      // $scope.$digest();
+      console.log('Scroll to segment top: ' + $scope.scrolling.activeSegmentTop);
+      // var activeSegId = 0
+      // if ($scope.scrolling.activeSegment) {
+      //   activeSegId = $scope.scrolling.activeSegment;
+      // }
+      // var anchorElem = $('#segment-' + activeSegId);
       // this is a hack because $el.offset is returning the wrong values
       // TODO: 336? or larger -- $elem.outerHeight returns different values at different times?
       // var segmentHeight = anchorElem.outerHeight(true)
-      var segmentHeight = 320;
-      var top = segmentHeight * $scope.activeSegment;
+      // var segmentHeight = 320;
+      // var top = segmentHeight * activeSegment;
+      var top = $scope.scrolling.activeSegmentTop;
 
       // scroll the ui to the currentSegment
       $("md-content").animate({scrollTop: top}, "slow");
@@ -242,6 +254,12 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
         return
       }
 
+      var anchorElem = $('#segment-' + data.currentSegment);
+      // this is a hack because $el.offset is returning the wrong values
+      // var segmentHeight = 256;
+      var segmentHeight = anchorElem.outerHeight(true);
+      var top = segmentHeight * data.currentSegment;
+
       // if this segment is already active
       if ($scope.activeSegment === data.currentSegment) {
         // do nothing
@@ -249,15 +267,12 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       }
 
       // activeSegment is an int id
-      $scope.activeSegment = data.currentSegment
+      $scope.activeSegment = parseInt(data.currentSegment);
+      $scope.scrolling.activeSegmentTop = top;
+      console.log('Set activeSegment to: ' + $scope.activeSegment);
 
       // autoscroll to the next segment
-      var anchorElem = $('#segment-' + data.currentSegment);
-      // this is a hack because $el.offset is returning the wrong values
-      // var segmentHeight = 256;
-      var segmentHeight = anchorElem.outerHeight(true)
-      var top = segmentHeight * $scope.activeSegment;
-
+      console.log('Scrolling to: ' + top);
       // scroll the ui to the currentSegment
       $("md-content").animate({scrollTop: top}, "slow");
     });

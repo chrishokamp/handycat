@@ -20,51 +20,52 @@
         ></plaintext-editor>
       </div>
 
+      <!--Commented below here for QE score experiments  -->
       <!-- TYPEAHEAD -->
-      <div class="cssSlideUp"
-           ng-show="widgets.activeComponent === 'typeaheadEditor'"
-        >
-        <typeahead-editor
-          target-segment="segment.target"
-          source-segment="segment.source"
-          source-lang="{{document.sourceLang}}"
-          target-lang="{{document.targetLang}}"
-          active-component="widgets.activeComponent"
-          is-active="isActive.active"
-          ></typeahead-editor>
-      </div>
+      <!--<div class="cssSlideUp"-->
+           <!--ng-show="widgets.activeComponent === 'typeaheadEditor'"-->
+        <!--&gt;-->
+        <!--<typeahead-editor-->
+          <!--target-segment="segment.target"-->
+          <!--source-segment="segment.source"-->
+          <!--source-lang="{{document.sourceLang}}"-->
+          <!--target-lang="{{document.targetLang}}"-->
+          <!--active-component="widgets.activeComponent"-->
+          <!--is-active="isActive.active"-->
+          <!--&gt;</typeahead-editor>-->
+      <!--</div>-->
 
       <!-- Post Editor -->
-      <div class="cssSlideUp"
-         ng-show="widgets.activeComponent === 'postEditor'"
-      >
-          <post-editor
-              target-segment="segment.target"
-              is-active="isActive.active"
-              log-action="logAction(action, data)"
-          ></post-editor>
-      </div>
+      <!--<div class="cssSlideUp"-->
+         <!--ng-show="widgets.activeComponent === 'postEditor'"-->
+      <!--&gt;-->
+          <!--<post-editor-->
+              <!--target-segment="segment.target"-->
+              <!--is-active="isActive.active"-->
+              <!--log-action="logAction(action, data)"-->
+          <!--&gt;</post-editor>-->
+      <!--</div>-->
 
       <!--WORKING: implement the QE score component-->
       <!--QE score is an overlay on the target area until user closes it, then the editing component is activated  -->
-      <div class="cssSlideUp"
-           ng-show="widgets.activeComponent === 'qeScore'">
-          <qe-score
-                  numerical-qe-score="{{segment.qeScore}}"
-          ></qe-score>
-      </div>
+      <!--<div class="cssSlideUp"-->
+           <!--ng-show="widgets.activeComponent === 'qeScore'">-->
+          <!--<qe-score-->
+                  <!--numerical-qe-score="{{segment.qeScore}}"-->
+          <!--&gt;</qe-score>-->
+      <!--</div>-->
 
       <!-- Translation Resource selector -->
       <!--the translation resource selection component-->
       <!--WORKING - we need a simpler component which simply populates the targetArea with the output of the user's default translation resource-->
       <!--Note: this component gets its options from the parent scope (translationOptions in the segmentArea-->
-      <div class="cssSlideUp"
-           ng-show="widgets.activeComponent === 'translationSelector'" >
-        <translation-selector
-          on-select="setTargetValue"
-          selector-options="translationOptions">
-       </translation-selector>
-      </div>
+      <!--<div class="cssSlideUp"-->
+           <!--ng-show="widgets.activeComponent === 'translationSelector'" >-->
+        <!--<translation-selector-->
+          <!--on-select="setTargetValue"-->
+          <!--selector-options="translationOptions">-->
+       <!--</translation-selector>-->
+      <!--</div>-->
 
       <!-- commented for lm autocomplete experiments-->
       <!--<div ui-ace="{onLoad: aceLoaded}" ng-model="segment.target"></div>-->

@@ -111,8 +111,14 @@ go in the `microservices/` directory.
 # Building and Deploying
 
 * The command `grunt handycat_builds` will build the client application into `handycat_builds/`
+
 * To deploy the application to a public server, copy the `handycat_builds/` directory to your server,
 and change the environment to "production" by uncommenting [this line](https://github.com/chrishokamp/handycat/blob/master/web.js#L35)
+    - you can put everything together by doing:
+    
+```
+tar czf handycat_build.tar.gz handycat_builds
+```
 * if you need to change the port, one way is just to change the hardcoded port number [here](https://github.com/chrishokamp/handycat/blob/master/web.js#L451)
 
 
