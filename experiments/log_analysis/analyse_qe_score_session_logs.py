@@ -1,11 +1,18 @@
+#!/usr/bin/env python
+"""
+Write some stats to a tsv for each task, given a directory of .json log files
+"""
+
 import os
 import json
 import codecs
-import difflib
 import re
 import argparse
 from collections import defaultdict, Counter
 
+import difflib
+
+__author__ = "Chris Hokamp"
 
 def tasks_from_session_log(log):
     return [(name, log['document'][name]['segments']) for name in log['document'].keys()]
