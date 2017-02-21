@@ -145,6 +145,16 @@ def main(logdir):
                 if os.path.isfile(os.path.join(logdir, f)) and '.json' in f]
     json_logs = [json.loads(codecs.open(f, encoding='utf8').read()) for f in logfiles]
     tasks_by_log = [tasks_from_session_log(log) for log in json_logs]
+    task_names_by_file = [(f_name, task[0]) for f_name, session in zip(logfiles, tasks_by_log) for task in session]
+
+    task_to_file_name_map = defaultdict(list)
+
+    for f_name, task_name in task_names_by_file:
+        task_to_file_name_map[task_name].append(f_name.split('/')[-1])
+
+    for task_name, file_names in task_to_file_name_map.items():
+        if len(file_names) > 1:
+            print('Task: {} was done {} times, in {}'.format(task_name, len(file_names), file_names))
 
     username_by_task_by_log = [[(name, get_username_from_segments(segments)) for name, segments in log]
                                 for log in tasks_by_log]
