@@ -1,8 +1,8 @@
 # Introduction
 
-This is the main repo for the prototype web-based CAT tool developed at CNGL.  
+Welcome to HandyCAT, a flexible web-based CAT tool for translation process research.
 
-#Build Instructions     
+### Quickstart
 
 The frontend is built entirely with javascript, using the [Angular](http://angularjs.org/) framework.     
 
@@ -97,18 +97,19 @@ Note: the command was previously `grunt serve`, but this was changed so that bot
 ### Code Style
 * use *two spaces* to indent javascript
 
-### Styles
+### Style
+
 * the project uses [sass](http://sass-lang.com/) and makes use of mixins and css variables in the app/styles/ directory
 * you need at least sass 3.3 -- do `sass -v` to check your version, `gem install sass` to install/update
 
-## Microservices   
+### Microservices   
 
 In order to implement new features in HandyCAT, you may need to implement new backend services as well. These should 
-go in the `microservices/` directory.
+go in the `microservices/` directory. The urls to the microservice should then be proxied throught the express server.
 
-## Testing
+### Testing
 
-# Building and Deploying
+#### Building and Deploying
 
 * The command `grunt handycat_builds` will build the client application into `handycat_builds/`
 
@@ -120,8 +121,6 @@ and change the environment to "production" by uncommenting [this line](https://g
 tar czf handycat_build.tar.gz handycat_builds
 ```
 * if you need to change the port, one way is just to change the hardcoded port number [here](https://github.com/chrishokamp/handycat/blob/master/web.js#L451)
-
-
 
 
 ### Language Codes
