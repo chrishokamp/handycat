@@ -120,8 +120,7 @@ handyCATconfig.constant('widgetConfiguration',
   })
 
 // allow experiment configuration via handyCAT config
-// TODO: gen the grouping for each translator automagically
-
+// TODO: load experiment configuration from external json file via grunt task with optional arguments
 var experimentGroups = [
     {
       "name": "Translator 1",
