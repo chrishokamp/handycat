@@ -4,3 +4,21 @@ word-level-qe-editor > div {
   width: 100%;
 }
 
+//.test-underline {
+//  text-decoration: underline dotted red;
+//}
+
+.word-level-qe-token {
+  display: inline-block;
+  position: relative;
+}
+
+.qe-bar {
+  height: 2px;
+  background-color: pink;
+  width: 100%;
+}
+
+
+
+
