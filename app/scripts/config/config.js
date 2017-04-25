@@ -79,7 +79,6 @@ handyCATconfig.constant('glossaryURL', glossaryURL);
 var loggerURL = 'logger';
 handyCATconfig.constant('loggerURL', loggerURL);
 
-// TODO: raw textarea component (no typeahead)
 // this is the default global configuration -- projects can override this config
 handyCATconfig.constant('projectCreationConfiguration',
   {
@@ -91,8 +90,8 @@ handyCATconfig.constant('projectCreationConfiguration',
 handyCATconfig.constant('widgetConfiguration',
   {
     'segmentControls': {
-      'targetComponentSelector': false,
-      'qeScore': true,
+      'targetComponentSelector': true,
+      'qeScore': false
     },
     'target': {
       activeComponent: 'plaintextEditor',
@@ -111,6 +110,10 @@ handyCATconfig.constant('widgetConfiguration',
         //   'directiveName': 'postEditor',
         //   'textName': 'postEditor'
         // },
+        {
+            'directiveName': 'wordLevelQeEditor',
+            'textName': 'Word Level QE Editor'
+        }
         // {
         //   'directiveName': 'qeScore',
         //   'textName': 'QE Score'
@@ -122,6 +125,41 @@ handyCATconfig.constant('widgetConfiguration',
 // allow experiment configuration via handyCAT config
 // TODO: load experiment configuration from external json file via grunt task with optional arguments
 var experimentGroups = [
+    {
+        "name": "Test Word Level QE",
+        "sampleFiles": [
+            {
+                "name": "Test Word Level QE",
+                "internalName": "wl-qe-test",
+                "url": "data/qe_score_experiments/documents/PRJ0.xliff",
+                "configuration": {
+                    "target": {
+                        "activeComponent": "wordLevelQeEditor",
+                        "defaultComponent": "wordLevelQeEditor",
+                        "components": [
+                          {
+                            "directiveName": "plaintextEditor",
+                            "textName": "plaintextEditor"
+                          },
+                          {
+                              "directiveName": "wordLevelQeEditor",
+                              "textName": "wordLevelQeEditor"
+                          },
+                          // {
+                          //     "directiveName": "postEditor",
+                          //     "textName": "postEditor"
+                          // }
+                        ]
+                    },
+                    "tsvUrl": "data/qe_score_experiments/documents/score_tsvs/QE0",
+                    "tsvData": [],
+                    "qeScoreConfig": {
+                        "scoreIndex": 0
+                    }
+                }
+            }
+        ]
+    },
     {
       "name": "Translator 1",
       "sampleFiles": [

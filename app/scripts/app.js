@@ -8,7 +8,7 @@ var App = window.App = angular.module('editorComponentsApp',
         'controllers',
         'directives',
         'services',
-        'ui.ace',
+        // 'ui.ace',
         'ui.bootstrap',
         'angularFileUpload',
         'ngAnimate',
@@ -22,6 +22,7 @@ var App = window.App = angular.module('editorComponentsApp',
         'handycat.typeaheads',
         'handycat.editors',
         'handycat.posteditors',
+        'handycat.wordLevelQe',
         'handycat.trieAutocomplete'
 
         //'summaryMenu'

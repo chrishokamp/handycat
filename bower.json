@@ -30,7 +30,8 @@
     "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.4.5",
     "angular-select-text": "~1.1.1",
     "intro.js": "^2.3.0",
-    "angular-intro.js": "^2.1.1"
+    "angular-intro.js": "^2.1.1",
+    "angular-highlight-textarea": "^1.2.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0",

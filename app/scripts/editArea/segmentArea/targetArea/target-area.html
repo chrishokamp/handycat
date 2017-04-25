@@ -20,6 +20,26 @@
         ></plaintext-editor>
       </div>
 
+        <!-- Post Editor -->
+        <!--<div class="cssSlideUp"-->
+        <!--ng-show="widgets.activeComponent === 'postEditor'"-->
+        <!--&gt;-->
+        <!--<post-editor-->
+        <!--target-segment="segment.target"-->
+        <!--is-active="isActive.active"-->
+        <!--log-action="logAction(action, data)"-->
+        <!--&gt;</post-editor>-->
+        <!--</div>-->
+      <!--WORKING: implement editor with markup for word-level QE  -->
+      <div class="cssSlideUp"
+        ng-show="widgets.activeComponent === 'wordLevelQeEditor'"
+      >
+        <word-level-qe-editor
+          target-segment="segment.target"
+          is-active="isActive.active"
+        ></word-level-qe-editor>
+      </div>
+
       <!--Commented below here for QE score experiments  -->
       <!-- TYPEAHEAD -->
       <!--<div class="cssSlideUp"-->
@@ -44,15 +64,6 @@
               <!--is-active="isActive.active"-->
               <!--log-action="logAction(action, data)"-->
           <!--&gt;</post-editor>-->
-      <!--</div>-->
-
-      <!--WORKING: implement the QE score component-->
-      <!--QE score is an overlay on the target area until user closes it, then the editing component is activated  -->
-      <!--<div class="cssSlideUp"-->
-           <!--ng-show="widgets.activeComponent === 'qeScore'">-->
-          <!--<qe-score-->
-                  <!--numerical-qe-score="{{segment.qeScore}}"-->
-          <!--&gt;</qe-score>-->
       <!--</div>-->
 
       <!-- Translation Resource selector -->
