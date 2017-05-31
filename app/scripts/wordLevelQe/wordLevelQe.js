@@ -243,10 +243,17 @@ angular.module('handycat.wordLevelQe')
           });
           $el.find('.post-editor').first().html(posteditorHtml);
 
+          // WORKING: randomly assign color in scale to qe-bars
           // bind to each span
-          $el.find('span.post-editor-word').hover(
-            function() { $(this).css('background-color','pink'); },
-            function() { $(this).css('background-color', 'transparent'); }
+          function getRandomColor() {
+            var colors = ['red', 'green'];
+            var randomColor = colors[Math.floor(Math.random() * 2)];
+            return randomColor;
+          }
+
+          $el.find('div.qe-bar').css('background-color',
+            // function() { $(this).css('background-color','pink'); },
+            function() { return getRandomColor(); }
           );
 
           // select text in span on click
