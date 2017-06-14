@@ -84,20 +84,18 @@ angular.module('handycat.wordLevelQe')
                 // );
 
               } else {
-                // WORKING HERE: support arbitrarily highlighted spans, not just whitespace separated tokens
-                var a = document.createElement("span");
-
-                a.setAttribute('class', 'tooltip-span');
-                // a.setAttribute('display', 'inline-block');
-
-                $compile(a)(scope);
                 range = sel.getRangeAt(0).cloneRange();
                 sel.removeAllRanges();
 
-                // TODO: there will be an error here if user has dragged to highlight instead of clicking a token
+                var a = document.createElement("div");
+                a.setAttribute('class', 'tooltip-span');
                 a.appendChild(range.extractContents())
+                $compile(a)(scope);
 
+                // var $newEl = $('.tooltip-span');
+                // $newEl.html(range.extractContents());
                 // range.surroundContents(a);
+
                 range.insertNode(a);
                 sel.addRange(range);
 
