@@ -246,8 +246,8 @@ angular.module('handycat.wordLevelQe')
           // WORKING: randomly assign color in scale to qe-bars
           // bind to each span
           function getRandomColor() {
-            var colors = ['red', 'green'];
-            var randomColor = colors[Math.floor(Math.random() * 2)];
+            var colors = ['red', 'green', 'green', 'green', 'green'];
+            var randomColor = colors[Math.floor(Math.random() * 5)];
             return randomColor;
           }
 
