@@ -84,8 +84,7 @@ angular.module('handycat.wordLevelQe')
                 // );
 
               } else {
-
-                // WORKING HERE: support underlined divs
+                // WORKING HERE: support arbitrarily highlighted spans, not just whitespace separated tokens
                 var a = document.createElement("span");
 
                 a.setAttribute('class', 'tooltip-span');
@@ -96,7 +95,10 @@ angular.module('handycat.wordLevelQe')
                 sel.removeAllRanges();
 
                 // TODO: there will be an error here if user has dragged to highlight instead of clicking a token
-                range.surroundContents(a);
+                a.appendChild(range.extractContents())
+
+                // range.surroundContents(a);
+                range.insertNode(a);
                 sel.addRange(range);
 
                 // Note: we could also send the current range in the broadcast event
@@ -112,8 +114,6 @@ angular.module('handycat.wordLevelQe')
         scope.selectedText = '';
         $el.on('mouseup', function (e) {
           console.log('mouseup');
-          // WORKING: remove helper spans, just select the text inside
-
           $timeout(function() {
           var selectedText = getSelectedText();
           // if (selectedText !== scope.selectedText) {
@@ -229,10 +229,8 @@ angular.module('handycat.wordLevelQe')
           $el.find('.post-editor').first().text('    ' + scope.targetSegment + '    ');
           var posteditorText = '    ' + scope.targetSegment + '    ';
           var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
-          // var re = '/(\s+)/g';
 
           // WORKING: we want to underline good/bad tokens
-
           var allTokens = posteditorText.match(re);
           var posteditorHtml = allTokens.map(function (m) {
             if (/^\s+$/.test(m)) {
@@ -242,6 +240,8 @@ angular.module('handycat.wordLevelQe')
             }
           });
           $el.find('.post-editor').first().html(posteditorHtml);
+          // just add raw text
+          // $el.find('.post-editor').first().text(posteditorText);
 
           // WORKING: randomly assign color in scale to qe-bars
           // bind to each span
@@ -251,39 +251,46 @@ angular.module('handycat.wordLevelQe')
             return randomColor;
           }
 
+          // random color
           $el.find('div.qe-bar').css('background-color',
-            // function() { $(this).css('background-color','pink'); },
             function() { return getRandomColor(); }
           );
+          // random opacity
+          $el.find('div.qe-bar').css('opacity',
+            function() { return Math.random(); }
+          );
 
-          // select text in span on click
-          $el.find('div.post-editor-whitespace').hover(
-            function() {
-              var origWidth = $(this).width();
-              this['origWidth'] = origWidth;
-              $(this).css('background-color','#87cefa')
-                // .animate({'width': '+=10'}, 200)
-            },
-            function() {
-              $(this).css('background-color', 'transparent')
-                // .animate({'width': this['origWidth']}, 200)
-            }
-          ).click(function (){
-            // remove this span
-            var range, selection;
-
-            if (window.getSelection && document.createRange) {
-              selection = window.getSelection();
-              range = document.createRange();
-              range.selectNodeContents(this);
-              selection.removeAllRanges();
-              selection.addRange(range);
-            } else if (document.selection && document.body.createTextRange) {
-              range = document.body.createTextRange();
-              range.moveToElementText(this);
-              range.select();
-            }
-          });
+          // automatically select text in .post-editor-whitespace spans on click
+          // $el.find('div.post-editor-whitespace').hover(
+          //   function() {
+          //     var origWidth = $(this).width();
+          //     this['origWidth'] = origWidth;
+          //     $(this).css('background-color','#87cefa')
+          //       // .animate({'width': '+=10'}, 200)
+          //   },
+          //   function() {
+          //     $(this).css('background-color', 'transparent')
+          //       // .animate({'width': this['origWidth']}, 200)
+          //   }
+          // ).click(function (){
+          //   // remove this span
+          //   var range, selection;
+          //
+          //   // the if/else here are for different browsers
+          //   // WORKING: support CTRL+click to expand selection, and ESC to remove it
+          //   // WORKING: for now, user needs to drag to select a span, disable auto-selection
+          //   if (window.getSelection && document.createRange) {
+          //     selection = window.getSelection();
+          //     range = document.createRange();
+          //     range.selectNodeContents(this);
+          //     selection.removeAllRanges();
+          //     selection.addRange(range);
+          //   } else if (document.selection && document.body.createTextRange) {
+          //     range = document.body.createTextRange();
+          //     range.moveToElementText(this);
+          //     range.select();
+          //   }
+          // });
 
           $timeout(
             function() {
