@@ -208,6 +208,10 @@ angular.module('handycat.wordLevelQe')
           // make sure the tooltip span is gone
           $el.find('.tooltip-span').remove();
           if (!newValue) {
+            // WORKING: here we need to differentiate the user-provided text from the qe-annotated segments
+            // WORKING: ideally, we need to join the annotated left context and the annotated right context
+            // IDEA: instead of getting only the text, get each of the _elements_ -- qe tags should be attributes
+            // IDEA: on the elements -- simplest way is jquery with data-* attributes
             newTargetSegment = $el.find('.post-editor').first().text();
             // remove any extra whitespace
             newTargetSegment = newTargetSegment.replace(/\s+/g,' ');
@@ -336,7 +340,6 @@ angular.module('handycat.wordLevelQe')
           scope.$digest();
         }
 
-        // Working: add ctrl+Z to trigger undo
         // use a namespace on the event to bind the escape keypress to this element
         // unbind when component goes out of focus, rebind when it comes back in
         scope.$watch(function() {
