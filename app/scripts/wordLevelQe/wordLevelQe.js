@@ -18,6 +18,8 @@ angular.module('handycat.wordLevelQe')
           'action'   : 'default',
           'undoStack': []
         }
+        // the syntax below makes sure we always make a deep copy
+        scope.localTargetSegment = (' ' + scope.targetSegment).slice(1);
 
         var getSelectedText = function () {
           var text = "";
@@ -216,8 +218,8 @@ angular.module('handycat.wordLevelQe')
               scope.state.undoStack.push(origTargetSegment);
           } else {
             // if the undoStack is empty, add the first annotated representation, if it exists
-            if (scope.hasOwnProperty('firstTargetSegment')) {
-              console.log('pushing: ' + scope.firstTargetSegment);
+            if (scope.state.undoStack.length === 0 && scope.hasOwnProperty('firstTargetSegment')) {
+              console.log('Pushing: ' + scope.firstTargetSegment);
               scope.state.undoStack.push(scope.firstTargetSegment);
             }
           }
@@ -240,23 +242,13 @@ angular.module('handycat.wordLevelQe')
           $el.find('.tooltip-span').contents().unwrap();
           $el.find('.tooltip-span').remove();
 
-          if (!newValue) {
+          if (newValue) {
             // WORKING: here we need to differentiate the user-provided text from the qe-annotated segments
             // WORKING: ideally, we need to join the annotated left context and the annotated right context
             // IDEA: instead of getting only the text, get each of the _elements_ -- qe tags should be attributes
             // IDEA: on the elements -- simplest way is jquery with data-* attributes
 
-            // newTargetSegment = $el.find('.post-editor').first().text();
-            newTargetSegment = $el.find('.post-editor').first().html();
-
-            // remove any extra whitespace
-            // newTargetSegment = newTargetSegment.replace(/\s+/g,' ');
-
-            // remove whitespace at beginning and end
-            // newTargetSegment = newTargetSegment.replace(/^\s+/,'');
-            // newTargetSegment = newTargetSegment.replace(/\s+$/,'');
-
-          } else {
+          // } else {
             newTargetSegment = newValue;
             scope.targetSegment = newTargetSegment;
             $el.find('.post-editor').first().html(newTargetSegment);
@@ -265,7 +257,8 @@ angular.module('handycat.wordLevelQe')
 
           if (qeAnnotate === true) {
             // The "reannotation" should only happen on the first call
-            var posteditorText = '    ' + scope.targetSegment + '    ';
+            newTargetSegment = scope.localTargetSegment;
+            var posteditorText = '    ' + scope.localTargetSegment + '    ';
             // var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
 
             // IDEA: split on characters
@@ -285,7 +278,6 @@ angular.module('handycat.wordLevelQe')
                     return '<div class="post-editor-whitespace word-level-qe-token">' + m + '<div class="qe-bar"></div></div>';
                 }
             }).join('');
-            // debugger;
 
             $el.find('.post-editor').first().html(posteditorHtml);
             // just add raw text
@@ -296,17 +288,14 @@ angular.module('handycat.wordLevelQe')
             // thus we always push to the undo stack when annotate happens
             if (scope.state.undoStack.length === 0) {
               scope.firstTargetSegment = posteditorHtml;
-              scope.targetSegment = posteditorHtml;
+              scope.localTargetSegment = posteditorHtml;
               console.log('pushing: ' + scope.firstTargetSegment);
               scope.state.undoStack.push(scope.firstTargetSegment);
               // debugger;
             }
           } else {
-            scope.targetSegment = newTargetSegment;
+            scope.localTargetSegment = newTargetSegment;
           }
-
-          // set the component text to the targetSegment, adding some space so user can easily move to the beginning or end
-          // $el.find('.post-editor').first().text('    ' + scope.targetSegment + '    ');
 
           // Note: this method requires us to call color annotation every time, otherwise colors will disappear when we replace element HTML
           // placeholder for calling the annotation function, which returns span annotations of the input text
@@ -321,8 +310,7 @@ angular.module('handycat.wordLevelQe')
               function() { return Math.random(); }
           );
 
-          // WORKING: randomly assign color in scale to qe-bars
-          // bind to each span
+          // randomly assign color in scale to qe-bars
           function getRandomColor() {
             var colors = ['red', 'green', 'green', 'green', 'green'];
             var randomColor = colors[Math.floor(Math.random() * 5)];
@@ -365,6 +353,17 @@ angular.module('handycat.wordLevelQe')
             function() {
               scope.state.action = 'default';
             },0)
+
+          // remove any extra whitespace
+          var currentText = $el.find('.post-editor').first().text();
+          currentText = currentText.replace(/\s+/g,' ');
+
+          // remove whitespace at beginning and end
+          currentText = currentText.replace(/^\s+/,'');
+          currentText = currentText.replace(/\s+$/,'');
+
+          // finally set the targetSegment to just the current string representation of the component
+          scope.targetSegment = currentText;
 
           return [origTargetSegment, newTargetSegment]
         }
