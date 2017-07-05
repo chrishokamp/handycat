@@ -16,7 +16,7 @@ angular.module('handycat.wordLevelQe')
 
         scope.state = {
           'action'   : 'default',
-          'undoStack': [scope.targetSegment]
+          'undoStack': []
         }
 
         var getSelectedText = function () {
@@ -196,20 +196,33 @@ angular.module('handycat.wordLevelQe')
         var resetTargetSegment = function() {
           var previousSegment;
           if (scope.state.undoStack.length > 0) {
+            console.log('Undo stack: ' + scope.state.undoStack);
             previousSegment = scope.state.undoStack.pop();
-            updateTargetSegment(previousSegment);
+            console.log('previous segment: ' + previousSegment);
+            debugger;
+            updateTargetSegment(false, previousSegment);
           }
         }
 
-
         // WORKING: we want to map the original segment through QE each time, then at each editing step update annotations as needed
         var updateTargetSegment = function(qeAnnotate, newValue) {
-          var origTargetSegment, newTargetSegment;
 
+          // handling the undo stack
+          var origTargetSegment, newTargetSegment;
           origTargetSegment = scope.targetSegment;
-          // make sure the tooltip span is gone
-          // TODO: make sure any new user spans are newly annotated before removing span
-          // TODO: anything inside this span was edited by user
+
+          if (scope.state.undoStack.length > 0 && !newValue) {
+              // push the old value to the undo stack if the user is not undoing something
+              scope.state.undoStack.push(origTargetSegment);
+          } else {
+            // if the undoStack is empty, add the first annotated representation, if it exists
+            if (scope.hasOwnProperty('firstTargetSegment')) {
+              console.log('pushing: ' + scope.firstTargetSegment);
+              scope.state.undoStack.push(scope.firstTargetSegment);
+            }
+          }
+
+          // handling new content inserted by user
           var userAddedText = $el.find('.tooltip-span').text();
           // reannotate the userAddedText with special user spans
           var newUserTokens = userAddedText.split('');
@@ -217,16 +230,15 @@ angular.module('handycat.wordLevelQe')
               if (/^\s+$/.test(m)) {
                   return '<div class="post-editor-whitespace word-level-qe-token">' + m + '</div>';
               } else {
-                  return '<div class="post-editor-whitespace word-level-qe-token test-underline">' + m + '<div class="qe-user-bar"></div></div>';
+                  return '<div class="post-editor-whitespace word-level-qe-token">' + m + '<div class="qe-user-bar"></div></div>';
               }
-          });
+          }).join('');
           // add the new annotated user data into the current tooltip span
           $el.find('.tooltip-span').html(newUserHtml);
 
           // now remove the tooltip span, leaving the contents
           $el.find('.tooltip-span').contents().unwrap();
           $el.find('.tooltip-span').remove();
-
 
           if (!newValue) {
             // WORKING: here we need to differentiate the user-provided text from the qe-annotated segments
@@ -244,13 +256,12 @@ angular.module('handycat.wordLevelQe')
             // newTargetSegment = newTargetSegment.replace(/^\s+/,'');
             // newTargetSegment = newTargetSegment.replace(/\s+$/,'');
 
-            // push the old value to the undo stack if the user is not undoing something
-            scope.state.undoStack.push(scope.targetSegment);
           } else {
             newTargetSegment = newValue;
+            scope.targetSegment = newTargetSegment;
+            $el.find('.post-editor').first().html(newTargetSegment);
+            debugger;
           }
-
-          scope.targetSegment = newTargetSegment;
 
           if (qeAnnotate === true) {
             // The "reannotation" should only happen on the first call
@@ -271,17 +282,44 @@ angular.module('handycat.wordLevelQe')
                 if (/^\s+$/.test(m)) {
                     return '<div class="post-editor-whitespace word-level-qe-token">' + m + '</div>';
                 } else {
-                    return '<div class="post-editor-whitespace word-level-qe-token test-underline">' + m + '<div class="qe-bar"></div></div>';
+                    return '<div class="post-editor-whitespace word-level-qe-token">' + m + '<div class="qe-bar"></div></div>';
                 }
-            });
+            }).join('');
+            // debugger;
+
             $el.find('.post-editor').first().html(posteditorHtml);
             // just add raw text
             // $el.find('.post-editor').first().text(posteditorText);
+
+
+            // the annotation is expected to occur only once -- the first time this function is called
+            // thus we always push to the undo stack when annotate happens
+            if (scope.state.undoStack.length === 0) {
+              scope.firstTargetSegment = posteditorHtml;
+              scope.targetSegment = posteditorHtml;
+              console.log('pushing: ' + scope.firstTargetSegment);
+              scope.state.undoStack.push(scope.firstTargetSegment);
+              // debugger;
+            }
+          } else {
+            scope.targetSegment = newTargetSegment;
           }
 
           // set the component text to the targetSegment, adding some space so user can easily move to the beginning or end
           // $el.find('.post-editor').first().text('    ' + scope.targetSegment + '    ');
 
+          // Note: this method requires us to call color annotation every time, otherwise colors will disappear when we replace element HTML
+          // placeholder for calling the annotation function, which returns span annotations of the input text
+          // random color
+          // WORKING: change getRandomColor to a function which calls configurable QE backend microservice
+          // WORKING: the QE can actually be hard-coded, we don't need dynamic access because user edits are automatically "OK"
+          $el.find('div.qe-bar').css('background-color',
+              function() { return getRandomColor(); }
+          );
+          // random opacity
+          $el.find('div.qe-bar').css('opacity',
+              function() { return Math.random(); }
+          );
 
           // WORKING: randomly assign color in scale to qe-bars
           // bind to each span
@@ -290,17 +328,6 @@ angular.module('handycat.wordLevelQe')
             var randomColor = colors[Math.floor(Math.random() * 5)];
             return randomColor;
           }
-
-          // random color
-          // WORKING: change getRandomColor to a function which calls configurable QE backend microservice
-          // WORKING: the QE can actually be hard-coded, we don't need dynamic access because user edits are automatically "OK"
-          $el.find('div.qe-bar').css('background-color',
-            function() { return getRandomColor(); }
-          );
-          // random opacity
-          $el.find('div.qe-bar').css('opacity',
-            function() { return Math.random(); }
-          );
 
           // automatically select text in .post-editor-whitespace spans on click
           // $el.find('div.post-editor-whitespace').hover(
