@@ -201,23 +201,48 @@ angular.module('handycat.wordLevelQe')
           }
         }
 
-        var updateTargetSegment = function(newValue) {
+
+        // WORKING: we want to map the original segment through QE each time, then at each editing step update annotations as needed
+        var updateTargetSegment = function(qeAnnotate, newValue) {
           var origTargetSegment, newTargetSegment;
 
           origTargetSegment = scope.targetSegment;
           // make sure the tooltip span is gone
+          // TODO: make sure any new user spans are newly annotated before removing span
+          // TODO: anything inside this span was edited by user
+          var userAddedText = $el.find('.tooltip-span').text();
+          // reannotate the userAddedText with special user spans
+          var newUserTokens = userAddedText.split('');
+          var newUserHtml = newUserTokens.map(function (m) {
+              if (/^\s+$/.test(m)) {
+                  return '<div class="post-editor-whitespace word-level-qe-token">' + m + '</div>';
+              } else {
+                  return '<div class="post-editor-whitespace word-level-qe-token test-underline">' + m + '<div class="qe-user-bar"></div></div>';
+              }
+          });
+          // add the new annotated user data into the current tooltip span
+          $el.find('.tooltip-span').html(newUserHtml);
+
+          // now remove the tooltip span, leaving the contents
+          $el.find('.tooltip-span').contents().unwrap();
           $el.find('.tooltip-span').remove();
+
+
           if (!newValue) {
             // WORKING: here we need to differentiate the user-provided text from the qe-annotated segments
             // WORKING: ideally, we need to join the annotated left context and the annotated right context
             // IDEA: instead of getting only the text, get each of the _elements_ -- qe tags should be attributes
             // IDEA: on the elements -- simplest way is jquery with data-* attributes
-            newTargetSegment = $el.find('.post-editor').first().text();
+
+            // newTargetSegment = $el.find('.post-editor').first().text();
+            newTargetSegment = $el.find('.post-editor').first().html();
+
             // remove any extra whitespace
-            newTargetSegment = newTargetSegment.replace(/\s+/g,' ');
+            // newTargetSegment = newTargetSegment.replace(/\s+/g,' ');
+
             // remove whitespace at beginning and end
-            newTargetSegment = newTargetSegment.replace(/^\s+/,'');
-            newTargetSegment = newTargetSegment.replace(/\s+$/,'');
+            // newTargetSegment = newTargetSegment.replace(/^\s+/,'');
+            // newTargetSegment = newTargetSegment.replace(/\s+$/,'');
 
             // push the old value to the undo stack if the user is not undoing something
             scope.state.undoStack.push(scope.targetSegment);
@@ -227,23 +252,36 @@ angular.module('handycat.wordLevelQe')
 
           scope.targetSegment = newTargetSegment;
 
-          // set the component text to the targetSegment, adding some space so user can move to the beginning or end
-          $el.find('.post-editor').first().text('    ' + scope.targetSegment + '    ');
-          var posteditorText = '    ' + scope.targetSegment + '    ';
-          var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
+          if (qeAnnotate === true) {
+            // The "reannotation" should only happen on the first call
+            var posteditorText = '    ' + scope.targetSegment + '    ';
+            // var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
 
-          // WORKING: we want to underline good/bad tokens
-          var allTokens = posteditorText.match(re);
-          var posteditorHtml = allTokens.map(function (m) {
-            if (/^\s+$/.test(m)) {
-                return '<div class="post-editor-whitespace word-level-qe-token">' + m + '</div>';
-            } else {
-                return '<div class="post-editor-whitespace word-level-qe-token test-underline">' + m + '<div class="qe-bar"></div></div>';
-            }
-          });
-          $el.find('.post-editor').first().html(posteditorHtml);
-          // just add raw text
-          // $el.find('.post-editor').first().text(posteditorText);
+            // IDEA: split on characters
+            // var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
+
+            // WORKING: we want to underline good/bad tokens
+            // WORKING: we need a data model that can add, remove, and update span annotations
+            // WORKING: IDEA: annotations are stored in the DOM, mapped to each token
+            // var allTokens = posteditorText.match(re);
+
+            // IDEA: split on characters
+            var allTokens = posteditorText.split('');
+            var posteditorHtml = allTokens.map(function (m) {
+                if (/^\s+$/.test(m)) {
+                    return '<div class="post-editor-whitespace word-level-qe-token">' + m + '</div>';
+                } else {
+                    return '<div class="post-editor-whitespace word-level-qe-token test-underline">' + m + '<div class="qe-bar"></div></div>';
+                }
+            });
+            $el.find('.post-editor').first().html(posteditorHtml);
+            // just add raw text
+            // $el.find('.post-editor').first().text(posteditorText);
+          }
+
+          // set the component text to the targetSegment, adding some space so user can easily move to the beginning or end
+          // $el.find('.post-editor').first().text('    ' + scope.targetSegment + '    ');
+
 
           // WORKING: randomly assign color in scale to qe-bars
           // bind to each span
@@ -254,6 +292,8 @@ angular.module('handycat.wordLevelQe')
           }
 
           // random color
+          // WORKING: change getRandomColor to a function which calls configurable QE backend microservice
+          // WORKING: the QE can actually be hard-coded, we don't need dynamic access because user edits are automatically "OK"
           $el.find('div.qe-bar').css('background-color',
             function() { return getRandomColor(); }
           );
@@ -307,8 +347,8 @@ angular.module('handycat.wordLevelQe')
            var currentState = scope.state.action;
            if (e.which == 27) {
              console.log('ESCAPE WAS PRESSED')
-             $el.find('.tooltip-span').contents().unwrap();
              if (currentState === 'replacing' || currentState === 'inserting') {
+               // this is the call which updates the new UI state
                var oldNewTarget = updateTargetSegment();
                var origTarget = oldNewTarget[0];
                var newTarget = oldNewTarget[1];
@@ -323,6 +363,8 @@ angular.module('handycat.wordLevelQe')
                //     }
                //   }
                // );
+             } else {
+               $el.find('.tooltip-span').contents().unwrap();
              }
              scope.showTooltip = false;
              scope.state.action === 'default';
@@ -355,7 +397,7 @@ angular.module('handycat.wordLevelQe')
         })
 
         $timeout(function() {
-          updateTargetSegment();
+          updateTargetSegment(true);
         }, 0);
 
       },
