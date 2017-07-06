@@ -198,10 +198,9 @@ angular.module('handycat.wordLevelQe')
         var resetTargetSegment = function() {
           var previousSegment;
           if (scope.state.undoStack.length > 0) {
-            console.log('Undo stack: ' + scope.state.undoStack);
+            // console.log('Undo stack: ' + scope.state.undoStack);
             previousSegment = scope.state.undoStack.pop();
-            console.log('previous segment: ' + previousSegment);
-            debugger;
+            // console.log('previous segment: ' + previousSegment);
             updateTargetSegment(false, previousSegment);
           }
         }
@@ -211,7 +210,7 @@ angular.module('handycat.wordLevelQe')
 
           // handling the undo stack
           var origTargetSegment, newTargetSegment;
-          origTargetSegment = scope.targetSegment;
+          origTargetSegment = scope.localTargetSegment;
 
           if (scope.state.undoStack.length > 0 && !newValue) {
               // push the old value to the undo stack if the user is not undoing something
@@ -248,11 +247,11 @@ angular.module('handycat.wordLevelQe')
             // IDEA: instead of getting only the text, get each of the _elements_ -- qe tags should be attributes
             // IDEA: on the elements -- simplest way is jquery with data-* attributes
 
-          // } else {
             newTargetSegment = newValue;
-            scope.targetSegment = newTargetSegment;
+            scope.localTargetSegment = newTargetSegment;
             $el.find('.post-editor').first().html(newTargetSegment);
-            debugger;
+          } else {
+            newTargetSegment = $el.find('.post-editor').first().html();
           }
 
           if (qeAnnotate === true) {
@@ -280,18 +279,15 @@ angular.module('handycat.wordLevelQe')
             }).join('');
 
             $el.find('.post-editor').first().html(posteditorHtml);
-            // just add raw text
-            // $el.find('.post-editor').first().text(posteditorText);
 
+            scope.localTargetSegment = posteditorHtml;
 
             // the annotation is expected to occur only once -- the first time this function is called
             // thus we always push to the undo stack when annotate happens
             if (scope.state.undoStack.length === 0) {
               scope.firstTargetSegment = posteditorHtml;
-              scope.localTargetSegment = posteditorHtml;
-              console.log('pushing: ' + scope.firstTargetSegment);
+              // console.log('pushing: ' + scope.firstTargetSegment);
               scope.state.undoStack.push(scope.firstTargetSegment);
-              // debugger;
             }
           } else {
             scope.localTargetSegment = newTargetSegment;
@@ -354,6 +350,7 @@ angular.module('handycat.wordLevelQe')
               scope.state.action = 'default';
             },0)
 
+          // Updating the target segment data model for the actual document
           // remove any extra whitespace
           var currentText = $el.find('.post-editor').first().text();
           currentText = currentText.replace(/\s+/g,' ');
