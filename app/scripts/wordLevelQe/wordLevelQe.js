@@ -225,13 +225,14 @@ angular.module('handycat.wordLevelQe')
 
           // handling new content inserted by user
           var userAddedText = $el.find('.tooltip-span').text();
-          // reannotate the userAddedText with special user spans
+
+          // reannotate the userAddedText with special user spans, all other spans retain their original annotations
           var newUserTokens = userAddedText.split('');
           var newUserHtml = newUserTokens.map(function (m) {
               if (/^\s+$/.test(m)) {
                   return '<div class="post-editor-whitespace word-level-qe-token">' + m + '</div>';
               } else {
-                  return '<div class="post-editor-whitespace word-level-qe-token">' + m + '<div class="qe-user-bar"></div></div>';
+                  return '<div class="post-editor-whitespace word-level-qe-token" data-qe-label="user">' + m + '<div class="qe-bar-user"></div></div>';
               }
           }).join('');
           // add the new annotated user data into the current tooltip span
@@ -265,16 +266,26 @@ angular.module('handycat.wordLevelQe')
 
             // WORKING: we want to underline good/bad tokens
             // WORKING: we need a data model that can add, remove, and update span annotations
-            // WORKING: IDEA: annotations are stored in the DOM, mapped to each token
+            // WORKING: IDEA: annotations are stored in the DOM via data-* attributes, mapped to each token
             // var allTokens = posteditorText.match(re);
 
             // IDEA: split on characters
             var allTokens = posteditorText.split('');
-            var posteditorHtml = allTokens.map(function (m) {
+
+
+            var prevClass = undefined;
+            var qeClasses = ["qe-bar-good", "qe-bar-good", "qe-bar-good", "qe-bar-good", "qe-bar-bad"];
+            var posteditorHtml = allTokens.map(function (m, idx, arr) {
+
                 if (/^\s+$/.test(m)) {
                     return '<div class="post-editor-whitespace word-level-qe-token">' + m + '</div>';
                 } else {
-                    return '<div class="post-editor-whitespace word-level-qe-token">' + m + '<div class="qe-bar"></div></div>';
+                    // check if we're continuing a word
+                    if (idx === 0 || /^\s+$/.test(arr[idx-1])) {
+                        // we're starting a new class, select a new random label
+                        prevClass = qeClasses[Math.floor(Math.random() * qeClasses.length)];
+                    }
+                    return '<div class="post-editor-whitespace word-level-qe-token">' + m + '<div class="' + prevClass + '"></div></div>';
                 }
             }).join('');
 
@@ -298,13 +309,17 @@ angular.module('handycat.wordLevelQe')
           // random color
           // WORKING: change getRandomColor to a function which calls configurable QE backend microservice
           // WORKING: the QE can actually be hard-coded, we don't need dynamic access because user edits are automatically "OK"
-          $el.find('div.qe-bar').css('background-color',
-              function() { return getRandomColor(); }
-          );
-          // random opacity
-          $el.find('div.qe-bar').css('opacity',
-              function() { return Math.random(); }
-          );
+
+          // $el.find('div.qe-bar').css('background-color',
+          //     function() { return getRandomColor(); }
+          // );
+          // random opacity -- Note these classes are at the character level, so we need a smarter solution
+          // $el.find('div.qe-bar-good').css('opacity',
+          //     function() { return Math.random(); }
+          // );
+          // $el.find('div.qe-bar-bad').css('opacity',
+          //     function() { return Math.random(); }
+          // );
 
           // randomly assign color in scale to qe-bars
           function getRandomColor() {

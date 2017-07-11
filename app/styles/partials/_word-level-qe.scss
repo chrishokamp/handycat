@@ -18,8 +18,18 @@ word-level-qe-editor > div {
   //background-color: pink;
   width: 100%;
 }
+.qe-bar-good {
+  height: 2px;
+  background-color: green;
+  width: 100%;
+}
+.qe-bar-bad {
+  height: 2px;
+  background-color: red;
+  width: 100%;
+}
 
-.qe-user-bar {
+.qe-bar-user {
   height: 2px;
   background-color: blue;
   width: 100%;
