@@ -264,7 +264,6 @@ angular.module('handycat.wordLevelQe')
             // IDEA: split on characters
             // var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
 
-            // WORKING: we want to underline good/bad tokens
             // WORKING: we need a data model that can add, remove, and update span annotations
             // WORKING: IDEA: annotations are stored in the DOM via data-* attributes, mapped to each token
             // var allTokens = posteditorText.match(re);

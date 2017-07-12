@@ -400,6 +400,20 @@ app.get('/imt/neural_imt', function(req,res) {
   }).pipe(res);
 });
 
+// WORKING: proxy through to QE server, which returns span-level annotations of an input sequence
+
+// QE
+// THINKING: how to convert token-level QE annotations to span-level indexes?
+// Note this isn't absolutely necessary, as we can hard-code QE annotations for experiments
+// IDEA:
+// iterate through tokenized sequence, mapping non-whitespace spans to their original indices in the untokenized sequence
+// token_spans = [(start, end), (start, end), ...]
+// after qe tagging, the number of spans should equal the number of tags
+//     - spans in-between qe spans are implicitly whitespace
+
+// Constrained Decoding
+// - we need to know the indexes of the user constraints 
+
 
 var url = require('url');
 app.get('/lm_autocomplete/constrained', function(req,res) {
