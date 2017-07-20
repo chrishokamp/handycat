@@ -96,7 +96,7 @@ handyCATconfig.constant('widgetConfiguration',
     'target': {
       activeComponent: 'plaintextEditor',
       defaultComponent: 'plaintextEditor',
-      // a list of the available components
+      // a list of all available components
       components: [
         {
           'directiveName': 'plaintextEditor',
@@ -133,6 +133,10 @@ var experimentGroups = [
                 "internalName": "wl-qe-test",
                 "url": "data/qe_score_experiments/documents/PRJ0.xliff",
                 "configuration": {
+                    "project": {
+                      "useConstrainedDecoding": false,
+                      "useWordLevelQE": false,
+                    },
                     "target": {
                         "activeComponent": "wordLevelQeEditor",
                         "defaultComponent": "wordLevelQeEditor",

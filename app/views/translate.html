@@ -74,7 +74,8 @@
           </div>
           <!--END segment info row-->
 
-          <!--row for additional widgets like qe score  -->
+          <!--row for segment-level widgets like qe score  -->
+          <!-- segment level QE score widget -->
           <div layout="row" layout-align="center center">
             <div class="qe-score-box"
                  ng-class="{animatebackground: isActive.active === true, hidescore: segment.qeScoreIdx < 0}"
@@ -83,6 +84,7 @@
             >{{segment.qeScore}}</div>
 
           </div>
+          <!-- end segment-level widget row  -->
 
           <!-- the source and target rows -->
           <div
@@ -91,9 +93,10 @@
                   layout-padding
                   class="bottom-margin translation-content-row"
           >
-            <!--this box can mask the row-->
+            <!-- this box can mask the row if an action needs to happen _before_ the segment can be edited -->
             <div class="translation-content-row-mask" ng-show="segmentControls.qeScore && !qeScoreAccepted"></div>
 
+            <!--SOURCE-->
             <div flex layout="column">
               <div class="bottom-margin content-card" ng-click="activate(id.index)">
                 <div ng-show="segment.state === 'translated'"
@@ -109,6 +112,7 @@
               </div>
             </div>
 
+            <!--TARGET-->
             <div flex
                  layout="column"
               >
@@ -124,7 +128,7 @@
 
               <!--  the segment-level controls for the target panel -->
               <!--ng-show="isActive.active"-->
-                <!--WORKING: this for Carlos-->
+                <!-- this for QE score experiments - mask completion controls, just show text -->
               <div
                       ng-show="isActive.active"
                       layout="row"

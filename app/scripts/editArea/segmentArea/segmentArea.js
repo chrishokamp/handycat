@@ -13,7 +13,7 @@ angular.module('controllers')
 
     // this object tells us which translation widgets are available to the user
     // These are currently target-side widgets only, which are set via configuration
-    // we copy the config because the scope will actively modify this object as user edits
+    // we copy the config because the scope will actively can modify this object as user edits
     $scope.widgets = $.extend(true, {}, widgetConfiguration.target);
     $scope.segmentControls = $.extend(true, {'targetComponentSelector': false}, widgetConfiguration.segmentControls);
 
@@ -69,7 +69,7 @@ angular.module('controllers')
       } else {
         $(document).unbind('keypress.qe_score')
       }
-    })
+    });
     // TODO: whether this is available depends upon configuration
     // TODO: this should be set for each segment from the document model _if_ it is available
     // TODO: if score is not available for a segment, any component that relies on it cannot display, or shows error
@@ -82,7 +82,7 @@ angular.module('controllers')
 
       logAction('qeScore.accept', {'segmentId': $scope.id.index});
 
-    }
+    };
 
     // WORKING: use project-level config to index into the correct qe score for this segment
     if ($scope.segmentControls.qeScore) {
@@ -139,7 +139,7 @@ angular.module('controllers')
           //  {'segment': d + ' gibt es geheime Schwarzmarktgruppen im Internet, die große Mühe geben, von Strafverfolgung versteckt zu bleiben',
           //    'created': 'January 26, 2014',
           //    'quality': 0.95,
-          //    'provider': 'Chris Hokamp'
+          //    'provider': 'Test Translator'
           //  },
           //  {'segment': 'Zweifellos gibt es geheimere Schwarzmarkt-Gruppen im Internet, die große Mühe geben, Strafverfolgung verborgen bleiben.',
           //    'created': 'August 26, 2013',
@@ -156,7 +156,7 @@ angular.module('controllers')
       }
     )
 
-    // WORKING - this should be part of the 'translationSelector' component
+    // Note: this should be part of the 'translationSelector' component
     // create buttons for the user's translation resources -- we know what resources they have from $scope.currentUser
     // buttons appear when the translation is ready, onClick the value gets put into the editor or translation component
     // response API: {provider: <provider name>, target: <target text>}

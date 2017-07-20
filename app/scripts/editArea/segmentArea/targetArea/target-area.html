@@ -11,8 +11,8 @@
            ng-show="widgets.activeComponent === 'plaintextEditor'"
       >
         <plaintext-editor
-                target-segment="segment.target"
                 source-segment="segment.source"
+                target-segment="segment.target"
                 source-lang="{{document.sourceLang}}"
                 target-lang="{{document.targetLang}}"
                 active-component="widgets.activeComponent"
@@ -30,12 +30,17 @@
         <!--log-action="logAction(action, data)"-->
         <!--&gt;</post-editor>-->
         <!--</div>-->
-      <!--WORKING: implement editor with markup for word-level QE  -->
+
+      <!-- editor with markup for word-level QE  -->
       <div class="cssSlideUp"
         ng-show="widgets.activeComponent === 'wordLevelQeEditor'"
       >
         <word-level-qe-editor
+          source-segment="segment.source"
           target-segment="segment.target"
+          source-lang="{{document.sourceLang}}"
+          target-lang="{{document.targetLang}}"
+          configuration=""
           is-active="isActive.active"
         ></word-level-qe-editor>
       </div>

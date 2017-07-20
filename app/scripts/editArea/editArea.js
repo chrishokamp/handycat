@@ -38,18 +38,16 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
             // The segment exchange format (in document.segments) is:
 //          var segPair = { source: sourceText, target: targetText, sourceDOM: seg[0],targetDOM: seg[1]};
+
+            // Note: target widget config can be modified via the project resource config
+            // Note: the current method of merging global and local configs overwrites the global config, this could cause unexpected behavior
             $log.log('$scope.document loaded and parsed');
             $log.log('Project: local widget configuration: ');
             $log.log(projectResource.configuration);
             $scope.configuration = projectResource.configuration;
 
-            // TODO: target widget config can be modified via the project resource config
-            // TODO: the current method of merging global and local configs overwrites the global config, this could cause unexpected behavior
-
-            // TODO: make sure that we can log which autocompleter we're using
             try {
               if (projectResource.configuration.target) {
-                // $.extend(true, widgetConfiguration, projectResource.configuration);
                 widgetConfiguration.target = projectResource.configuration.target;
 
                 // legacy
@@ -66,7 +64,13 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
             } catch(err) {
               console.error('project doesnt have key `projectResource.configuration.target`');
             }
-
+            try {
+              if (projectResource.configuration.project) {
+                widgetConfiguration.project = projectResource.configuration.project;
+              }
+            } catch(err) {
+              console.error('project doesnt have key `projectResource.configuration.project;` (may be a legacy project);')
+            }
 
             $scope.visible.projectLoading = false;
           },

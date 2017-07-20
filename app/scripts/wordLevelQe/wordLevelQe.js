@@ -1,12 +1,16 @@
 angular.module('handycat.wordLevelQe', ['handycatConfig']);
 
+// WORKING: inject widgetConfiguration service
 angular.module('handycat.wordLevelQe')
-.directive('wordLevelQeEditor', ['$log', 'tokenizer', '$compile', '$timeout',
-  function($log, tokenizer, $compile, $timeout) {
+.directive('wordLevelQeEditor', ['widgetConfiguration', '$log', 'tokenizer', '$compile', '$timeout',
+  function(widgetConfiguration, $log, tokenizer, $compile, $timeout) {
     // take the text inside the element, tokenize it, and wrap in spans that we can interact with
     return {
       scope: {
+        sourceSegment: '=',
         targetSegment: '=',
+        'targetLang': '@',
+        'sourceLang': '@',
         isActive: '=',
         // logAction: '&'
       },
@@ -33,16 +37,6 @@ angular.module('handycat.wordLevelQe')
 
         var addTooltipToSelected = function () {
           var sel, range, text;
-
-          // WORKING: remove all token helper spans when tooltip displays, add them back when it hides
-          // var b = document.getElementsByClassName('post-editor-whitespace');
-          // while(b.length) {
-          //   var parent = b[ 0 ].parentNode;
-          //   while( b[ 0 ].firstChild ) {
-          //     parent.insertBefore(  b[ 0 ].firstChild, b[ 0 ] );
-          //   }
-          //   parent.removeChild( b[ 0 ] );
-          // }
 
           // use the range API to replace and move text
           // single tooltip directive, move that around as needed and fire events from it
@@ -232,7 +226,7 @@ angular.module('handycat.wordLevelQe')
               if (/^\s+$/.test(m)) {
                   return '<div class="post-editor-whitespace word-level-qe-token">' + m + '</div>';
               } else {
-                  return '<div class="post-editor-whitespace word-level-qe-token" data-qe-label="user">' + m + '<div class="qe-bar-user"></div></div>';
+                  return '<div class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '<div class="qe-bar-user"></div></div>';
               }
           }).join('');
           // add the new annotated user data into the current tooltip span
@@ -243,11 +237,9 @@ angular.module('handycat.wordLevelQe')
           $el.find('.tooltip-span').remove();
 
           if (newValue) {
-            // WORKING: here we need to differentiate the user-provided text from the qe-annotated segments
-            // WORKING: ideally, we need to join the annotated left context and the annotated right context
+            // Note: here we need to differentiate the user-provided text constraints from the qe-annotated segments
             // IDEA: instead of getting only the text, get each of the _elements_ -- qe tags should be attributes
             // IDEA: on the elements -- simplest way is jquery with data-* attributes
-
             newTargetSegment = newValue;
             scope.localTargetSegment = newTargetSegment;
             $el.find('.post-editor').first().html(newTargetSegment);
@@ -364,7 +356,7 @@ angular.module('handycat.wordLevelQe')
               scope.state.action = 'default';
             },0)
 
-          // Updating the target segment data model for the actual document
+          // Updating the target segment data model for the actual document model (i.e. removing the markup associated with this component)
           // remove any extra whitespace
           var currentText = $el.find('.post-editor').first().text();
           currentText = currentText.replace(/\s+/g,' ');
@@ -406,6 +398,10 @@ angular.module('handycat.wordLevelQe')
              scope.showTooltip = false;
              scope.state.action === 'default';
              scope.$digest();
+
+             // TESTING CONSTRAINED DECODING
+             console.log('Querying constrained decoding');
+             queryConstrainedDecoding();
            }
          }
 
@@ -436,6 +432,53 @@ angular.module('handycat.wordLevelQe')
         $timeout(function() {
           updateTargetSegment(true);
         }, 0);
+
+        // query the constrained decoder, ask for a translation, once the request resolves, update the UI
+        // TODO: manage callback of this function
+        var queryConstrainedDecoding = function () {
+          // take the current input representation, including any user constraints, and use it to query the constrained decoder
+          // get the text from the user-added constraints from the current local segment
+
+
+          var currentTokenElements = $el.find('.word-level-qe-token');
+          console.log('Current Elements: ' +  currentTokenElements);
+
+          var allUserConstraints = [];
+          var currentUserConstraint = undefined;
+          var prevTokenWasConstraint = false;
+          currentTokenElements.each(function(index, element) {
+            $thisEl = $(element);
+            console.log('userAttr: ' + $thisEl.attr('data-qelabel'));
+            console.log('text: ' + $thisEl.text());
+            if ($thisEl.attr('data-qelabel') == 'user') {
+              if (!prevTokenWasConstraint) {
+                currentUserConstraint = [$thisEl.text()];
+                prevTokenWasConstraint = true;
+              } else {
+                currentUserConstraint.push($thisEl.text());
+              }
+            } else {
+              if (prevTokenWasConstraint) {
+                // push the finished constraint, use .slice() to clone it
+                allUserConstraints.push(currentUserConstraint.slice());
+                currentUserConstraint = [];
+                prevTokenWasConstraint = false;
+              }
+            }
+          });
+          // finally if the last token was part of a constraint
+          if (currentUserConstraint.length > 0) {
+            allUserConstraints.push(currentUserConstraint)
+          }
+
+          // iterate through elements in localSegment, starting constraints when a new `data-qe-label="user"` is found
+          // we don't need the string indices of the constraints, just the constraints themselves since, in general, they may be rearranged by the MT engine
+          debugger;
+
+
+
+
+        }
 
       },
       controller: function($scope) {
