@@ -400,9 +400,10 @@ app.get('/imt/neural_imt', function(req,res) {
   }).pipe(res);
 });
 
-// WORKING: proxy through to QE server, which returns span-level annotations of an input sequence
 
 // QE
+
+// WORKING: proxy through to QE server, which returns span-level annotations of an input sequence
 // THINKING: how to convert token-level QE annotations to span-level indexes?
 // Note this isn't absolutely necessary, as we can hard-code QE annotations for experiments
 // IDEA:
@@ -412,7 +413,45 @@ app.get('/imt/neural_imt', function(req,res) {
 //     - spans in-between qe spans are implicitly whitespace
 
 // Constrained Decoding
-// - we need to know the indexes of the user constraints 
+// - we need to know the indexes of the user constraints, because these need to be preserved across PRIMT cycles
+app.get('/qe/word_level', function(req,res) {
+    console.log('IMT ENDPOINT');
+    console.log(req.query);
+
+    // Mock the output from tagging
+    res.json({"annotations": [
+        {"start": 1, "end": 2, "label": "OK", "confidence": 0.5},
+        {"start": 4, "end": 6, "label": "OK", "confidence": 0.5},
+    ]});
+
+    // var lang_code_mapping = {
+    //     'en-EN': 'en',
+    //     'fr-FR': 'fr',
+    //     'de-DE': 'de',
+    //     'pt-PT': 'pt',
+    //     'pt-BR': 'pt',
+    //     'ga-IE': 'ga'
+    // }
+    // TODO: error when lang_code is not found -- otherwise this can fail silently
+    // nimtUrl = 'http://localhost:5000/nimt';
+    // var options = {
+    //     uri: nimtUrl,
+    //     method: 'POST',
+    //     json: {
+    //         "source_lang": lang_code_mapping[req.query.source_lang],
+    //         "target_lang": lang_code_mapping[req.query.target_lang],
+    //         "source_sentence": req.query.source_segment,
+    //         "target_prefix": req.query.target_prefix,
+    //         "request_time": req.query.request_time
+    //     }
+    // };
+
+    // request(options, function (error, response, body) {
+    //     if (error && error.code === 'ECONNREFUSED'){
+    //         console.error('Refused connection to: ' + nimtUrl);
+    //     }
+    // }).pipe(res);
+});
 
 
 var url = require('url');
