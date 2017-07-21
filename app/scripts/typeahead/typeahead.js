@@ -203,6 +203,6 @@ angular.module('handycat.typeaheads')
 
       }
     }
-}])
+}]);
   //.controller('typeaheadCtrl', function() {
   //});

@@ -27,6 +27,9 @@ handyCATconfig.constant('xliffCreatorUrl', xliffCreatorUrl);
 var parallelXliffCreatorUrl = 'create-parallel-xliff/'
 handyCATconfig.constant('parallelXliffCreatorUrl', parallelXliffCreatorUrl);
 
+var constrainedDecodingUrl = 'imt/constrained_decoding';
+handyCATconfig.constant('constrainedDecodingUrl', constrainedDecodingUrl);
+
 // autocompleter URLs
 //var lmAutocompleterURL = baseURL + ':8010/lm_autocomplete';
 // the two autocompleter types that we currently support
@@ -37,6 +40,7 @@ var constrainedAutocompleterURL = 'lm_autocomplete/constrained';
 var defaultAutocompleterURL = 'lm_autocomplete/default';
 //var imtAutocompleterURL = 'imt_autocomplete';
 var imtAutocompleterURL = 'imt/neural_imt';
+
 
 handyCATconfig.service('autocompleterURLs', function() {
   // controls whether we will use a remote autocompleter at all

@@ -2,15 +2,16 @@ angular.module('handycat.wordLevelQe', ['handycatConfig']);
 
 // WORKING: inject widgetConfiguration service
 angular.module('handycat.wordLevelQe')
-.directive('wordLevelQeEditor', ['widgetConfiguration', '$log', 'tokenizer', '$compile', '$timeout',
-  function(widgetConfiguration, $log, tokenizer, $compile, $timeout) {
+.directive('wordLevelQeEditor', ['widgetConfiguration', 'constrainedDecodingUrl', '$log',
+                                 'tokenizer', '$compile', '$timeout', '$http',
+  function(widgetConfiguration, constrainedDecodingUrl, $log, tokenizer, $compile, $timeout, $http) {
     // take the text inside the element, tokenize it, and wrap in spans that we can interact with
     return {
       scope: {
         sourceSegment: '=',
         targetSegment: '=',
-        'targetLang': '@',
-        'sourceLang': '@',
+        targetLang: '@',
+        sourceLang: '@',
         isActive: '=',
         // logAction: '&'
       },
@@ -103,7 +104,7 @@ angular.module('handycat.wordLevelQe')
 
             }
           }
-        }
+        };
 
         scope.selectedText = '';
         $el.on('mouseup', function (e) {
@@ -197,7 +198,7 @@ angular.module('handycat.wordLevelQe')
             // console.log('previous segment: ' + previousSegment);
             updateTargetSegment(false, previousSegment);
           }
-        }
+        };
 
         // WORKING: we want to map the original segment through QE each time, then at each editing step update annotations as needed
         var updateTargetSegment = function(qeAnnotate, newValue) {
@@ -224,7 +225,7 @@ angular.module('handycat.wordLevelQe')
           var newUserTokens = userAddedText.split('');
           var newUserHtml = newUserTokens.map(function (m) {
               if (/^\s+$/.test(m)) {
-                  return '<div class="post-editor-whitespace word-level-qe-token">' + m + '</div>';
+                  return '<div class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '</div>';
               } else {
                   return '<div class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '<div class="qe-bar-user"></div></div>';
               }
@@ -262,7 +263,6 @@ angular.module('handycat.wordLevelQe')
 
             // IDEA: split on characters
             var allTokens = posteditorText.split('');
-
 
             var prevClass = undefined;
             var qeClasses = ["qe-bar-good", "qe-bar-good", "qe-bar-good", "qe-bar-good", "qe-bar-bad"];
@@ -369,7 +369,7 @@ angular.module('handycat.wordLevelQe')
           scope.targetSegment = currentText;
 
           return [origTargetSegment, newTargetSegment]
-        }
+        };
 
         // keybindings
          var handleEscape = function(e) {
@@ -413,7 +413,7 @@ angular.module('handycat.wordLevelQe')
           scope.showTooltip = false;
           scope.state.action === 'default';
           scope.$digest();
-        }
+        };
 
         // use a namespace on the event to bind the escape keypress to this element
         // unbind when component goes out of focus, rebind when it comes back in
@@ -427,7 +427,7 @@ angular.module('handycat.wordLevelQe')
             $(document).unbind('keyup.posteditor_escape')
             $(document).unbind('keyup.posteditor_undo')
           }
-        })
+        });
 
         $timeout(function() {
           updateTargetSegment(true);
@@ -438,18 +438,15 @@ angular.module('handycat.wordLevelQe')
         var queryConstrainedDecoding = function () {
           // take the current input representation, including any user constraints, and use it to query the constrained decoder
           // get the text from the user-added constraints from the current local segment
-
-
           var currentTokenElements = $el.find('.word-level-qe-token');
-          console.log('Current Elements: ' +  currentTokenElements);
 
+          // iterate through elements in localSegment, starting constraints when a new `data-qe-label="user"` is found
+          // we don't need the string indices of the constraints, just the constraints themselves since, in general, they may be rearranged by the MT engine
           var allUserConstraints = [];
-          var currentUserConstraint = undefined;
+          var currentUserConstraint = [];
           var prevTokenWasConstraint = false;
           currentTokenElements.each(function(index, element) {
             $thisEl = $(element);
-            console.log('userAttr: ' + $thisEl.attr('data-qelabel'));
-            console.log('text: ' + $thisEl.text());
             if ($thisEl.attr('data-qelabel') == 'user') {
               if (!prevTokenWasConstraint) {
                 currentUserConstraint = [$thisEl.text()];
@@ -471,12 +468,34 @@ angular.module('handycat.wordLevelQe')
             allUserConstraints.push(currentUserConstraint)
           }
 
-          // iterate through elements in localSegment, starting constraints when a new `data-qe-label="user"` is found
-          // we don't need the string indices of the constraints, just the constraints themselves since, in general, they may be rearranged by the MT engine
-          debugger;
+          // concat the tokens in each constraint together, and trim whitespace at the beginning and end
+          allUserConstraints = allUserConstraints.map(function (currentValue, idx, arr) {
+            return currentValue.join('').trim();
+          });
 
-
-
+          // Now we're ready to ask the server for a lexically constrained translation
+          // set the timestamp for the current request
+          var reqTimestamp = Date.now();
+          $http.get(constrainedDecodingUrl,
+            {
+              params: {
+                source_segment: scope.sourceSegment,
+                target_constraints   : allUserConstraints,
+                target_lang   : scope.targetLang,
+                source_lang   : scope.sourceLang,
+                request_time  : reqTimestamp
+              }
+            }
+          )
+          .success(
+            function (output) {
+              var translationObjs = output['outputs'];
+              console.log('Translation system outputs:')
+              console.log(translationObjs)
+              // TODO: now render output in the component
+            }
+          );
+          // TODO: handle failure and timeout
 
         }
 

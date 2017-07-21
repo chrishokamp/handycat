@@ -368,6 +368,7 @@ app.get('/lm_autocomplete/default', function(req,res) {
   res.json({'ranked_completions': []});
 });
 
+// Neural IMT
 app.get('/imt/neural_imt', function(req,res) {
   console.log('IMT ENDPOINT');
   console.log(req.query);
@@ -380,7 +381,7 @@ app.get('/imt/neural_imt', function(req,res) {
     'ga-IE': 'ga'
   }
   // TODO: error when lang_code is not found -- otherwise this can fail silently
-  nimtUrl = 'http://localhost:5000/nimt';
+  var nimtUrl = 'http://localhost:5000/nimt';
   var options = {
     uri: nimtUrl,
     method: 'POST',
@@ -400,6 +401,38 @@ app.get('/imt/neural_imt', function(req,res) {
   }).pipe(res);
 });
 
+// Constrained decoding with Grid Beam Search
+app.get('/imt/constrained_decoding', function(req,res) {
+  console.log('Constrained Decoding Endpoint');
+  console.log(req.query);
+  var lang_code_mapping = {
+    'en-EN': 'en',
+    'de-DE': 'de',
+  }
+  // TODO: error when lang_code is not found -- otherwise this can fail silently
+  var constrainedDecodingUrl = 'http://localhost:5007/translate';
+  var options = {
+    uri: constrainedDecodingUrl,
+    method: 'POST',
+    json: {
+      // "source_lang": lang_code_mapping[req.query.source_lang],
+      // "target_lang": lang_code_mapping[req.query.target_lang],
+      // TODO: remove language pair hard-coding
+      "source_lang": 'en',
+      "target_lang": 'de',
+      "source_sentence": req.query.source_segment,
+      // get constraints if they exist, otherwise empty list
+      "target_constraints": req.query.target_constraints || [],
+      "request_time": req.query.request_time
+    }
+  };
+
+  request(options, function (error, response, body) {
+    if (error && error.code === 'ECONNREFUSED'){
+      console.error('Refused connection to: ' + constrainedDecodingUrl);
+    }
+  }).pipe(res);
+});
 
 // QE
 
