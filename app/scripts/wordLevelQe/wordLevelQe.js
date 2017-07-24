@@ -56,7 +56,7 @@ angular.module('handycat.wordLevelQe')
             }
 
             if (text.length >= 1) {
-              console.log('Selected text: ' + text);
+              // console.log('Selected text: ' + text);
               //if we're in move mode
               if (scope.state.action === 'moving') {
                 var textInSpan = $el.find('.tooltip-span').text();
@@ -473,36 +473,74 @@ angular.module('handycat.wordLevelQe')
             return currentValue.join('').trim();
           });
 
+          // debugger;
           // Now we're ready to ask the server for a lexically constrained translation
           // set the timestamp for the current request
           var reqTimestamp = Date.now();
-          $http.get(constrainedDecodingUrl,
+          $http.post(constrainedDecodingUrl,
             {
-              params: {
-                source_segment: scope.sourceSegment,
-                target_constraints   : allUserConstraints,
-                target_lang   : scope.targetLang,
-                source_lang   : scope.sourceLang,
-                request_time  : reqTimestamp
-              }
+              source_segment: scope.sourceSegment,
+              target_constraints   : allUserConstraints,
+              // target_lang   : scope.targetLang,
+              target_lang   : 'de',
+              source_lang   : scope.sourceLang,
+              request_time  : reqTimestamp
             }
+            // {headers: {'Content-Type': 'application/json'}
           )
           .success(
             function (output) {
               var translationObjs = output['outputs'];
-              console.log('Translation system outputs:')
-              console.log(translationObjs)
-              // TODO: now render output in the component
+              // TODO: now render output in the component -- maintain user annotations, but annotations such as QE scores will disappear
+              // we only care about the 1-best translation
+              var outputObj = translationObjs[0];
+              var outputTranslation = outputObj['translation'];
+              var constraintAnnotations = outputObj['constraint_annotations'];
+              // we know the constraint annotations are in order
+              var starts = constraintAnnotations.map(function(tup, _, _) {
+                return tup[0];
+              });
+              var ends = constraintAnnotations.map(function(tup, _, _) {
+                return tup[1];
+              });
+
+              var outputChars = outputTranslation.split('');
+              var tagging = false;
+              var outputHtml = outputChars.map(function(char, index, _) {
+                if (starts.indexOf(index) > -1) {
+                  // this index starts a constraint
+                  tagging = true;
+                } else if (ends.indexOf(index) > -1) {
+                  // a constraint just finished
+                  tagging = false;
+                }
+
+                if (tagging) {
+                  if (/^\s+$/.test(char)) {
+                    return '<div class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '</div>';
+                  } else {
+                    return '<div class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '<div class="qe-bar-user"></div></div>';
+                  }
+                } else {
+                  if (/^\s+$/.test(char)) {
+                    return '<div class="post-editor-whitespace word-level-qe-token">' + char + '</div>';
+                  } else {
+                    return '<div class="post-editor-whitespace word-level-qe-token">' + char + '</div>';
+                  }
+                }
+              }).join('');
+
+              $el.find('.post-editor').first().html(outputHtml);
+              // TODO: handle undo stack
+
+
             }
           );
           // TODO: handle failure and timeout
 
         }
-
       },
-      controller: function($scope) {
-
-      }
+      controller: function($scope) {}
     };
 }]);
 

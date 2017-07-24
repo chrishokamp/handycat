@@ -402,9 +402,10 @@ app.get('/imt/neural_imt', function(req,res) {
 });
 
 // Constrained decoding with Grid Beam Search
-app.get('/imt/constrained_decoding', function(req,res) {
+// app.get('/imt/constrained_decoding', function(req,res) {
+app.post('/imt/constrained_decoding', function(req,res) {
   console.log('Constrained Decoding Endpoint');
-  console.log(req.query);
+  console.log(req.body);
   var lang_code_mapping = {
     'en-EN': 'en',
     'de-DE': 'de',
@@ -420,10 +421,10 @@ app.get('/imt/constrained_decoding', function(req,res) {
       // TODO: remove language pair hard-coding
       "source_lang": 'en',
       "target_lang": 'de',
-      "source_sentence": req.query.source_segment,
+      "source_sentence": req.body.source_segment,
       // get constraints if they exist, otherwise empty list
-      "target_constraints": req.query.target_constraints || [],
-      "request_time": req.query.request_time
+      "target_constraints": req.body.target_constraints || [],
+      "request_time": req.body.request_time
     }
   };
 
@@ -437,6 +438,7 @@ app.get('/imt/constrained_decoding', function(req,res) {
 // QE
 
 // WORKING: proxy through to QE server, which returns span-level annotations of an input sequence
+
 // THINKING: how to convert token-level QE annotations to span-level indexes?
 // Note this isn't absolutely necessary, as we can hard-code QE annotations for experiments
 // IDEA:
