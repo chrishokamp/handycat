@@ -21,6 +21,7 @@ angular.module('handycat.wordLevelQe')
 
         scope.state = {
           'action'   : 'default',
+          'translationPending': false,
           'undoStack': []
         }
         // the syntax below makes sure we always make a deep copy
@@ -475,6 +476,8 @@ angular.module('handycat.wordLevelQe')
 
           // debugger;
           // Now we're ready to ask the server for a lexically constrained translation
+          // UI state changes while we're waiting for a translation
+          scope.state.translationPending = true;
           // set the timestamp for the current request
           var reqTimestamp = Date.now();
           $http.post(constrainedDecodingUrl,
@@ -531,9 +534,13 @@ angular.module('handycat.wordLevelQe')
               }).join('');
 
               $el.find('.post-editor').first().html(outputHtml);
+              scope.state.translationPending = false;
               // TODO: handle undo stack
 
 
+            }
+          ).error(function () {
+              scope.state.translationPending = false;
             }
           );
           // TODO: handle failure and timeout

@@ -47,6 +47,13 @@ $posteditor-color: #FFFFFF;
   }
 }
 
+.post-editor-spinner {
+  @extend .post-editor;
+  position: relative;
+  opacity: .5;
+}
+
+
 .post-editor > textarea {
   //  make sure we fill our parent
   resize: none;
