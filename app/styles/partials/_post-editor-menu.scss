@@ -1,4 +1,5 @@
 post-editor > div {
+  top: 0;
   position: relative;
   height: 100%;
   width: 100%;
@@ -49,8 +50,6 @@ $posteditor-color: #FFFFFF;
 
 .post-editor-spinner {
   @extend .post-editor;
-  position: relative;
-  opacity: .5;
 }
 
 

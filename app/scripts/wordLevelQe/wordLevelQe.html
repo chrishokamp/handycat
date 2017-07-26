@@ -1,27 +1,16 @@
 <div class="post-editor-wrapper">
+    <!--this is a spinner which shows when we're waiting for a translation-->
+    <div class="post-editor-spinner spinner"
+         ng-show="state.translationPending">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
     <div
           class="post-editor"
           ng-show="!state.translationPending"
     >{{targetSegment}}
     </div>
-    <!--this is a spinner which shows when we're waiting for a translation-->
-    <div
-          class="post-editor-spinner"
-          ng-show="state.translationPending"
-    >
-        <div id="fountainG">
-            <div id="fountainG_1" class="fountainG"></div>
-            <div id="fountainG_2" class="fountainG"></div>
-            <div id="fountainG_3" class="fountainG"></div>
-            <div id="fountainG_4" class="fountainG"></div>
-            <div id="fountainG_5" class="fountainG"></div>
-            <div id="fountainG_6" class="fountainG"></div>
-            <div id="fountainG_7" class="fountainG"></div>
-            <div id="fountainG_8" class="fountainG"></div>
-        </div>
-        <!--<div ng-class="{'cssload-whirlpool': state.translationPending}"></div>-->
-    </div>
-    <div ng-show="state.action !== 'default'"
+    <div ng-show="state.action !== 'default' && !state.translationPending"
          class="postedit-mode-sheet"
     >{{state.action}}
     </div>

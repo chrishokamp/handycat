@@ -226,9 +226,9 @@ angular.module('handycat.wordLevelQe')
           var newUserTokens = userAddedText.split('');
           var newUserHtml = newUserTokens.map(function (m) {
               if (/^\s+$/.test(m)) {
-                  return '<div class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '</div>';
+                  return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '</span>';
               } else {
-                  return '<div class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '<div class="qe-bar-user"></div></div>';
+                  return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '<div class="qe-bar-user"></div></span>';
               }
           }).join('');
           // add the new annotated user data into the current tooltip span
@@ -258,11 +258,8 @@ angular.module('handycat.wordLevelQe')
             // IDEA: split on characters
             // var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
 
-            // WORKING: we need a data model that can add, remove, and update span annotations
-            // WORKING: IDEA: annotations are stored in the DOM via data-* attributes, mapped to each token
-            // var allTokens = posteditorText.match(re);
-
-            // IDEA: split on characters
+            // Key idea: annotations are stored in the DOM via data-* attributes, mapped to each token
+            // split on characters
             var allTokens = posteditorText.split('');
 
             var prevClass = undefined;
@@ -270,14 +267,14 @@ angular.module('handycat.wordLevelQe')
             var posteditorHtml = allTokens.map(function (m, idx, arr) {
 
                 if (/^\s+$/.test(m)) {
-                    return '<div class="post-editor-whitespace word-level-qe-token">' + m + '</div>';
+                    return '<span class="post-editor-whitespace word-level-qe-token">' + m + '</span>';
                 } else {
                     // check if we're continuing a word
                     if (idx === 0 || /^\s+$/.test(arr[idx-1])) {
                         // we're starting a new class, select a new random label
                         prevClass = qeClasses[Math.floor(Math.random() * qeClasses.length)];
                     }
-                    return '<div class="post-editor-whitespace word-level-qe-token">' + m + '<div class="' + prevClass + '"></div></div>';
+                    return '<span class="post-editor-whitespace word-level-qe-token">' + m + '<div class="' + prevClass + '"></div></span>';
                 }
             }).join('');
 
@@ -301,24 +298,6 @@ angular.module('handycat.wordLevelQe')
           // random color
           // WORKING: change getRandomColor to a function which calls configurable QE backend microservice
           // WORKING: the QE can actually be hard-coded, we don't need dynamic access because user edits are automatically "OK"
-
-          // $el.find('div.qe-bar').css('background-color',
-          //     function() { return getRandomColor(); }
-          // );
-          // random opacity -- Note these classes are at the character level, so we need a smarter solution
-          // $el.find('div.qe-bar-good').css('opacity',
-          //     function() { return Math.random(); }
-          // );
-          // $el.find('div.qe-bar-bad').css('opacity',
-          //     function() { return Math.random(); }
-          // );
-
-          // randomly assign color in scale to qe-bars
-          function getRandomColor() {
-            var colors = ['red', 'green', 'green', 'green', 'green'];
-            var randomColor = colors[Math.floor(Math.random() * 5)];
-            return randomColor;
-          }
 
           // automatically select text in .post-editor-whitespace spans on click
           // $el.find('div.post-editor-whitespace').hover(
@@ -520,15 +499,15 @@ angular.module('handycat.wordLevelQe')
 
                 if (tagging) {
                   if (/^\s+$/.test(char)) {
-                    return '<div class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '</div>';
+                    return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '</span>';
                   } else {
-                    return '<div class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '<div class="qe-bar-user"></div></div>';
+                    return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '<div class="qe-bar-user"></div></span>';
                   }
                 } else {
                   if (/^\s+$/.test(char)) {
-                    return '<div class="post-editor-whitespace word-level-qe-token">' + char + '</div>';
+                    return '<span class="post-editor-whitespace word-level-qe-token">' + char + '</span>';
                   } else {
-                    return '<div class="post-editor-whitespace word-level-qe-token">' + char + '</div>';
+                    return '<span class="post-editor-whitespace word-level-qe-token">' + char + '</span>';
                   }
                 }
               }).join('');
