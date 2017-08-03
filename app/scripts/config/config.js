@@ -130,6 +130,40 @@ handyCATconfig.constant('widgetConfiguration',
 // TODO: load experiment configuration from external json file via grunt task with optional arguments
 var experimentGroups = [
     {
+        "name": "Test EN-DE Word Level QE",
+        "sampleFiles": [
+            {
+                "name": "Test EN-DE Word Level QE",
+                "internalName": "wl-qe-test",
+                "url": "data/word_level_qe_experiments/sample_data/sample_qe.xliff",
+                "configuration": {
+                    "project": {
+                        "useConstrainedDecoding": false,
+                        "useWordLevelQE": false,
+                    },
+                    "target": {
+                        "activeComponent": "wordLevelQeEditor",
+                        "defaultComponent": "wordLevelQeEditor",
+                        "components": [
+                            {
+                                "directiveName": "plaintextEditor",
+                                "textName": "plaintextEditor"
+                            },
+                            {
+                                "directiveName": "wordLevelQeEditor",
+                                "textName": "wordLevelQeEditor"
+                            },
+                            // {
+                            //     "directiveName": "postEditor",
+                            //     "textName": "postEditor"
+                            // }
+                        ]
+                    },
+                }
+            }
+        ]
+    },
+    {
         "name": "Test Word Level QE",
         "sampleFiles": [
             {

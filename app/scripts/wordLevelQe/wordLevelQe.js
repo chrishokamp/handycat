@@ -85,7 +85,9 @@ angular.module('handycat.wordLevelQe')
                 range = sel.getRangeAt(0).cloneRange();
                 sel.removeAllRanges();
 
-                var a = document.createElement("div");
+                // logic which creates the tooltip span
+                // var a = document.createElement("div");
+                var a = document.createElement("span");
                 a.setAttribute('class', 'tooltip-span');
                 a.appendChild(range.extractContents())
                 $compile(a)(scope);
@@ -108,18 +110,33 @@ angular.module('handycat.wordLevelQe')
         };
 
         scope.selectedText = '';
-        $el.on('mouseup', function (e) {
+        var isHighlight = 0;
+        var mouseDown = 0;
+        $el.mousedown(function() {
+            mouseDown = 1;
+        }).mousemove(function () {
+          if (mouseDown == 1) {
+            isHighlight = 1;
+          }
+        }).on('mouseup', function (e) {
           console.log('mouseup');
+
           $timeout(function() {
-          var selectedText = getSelectedText();
-          // if (selectedText !== scope.selectedText) {
-            scope.selectedText = selectedText;
-            $log.log('selected text');
-            $log.log(selectedText);
-            addTooltipToSelected();
+            if(isHighlight == 1) {
+              var selectedText = getSelectedText();
+              scope.selectedText = selectedText;
+              $log.log('selected text');
+              $log.log(selectedText);
+              $log.log('isHighlight: ' + isHighlight);
+              addTooltipToSelected();
+            }
+
+            isHighlight = 0;
+            mouseDown = 0;
           },0);
           // }
         });
+
 
         scope.$on('delete-event', function (e) {
           // delete this span, update targetSegment model
@@ -201,7 +218,7 @@ angular.module('handycat.wordLevelQe')
           }
         };
 
-        // WORKING: we want to map the original segment through QE each time, then at each editing step update annotations as needed
+        // we want to map the original segment through QE each time, then at each editing step update annotations as needed
         var updateTargetSegment = function(qeAnnotate, newValue) {
 
           // handling the undo stack
@@ -511,6 +528,9 @@ angular.module('handycat.wordLevelQe')
                   }
                 }
               }).join('');
+
+
+              // TODO: possibly callback to QE server if the component is set to support both QE and Constrained Decoding
 
               $el.find('.post-editor').first().html(outputHtml);
               scope.state.translationPending = false;
