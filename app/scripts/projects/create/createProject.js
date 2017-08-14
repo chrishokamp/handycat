@@ -306,7 +306,7 @@ angular.module('controllers')
           // WORKING - user must specify source and target langs
           params: {
             sourceLang: 'en',
-            targetLang: 'es',
+            targetLang: 'de',
             sourceText: rawSourceText,
             targetText: rawTargetText
           }
