@@ -82,6 +82,9 @@ angular.module('handycat.wordLevelQe')
                 // );
 
               } else {
+                // debugging: this removes a class from the output
+                // WARNING: `modify` is a non-standard function
+                sel.modify('extend', 'forward', 'character');
                 range = sel.getRangeAt(0).cloneRange();
                 sel.removeAllRanges();
 
@@ -98,6 +101,7 @@ angular.module('handycat.wordLevelQe')
 
                 range.insertNode(a);
                 sel.addRange(range);
+                // sel.modify('extend', 'backward', 'character');
 
                 // Note: we could also send the current range in the broadcast event
                 // tell the tooltip to move
@@ -123,11 +127,11 @@ angular.module('handycat.wordLevelQe')
 
           $timeout(function() {
             if(isHighlight == 1) {
-              var selectedText = getSelectedText();
-              scope.selectedText = selectedText;
-              $log.log('selected text');
-              $log.log(selectedText);
-              $log.log('isHighlight: ' + isHighlight);
+              // var selectedText = getSelectedText();
+              // scope.selectedText = selectedText;
+              // $log.log('selected text');
+              // $log.log(selectedText);
+              // $log.log('isHighlight: ' + isHighlight);
               addTooltipToSelected();
             }
 
@@ -240,6 +244,7 @@ angular.module('handycat.wordLevelQe')
           var userAddedText = $el.find('.tooltip-span').text();
 
           // reannotate the userAddedText with special user spans, all other spans retain their original annotations
+          userAddedText = $.trim(userAddedText);
           var newUserTokens = userAddedText.split('');
           var newUserHtml = newUserTokens.map(function (m) {
               if (/^\s+$/.test(m)) {
@@ -375,6 +380,7 @@ angular.module('handycat.wordLevelQe')
              console.log('ESCAPE WAS PRESSED')
              if (currentState === 'replacing' || currentState === 'inserting') {
                // this is the call which updates the new UI state
+               // TODO: don't do this unless user actually changed something
                var oldNewTarget = updateTargetSegment();
                var origTarget = oldNewTarget[0];
                var newTarget = oldNewTarget[1];
@@ -391,14 +397,17 @@ angular.module('handycat.wordLevelQe')
                // );
              } else {
                $el.find('.tooltip-span').contents().unwrap();
+               $el.find('.tooltip-span').remove();
              }
              scope.showTooltip = false;
              scope.state.action === 'default';
              scope.$digest();
 
              // TESTING CONSTRAINED DECODING
-             console.log('Querying constrained decoding');
-             queryConstrainedDecoding();
+             // console.log('Querying constrained decoding');
+             // queryConstrainedDecoding();
+             console.log('Querying APE QE');
+             queryApeQe();
            }
          }
 
@@ -473,6 +482,7 @@ angular.module('handycat.wordLevelQe')
           // debugger;
           // Now we're ready to ask the server for a lexically constrained translation
           // UI state changes while we're waiting for a translation
+          // TODO: pulse colors when translation arrives
           scope.state.translationPending = true;
           // set the timestamp for the current request
           var reqTimestamp = Date.now();
@@ -536,7 +546,6 @@ angular.module('handycat.wordLevelQe')
               scope.state.translationPending = false;
               // TODO: handle undo stack
 
-
             }
           ).error(function () {
               scope.state.translationPending = false;
@@ -545,6 +554,180 @@ angular.module('handycat.wordLevelQe')
           // TODO: handle failure and timeout
 
         }
+
+        // query the constrained decoder, ask for a translation, once the request resolves, update the UI
+        // TODO: manage callback of this function
+        var queryApeQe = function () {
+          // take the current input representation, including any user constraints, and use it to query the constrained decoder
+          // get the text from the user-added constraints from the current local segment
+          var currentTokenElements = $el.find('.word-level-qe-token');
+
+          // WORKING: we need the span indices of user constraints [(start, end), (start, end), ...]
+          // iterate through elements in localSegment, starting constraints when a new `data-qe-label="user"` is found
+          // we don't need the string indices of the constraints, just the constraints themselves since, in general, they may be rearranged by the MT engine
+
+          var allUserConstraints = [];
+          var currentUserConstraint = [];
+          var userConstraintSpans = [];
+          var currentConstraintSpan = [];
+          var prevTokenWasConstraint = false;
+          var currentSurfaceRepresentation = '';
+          console.log('Getting user constraint idxs');
+
+
+          // TODO: go through the QE spans from server, map each index to a tag + confidence value
+          // TODO: constraint spans override QE spans -- after going through the QE spans, go through the constraint spans
+          // TODO: This index-->{tag, confidence} map is the ground truth for the current UI state
+          currentTokenElements.each(function (index, element) {
+              $thisEl = $(element);
+              console.log('EL: ' + $thisEl);
+              console.log('Text: ' + $thisEl.text());
+              currentSurfaceRepresentation = currentSurfaceRepresentation + $thisEl.text();
+
+              // TODO: this is a hack, not clear why there can be token elements which contain no text
+              var idxOffset = (currentSurfaceRepresentation.length - 1) - index;
+              console.log('len Rep: ' + currentSurfaceRepresentation.length);
+              if ($thisEl.attr('data-qelabel') == 'user') {
+                  if (!prevTokenWasConstraint) {
+                      // starting
+                      console.log('starting');
+                      currentConstraintSpan.push(index + idxOffset);
+                      currentUserConstraint = [$thisEl.text()];
+                      prevTokenWasConstraint = true;
+                  } else {
+                      // continuing
+                      console.log('continuing');
+                      currentUserConstraint.push($thisEl.text());
+                  }
+              } else {
+                  if (prevTokenWasConstraint) {
+                      // finishing
+                      console.log('finishing');
+                      // if we're finishing, add 1
+                      currentConstraintSpan.push(index + idxOffset + 1);
+                      userConstraintSpans.push(currentConstraintSpan);
+                      currentConstraintSpan = [];
+                      // push the finished constraint, use .slice() to clone it
+                      allUserConstraints.push(currentUserConstraint.slice());
+                      currentUserConstraint = [];
+                      prevTokenWasConstraint = false;
+                  }
+              }
+              console.log("Index: " + index);
+          });
+          // finally if the last token was part of a constraint
+          if (currentUserConstraint.length > 0) {
+              // TODO: confirm offset logic
+              var idxOffset = (currentSurfaceRepresentation.length - 1) - currentTokenElements.length;
+              currentConstraintSpan.push(currentTokenElements.length + idxOffset);
+              userConstraintSpans.push(currentConstraintSpan)
+              allUserConstraints.push(currentUserConstraint)
+          }
+          debugger;
+
+          // concat the tokens in each constraint together, and trim whitespace at the beginning and end
+          allUserConstraints = allUserConstraints.map(function (currentValue, idx, arr) {
+              return currentValue.join('').trim();
+          });
+
+          // TODO: sanity here
+          // var elText = $el.find('.word-level-qe-token').text();
+          console.log(userConstraintSpans);
+          console.log(currentSurfaceRepresentation);
+          userConstraintSpans.forEach(function (value, idx) {
+              console.log('Span: ' + value);
+              console.log('substring: ' + currentSurfaceRepresentation.slice(value[0], value[1]));
+          });
+
+
+
+          // Now we're ready to ask the server for Quality Estimation span annotations
+          // remember that the surface string isn't going to change, and user constraints are going to stay
+          // UI state changes while we're waiting for QE?
+          // TODO: pulse colors when QE arrives
+          // scope.state.translationPending = true;
+
+          // set the timestamp for the current request
+          // var reqTimestamp = Date.now();
+          // $http.post(apeQeUrl,
+          //     {
+          //       src_lang: 'en',
+          //       trg_lang: 'de',
+          //       src_segment: 'Select the target screen in the tree control .',
+          //       trg_segment: 'Wählen Sie das Ziel in der Struktur zu steuern.'
+          //     },
+          //     {headers: {'Content-Type': 'application/json'}
+          // )
+            // "qe_labels": [
+            //     {
+            //         "confidence": 1,
+            //         "span": [
+            //             0,
+            //             6
+            //         ],
+            //         "tag": "OK"
+            //     },
+          //     .success(
+          //         function (output) {
+          //             var qeSpanAnnotations = output['qe_labels'];
+          //             // TODO: now render output in the component -- maintain user annotations, but add QE annotation around the user annotation
+          //             // we only care about the 1-best translation
+          //             var outputObj = translationObjs[0];
+          //             var outputTranslation = outputObj['translation'];
+          //             var constraintAnnotations = outputObj['constraint_annotations'];
+          //             // we know the constraint annotations are in order
+          //             var starts = constraintAnnotations.map(function (tup, _, _) {
+          //                 return tup[0];
+          //             });
+          //             var ends = constraintAnnotations.map(function (tup, _, _) {
+          //                 return tup[1];
+          //             });
+          //
+          //             var outputChars = outputTranslation.split('');
+          //             var tagging = false;
+          //             var outputHtml = outputChars.map(function (char, index, _) {
+          //                 if (starts.indexOf(index) > -1) {
+          //                     // this index starts a constraint
+          //                     tagging = true;
+          //                 } else if (ends.indexOf(index) > -1) {
+          //                     // a constraint just finished
+          //                     tagging = false;
+          //                 }
+          //
+          //                 if (tagging) {
+          //                     if (/^\s+$/.test(char)) {
+          //                         return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '</span>';
+          //                     } else {
+          //                         return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '<div class="qe-bar-user"></div></span>';
+          //                     }
+          //                 } else {
+          //                     if (/^\s+$/.test(char)) {
+          //                         return '<span class="post-editor-whitespace word-level-qe-token">' + char + '</span>';
+          //                     } else {
+          //                         return '<span class="post-editor-whitespace word-level-qe-token">' + char + '</span>';
+          //                     }
+          //                 }
+          //             }).join('');
+          //
+          //
+          //             // TODO: possibly callback to QE server if the component is set to support both QE and Constrained Decoding
+          //
+          //             $el.find('.post-editor').first().html(outputHtml);
+          //             scope.state.translationPending = false;
+          //             // TODO: handle undo stack
+          //
+          //
+          //         }
+          //     ).error(function () {
+          //         scope.state.translationPending = false;
+          //     }
+          // );
+          // TODO: handle failure and timeout
+        }
+
+
+
+
       },
       controller: function($scope) {}
     };
