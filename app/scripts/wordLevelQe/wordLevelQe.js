@@ -222,7 +222,6 @@ angular.module('handycat.wordLevelQe')
           }
         };
 
-
         // we want to map the original segment through QE each time, then at each editing step update annotations as needed
         var updateTargetSegment = function(qeAnnotate, newValue) {
 
@@ -651,7 +650,7 @@ angular.module('handycat.wordLevelQe')
 
           // TODO: pulse colors when QE arrives
           // scope.state.qePending = true;
-          // Note: what we send to the server should be _exactly_ the surface representation
+          // Note: what we send to the server should be _exactly_ the surface representation in the UI
           // Note: except for the whitespace at the beginning and end
           // Note: when we get the QE annotations back, we offset them by the whitespaces at beginning and end
           var numStartWhitespaceChars = currentSurfaceRepresentation.match(/^\s+/)[0].length;
@@ -663,10 +662,10 @@ angular.module('handycat.wordLevelQe')
               {
                 src_lang: 'en',
                 trg_lang: 'de',
-                src_segment: 'Select the target screen in the tree control .',
-                trg_segment: 'Wählen Sie das Ziel in der Struktur zu steuern.'
+                src_segment: scope.sourceSegment,
+                trg_segment: qeInputString
               },
-              {headers: {'Content-Type': 'application/json'}
+              {headers: {'Content-Type': 'application/json'}}
           )
             // "qe_labels": [
             //     {
@@ -677,66 +676,97 @@ angular.module('handycat.wordLevelQe')
             //         ],
             //         "tag": "OK"
             //     },
-          //     .success(
-          //         function (output) {
-          //             var qeSpanAnnotations = output['qe_labels'];
-          //             // TODO: now render output in the component -- maintain user annotations, but add QE annotation around the user annotation
-          //             // we only care about the 1-best translation
-          //             var outputObj = translationObjs[0];
-          //             var outputTranslation = outputObj['translation'];
-          //             var constraintAnnotations = outputObj['constraint_annotations'];
-          //             // we know the constraint annotations are in order
-          //             var starts = constraintAnnotations.map(function (tup, _, _) {
-          //                 return tup[0];
-          //             });
-          //             var ends = constraintAnnotations.map(function (tup, _, _) {
-          //                 return tup[1];
-          //             });
-          //
-          //             var outputChars = outputTranslation.split('');
-          //             var tagging = false;
-          //             var outputHtml = outputChars.map(function (char, index, _) {
-          //                 if (starts.indexOf(index) > -1) {
-          //                     // this index starts a constraint
-          //                     tagging = true;
-          //                 } else if (ends.indexOf(index) > -1) {
-          //                     // a constraint just finished
-          //                     tagging = false;
-          //                 }
-          //
-          //                 if (tagging) {
-          //                     if (/^\s+$/.test(char)) {
-          //                         return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '</span>';
-          //                     } else {
-          //                         return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '<div class="qe-bar-user"></div></span>';
-          //                     }
-          //                 } else {
-          //                     if (/^\s+$/.test(char)) {
-          //                         return '<span class="post-editor-whitespace word-level-qe-token">' + char + '</span>';
-          //                     } else {
-          //                         return '<span class="post-editor-whitespace word-level-qe-token">' + char + '</span>';
-          //                     }
-          //                 }
-          //             }).join('');
-          //
-          //
-          //             // TODO: possibly callback to QE server if the component is set to support both QE and Constrained Decoding
-          //
-          //             $el.find('.post-editor').first().html(outputHtml);
-          //             scope.state.translationPending = false;
-          //             // TODO: handle undo stack
-          //
-          //
-          //         }
-          //     ).error(function () {
-          //         scope.state.translationPending = false;
-          //     }
-          // );
+              .success(
+                  function (output) {
+                      var qeSpanAnnotations = output['qe_labels'];
+
+                      // TODO: use the leading whitespace offset on the qe annotations
+
+                      // first go through qe annotations from server
+                      console.log('QE output: ');
+                      var currentAnnotations = {}
+                      qeSpanAnnotations.forEach(function(obj, idx) {
+
+                        // use the leading whitespace offset on the qe annotations
+                        var span = obj['span']
+                        span[0] += numStartWhitespaceChars;
+                        span[1] += numStartWhitespaceChars;
+                        console.log('Span: ' + span);
+                        console.log('substring: ' + currentSurfaceRepresentation.slice(span[0], span[1]));
+                        console.log('tag: ' + obj['tag']);
+
+                        for (var i=span[0]; i<span[1]; i++) {
+                          currentAnnotations[i] = {'tag': obj['tag'], 'confidence': obj['confidence']}
+                        }
+                      });
+
+                      // now overwrite with user constraint annotations
+                      userConstraintSpans.forEach(function (span, idx) {
+                          for (var i=span[0]; i<span[1]; i++) {
+                              currentAnnotations[i] = {'tag': 'USER', 'confidence': 1.}
+                          }
+                      });
+
+                      // now spans are correct in currentAnnotations
+                      // TODO: remember to ensure currentSurfaceRepresentation has whitespace at beginning and end
+                      renderAnnotations({'text': currentSurfaceRepresentation, 'annotations': currentAnnotations})
+
+                      // TODO: now render output in the component -- maintain user annotations, but add QE annotation around the user annotation
+                  }
+              ).error(function () {
+                  // scope.state.translationPending = false;
+              }
+          );
           // TODO: handle failure and timeout
         }
 
-        var renderAnnotations = function(annotaionObj) {
+        var renderAnnotations = function(annotationObj) {
+            // sanity: enumerate the surface representation character by character.
+            //      - append a character span for each character:
+            //         - when the current index is found in the annotation index, add the TAG's markup according to the tag id
+
           // Placeholder: render an annotation object in the UI
+            // we know the constraint annotations are in order
+            // var starts = constraintAnnotations.map(function (tup, _, _) {
+            //     return tup[0];
+            // });
+            // var ends = constraintAnnotations.map(function (tup, _, _) {
+            //     return tup[1];
+            // });
+            //
+            // var outputChars = outputTranslation.split('');
+            // var tagging = false;
+            // var outputHtml = outputChars.map(function (char, index, _) {
+            //     if (starts.indexOf(index) > -1) {
+            //         // this index starts a constraint
+            //         tagging = true;
+            //     } else if (ends.indexOf(index) > -1) {
+            //         // a constraint just finished
+            //         tagging = false;
+            //     }
+            //
+            //     if (tagging) {
+            //         if (/^\s+$/.test(char)) {
+            //             return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '</span>';
+            //         } else {
+            //             return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + char + '<div class="qe-bar-user"></div></span>';
+            //         }
+            //     } else {
+            //         if (/^\s+$/.test(char)) {
+            //             return '<span class="post-editor-whitespace word-level-qe-token">' + char + '</span>';
+            //         } else {
+            //             return '<span class="post-editor-whitespace word-level-qe-token">' + char + '</span>';
+            //         }
+            //     }
+            // }).join('');
+            //
+            //
+            // // TODO: possibly callback to QE server if the component is set to support both QE and Constrained Decoding
+            //
+            // $el.find('.post-editor').first().html(outputHtml);
+            // scope.state.translationPending = false;
+            // // TODO: handle undo stack
+
         };
 
       },

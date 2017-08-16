@@ -30,6 +30,9 @@ handyCATconfig.constant('parallelXliffCreatorUrl', parallelXliffCreatorUrl);
 var constrainedDecodingUrl = 'imt/constrained_decoding';
 handyCATconfig.constant('constrainedDecodingUrl', constrainedDecodingUrl);
 
+var apeQeUrl = 'qe/word_level';
+handyCATconfig.constant('apeQeUrl', apeQeUrl);
+
 // autocompleter URLs
 //var lmAutocompleterURL = baseURL + ':8010/lm_autocomplete';
 // the two autocompleter types that we currently support

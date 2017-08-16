@@ -447,45 +447,49 @@ app.post('/imt/constrained_decoding', function(req,res) {
 // after qe tagging, the number of spans should equal the number of tags
 //     - spans in-between qe spans are implicitly whitespace
 
-// Constrained Decoding
-// - we need to know the indexes of the user constraints, because these need to be preserved across PRIMT cycles
-app.get('/qe/word_level', function(req,res) {
-    console.log('IMT ENDPOINT');
-    console.log(req.query);
+// APE-QE
+// - we need to return span level annotations with confidence scores
+app.post('/qe/word_level', function(req,res) {
+    console.log('QE ENDPOINT');
+    console.log(req.body);
 
     // Mock the output from tagging
-    res.json({"annotations": [
-        {"start": 1, "end": 2, "label": "OK", "confidence": 0.5},
-        {"start": 4, "end": 6, "label": "OK", "confidence": 0.5},
-    ]});
+    // res.json(
+    //     {
+    //           "qe_labels": [
+    //               {
+    //                   "confidence": 1,
+    //                   "span": [
+    //                       1,
+    //                       6
+    //                   ],
+    //                   "tag": "OK"
+    //               }
+    //           ]
+    // });
 
-    // var lang_code_mapping = {
-    //     'en-EN': 'en',
-    //     'fr-FR': 'fr',
-    //     'de-DE': 'de',
-    //     'pt-PT': 'pt',
-    //     'pt-BR': 'pt',
-    //     'ga-IE': 'ga'
-    // }
     // TODO: error when lang_code is not found -- otherwise this can fail silently
-    // nimtUrl = 'http://localhost:5000/nimt';
-    // var options = {
-    //     uri: nimtUrl,
-    //     method: 'POST',
-    //     json: {
-    //         "source_lang": lang_code_mapping[req.query.source_lang],
-    //         "target_lang": lang_code_mapping[req.query.target_lang],
-    //         "source_sentence": req.query.source_segment,
-    //         "target_prefix": req.query.target_prefix,
-    //         "request_time": req.query.request_time
-    //     }
-    // };
+    var apeQeUrl = 'http://localhost:5007/word_level_qe';
+    var options = {
+        uri: apeQeUrl,
+        method: 'POST',
+        json: {
+            // "source_lang": lang_code_mapping[req.query.source_lang],
+            // "target_lang": lang_code_mapping[req.query.target_lang],
+            // TODO: remove language pair hard-coding
+            "src_lang": 'en',
+            "trg_lang": 'de',
+            "src_segment": req.body.src_segment,
+            "trg_segment": req.body.trg_segment,
+            "request_time": req.body.request_time
+        }
+    };
 
-    // request(options, function (error, response, body) {
-    //     if (error && error.code === 'ECONNREFUSED'){
-    //         console.error('Refused connection to: ' + nimtUrl);
-    //     }
-    // }).pipe(res);
+    request(options, function (error, response, body) {
+        if (error && error.code === 'ECONNREFUSED'){
+            console.error('Refused connection to: ' + apeQeUrl);
+        }
+    }).pipe(res);
 });
 
 
