@@ -2,9 +2,9 @@ angular.module('handycat.wordLevelQe', ['handycatConfig']);
 
 // WORKING: inject widgetConfiguration service
 angular.module('handycat.wordLevelQe')
-.directive('wordLevelQeEditor', ['widgetConfiguration', 'constrainedDecodingUrl', '$log',
+.directive('wordLevelQeEditor', ['widgetConfiguration', 'constrainedDecodingUrl', 'apeQeUrl', '$log',
                                  'tokenizer', '$compile', '$timeout', '$http',
-  function(widgetConfiguration, constrainedDecodingUrl, $log, tokenizer, $compile, $timeout, $http) {
+  function(widgetConfiguration, constrainedDecodingUrl, apeQeUrl, $log, tokenizer, $compile, $timeout, $http) {
     // take the text inside the element, tokenize it, and wrap in spans that we can interact with
     return {
       scope: {
@@ -222,6 +222,7 @@ angular.module('handycat.wordLevelQe')
           }
         };
 
+
         // we want to map the original segment through QE each time, then at each editing step update annotations as needed
         var updateTargetSegment = function(qeAnnotate, newValue) {
 
@@ -274,6 +275,7 @@ angular.module('handycat.wordLevelQe')
           if (qeAnnotate === true) {
             // The "reannotation" should only happen on the first call
             newTargetSegment = scope.localTargetSegment;
+            // Note addition of whitespace on both sides
             var posteditorText = '    ' + scope.localTargetSegment + '    ';
             // var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
 
@@ -584,7 +586,7 @@ angular.module('handycat.wordLevelQe')
               console.log('Text: ' + $thisEl.text());
               currentSurfaceRepresentation = currentSurfaceRepresentation + $thisEl.text();
 
-              // TODO: this is a hack, not clear why there can be token elements which contain no text
+              // TODO: this is a hack, it's not clear why there can be token elements which contain no text
               var idxOffset = (currentSurfaceRepresentation.length - 1) - index;
               console.log('len Rep: ' + currentSurfaceRepresentation.length);
               if ($thisEl.attr('data-qelabel') == 'user') {
@@ -623,7 +625,6 @@ angular.module('handycat.wordLevelQe')
               userConstraintSpans.push(currentConstraintSpan)
               allUserConstraints.push(currentUserConstraint)
           }
-          debugger;
 
           // concat the tokens in each constraint together, and trim whitespace at the beginning and end
           allUserConstraints = allUserConstraints.map(function (currentValue, idx, arr) {
@@ -639,25 +640,34 @@ angular.module('handycat.wordLevelQe')
               console.log('substring: ' + currentSurfaceRepresentation.slice(value[0], value[1]));
           });
 
-
-
           // Now we're ready to ask the server for Quality Estimation span annotations
-          // remember that the surface string isn't going to change, and user constraints are going to stay
+          // remember that the surface string isn't going to change, and user constraints are going to stay, overriding anything we get back
           // UI state changes while we're waiting for QE?
+          // moving to span level format
+          // {
+          //   'text': <the surface text that's currently displaying>,
+          //   'annotations': {<index>: {
+          // }
+
           // TODO: pulse colors when QE arrives
-          // scope.state.translationPending = true;
+          // scope.state.qePending = true;
+          // Note: what we send to the server should be _exactly_ the surface representation
+          // Note: except for the whitespace at the beginning and end
+          // Note: when we get the QE annotations back, we offset them by the whitespaces at beginning and end
+          var numStartWhitespaceChars = currentSurfaceRepresentation.match(/^\s+/)[0].length;
+          var qeInputString = currentSurfaceRepresentation.trim();
 
           // set the timestamp for the current request
           // var reqTimestamp = Date.now();
-          // $http.post(apeQeUrl,
-          //     {
-          //       src_lang: 'en',
-          //       trg_lang: 'de',
-          //       src_segment: 'Select the target screen in the tree control .',
-          //       trg_segment: 'Wählen Sie das Ziel in der Struktur zu steuern.'
-          //     },
-          //     {headers: {'Content-Type': 'application/json'}
-          // )
+          $http.post(apeQeUrl,
+              {
+                src_lang: 'en',
+                trg_lang: 'de',
+                src_segment: 'Select the target screen in the tree control .',
+                trg_segment: 'Wählen Sie das Ziel in der Struktur zu steuern.'
+              },
+              {headers: {'Content-Type': 'application/json'}
+          )
             // "qe_labels": [
             //     {
             //         "confidence": 1,
@@ -725,8 +735,9 @@ angular.module('handycat.wordLevelQe')
           // TODO: handle failure and timeout
         }
 
-
-
+        var renderAnnotations = function(annotaionObj) {
+          // Placeholder: render an annotation object in the UI
+        };
 
       },
       controller: function($scope) {}
