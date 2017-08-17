@@ -21,9 +21,7 @@ angular.module('handycat.wordLevelQe')
       restrict: 'E',
       link: function(scope, $el, attrs) {
 
-          // TODO: implement qeAnnotation mode and constrainedDecoding mode
-          // TODO: hack in dev
-          // TODO: qe server must come after constrained decoding server
+          // TODO: implement qeAnnotation mode and constrainedDecoding mode in config
           // TODO: server caches inputs on disk -- for our experiments, the first QE query is always the same
           scope.constrainedDecoding = false;
           scope.qeAnnotation = true;
@@ -77,7 +75,7 @@ angular.module('handycat.wordLevelQe')
                           range.insertNode(document.createTextNode(' ' + textInSpan + ' '));
                           scope.state.action = 'default';
 
-                          var oldNewTarget = updateTargetSegment();
+                          updateTargetSegment('insert');
                           // log this action
                           // scope.logAction(
                           //   {
@@ -92,8 +90,8 @@ angular.module('handycat.wordLevelQe')
                       } else {
                           // debugging: this removes a class from the output
                           // WARNING: `modify` is a non-standard function
-                          sel.modify('extend', 'forward', 'character');
-                          sel.modify('extend', 'backward', 'character');
+                          // sel.modify('extend', 'forward', 'character');
+                          // sel.modify('extend', 'backward', 'character');
                           range = sel.getRangeAt(0).cloneRange();
                           sel.removeAllRanges();
 
@@ -187,7 +185,6 @@ angular.module('handycat.wordLevelQe')
               $tooltipSpan.attr('contentEditable', true).text(currentText);
 
               $tooltipSpan.focus();
-              // $el.find('.tooltip-span').first().focus();
               scope.showTooltip = false;
 
               scope.state.action = 'replacing';
@@ -230,19 +227,12 @@ angular.module('handycat.wordLevelQe')
 
           scope.$on('clear-editor', function () {
               console.error('Not Implemented');
-              // updateTargetSegment('Modify this text to translate...');
-              // updateTargetSegment();
           });
 
           // called when user clicks undo
-          // TODO: fixed effect rendering from static representation
-          // TODO: updateTargetSegment shouldn't be used here
-          // TODO: render function handles undo stack, not updateTargetSegment
           var resetTargetSegment = function () {
               var previousState;
-              debugger;
               if (scope.state.undoStack.length > 0) {
-                  // console.log('Undo stack: ' + scope.state.undoStack);
                   previousState = scope.state.undoStack.pop();
                   renderAnnotations(previousState);
               }
@@ -255,8 +245,8 @@ angular.module('handycat.wordLevelQe')
                   console.log('ESCAPE WAS PRESSED')
                   if (currentState === 'replacing' || currentState === 'inserting') {
                       // this is the call which updates the new UI state
-                      // TODO: don't do this unless user actually changed something
-                      updateTargetSegment();
+                      // IDEA: don't do this unless user actually changed something
+                      updateTargetSegment('insert');
                       // var oldNewTarget = updateTargetSegment();
                       // var origTarget = oldNewTarget[0];
                       // var newTarget = oldNewTarget[1];
@@ -274,9 +264,8 @@ angular.module('handycat.wordLevelQe')
                       // );
                   } else {
                       // render the UI
-                      // TODO: this is removing the markup
-                      $el.find('.tooltip-span').contents().unwrap();
-                      $el.find('.tooltip-span').remove();
+                      // $el.find('.tooltip-span').contents().unwrap();
+                      // $el.find('.tooltip-span').remove();
                       // put the UI back in the state before the highlight event
                       renderAnnotations(scope.previousState);
                   }
@@ -312,16 +301,29 @@ angular.module('handycat.wordLevelQe')
           });
 
 
-          var getCurrentAnnotationMap = function () {
+          var getCurrentAnnotationMap = function (mode) {
 
             // take the current input representation, including any user constraints, and use it to query the constrained decoder
             // get the text from the user-added constraints from the current local segment
-            var currentTokenElements = $el.find('.word-level-qe-token');
 
-            // TODO: we need to normalize whitespace along the way
+            // TODO: this shouldn't be required, there is a bug somewhere
+            if(mode === 'insert') {
+                $el.find('.tooltip-span').remove();
+                // $digest or $apply
+                scope.$digest();
+                var currentTokenElements = $el.find('.word-level-qe-token');
+                debugger;
+            }
+
+            // TODO: BUG -- there can be tags that wrap other tags -- fix this
+            var currentTokenElements = $el.find('.word-level-qe-token').filter(function (index, element) {
+                return !($(element).find('span.word-level-qe-token').length)
+            });
+
             // we need the span indices of user constraints [(start, end), (start, end), ...]
             // iterate through elements in localSegment, starting constraints when a new `data-qe-label="user"` is found
-            // they may be rearranged by the MT engine
+            // constraints may be rearranged by the MT engine
+            // Note we also need to normalize whitespace along the way -- consecutive whitespace isn't allowed
 
             var allUserConstraints = [];
             var currentUserConstraint = [];
@@ -337,15 +339,16 @@ angular.module('handycat.wordLevelQe')
             var currentChar = undefined;
             currentTokenElements.each(function (index, element) {
                 var $thisEl = $(element);
-                console.log('EL: ' + $thisEl);
-                console.log('Text: ' + $thisEl.text());
+                // console.log('EL: ' + $thisEl);
+                // console.log('Text: ' + $thisEl.text());
                 if ((currentSurfaceRepresentation + $thisEl.text()).length > currentSurfaceRepresentation.length) {
                     // hack: this is an actual character
                     previousChar = currentChar;
                     currentChar = $thisEl.text();
                 }
+                // console.log('previousChar :' + previousChar);
+                // console.log('currentChar: ' + currentChar);
 
-                // TODO: handle helper whitespace at the end
                 // TODO: use spans in constrained decoding, don't duplicate logic
                 var consecutiveWhitespace = false;
                 if (/^\s+$/.test($thisEl.text())) {
@@ -364,26 +367,28 @@ angular.module('handycat.wordLevelQe')
                 if (!consecutiveWhitespace) {
                   currentSurfaceRepresentation = currentSurfaceRepresentation + $thisEl.text();
                 }
+                // currentSurfaceRepresentation = currentSurfaceRepresentation + $thisEl.text();
 
                 // TODO: this is a hack, it's not clear why there can be token elements which contain no text
-                var idxOffset = (currentSurfaceRepresentation.length - 1) - index - whiteSpaceOffset;
-                console.log('len Rep: ' + currentSurfaceRepresentation.length);
-                if ($thisEl.attr('data-qelabel') == 'user') {
+                // var idxOffset = (currentSurfaceRepresentation.length - 1) - index - whiteSpaceOffset;
+                var idxOffset = (currentSurfaceRepresentation.length - 1) - index;
+                // console.log('len Rep: ' + currentSurfaceRepresentation.length);
+                if ($thisEl.attr('data-qelabel') == 'user' && !consecutiveWhitespace) {
                     if (!prevTokenWasConstraint) {
                         // starting
-                        console.log('starting');
+                        // console.log('starting');
                         currentConstraintSpan.push(index + idxOffset);
                         currentUserConstraint = [$thisEl.text()];
                         prevTokenWasConstraint = true;
                     } else {
                         // continuing
-                        console.log('continuing');
+                        // console.log('continuing');
                         currentUserConstraint.push($thisEl.text());
                     }
                 } else {
                     if (prevTokenWasConstraint) {
                         // finishing
-                        console.log('finishing');
+                        // console.log('finishing');
                         // if we're finishing, add 1
                         currentConstraintSpan.push(index + idxOffset + 1);
                         userConstraintSpans.push(currentConstraintSpan);
@@ -394,7 +399,7 @@ angular.module('handycat.wordLevelQe')
                         prevTokenWasConstraint = false;
                     }
                 }
-                console.log("Index: " + index);
+                // console.log("Index: " + index);
             });
             // finally if the last token was part of a constraint
             if (currentUserConstraint.length > 0) {
@@ -421,6 +426,10 @@ angular.module('handycat.wordLevelQe')
                 console.log('constraint at: ' + span);
                 console.log(currentSurfaceRepresentation.slice(span[0], span[1]))
             });
+
+            // just make sure there's a bit of helper whitespace at the end of the surface representation
+            currentSurfaceRepresentation = currentSurfaceRepresentation.replace(/\s+$/, '');
+            currentSurfaceRepresentation = currentSurfaceRepresentation + '   ';
 
             return {'text': currentSurfaceRepresentation, 'annotations': currentAnnotations};
 
@@ -514,6 +523,7 @@ angular.module('handycat.wordLevelQe')
                           'text': outputTranslation,
                           'annotations': annotationMap
                       }
+
                       deferred.resolve(annotationObj);
 
                       scope.state.translationPending = false;
@@ -547,7 +557,7 @@ angular.module('handycat.wordLevelQe')
               // Note: what we send to the server should be _exactly_ the surface representation in the UI
               // Note: except for the whitespace at the beginning and end
               // Note: when we get the QE annotations back, we offset them by the whitespaces at beginning and end
-              console.log(currentAnnotationObj);
+              // console.log(currentAnnotationObj);
               var currentSurfaceRepresentation = currentAnnotationObj['text'];
               var numStartWhitespaceChars = currentSurfaceRepresentation.match(/^\s+/)[0].length;
               var qeInputString = currentSurfaceRepresentation.trim();
@@ -582,7 +592,7 @@ angular.module('handycat.wordLevelQe')
                         // TODO: use the leading whitespace offset on the qe annotations
 
                         // first go through qe annotations from server
-                        console.log('QE output: ');
+                        // console.log('QE output: ');
                         // TODO: deep copy annotation obj, and modify that
 
                         var currentAnnotations = {};
@@ -592,9 +602,9 @@ angular.module('handycat.wordLevelQe')
                             var span = obj['span']
                             span[0] += numStartWhitespaceChars;
                             span[1] += numStartWhitespaceChars;
-                            console.log('Span: ' + span);
-                            console.log('substring: ' + currentSurfaceRepresentation.slice(span[0], span[1]));
-                            console.log('tag: ' + obj['tag']);
+                            // console.log('Span: ' + span);
+                            // console.log('substring: ' + currentSurfaceRepresentation.slice(span[0], span[1]));
+                            // console.log('tag: ' + obj['tag']);
 
                             for (var i = span[0]; i < span[1]; i++) {
                                 currentAnnotations[i] = {'tag': obj['tag'], 'confidence': obj['confidence']}
@@ -628,6 +638,23 @@ angular.module('handycat.wordLevelQe')
         // render output in the component -- maintain user annotations, but add QE annotation around the user annotation
         // TODO: log actions when UI state changes, this function could take event that caused the change as input
         scope.previousState = undefined;
+        var addUndo = function (annotationObj) {
+          // Undo Stack
+          if (scope.previousState != null) {
+
+              if (scope.state.undoStack.length >= 1) {
+                  var lastIndex = scope.state.undoStack.length - 1;
+                  if (JSON.stringify(scope.previousState) !== JSON.stringify(scope.state.undoStack[lastIndex])) {
+                      scope.state.undoStack.push(scope.previousState);
+                  }
+              } else {
+                  scope.state.undoStack.push(scope.previousState);
+              }
+          }
+          scope.previousState = annotationObj;
+          // End Undo Stack
+
+        }
         var renderAnnotations = function(annotationObj) {
           // sanity: enumerate the surface representation character by character.
           //      - append a character span for each character:
@@ -647,20 +674,6 @@ angular.module('handycat.wordLevelQe')
           scope.targetSegment = currentText;
           // END GLOBAL DATA MODEL
 
-          // Undo Stack
-          if (scope.previousState != null) {
-
-            if (scope.state.undoStack.length >= 1) {
-              var lastIndex = scope.state.undoStack.length - 1;
-              if (JSON.stringify(scope.previousState) !== JSON.stringify(scope.state.undoStack[lastIndex])) {
-                  scope.state.undoStack.push(scope.previousState);
-              }
-            } else {
-              scope.state.undoStack.push(scope.previousState);
-            }
-          }
-          scope.previousState = annotationObj;
-          // End Undo Stack
 
           var surfaceText = annotationObj['text'];
           var annotations = annotationObj['annotations'];
@@ -712,12 +725,28 @@ angular.module('handycat.wordLevelQe')
         //     - QE returns a promise which either (1) resolves immediately or (2) calls the QE server
         //     - all server functions pass the current annotationObj through
         //     - after the QE server promise resolves, UI gets rendered
-        var updateTargetSegment = function () {
+        var updateTargetSegment = function (mode) {
 
                 // handling new content inserted by user
                 var userAddedText = $el.find('.tooltip-span').text();
+                userAddedText = userAddedText.replace(/\s+/g, ' ');
+                console.log('user added text: ' + userAddedText);
+                console.log('mode: ' + mode);
+
+                // if (!/^\s+$/.test(userAddedText)) {
+                //   userAddedText = $.trim(userAddedText);
+                // }
 
                 // reannotate the userAddedText with special user spans, all other spans retain their original annotations
+                var startingSpace = '';
+                if (userAddedText.match(/^\s+/)) {
+                    startingSpace = userAddedText.match(/^\s+/)[0];
+                }
+                var trailingSpace = '';
+                if (userAddedText.match(/\s+$/)) {
+                  trailingSpace = userAddedText.match(/\s+$/)[0];
+                }
+
                 userAddedText = $.trim(userAddedText);
                 var newUserTokens = userAddedText.split('');
                 var newUserHtml = newUserTokens.map(function (m) {
@@ -727,6 +756,13 @@ angular.module('handycat.wordLevelQe')
                         return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '<div class="qe-bar-user"></div></span>';
                     }
                 }).join('');
+                if (startingSpace.length > 0) {
+                  newUserHtml = '<span class="post-editor-whitespace word-level-qe-token"> </span>' + newUserHtml;
+                }
+                if (trailingSpace.length > 0) {
+                  newUserHtml = newUserHtml + '<span class="post-editor-whitespace word-level-qe-token"> </span>';
+                }
+
                 // add the new annotated user data into the current tooltip span
                 $el.find('.tooltip-span').html(newUserHtml);
 
@@ -734,13 +770,20 @@ angular.module('handycat.wordLevelQe')
                 $el.find('.tooltip-span').contents().unwrap();
                 $el.find('.tooltip-span').remove();
 
+                // The $digest is important here, otherwise component state won't be ready
+                if(mode === 'insert') {
+                    // $digest or $apply
+                    scope.$digest();
+                }
+
                 // Now user constraints are now annotated in the UI
 
                 // now rebuild the annotation object with the surface representation + annotation indices
                 // in baseline and constrainedDecoding mode we just show the user-added spans underlined
                 // in qe mode we also annotate for QE
-
-                    var currentAnnotationMap = getCurrentAnnotationMap();
+                $timeout(function () {
+                    var currentAnnotationMap = getCurrentAnnotationMap(mode);
+                    // console.log(currentAnnotationMap);
 
                     // this Async block updates the UI with the results of the configured services
                     var gbsPromise = queryConstrainedDecoding(currentAnnotationMap);
@@ -749,6 +792,7 @@ angular.module('handycat.wordLevelQe')
                         var qePromise = queryApeQe(currentAnnotationMap);
                         qePromise.then(function (newAnnotationMap) {
                             // now render UI
+                            addUndo(newAnnotationMap);
                             renderAnnotations(newAnnotationMap);
                         }, function (reason) {
 
@@ -762,6 +806,7 @@ angular.module('handycat.wordLevelQe')
                     });
                     // GBS Promise resolves with annotation map
                     // Note: GBS overwrites the annotation map, QE modifies it
+                }, 0);
 
 
                     // Note: this method requires us to call color annotation every time, otherwise colors will disappear when we replace element HTML
