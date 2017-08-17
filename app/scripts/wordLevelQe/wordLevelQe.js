@@ -180,7 +180,7 @@ angular.module('handycat.wordLevelQe')
           scope.$on('replace-event', function (e) {
               console.log('HEARD REPLACE');
               // clear text and make contenteditable
-              var $tooltipSpan = $el.find('.tooltip-span').first();
+              var $tooltipSpan = $el.find('.tooltip-span');
               var currentText = $tooltipSpan.text();
               $tooltipSpan.attr('contentEditable', true).text(currentText);
 
@@ -192,7 +192,7 @@ angular.module('handycat.wordLevelQe')
 
           scope.$on('insert-event', function (e) {
               console.log('HEARD INSERT');
-              var tooltipElement = $el.find('.tooltip-span').first().attr('contentEditable', true).text('  ').focus()[0];
+              var tooltipElement = $el.find('.tooltip-span').attr('contentEditable', true).text('  ').focus()[0];
               // now select the new text in the element
               var selection = window.getSelection();
               var range = document.createRange();
@@ -334,43 +334,61 @@ angular.module('handycat.wordLevelQe')
 
             var whiteSpaceOffset = 0;
             var sawText = false;
-            var previousChar = undefined;
-            var currentChar = undefined;
+            var previousChar = '';
+            var currentChar = '';
             currentTokenElements.each(function (index, element) {
                 var $thisEl = $(element);
                 // console.log('EL: ' + $thisEl);
                 // console.log('Text: ' + $thisEl.text());
-                if ((currentSurfaceRepresentation + $thisEl.text()).length > currentSurfaceRepresentation.length) {
+                if ($thisEl.text().length > 0) {
                     // hack: this is an actual character
                     previousChar = currentChar;
                     currentChar = $thisEl.text();
+                    if (currentChar.length != 1) {
+                      debugger;
+                    }
+                } else {
+                  // 0 length character
+                  debugger;
                 }
                 // console.log('previousChar :' + previousChar);
                 // console.log('currentChar: ' + currentChar);
 
                 // TODO: use spans in constrained decoding, don't duplicate logic
                 var consecutiveWhitespace = false;
-                if (/^\s+$/.test($thisEl.text())) {
+                if (/^\s+$/.test(currentChar)) {
                     if (sawText && /^\s+$/.test(previousChar)) {
-                        // consecutive whitespace, remove it
-                        whiteSpaceOffset += 1;
+                        console.log('NO PASS')
+                        // consecutive whitespace, we won't use this character
                         consecutiveWhitespace = true;
+                        console.log('index: ' + index);
                     } else {
                         consecutiveWhitespace = false;
+                        console.log('PASS')
                     }
                 } else {
-                    sawText = true;
+                    console.log('PASS')
+                    if (previousChar.length != 0) {
+                      sawText = true;
+                    }
                     consecutiveWhitespace = false;
                 }
 
+                console.log('currentChar: ' + currentChar + ' len: ' + currentChar.length);
+              console.log('previousChar: ' + previousChar + ' len: ' + previousChar.length);
                 if (!consecutiveWhitespace) {
+                  console.log('YES')
+                  // we use $thisEl.text() instead of currentChar because there can be elements with no text
                   currentSurfaceRepresentation = currentSurfaceRepresentation + $thisEl.text();
+                } else {
+                  console.log('NO')
                 }
+                console.log('REP: ' + currentSurfaceRepresentation);
+
                 // currentSurfaceRepresentation = currentSurfaceRepresentation + $thisEl.text();
 
                 // TODO: this is a hack, it's not clear why there can be token elements which contain no text
-                // var idxOffset = (currentSurfaceRepresentation.length - 1) - index;
-                var idxOffset = (currentSurfaceRepresentation.length - 1) - index - whiteSpaceOffset;
+                var idxOffset = (currentSurfaceRepresentation.length - 1) - index;
                 // console.log('len Rep: ' + currentSurfaceRepresentation.length);
                 if ($thisEl.attr('data-qelabel') == 'user' && !consecutiveWhitespace) {
                     if (!prevTokenWasConstraint) {
@@ -657,7 +675,8 @@ angular.module('handycat.wordLevelQe')
           scope.previousState = annotationObj;
           // End Undo Stack
 
-        }
+        };
+
         var renderAnnotations = function(annotationObj) {
           // sanity: enumerate the surface representation character by character.
           //      - append a character span for each character:
@@ -729,7 +748,6 @@ angular.module('handycat.wordLevelQe')
         //     - all server functions pass the current annotationObj through
         //     - after the QE server promise resolves, UI gets rendered
         var updateTargetSegment = function (mode) {
-
                 // handling new content inserted by user
                 var userAddedText = $el.find('.tooltip-span').text();
                 userAddedText = userAddedText.replace(/\s+/g, ' ');
