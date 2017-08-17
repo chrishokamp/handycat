@@ -312,7 +312,6 @@ angular.module('handycat.wordLevelQe')
                 // $digest or $apply
                 scope.$digest();
                 var currentTokenElements = $el.find('.word-level-qe-token');
-                debugger;
             }
 
             // TODO: BUG -- there can be tags that wrap other tags -- fix this
@@ -370,8 +369,8 @@ angular.module('handycat.wordLevelQe')
                 // currentSurfaceRepresentation = currentSurfaceRepresentation + $thisEl.text();
 
                 // TODO: this is a hack, it's not clear why there can be token elements which contain no text
-                // var idxOffset = (currentSurfaceRepresentation.length - 1) - index - whiteSpaceOffset;
-                var idxOffset = (currentSurfaceRepresentation.length - 1) - index;
+                // var idxOffset = (currentSurfaceRepresentation.length - 1) - index;
+                var idxOffset = (currentSurfaceRepresentation.length - 1) - index - whiteSpaceOffset;
                 // console.log('len Rep: ' + currentSurfaceRepresentation.length);
                 if ($thisEl.attr('data-qelabel') == 'user' && !consecutiveWhitespace) {
                     if (!prevTokenWasConstraint) {
@@ -390,7 +389,10 @@ angular.module('handycat.wordLevelQe')
                         // finishing
                         // console.log('finishing');
                         // if we're finishing, add 1
-                        currentConstraintSpan.push(index + idxOffset + 1);
+                        // TODO: there is an off by one bug here somewhere
+                        currentConstraintSpan.push(index + idxOffset);
+                        // currentConstraintSpan.push(index + idxOffset + 1);
+
                         userConstraintSpans.push(currentConstraintSpan);
                         currentConstraintSpan = [];
                         // push the finished constraint, use .slice() to clone it
@@ -414,6 +416,7 @@ angular.module('handycat.wordLevelQe')
             allUserConstraints = allUserConstraints.map(function (currentValue, idx, arr) {
                 return currentValue.join('').trim();
             });
+            console.log('allUserConstraints: ' + allUserConstraints);
 
             console.log(userConstraintSpans);
             console.log(currentSurfaceRepresentation);
