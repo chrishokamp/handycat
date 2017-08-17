@@ -12,8 +12,8 @@ angular.module('handycat.wordLevelQe')
         targetSegment: '=',
         targetLang: '@',
         sourceLang: '@',
-        qeAnnotation: '=',
-        constrainedDecoding: '=',
+        // qeAnnotation: '=',
+        // constrainedDecoding: '=',
         isActive: '=',
         // logAction: '&'
       },
@@ -22,6 +22,11 @@ angular.module('handycat.wordLevelQe')
       link: function(scope, $el, attrs) {
 
           // TODO: implement qeAnnotation mode and constrainedDecoding mode
+          // TODO: hack in dev
+          // TODO: qe server must come after constrained decoding server
+          // TODO: server caches inputs on disk -- for our experiments, the first QE query is always the same
+          scope.constrainedDecoding = false;
+          scope.qeAnnotation = true;
 
           scope.state = {
               'action': 'default',
@@ -73,8 +78,6 @@ angular.module('handycat.wordLevelQe')
                           scope.state.action = 'default';
 
                           var oldNewTarget = updateTargetSegment();
-                          var origTarget = oldNewTarget[0];
-                          var newTarget = oldNewTarget[1];
                           // log this action
                           // scope.logAction(
                           //   {
@@ -158,9 +161,12 @@ angular.module('handycat.wordLevelQe')
               // delete this span, update targetSegment model
               $el.find('.tooltip-span').remove();
               scope.showTooltip = false;
-              var oldNewTarget = updateTargetSegment();
-              var origTarget = oldNewTarget[0];
-              var newTarget = oldNewTarget[1];
+              updateTargetSegment();
+
+              // var oldNewTarget = updateTargetSegment();
+              // var origTarget = oldNewTarget[0];
+              // var newTarget = oldNewTarget[1];
+
               // log this action
               // scope.logAction(
               //   {
@@ -223,207 +229,23 @@ angular.module('handycat.wordLevelQe')
           });
 
           scope.$on('clear-editor', function () {
-              updateTargetSegment('Modify this text to translate...');
+              console.error('Not Implemented');
+              // updateTargetSegment('Modify this text to translate...');
+              // updateTargetSegment();
           });
 
           // called when user clicks undo
           // TODO: fixed effect rendering from static representation
           // TODO: updateTargetSegment shouldn't be used here
+          // TODO: render function handles undo stack, not updateTargetSegment
           var resetTargetSegment = function () {
-              var previousSegment;
+              var previousState;
+              debugger;
               if (scope.state.undoStack.length > 0) {
                   // console.log('Undo stack: ' + scope.state.undoStack);
-                  previousSegment = scope.state.undoStack.pop();
-                  // console.log('previous segment: ' + previousSegment);
-                  updateTargetSegment(false, previousSegment);
+                  previousState = scope.state.undoStack.pop();
+                  renderAnnotations(previousState);
               }
-          };
-
-          // we want to map the original segment through QE each time, then at each editing step update annotations as needed
-          // This is effectively the god function:
-          // - updates the UI state triggered by a user interaction
-          //     - constrained decoding returns a promise which either (1) resolves immediately or (2) calls the server
-          //     - QE returns a promise which either (1) resolves immediately or (2) calls the QE server
-          //     - all server functions pass the current annotationObj through
-          //     - after the QE server promise resolves, UI gets rendered
-          var updateTargetSegment = function (qeAnnotate, newValue) {
-
-              // handling the undo stack
-              // TODO: modify undo stack to store segments + annotations, render again each time undo gets called
-              var origTargetSegment, newTargetSegment;
-              origTargetSegment = scope.localTargetSegment;
-
-              if (scope.state.undoStack.length > 0 && !newValue) {
-                  // push the old value to the undo stack if the user is not undoing something
-                  scope.state.undoStack.push(origTargetSegment);
-              } else {
-                  // if the undoStack is empty, add the first annotated representation, if it exists
-                  if (scope.state.undoStack.length === 0 && scope.hasOwnProperty('firstTargetSegment')) {
-                      console.log('Pushing: ' + scope.firstTargetSegment);
-                      scope.state.undoStack.push(scope.firstTargetSegment);
-                  }
-              }
-
-              // handling new content inserted by user
-              var userAddedText = $el.find('.tooltip-span').text();
-
-              // reannotate the userAddedText with special user spans, all other spans retain their original annotations
-              userAddedText = $.trim(userAddedText);
-              var newUserTokens = userAddedText.split('');
-              var newUserHtml = newUserTokens.map(function (m) {
-                  if (/^\s+$/.test(m)) {
-                      return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '</span>';
-                  } else {
-                      return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '<div class="qe-bar-user"></div></span>';
-                  }
-              }).join('');
-              // add the new annotated user data into the current tooltip span
-              $el.find('.tooltip-span').html(newUserHtml);
-
-              // now remove the tooltip span, leaving the contents
-              $el.find('.tooltip-span').contents().unwrap();
-              $el.find('.tooltip-span').remove();
-
-              // now rebuild the annotation object with the surface representation + annotation indices
-              // in baseline and constrainedDecoding mode we just show the user-added spans underlined
-              // in qe mode we also annotate for QE
-
-              if (newValue) {
-                  // Note: here we need to differentiate the user-provided text constraints from the qe-annotated segments
-                  // data-* attributes are used to indicate which spans were added by user
-                  newTargetSegment = newValue;
-                  scope.localTargetSegment = newTargetSegment;
-                  $el.find('.post-editor').first().html(newTargetSegment);
-              } else {
-                  newTargetSegment = $el.find('.post-editor').first().html();
-              }
-
-              if (qeAnnotate === true) {
-                  // TODO: call the QE server if we're in QE mode
-                  // TODO: qe server must come after constrained decoding server
-                  // TODO: server caches inputs on disk -- for our experiments, the first QE query is always the same
-                  // The "reannotation" should only happen on the first call
-                  newTargetSegment = scope.localTargetSegment;
-
-                  // Note addition of whitespace on both sides -- TODO: make this more explicit
-                  var posteditorText = '    ' + scope.localTargetSegment + '    ';
-                  // var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
-
-                  // IDEA: split on characters
-                  // var re = /\s+|[^\s!@#$%^&*(),.;:'"/?\\]+|[!@#$%^&*(),.;:'"/?\\]/g;
-
-                  // Key idea: annotations are stored in the DOM via data-* attributes, mapped to each token
-                  // split on characters
-                  // TODO: remove these random annotations -- annotations come from backend only
-                  var allTokens = posteditorText.split('');
-
-                  var prevClass = undefined;
-                  var qeClasses = ["qe-bar-good", "qe-bar-good", "qe-bar-good", "qe-bar-good", "qe-bar-bad"];
-                  var posteditorHtml = allTokens.map(function (m, idx, arr) {
-
-                      if (/^\s+$/.test(m)) {
-                          return '<span class="post-editor-whitespace word-level-qe-token">' + m + '</span>';
-                      } else {
-                          // check if we're continuing a word
-                          if (idx === 0 || /^\s+$/.test(arr[idx - 1])) {
-                              // we're starting a new class, select a new random label
-                              prevClass = qeClasses[Math.floor(Math.random() * qeClasses.length)];
-                          }
-                          return '<span class="post-editor-whitespace word-level-qe-token">' + m + '<div class="' + prevClass + '"></div></span>';
-                      }
-                  })
-
-
-                  $el.find('.post-editor').first().html(posteditorHtml);
-                  // hack
-                  // $el.find('.post-editor').find('.word-level-qe-token').each(function() {
-                  //     console.log($(this).text());
-                  //     if ($(this).text().length == 0) {
-                  //         $(this).remove();
-                  //     }
-                  // });
-
-                  scope.localTargetSegment = posteditorHtml;
-
-                  // the annotation is expected to occur only once -- the first time this function is called
-                  // thus we always push to the undo stack when annotate happens
-                  if (scope.state.undoStack.length === 0) {
-                      scope.firstTargetSegment = posteditorHtml;
-                      // console.log('pushing: ' + scope.firstTargetSegment);
-                      scope.state.undoStack.push(scope.firstTargetSegment);
-                  }
-              } else {
-                  scope.localTargetSegment = newTargetSegment;
-              }
-
-              // WORKING: moving towards doing the full update pass in this function alone
-
-
-// var promise = asyncGreet('Robin Hood');
-// promise.then(function(greeting) {
-//     alert('Success: ' + greeting);
-// }, function(reason) {
-//     alert('Failed: ' + reason);
-// }, function(update) {
-//     alert('Got notification: ' + update);
-// });
-
-              // Note: this method requires us to call color annotation every time, otherwise colors will disappear when we replace element HTML
-              // placeholder for calling the annotation function, which returns span annotations of the input text
-              // random color
-              // WORKING: the QE can actually be hard-coded, we don't need dynamic access because user edits are automatically "OK"
-
-              // automatically select text in .post-editor-whitespace spans on click
-              // $el.find('div.post-editor-whitespace').hover(
-              //   function() {
-              //     var origWidth = $(this).width();
-              //     this['origWidth'] = origWidth;
-              //     $(this).css('background-color','#87cefa')
-              //       // .animate({'width': '+=10'}, 200)
-              //   },
-              //   function() {
-              //     $(this).css('background-color', 'transparent')
-              //       // .animate({'width': this['origWidth']}, 200)
-              //   }
-              // ).click(function (){
-              //   // remove this span
-              //   var range, selection;
-              //
-              //   // the if/else here are for different browsers
-              //   // WORKING: support CTRL+click to expand selection, and ESC to remove it
-              //   // WORKING: for now, user needs to drag to select a span, disable auto-selection
-              //   if (window.getSelection && document.createRange) {
-              //     selection = window.getSelection();
-              //     range = document.createRange();
-              //     range.selectNodeContents(this);
-              //     selection.removeAllRanges();
-              //     selection.addRange(range);
-              //   } else if (document.selection && document.body.createTextRange) {
-              //     range = document.body.createTextRange();
-              //     range.moveToElementText(this);
-              //     range.select();
-              //   }
-              // });
-
-              $timeout(
-                  function () {
-                      scope.state.action = 'default';
-                  }, 0)
-
-              // GLOBAL DATA MODEL
-              // Updating the target segment data model for the actual document model (i.e. removing the markup associated with this component)
-              // remove any extra whitespace
-              var currentText = $el.find('.post-editor').first().text();
-              currentText = currentText.replace(/\s+/g, ' ');
-
-              // remove whitespace at beginning and end
-              currentText = currentText.replace(/^\s+/, '');
-              currentText = currentText.replace(/\s+$/, '');
-
-              // finally set the targetSegment to just the current string representation of the component
-              scope.targetSegment = currentText;
-
-              return [origTargetSegment, newTargetSegment]
           };
 
           // keybindings
@@ -434,9 +256,11 @@ angular.module('handycat.wordLevelQe')
                   if (currentState === 'replacing' || currentState === 'inserting') {
                       // this is the call which updates the new UI state
                       // TODO: don't do this unless user actually changed something
-                      var oldNewTarget = updateTargetSegment();
-                      var origTarget = oldNewTarget[0];
-                      var newTarget = oldNewTarget[1];
+                      updateTargetSegment();
+                      // var oldNewTarget = updateTargetSegment();
+                      // var origTarget = oldNewTarget[0];
+                      // var newTarget = oldNewTarget[1];
+
                       // log this action
                       var action = currentState === 'replacing' ? 'replace' : 'insert';
                       // scope.logAction(
@@ -449,20 +273,19 @@ angular.module('handycat.wordLevelQe')
                       //   }
                       // );
                   } else {
+                      // render the UI
+                      // TODO: this is removing the markup
                       $el.find('.tooltip-span').contents().unwrap();
                       $el.find('.tooltip-span').remove();
+                      // put the UI back in the state before the highlight event
+                      renderAnnotations(scope.previousState);
                   }
                   scope.showTooltip = false;
                   scope.state.action === 'default';
                   scope.$digest();
 
-                  // TESTING CONSTRAINED DECODING
-                  // console.log('Querying constrained decoding');
-                  // queryConstrainedDecoding();
-                  console.log('Querying APE QE');
-                  queryApeQe();
               }
-          }
+          };
 
           var handleUndo = function (e) {
               if (e.keyCode == 90 && e.ctrlKey) {
@@ -488,13 +311,122 @@ angular.module('handycat.wordLevelQe')
               }
           });
 
-          $timeout(function () {
-              // TODO: the `true` arg says to do QE annotation -- make this configurable in component initialization
-              updateTargetSegment(true);
-          }, 0);
+
+          var getCurrentAnnotationMap = function () {
+
+            // take the current input representation, including any user constraints, and use it to query the constrained decoder
+            // get the text from the user-added constraints from the current local segment
+            var currentTokenElements = $el.find('.word-level-qe-token');
+
+            // TODO: we need to normalize whitespace along the way
+            // we need the span indices of user constraints [(start, end), (start, end), ...]
+            // iterate through elements in localSegment, starting constraints when a new `data-qe-label="user"` is found
+            // they may be rearranged by the MT engine
+
+            var allUserConstraints = [];
+            var currentUserConstraint = [];
+            var userConstraintSpans = [];
+            var currentConstraintSpan = [];
+            var prevTokenWasConstraint = false;
+            var currentSurfaceRepresentation = '';
+            console.log('Getting user constraint idxs');
+
+            var whiteSpaceOffset = 0;
+            var sawText = false;
+            var previousChar = undefined;
+            var currentChar = undefined;
+            currentTokenElements.each(function (index, element) {
+                var $thisEl = $(element);
+                console.log('EL: ' + $thisEl);
+                console.log('Text: ' + $thisEl.text());
+                if ((currentSurfaceRepresentation + $thisEl.text()).length > currentSurfaceRepresentation.length) {
+                    // hack: this is an actual character
+                    previousChar = currentChar;
+                    currentChar = $thisEl.text();
+                }
+
+                // TODO: handle helper whitespace at the end
+                // TODO: use spans in constrained decoding, don't duplicate logic
+                var consecutiveWhitespace = false;
+                if (/^\s+$/.test($thisEl.text())) {
+                    if (sawText && /^\s+$/.test(previousChar)) {
+                        // consecutive whitespace, remove it
+                        whiteSpaceOffset += 1;
+                        consecutiveWhitespace = true;
+                    } else {
+                        consecutiveWhitespace = false;
+                    }
+                } else {
+                    sawText = true;
+                    consecutiveWhitespace = false;
+                }
+
+                if (!consecutiveWhitespace) {
+                  currentSurfaceRepresentation = currentSurfaceRepresentation + $thisEl.text();
+                }
+
+                // TODO: this is a hack, it's not clear why there can be token elements which contain no text
+                var idxOffset = (currentSurfaceRepresentation.length - 1) - index - whiteSpaceOffset;
+                console.log('len Rep: ' + currentSurfaceRepresentation.length);
+                if ($thisEl.attr('data-qelabel') == 'user') {
+                    if (!prevTokenWasConstraint) {
+                        // starting
+                        console.log('starting');
+                        currentConstraintSpan.push(index + idxOffset);
+                        currentUserConstraint = [$thisEl.text()];
+                        prevTokenWasConstraint = true;
+                    } else {
+                        // continuing
+                        console.log('continuing');
+                        currentUserConstraint.push($thisEl.text());
+                    }
+                } else {
+                    if (prevTokenWasConstraint) {
+                        // finishing
+                        console.log('finishing');
+                        // if we're finishing, add 1
+                        currentConstraintSpan.push(index + idxOffset + 1);
+                        userConstraintSpans.push(currentConstraintSpan);
+                        currentConstraintSpan = [];
+                        // push the finished constraint, use .slice() to clone it
+                        allUserConstraints.push(currentUserConstraint.slice());
+                        currentUserConstraint = [];
+                        prevTokenWasConstraint = false;
+                    }
+                }
+                console.log("Index: " + index);
+            });
+            // finally if the last token was part of a constraint
+            if (currentUserConstraint.length > 0) {
+                // TODO: confirm offset logic
+                var idxOffset = (currentSurfaceRepresentation.length - 1) - currentTokenElements.length;
+                currentConstraintSpan.push(currentTokenElements.length + idxOffset);
+                userConstraintSpans.push(currentConstraintSpan)
+                allUserConstraints.push(currentUserConstraint)
+            }
+
+            // concat the tokens in each constraint together, and trim whitespace at the beginning and end
+            allUserConstraints = allUserConstraints.map(function (currentValue, idx, arr) {
+                return currentValue.join('').trim();
+            });
+
+            console.log(userConstraintSpans);
+            console.log(currentSurfaceRepresentation);
+            var currentAnnotations = {};
+            // now overwrite with user constraint annotations
+            userConstraintSpans.forEach(function (span, idx) {
+                for (var i = span[0]; i < span[1]; i++) {
+                    currentAnnotations[i] = {'tag': 'USER', 'confidence': 1.}
+                }
+                console.log('constraint at: ' + span);
+                console.log(currentSurfaceRepresentation.slice(span[0], span[1]))
+            });
+
+            return {'text': currentSurfaceRepresentation, 'annotations': currentAnnotations};
+
+          }
 
           // query the constrained decoder, ask for a translation, once the request resolves, update the UI
-          // TODO: manage callback of this function
           var queryConstrainedDecoding = function (currentAnnotationObj) {
               var deferred = $q.defer();
 
@@ -514,7 +446,7 @@ angular.module('handycat.wordLevelQe')
               var currentUserConstraint = [];
               var prevTokenWasConstraint = false;
               currentTokenElements.each(function (index, element) {
-                  $thisEl = $(element);
+                  var $thisEl = $(element);
                   if ($thisEl.attr('data-qelabel') == 'user') {
                       if (!prevTokenWasConstraint) {
                           currentUserConstraint = [$thisEl.text()];
@@ -542,7 +474,6 @@ angular.module('handycat.wordLevelQe')
                   return currentValue.join('').trim();
               });
 
-              // debugger;
               // Now we're ready to ask the server for a lexically constrained translation
               // UI state changes while we're waiting for a translation
               // TODO: pulse colors when translation arrives
@@ -585,117 +516,39 @@ angular.module('handycat.wordLevelQe')
                       }
                       deferred.resolve(annotationObj);
 
-                      // TODO: handle undo stack
-                      // renderAnnotations(annotationObj);
-
                       scope.state.translationPending = false;
                   }
               ).error(function () {
                   scope.state.translationPending = false;
-                  // TODO: handle error
+                  // TODO: handle error (reject deferred)
               });
 
               // TODO: handle failure and timeout
             return deferred.promise;
 
-          }
+          };
 
           // query the constrained decoder, ask for a translation, once the request resolves, update the UI
-          // TODO: manage callback of this function
-          var queryApeQe = function () {
-              // take the current input representation, including any user constraints, and use it to query the constrained decoder
-              // get the text from the user-added constraints from the current local segment
-              var currentTokenElements = $el.find('.word-level-qe-token');
+          var queryApeQe = function (currentAnnotationObj) {
+              var deferred = $q.defer();
 
-              // WORKING: we need the span indices of user constraints [(start, end), (start, end), ...]
-              // iterate through elements in localSegment, starting constraints when a new `data-qe-label="user"` is found
-              // we don't need the string indices of the constraints, just the constraints themselves since, in general, they may be rearranged by the MT engine
-
-              var allUserConstraints = [];
-              var currentUserConstraint = [];
-              var userConstraintSpans = [];
-              var currentConstraintSpan = [];
-              var prevTokenWasConstraint = false;
-              var currentSurfaceRepresentation = '';
-              console.log('Getting user constraint idxs');
-
-              // TODO: go through the QE spans from server, map each index to a tag + confidence value
-              // TODO: constraint spans override QE spans -- after going through the QE spans, go through the constraint spans
-              // TODO: This index-->{tag, confidence} map is the ground truth for the current UI state
-              currentTokenElements.each(function (index, element) {
-                  $thisEl = $(element);
-                  console.log('EL: ' + $thisEl);
-                  console.log('Text: ' + $thisEl.text());
-                  currentSurfaceRepresentation = currentSurfaceRepresentation + $thisEl.text();
-
-                  // TODO: this is a hack, it's not clear why there can be token elements which contain no text
-                  var idxOffset = (currentSurfaceRepresentation.length - 1) - index;
-                  console.log('len Rep: ' + currentSurfaceRepresentation.length);
-                  if ($thisEl.attr('data-qelabel') == 'user') {
-                      if (!prevTokenWasConstraint) {
-                          // starting
-                          console.log('starting');
-                          currentConstraintSpan.push(index + idxOffset);
-                          currentUserConstraint = [$thisEl.text()];
-                          prevTokenWasConstraint = true;
-                      } else {
-                          // continuing
-                          console.log('continuing');
-                          currentUserConstraint.push($thisEl.text());
-                      }
-                  } else {
-                      if (prevTokenWasConstraint) {
-                          // finishing
-                          console.log('finishing');
-                          // if we're finishing, add 1
-                          currentConstraintSpan.push(index + idxOffset + 1);
-                          userConstraintSpans.push(currentConstraintSpan);
-                          currentConstraintSpan = [];
-                          // push the finished constraint, use .slice() to clone it
-                          allUserConstraints.push(currentUserConstraint.slice());
-                          currentUserConstraint = [];
-                          prevTokenWasConstraint = false;
-                      }
-                  }
-                  console.log("Index: " + index);
-              });
-              // finally if the last token was part of a constraint
-              if (currentUserConstraint.length > 0) {
-                  // TODO: confirm offset logic
-                  var idxOffset = (currentSurfaceRepresentation.length - 1) - currentTokenElements.length;
-                  currentConstraintSpan.push(currentTokenElements.length + idxOffset);
-                  userConstraintSpans.push(currentConstraintSpan)
-                  allUserConstraints.push(currentUserConstraint)
+              // return annotationObj immediately if constrained decoding is not enabled
+              if (!scope.qeAnnotation) {
+                  deferred.resolve(currentAnnotationObj);
+                  return deferred.promise;
               }
-
-              // concat the tokens in each constraint together, and trim whitespace at the beginning and end
-              allUserConstraints = allUserConstraints.map(function (currentValue, idx, arr) {
-                  return currentValue.join('').trim();
-              });
-
-              // TODO: sanity here
-              // var elText = $el.find('.word-level-qe-token').text();
-              console.log(userConstraintSpans);
-              console.log(currentSurfaceRepresentation);
-              userConstraintSpans.forEach(function (value, idx) {
-                  console.log('Span: ' + value);
-                  console.log('substring: ' + currentSurfaceRepresentation.slice(value[0], value[1]));
-              });
 
               // Now we're ready to ask the server for Quality Estimation span annotations
               // remember that the surface string isn't going to change, and user constraints are going to stay, overriding anything we get back
               // UI state changes while we're waiting for QE?
-              // moving to span level format
-              // {
-              //   'text': <the surface text that's currently displaying>,
-              //   'annotations': {<index>: {
-              // }
 
               // TODO: pulse colors when QE arrives
               // scope.state.qePending = true;
               // Note: what we send to the server should be _exactly_ the surface representation in the UI
               // Note: except for the whitespace at the beginning and end
               // Note: when we get the QE annotations back, we offset them by the whitespaces at beginning and end
+              console.log(currentAnnotationObj);
+              var currentSurfaceRepresentation = currentAnnotationObj['text'];
               var numStartWhitespaceChars = currentSurfaceRepresentation.match(/^\s+/)[0].length;
               var qeInputString = currentSurfaceRepresentation.trim();
 
@@ -730,7 +583,9 @@ angular.module('handycat.wordLevelQe')
 
                         // first go through qe annotations from server
                         console.log('QE output: ');
-                        var currentAnnotations = {}
+                        // TODO: deep copy annotation obj, and modify that
+
+                        var currentAnnotations = {};
                         qeSpanAnnotations.forEach(function (obj, idx) {
 
                             // use the leading whitespace offset on the qe annotations
@@ -746,33 +601,66 @@ angular.module('handycat.wordLevelQe')
                             }
                         });
 
-                        // now overwrite with user constraint annotations
-                        userConstraintSpans.forEach(function (span, idx) {
-                            for (var i = span[0]; i < span[1]; i++) {
-                                currentAnnotations[i] = {'tag': 'USER', 'confidence': 1.}
-                            }
-                        });
+                        var existingAnnotations = JSON.parse(JSON.stringify(currentAnnotationObj['annotations']))
+
+                        // now overwrite the QE annotations with the current constraint annotations where they exist
+                        currentAnnotations = $.extend(true, {}, currentAnnotations, existingAnnotations);
 
                         // now spans are correct in currentAnnotations
                         // TODO: remember to ensure currentSurfaceRepresentation has whitespace at beginning and end
-                        console.log('rendering');
-                        renderAnnotations({'text': currentSurfaceRepresentation, 'annotations': currentAnnotations})
+                        var annotationObj = {'text': currentSurfaceRepresentation, 'annotations': currentAnnotations};
+                        deferred.resolve(annotationObj);
+
                       scope.state['qePending'] = false;
                   }
                 ).error(function () {
                     scope.state.qePending = false;
+                    // TODO: handle error (reject deferred)
+                    // TODO: handle failure and timeout
                 }
               );
-              // TODO: handle failure and timeout
           }
+
+          return deferred.promise
       }
 
-        // WORKING: this will be the global "single truth" rendering function
-        // TODO: now render output in the component -- maintain user annotations, but add QE annotation around the user annotation
+        // global "single truth" rendering function
+        // render output in the component -- maintain user annotations, but add QE annotation around the user annotation
+        // TODO: log actions when UI state changes, this function could take event that caused the change as input
+        scope.previousState = undefined;
         var renderAnnotations = function(annotationObj) {
           // sanity: enumerate the surface representation character by character.
           //      - append a character span for each character:
           //         - when the current index is found in the annotation index, add the TAG's markup according to the tag id
+
+          // GLOBAL DATA MODEL
+          // Updating the target segment data model for the actual document model (i.e. removing the markup associated with this component)
+          // remove any extra whitespace
+          var currentText = annotationObj['text'];
+          currentText = currentText.replace(/\s+/g, ' ');
+
+          // remove whitespace at beginning and end
+          currentText = currentText.replace(/^\s+/, '');
+          currentText = currentText.replace(/\s+$/, '');
+
+          // finally set the targetSegment to just the current string representation of the component
+          scope.targetSegment = currentText;
+          // END GLOBAL DATA MODEL
+
+          // Undo Stack
+          if (scope.previousState != null) {
+
+            if (scope.state.undoStack.length >= 1) {
+              var lastIndex = scope.state.undoStack.length - 1;
+              if (JSON.stringify(scope.previousState) !== JSON.stringify(scope.state.undoStack[lastIndex])) {
+                  scope.state.undoStack.push(scope.previousState);
+              }
+            } else {
+              scope.state.undoStack.push(scope.previousState);
+            }
+          }
+          scope.previousState = annotationObj;
+          // End Undo Stack
 
           var surfaceText = annotationObj['text'];
           var annotations = annotationObj['annotations'];
@@ -786,9 +674,8 @@ angular.module('handycat.wordLevelQe')
               tag = annotations[i]['tag'];
               confidence = annotations[i]['confidence'];
             }
-            // TODO: opacity/color is a function of confidence
-            // TODO: check if char is whitespace
 
+            // TODO: opacity/color is a function of confidence
             if (tag != null) {
               if (tag === 'USER') {
                 if (/^\s+$/.test(char)) {
@@ -815,8 +702,161 @@ angular.module('handycat.wordLevelQe')
           surfaceHtml = surfaceHtml.join('');
           $el.find('.post-editor').first().html(surfaceHtml);
           console.log('repopulated component HTML');
-          // TODO: handle undo stack
         };
+
+
+        // we want to map the original segment through QE each time, then at each editing step update annotations as needed
+        // This is effectively the god function:
+        // - updates the UI state triggered by a user interaction
+        //     - constrained decoding returns a promise which either (1) resolves immediately or (2) calls the server
+        //     - QE returns a promise which either (1) resolves immediately or (2) calls the QE server
+        //     - all server functions pass the current annotationObj through
+        //     - after the QE server promise resolves, UI gets rendered
+        var updateTargetSegment = function () {
+
+                // handling new content inserted by user
+                var userAddedText = $el.find('.tooltip-span').text();
+
+                // reannotate the userAddedText with special user spans, all other spans retain their original annotations
+                userAddedText = $.trim(userAddedText);
+                var newUserTokens = userAddedText.split('');
+                var newUserHtml = newUserTokens.map(function (m) {
+                    if (/^\s+$/.test(m)) {
+                        return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '</span>';
+                    } else {
+                        return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '<div class="qe-bar-user"></div></span>';
+                    }
+                }).join('');
+                // add the new annotated user data into the current tooltip span
+                $el.find('.tooltip-span').html(newUserHtml);
+
+                // now remove the tooltip span, leaving the contents
+                $el.find('.tooltip-span').contents().unwrap();
+                $el.find('.tooltip-span').remove();
+
+                // Now user constraints are now annotated in the UI
+
+                // now rebuild the annotation object with the surface representation + annotation indices
+                // in baseline and constrainedDecoding mode we just show the user-added spans underlined
+                // in qe mode we also annotate for QE
+
+                    var currentAnnotationMap = getCurrentAnnotationMap();
+
+                    // this Async block updates the UI with the results of the configured services
+                    var gbsPromise = queryConstrainedDecoding(currentAnnotationMap);
+                    gbsPromise.then(function (newAnnotationMap) {
+                        currentAnnotationMap = newAnnotationMap;
+                        var qePromise = queryApeQe(currentAnnotationMap);
+                        qePromise.then(function (newAnnotationMap) {
+                            // now render UI
+                            renderAnnotations(newAnnotationMap);
+                        }, function (reason) {
+
+                        }, function (update) {
+
+                        });
+                    }, function(reason) {
+                        // error
+                    }, function(update) {
+                        // update
+                    });
+                    // GBS Promise resolves with annotation map
+                    // Note: GBS overwrites the annotation map, QE modifies it
+
+
+                    // Note: this method requires us to call color annotation every time, otherwise colors will disappear when we replace element HTML
+                    // placeholder for calling the annotation function, which returns span annotations of the input text
+                    // random color
+                    // WORKING: the QE can actually be hard-coded, we don't need dynamic access because user edits are automatically "OK"
+
+                    // automatically select text in .post-editor-whitespace spans on click
+                    // $el.find('div.post-editor-whitespace').hover(
+                    //   function() {
+                    //     var origWidth = $(this).width();
+                    //     this['origWidth'] = origWidth;
+                    //     $(this).css('background-color','#87cefa')
+                    //       // .animate({'width': '+=10'}, 200)
+                    //   },
+                    //   function() {
+                    //     $(this).css('background-color', 'transparent')
+                    //       // .animate({'width': this['origWidth']}, 200)
+                    //   }
+                    // ).click(function (){
+                    //   // remove this span
+                    //   var range, selection;
+                    //
+                    //   // the if/else here are for different browsers
+                    //   // WORKING: support CTRL+click to expand selection, and ESC to remove it
+                    //   // WORKING: for now, user needs to drag to select a span, disable auto-selection
+                    //   if (window.getSelection && document.createRange) {
+                    //     selection = window.getSelection();
+                    //     range = document.createRange();
+                    //     range.selectNodeContents(this);
+                    //     selection.removeAllRanges();
+                    //     selection.addRange(range);
+                    //   } else if (document.selection && document.body.createTextRange) {
+                    //     range = document.body.createTextRange();
+                    //     range.moveToElementText(this);
+                    //     range.select();
+                    //   }
+                    // });
+
+                    // resets component state
+                    $timeout(
+                        function () {
+                            scope.state.action = 'default';
+                        }, 0)
+
+                };
+
+        var componentTextToHtml = function () {
+          // The "reannotation" should only happen on the first call
+          // Note addition of whitespace on both sides -- TODO: make this more explicit
+          var posteditorText = '    ' + scope.localTargetSegment + '    ';
+
+          // Key idea: annotations are stored in the DOM via data-* attributes, mapped to each token
+          // split on characters
+          var allTokens = posteditorText.split('');
+          // wraps every character in its own span
+          var posteditorHtml = allTokens.map(function (m, idx, arr) {
+              return '<span class="post-editor-whitespace word-level-qe-token">' + m + '</span>';
+          });
+          $el.find('.post-editor').first().html(posteditorHtml);
+
+          // DEV: random annotations while developing
+          // var prevClass = undefined;
+          // var qeClasses = ["qe-bar-good", "qe-bar-good", "qe-bar-good", "qe-bar-good", "qe-bar-bad"];
+          // var posteditorHtml = allTokens.map(function (m, idx, arr) {
+          //     if (/^\s+$/.test(m)) {
+          //         return '<span class="post-editor-whitespace word-level-qe-token">' + m + '</span>';
+          //     } else {
+          //         // check if we're continuing a word
+          //         if (idx === 0 || /^\s+$/.test(arr[idx - 1])) {
+          //             // we're starting a new class, select a new random label
+          //             prevClass = qeClasses[Math.floor(Math.random() * qeClasses.length)];
+          //         }
+          //         return '<span class="post-editor-whitespace word-level-qe-token">' + m + '<div class="' + prevClass + '"></div></span>';
+          //     }
+          // });
+          // constraints and QE annotations are now in the UI
+
+          // hack
+          // $el.find('.post-editor').find('.word-level-qe-token').each(function() {
+          //     console.log($(this).text());
+          //     if ($(this).text().length == 0) {
+          //         $(this).remove();
+          //     }
+          // });
+        };
+
+
+        // when the directive initializes
+        $timeout(function () {
+            // TODO: the `true` arg says to do QE annotation -- make this configurable in component initialization
+            // TODO: annotate tokens and push to undo stack when directive initializes
+            componentTextToHtml();
+            updateTargetSegment();
+        }, 0);
 
       },
       controller: function($scope) {}
