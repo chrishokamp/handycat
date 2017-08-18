@@ -138,28 +138,36 @@
 
               <!--COMMENTED FOR QE SCORE EXPERIMENTS-->
               <!--SEGMENT CONTROLS-->
-              <!--<div-->
-                <!--ng-show="isActive.active"-->
-                <!--layout="row"-->
-                <!--layout-align="end center"-->
-                <!--class="segment-controls"-->
-                <!--&gt;-->
+              <div
+                ng-show="isActive.active"
+                layout="row"
+                layout-align="end center"
+                class="segment-controls"
+                >
 
-                <!--<div>-->
-                  <!--<md-button-->
-                    <!--ng-click="segmentFinished(id.index)"-->
-                    <!--ng-disabled="getSegmentState(id.index) === 'translated'"-->
-                    <!--&gt;-->
-                    <!--<span class="glyphicon glyphicon-ok-sign"></span>-->
-                  <!--</md-button>-->
-                <!--</div>-->
+                <!-- retranslate button which fires request for a new translation -->
+                <div>
+                  <md-button
+                          ng-click="requestNewTranslation()"
+                          ng-disabled="getSegmentState(id.index) === 'translated'"
+                  >
+                    <span class="glyphicon glyphicon-refresh"></span>
+                  </md-button>
+                </div>
+                <div>
+                  <md-button
+                    ng-click="segmentFinished(id.index)"
+                    ng-disabled="getSegmentState(id.index) === 'translated'"
+                    >
+                    <span class="glyphicon glyphicon-ok-sign"></span>
+                  </md-button>
+                </div>
                 <!--the buttons below here don't work yet-->
                 <!--<div>-->
                   <!--<md-button-->
                           <!--ng-click="clearEditor()"-->
                           <!--ng-disabled="getSegmentState(id.index) === 'translated'"-->
-                  <!-->
-                    <!--<span class="glyphicon glyphicon-remove"></span>-->
+                                     <!--<span class="glyphicon glyphicon-remove"></span>-->
                   <!--</md-button>-->
                 <!--</div>-->
                 <!--<div>-->
@@ -178,7 +186,7 @@
                     <!--<span class="glyphicon glyphicon-remove"></span>-->
                   <!--</md-button>-->
                 <!--</div>-->
-              <!--</div>-->
+              </div>
             </div>
           </div>
           <md-divider></md-divider>

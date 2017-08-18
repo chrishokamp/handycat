@@ -1,16 +1,19 @@
 <div class="post-editor-wrapper">
     <!--this is a spinner which shows when we're waiting for a translation-->
-    <div class="post-editor-spinner spinner"
-         ng-show="state.translationPending">
-        <div class="cube1"></div>
-        <div class="cube2"></div>
+    <div class="post-editor-spinner"
+         ng-show="state.translationPending || state.qePending">
+        <div class='spinner'>
+          <div class="cube1"></div>
+          <div class="cube2"></div>
+        </div>
     </div>
     <div
           class="post-editor"
-          ng-show="!state.translationPending"
     >{{targetSegment}}
     </div>
-    <div ng-show="state.action !== 'default' && !state.translationPending"
+    <!--ng-show="!state.translationPending && !state.qePending"-->
+    <!--<div ng-show="state.action !== 'default' && !state.translationPending && !state.qePending"-->
+    <div ng-show="state.action !== 'default'"
          class="postedit-mode-sheet"
     >{{state.action}}
     </div>

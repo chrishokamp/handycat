@@ -436,40 +436,13 @@ app.post('/imt/constrained_decoding', function(req,res) {
 });
 
 // QE
-
-// WORKING: proxy through to QE server, which returns span-level annotations of an input sequence
-
-// THINKING: how to convert token-level QE annotations to span-level indexes?
-// Note this isn't absolutely necessary, as we can hard-code QE annotations for experiments
-// IDEA:
-// iterate through tokenized sequence, mapping non-whitespace spans to their original indices in the untokenized sequence
-// token_spans = [(start, end), (start, end), ...]
-// after qe tagging, the number of spans should equal the number of tags
-//     - spans in-between qe spans are implicitly whitespace
-
-// APE-QE
-// - we need to return span level annotations with confidence scores
+// - Note we return span-level annotations with confidence scores
 app.post('/qe/word_level', function(req,res) {
     console.log('QE ENDPOINT');
     console.log(req.body);
 
-    // Mock the output from tagging
-    // res.json(
-    //     {
-    //           "qe_labels": [
-    //               {
-    //                   "confidence": 1,
-    //                   "span": [
-    //                       1,
-    //                       6
-    //                   ],
-    //                   "tag": "OK"
-    //               }
-    //           ]
-    // });
-
     // TODO: error when lang_code is not found -- otherwise this can fail silently
-    var apeQeUrl = 'http://localhost:5007/word_level_qe';
+    var apeQeUrl = 'http://localhost:5009/word_level_qe';
     var options = {
         uri: apeQeUrl,
         method: 'POST',

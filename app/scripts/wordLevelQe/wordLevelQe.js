@@ -23,7 +23,7 @@ angular.module('handycat.wordLevelQe')
 
           // TODO: implement qeAnnotation mode and constrainedDecoding mode in config
           // TODO: server caches inputs on disk -- for our experiments, the first QE query is always the same
-          scope.constrainedDecoding = false;
+          scope.constrainedDecoding = true;
           scope.qeAnnotation = true;
 
           scope.state = {
@@ -154,6 +154,30 @@ angular.module('handycat.wordLevelQe')
               // }
           });
 
+          // this event comes from parent scope, user wants to do GBS
+          scope.$on('request-new-translation', function (e) {
+              console.log('heard request-new-translation');
+              $timeout(function () {
+                var currentAnnotationMap = getCurrentAnnotationMap();
+                // console.log(currentAnnotationMap);
+
+                // this Async block updates the UI with the results of the configured services
+                // WORKING: GBS only happens when user asks for it, expose GBS on scope
+                // WORKING: if GBS+QE in configuration, GBS manager calls QE after finishing, otherwise GBS output renders directly
+                var gbsPromise = queryConstrainedDecoding(currentAnnotationMap);
+                gbsPromise.then(function (newAnnotationMap) {
+                    // Note: here we pass the representation via the UI state, this is wasteful
+                    renderAnnotations(newAnnotationMap);
+                    updateTargetSegment();
+                }, function(reason) {
+                   // error
+                }, function(update) {
+                   // update
+                });
+                  // GBS Promise resolves with annotation map
+                  // Note: GBS overwrites the annotation map, QE modifies it
+              }, 0);
+          });
 
           scope.$on('delete-event', function (e) {
               // delete this span, update targetSegment model
@@ -188,6 +212,17 @@ angular.module('handycat.wordLevelQe')
               scope.showTooltip = false;
 
               scope.state.action = 'replacing';
+          });
+
+          // This event just adds the currenty highlighted text as a constraint
+          scope.$on('confirm-event', function (e) {
+              console.log('HEARD CONFIRM');
+              // clear text and make contenteditable
+              var $tooltipSpan = $el.find('.tooltip-span');
+              var currentText = $tooltipSpan.text();
+              $tooltipSpan.text(currentText);
+              updateTargetSegment();
+              scope.showTooltip = false;
           });
 
           scope.$on('insert-event', function (e) {
@@ -344,12 +379,8 @@ angular.module('handycat.wordLevelQe')
                     // hack: this is an actual character
                     previousChar = currentChar;
                     currentChar = $thisEl.text();
-                    if (currentChar.length != 1) {
-                      debugger;
-                    }
                 } else {
-                  // 0 length character
-                  debugger;
+                  // this is a 0 length character
                 }
                 // console.log('previousChar :' + previousChar);
                 // console.log('currentChar: ' + currentChar);
@@ -358,32 +389,28 @@ angular.module('handycat.wordLevelQe')
                 var consecutiveWhitespace = false;
                 if (/^\s+$/.test(currentChar)) {
                     if (sawText && /^\s+$/.test(previousChar)) {
-                        console.log('NO PASS')
                         // consecutive whitespace, we won't use this character
                         consecutiveWhitespace = true;
-                        console.log('index: ' + index);
                     } else {
                         consecutiveWhitespace = false;
-                        console.log('PASS')
                     }
                 } else {
-                    console.log('PASS')
                     if (previousChar.length != 0) {
                       sawText = true;
                     }
                     consecutiveWhitespace = false;
                 }
 
-                console.log('currentChar: ' + currentChar + ' len: ' + currentChar.length);
-              console.log('previousChar: ' + previousChar + ' len: ' + previousChar.length);
+                // console.log('currentChar: ' + currentChar + ' len: ' + currentChar.length);
+                // console.log('previousChar: ' + previousChar + ' len: ' + previousChar.length);
                 if (!consecutiveWhitespace) {
-                  console.log('YES')
+                  // console.log('YES')
                   // we use $thisEl.text() instead of currentChar because there can be elements with no text
                   currentSurfaceRepresentation = currentSurfaceRepresentation + $thisEl.text();
                 } else {
-                  console.log('NO')
+                  // console.log('NO')
                 }
-                console.log('REP: ' + currentSurfaceRepresentation);
+                // console.log('REP: ' + currentSurfaceRepresentation);
 
                 // currentSurfaceRepresentation = currentSurfaceRepresentation + $thisEl.text();
 
@@ -423,7 +450,7 @@ angular.module('handycat.wordLevelQe')
             });
             // finally if the last token was part of a constraint
             if (currentUserConstraint.length > 0) {
-                // TODO: confirm offset logic
+                // TODO: confirm offset logic, we don't hit this code because there's always whitespace at the end
                 var idxOffset = (currentSurfaceRepresentation.length - 1) - currentTokenElements.length;
                 currentConstraintSpan.push(currentTokenElements.length + idxOffset);
                 userConstraintSpans.push(currentConstraintSpan)
@@ -434,17 +461,31 @@ angular.module('handycat.wordLevelQe')
             allUserConstraints = allUserConstraints.map(function (currentValue, idx, arr) {
                 return currentValue.join('').trim();
             });
-            console.log('allUserConstraints: ' + allUserConstraints);
 
-            console.log(userConstraintSpans);
-            console.log(currentSurfaceRepresentation);
+            // now expand any partial constraints that aren't whole tokens
+            var expandedUserConstraints = [];
+            userConstraintSpans.forEach(function (span) {
+                var spanStart = span[0];
+                var spanEnd = span[1];
+
+                // expand left
+                while (spanStart > 0 && !/^\s+$/.test(currentSurfaceRepresentation.charAt(spanStart - 1))) {
+                    spanStart = spanStart - 1;
+                }
+                // expand right
+                while (spanEnd < currentSurfaceRepresentation.length && !/^\s+$/.test(currentSurfaceRepresentation.charAt(spanEnd))) {
+                    spanEnd = spanEnd + 1;
+                }
+                expandedUserConstraints.push([spanStart, spanEnd]);
+            });
+
             var currentAnnotations = {};
             // now overwrite with user constraint annotations
-            userConstraintSpans.forEach(function (span, idx) {
+            expandedUserConstraints.forEach(function (span, idx) {
                 for (var i = span[0]; i < span[1]; i++) {
                     currentAnnotations[i] = {'tag': 'USER', 'confidence': 1.}
                 }
-                console.log('constraint at: ' + span);
+                // console.log('constraint at: ' + span);
                 console.log(currentSurfaceRepresentation.slice(span[0], span[1]))
             });
 
@@ -452,9 +493,12 @@ angular.module('handycat.wordLevelQe')
             currentSurfaceRepresentation = currentSurfaceRepresentation.replace(/\s+$/, '');
             currentSurfaceRepresentation = currentSurfaceRepresentation + '   ';
 
-            return {'text': currentSurfaceRepresentation, 'annotations': currentAnnotations};
-
-          }
+            return {
+                'text': currentSurfaceRepresentation,
+                'annotations': currentAnnotations,
+                'spans': expandedUserConstraints
+            };
+          };
 
           // query the constrained decoder, ask for a translation, once the request resolves, update the UI
           var queryConstrainedDecoding = function (currentAnnotationObj) {
@@ -465,49 +509,23 @@ angular.module('handycat.wordLevelQe')
                 deferred.resolve(currentAnnotationObj);
                 return deferred.promise;
               }
-//
-              // take the current input representation, including any user constraints, and use it to query the constrained decoder
-              // get the text from the user-added constraints from the current local segment
-              var currentTokenElements = $el.find('.word-level-qe-token');
 
-              // iterate through elements in localSegment, starting constraints when a new `data-qe-label="user"` is found
-              // we don't need the string indices of the constraints, just the constraints themselves since, in general, they may be rearranged by the MT engine
+              var surfaceRepresentation = currentAnnotationObj['text'];
               var allUserConstraints = [];
-              var currentUserConstraint = [];
-              var prevTokenWasConstraint = false;
-              currentTokenElements.each(function (index, element) {
-                  var $thisEl = $(element);
-                  if ($thisEl.attr('data-qelabel') == 'user') {
-                      if (!prevTokenWasConstraint) {
-                          currentUserConstraint = [$thisEl.text()];
-                          prevTokenWasConstraint = true;
-                      } else {
-                          currentUserConstraint.push($thisEl.text());
-                      }
-                  } else {
-                      if (prevTokenWasConstraint) {
-                          // push the finished constraint, use .slice() to clone it
-                          allUserConstraints.push(currentUserConstraint.slice());
-                          currentUserConstraint = [];
-                          prevTokenWasConstraint = false;
-                      }
-                  }
+              currentAnnotationObj['spans'].forEach(function (span, idx) {
+                  allUserConstraints.push(surfaceRepresentation.slice(span[0], span[1]))
               });
-
-              // finally if the last token was part of a constraint
-              if (currentUserConstraint.length > 0) {
-                  allUserConstraints.push(currentUserConstraint)
-              }
 
               // concat the tokens in each constraint together, and trim whitespace at the beginning and end
               allUserConstraints = allUserConstraints.map(function (currentValue, idx, arr) {
-                  return currentValue.join('').trim();
+                  return currentValue.trim();
               });
 
               // Now we're ready to ask the server for a lexically constrained translation
               // UI state changes while we're waiting for a translation
               // TODO: pulse colors when translation arrives
-              // TODO: postprocessing for server output in another promise
+
+              scope.state.action = 'translating';
               scope.state.translationPending = true;
               // set the timestamp for the current request
               var reqTimestamp = Date.now();
@@ -526,7 +544,6 @@ angular.module('handycat.wordLevelQe')
                   function (output) {
                       // working: change this logic for render interface
                       var translationObjs = output['outputs'];
-                      // TODO: now render output in the component -- maintain user annotations, but annotations such as QE scores will disappear
                       // we only care about the 1-best translation
                       var outputObj = translationObjs[0];
                       var outputTranslation = outputObj['translation'];
@@ -537,20 +554,23 @@ angular.module('handycat.wordLevelQe')
                           for (var i = span[0]; i < span[1]; i++) {
                             annotationMap[i] = {'tag': 'USER', 'confidence': 1.}
                           }
-                      })
+                      });
 
                       // create new annotation obj
                       var annotationObj = {
                           'text': outputTranslation,
-                          'annotations': annotationMap
+                          'annotations': annotationMap,
+                          'spans': constraintAnnotations
                       }
 
                       deferred.resolve(annotationObj);
 
                       scope.state.translationPending = false;
+                      scope.state.action = 'default';
                   }
               ).error(function () {
                   scope.state.translationPending = false;
+                  scope.state.action = 'default';
                   // TODO: handle error (reject deferred)
               });
 
@@ -574,19 +594,22 @@ angular.module('handycat.wordLevelQe')
               // UI state changes while we're waiting for QE?
 
               // TODO: pulse colors when QE arrives
-              // scope.state.qePending = true;
               // Note: what we send to the server should be _exactly_ the surface representation in the UI
               // Note: except for the whitespace at the beginning and end
               // Note: when we get the QE annotations back, we offset them by the whitespaces at beginning and end
               // console.log(currentAnnotationObj);
               var currentSurfaceRepresentation = currentAnnotationObj['text'];
-              var numStartWhitespaceChars = currentSurfaceRepresentation.match(/^\s+/)[0].length;
+              var numStartWhitespaceChars = 0;
+              if (/^\s+/.test(currentSurfaceRepresentation)) {
+                  numStartWhitespaceChars = currentSurfaceRepresentation.match(/^\s+/)[0].length;
+              }
               var qeInputString = currentSurfaceRepresentation.trim();
 
               // set the timestamp for the current request
               var reqTimestamp = Date.now();
               if (!scope.state.qePending) {
                   scope.state.qePending = true;
+                  scope.state.action = 'estimating quality';
 
                 $http.post(apeQeUrl,
                     {
@@ -617,12 +640,14 @@ angular.module('handycat.wordLevelQe')
                         // TODO: deep copy annotation obj, and modify that
 
                         var currentAnnotations = {};
+                        var offsetAnnotations = []
                         qeSpanAnnotations.forEach(function (obj, idx) {
 
                             // use the leading whitespace offset on the qe annotations
                             var span = obj['span']
                             span[0] += numStartWhitespaceChars;
                             span[1] += numStartWhitespaceChars;
+                            offsetAnnotations.push(span);
                             // console.log('Span: ' + span);
                             // console.log('substring: ' + currentSurfaceRepresentation.slice(span[0], span[1]));
                             // console.log('tag: ' + obj['tag']);
@@ -639,13 +664,19 @@ angular.module('handycat.wordLevelQe')
 
                         // now spans are correct in currentAnnotations
                         // TODO: remember to ensure currentSurfaceRepresentation has whitespace at beginning and end
-                        var annotationObj = {'text': currentSurfaceRepresentation, 'annotations': currentAnnotations};
+                        var annotationObj = {
+                            'text': currentSurfaceRepresentation,
+                            'annotations': currentAnnotations,
+                            'spans': offsetAnnotations
+                        }
                         deferred.resolve(annotationObj);
 
-                      scope.state['qePending'] = false;
+                      scope.state.qePending = false;
+                      scope.state.action = 'default';
                   }
                 ).error(function () {
                     scope.state.qePending = false;
+                    scope.state.action = 'default';
                     // TODO: handle error (reject deferred)
                     // TODO: handle failure and timeout
                 }
@@ -803,30 +834,21 @@ angular.module('handycat.wordLevelQe')
                 // in baseline and constrainedDecoding mode we just show the user-added spans underlined
                 // in qe mode we also annotate for QE
                 $timeout(function () {
-                    var currentAnnotationMap = getCurrentAnnotationMap(mode);
-                    // console.log(currentAnnotationMap);
+                  var currentAnnotationMap = getCurrentAnnotationMap(mode);
+                  // console.log(currentAnnotationMap);
 
-                    // this Async block updates the UI with the results of the configured services
-                    var gbsPromise = queryConstrainedDecoding(currentAnnotationMap);
-                    gbsPromise.then(function (newAnnotationMap) {
-                        currentAnnotationMap = newAnnotationMap;
-                        var qePromise = queryApeQe(currentAnnotationMap);
-                        qePromise.then(function (newAnnotationMap) {
-                            // now render UI
-                            addUndo(newAnnotationMap);
-                            renderAnnotations(newAnnotationMap);
-                        }, function (reason) {
+                  // this Async block updates the UI with the results of the configured services
+                  var qePromise = queryApeQe(currentAnnotationMap);
+                  qePromise.then(function (newAnnotationMap) {
+                    // now render UI
+                    addUndo(newAnnotationMap);
+                    renderAnnotations(newAnnotationMap);
+                    scope.state.action = 'default';
+                  }, function (reason) {
 
-                        }, function (update) {
+                  }, function (update) {
 
-                        });
-                    }, function(reason) {
-                        // error
-                    }, function(update) {
-                        // update
-                    });
-                    // GBS Promise resolves with annotation map
-                    // Note: GBS overwrites the annotation map, QE modifies it
+                  });
                 }, 0);
 
 
@@ -868,10 +890,10 @@ angular.module('handycat.wordLevelQe')
                     // });
 
                     // resets component state
-                    $timeout(
-                        function () {
-                            scope.state.action = 'default';
-                        }, 0)
+                    // $timeout(
+                    //     function () {
+                    //         scope.state.action = 'default';
+                    //     }, 0)
 
                 };
 

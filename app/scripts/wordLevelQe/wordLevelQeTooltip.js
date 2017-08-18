@@ -52,6 +52,11 @@ angular.module('handycat.wordLevelQe')
           $scope.$emit('replace-event')
         }
 
+        $scope.confirmEvent = function() {
+            console.log('Emit confirm');
+            $scope.$emit('confirm-event')
+        }
+
         $scope.moveEvent = function() {
           console.log('Emit move');
           $scope.$emit('move-event')

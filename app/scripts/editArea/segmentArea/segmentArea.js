@@ -244,6 +244,12 @@ angular.module('controllers')
       $scope.$broadcast('undo-change');
     };
 
+    // WORKING: fire event when translation request clicked
+    $scope.requestNewTranslation = function() {
+        $scope.$broadcast('request-new-translation');
+
+    }
+
     $scope.segmentFinished = function(segId) {
       segId = Number(segId);
       $log.log("SEGMENT FINISHED - segId is: " + segId);
