@@ -741,7 +741,8 @@ angular.module('handycat.wordLevelQe')
               confidence = annotations[i]['confidence'];
             }
 
-            // TODO: opacity/color is a function of confidence
+            // opacity/color is a function of confidence
+            // TODO: tooltip on qe-bars showing confidence score
             if (tag != null) {
               if (tag === 'USER') {
                 if (/^\s+$/.test(char)) {
@@ -754,9 +755,9 @@ angular.module('handycat.wordLevelQe')
                 if (/^\s+$/.test(char)) {
                   surfaceHtml.push('<span class="post-editor-whitespace word-level-qe-token">' + char + '</span>');
                 } else if (tag === 'OK') {
-                  surfaceHtml.push('<span class="post-editor-whitespace word-level-qe-token">' + char + '<div class="qe-bar-good"></div></span>');
+                  surfaceHtml.push('<span class="post-editor-whitespace word-level-qe-token">' + char + '<div class="qe-bar-good" style="opacity: ' + confidence + '"></div></span>');
                 } else if (tag === 'BAD') {
-                  surfaceHtml.push('<span class="post-editor-whitespace word-level-qe-token">' + char + '<div class="qe-bar-bad"></div></span>');
+                  surfaceHtml.push('<span class="post-editor-whitespace word-level-qe-token">' + char + '<div class="qe-bar-bad" style="opacity: ' + confidence + '"></div></span>');
                 }
               }
             } else {
