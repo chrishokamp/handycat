@@ -12,8 +12,11 @@ post-editor > div {
   background: white;
   float: left;
   white-space: nowrap;
+  width: 100px;
 
   .post-editor-action {
+    display: block !important;
+    width: 100% !important;
     &:hover {
       background-color: lightgray !important;
     }

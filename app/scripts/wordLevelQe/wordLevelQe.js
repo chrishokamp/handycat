@@ -743,6 +743,7 @@ angular.module('handycat.wordLevelQe')
 
             // opacity/color is a function of confidence
             // TODO: tooltip on qe-bars showing confidence score
+            // TODO: qe-bars always fade in quickly on render
             if (tag != null) {
               if (tag === 'USER') {
                 if (/^\s+$/.test(char)) {
