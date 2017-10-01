@@ -53,12 +53,12 @@ angular.module('controllers')
     var handleKeypress = function(e) {
 
       var pressedKey = String.fromCharCode(e.which);
-      console.log(pressedKey + ' WAS PRESSED')
-      logAction('plaintextEditor.keypress',
-        {
-          'key': pressedKey
-        }
-      );
+      // console.log(pressedKey + ' WAS PRESSED')
+      // logAction('plaintextEditor.keypress',
+      //   {
+      //     'key': pressedKey
+      //   }
+      // );
     }
 
     $scope.$watch(function() {
@@ -389,6 +389,7 @@ angular.module('controllers')
       // console.log('Logged action: ' + logData.action);
       // console.log(logData);
     }
+    // expose this function on the scope
     $scope.logAction = logAction;
 
 }]);

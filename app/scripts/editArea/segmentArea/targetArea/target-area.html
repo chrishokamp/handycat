@@ -6,19 +6,19 @@
       <!--ALL TARGET AREA COMPONENTS BELONG HERE-->
       <!--The component that is currently active is controlled by widgets.activeComponent on the parent scope-->
 
-      <!-- PLAINTEXT -->
-      <div class="cssSlideUp"
-           ng-show="widgets.activeComponent === 'plaintextEditor'"
-      >
-        <plaintext-editor
-                source-segment="segment.source"
-                target-segment="segment.target"
-                source-lang="{{document.sourceLang}}"
-                target-lang="{{document.targetLang}}"
-                active-component="widgets.activeComponent"
-                is-active="isActive.active"
-        ></plaintext-editor>
-      </div>
+      <!-- PLAINTEXT EDITOR -->
+      <!--<div class="cssSlideUp"-->
+           <!--ng-show="widgets.activeComponent === 'plaintextEditor'"-->
+      <!--&gt;-->
+        <!--<plaintext-editor-->
+                <!--source-segment="segment.source"-->
+                <!--target-segment="segment.target"-->
+                <!--source-lang="{{document.sourceLang}}"-->
+                <!--target-lang="{{document.targetLang}}"-->
+                <!--active-component="widgets.activeComponent"-->
+                <!--is-active="isActive.active"-->
+        <!--&gt;</plaintext-editor>-->
+      <!--</div>-->
 
         <!-- Post Editor -->
         <!--<div class="cssSlideUp"-->
@@ -42,6 +42,7 @@
           target-lang="{{document.targetLang}}"
           qe-annotation="widgets.services.useWordLevelQE"
           constrained-decoding="widgets.services.useConstrainedDecoding"
+          log-action="logAction(action, data)"
           is-active="isActive.active"
         ></word-level-qe-editor>
       </div>

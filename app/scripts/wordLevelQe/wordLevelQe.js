@@ -15,7 +15,7 @@ angular.module('handycat.wordLevelQe')
         qeAnnotation: '=',
         constrainedDecoding: '=',
         isActive: '=',
-        // logAction: '&'
+        logAction: '&'
       },
       templateUrl: 'scripts/wordLevelQe/wordLevelQe.html',
       restrict: 'E',
@@ -26,8 +26,18 @@ angular.module('handycat.wordLevelQe')
           // scope.constrainedDecoding = true;
           // scope.qeAnnotation = true;
 
+        // scope.logAction(
+        //   {
+        //     action: 'postEditor.delete',
+        //     data  : {
+        //       'originalTarget': origTarget,
+        //       'newTarget'     : newTarget
+        //     }
+        //   }
+
           scope.state = {
               'action': 'default',
+              'logAction': 'default',
               'translationPending': false,
               'qePending': false,
               'undoStack': []
@@ -183,22 +193,8 @@ angular.module('handycat.wordLevelQe')
               // delete this span, update targetSegment model
               $el.find('.tooltip-span').remove();
               scope.showTooltip = false;
+              scope.state.logAction = 'ipe.delete'
               updateTargetSegment();
-
-              // var oldNewTarget = updateTargetSegment();
-              // var origTarget = oldNewTarget[0];
-              // var newTarget = oldNewTarget[1];
-
-              // log this action
-              // scope.logAction(
-              //   {
-              //     action: 'postEditor.delete',
-              //     data  : {
-              //       'originalTarget': origTarget,
-              //       'newTarget'     : newTarget
-              //     }
-              //   }
-              // );
           });
 
           scope.$on('replace-event', function (e) {
@@ -212,6 +208,8 @@ angular.module('handycat.wordLevelQe')
               scope.showTooltip = false;
 
               scope.state.action = 'replacing';
+              scope.state.logAction = 'ipe.replace';
+
           });
 
           // This event just adds the currenty highlighted text as a constraint
@@ -221,6 +219,7 @@ angular.module('handycat.wordLevelQe')
               var $tooltipSpan = $el.find('.tooltip-span');
               var currentText = $tooltipSpan.text();
               $tooltipSpan.text(currentText);
+              scope.state.logAction = 'ipe.confirm';
               updateTargetSegment();
               scope.showTooltip = false;
           });
@@ -245,6 +244,7 @@ angular.module('handycat.wordLevelQe')
 
               scope.showTooltip = false;
               scope.state.action = 'inserting';
+              scope.state.logAction = 'ipe.insert';
           });
 
           //if we select while component is in move mode, replace selection with text from our span
@@ -253,6 +253,7 @@ angular.module('handycat.wordLevelQe')
               // just set move mode, we're waiting for user to select something else
               scope.showTooltip = false;
               scope.state.action = 'moving';
+              scope.state.logAction = 'ipe.move';
           });
 
           scope.$on('undo-change', function () {
@@ -314,6 +315,7 @@ angular.module('handycat.wordLevelQe')
           var handleUndo = function (e) {
               if (e.keyCode == 90 && e.ctrlKey) {
                   console.log('Ctrl-Z');
+                  scope.state.logAction = 'ipe.undo';
                   resetTargetSegment();
               }
               scope.showTooltip = false;
@@ -724,6 +726,7 @@ angular.module('handycat.wordLevelQe')
           currentText = currentText.replace(/\s+$/, '');
 
           // finally set the targetSegment to just the current string representation of the component
+          // TODO: also log this action, and any relevant state from the annotation object
           scope.targetSegment = currentText;
           // END GLOBAL DATA MODEL
 
@@ -837,7 +840,8 @@ angular.module('handycat.wordLevelQe')
           // in qe mode we also annotate for QE
           $timeout(function () {
             var currentAnnotationMap = getCurrentAnnotationMap(mode);
-            // console.log(currentAnnotationMap);
+            var currentAction = scope.state.logAction;
+            var currentText = (' ' + scope.targetSegment).slice(1);
 
             // this Async block updates the UI with the results of the configured services
             var qePromise = queryApeQe(currentAnnotationMap);
@@ -845,6 +849,16 @@ angular.module('handycat.wordLevelQe')
               // now render UI
               addUndo(newAnnotationMap);
               renderAnnotations(newAnnotationMap);
+
+              // TODO: Now log this action (but don't block)
+              scope.logAction(
+                {
+                  action: currentAction,
+                  data  : {
+                    'originalTarget': currentText,
+                    'newTarget'     : newAnnotationMap['text']
+                  }
+                });
               scope.state.action = 'default';
             }, function (reason) {
 
