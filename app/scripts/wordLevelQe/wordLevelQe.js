@@ -12,8 +12,8 @@ angular.module('handycat.wordLevelQe')
         targetSegment: '=',
         targetLang: '@',
         sourceLang: '@',
-        // qeAnnotation: '=',
-        // constrainedDecoding: '=',
+        qeAnnotation: '=',
+        constrainedDecoding: '=',
         isActive: '=',
         // logAction: '&'
       },
@@ -22,9 +22,9 @@ angular.module('handycat.wordLevelQe')
       link: function(scope, $el, attrs) {
 
           // TODO: implement qeAnnotation mode and constrainedDecoding mode in config
-          // TODO: server caches inputs on disk -- for our experiments, the first QE query is always the same
-          scope.constrainedDecoding = true;
-          scope.qeAnnotation = true;
+          // TODO: server caches inputs on disk -- for our experiments, the first QE query of each segment is always the same
+          // scope.constrainedDecoding = true;
+          // scope.qeAnnotation = true;
 
           scope.state = {
               'action': 'default',
@@ -781,123 +781,123 @@ angular.module('handycat.wordLevelQe')
         //     - all server functions pass the current annotationObj through
         //     - after the QE server promise resolves, UI gets rendered
         var updateTargetSegment = function (mode) {
-                // handling new content inserted by user
-                var userAddedText = $el.find('.tooltip-span').text();
-                userAddedText = userAddedText.replace(/\s+/g, ' ');
-                console.log('user added text: ' + userAddedText);
-                console.log('mode: ' + mode);
+          // handling new content inserted by user
+          var userAddedText = $el.find('.tooltip-span').text();
+          userAddedText = userAddedText.replace(/\s+/g, ' ');
+          console.log('user added text: ' + userAddedText);
+          console.log('mode: ' + mode);
 
-                // if (!/^\s+$/.test(userAddedText)) {
-                //   userAddedText = $.trim(userAddedText);
-                // }
+          // if (!/^\s+$/.test(userAddedText)) {
+          //   userAddedText = $.trim(userAddedText);
+          // }
 
-                // reannotate the userAddedText with special user spans, all other spans retain their original annotations
-                var startingSpace = '';
-                if (userAddedText.match(/^\s+/)) {
-                    startingSpace = userAddedText.match(/^\s+/)[0];
-                }
-                var trailingSpace = '';
-                if (userAddedText.match(/\s+$/)) {
-                  trailingSpace = userAddedText.match(/\s+$/)[0];
-                }
+          // reannotate the userAddedText with special user spans, all other spans retain their original annotations
+          var startingSpace = '';
+          if (userAddedText.match(/^\s+/)) {
+              startingSpace = userAddedText.match(/^\s+/)[0];
+          }
+          var trailingSpace = '';
+          if (userAddedText.match(/\s+$/)) {
+            trailingSpace = userAddedText.match(/\s+$/)[0];
+          }
 
-                userAddedText = $.trim(userAddedText);
-                var newUserTokens = userAddedText.split('');
-                var newUserHtml = newUserTokens.map(function (m) {
-                    if (/^\s+$/.test(m)) {
-                        return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '</span>';
-                    } else {
-                        return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '<div class="qe-bar-user"></div></span>';
-                    }
-                }).join('');
-                if (startingSpace.length > 0) {
-                  newUserHtml = '<span class="post-editor-whitespace word-level-qe-token"> </span>' + newUserHtml;
-                }
-                if (trailingSpace.length > 0) {
-                  newUserHtml = newUserHtml + '<span class="post-editor-whitespace word-level-qe-token"> </span>';
-                }
+          userAddedText = $.trim(userAddedText);
+          var newUserTokens = userAddedText.split('');
+          var newUserHtml = newUserTokens.map(function (m) {
+              if (/^\s+$/.test(m)) {
+                  return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '</span>';
+              } else {
+                  return '<span class="post-editor-whitespace word-level-qe-token" data-qelabel="user">' + m + '<div class="qe-bar-user"></div></span>';
+              }
+          }).join('');
+          if (startingSpace.length > 0) {
+            newUserHtml = '<span class="post-editor-whitespace word-level-qe-token"> </span>' + newUserHtml;
+          }
+          if (trailingSpace.length > 0) {
+            newUserHtml = newUserHtml + '<span class="post-editor-whitespace word-level-qe-token"> </span>';
+          }
 
-                // add the new annotated user data into the current tooltip span
-                $el.find('.tooltip-span').html(newUserHtml);
+          // add the new annotated user data into the current tooltip span
+          $el.find('.tooltip-span').html(newUserHtml);
 
-                // now remove the tooltip span, leaving the contents
-                $el.find('.tooltip-span').contents().unwrap();
-                $el.find('.tooltip-span').remove();
+          // now remove the tooltip span, leaving the contents
+          $el.find('.tooltip-span').contents().unwrap();
+          $el.find('.tooltip-span').remove();
 
-                // The $digest is important here, otherwise component state won't be ready
-                if(mode === 'insert') {
-                    // $digest or $apply
-                    scope.$digest();
-                }
+          // The $digest is important here, otherwise component state won't be ready
+          if(mode === 'insert') {
+              // $digest or $apply
+              scope.$digest();
+          }
 
-                // Now user constraints are now annotated in the UI
+          // Now user constraints are now annotated in the UI
 
-                // now rebuild the annotation object with the surface representation + annotation indices
-                // in baseline and constrainedDecoding mode we just show the user-added spans underlined
-                // in qe mode we also annotate for QE
-                $timeout(function () {
-                  var currentAnnotationMap = getCurrentAnnotationMap(mode);
-                  // console.log(currentAnnotationMap);
+          // now rebuild the annotation object with the surface representation + annotation indices
+          // in baseline and constrainedDecoding mode we just show the user-added spans underlined
+          // in qe mode we also annotate for QE
+          $timeout(function () {
+            var currentAnnotationMap = getCurrentAnnotationMap(mode);
+            // console.log(currentAnnotationMap);
 
-                  // this Async block updates the UI with the results of the configured services
-                  var qePromise = queryApeQe(currentAnnotationMap);
-                  qePromise.then(function (newAnnotationMap) {
-                    // now render UI
-                    addUndo(newAnnotationMap);
-                    renderAnnotations(newAnnotationMap);
-                    scope.state.action = 'default';
-                  }, function (reason) {
+            // this Async block updates the UI with the results of the configured services
+            var qePromise = queryApeQe(currentAnnotationMap);
+            qePromise.then(function (newAnnotationMap) {
+              // now render UI
+              addUndo(newAnnotationMap);
+              renderAnnotations(newAnnotationMap);
+              scope.state.action = 'default';
+            }, function (reason) {
 
-                  }, function (update) {
+            }, function (update) {
 
-                  });
-                }, 0);
+            });
+          }, 0);
 
 
-                    // Note: this method requires us to call color annotation every time, otherwise colors will disappear when we replace element HTML
-                    // placeholder for calling the annotation function, which returns span annotations of the input text
-                    // random color
-                    // WORKING: the QE can actually be hard-coded, we don't need dynamic access because user edits are automatically "OK"
+              // Note: this method requires us to call color annotation every time, otherwise colors will disappear when we replace element HTML
+              // placeholder for calling the annotation function, which returns span annotations of the input text
+              // random color
+              // WORKING: the QE can actually be hard-coded, we don't need dynamic access because user edits are automatically "OK"
 
-                    // automatically select text in .post-editor-whitespace spans on click
-                    // $el.find('div.post-editor-whitespace').hover(
-                    //   function() {
-                    //     var origWidth = $(this).width();
-                    //     this['origWidth'] = origWidth;
-                    //     $(this).css('background-color','#87cefa')
-                    //       // .animate({'width': '+=10'}, 200)
-                    //   },
-                    //   function() {
-                    //     $(this).css('background-color', 'transparent')
-                    //       // .animate({'width': this['origWidth']}, 200)
-                    //   }
-                    // ).click(function (){
-                    //   // remove this span
-                    //   var range, selection;
-                    //
-                    //   // the if/else here are for different browsers
-                    //   // WORKING: support CTRL+click to expand selection, and ESC to remove it
-                    //   // WORKING: for now, user needs to drag to select a span, disable auto-selection
-                    //   if (window.getSelection && document.createRange) {
-                    //     selection = window.getSelection();
-                    //     range = document.createRange();
-                    //     range.selectNodeContents(this);
-                    //     selection.removeAllRanges();
-                    //     selection.addRange(range);
-                    //   } else if (document.selection && document.body.createTextRange) {
-                    //     range = document.body.createTextRange();
-                    //     range.moveToElementText(this);
-                    //     range.select();
-                    //   }
-                    // });
+              // automatically select text in .post-editor-whitespace spans on click
+              // $el.find('div.post-editor-whitespace').hover(
+              //   function() {
+              //     var origWidth = $(this).width();
+              //     this['origWidth'] = origWidth;
+              //     $(this).css('background-color','#87cefa')
+              //       // .animate({'width': '+=10'}, 200)
+              //   },
+              //   function() {
+              //     $(this).css('background-color', 'transparent')
+              //       // .animate({'width': this['origWidth']}, 200)
+              //   }
+              // ).click(function (){
+              //   // remove this span
+              //   var range, selection;
+              //
+              //   // the if/else here are for different browsers
+              //   // WORKING: support CTRL+click to expand selection, and ESC to remove it
+              //   // WORKING: for now, user needs to drag to select a span, disable auto-selection
+              //   if (window.getSelection && document.createRange) {
+              //     selection = window.getSelection();
+              //     range = document.createRange();
+              //     range.selectNodeContents(this);
+              //     selection.removeAllRanges();
+              //     selection.addRange(range);
+              //   } else if (document.selection && document.body.createTextRange) {
+              //     range = document.body.createTextRange();
+              //     range.moveToElementText(this);
+              //     range.select();
+              //   }
+              // });
 
-                    // resets component state
-                    // $timeout(
-                    //     function () {
-                    //         scope.state.action = 'default';
-                    //     }, 0)
+              // resets component state
+              // $timeout(
+              //     function () {
+              //         scope.state.action = 'default';
+              //     }, 0)
 
-                };
+          };
 
         var componentTextToHtml = function () {
           // The "reannotation" should only happen on the first call

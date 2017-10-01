@@ -101,8 +101,8 @@ handyCATconfig.constant('widgetConfiguration',
       'qeScore': false
     },
     'target': {
-      activeComponent: 'plaintextEditor',
-      defaultComponent: 'plaintextEditor',
+      activeComponent: 'wordLevelQEEditor',
+      defaultComponent: 'wordLevelQEEditor',
       // a list of all available components
       components: [
         {
@@ -140,21 +140,21 @@ var experimentGroups = [
                 "internalName": "wl-qe-test",
                 "url": "data/word_level_qe_experiments/sample_data/sample_qe.xliff",
                 "configuration": {
-                    "project": {
-                        "useConstrainedDecoding": false,
-                        "useWordLevelQE": false,
-                    },
                     "target": {
+                        "services": {
+                          "useConstrainedDecoding": false,
+                          "useWordLevelQE": false,
+                        },
                         "activeComponent": "wordLevelQeEditor",
                         "defaultComponent": "wordLevelQeEditor",
                         "components": [
-                            {
-                                "directiveName": "plaintextEditor",
-                                "textName": "plaintextEditor"
-                            },
+                            // {
+                            //     "directiveName": "plaintextEditor",
+                            //     "textName": "plaintextEditor"
+                            // },
                             {
                                 "directiveName": "wordLevelQeEditor",
-                                "textName": "wordLevelQeEditor"
+                                "textName": "wordLevelQeEditor",
                             },
                             // {
                             //     "directiveName": "postEditor",
