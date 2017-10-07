@@ -148,12 +148,13 @@
                 <!-- retranslate button which fires request for a new translation -->
                 <div>
                   <md-button
-                          ng-click="requestNewTranslation()"
-                          ng-disabled="getSegmentState(id.index) === 'translated'"
-                          ng-show="widgets.services.useConstrainedDecoding"
+                    ng-click="requestNewTranslation()"
+                    ng-disabled="getSegmentState(id.index) === 'translated'"
+                    ng-show="widgets.services.useConstrainedDecoding"
+                    class="md-primary update-translation-button"
 
                   >
-                    <span class="glyphicon glyphicon-refresh"></span>
+                    Update Translation <span class="glyphicon glyphicon-refresh"></span>
                   </md-button>
                 </div>
                 <div>

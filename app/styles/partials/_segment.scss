@@ -10,6 +10,32 @@ $finished-segment-background-color: transparent;
   padding:0;
 }
 
+///*Animation Prefs*/
+//@-webkit-keyframes pulse {
+//  0% {background-color: white;}
+//  50% {background-color: #00FF1A;}
+//  100% {background-color: white;}
+//}
+
+$refresh-button-color: #00FF1A;
+@keyframes pulserefresh {
+  0% {
+    background-color: $refresh-button-color;
+  }
+  100% {
+    background-color: white;
+  }
+}
+
+.update-translation-button {
+//  background: rgba(green, 0.3) !important;
+  animation: pulserefresh 1.4s ease;
+  color: black !important;
+  //:hover {
+  //  background: rgba(#00FF1A, 0.8) !important;
+  //}
+}
+
 .segment {
   padding-top: 12px;
   position: relative;

@@ -13,23 +13,34 @@ word-level-qe-editor > div {
   position: relative;
 }
 
+@keyframes opacityfadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+
 .qe-bar {
   height: 2px;
   //background-color: pink;
   width: 100%;
 }
 .qe-bar-good {
+  animation: opacityfadein 1.5s ease;
   height: 2px;
   background-color: green;
   width: 100%;
 }
 .qe-bar-bad {
+  animation: opacityfadein 1.5s ease;
   height: 2px;
   background-color: red;
   width: 100%;
 }
-
 .qe-bar-user {
+  animation: opacityfadein 1.5s ease;
   height: 2px;
   background-color: blue;
   width: 100%;

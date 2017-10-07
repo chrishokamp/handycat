@@ -187,7 +187,7 @@ var experimentGroups = [
           "target": {
             "services": {
               "useConstrainedDecoding": false,
-              "useWordLevelQE": false,
+              "useWordLevelQE": true,
             },
             "activeComponent": "wordLevelQeEditor",
             "defaultComponent": "wordLevelQeEditor",
@@ -207,7 +207,7 @@ var experimentGroups = [
         "configuration": {
           "target": {
             "services": {
-              "useConstrainedDecoding": false,
+              "useConstrainedDecoding": true,
               "useWordLevelQE": false,
             },
             "activeComponent": "wordLevelQeEditor",
@@ -228,8 +228,8 @@ var experimentGroups = [
         "configuration": {
           "target": {
             "services": {
-              "useConstrainedDecoding": false,
-              "useWordLevelQE": false,
+              "useConstrainedDecoding": true,
+              "useWordLevelQE": true,
             },
             "activeComponent": "wordLevelQeEditor",
             "defaultComponent": "wordLevelQeEditor",
