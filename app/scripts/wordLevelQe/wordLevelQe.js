@@ -867,50 +867,6 @@ angular.module('handycat.wordLevelQe')
             });
           }, 0);
 
-
-              // Note: this method requires us to call color annotation every time, otherwise colors will disappear when we replace element HTML
-              // placeholder for calling the annotation function, which returns span annotations of the input text
-              // random color
-              // WORKING: the QE can actually be hard-coded, we don't need dynamic access because user edits are automatically "OK"
-
-              // automatically select text in .post-editor-whitespace spans on click
-              // $el.find('div.post-editor-whitespace').hover(
-              //   function() {
-              //     var origWidth = $(this).width();
-              //     this['origWidth'] = origWidth;
-              //     $(this).css('background-color','#87cefa')
-              //       // .animate({'width': '+=10'}, 200)
-              //   },
-              //   function() {
-              //     $(this).css('background-color', 'transparent')
-              //       // .animate({'width': this['origWidth']}, 200)
-              //   }
-              // ).click(function (){
-              //   // remove this span
-              //   var range, selection;
-              //
-              //   // the if/else here are for different browsers
-              //   // WORKING: support CTRL+click to expand selection, and ESC to remove it
-              //   // WORKING: for now, user needs to drag to select a span, disable auto-selection
-              //   if (window.getSelection && document.createRange) {
-              //     selection = window.getSelection();
-              //     range = document.createRange();
-              //     range.selectNodeContents(this);
-              //     selection.removeAllRanges();
-              //     selection.addRange(range);
-              //   } else if (document.selection && document.body.createTextRange) {
-              //     range = document.body.createTextRange();
-              //     range.moveToElementText(this);
-              //     range.select();
-              //   }
-              // });
-
-              // resets component state
-              // $timeout(
-              //     function () {
-              //         scope.state.action = 'default';
-              //     }, 0)
-
           };
 
         var componentTextToHtml = function () {
@@ -926,31 +882,6 @@ angular.module('handycat.wordLevelQe')
               return '<span class="post-editor-whitespace word-level-qe-token">' + m + '</span>';
           });
           $el.find('.post-editor').first().html(posteditorHtml);
-
-          // DEV: random annotations while developing
-          // var prevClass = undefined;
-          // var qeClasses = ["qe-bar-good", "qe-bar-good", "qe-bar-good", "qe-bar-good", "qe-bar-bad"];
-          // var posteditorHtml = allTokens.map(function (m, idx, arr) {
-          //     if (/^\s+$/.test(m)) {
-          //         return '<span class="post-editor-whitespace word-level-qe-token">' + m + '</span>';
-          //     } else {
-          //         // check if we're continuing a word
-          //         if (idx === 0 || /^\s+$/.test(arr[idx - 1])) {
-          //             // we're starting a new class, select a new random label
-          //             prevClass = qeClasses[Math.floor(Math.random() * qeClasses.length)];
-          //         }
-          //         return '<span class="post-editor-whitespace word-level-qe-token">' + m + '<div class="' + prevClass + '"></div></span>';
-          //     }
-          // });
-          // constraints and QE annotations are now in the UI
-
-          // hack
-          // $el.find('.post-editor').find('.word-level-qe-token').each(function() {
-          //     console.log($(this).text());
-          //     if ($(this).text().length == 0) {
-          //         $(this).remove();
-          //     }
-          // });
         };
 
 
