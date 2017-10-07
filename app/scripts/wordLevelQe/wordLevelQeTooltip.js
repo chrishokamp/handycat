@@ -16,7 +16,11 @@ angular.module('handycat.wordLevelQe')
           // Note: this is currently hard-coded
           var tooltipWidth = 90;
           var $innerSpan = $('.tooltip-span');
-          var pos = $innerSpan.parent().position();
+          if ($innerSpan.position().left != 0) {
+            var pos = $innerSpan.position();
+          } else {
+            var pos = $innerSpan.parent().position();
+          }
 
           // check if we're going outside the target area, if so, offset the tooltip
           var $targetArea = $innerSpan.closest('.post-editor-wrapper');
@@ -24,10 +28,12 @@ angular.module('handycat.wordLevelQe')
           var topRightCorner = targetAreaLeft + $targetArea.width();
           var toolTipRightCorner = targetAreaLeft + pos.left + tooltipWidth;
           var cornerDiff = topRightCorner - toolTipRightCorner;
+
           var tooltipOffset = 0;
           if (cornerDiff < 0) {
-            tooltipOffset = cornerDiff;
+            tooltipOffset = cornerDiff + -10;
           }
+          // debugger;
           $el.css({
             position: "absolute",
             top: pos.top + 24 + "px",
