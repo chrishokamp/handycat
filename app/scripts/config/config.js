@@ -132,119 +132,736 @@ handyCATconfig.constant('widgetConfiguration',
 // allow experiment configuration via handyCAT config
 // TODO: load experiment configuration from external json file via grunt task with optional arguments
 
-// TODO: Interactive PE experiment configurations
 var experimentGroups = [
   {
-    "name": "Interactive Post-Editing User Study",
+    "name": "Project 1",
     "sampleFiles": [
       {
-        "name": "Practice Project",
-        "internalName": "project_0",
-        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_0.xliff",
+        "name": "DEMO-Task-A",
+        "internalName": "test_1-DEMO",
+        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_1.xliff",
         "configuration": {
           "target": {
             "services": {
-              "useConstrainedDecoding": false,
-              "useWordLevelQE": false,
+              "useConstrainedDecoding": true,
+              "useWordLevelQE": true
             },
             "activeComponent": "wordLevelQeEditor",
             "defaultComponent": "wordLevelQeEditor",
             "components": [
               {
                 "directiveName": "wordLevelQeEditor",
-                "textName": "wordLevelQeEditor",
-              },
+                "textName": "wordLevelQeEditor"
+              }
             ]
-          },
+          }
         }
       },
       {
-        "name": "Project 1",
-        "internalName": "project_1",
+        "name": "BASIC-Task-A",
+        "internalName": "test_1-BASIC",
         "url": "data/word_level_qe_experiments/experiment_data/xliff/test_1.xliff",
         "configuration": {
           "target": {
             "services": {
               "useConstrainedDecoding": false,
-              "useWordLevelQE": false,
+              "useWordLevelQE": false
             },
             "activeComponent": "wordLevelQeEditor",
             "defaultComponent": "wordLevelQeEditor",
             "components": [
               {
                 "directiveName": "wordLevelQeEditor",
-                "textName": "wordLevelQeEditor",
-              },
+                "textName": "wordLevelQeEditor"
+              }
             ]
-          },
+          }
         }
       },
       {
-        "name": "Project 2",
-        "internalName": "project_2",
-        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_2.xliff",
+        "name": "QE-Task-A",
+        "internalName": "test_1-QE",
+        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_1.xliff",
         "configuration": {
           "target": {
             "services": {
               "useConstrainedDecoding": false,
-              "useWordLevelQE": true,
+              "useWordLevelQE": true
             },
             "activeComponent": "wordLevelQeEditor",
             "defaultComponent": "wordLevelQeEditor",
             "components": [
               {
                 "directiveName": "wordLevelQeEditor",
-                "textName": "wordLevelQeEditor",
-              },
+                "textName": "wordLevelQeEditor"
+              }
             ]
-          },
+          }
         }
       },
       {
-        "name": "Project 3",
-        "internalName": "project_3",
-        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_3.xliff",
+        "name": "CD-Task-A",
+        "internalName": "test_1-CD",
+        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_1.xliff",
         "configuration": {
           "target": {
             "services": {
               "useConstrainedDecoding": true,
-              "useWordLevelQE": false,
+              "useWordLevelQE": false
             },
             "activeComponent": "wordLevelQeEditor",
             "defaultComponent": "wordLevelQeEditor",
             "components": [
               {
                 "directiveName": "wordLevelQeEditor",
-                "textName": "wordLevelQeEditor",
-              },
+                "textName": "wordLevelQeEditor"
+              }
             ]
-          },
+          }
         }
       },
       {
-        "name": "Project 4",
-        "internalName": "project_4",
-        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_4.xliff",
+        "name": "IPE-Task-A",
+        "internalName": "test_1-IPE",
+        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_1.xliff",
         "configuration": {
           "target": {
             "services": {
               "useConstrainedDecoding": true,
-              "useWordLevelQE": true,
+              "useWordLevelQE": true
             },
             "activeComponent": "wordLevelQeEditor",
             "defaultComponent": "wordLevelQeEditor",
             "components": [
               {
                 "directiveName": "wordLevelQeEditor",
-                "textName": "wordLevelQeEditor",
-              },
+                "textName": "wordLevelQeEditor"
+              }
             ]
-          },
+          }
         }
       }
     ]
   },
+  {
+    "name"       : "Project 2",
+    "sampleFiles": [
+      {
+        "name"         : "DEMO-Task-B",
+        "internalName" : "test_2-DEMO",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_2.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE"        : true
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "BASIC-Task-B",
+        "internalName" : "test_2-BASIC",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_2.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": false,
+              "useWordLevelQE"        : false
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "QE-Task-B",
+        "internalName" : "test_2-QE",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_2.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": false,
+              "useWordLevelQE"        : true
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "CD-Task-B",
+        "internalName" : "test_2-CD",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_2.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE"        : false
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "IPE-Task-B",
+        "internalName" : "test_2-IPE",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_2.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE"        : true
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name"       : "Project 3",
+    "sampleFiles": [
+      {
+        "name"         : "DEMO-Task-C",
+        "internalName" : "test_3-DEMO",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_3.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE"        : true
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "BASIC-Task-C",
+        "internalName" : "test_3-BASIC",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_3.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": false,
+              "useWordLevelQE"        : false
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "QE-Task-C",
+        "internalName" : "test_3-QE",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_3.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": false,
+              "useWordLevelQE"        : true
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "CD-Task-C",
+        "internalName" : "test_3-CD",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_3.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE"        : false
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "IPE-Task-C",
+        "internalName" : "test_3-IPE",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_3.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE"        : true
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name"       : "Project 4",
+    "sampleFiles": [
+      {
+        "name"         : "DEMO-Task-D",
+        "internalName" : "test_4-DEMO",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_4.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE"        : true
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "BASIC-Task-D",
+        "internalName" : "test_4-BASIC",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_4.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": false,
+              "useWordLevelQE"        : false
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "QE-Task-D",
+        "internalName" : "test_4-QE",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_4.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": false,
+              "useWordLevelQE"        : true
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "CD-Task-D",
+        "internalName" : "test_4-CD",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_4.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE"        : false
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name"         : "IPE-Task-D",
+        "internalName" : "test_4-IPE",
+        "url"          : "data/word_level_qe_experiments/experiment_data/xliff/test_4.xliff",
+        "configuration": {
+          "target": {
+            "services"        : {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE"        : true
+            },
+            "activeComponent" : "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components"      : [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName"     : "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Project 0",
+    "sampleFiles": [
+      {
+        "name": "DEMO-Task-E",
+        "internalName": "test_0-DEMO",
+        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_0.xliff",
+        "configuration": {
+          "target": {
+            "services": {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE": true
+            },
+            "activeComponent": "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components": [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName": "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "BASIC-Task-E",
+        "internalName": "test_0-BASIC",
+        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_0.xliff",
+        "configuration": {
+          "target": {
+            "services": {
+              "useConstrainedDecoding": false,
+              "useWordLevelQE": false
+            },
+            "activeComponent": "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components": [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName": "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "QE-Task-E",
+        "internalName": "test_0-QE",
+        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_0.xliff",
+        "configuration": {
+          "target": {
+            "services": {
+              "useConstrainedDecoding": false,
+              "useWordLevelQE": true
+            },
+            "activeComponent": "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components": [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName": "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "CD-Task-E",
+        "internalName": "test_0-CD",
+        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_0.xliff",
+        "configuration": {
+          "target": {
+            "services": {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE": false
+            },
+            "activeComponent": "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components": [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName": "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "IPE-Task-E",
+        "internalName": "test_0-IPE",
+        "url": "data/word_level_qe_experiments/experiment_data/xliff/test_0.xliff",
+        "configuration": {
+          "target": {
+            "services": {
+              "useConstrainedDecoding": true,
+              "useWordLevelQE": true
+            },
+            "activeComponent": "wordLevelQeEditor",
+            "defaultComponent": "wordLevelQeEditor",
+            "components": [
+              {
+                "directiveName": "wordLevelQeEditor",
+                "textName": "wordLevelQeEditor"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
 ]
+
+
+// TODO: Interactive PE experiment configurations
+// var experimentGroups = [
+//   {
+//     "name": "Interactive Post-Editing User Study",
+//     "sampleFiles": [
+//       {
+//         "name": "Practice Project -- Basic",
+//         "internalName": "project_0_basic",
+//         "url": "data/word_level_qe_experiments/experiment_data/xliff/test_0.xliff",
+//         "configuration": {
+//           "target": {
+//             "services": {
+//               "useConstrainedDecoding": false,
+//               "useWordLevelQE": false,
+//             },
+//             "activeComponent": "wordLevelQeEditor",
+//             "defaultComponent": "wordLevelQeEditor",
+//             "components": [
+//               {
+//                 "directiveName": "wordLevelQeEditor",
+//                 "textName": "wordLevelQeEditor",
+//               },
+//             ]
+//           },
+//         }
+//       },
+//       {
+//         "name": "Practice Project -- QE",
+//         "internalName": "project_0_qe",
+//         "url": "data/word_level_qe_experiments/experiment_data/xliff/test_0.xliff",
+//         "configuration": {
+//           "target": {
+//             "services": {
+//               "useConstrainedDecoding": false,
+//               "useWordLevelQE": true,
+//             },
+//             "activeComponent": "wordLevelQeEditor",
+//             "defaultComponent": "wordLevelQeEditor",
+//             "components": [
+//               {
+//                 "directiveName": "wordLevelQeEditor",
+//                 "textName": "wordLevelQeEditor",
+//               },
+//             ]
+//           },
+//         }
+//       },
+//       {
+//         "name": "Practice Project -- CD",
+//         "internalName": "project_0_cd",
+//         "url": "data/word_level_qe_experiments/experiment_data/xliff/test_0.xliff",
+//         "configuration": {
+//           "target": {
+//             "services": {
+//               "useConstrainedDecoding": true,
+//               "useWordLevelQE": false,
+//             },
+//             "activeComponent": "wordLevelQeEditor",
+//             "defaultComponent": "wordLevelQeEditor",
+//             "components": [
+//               {
+//                 "directiveName": "wordLevelQeEditor",
+//                 "textName": "wordLevelQeEditor",
+//               },
+//             ]
+//           },
+//         }
+//       },
+//       {
+//         "name": "Practice Project -- IPE",
+//         "internalName": "project_0_ipe",
+//         "url": "data/word_level_qe_experiments/experiment_data/xliff/test_0.xliff",
+//         "configuration": {
+//           "target": {
+//             "services": {
+//               "useConstrainedDecoding": true,
+//               "useWordLevelQE": true,
+//             },
+//             "activeComponent": "wordLevelQeEditor",
+//             "defaultComponent": "wordLevelQeEditor",
+//             "components": [
+//               {
+//                 "directiveName": "wordLevelQeEditor",
+//                 "textName": "wordLevelQeEditor",
+//               },
+//             ]
+//           },
+//         }
+//       },
+//       {
+//         "name": "Project 1",
+//         "internalName": "project_1",
+//         "url": "data/word_level_qe_experiments/experiment_data/xliff/test_1.xliff",
+//         "configuration": {
+//           "target": {
+//             "services": {
+//               "useConstrainedDecoding": false,
+//               "useWordLevelQE": false,
+//             },
+//             "activeComponent": "wordLevelQeEditor",
+//             "defaultComponent": "wordLevelQeEditor",
+//             "components": [
+//               {
+//                 "directiveName": "wordLevelQeEditor",
+//                 "textName": "wordLevelQeEditor",
+//               },
+//             ]
+//           },
+//         }
+//       },
+//       {
+//         "name": "Project 2",
+//         "internalName": "project_2",
+//         "url": "data/word_level_qe_experiments/experiment_data/xliff/test_2.xliff",
+//         "configuration": {
+//           "target": {
+//             "services": {
+//               "useConstrainedDecoding": false,
+//               "useWordLevelQE": true,
+//             },
+//             "activeComponent": "wordLevelQeEditor",
+//             "defaultComponent": "wordLevelQeEditor",
+//             "components": [
+//               {
+//                 "directiveName": "wordLevelQeEditor",
+//                 "textName": "wordLevelQeEditor",
+//               },
+//             ]
+//           },
+//         }
+//       },
+//       {
+//         "name": "Project 3",
+//         "internalName": "project_3",
+//         "url": "data/word_level_qe_experiments/experiment_data/xliff/test_3.xliff",
+//         "configuration": {
+//           "target": {
+//             "services": {
+//               "useConstrainedDecoding": true,
+//               "useWordLevelQE": false,
+//             },
+//             "activeComponent": "wordLevelQeEditor",
+//             "defaultComponent": "wordLevelQeEditor",
+//             "components": [
+//               {
+//                 "directiveName": "wordLevelQeEditor",
+//                 "textName": "wordLevelQeEditor",
+//               },
+//             ]
+//           },
+//         }
+//       },
+//       {
+//         "name": "Project 4",
+//         "internalName": "project_4",
+//         "url": "data/word_level_qe_experiments/experiment_data/xliff/test_4.xliff",
+//         "configuration": {
+//           "target": {
+//             "services": {
+//               "useConstrainedDecoding": true,
+//               "useWordLevelQE": true,
+//             },
+//             "activeComponent": "wordLevelQeEditor",
+//             "defaultComponent": "wordLevelQeEditor",
+//             "components": [
+//               {
+//                 "directiveName": "wordLevelQeEditor",
+//                 "textName": "wordLevelQeEditor",
+//               },
+//             ]
+//           },
+//         }
+//       }
+//     ]
+//   },
+// ]
 
 handyCATconfig.constant('experimentGroups', experimentGroups)
 
