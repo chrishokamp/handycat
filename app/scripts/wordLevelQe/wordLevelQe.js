@@ -539,7 +539,8 @@ angular.module('handycat.wordLevelQe')
                       target_lang: 'de',
                       source_lang: scope.sourceLang,
                       request_time: reqTimestamp
-                  }
+                  },
+                {timeout: 7500}
                   // {headers: {'Content-Type': 'application/json'}
               )
               .success(
@@ -573,10 +574,10 @@ angular.module('handycat.wordLevelQe')
               ).error(function () {
                   scope.state.translationPending = false;
                   scope.state.action = 'default';
-                  // TODO: handle error (reject deferred)
+                  console.error('ERROR: Constrained Decoder request timeout');
+                  deferred.resolve(currentAnnotationObj);
               });
 
-              // TODO: handle failure and timeout
             return deferred.promise;
 
           };
@@ -620,7 +621,7 @@ angular.module('handycat.wordLevelQe')
                         src_segment: scope.sourceSegment,
                         trg_segment: qeInputString
                     },
-                    {headers: {'Content-Type': 'application/json'}}
+                    {headers: {'Content-Type': 'application/json'}, timeout: 7500}
                 )
                 // "qe_labels": [
                 //     {
@@ -679,8 +680,8 @@ angular.module('handycat.wordLevelQe')
                 ).error(function () {
                     scope.state.qePending = false;
                     scope.state.action = 'default';
-                    // TODO: handle error (reject deferred)
-                    // TODO: handle failure and timeout
+                    console.error('ERROR: QE request timeout');
+                    deferred.resolve(currentAnnotationObj);
                 }
               );
           }
@@ -746,7 +747,6 @@ angular.module('handycat.wordLevelQe')
 
             // opacity/color is a function of confidence
             // TODO: tooltip on qe-bars showing confidence score
-            // TODO: qe-bars always fade in quickly on render
             if (tag != null) {
               if (tag === 'USER') {
                 if (/^\s+$/.test(char)) {
