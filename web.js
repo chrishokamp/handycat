@@ -435,6 +435,26 @@ app.post('/imt/constrained_decoding', function(req,res) {
   }).pipe(res);
 });
 
+// edit-log-saver
+app.post('/util/save-edit-log', function(req,res) {
+  console.log('Trying to save an edit log');
+
+  var editLogSaverUrl = 'http://localhost:6090/save';
+  var options = {
+    uri: editLogSaverUrl,
+    method: 'POST',
+    json: {
+      "json_edit_log": req.body.json_edit_log,
+    }
+  };
+
+  request(options, function (error, response, body) {
+    if (error && error.code === 'ECONNREFUSED'){
+      console.error('Refused connection to: ' + editLogSaverUrl);
+    }
+  }).pipe(res);
+});
+
 // QE
 // - Note we return span-level annotations with confidence scores
 app.post('/qe/word_level', function(req,res) {
@@ -515,6 +535,7 @@ app.get('/tm', function(req,res) {
     }
   ).pipe(res);
 });
+
 app.post('/tm', function(req,res) {
   var newurl = 'http://localhost:8899/tm';
   console.log('tm req body');

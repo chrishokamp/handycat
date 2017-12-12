@@ -1,8 +1,10 @@
 angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal',
   '$log', 'SegmentOrder', 'editSession', '$mdBottomSheet', '$rootScope', 'Wikipedia', '$timeout', 'Projects',
-  'XliffParser', 'autocompleterURLs', 'Logger', 'widgetConfiguration', '$state', '$stateParams', '$q',
-  function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, editSession, $mdBottomSheet, $rootScope, Wikipedia, $timeout,
-           Projects, XliffParser, autocompleterURLs, Logger, widgetConfiguration, $state, $stateParams, $q) {
+  'XliffParser', 'autocompleterURLs', 'Logger', 'widgetConfiguration', 'editLogSaverUrl',
+  '$state', '$stateParams', '$q', '$http',
+  function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, editSession, $mdBottomSheet, $rootScope,
+           Wikipedia, $timeout, Projects, XliffParser, autocompleterURLs, Logger, widgetConfiguration, editLogSaverUrl,
+           $state, $stateParams, $q, $http) {
 
     // global user options (may be accessed or changed from child controllers)
     $scope.visible = {
@@ -192,10 +194,28 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
           saveAs(blob, "edit-log.json");
         };
 
+        // post the log json to the log saving microservice
+        $scope.sendLog = function () {
+          $http.post(editLogSaverUrl,
+            {
+              json_edit_log: Logger.log
+            }
+              // {headers: {'Content-Type': 'application/json'}
+          )
+          .success(function (output) {
+            $log.log('Posted edit-log to server')
+
+          })
+          .error(function() {
+
+          })
+        };
+
         // remember that this is available
         //$mdBottomSheet.hide(clickedItem);
 
         $scope.bottomItems = [
+          {name: 'Send Log', icon: 'ion-ios7-cloud-download', action: $scope.sendLog},
           {name: 'Log', icon: 'ion-ios7-cloud-download', action: $scope.saveJSON},
           {name: 'Xliff', icon: 'ion-ios7-cloud-download', action: $scope.saveXliff},
           {name: 'Text', icon: 'ion-ios7-cloud-download-outline', action: $scope.saveTarget},

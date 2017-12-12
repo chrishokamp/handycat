@@ -27,6 +27,10 @@ handyCATconfig.constant('xliffCreatorUrl', xliffCreatorUrl);
 var parallelXliffCreatorUrl = 'create-parallel-xliff/'
 handyCATconfig.constant('parallelXliffCreatorUrl', parallelXliffCreatorUrl);
 
+// to save json logs to a configured directory
+var editLogSaverUrl = 'util/save-edit-log'
+handyCATconfig.constant('editLogSaverUrl', editLogSaverUrl);
+
 var constrainedDecodingUrl = 'imt/constrained_decoding';
 handyCATconfig.constant('constrainedDecodingUrl', constrainedDecodingUrl);
 
