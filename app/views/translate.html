@@ -127,16 +127,14 @@
               </div>
 
               <!--  the segment-level controls for the target panel -->
-              <!--ng-show="isActive.active"-->
-                <!-- this for QE score experiments - mask completion controls, just show text -->
-              <div
-                      ng-show="isActive.active"
-                      layout="row"
-                      layout-align="end center"
-                      class="segment-controls"
-              >Press Ctrl+Enter to proceed</div>
+              <!--Uncomment this for a text hint to user  -->
+              <!--<div-->
+                      <!--ng-show="isActive.active"-->
+                      <!--layout="row"-->
+                      <!--layout-align="end center"-->
+                      <!--class="segment-controls"-->
+              <!--&gt;Press Ctrl+Enter to proceed</div>-->
 
-              <!--COMMENTED FOR QE SCORE EXPERIMENTS-->
               <!--SEGMENT CONTROLS-->
               <div
                 ng-show="isActive.active"
@@ -157,6 +155,7 @@
                     Update Translation <span class="glyphicon glyphicon-refresh"></span>
                   </md-button>
                 </div>
+                <div layout-fill></div>
                 <div>
                   <md-button
                     ng-click="segmentFinished(id.index)"
