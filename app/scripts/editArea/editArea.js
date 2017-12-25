@@ -1,8 +1,8 @@
-angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal',
+angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location', '$anchorScroll', '$modal', '$mdDialog',
   '$log', 'SegmentOrder', 'editSession', '$mdBottomSheet', '$rootScope', 'Wikipedia', '$timeout', 'Projects',
   'XliffParser', 'autocompleterURLs', 'Logger', 'widgetConfiguration', 'editLogSaverUrl',
   '$state', '$stateParams', '$q', '$http',
-  function($scope, $location, $anchorScroll, $modal, $log, segmentOrder, editSession, $mdBottomSheet, $rootScope,
+  function($scope, $location, $anchorScroll, $modal, $mdDialog, $log, segmentOrder, editSession, $mdBottomSheet, $rootScope,
            Wikipedia, $timeout, Projects, XliffParser, autocompleterURLs, Logger, widgetConfiguration, editLogSaverUrl,
            $state, $stateParams, $q, $http) {
 
@@ -101,6 +101,26 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
       });
     };
 
+    var showSuccessAlert = function(ev) {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Log Saved')
+          .content('Your experiment log was saved successfully!')
+          .ok('OK')
+      );
+    };
+
+    var showErrorAlert = function(ev) {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Error Saving Log!')
+          .content('Sorry, we couldn\'t save the log -- please download and send to us by email')
+          .ok('OK')
+      );
+    };
+
     // Translate state HELP MODAL
     $scope.
       openHelp = function (size) {
@@ -196,6 +216,7 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
 
         // post the log json to the log saving microservice
         $scope.sendLog = function () {
+          $log.log('Trying to send edit-log to server');
           $http.post(editLogSaverUrl,
             {
               json_edit_log: Logger.log
@@ -204,9 +225,12 @@ angular.module('controllers').controller('EditAreaCtrl', ['$scope', '$location',
           )
           .success(function (output) {
             $log.log('Posted edit-log to server')
+            showSuccessAlert();
 
           })
           .error(function() {
+            $log.log('Posted edit-log to server')
+            showErrorAlert();
 
           })
         };
