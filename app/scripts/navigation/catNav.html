@@ -4,6 +4,12 @@
 
     <!-- fill up the space between left and right area -->
     <span flex></span>
+    <div
+            class=""
+            ng-show="$state.current.name === 'projects.translate'"
+    >
+      {{projectName}}
+    </div>
     <!-- show the toolbar -->
     <!--<md-button-->
       <!--class="handycat-toolbar-button"-->
@@ -15,43 +21,27 @@
     <!--&gt;-->
       <!--<i class="ion-wrench"></i>-->
     <!--</md-button>-->
-    <!--<md-button-->
-      <!--class="handycat-toolbar-button"-->
-      <!--ng-click="showGridBottomSheet()"-->
-      <!--ng-show="$state.current.name === 'projects.translate'"-->
-      <!--tooltip="show the translation project options"-->
-      <!--tooltip-placement="bottom"-->
-      <!--ng-class="{selected: visible.toolbar}"-->
-    <!--&gt;-->
-      <!--<i class="ion-android-download"></i>-->
-    <!--</md-button>-->
-    <!--&lt;!&ndash; show the help &ndash;&gt;-->
-    <!--<md-button-->
-      <!--class="handycat-toolbar-button"-->
-      <!--ng-click="showCheatSheet()"-->
-      <!--ng-show="$state.current.name === 'projects.translate'"-->
-      <!--tooltip="show the translation project options"-->
-      <!--tooltip-placement="bottom"-->
-      <!--ng-class="{selected: visible.toolbar}"-->
-      <!--&gt;-->
-      <!--<i class="ion-help"></i>-->
-    <!--</md-button>-->
-    <!--<md-button-->
-      <!--class="handycat-toolbar-button"-->
-      <!--ng-click="showCheatSheet()"-->
-      <!--ng-show="$state.current.name === 'projects.translate'"-->
-      <!--tooltip="show the translation project options"-->
-      <!--tooltip-placement="bottom"-->
-      <!--ng-class="{selected: visible.toolbar}"-->
-    <!--&gt;-->
-    <!--<i class="ion-help"></i>-->
-    <!--</md-button>-->
-    <div
-            class=""
-            ng-show="$state.current.name === 'projects.translate'"
+    <md-button
+      class="handycat-toolbar-button"
+      ng-click="showGridBottomSheet()"
+      ng-show="$state.current.name === 'projects.translate'"
+      tooltip="show the translation project options"
+      tooltip-placement="bottom"
+      ng-class="{selected: visible.toolbar}"
     >
-        {{projectName}}
-    </div>
+      <i class="ion-android-download"></i>
+    </md-button>
+    <!-- show the help -->
+    <md-button
+      class="handycat-toolbar-button"
+      ng-click="showCheatSheet()"
+      ng-show="$state.current.name === 'projects.translate'"
+      tooltip="show the translation project options"
+      tooltip-placement="bottom"
+      ng-class="{selected: visible.toolbar}"
+      >
+      <i class="ion-help"></i>
+    </md-button>
     <div class="handycat-toolbar-padder"></div>
   </div>
 </md-toolbar>
