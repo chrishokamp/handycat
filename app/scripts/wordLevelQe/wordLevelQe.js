@@ -525,6 +525,13 @@ angular.module('handycat.wordLevelQe')
                           'spans': constraintAnnotations
                       }
 
+                      // log the annotation obj
+                      scope.logAction(
+                        {
+                          action: 'ipe.cd_server_response',
+                          data  : annotationObj
+                      });
+
                       deferred.resolve(annotationObj);
 
                       scope.state.translationPending = false;
@@ -541,7 +548,7 @@ angular.module('handycat.wordLevelQe')
 
           };
 
-          // query the constrained decoder, ask for a translation, once the request resolves, update the UI
+          // query the qe server, ask for a translation, once the request resolves, update the UI
           var queryApeQe = function (currentAnnotationObj) {
               var deferred = $q.defer();
 
@@ -623,6 +630,14 @@ angular.module('handycat.wordLevelQe')
                             'annotations': currentAnnotations,
                             'spans': offsetAnnotations
                         }
+
+                        // log the annotation obj
+                        scope.logAction(
+                          {
+                            action: 'ipe.qe_server_response',
+                            data  : annotationObj
+                        });
+
                         deferred.resolve(annotationObj);
 
                       scope.state.qePending = false;
